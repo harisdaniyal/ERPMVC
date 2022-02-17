@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "LogisticInvoiceReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<br />
+<div class="card">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Print Invoice Report</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <div class="input-group">
+                        <select class="form-control select2" id="_txtCustomerName" name="_txtCustomerName" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label">Invoice From Date<label id="_OrderDate-error" class="error" for="_invoiceFromdate"></label></label>
+
+                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="date" id="_invoiceFromdate" name="_invoiceFromdate" class="form-control datetimepicker-input" />
+                        <!--
+                                       <input type="text" id="_invoiceFromdate" name="_invoiceFromdate"  class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+
+                                               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                               </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label">Invoice To Date<label id="_OrderDate-error" class="error" for="_invoiceTodate"></label></label>
+
+
+
+                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                        <input type="date" id="_invoiceTodate" name="_invoiceTodate" class="form-control datetimepicker-input" />
+
+                        <!--
+                        <input type="text" id="_invoiceTodate" name="_invoiceTodate"  class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask >
+
+                                       <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                       </div>
+                                            -->
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <button type="submit" id="_btnPrintInvoiceReport" class="btn btn-dark">Generate Invoice</button>
+    </div>
+</div>
+
+<script src="~/AdminLte/Scripts/invoice-create.js"></script>
+

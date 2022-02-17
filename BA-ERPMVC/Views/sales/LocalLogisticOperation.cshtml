@@ -1,0 +1,808 @@
+﻿
+@{
+
+    ViewBag.Title = "Local Logistic Operation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="editdiv" class=" card card-default d-none">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Edit Logistic Operation</h6>
+    </div>
+    <!--
+    <div class="card-header">
+        <h3 class="card-title">Edit Logistic Operation</h3>
+    </div>
+        -->
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Order Number</label>
+                    <input class="form-control _field" id="txteditOrderNo" name="txteditOrderNo" disabled="disabled" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <input class="form-control _field" id="txtEditCustName" name="txtEditCustName" disabled="disabled" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Job Type</label>
+                    <select class="form-control select2 _field" id="ddleditjob" name="ddleditjob" style="width: 100%;">
+                        <option value="Laden">LADEN</option>
+                        <option value="Empty">EMPTY</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>From Location</label>
+                    <input class="form-control _field" id="txteditfromlocation" name="txteditfromlocation" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>To Location</label>
+                    <input class="form-control _field" id="txtedittolocation" name="txtedittolocation" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Container No</label>
+                    <input class="form-control _field" id="txteditContainerno" name="txteditContainerno" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Container No2</label>
+                    <input class="form-control _field" id="txteditContainerno2" name="txteditContainerno2" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Container Size</label>
+                    <input class="form-control _field" id="txteditContSize" name="txteditContSize" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-lg-2">
+
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input class="form-control _field" id="txteditquantity" name="txteditquantity" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Container Weight</label>
+                    <input class="form-control _field" id="txtediteContainerWeight" name="txtediteContainerWeight" style="width:100%; " />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <button type="submit" id="bteditUpdate" class="btn btn-success">Update</button>
+        <button type="button" id="btneditback" class="btn btn-dark">Back</button>
+    </div>
+</div>
+
+<div id="gridShow" class="card shadow-lg p-3 mb-5  rounded d-none">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Logistics Operations Form</h6>
+    </div>
+
+
+
+    <div class="card-body ">
+        @*<div class="item form-group">
+            <div class="col-md-7 col-sm-7 offset-md-5">
+                <button type="button" id="btnADD" class="btn btn-success">Add Operation</button>
+            </div>
+        </div>*@
+
+
+
+
+        <!-- Start -->
+        <div class="ln_solid"></div>
+        <br />
+
+        <div id="TableDiv" class="">
+            <div class=" row justify-content-md-center">
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">From Date<label id="_fromDate-error" class="error" for="_fromDate"></label></label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input class="date-picker form-control" id="_fromDate" name="_fromDate" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                            <!--
+                            <input type="text" id="_OrderDate" name="OrderDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                                -->
+                            <script>
+                    function timeFunctionLong(input) {
+                        setTimeout(function () {
+                            input.type = 'text';
+                        }, 60000);
+                    }</script>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">To Date<label id="_toDate-error" class="error" for="_toDate"></label></label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input class="date-picker form-control" id="_toDate" name="_toDate" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                            <!--
+                            <input type="text" id="_OrderDate" name="OrderDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                                -->
+                            <script>
+                    function timeFunctionLong(input) {
+                        setTimeout(function () {
+                            input.type = 'text';
+                        }, 60000);
+                    }</script>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-2 ">
+                    <br />
+                    <div class="form-group">
+
+                        @*<button type="button" id="_btnSearch" class="btn btn-success">Search</button>*@
+                        <button type="button" id="_btnPrintReport" class="btn btn-success">Print</button>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <br />
+
+
+
+
+            <div id="TableDiv">
+
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+
+                            <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="logicgrid">
+                                                <thead class="_changeHeaderColor">
+                                                    <tr>
+                                                        @*<th scope="col">TripCode</th>*@
+                                                        <th scope="col">OrderNo</th>
+                                                        <th scope="col">Order Date</th>
+
+                                                        <th scope="col">BusinessDivisionName</th>
+                                                        <th scope="col">Customer_Name</th>
+
+                                                        @*<th scope="col">Container No</th>
+                                                            <th scope="col">Container No2</th>
+                                                            <th scope="col">Vehicle No</th>
+                                                            <th scope="col">DriverName</th>
+                                                            <th scope="col">From Location</th>
+                                                            <th scope="col">To Location</th>
+                                                            <th scope="col">Container Status</th>
+                                                            <th scope="col">Total Expense</th>*@
+                                                        @*<th scope="col">Action</th>*@
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="_logicgridlist"></tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            @*<div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="logicgrid">
+                                            <thead class="_changeHeaderColor">
+                                                <tr>
+                                                    <th scope="col">Order No</th>
+                                                    <th scope="col">Customer Name</th>
+                                                    <th scope="col">Job Type</th>
+                                                    <th scope="col">Facility Name</th>
+                                                    @*<th scope="col">Container Status</th>*@
+            @*<th scope="col">Container No</th>
+                    <th scope="col">Container No 2</th>
+                    <th scope="col">Container Weight</th>
+                    <th scope="col">Container Size</th>
+                    <th scope="col">From Location</th>
+                    <th scope="col">To Location</th>
+                    <th scope="col">Is Active</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="_LogisticsList"></tbody>
+
+                    </table>
+                </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+        </div>
+        <!-- END -->
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div id="lloForm" class="card card-default d-none">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Logistics Operations Form</h6>
+    </div>
+    <!--
+    <div class="card-header">
+        <h3 class="card-title">Logistics Operations Form</h3>
+    </div>
+        -->
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Order Number</label>
+                    <select class="form-control select2" id="ddlOrderNo" name="ddlOrderNo" style="width: 100%;"></select>
+                </div>
+            </div>
+            <div class="col-lg-4 d-none" id="bldiv">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>BL Number</label>
+                    <input class="form-control _field" id="ddlblNo" disabled="disabled" name="ddlblNo" style="width: 100%;">
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-none" id="CROdiv">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>CRO Number</label>
+                    <input class="form-control _field" id="ddlCRONo" disabled="disabled" name="ddlCRONo" style="width: 100%;">
+                </div>
+            </div>
+
+        </div>
+        <div class="row divTopMargin d-none" id="orderdetails">
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <input type="text" id="txtCustName" maxlength="50" disabled="disabled" class="form-control _field">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Order Date</label>
+                    <input type="text" id="txtOrderDate" maxlength="12" class="form-control _field">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select class="form-control" id="ddlServiceType" name="ddlServiceType" style="width: 100%;"></select>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="Transport" class="card d-none">
+
+    <div class="card-header" style="border-bottom: 4px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Transport Form</h6>
+    </div>
+    <!--
+    <div class="card-header">
+        <h3 class="card-title">Transport Form</h3>
+    </div>
+        -->
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label>Select Entry Type</label>
+                    <select class="form-control" id="ddlentry" name="ddlentry" style="width: 100%;">
+                        <option value="manual">Manual Entry</option>
+                        <option value="Excel">Excel Import</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="excelimport" class="d-none">
+            <div class="row divTopMargin">
+                <div class="col-lg-4">
+                    <div class="btn-group-toggle">
+                        <input type="file" id="input" accept=".xls,.xlsx" class="btn btn-block" value="Import File" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <button type="button" id="uploadexcel" class="btn btn-primary btn-block ">Upload File</button>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <a href="~/AdminLte/File/ExcelTransport.xlsx">Click here to Sample Excel File </a>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+
+
+
+            <!-- Start -->
+            <div class="ln_solid"></div>
+            <br />
+
+            <div id="TableDiv" class="">
+
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+
+                            <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="ExcelGrid">
+                                                <thead class="_changeHeaderColor">
+                                                    <tr>
+                                                        @*<th>Container Status</th>*@
+                                                        <th>1st Container</th>
+                                                        <th>2nd Container</th>
+                                                        <th>Container Size</th>
+                                                        <th>From Location</th>
+                                                        <th>To Location</th>
+                                                        <th>1st Job Type</th>
+                                                        <th>2nd Job Type</th>
+                                                        <th>ContainerWeight</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody id="_purchasetList"></tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END -->
+            @*<div class="row divTopMargin">
+                    <div class="table-responsive">
+                        <table id="ExcelGrid" class="table table-bordered">
+                            <thead>
+                                <tr>
+
+                                    <th>Container No</th>
+                                    <th>Container No 2</th>
+                                    <th>Container Size</th>
+                                    <th>From Location</th>
+                                    <th>To Location</th>
+                                    <th>Job Type</th>
+                                    <th>ContainerWeight</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>*@
+
+        </div>
+        <form id="_addOrder">
+            <div id="manualentry" class="d-none">
+                <div class="row divTopMargin">
+                    <!--
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Container Status<label id="txtconStatus-error" class="error" for="txtconStatus"></label></label>
+                            <select class="form-control" id="txtconStatus" name="txtconStatus" style="width: 100%;"></select>
+
+                        </div>
+                    </div>
+                        -->
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Container Size<label id="txtcontsize-error" class="error" for="txtcontsize"></label></label>
+                            <select class="form-control" id="txtcontsize" name="txtcontsize" style="width: 100%;"></select>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="ddlCont">
+                        <div class="form-group">
+                            <label>1st Container <label id="txtcontno-error" class="error" for="txtcontno"></label></label>
+                            <input type="text" id="txtcontno" name="txtcontno" maxlength="50" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4" id="ddlCont2">
+                        <div class="form-group">
+                            <label>2nd Container <label id="txtcontno2-error" class="error" for="txtcontno2"></label></label>
+                            <input type="text" id="txtcontno2" name="txtcontno2" maxlength="50" class="form-control">
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="row divTopMargin">
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>1st Job Type<label id="ddlJobType-error" class="error" for="ddlJobType"></label></label>
+                            <select class="form-control" id="ddlJobType" name="ddlJobType" style="width: 100%;">
+                                <option value="">--Select Type--</option>
+                                <option value="Laden">LADEN</option>
+                                <option value="Empty">EMPTY</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" id="2ndddlJobType">
+                        <div class="form-group">
+                            <label>2nd Job Type<label id="2ndddlJobType-error" class="error" for="2ndddlJobType"></label></label>
+                            <select class="form-control" id="2ndddlJobType" name="2ndddlJobType" style="width: 100%;">
+                                <option value="">--Select Type--</option>
+                                <option value="Laden">LADEN</option>
+                                <option value="Empty">EMPTY</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Container Weight<label id="ddlWeihght-error" class="error" for="ddlWeihght"></label></label>
+                            <input type="number" value="0" class="form-control" id="ddlWeihght" name="ddlWeihght" style="width: 100%;"/>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="row divTopMargin">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>From Location<label id="txtFromLocation-error" class="error" for="txtFromLocation"></label></label>
+                            <select class="form-control select2" id="txtFromLocation" name="txtFromLocation" style="width: 100%;"></select>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>To Location<label id="txtToLocation-error" class="error" for="txtToLocation"></label></label>
+                            <select class="form-control select2" id="txtToLocation" name="txtToLocation" style="width: 100%;"></select>
+
+                        </div>
+                    </div>
+
+                
+
+
+                </div>
+                <div class="row">
+
+
+                    <div class="col-lg-4">
+                        <div class="form-group" style="margin-top:30px;">
+                            <button type="submit" id="btnitemAdd" class="btn btn-dark">Add Item</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Start -->
+                <div class="ln_solid"></div>
+                <br />
+
+                <div id="TableDiv" class="">
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+
+                                <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="TransportGrid">
+                                                    <thead class="_changeHeaderColor">
+                                                        <tr>
+                                                            @*<th>Container Status</th>*@
+                                                            <th>Container No</th>
+                                                            <th>Container No 2</th>
+                                                            <th>Container Size</th>
+                                                            <th>From Location</th>
+                                                            <th>To Location</th>
+                                                            <th>1st Job Type</th>
+                                                            <th>2nd Job type</th>
+                                                            <th>Container Weight</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody id="_purchasetList"></tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END -->
+                @*<div class="table-responsive">
+                        <table id="TransportGrid" class="table table-bordered">
+                            <thead>
+                                <tr>
+
+                                    <th>Container No</th>
+                                    <th>Container No 2</th>
+                                    <th>Container Size</th>
+                                    <th>From Location</th>
+                                    <th>To Location</th>
+                                    <th>Job Type</th>
+                                    <th>Container Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>*@
+
+            </div>
+        </form>
+
+    </div>
+
+
+
+    <div class="card-footer d-none" id="submitbutton">
+        <button class="btn btn-dark " id="btnback" type="submit">Back</button>
+        <button type="submit" id="btnmanualSubmit" class="btn btn-success">Submit</button>
+    </div>
+
+</div>
+
+<div id="Lolo" class="card d-none">
+    <form id="_addOrderlolo">
+        <div class="card-header" id="facList" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+            <h6 class="m-0 font-weight-bold centerHead">LOLO Form</h6>
+        </div>
+        <!--
+            <div class="card-header" style="border-bottom: 4px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                <h6 class="m-0 font-weight-bold centerHead">LOLO Form</h6>
+            </div>
+
+        <div class="card-header">
+            <h3 class="card-title">LOLO Form</h3>
+        </div>
+            -->
+        <div class="card-body">
+            <div class="row divTopMargin">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>Select Entry Type</label>
+                        <select class="form-control select2" id="ddlloloentry" name="ddlloloentry" style="width: 100%;">
+                            <option value="manual">Manual Entry</option>
+                            <option value="Excel">Excel Import</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="lolomanual" class="d-none">
+                <div class="row divTopMargin">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Quantity<label id="txtQuantityLolo-error" class="error" for="txtQuantityLolo"></label></label>
+                            <input type="text" id="txtQuantityLolo" name="txtQuantityLolo" maxlength="4" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Job Type<label id="ddlLoloJobType-error" class="error" for="ddlLoloJobType"></label></label>
+                            <select class="form-control select2" id="ddlLoloJobType" name="ddlLoloJobType" style="width: 100%;">
+                                <option value="">--Select Type--</option>
+                                <option value="LADEN">LADEN</option>
+                                <option value="Empty">EMPTY</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none" id="loloexcel">
+                <div class="row divTopMargin">
+                    <div class="col-lg-3">
+                        <div class="btn-group-toggle">
+                            <input type="file" id="input1" accept=".xls,.xlsx" value="Import File" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="button" id="uploadloloexcel" class="btn btn-primary">Upload File</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <a href="~/AdminLte/File/ExcelLolo.xlsx">Click here to Sample Excel File </a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row divTopMargin">
+                    <div class="table-responsive">
+                        <table id="ExcelloloGrid" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Container No</th>
+                                    <th>Container Size</th>
+                                    <th>Job Type</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="card-footer">
+        <button type="submit" id="btnloloSubmit" class="btn btn-success">Submit</button>
+        <button type="button" id="btnbacklolo" class="btn btn-dark">Back</button>
+
+    </div>
+</div>
+
+
+
+<div class="card d-none" id="hideContainerLogisticsGride">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Logistics Operations Details</h6>
+    </div>
+    <br />
+    <br/>
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="card-box table-responsive">
+
+                <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                    <div class="row">
+                        <div class="table-responsive">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="detailslogicgrid">
+                                    <thead class="_changeHeaderColor">
+                                        <tr>
+                                            <th scope="col">Order No</th>
+                                            <th scope="col">Customer Name</th>
+                                            <th scope="col">Job Type</th>
+                                            <th scope="col">Facility Name</th>
+                                            @*<th scope="col">Container Status</th>*@
+                                            <th scope="col">Container No</th>
+                                            <th scope="col">Container No 2</th>
+                                            <th scope="col">Container Weight</th>
+                                            <th scope="col">Container Size</th>
+                                            <th scope="col">From Location</th>
+                                            <th scope="col">To Location</th>
+                                            <th scope="col">Is Active</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="_detailsLogisticsList"></tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+<script src="~/AdminLte/Js/xlsx.min.js"></script>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/LocalLogistics.js")"></script>
+

@@ -1,0 +1,40 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "CreateRole";
+}
+
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary" onclick="window.location.href='RoleList'">View Role Details</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+    @using (Html.BeginForm("CreateRole", "Role"))
+    {
+    <div class="registration-form">
+        <div class="card-body">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Role Name</label>
+                    @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.Name)
+                </div>
+               
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+          
+    </div>
+        }
+
+
+    </div>
+

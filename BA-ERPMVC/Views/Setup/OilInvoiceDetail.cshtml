@@ -1,0 +1,215 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+
+
+@{
+    ViewBag.Title = "OilInvoiceDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+
+
+
+<div class="card" id="gridShow">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Oil Invoice Details</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+ 
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="OilInvoiceGride" class="table table-bordered" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">RecivedDate</th>
+                            <th scope="col">OilName</th>
+                            <th scope="col">DeliveryNo</th>
+                            <!--
+                            <th >OilCompany</th>
+                            -->
+                            <th scope="col">Quantity</th>
+                            <th scope="col">InvoiceNumber</th>
+                            <th scope="col">InvoiceDate</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">PaymentMode</th>
+                            <th scope="col">TotalAmount</th>
+                            <th scope="col">PO/Ref_No</th>
+                            <th scope="col">POAmount</th>
+                            <th scope="col">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">Oil Invoice Details</h3>
+    </div>
+
+    <div class="registration-form">
+
+        <!-- /.card-header -->
+        <div class="card-body">
+        
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>Delivery Number</label>
+                        <select class="form-control select2" id="txtDekiveryNo" name="txtDekiveryNo" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-lg-4" id="OTY">
+                    <div class="form-group">
+                        <label>Oil Company</label>
+                        <input type="text" id="txtOilCompany" name="txtOilCompany" class="form-control" disabled />
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4" id="RD">
+                    <div class="form-group">
+                        <label>Invoice Date</label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input type="text" id="txtInvoiceDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3" id="QU">
+                    <div class="form-group">
+                        <label>Invoice Amount</label>
+                        <div class="input-group mb-3">
+                            <input type="number" id="txtInvoiceAmount" name="txtInvoiceAmount" min="1" max="5" class="form-control"  onKeyUp="multiply()">
+                            <!--
+                                <input type="text" id="txtInvoiceAmount" name="txtInvoiceAmount" class="form-control" onKeyUp="multiply()">
+                            -->
+                                <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="text"  id="txtQauntity" name="txtQauntity" class="form-control" disabled/>
+                    </div>
+                </div>
+                
+
+                <div class="col-lg-4" id="DN">
+                    <div class="form-group">
+                        <label>Rate</label>
+                        <input type="text" id="txtrate" name="txtrate" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>Payment Mode</label>
+                        <select class="form-control select2" id="txtPaymentMode" name="txtPaymentMode" style="width: 100%;">
+                            <option selected="selected">--Please Select PaymentMode--</option>
+                           
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3" id="CheNo">
+                    <div class="form-group">
+                        <label>Cheque No</label>
+                        <input type="text" id="txtChequeNO" name="txtChequeNO" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-lg-3" id="PayOrder">
+                    <div class="form-group">
+                        <label>PayOrder No</label>
+                        <input type="text" id="txtPayOrderNo" name="txtPayOrderNo" class="form-control">
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3" id="RD">
+                    <div class="form-group">
+                        <label>PayOrder Date</label>
+                        <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                            <input type="text" id="txtPayOrderDate" class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                            <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3" id="QU">
+                    <div class="form-group">
+                        <label>PayOrder Amount</label>
+                        <div class="input-group mb-3">
+                            <input type="number" id="txtPayOrderAmount" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="btnBack" class="btn btn-primary">Back</button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+<script src="~/AdminLte/Scripts/OilInvoiceDet.js"></script>

@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ItemUnit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Setup/ItemUnit</h6>
+    </div>
+    <div class="card-body">
+
+        <div class="input-group input-group-lg col-md-6 mx-auto">
+            <input type="hidden" id="UnitId" required="required" class="form-control " value="0">
+            <label for="_txtunitName">Unit Name *<label id="_txtunitName-error" class="error" for="_txtunitName"></label></label>
+            <div class="input-group">
+                <input type="text" id="_txtunitName" required="required" class="form-control ">
+
+
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <br />
+        <div class="item form-group">
+            <div class="col-md-6 col-sm-6 offset-md-3">
+                <button class="btn btn-primary" type="reset" id="_resetItem">Reset</button>
+                <button type="button" class="btn btn-success" id="_AddItem">Submit</button>
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box table-responsive">
+
+                    <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <table class="table table-hover table-condensed dataTable shadow-lg p-3 mb-5 bg-white rounded" id="_UnitName">
+                                        <thead class="_changeHeaderColor">
+                                            <tr>
+                                                <th>Unit Name</th>
+                                                <th>isActive</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="_ticketList"></tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/AdminLte/Scripts/Setup_ItemUnit_JS.js"></script>

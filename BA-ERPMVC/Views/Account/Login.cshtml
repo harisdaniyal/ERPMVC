@@ -1,0 +1,48 @@
+﻿@using BA_ERPMVC.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BA-ERP</title>
+    <link href="~/AdminLte/dist/css/LoginPage.css" rel="stylesheet" />
+</head>
+<body onload="randombg()">
+    <div class="container">
+        <div class="left">
+            <img src="~/AdminLte/dist/img/icon_login.png" class="animation a6" style="margin: 0 auto 10px;width: 150px"/>
+            <div class="header">
+
+                <p class="animation a2" style="text-align: center;">ENTERPRISE RESOURCE PLANNING SYSTEM</p>
+            </div>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                @Html.TextBoxFor(a => a.UserName, new { placeholder = "User Name", @class = "form-field animation a3", autocomplete = "off" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
+
+
+                @Html.PasswordFor(a => a.Password, new { placeholder = "Password", @class = "form-field animation a4" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                <div class="error-content">
+                    <center><label style="color:Red;">@ViewData["Error"]</label></center>
+                </div>
+                
+                    <input type="submit" class="button animation a6" value="Login" />
+                
+            }
+
+        </div>
+        <div id="right"></div>
+    </div>
+    
+    <script src="~/AdminLte/dist/js/Loginscript.js"></script>
+</body>
+</html>

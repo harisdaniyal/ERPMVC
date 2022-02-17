@@ -1,0 +1,356 @@
+﻿
+@{
+    ViewBag.Title = "OrderBooking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+
+
+
+
+
+
+
+<div class="card">
+
+    <div class="card-header" style="border-bottom: 8px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Customer Order Booking</h6>
+        <div class="col-md-6 float-sm-right">
+            <button type="submit" id="_btnBack" class="btn btn-default btn-primary float-right d-none">Back</button>
+        </div><!-- /.col -->
+    </div>
+
+
+    @*<div class="card-header">
+        <div class="container-fluid ">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h6>Customer Order Booking</h6>
+                </div>
+                <div class="col-md-6 float-sm-right">
+                    <button type="submit" id="_btnBack" class="btn btn-default btn-primary float-right d-none">Back</button>
+                </div><!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>*@
+
+
+
+    <div id="HideForm">
+        <form id="_addOrder">
+            <div class="card-body">
+
+                <div class="row divTopMargin">
+
+                    <!--
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Order Date<label id="_OrderDate-error" class="error" for="_OrderDate"></label></label>
+                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <input type="text" id="_OrderDate" name="OrderDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+            -->
+
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Order Date<label id="_OrderDate-error" class="error" for="_OrderDate"></label></label>
+                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                <input class="date-picker form-control" id="_OrderDate" name="OrderDate" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                <!--
+                    <input type="text" id="_OrderDate" name="OrderDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        -->
+                                <script>
+                                    function timeFunctionLong(input) {
+                                        setTimeout(function () {
+                                            input.type = 'text';
+                                        }, 60000);
+                                    }</script>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Order Number<label id="_txtOrderNumber-error" class="error" for="_txtOrderNumber"></label></label>
+                            <div class="input-group date">
+                                <input type="text" name="_txtOrderNumber" id="_txtOrderNumber" class="form-control " disabled />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Business Devision<label id="_txtBusinessDevision-error" class="error" for="_txtBusinessDevision"></label></label>
+                            <div class="input-group">
+                                <select name="BusinessDevision" id="_txtBusinessDevision" class="form-control"></select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="CustomerName">Customer Name<label id="_txtCustomerName-error" class="error" for="_txtCustomerName"></label></label>
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <select name="CustomerName" id="_txtCustomerName" class="form-control  select2"></select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-none" id="divOT">
+                        <div class="form-group">
+                            <label for="OrderType">Order Type<label id="_txtOrderType-error" class="error" for="_txtOrderType"></label></label>
+                            <div class="input-group">
+                                <select name="OrderType" id="_txtOrderType" class="form-control _field ">
+                                    <option value="">Select Order Type</option>
+                                    <option value="Import">Import</option>
+                                    <option value="Export">Export</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-none" id="divBL">
+                        <div class="form-group">
+                            <label for="BL">BL<label id="_txtBLCRO-error" class="error" for="_txtBL"></label></label>
+                            <div class="input-group">
+                                <input name="BL" id="_txtBL" class="form-control _field" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+        <div class="col-md-4 d-none" id="divEditeBL">
+            <div class="form-group">
+                <label for="BL">BL<label id="_txtBLCRO-error" class="error" for="_txtBLedite"></label></label>
+                <div class="input-group">
+                    <input name="BL" id="_txtBLedite" class="form-control _field" />
+
+                </div>
+            </div>
+        </div>
+            -->
+                    <div class="col-md-4 d-none" id="divCRO">
+                        <div class="form-group">
+                            <label for="CRO">CRO<label id="_txtBLCRO-error" class="error" for="_txtCRO"></label></label>
+                            <div class="input-group">
+                                <input name="CRO" id="_txtCRO" class="form-control _field" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 d-none" id="divBond">
+                        <div class="form-group">
+                            <label for="inBond">InBond-Number<label id="_txtinBond-error" class="error" for="_txtinBond"></label></label>
+                            <div class="input-group">
+                                <input name="inBond" id="_txtinBond" class="form-control _field" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-none" id="divDelivery">
+                        <div class="form-group">
+                            <label>Delivery No<label id="_DeliveryNo-error" class="error" for="_DeliveryNo"></label></label>
+                            <div class="input-group">
+                                <input name="DeliveryNo" id="_DeliveryNo" class="form-control _field" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" id="HoHideRate">
+                        <div class="form-group">
+                            <label>HO Rates </label>
+                            <div class="input-group">
+                                <input type="checkbox" id="scales" name="scales">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @*<div class="col-md-4 d-none" id="hs">
+                        <div class="form-group">
+                            <label>HO Rates </label>
+                            <div class="input-group">
+                                <input type="checkbox" id="df" name="dfg" checked>
+
+
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                </div>
+
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-header" style="border-bottom: 2px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                        <h5 class="m-0 font-weight-bold centerHead">Facilities List</h5>
+                    </div>
+                    <input type="hidden" id="itemId" required="required" class="form-control " value="0">
+
+                    <ul class="list-group list-group-flush" id="dvCheckBoxListControl">
+
+                        @*<li class="list-group-item">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="">
+                            <label class="form-check-label" for="">
+
+                            </label>
+                        </div>
+                    </div>
+                </li>*@
+
+                    </ul>
+                </div>
+
+
+
+                <div class="shadow p-3 mb-5 bg-white rounded d-none" id="hs">
+                 
+
+                      
+                            <div class="card-header" style="border-bottom: 2px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                                <h5 class="m-0 font-weight-bold centerHead">Expense List</h5>
+                            </div>
+                            <!--
+                <div class="card-header">
+                    <div class="row">
+                        <h4>Expense List</h4>
+                    </div>
+                </div>
+                    -->
+                            <div class=" p-3 mb-5 rounded">
+                                <ul class="list-group list-group-flush" id="dvCheckBoxListControl1"></ul>
+                            </div>
+                         
+                       
+                    
+                </div>
+
+
+
+
+
+                @*<div class="row d-none" id="ServiceRemarks">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Service Detail</label>
+                    <div class="input-group">
+                        <input name="_txtinBond" id="_txtinBond" class="form-control _field" />
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+            </div>
+
+            
+
+
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-6 offset-md-3">
+                    <button class="btn btn-primary " id="_btnReset" type="reset">Reset</button>
+                    <button type="submit" id="_btnOrderSubmit" class="btn btn-success">Submit</button>
+                    <button class="btn btn-dark " id="_viewOrder" type="button">ViewOrder</button>
+                    <button class="btn btn-dark " id="btnBack" type="reset">Back</button>
+                </div>
+            </div>
+
+            @*<div class="card-footer">
+            <button type="submit" id="_btnOrderSubmit" class="btn btn-primary">Submit</button>
+            <button type="button" id="_btnReset" class="btn btn-primary">Reset</button>
+            <button type="button" id="_viewOrder" class="btn btn-primary">View Order</button>
+        </div>*@
+        </form>
+    </div>
+    <div class="card-body d-none" id="OrderTableHide">
+
+
+
+        <!-- Start -->
+        <div class="ln_solid"></div>
+        <br />
+
+        <div id="TableDiv" >
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="_orderTable">
+                                            <thead class="_changeHeaderColor">
+                                                <tr>
+                                                    <th scope="col">Order ID</th>
+                                                    <th scope="col">Order Date</th>
+                                                    <th scope="col">Order No</th>
+                                                    <th scope="col">Business Devision</th>
+                                                    <th scope="col">Customer Name</th>
+                                                    <th scope="col">Order Type</th>
+                                                    <th scope="col">BL Number</th>
+                                                    <th scope="col">CRO Number</th>
+                                                    <th scope="col">Delivery No</th>
+                                                    <th scope="col">In-Bond Number</th>
+                                                    <th scope="col">Create Date</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="_purchasetList"></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    </div>
+
+</div>
+<script src="~/AdminLte/Scripts/salesOrder.js"></script>

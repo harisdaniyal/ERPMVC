@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "PrintReportLogistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<div class="card">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">   Print Trip Sheet / Driver Slip </h6>
+    </div>
+    <div class="card-body">
+
+
+
+        <div class="form-row ">
+
+            <div class="input-group input-group-lg col-md-6 mx-auto">
+                <label for="txtCustname">ReportFormation<label id="_txtCustomerName-error" class="error" for="txtCustname"></label></label>
+                <div class="input-group">
+                    <select class="form-control" id="txtReportFormation" name="txtReportFormation" style="width: 100%;">
+                        <option value="">--Please Select Report formation--</option>
+                        <option value="1">--Print Trip Sheet--</option>
+                        <option value="2">--Print Driver Slip--</option>
+                    </select>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <br />
+
+        <div class="form-row d-none" id="hideTripNo">
+
+            <div class="input-group input-group-lg col-md-6 mx-auto">
+                <label for="_InvoiceNumber">TripNumber<label id="_InvoiceNumber-error" class="error" for="_InvoiceNumber"></label></label>
+                <div class="input-group">
+                    <select class="form-control" id="_InvoiceNumber" name="_InvoiceNumber" style="width: 100%;"></select>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-row d-none" id="hideSlip">
+
+            <div class="input-group input-group-lg col-md-6 mx-auto">
+                <label for="txtSliptripNo">TripNumber<label id="txtSliptripNo-error" class="error" for="txtSliptripNo"></label></label>
+                <div class="input-group">
+                    <select class="form-control" id="txtSliptripNo" name="txtSliptripNo" style="width: 100%;"></select>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    
+
+     
+   
+    <div class="card-footer">
+        <div class="col-md-9 col-sm-9  offset-md-3">
+            <button type="submit" id="_btnPrintInvoiceReport" class="btn btn-dark">Generate Report</button>
+            <button type="submit" id="_btnPrintslipReport" class="btn btn-dark d-none">Generate Report</button>
+            @*<button class="btn btn-primary" type="button" id="_back">Back</button>
+            <button class="btn btn-primary _field" type="reset" id="_reset">Reset</button>
+            <button type="button" class="btn btn-success _field" id="_addCash">Add</button>*@
+        </div>
+    </div>
+</div>
+
+
+<script src="~/AdminLte/Scripts/Print-Report-Logistics-JS.js"></script>

@@ -1,0 +1,508 @@
+﻿<!--
+<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+    -->
+@{
+    ViewBag.Title = "TripDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+
+<div class="card shadow-lg p-3 mb-5  rounded d-none" id="gridShow">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Trip Details / Expense</h6>
+    </div>
+
+
+
+    <div class="card-body">
+        @*<div class="item form-group">
+                <div class="col-md-7 col-sm-7 offset-md-5">
+                    <button type="button" id="btnADD" class="btn btn-success">Add TripDetails</button>
+                </div>
+            </div>*@
+
+
+        <br />
+        <!-- Start -->
+        <div class="ln_solid"></div>
+
+        <div id="TableDiv">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="MainGrid">
+                                            <thead class="_changeHeaderColor">
+                                                <tr>
+                                                    @*<th scope="col">TripCode</th>*@
+                                                    <th scope="col">OrderNo</th>
+                                                    <th scope="col">Order Date</th>
+
+                                                    <th scope="col">BusinessDivisionName</th>
+                                                    <th scope="col">Customer_Name</th>
+
+                                                    @*<th scope="col">Container No</th>
+                                                        <th scope="col">Container No2</th>
+                                                        <th scope="col">Vehicle No</th>
+                                                        <th scope="col">DriverName</th>
+                                                        <th scope="col">From Location</th>
+                                                        <th scope="col">To Location</th>
+                                                        <th scope="col">Container Status</th>
+                                                        <th scope="col">Total Expense</th>*@
+                                                    @*<th scope="col">Action</th>*@
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="_MainGrideList"></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+        <!--
+        <div class="row ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetail">
+
+
+                <table class="table table-bordered" style="width:100%;" id="MainGrid">
+                    <thead class="_changeHeaderColor datatable-head">
+
+                        <tr class="text-center">
+                            <th scope="col">TripCode</th>
+                            <th scope="col">Order No</th>
+                            <th scope="col">Container No</th>
+                            <th scope="col">Container No2</th>
+                            <th scope="col">Vehicle No</th>
+                            <th scope="col">DriverName</th>
+                            <th scope="col">From Location</th>
+                            <th scope="col">To Location</th>
+                            <!--
+                        <th scope="col">CurrentFrom Location</th>
+                        <th scope="col">CurrentTo Location</th>
+
+            <th scope="col">Container Status</th>
+            <th scope="col">Total Expense</th>
+            <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody id="_orderList" class="text-center"></tbody>
+            </table>
+
+
+        </div>
+
+            </div>
+
+            -->
+
+    </div>
+
+
+</div>
+
+<div id="lloForm" class="card card-default d-none">
+
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Trip/Expense Details Form</h6>
+    </div>
+    <!--
+    <div class="card-header">
+        <h3 class="card-title">Trip/Expense Details Form</h3>
+    </div>
+        -->
+
+    <form id="_addCustomerReg">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div>
+                <div class="row divTopMargin" id="divTipDetails">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Trip No</label>
+                            <input type="text" name="TripID" id="TripID" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Order Date<label id="_OrderDate-error" class="error" for="_OrderDate"></label></label>
+                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                <input class="date-picker form-control" id="txtDate" name="txtDate" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                <!--
+                <input type="text" id="_OrderDate" name="OrderDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                    -->
+                                <script>
+                                    function timeFunctionLong(input) {
+                                        setTimeout(function () {
+                                            input.type = 'text';
+                                        }, 60000);
+                                    }</script>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+    <div class="col-lg-4">
+        <!-- text input
+            <div class="form-group">
+                <label>Operation Date</label>
+                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <input type="text" id="txtDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Order Number</label>
+                            <select class="form-control select2" id="ddlOrderID" name="ddlOrderID" style="width: 100%;"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" id="Containerhide">
+                        <div class="form-group">
+                            <label>First Container</label>
+                            <select class="form-control select2" id="ddlContainerNo" name="ddlContainerNo" style="width: 100%;">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-4" id="ContainerHideedite">
+            <div class="form-group">
+                <label>Container No</label>
+                <input type="text" name="editeContainerNo" id="editeContainerNo" disabled="disabled" class="form-control">
+            </div>
+        </div>*@
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Second Container</label>
+                            <input type="text" name="ddlContainerNo2" id="ddlContainerNo2" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Container Weight</label>
+                            <input type="text" name="txtContainerWeight" id="txtContainerWeight" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Vendor</label>
+                            <select class="form-control select2" id="ddlVendor" name="ddlVendor" style="width: 100%;">
+                                <option value="">--Select Vendor--</option>
+                                <option value="Own">Own</option>
+                                <option value="9">Test vendor 111</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 thirdPartyVendorDetail d-none">
+                        <div class="form-group">
+                            <label>Driver Name</label>
+                            <input type="text" name="VendorDriverName" id="VendorDriverName" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 thirdPartyVendorDetail d-none">
+                        <div class="form-group">
+                            <label>Driver CNIC</label>
+                            <input type="text" name="VendorDriverCNIC" id="VendorDriverCNIC" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 thirdPartyVendorDetail d-none">
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="text" name="VendorDriverContactNumber" id="VendorDriverContactNumber" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 thirdPartyVendorDetail d-none">
+                        <div class="form-group">
+                            <label>Vehicle No</label>
+                            <input type="text" name="VendorVehicleNo" id="VendorVehicleNo" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 thirdPartyVendorDetail d-none">
+                        <div class="form-group">
+                            <label>Vehicle Rate</label>
+                            <input type="number" name="VendorRate" id="VendorRate" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 localTransportDetail">
+                        <div class="form-group">
+                            <label>First Driver</label>
+                            <select class="form-control select2" id="ddlDriverID" name="ddlDriverID" style="width: 100%;"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 localTransportDetail" id="hideDriverID2nd">
+                        <div class="form-group">
+                            <label>Second Driver</label>
+                            <select class="form-control select2" id="ddlDriverID2nd" name="ddlDriverID2nd" style="width: 100%;"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 localTransportDetail">
+                        <div class="form-group">
+                            <label>Vehicle No</label>
+                            <select class="form-control select2" id="ddlVechilID" name="ddlVechilID" style="width: 100%;"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>From Location</label>
+                            <input type="text" name="Fromlocation" id="Fromlocation" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>To Location</label>
+                            <input type="text" name="Tolocation" id="Tolocation" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-4" style="margin-top:10px;" id="hideCheckboxContainerCurrent">
+                        <br />
+                        <div class="[ form-group ]">
+
+
+                            <div class="[ btn-group ]">
+                                <label for="fancy-checkbox-default" class="btn btn-outline-secondary">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span> </span>
+                                    <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
+                                </label>
+                                <label for="fancy-checkbox-default" class="[ btn btn-dark active ]">
+                                    Current Container Location
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" id="currentToLoactionhide">
+                        <div class="form-group">
+                            <label>Current From Location</label>
+                            <input type="text" name="currentFromLocation" id="currentFromLocation" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" id="currentFromLocationhide">
+                            <label>Current To Location</label>
+                            <input type="text" name="currentToLoaction" id="currentToLoaction" class="form-control">
+                        </div>
+                    </div>
+
+
+                </div>*@
+
+            <div class="row">
+
+                <div class="col-md-4 d-none" id="hidetxtContainerStatus">
+                    <div class="form-group">
+                        <label>Container Status</label>
+                        <select class="form-control select2" id="txtContainerStatus" name="txtContainerStatus" style="width: 100%;"></select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 d-none" id="hideRecivedDate">
+                    <div class="form-group">
+                        <label class="control-label">Received Date<label id="txtReceivedDate-error" class="error" for="txtReceivedDate"></label></label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input class="date-picker form-control" id="txtReceivedDate" name="txtReceivedDate" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                            <!--
+                            <input type="text" id="_OrderDate" name="OrderDate" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                                -->
+                            <script>
+                                function timeFunctionLong(input) {
+                                    setTimeout(function () {
+                                        input.type = 'text';
+                                    }, 60000);
+                                }</script>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <hr class="my-12" />
+            <div class="item form-group">
+                <div class="col-md-8 col-sm-2 offset-md-2">
+                    <button class="btn btn-primary " id="_btnReset" type="reset">Reset</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-success">Submit</button>
+                    <button class="btn btn-dark " id="btnBack" type="button">Back</button>
+                    <button class="btn btn-primary" id="PrintSlipbtn" type="button">Print Slip</button>
+                </div>
+            </div>
+            <hr class="my-12" />
+            <div class="card-body" id="divExpenseList">
+                <div class="row divTopMargin" id="hiderow4">
+
+                    <div class="col-md-12 shadow p-3 mb-5 bg-white rounded">
+
+
+
+                        @*<div class="col-md-4" id="">
+                                <div class="form-group">
+                                    <label>Expense Name</label>
+                                    <select class="form-control select2" id="txtExpenseID" name="txtExpenseID" style="width: 100%;"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success _field" id="_addCash">Add</button>
+                                </div>
+                            </div>*@
+                        <!--
+                        <div class="card-header">
+                            <div class="row">
+                                <h4>Expense List</h4>
+                            </div>
+                        </div>
+                            -->
+
+                        <div class="card-header" style="border-bottom: 2px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                            <h5 class="m-0 font-weight-bold centerHead">Expense List</h5>
+                        </div>
+
+                        <br />
+                        <ul class="list-group list-group-flush" id="dvCheckBoxListControl"></ul>
+                        <br />
+                        <div class="card-header" id="HoHeadTxt" style="border-bottom: 2px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                            <h5 class="m-0 font-weight-bold centerHead">Head Office Rates</h5>
+                        </div>
+                        <br />
+                        <ul class="list-group list-group-flush" id="dvCheckBoxListControl1"></ul>
+                        <br />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>
+                            Total Price:
+                        </label>
+                        <label id="_totalPrice">0</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--start-->
+
+            <div class="card-body shadow-lg p-3 mb-5 bg-white rounded" id="hideTripeDetals">
+
+                <div class="card-header" style="border-bottom: 2px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                    <h5 class="m-0 font-weight-bold centerHead">Trip Details</h5>
+                </div>
+                <br />
+                <div id="TableDiv">
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+
+                                <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <table class="table   table-hover table-bordered table-condensed dataTable nowrap  " id="tripGride">
+                                                    <thead class="_changeHeaderColor">
+                                                        <tr>
+                                                            <th scope="col">TripCode</th>
+                                                            <th scope="col">OrderNo</th>
+                                                            @*<th scope="col">Order Date</th>
+
+        <th scope="col">BusinessDivisionName</th>
+        <th scope="col">Customer_Name</th>*@
+
+                                                            <th scope="col">Container No</th>
+                                                            <th scope="col">Container No2</th>
+                                                            <th scope="col">Vehicle No</th>
+                                                            <th scope="col">DriverName</th>
+                                                            <th scope="col">From Location</th>
+                                                            <th scope="col">To Location</th>
+                                                            @*<th scope="col">Vendor Party</th>*@
+                                                            <th scope="col">Vendor Driver Name</th>
+                                                            <th scope="col">Vendor Driver CNIC</th>
+                                                            <th scope="col">Vendor Contact Number</th>
+                                                            <th scope="col">Vendor Vehicle No</th>
+                                                            <th scope="col">Container Status</th>
+                                                            <th scope="col">Total Expense</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody id="_TrideGrideList"></tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!--End-->
+
+
+
+
+
+
+        </div>
+
+    </form>
+</div>
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/TripDetails.js")"></script>

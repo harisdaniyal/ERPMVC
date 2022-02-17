@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "OrderListing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.OrderListViewModel>
+
+<br />
+<div id="orderListing" class="card cardV2">
+    <div class="card-header">
+        <h5 class="m-0 font-weight-bold centerHead">Order Listing</h5>
+    </div>
+    <div class="filterBar d-flex align-content-center justify-content-between w-100 bg-light p-2 border-top border-lighter">
+        <div class="mr-2 mt-1">
+            <select class="form-control form-control-v1 form-control-sm bg-white" id="ddl_BusinessDivision" onchange="onChange_BusinessDivision(this)">
+                <option value="">Please Select Division</option>
+                @foreach (var businessDivision in ViewBag.BusinessDivisions)
+                {
+                    <option value="@businessDivision.BusinessDivisionID" @((Request["businessDivisionId"] != null && businessDivision.BusinessDivisionID.ToString() == Request["businessDivisionId"]) ? "selected=selected" : "")>@businessDivision.BusinessDivisionName</option>
+                }
+            </select>
+        </div>
+        @*<div class="mx-2 mt-1">
+                <div class="input-group input-group-icon input-group-noLable-sm mb-0 bg-white">
+                    <input type="text" class="form-control form-control-v1 form-control-sm bg-transparent" placeholder="Search .." />
+                    <i class="fas fa-search input-icon"></i>
+                </div>
+            </div>*@
+        <div class="ml-2">
+            <button type="button" class="btn btn-primary btn-v2" onclick="onChange_BtnNewOrder()">New Order</button>
+        </div>
+    </div>
+    <table class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th class="w-25">Customer Name</th>
+                <th class="w-20">Business Devision</th>
+                <th class="w-20">Order Type</th>
+                <th style="width:150px;">Remaing Trips</th>
+                <th>Invoice Amount</th>
+                <th>Vendor Expense</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderNo</td>
+                    <td>@order.CustomerName</td>
+                    <td>@order.BusinessDivision</td>
+                    <td>
+                        <div class="badge badge-pill badge-success w-100 py-2">@order.OrderType</div>
+                    </td>
+                    <td>@order.RemainingTrips</td>
+                    <td>@order.InvoiceAmount</td>
+                    <td>@order.VendorExpense</td>
+
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-sm btn-danger btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*<div class="d-block mr-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination default-paging justify-content-end">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>*@
+</div>
+<script>
+    function onClick_btnView(orderBookingId) {
+        location.href = "Index?orderBookingId=" + orderBookingId + "&stepNo=Logistics";
+    }
+    function onChange_BusinessDivision(element) {
+        if (element.value)
+            location.href = "OrderList?businessDivisionId=" + element.value;
+        else location.href = "OrderList";
+    }
+    function onChange_BtnNewOrder() {
+        location.href = "Index";
+    }
+</script>

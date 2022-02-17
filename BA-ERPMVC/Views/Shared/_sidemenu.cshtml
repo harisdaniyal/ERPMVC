@@ -1,0 +1,449 @@
+﻿<style>
+
+    /*li {
+        margin: 8px 0;
+    }*/
+</style>
+<ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-flat col-md-offset-3" data-widget="treeview" role="menu" data-accordion="false">
+    <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+
+    <li class="nav-item">
+        <a href="@Url.Action("Dashboard","Home")" class="nav-link active">
+            <!--
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+                -->
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Dashboard
+
+            </p>
+        </a>
+
+    </li>
+
+
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    Setup
+
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/BLShippingLine/Index" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            BLShippingLine
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/BVMS/VehicleRegistration" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>VehicleRegistration</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/HumanResourceManagment/EmployeeDetails" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>EmployeeDetails</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/DropDownMenu/Expenses" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Expenses</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Vendor/Index" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Vendor</p>
+                    </a>
+
+                </li>
+            </ul>
+
+
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Country/Index" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Country</p>
+                    </a>
+
+                </li>
+            </ul>
+
+
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Department/Index" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Department</p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/City/Index" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>City</p>
+                    </a>
+
+                </li>
+            </ul>
+
+
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/BusinessDivision/Index" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>BusinessDivision</p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Designation/Index" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Designation</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/DropDownMenu/Facility" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Facility</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/DropDownMenu/Location" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Location</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Setup/Oil" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>Oil</p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Setup/OilInvoiceDetail" class="nav-link">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>OilInvoiceDetail</p>
+                    </a>
+
+                </li>
+            </ul>
+
+
+
+        </li>
+        <li class="nav-item">
+            <a href="/sales/OrderBooking" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Create Order
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/OrderBooking/Index" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Create Order New
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/OrderBooking/OrderList" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    OrderListing
+                </p>
+            </a>
+        </li>
+
+
+
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Customer
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Customer/CustomerRegistration" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>Customer Registration</p>
+                    </a>
+
+                </li>
+
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/CustomerPrice/index" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>Pricing</p>
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Operations
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/sales/LocalLogisticOperation" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>Logistic Operations</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/sales/TripDetails" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>Trip Detail</p>
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sales/UpCommingTrips" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>UpCommingTrips</p>
+                    </a>
+
+                </li>
+            </ul>
+
+        </li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    BVMS
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/BVMS/VehicleMaintenance" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>Vehicle Maintenance</p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-gas-pump nav-icon"></i>
+                        <p>Diesel/Lubricant</p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tire Maintenance</p>
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    TripSheet Summary
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+
+                        <a href="/Invoices/InvoiceGenerationLogistic" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Generate Report Logistics</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+
+                    <a href="/Invoices/PrintReportLogistics" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Print Report</p>
+                    </a>
+
+                </li>
+            </ul>
+
+
+        </li>
+
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Invoice
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Invoices/InvoiceGeneration" class="nav-link">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>Generate Invoice</p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="/Invoices/LogisticInvoice" class="nav-link">
+                        <i class="fas fa-gas-pump nav-icon"></i>
+                        <p>Print Invoice</p>
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
+                        <i class="fas fa-gas-pump nav-icon"></i>
+                        <p>Print Invoice Report</p>
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </li>
+
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    User Management
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+
+                    <a href="/Account/Register" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>User Registration</p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+
+                    <a href="/Role/CreateRole" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Role</p>
+                    </a>
+
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Account/Menu" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Menu</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Account/Permission" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Permission</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
+    {
+        <li class="nav-item">
+            <a href="/BLShippingLine/Index" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    BL Shipping Line
+                </p>
+            </a>
+        </li>
+
+    }
+
+</ul>
+

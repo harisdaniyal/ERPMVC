@@ -1,0 +1,369 @@
+﻿
+<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<!--
+<link href="~/Content/toastr.css" rel="stylesheet" />
+    -->
+
+@{
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<br />
+
+<div id="gridShow" class="card d-none">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add BL Shipping line</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <div class="row">
+           
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="BLShippingGride" class="table table-bordered dataTable" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th scope="col">Approval</th>
+                            <th scope="col">BL</th>
+                            <th scope="col">ShippingNameAndAddress</th>
+                            <th scope="col">ConsignesNameAndAddress</th>
+                            <th scope="col">NotifyPartyNameAndAdress</th>
+                            <th scope="col">PreCarriageBy</th>
+                            <th scope="col">PlaceOfReceipt</th>
+                            <th scope="col">OceanVessel</th>
+                            <th scope="col">VoyNo</th>
+                            <th scope="col">PortOfLanding</th>
+                            <th scope="col">PortOfDischarge</th>
+                            <th scope="col">PlaceOfDelivery</th>
+                            <th scope="col">ContainerNo</th>
+                            <th scope="col">SealNo</th>
+                            <th scope="col">NumberOfContainerPack</th>
+                            <th scope="col">KindOfPackDescriptionOfGoods</th>
+                            <th scope="col">GrossWeight</th>
+                            <th scope="col">NetWeight</th>
+                            <th scope="col">FreightAndCharges</th>
+                            <th scope="col">TypeOfService</th>
+                            <th scope="col">NumberOfOrignalBL</th>
+                            <th scope="col">FrightPayable</th>
+                            <th scope="col">placeOfDateofIssue</th>
+                            
+                            <th scope="col" sec:authorize="hasRole('Amin')">Action</th>
+                            
+                            </tr>
+                    </thead>
+                    <tfoot>
+                        
+                <tr>
+                    <th></th>
+
+                    </tr>
+        
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">BLShippingLine Name</h3>
+    </div>
+
+    <form id="_addShippingLine">
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtblNo">BL No<label id="_txtCustomerName-error" class="error" for="txtblNo"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtblNo" name="txtblNo" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" id="DX">
+                    <div class="form-group">
+                        <label for="txtApproval">Approval<label id="_txtCustomerName-error" class="error" for="txtApproval"></label></label>
+                        <div class="input-group">
+                            <select class="form-control select2" id="txtApproval" name="txtApproval" style="width: 100%;">
+                                <option selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtshipping">Shipping(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtshipping"></label></label>
+                        <div class="input-group">
+                            <textarea type="text" id="txtshipping" name="txtshipping" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtConsignee">Consignee(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtConsignee"></label></label>
+                        <div class="input-group">
+                            <textarea type="text" id="txtConsignee" name="txtConsignee" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtNotifyParty">Notify Party(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtNotifyParty"></label></label>
+                        <div class="input-group">
+                            <textarea type="text" id="txtNotifyParty" name="txtNotifyParty" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtprecarriageby">Pre-carriage by<label id="_txtCustomerName-error" class="error" for="txtprecarriageby"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtprecarriageby" name="txtprecarriageby" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtplaceofReceipt">Place of receipt<label id="_txtCustomerName-error" class="error" for="txtplaceofReceipt"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtplaceofReceipt" name="txtplaceofReceipt" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtOceanVessel">Ocean Vessel<label id="_txtCustomerName-error" class="error" for="txtOceanVessel"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtOceanVessel" name="txtOceanVessel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtVoyNo">Voy No.<label id="_txtCustomerName-error" class="error" for="txtVoyNo"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtVoyNo" name="txtVoyNo" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtPortOfLanding">Port of landing.<label id="_txtCustomerName-error" class="error" for="txtPortOfLanding"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtPortOfLanding" name="txtPortOfLanding" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtPortOfDischarge">Port of Discharge.<label id="_txtCustomerName-error" class="error" for="txtPortOfDischarge"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtPortOfDischarge" name="txtPortOfDischarge" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtPlaceofDeilvery">Place Of Delivery.<label id="_txtCustomerName-error" class="error" for="txtPlaceofDeilvery"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtPlaceofDeilvery" name="txtPlaceofDeilvery" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtContainerNo">ContainerNo.<label id="_txtCustomerName-error" class="error" for="txtContainerNo"></label></label>
+                        <div class="input-group">
+                            <textarea type="text" id="txtContainerNo" name="txtContainerNo" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtSealNo">Seal No.<label id="_txtCustomerName-error" class="error" for="txtSealNo"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtSealNo" name="txtSealNo" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+
+
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtConatinerOrPackage">Number of Container or Packages<label id="_txtCustomerName-error" class="error" for="txtConatinerOrPackage"></label></label>
+                        <div class="input-group">
+                            <textarea type="text" id="txtConatinerOrPackage" name="txtConatinerOrPackage" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtkindofpack">Kind Of packages;Description of goods<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
+                        <div class="input-group">
+                            <textarea type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtGrossWeight">Gross Weight<label id="_txtCustomerName-error" class="error" for="txtGrossWeight"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtGrossWeight" name="txtGrossWeight" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtNetWeight">Net Weight<label id="_txtCustomerName-error" class="error" for="txtNetWeight"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtNetWeight" name="txtNetWeight" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtfreightandcharges">Freight and Charges<label id="_txtCustomerName-error" class="error" for="txtfreightandcharges"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtfreightandcharges" name="txtfreightandcharges" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtCollect">Collect<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtCollect" name="txtCollect" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtStatus">Status<label id="_txtCustomerName-error" class="error" for="txtStatus"></label></label>
+                        <div class="input-group">
+                            <select class="form-control select2" id="txtStatus" name="txtStatus" style="width: 100%;">
+                                <option selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                    -->
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtypeofservice">Type of Service<label id="_txtCustomerName-error" class="error" for="txtypeofservice"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtypeofservice" name="txtypeofservice" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtNumberofOrignal">Number of Orignal B(s)/L<label id="_txtCustomerName-error" class="error" for="txtNumberofOrignal"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtNumberofOrignal" name="txtNumberofOrignal" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtfreightPayable">Freight Payable<label id="_txtCustomerName-error" class="error" for="txtfreightPayable"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtfreightPayable" name="txtfreightPayable" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label for="txtEDob">Place of Date<label id="_txtCustomerName-error" class="error" for="txtEDob"></label></label>
+
+                        <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                            <input type="text" id="txtOperationDate" name="txtOperationDate" class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                            <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+        </div>
+    </form>
+</div>
+
+
+<script src="~/AdminLte/Scripts/blshipping.js"></script>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BA-ERPMVC", "BA-ERPMVC\BA-ERPMVC.csproj", "{DDABEB56-7A04-4374-AAF7-D3A2BB5C5FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterLayer", "MasterLayer\MasterLayer\MasterLayer.csproj", "{DD0CABD1-0BC7-49E7-AC07-403AFE560C67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDABEB56-7A04-4374-AAF7-D3A2BB5C5FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDABEB56-7A04-4374-AAF7-D3A2BB5C5FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDABEB56-7A04-4374-AAF7-D3A2BB5C5FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDABEB56-7A04-4374-AAF7-D3A2BB5C5FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD0CABD1-0BC7-49E7-AC07-403AFE560C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD0CABD1-0BC7-49E7-AC07-403AFE560C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD0CABD1-0BC7-49E7-AC07-403AFE560C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD0CABD1-0BC7-49E7-AC07-403AFE560C67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEFED285-9BD6-4CA6-88A6-8C7E5135DF31}
+	EndGlobalSection
+EndGlobal

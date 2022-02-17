@@ -1,0 +1,1063 @@
+﻿
+@{
+    ViewBag.Title = "CustomerPrice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card shadow-lg p-3 mb-5 bg-white rounded d-none" id="FormDetail">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">CustomerPrice</h6>
+    </div>
+    <div class="card-body">
+
+        <form class="form-label-left input_mask" id="form1">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="x_panel shadow-lg p-3 mb-5 bg-white rounded">
+
+                        <div class="x_content">
+                            <br>
+                            <input type="hidden" id="_purchaseId" name="_purchaseId" required="required" class="form-control " value="0">
+
+                            <div class="form-row ">
+
+                                <div class="input-group input-group-lg col-md-6 mx-auto">
+                                    <label for="txtCustname">Customer Name<label id="_txtCustomerName-error" class="error" for="txtCustname"></label></label>
+                                    <div class="input-group">
+                                        <select class="form-control" id="txtCustomerName" name="txtCustomerName" style="width: 100%;">
+                                            <option></option>
+                                        </select>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="input-group input-group-lg col-md-6 mx-auto">
+
+                                    <label for="txtfacility">Facility List<label id="txtfacility-error" class="error" for="txtfacility"></label></label>
+                                    <div class="input-group">
+                                        <select class="form-control" id="txtfacility" name="txtfacility" style="width: 100%;">
+                                            <option></option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <input type="hidden" id="_purchaseDetailId" name="_purchaseDetailId" required="required" class="form-control " value="0">
+                            <div class="form-row" id="ContainerWeightCategoryhide">
+                                <div class="input-group input-group-lg col-md-6 mx-auto">
+
+                                    <label for="txtContainerWeightCategory">Container Weight Category<label id="txtContainerWeightCategory-error" class="error" for="txtContainerWeightCategory"></label></label>
+                                    <div class="input-group">
+                                        <select class="form-control" id="txtContainerWeightCategory" name="txtContainerWeightCategory" style="width: 100%;">
+                                            <option></option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-row" id="LadenEmptyHide">
+                                <div class="input-group input-group-lg col-md-6 mx-auto">
+
+                                    <label for="txtladenempty">Laden/Empty<label id="txtladenempty-error" class="error" for="txtladenempty"></label></label>
+                                    <div class="input-group">
+                                        <select class="form-control" id="txtladenempty" name="txtladenempty" style="width: 100%;">
+                                            <option></option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <br />
+                            <br />
+
+
+                            <div class="row" id="containerhide">
+                                <div class="col-lg-3" id="LC20">
+                                    <div class="form-group">
+                                        <p for="txtContainer20laden">LADEN/Container20<label id="_txtCustomerName-error" class="error" for="txtContainer20laden"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtContainer20laden" name="txtContainer20laden" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group" id="LC40">
+                                        <p for="txtContainer40laden">LADEN/Container40<label id="_txtCustomerName-error" class="error" for="txtContainer40laden"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtContainer40laden" name="txtContainer40laden" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group" id="EC20">
+                                        <p for="txtContainer20Empty">EMPTY/Container20<label id="_txtCustomerName-error" class="error" for="txtContainer20Empty"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtContainer20Empty" name="txtContainer20Empty" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group" id="EC40">
+                                        <p for="txtContainer40Empty">EMPTY/Container40<label id="_txtCustomerName-error" class="error" for="txtContainer40Empty"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtContainer40Empty" name="txtContainer40Empty" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row" id="lolohide">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <p for="txtloloLaden">LOLO/LADEN<label id="_txtCustomerName-error" class="error" for="txtloloLaden"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtloloLaden" name="txtloloLaden" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <p for="txtloloEmpty">LOLO/EMPTY<label id="_txtCustomerName-error" class="error" for="txtloloEmpty"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtloloEmpty" name="txtloloEmpty" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row" id="WeightChrgeshide">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <p for="txtweightmentchargesladen">Weightment Charges/20<label id="_txtCustomerName-error" class="error" for="txtweightmentchargesladen"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtweightmentchargesladen" name="txtweightmentchargesladen" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <p for="txtweightmentchargesempty">Weightment Charges/40<label id="_txtCustomerName-error" class="error" for="txtweightmentchargesempty"></label></p>
+                                        <div class="input-group">
+                                            <input type="text" id="txtweightmentchargesempty" name="txtweightmentchargesempty" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+
+                            <br />
+                            <br />
+
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group row">
+                                <div class="col-md-9 col-sm-9  offset-md-3">
+                                    <button class="btn btn-primary" type="button" id="_back">Back</button>
+                                    <button class="btn btn-primary _field" type="reset" id="_reset">Reset</button>
+                                    <button type="button" class="btn btn-success _field" id="_addCash">Add</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+        </form>
+
+
+        <div class="row" id="transportaionhide">
+            <div class="col-md-12 ">
+                <div class="x_panel shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="table-responsive">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <table class="table table-bordered  table-hover table-condensed dataTable nowrap" id="_tblTicketList">
+                                <thead class="_changeHeaderColor">
+                                    <tr>
+                                        <th></th>
+                                        <th>ContainerCategory</th>
+                                        <th>LADEN/Container20</th>
+                                        <th>LADEN/Container40</th>
+                                        <th>EMPTY/Container20</th>
+                                        <th>EMPTY/Container40</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="_ticketList"></tbody>
+                                <!--
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th style="text-align:right">Total:</th>
+                                <th>0</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                            -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+ 
+
+
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 offset-sm-8 offset-md-8">
+                <button type="button" id="_btnSubmit" class="btn btn-success _field" style="float: right;">Submit</button>
+                <button type="button" id="_btnSubmitlolo" class="btn btn-success _field" style="float: right;">Submitlolo</button>
+                <button class="btn btn-primary _field" type="reset" id="_cancel" style="float: right;">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="card shadow-lg p-3 mb-5  rounded " id="TableView">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">CustomerPrice</h6>
+    </div>
+    <div class="card-body">
+        <div class="item form-group">
+            <div class="col-md-7 col-sm-7 offset-md-5">
+                <button type="button" id="_addCustomerPrice" class="btn btn-success">Add CustomerPrice</button>
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div id="TableDiv">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table   table-hover table-condensed dataTable nowrap shadow-lg p-3 mb-5 bg-white rounded" id="_tblTransportaion">
+                                            <thead class="_changeHeaderColor">
+                                                <tr>
+                                                    <th>Container Weight Category</th>
+                                                    <th>LADEN/Container20</th>
+                                                    <th>LADEN/Container40</th>
+                                                    <th>EMPTY/Container20</th>
+                                                    <th>EMPTY/Container40</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="_purchasetList"></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="responsibility" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h4 class="modal-title">Purchase Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-striped text-center shadow-lg dataTable" id="_tblPurchaseDetail">
+                                    <thead class="custom-theme-color">
+                                        <tr class="text-center">
+                                            <th class="text-center">Container Category</th>
+                                            <th class="text-center">LADEN/Container20</th>
+                                            <th class="text-center">LADEN/Container40</th>
+                                            <th class="text-center">EMPTY/Container20</th>
+                                            <th class="text-center">EMPTY/Container40</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="_purchaseDetailList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#_tblTicketList').DataTable({
+        })
+        var services = new Services();
+        //var TotalAmount = 0;
+        //getParty();
+        //getPurchaseNo();
+        //var PurchaseId = $.url().param('id');
+        //var isEdit = $.url().param('edit');
+        //if (isEdit == "1") {
+        //    $("#FormDetail").removeClass("d-none");
+        //    $("#TableView").addClass("d-none");
+        //    getPurchaseMasterById(PurchaseId, isEdit);
+        //}
+        //else if (isEdit == "0") {
+        //    $("#FormDetail").removeClass("d-none");
+        //    $("#TableView").addClass("d-none");
+        //    $("._field").prop("disabled", true);
+        //    //hide the first column
+
+        //    getPurchaseMasterById(PurchaseId, isEdit);
+
+        //}
+
+        var form = $('#form1');
+        //$("#form1").validate({
+        //    rules: {
+        //        _purchaseNo: "required",
+        //        _date: "required",
+        //        _creditDay: "required",
+        //        _dueDate: "required",
+        //        _billNo: "required",
+        //        _partyList: "required",
+        //        //_amount: "required",
+        //        //_remarks: "required",
+        //    }
+
+        //});
+        //function getPurchaseMasterById(ID, isEdit) {
+        //    services.getPurchaseMasterbyId(JSON.stringify({
+        //        PurchaseId: ID
+        //    })).then(function (response) {
+        //        //$("#_tblTicketList").dataTable().fnDestroy();
+        //        for (var i = 0; i < response.length; i++) {
+        //            var html = "";
+
+        //            html += "<tr>" +
+        //                "<td>" + response[i].PurchaseDetailId + "</td>" +
+        //                "<td>" + response[i].ItemName + "_" + response[i].ItemId + "</td>" +
+        //                "<td>" + response[i].Quantity + "</td>" +
+        //                "<td>" + response[i].UnitIn + "</td>" +
+        //                "<td>" + response[i].Rate + "</td>" +
+        //                "<td>" + response[i].Amount + "</td>" +
+        //                "<td>" + response[i].Remarks + "</td>" +
+        //                "<td><a data-id='" + response[i].PurchaseDetailId + "' class='p-1 fa fa-edit _editDetail'' ></a><a data-PurchaseId='" + response[i].PurchaseDetailId + "' class='p-1 fa fa-trash _deletePurchaseDetail' ></a></td>" +
+        //                "</tr>";
+        //            $("#_ticketList").append(html)
+        //        }
+
+        //        var dt = $('#_tblTicketList').DataTable({
+
+        //            "footerCallback": function (row, data, start, end, display) {
+        //                FooterData(this);
+        //            },
+        //        })
+        //        if (isEdit == 0) {
+        //            dt.column(6).visible(false);
+        //        }
+        //        $("#_purchaseId").val(response[0].PurchaseId);
+        //        $("#_purchaseNo").val(response[0].PurchaseNo);
+        //        $("#_purchaseType").val(response[0].PurchaseTypeId);
+        //        $("#_date").val(moment(response[0].Date).format("YYYY-MM-DD"));
+        //        $("#_creditDay").val(response[0].CreditDay);
+        //        $("#_dueDate").val(moment(response[0].DueDate).format("YYYY-MM-DD"));
+        //        $("#_partyList").val(response[0].PartyId);
+        //        $("#_billNo").val(response[0].BillNo);
+
+        //    })
+        //}
+    
+ 
+     
+
+     $("#containerhide").addClass("d-none");
+     $("#lolohide").addClass("d-none");
+     $("#WeightChrgeshide").addClass("d-none");
+     $("#ContainerWeightCategoryhide").addClass("d-none");
+     $("#transportaionhide").addClass("d-none");
+        
+
+       function getCustomerName() {
+            services.getCustomerName(JSON.stringify({
+            })).then(function (data) {
+                var s = '<option value="-1">--Select Customer Name--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].CustomerID + '">' + data[i].Customer_Name + '</option>';
+
+                }
+                $("#txtCustomerName").html(s);
+
+            });
+        } getCustomerName();
+
+
+
+        function getFacilityList() {
+            services.getFacilityList(JSON.stringify({
+            })).then(function (data) {
+                var s = '<option value="-1">--Select Facility List--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].facilityID + '">' + data[i].FacilityName + '</option>';
+
+                }
+                $("#txtfacility").html(s);
+
+            });
+        } getFacilityList();
+
+    
+      function getContainerWeightCategory() {
+            services.getContainerWeightCategory(JSON.stringify({
+            })).then(function (data) {
+                var s = '<option value="-1">--Select Facility List--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].ID + '">' + data[i].ContainerWeight + '</option>';
+
+                }
+                $("#txtContainerWeightCategory").html(s);
+
+            });
+        } getContainerWeightCategory();
+
+
+
+    $(document).on('change', '#txtfacility', function () {
+        var OrderType = $(this).val();
+        if (OrderType == "1") {
+            $("#containerhide").removeClass("d-none");
+            $("#facList").removeClass("d-none");
+            $("#ContainerWeightCategoryhide").removeClass("d-none");
+            $("#transportaionhide").removeClass("d-none");
+            $("#txtloloLaden").val("");
+            $("#txtloloEmpty").val("");
+            $("#txtweightmentchargesladen").val("");
+            $("#txtweightmentchargesempty").val("");
+        }
+        else {
+         $("#containerhide").addClass("d-none");
+         $("#ContainerWeightCategoryhide").addClass("d-none");
+         $("#transportaionhide").addClass("d-none");
+            $("#lolohide").addClass("d-none");
+            $("#WeightChrgeshide").addClass("d-none");
+            $("#facList").addClass("d-none");
+        }
+    
+        if (OrderType == "2")
+        {
+            $("#lolohide").removeClass("d-none");
+            $("#facList").removeClass("d-none");
+            $("#txtContainer20laden").val("");
+            $("#txtContainer40laden").val("");
+            $("#txtContainer20Empty").val("");
+            $("#txtContainer40Empty").val("");
+            $("#txtweightmentchargesladen").val("");
+            $("#txtweightmentchargesempty").val("");
+        }
+        else {
+            $("#lolohide").addClass("d-none");
+        }
+
+        if (OrderType == "3")
+        {
+            $("#WeightChrgeshide").removeClass("d-none");
+            $("#facList").removeClass("d-none");
+                     $("#txtloloLaden").val("");
+                     $("#txtloloEmpty").val("");
+                     $("#txtContainer20laden").val("");
+                     $("#txtContainer40laden").val("");
+                     $("#txtContainer20Empty").val("");
+                     $("#txtContainer40Empty").val("");
+                    // $("#txtweightmentchargesladen").val("");
+                    // $("#txtweightmentchargesempty").val("");
+        }
+        else {
+            $("#WeightChrgeshide").addClass("d-none");
+        }
+
+    });
+
+
+        $(document).on("click", "#_addCustomerPrice", function (e) {
+
+            $("#FormDetail").removeClass("d-none");
+            $("#TableView").addClass("d-none");
+
+        });
+        $(document).on("click", "#_back", function (e) {
+            //if (isEdit == 0 || isEdit == 1) {
+            //    window.location = "PurchaseForm";
+            //}
+            //else {
+            //    getPurchaseMaster();
+                $("#FormDetail").addClass("d-none");
+                $("#TableView").removeClass("d-none");
+                Clear();
+                ClearTable();
+            //}
+
+        });
+        $(document).on("click", "#_reset", function (e) {
+
+            Clear();
+
+        });
+        $(document).on("click", "#_cancel", function (e) {
+
+            Clear();
+            ClearTable();
+
+        });
+
+
+    //lolo insert start
+
+      $(document).on("click", "#_btnSubmitlolo", function (e) {
+
+               var BACustomerFacilityDetails = [];
+                    var PurchaseData = {
+
+                        CustomerID: $("#_purchaseId").val(),
+                        FacilityID: $("#txtfacility").val(),
+                        price: $("#txtloloLaden").val(),
+                        priceEmpty: $("#txtloloEmpty").val(),
+                        WeightmentCharges: $("#txtweightmentchargesladen").val(),
+                        WeightmentCharges40: $("#txtweightmentchargesempty").val(),
+                    }
+                     
+
+                    BACustomerFacilityDetails.push(PurchaseData);
+               
+                var BACustomerPrice = {
+                    ID: $("#_purchaseId").val(),
+                    CustomerID: $("#txtCustomerName").val(),
+                    FacilityID: $("#txtfacility").val(),
+                    customerFacilityDetailsViewModels: BACustomerFacilityDetails,
+                }
+
+                services.AddCustomerPriceView(JSON.stringify(BACustomerPrice)).then(function (response) {
+                    if (response.statusCode == "00") {
+                        toastr.success(response.message);
+                        setTimeout(function () {
+                            Clear();
+                            ClearTable();
+                        }, 2000)
+                    }
+                    else if (response.statusCode == "000") {
+                        toastr.success(response.message);
+                        setTimeout(function () {
+                            window.location = "/Customer/CustomerPrice";
+                        }, 1000)
+                    }
+                    else {
+                        toastr.error("Server error,Please check your internet connection");
+                    }
+                })
+
+        });
+
+    //lolo insert end 
+
+
+
+
+
+
+    
+
+        $(document).on("click", "#_btnSubmit", function (e) {
+            var formValid = form.valid();
+            var table = $('#_tblTicketList').DataTable();
+            if (formValid && table.data().any()) {
+
+               var BACustomerFacilityDetails = [];
+                $("#_tblTicketList tbody tr").each(function () {
+                    var row = $(this);
+                    var PurchaseData = {
+
+                        Customer_Facilityid: row.find("td").eq(0).html(),
+                        ContainerWeight: row.find("td").eq(1).html().split("_")[1],
+                        ContainerSize20P: row.find("td").eq(2).html(),
+                        ContainerSize40P: row.find("td").eq(3).html(),
+                        ContainerSize20PEmpty: row.find("td").eq(4).html(),
+                        ContainerSize40PEmpty: row.find("td").eq(5).html(),
+                        CustomerID: $("#_purchaseId").val(),
+                        FacilityID: $("#txtfacility").val(),
+                        //price: $("#txtloloLaden").val(),
+                    }
+                     
+
+                    BACustomerFacilityDetails.push(PurchaseData);
+                });
+                var BACustomerPrice = {
+                    ID: $("#_purchaseId").val(),
+                    CustomerID: $("#txtCustomerName").val(),
+                    FacilityID: $("#txtfacility").val(),
+                    customerFacilityDetailsViewModels: BACustomerFacilityDetails,
+                }
+
+                services.AddCustomerPriceView(JSON.stringify(BACustomerPrice)).then(function (response) {
+                    if (response.statusCode == "00") {
+                        toastr.success(response.message);
+                        setTimeout(function () {
+                            Clear();
+                            ClearTable();
+                        }, 2000)
+                    }
+                    else if (response.statusCode == "000") {
+                        toastr.success(response.message);
+                        setTimeout(function () {
+                            window.location = "/Customer/CustomerPrice";
+                        }, 1000)
+                    }
+                    else {
+                        toastr.error("Server error,Please check your internet connection");
+                    }
+                })
+            }
+            else {
+
+                alert('Empty table');
+            }
+
+        });
+
+    
+        function ClearTable() {
+            $("#_tblTicketList").dataTable().fnClearTable();
+        }
+        //function Clear() {
+        //    $("#_purchaseType").val("1");
+        //    $("#_date").val("");
+        //    $("#_DueDate").val("");
+        //    $("#_creditDay").val("");
+        //    $("#_partyList").val("");
+        //    $("#_itemId").val("");
+        //    $("#_quantity").val("");
+        //    $("#_unitIn").val("");
+        //    $("#_rate").val("");
+        //    $("#_amount").val("");
+        //    $("#_remarks").val("");
+        //    getPurchaseNo();
+        //}
+        $(document).on("click", "#_addCash", function (e) {
+
+            var formValid = form.valid();
+            if (formValid) {
+                if ($("#_purchaseDetailId").val() == 0) {
+                    if ($("#txtContainerWeightCategory").val() != "" && $("#txtContainer20laden").val() != "" && $("#txtContainer40laden").val() != "" && $("#txtContainer20Empty").val() != "" && $("#txtContainer40Empty").val() != "") {
+                        $("#_tblTicketList").dataTable().fnDestroy();
+                        var html = "";
+
+                        html += "<tr>" +
+                            "<td>0</td>" +
+                            "<td>" + $("#txtContainerWeightCategory option:selected").text() + "_" + $("#txtContainerWeightCategory").val() + "</td>" +
+                            "<td>" + $("#txtContainer20laden").val() + "</td>" +
+                            "<td>" + $("#txtContainer40laden").val() + "</td>" +
+                            "<td>" + $("#txtContainer20Empty").val() + "</td>" +
+                            "<td>" + $("#txtContainer40Empty").val() + "</td>" +
+
+                            "<td><a data-id='0' class='p-1 fa fa-edit _editDetail'' ><a class='p-1 fa fa-trash _remove' ></a></td>" +
+                            "</tr>";
+                        $("#_ticketList").append(html)
+                        $('#_tblTicketList').DataTable({
+
+                            "footerCallback": function (row, data, start, end, display) {
+                                FooterData(this);
+                            },
+                        })
+                    }
+                    else {
+                        toastr.warning("Please Fill Required Fields");
+                    }
+                }
+                else {
+                    var PurchaseData = {
+                        PurchaseDetailId: $("#_purchaseDetailId").val(),
+                        ItemId: $("#_itemList").val(),
+                        Quantity: $("#_quantity").val(),
+                        UnitIn: $("#_unit").val(),
+                        Rate: $("#_rate").val(),
+                        Amount: $("#_amount").val(),
+                        Remarks: $("#_remarks").val(),
+                        PurchaseId: $("#_purchaseId").val(),
+                    }
+                    services.UpdatePurchaseDetail(JSON.stringify(PurchaseData)).then(function (response) {
+                        if (response.statusCode == "000") {
+                            toastr.success(response.message);
+                            setTimeout(function () {
+                                window.location = "PurchaseForm?id=" + $("#_purchaseId").val() + "&edit=1";
+                            }, 1000);
+                        }
+                        else {
+                            toastr.error("Server error,Please check your internet connection");
+                        }
+                    })
+                }
+                ClearAddFields()
+
+            }
+            else {
+                toastr.warning("Please Fill Required Fields");
+            }
+
+
+        })
+
+        //function FooterData(current) {
+        //    var api = current.api(), data;
+
+        //    var intVal = function (i) {
+        //        return typeof i === 'string' ?
+        //            i.replace(/[\$,]/g, '') * 1 :
+        //            typeof i === 'number' ?
+        //                i : 0;
+        //    };
+
+        //    // Total over all pages
+
+        //    amount = api
+        //        .column(5)
+        //        .data()
+        //        .reduce(function (a, b) {
+        //            return intVal(a) + intVal(b);
+        //        }, 0);
+        //    // Total over this page
+
+
+        //    // Update footer
+        //    TotalAmount = Math.round(amount);
+        //    $(api.column(5).footer()).html(
+        //        formatCurrency(Math.round(amount))
+        //    );
+        //}
+        //$(document).on("click", "._remove", function (e) {
+        //    var rowId = $(this).parents('tr');
+
+        //    $.confirm({
+        //        title: 'Delete!',
+        //        icon: 'fa fa-question',
+        //        theme: 'modern',
+        //        closeIcon: true,
+        //        animation: 'scale',
+        //        type: 'blue',
+        //        buttons: {
+        //            yes: function () {
+        //                $('#_tblTicketList').DataTable().row(rowId)
+        //                    .remove()
+        //                    .draw();
+        //            },
+        //            no: function () {
+
+        //            }
+        //        }
+        //    })
+
+        //});
+
+        //$(document).on("click", "._deletePurchaseDetail", function (e) {
+        //    var rowId = $(this).parents('tr');
+        //    var ID = $(this).attr('data-PurchaseId')
+        //    $.confirm({
+        //        title: 'Delete!',
+        //        icon: 'fa fa-question',
+        //        theme: 'modern',
+        //        closeIcon: true,
+        //        animation: 'scale',
+        //        type: 'blue',
+        //        buttons: {
+        //            yes: function () {
+        //                services.DeletePurchaseDetailById(JSON.stringify({
+        //                    PurchaseDetailId: ID
+        //                })).then(function (response) {
+
+        //                    if (response.statusCode == "00") {
+        //                        toastr.success("Purchase Detail has been Deleted successfully");
+        //                        $('#_tblTicketList').DataTable().row(rowId)
+        //                            .remove()
+        //                            .draw();
+        //                        var table = $('#_tblTicketList').DataTable();
+        //                        if (!(table.data().any())) {
+        //                            services.DeletePurchaseMasterById(JSON.stringify({
+        //                                PurchaseId: PurchaseId
+        //                            })).then(function (response) {
+        //                                window.location = "/Sales/PurchaseForm";
+        //                            })
+        //                        }
+        //                    }
+        //                    else {
+        //                        toastr.error("Server error,Please check your internet connection");
+        //                    }
+        //                });
+
+        //            },
+        //            no: function () {
+
+        //            }
+        //        }
+        //    })
+
+        //});
+
+        //function getPurchaseMaster() {
+        //    services.getPurchaseMaster().then(function (response) {
+        //        $("#_tblPurchaseList").dataTable().fnClearTable();
+        //        $("#_tblPurchaseList").dataTable().fnDestroy();
+        //        $('#_tblPurchaseList').DataTable({
+        //            data: response,
+        //            columns: [
+        //                {
+        //                    'data': 'PurchaseNo',
+        //                },
+        //                {
+        //                    'data': 'Date',
+        //                    'render': function (date) {
+        //                        //var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
+        //                        var data = date ? moment(date).format("DD-MM-YYYY") : "--"
+        //                        return data;
+        //                    }
+        //                },
+        //                {
+        //                    'data': 'CreditDay',
+
+        //                },
+
+        //                {
+        //                    'data': 'DueDate',
+        //                    'render': function (date) {
+        //                        //var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
+        //                        var data = date ? moment(date).format("DD-MM-YYYY") : "--"
+        //                        return data;
+        //                    }
+        //                },
+        //                {
+        //                    'data': 'PartyName',
+        //                },
+        //                {
+        //                    'data': 'BillNo',
+        //                },
+        //                {
+        //                    'data': 'CreatedBy',
+        //                },
+        //                {
+        //                    'data': 'CreatedDate',
+        //                    'render': function (date) {
+        //                        //var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
+        //                        var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
+        //                        return data;
+        //                    }
+        //                },
+
+        //                {
+        //                    data: 'PurchaseId',
+        //                    "render": function (data) {
+        //                        var html = appendActionMenu(data);
+        //                        return html;
+        //                    }
+
+        //                }
+        //            ],
+
+
+        //            //});
+
+        //        })
+        //    })
+        //}
+        //getPurchaseMaster()
+
+        //function appendActionMenu(id) {
+        //    var html =
+        //        '<div class="row" style="margin-left:4px;">' +
+        //        '<a data-id="' + id + '" class="p-1 fa fa-plus _purchaseDetailView" data-toggle="modal" data-target="#responsibility" ></a>' +
+        //        '<a data-id="' + id + '" class="p-1 fa fa-eye _view" ></a>' +
+        //        '<a data-id="' + id + '" class="p-1 fa fa-edit _edit" ></a>' +
+        //        '<a data-id="' + id + '" class="p-1 fa fa-trash _delete" ></a>' +
+        //        '</div>'
+        //    //'</div>'
+        //    return html;
+        //}
+
+        //$(document).on("click", "._view", function (e) {
+        //    var ID = $(this).attr('data-id');
+        //    window.location.href = "PurchaseForm?id=" + ID + "&edit=0";
+        //});
+
+        //$(document).on("click", "._edit", function (e) {
+        //    var ID = $(this).attr('data-id');
+        //    window.location.href = "PurchaseForm?id=" + ID + "&edit=1";
+        //});
+
+        //$(document).on("click", "._delete", function (e) {
+        //    var ID = parseInt($(this).attr('data-id'));
+        //    deletePurchaseMaster(ID);
+        //});
+
+        //$(document).on("click", "._purchaseDetailView", function (e) {
+        //    var ID = parseInt($(this).attr('data-id'));
+        //    GetPurchaseDetailById(ID);
+        //});
+        //$(document).on("click", "._editDetail", function (e) {
+
+        //    var ID = $(this).attr('data-id');
+        //    if (ID != '0') {
+        //        services.GetPurchaseDetailByDetailId(JSON.stringify({
+        //            PurchaseDetailId: ID
+        //        })).then(function (response) {
+        //            console.log(response)
+        //            $("#_purchaseDetailId").val(response[0].PurchaseDetailId)
+        //            $("#_itemList").val(response[0].ItemId)
+        //            $("#_remarks").val(response[0].Remarks)
+        //            $("#_quantity").val(response[0].Quantity)
+        //            $("#_unit").val(response[0].UnitIn)
+        //            $("#_rate").val(response[0].Rate)
+        //            $("#_amount").val(response[0].Amount)
+        //        })
+        //    }
+        //    else {
+
+        //        var rowId = $(this).parents('tr');
+        //        $("#_itemList").val(rowId.find("td").eq(1).html().split("_")[1]);
+
+        //        $("#_quantity").val(rowId.find("td").eq(2).html());
+        //        $("#_unit").val(rowId.find("td").eq(3).html());
+        //        $("#_rate").val(rowId.find("td").eq(4).html());
+        //        $("#_amount").val(rowId.find("td").eq(5).html());
+        //        $("#_remarks").val(rowId.find("td").eq(6).html());
+
+        //        $('#_tblTicketList').DataTable().row(rowId)
+        //            .remove()
+        //            .draw();
+        //    }
+        //});
+        //function ClearAddFields() {
+        //    $("#_itemList").val("");
+        //    $("#_remarks").val("");
+        //    $("#_quantity").val("");
+        //    $("#_unit").val("");
+        //    $("#_rate").val("");
+        //    $("#_amount").val("");
+
+        //}
+        //function deletePurchaseMaster(ID) {
+        //    $.confirm({
+        //        title: 'Delete!',
+        //        icon: 'fa fa-question',
+        //        theme: 'modern',
+        //        closeIcon: true,
+        //        animation: 'scale',
+        //        type: 'blue',
+        //        buttons: {
+        //            yes: function () {
+        //                services.DeletePurchaseMasterById(JSON.stringify({
+        //                    PurchaseId: ID
+        //                })).then(function (response) {
+        //                    if (response.statusCode == "00") {
+        //                        toastr.success("Purchase has been Deleted successfully");
+        //                        setTimeout(function () {
+        //                            getPurchaseMaster();
+        //                        }, 2000)
+
+        //                    }
+        //                    else {
+        //                        toastr.error("Server error,Please check your internet connection");
+        //                    }
+        //                });
+        //            },
+        //            no: function () {
+
+        //            }
+        //        }
+        //    })
+
+        //}
+        //function GetPurchaseDetailById(ID) {
+        //    services.GetPurchaseDetailById(JSON.stringify({
+        //        PurchaseId: ID
+        //    })).then(function (response) {
+        //        console.log(response)
+        //        var html = "";
+        //        var TotalDetailAmount = 0;
+        //        var TotalDetailQuantity = 0;
+        //        $("#_purchaseDetailList").empty();
+        //        for (let i = 0; i < response.length; i++) {
+        //            html += "<tr>" +
+        //                "<td>" + response[i].ItemName + "</td>" +
+        //                "<td>" + response[i].Quantity + "</td>" +
+        //                "<td>" + response[i].UnitIn + "</td>" +
+        //                "<td>" + response[i].Rate + "</td>" +
+        //                "<td>" + response[i].Amount + "</td>" +
+        //                "<td>" + response[i].Remarks + "</td>" +
+
+        //                "</tr>";
+        //            TotalDetailAmount = TotalDetailAmount + parseInt(response[i].Amount);
+        //            TotalDetailQuantity = TotalDetailQuantity + parseInt(response[i].Quantity);
+        //        }
+        //        html += "<tr>" +
+
+        //            "<td><b>Total</b></td>" +
+        //            "<td><b>" + TotalDetailQuantity + "</b></td>" +
+        //            "<td></td>" +
+        //            "<td></td>" +
+        //            "<td><b>" + TotalDetailAmount + "</b></td>" +
+        //            "<td></td>" +
+        //            "</tr>";
+        //        $("#_purchaseDetailList").append(html)
+        //    })
+
+        //}
+    })
+</script>
