@@ -354,7 +354,11 @@
     <Content Include="AdminLte\Js\pdfmake.min.js" />
     <Content Include="AdminLte\Js\vfs_fonts.js" />
     <Content Include="AdminLte\Js\xlsx.min.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExecuteTrips.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\TripExecution.js" />
     <Content Include="App_Code\Fingerprint.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -3205,6 +3209,10 @@
     <Content Include="Views\OrderBooking\Partials\_Trips.cshtml" />
     <Content Include="Views\OrderBooking\Index.cshtml" />
     <Content Include="Views\OrderBooking\OrderList.cshtml" />
+    <Content Include="Views\OrderBooking\TripsExecution.cshtml" />
+    <Content Include="Views\OrderBooking\OrderExecutionPartials\_Dispatched.cshtml" />
+    <Content Include="Views\OrderBooking\OrderExecutionPartials\_ExecuteTrips.cshtml" />
+    <Content Include="Views\OrderBooking\OrderExecutionPartials\_OrderDelivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

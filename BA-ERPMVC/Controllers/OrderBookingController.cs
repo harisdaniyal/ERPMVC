@@ -39,6 +39,11 @@ namespace BA_ERPMVC.Controllers
             return View();
         }
 
+        public ActionResult TripsExecution()
+        {
+            return View();
+        }
+
         [HttpGet]
         public async Task<ActionResult> Booking(int orderBookingId)
         {
@@ -295,5 +300,160 @@ namespace BA_ERPMVC.Controllers
                 return View("OrderList", new List<OrderListViewModel>());
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Dispatched(int orderBookingId)
+        {
+            if (orderBookingId < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(orderBookingId)} should be a valid id" });
+            }
+
+            this.ViewBag.Customers = await customerService.GetAllCustomersAsync();
+            this.ViewBag.Facilities = await facilityService.GetAllFacilitiesAsync();
+            this.ViewBag.BusinessDivisions = await businessDivisionService.GetAllBusinessDivisionsAsync();
+
+            var bookingViewModel = await orderBookingService.GetOrderBookingAsync(orderBookingId);
+
+            if (bookingViewModel == null)
+            {
+                var orderNo = await orderBookingService.GetNewOrderNumber();
+
+                return PartialView("OrderExecutionPartials/_Dispatched", new BookingViewModel
+                {
+                    OrderNo = orderNo
+                });
+            }
+            return PartialView("OrderExecutionPartials/_Dispatched", bookingViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Dispatched(BookingViewModel bookingViewModel)
+        {
+            if (bookingViewModel == null)
+            {
+                return Json(new { success = false, message = $"{nameof(bookingViewModel)} should be null or empty" });
+            }
+
+            try
+            {
+                if (bookingViewModel.OrderId == 0)
+                {
+                    await orderBookingService.CreateOrderBookingAsync(bookingViewModel);
+
+                    return Json(new { success = true, orderBookingId = bookingViewModel.OrderId });
+                }
+
+                await orderBookingService.UpdateOrderBookingAsync(bookingViewModel);
+
+                return Json(new { success = true, orderBookingId = bookingViewModel.OrderId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ExecuteTrips(int orderBookingId)
+        {
+            if (orderBookingId < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(orderBookingId)} should be positive integer" });
+            }
+
+            this.ViewBag.Locations = await locationService.GetLocationsAsync();
+            this.ViewBag.ContainerTypes = await containerTypeService.GetAllContainerTypesAsync();
+            this.ViewBag.ContainerSizes = await orderBookingService.GetContainerSizesAsync();
+
+            var logisticsModel = await orderBookingService.GeLogisticsAsync(orderBookingId);
+
+            if (logisticsModel == null || !logisticsModel.Any())
+            {
+                return PartialView("OrderExecutionPartials/_ExecuteTrips", new List<LogisticsViewModel>
+                {
+                });
+            }
+
+            var logisticsViewModel = Mapper.Map<IEnumerable<Logistic>, IEnumerable<LogisticsViewModel>>(logisticsModel);
+
+            return PartialView("OrderExecutionPartials/_ExecuteTrips", logisticsViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExecuteTrips(LogisticsViewModel logisticsViewModels)
+        {
+            if (logisticsViewModels == null)
+            {
+                return Json(new { success = false, message = $"{nameof(logisticsViewModels)} should be null or empty" });
+            }
+
+            try
+            {
+                var logistics = Mapper.Map<LogisticsViewModel, Logistic>(logisticsViewModels);
+
+                await orderBookingService.SaveLogisticsAsync(logistics);
+
+                return Json(new { success = true, logisticsId = logistics.logisticsid });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> OrderDelivery(int orderBookingId)
+        {
+            if (orderBookingId < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(orderBookingId)} should be a valid id" });
+            }
+
+            this.ViewBag.Customers = await customerService.GetAllCustomersAsync();
+            this.ViewBag.Facilities = await facilityService.GetAllFacilitiesAsync();
+            this.ViewBag.BusinessDivisions = await businessDivisionService.GetAllBusinessDivisionsAsync();
+
+            var bookingViewModel = await orderBookingService.GetOrderBookingAsync(orderBookingId);
+
+            if (bookingViewModel == null)
+            {
+                var orderNo = await orderBookingService.GetNewOrderNumber();
+
+                return PartialView("OrderExecutionPartials/_OrderDelivery", new BookingViewModel
+                {
+                    OrderNo = orderNo
+                });
+            }
+            return PartialView("OrderExecutionPartials/_OrderDelivery", bookingViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> OrderDelivery(BookingViewModel bookingViewModel)
+        {
+            if (bookingViewModel == null)
+            {
+                return Json(new { success = false, message = $"{nameof(bookingViewModel)} should be null or empty" });
+            }
+
+            try
+            {
+                if (bookingViewModel.OrderId == 0)
+                {
+                    await orderBookingService.CreateOrderBookingAsync(bookingViewModel);
+
+                    return Json(new { success = true, orderBookingId = bookingViewModel.OrderId });
+                }
+
+                await orderBookingService.UpdateOrderBookingAsync(bookingViewModel);
+
+                return Json(new { success = true, orderBookingId = bookingViewModel.OrderId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 }

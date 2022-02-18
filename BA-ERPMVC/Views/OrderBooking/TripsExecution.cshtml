@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
+
+
+<h2>Index</h2>
+<br />
+<div id="orderCreating" class="card cardV2">
+    <div class="card-header">
+        <h5 class="m-0 font-weight-bold centerHead">Trips Execution: <span class="text-primary" id="sp_OrderNo"></span></h5>
+    </div>
+    <div class="card-body px-0 pb-0">
+        <div class="multiStepForm">
+            <ul class="steps-wrapper">
+                <li class="stepCount active" data-formstep="1">
+                    <div class="step-count">1</div>
+                    <label>Dispatched</label>
+                </li>
+                <li class="stepCount" data-formstep="2">
+                    <div class="step-count">2</div>
+                    <label>Trips</label>
+                </li>
+                <li class="stepCount" data-formstep="3">
+                    <div class="step-count">3</div>
+                    <label>Delievery</label>
+                </li>
+            </ul>
+            <div class="stepsForm-wrapper" id="stepDiv">
+
+
+            </div>
+        </div>
+    </div>
+    <!-- LOADING SHOW HIDE -->
+    <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/TripExecution.js")"></script>
+
+<script>
+    $(document).ready(function () {
+        var stepNo = new URLSearchParams(window.location.search).get("stepNo");
+
+        if (!stepNo) {
+            stepNo = 'Dispatched';
+        }
+
+        loadPartial(stepNo);
+    });
+</script>
