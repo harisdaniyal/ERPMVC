@@ -49,21 +49,21 @@
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_Vendor">
-                                    <option value="">Please Select Vendor</option>
-                                    @foreach (var vendor in ViewBag.Vendors)
-                                    {
-                                        <option value="@vendor.PartyId" data-select2-id="@vendor.PartyId" @(vendor.PartyId == 0 ? "selected=selected" : "")>@vendor.PartyName</option>
-                                    }
-                                </select>
-                                <label>Vendor</label>
-                                <div class="form-status"><span></span></div>
-                                <i class="fas fa-check"></i>
-                                <i class="fas fa-times"></i>
-                            </div>
-                        </div>
+                        @*<div class="col-md-3">
+            <div class="input-group">
+                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_Vendor">
+                    <option value="">Please Select Vendor</option>
+                    @foreach (var vendor in ViewBag.Vendors)
+                    {
+                        <option value="@vendor.PartyId" data-select2-id="@vendor.PartyId" @(vendor.PartyId == 0 ? "selected=selected" : "")>@vendor.PartyName</option>
+                    }
+                </select>
+                <label>Vendor</label>
+                <div class="form-status"><span></span></div>
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>*@
                         <div class="col-md-3">
                             <div class="input-group">
                                 <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_FromLocation">
@@ -94,9 +94,7 @@
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row mb-3">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <input class="form-control date-picker staticLabel" type="date" id="txt_TripDate">
                                 <div class="form-status"><span></span></div>
@@ -104,6 +102,9 @@
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-row mb-3">
+                       
                         <div class="col-md-3">
                             <div class="input-group">
                                 <input class="form-control staticLabel" type="text" id="txt_DriverName">
@@ -113,7 +114,7 @@
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <input class="form-control staticLabel" type="text" id="txt_DriverContactNo">
                                 <label>Contact No.</label>
@@ -140,7 +141,7 @@
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        @*<div class="col-md-3">
                             <div class="input-group">
                                 <input class="form-control staticLabel" type="number" id="txt_VendorExpense">
                                 <label>Vendor Expense</label>
@@ -148,7 +149,7 @@
                                 <i class="fas fa-check"></i>
                                 <i class="fas fa-times"></i>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -200,6 +201,7 @@
             </div>
         </div>
         <!-- TRIP CARD END -->
+
 
 
 
@@ -277,7 +279,7 @@
                         <input type="text" class="input-lableSwitch" value="{{DriverCNIC}}" />
                     </div>
                     <div class="col-md-2 text-left">
-                        <strong class="fs-9">VEHICAL NO.</strong>
+                        <strong class="fs-9">VEHICLE NO.</strong>
                         <input type="text" class="input-lableSwitch" value="{{VehicleNumber}}" />
                     </div>
                 </div>
