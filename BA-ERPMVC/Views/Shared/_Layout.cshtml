@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="float-right">
                                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { role = "form" }))
                                 {
-                                    @Html.AntiForgeryToken()
+                                    @*@Html.AntiForgeryToken()*@
                                     @*@Html.ActionLink("Log out", "LogOff", "Account", null, new { @class = "dropdown-item" })*@
                                     <a onclick="$(this).closest('form').submit()" class="btn btn-default btn-flat">Log out</a>
                                 }
@@ -245,7 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
     <script src="~/AdminLte/dist/js/scrpts-ui.js"></script>
-
+    <script src="~/AdminLte/Scripts/Custom.js"></script>
 
     <!--New-->
     <!--New-->

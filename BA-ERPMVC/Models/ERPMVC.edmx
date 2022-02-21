@@ -227,10 +227,10 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Trip_ID" Type="nvarchar" MaxLength="8" />
           <Property Name="Operation_Date" Type="datetime" />
-          <Property Name="Logistics_ID" Type="int" />
-          <Property Name="Drive_ID" Type="int" />
+          <Property Name="Logistics_ID" Type="int" Nullable="false" />
+          <Property Name="Drive_ID" Type="int" Nullable="false" />
           <Property Name="Driver2_ID" Type="int" />
-          <Property Name="Vechial_ID" Type="int" />
+          <Property Name="Vechial_ID" Type="int" Nullable="false" />
           <Property Name="ContainerStatus" Type="int" Nullable="false" />
           <Property Name="RecivedDate" Type="date" />
           <Property Name="TotalExpense" Type="int" />
@@ -243,10 +243,21 @@
           <Property Name="PartyDriverCNIC" Type="varchar(max)" />
           <Property Name="PartyDriverContactNumber" Type="varchar(max)" />
           <Property Name="PartyVehicleNo" Type="varchar(max)" />
-          <Property Name="PartyRate" Type="int" />
           <Property Name="OrderId" Type="int" />
           <Property Name="FromLocation" Type="numeric" Precision="18" Scale="0" />
           <Property Name="ToLocation" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="PartyRate" Type="int" />
+        </EntityType>
+        <EntityType Name="ClearingAgent">
+          <Key>
+            <PropertyRef Name="ClearingAgentId" />
+          </Key>
+          <Property Name="ClearingAgentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="ChallanNumber" Type="nvarchar(max)" />
+          <Property Name="DeleteDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ContainerStatus">
           <Key>
@@ -369,7 +380,12 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
           <Property Name="InvoiceAmount" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="isCompleted" Type="bit" Nullable="false" />
+          <Property Name="isCompleted" Type="bit" />
+          <Property Name="ShippingAgentId" Type="int" />
+          <Property Name="FreeDays" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1000" />
+          <Property Name="VesselBerthingDate" Type="datetime" />
+          <Property Name="ShippingLineId" Type="int" />
         </EntityType>
         <EntityType Name="InventoryCategory">
           <Key>
@@ -402,6 +418,27 @@
           <Property Name="ContainerType" Type="int" />
           <Property Name="EmptyReturnLocation" Type="varchar" MaxLength="200" />
           <Property Name="EmptyReturnDate" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModeOfTransportation" Type="nvarchar" MaxLength="50" />
+          <Property Name="PreDispatched" Type="bit" />
+          <Property Name="Comodities" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="MaintenanceHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaintenanceTypeId" Type="int" Nullable="false" />
+          <Property Name="ProblemStatement" Type="nvarchar(max)" />
+          <Property Name="Solution" Type="nvarchar(max)" />
+          <Property Name="ItemName" Type="varchar" MaxLength="250" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -415,7 +452,7 @@
           <Property Name="delete" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'db_a780fa_bilal.dbo.OilBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERPMVC.dbo.OilBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OilBalance">
           <Key>
             <PropertyRef Name="AccID" />
@@ -428,7 +465,7 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.OilBalance' does not have a pr
           <Property Name="AccHead" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'db_a780fa_bilal.dbo.OilCompany' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERPMVC.dbo.OilCompany' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OilCompany">
           <Key>
             <PropertyRef Name="OCID" />
@@ -460,6 +497,19 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.OilCompany' does not have a pr
           <Property Name="OrderServiceID" Type="int" Nullable="false" />
           <Property Name="ServiceType" Type="nvarchar" MaxLength="50" />
           <Property Name="ServiceRemarks" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PortAndTerminal">
+          <Key>
+            <PropertyRef Name="PortAndTerminalId" />
+          </Key>
+          <Property Name="PortAndTerminalId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortName" Type="nvarchar(max)" />
+          <Property Name="TerminalCode" Type="nvarchar(max)" />
+          <Property Name="TerminalName" Type="nvarchar(max)" />
+          <Property Name="Destination" Type="nvarchar(max)" />
+          <Property Name="PortOfDischarge" Type="nvarchar(max)" />
+          <Property Name="DeleteDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Purchase_Requisition">
           <Key>
@@ -519,6 +569,28 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.OilCompany' does not have a pr
           <Property Name="isActive" Type="bit" />
           <Property Name="TotalAmount" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="ReadyForDispatched">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="OrderNo" Type="varchar" MaxLength="9" />
+          <Property Name="ContainerNo" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContainerSize" Type="nvarchar" MaxLength="250" />
+          <Property Name="BLnumber" Type="nvarchar" MaxLength="250" />
+          <Property Name="DOGranty" Type="datetime" />
+          <Property Name="ImportEIR" Type="datetime" />
+          <Property Name="PortWeighment" Type="datetime" />
+          <Property Name="OutSidePortWeighment" Type="datetime" />
+          <Property Name="GD" Type="datetime" />
+          <Property Name="BL" Type="datetime" />
+          <Property Name="IsCompleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Setup_Item_Master">
           <Key>
             <PropertyRef Name="ID" />
@@ -550,6 +622,45 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.OilCompany' does not have a pr
           <Property Name="UpdateUser" Type="varchar" MaxLength="50" />
           <Property Name="Update_IP" Type="varchar" MaxLength="50" />
           <Property Name="Update_DateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShippingAgent">
+          <Key>
+            <PropertyRef Name="ShippingAgentId" />
+          </Key>
+          <Property Name="ShippingAgentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Line" Type="nvarchar(max)" />
+          <Property Name="LineCode" Type="nvarchar(max)" />
+          <Property Name="OtherCharges" Type="int" Nullable="false" />
+          <Property Name="ChargesName" Type="nvarchar(max)" />
+          <Property Name="DeleteDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="BillDateType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ShippingLine">
+          <Key>
+            <PropertyRef Name="ShippingLineId" />
+          </Key>
+          <Property Name="ShippingLineId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShippingLineName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShippingLineCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShippingLineAgent" Type="nvarchar(max)" />
+          <Property Name="DeleteDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stations">
+          <Key>
+            <PropertyRef Name="StationID" />
+          </Key>
+          <Property Name="StationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StationName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="stp_BusinessDivision">
           <Key>
@@ -697,7 +808,7 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.OilCompany' does not have a pr
           <Property Name="Oil_Status" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="stp_PaymentMode">
           <Key>
             <PropertyRef Name="PaymentModeID" />
@@ -1006,19 +1117,19 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="200" />
         </EntityType>
-        <Association Name="FK__VendorExp__Vendo__5649C92D">
-          <End Role="VendorTypeExpense" Type="Self.VendorTypeExpense" Multiplicity="0..1" />
-          <End Role="VendorExpenses" Type="Self.VendorExpenses" Multiplicity="*" />
+        <Association Name="FK__TripConta__Logis__3FD07829">
+          <End Role="Logistics" Type="Self.Logistics" Multiplicity="0..1" />
+          <End Role="TripContainers" Type="Self.TripContainers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="VendorTypeExpense">
-              <PropertyRef Name="ExpenseID" />
+            <Principal Role="Logistics">
+              <PropertyRef Name="logisticsid" />
             </Principal>
-            <Dependent Role="VendorExpenses">
-              <PropertyRef Name="VendorTypeExpenseId" />
+            <Dependent Role="TripContainers">
+              <PropertyRef Name="LogisticsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VendorExp__Vendo__5832119F">
+        <Association Name="FK__VendorExp__Vendo__54CB950F">
           <End Role="VendorTypeExpense" Type="Self.VendorTypeExpense" Multiplicity="0..1" />
           <End Role="VendorExpenses" Type="Self.VendorExpenses" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1083,18 +1194,6 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Logistics">
-          <End Role="Logistics" Type="Self.Logistics" Multiplicity="0..1" />
-          <End Role="TripContainers" Type="Self.TripContainers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Logistics">
-              <PropertyRef Name="logisticsid" />
-            </Principal>
-            <Dependent Role="TripContainers">
-              <PropertyRef Name="LogisticsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1348,6 +1447,7 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <EntitySet Name="BAMaritalStatus" EntityType="Self.BAMaritalStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BAShippingLine" EntityType="Self.BAShippingLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BAtrip" EntityType="Self.BAtrip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClearingAgent" EntityType="Self.ClearingAgent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContainerStatus" EntityType="Self.ContainerStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContainerTypes" EntityType="Self.ContainerTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
@@ -1361,16 +1461,22 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <EntitySet Name="GenerateOrder" EntityType="Self.GenerateOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryCategory" EntityType="Self.InventoryCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logistics" EntityType="Self.Logistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceHistory" EntityType="Self.MaintenanceHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order_Expense_Mapping" EntityType="Self.Order_Expense_Mapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order_FacilityMapping" EntityType="Self.Order_FacilityMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderServices" EntityType="Self.OrderServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortAndTerminal" EntityType="Self.PortAndTerminal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase_Requisition" EntityType="Self.Purchase_Requisition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase_Requisition_Detail" EntityType="Self.Purchase_Requisition_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseMaster" EntityType="Self.PurchaseMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReadyForDispatched" EntityType="Self.ReadyForDispatched" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setup_Item_Master" EntityType="Self.Setup_Item_Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setup_Item_Unit" EntityType="Self.Setup_Item_Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingAgent" EntityType="Self.ShippingAgent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingLine" EntityType="Self.ShippingLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="stp_BusinessDivision" EntityType="Self.stp_BusinessDivision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="stp_City" EntityType="Self.stp_City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="stp_Company" EntityType="Self.stp_Company" Schema="dbo" store:Type="Tables" />
@@ -1428,11 +1534,11 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
     [stp_PaymentMode].[StatusID] AS [StatusID]
     FROM [dbo].[stp_PaymentMode] AS [stp_PaymentMode]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__VendorExp__Vendo__5649C92D" Association="Self.FK__VendorExp__Vendo__5649C92D">
-            <End Role="VendorTypeExpense" EntitySet="VendorTypeExpense" />
-            <End Role="VendorExpenses" EntitySet="VendorExpenses" />
+          <AssociationSet Name="FK__TripConta__Logis__3FD07829" Association="Self.FK__TripConta__Logis__3FD07829">
+            <End Role="Logistics" EntitySet="Logistics" />
+            <End Role="TripContainers" EntitySet="TripContainers" />
           </AssociationSet>
-          <AssociationSet Name="FK__VendorExp__Vendo__5832119F" Association="Self.FK__VendorExp__Vendo__5832119F">
+          <AssociationSet Name="FK__VendorExp__Vendo__54CB950F" Association="Self.FK__VendorExp__Vendo__54CB950F">
             <End Role="VendorTypeExpense" EntitySet="VendorTypeExpense" />
             <End Role="VendorExpenses" EntitySet="VendorExpenses" />
           </AssociationSet>
@@ -1451,10 +1557,6 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Logistics" Association="Self.FK_Logistics">
-            <End Role="Logistics" EntitySet="Logistics" />
-            <End Role="TripContainers" EntitySet="TripContainers" />
           </AssociationSet>
           <AssociationSet Name="FK_Logistics_tbl_Container_logistics_Status" Association="Self.FK_Logistics_tbl_Container_logistics_Status">
             <End Role="tbl_Container_logistics_Status" EntitySet="tbl_Container_logistics_Status" />
@@ -1564,9 +1666,7 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <EntitySet Name="Employees" EntityType="db_a780fa_bilalModel.Employee" />
           <EntitySet Name="FromLocOils" EntityType="db_a780fa_bilalModel.FromLocOil" />
           <EntitySet Name="Genders" EntityType="db_a780fa_bilalModel.Gender" />
-          <EntitySet Name="GenerateOrders" EntityType="db_a780fa_bilalModel.GenerateOrder" />
           <EntitySet Name="InventoryCategories" EntityType="db_a780fa_bilalModel.InventoryCategory" />
-          <EntitySet Name="Logistics" EntityType="db_a780fa_bilalModel.Logistic" />
           <EntitySet Name="Menus" EntityType="db_a780fa_bilalModel.Menu" />
           <EntitySet Name="Order_Expense_Mapping" EntityType="db_a780fa_bilalModel.Order_Expense_Mapping" />
           <EntitySet Name="Order_FacilityMapping" EntityType="db_a780fa_bilalModel.Order_FacilityMapping" />
@@ -1642,14 +1742,6 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
             <End Role="tbl_Party" EntitySet="tbl_Party" />
             <End Role="BAtrip" EntitySet="BAtrips" />
           </AssociationSet>
-          <AssociationSet Name="FK_Logistics" Association="db_a780fa_bilalModel.FK_Logistics">
-            <End Role="Logistic" EntitySet="Logistics" />
-            <End Role="TripContainer" EntitySet="TripContainers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Logistics_tbl_Container_logistics_Status" Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status">
-            <End Role="tbl_Container_logistics_Status" EntitySet="tbl_Container_logistics_Status" />
-            <End Role="Logistic" EntitySet="Logistics" />
-          </AssociationSet>
           <AssociationSet Name="FK_Purchase_Requisition_Detail_Purchase_Requisition" Association="db_a780fa_bilalModel.FK_Purchase_Requisition_Detail_Purchase_Requisition">
             <End Role="Purchase_Requisition" EntitySet="Purchase_Requisition" />
             <End Role="Purchase_Requisition_Detail" EntitySet="Purchase_Requisition_Detail" />
@@ -1710,8 +1802,25 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="ClearingAgents" EntityType="db_a780fa_bilalModel.ClearingAgent" />
+          <EntitySet Name="PortAndTerminals" EntityType="db_a780fa_bilalModel.PortAndTerminal" />
+          <EntitySet Name="ShippingAgents" EntityType="db_a780fa_bilalModel.ShippingAgent" />
+          <EntitySet Name="ShippingLines" EntityType="db_a780fa_bilalModel.ShippingLine" />
+          <EntitySet Name="MaintenanceHistories" EntityType="db_a780fa_bilalModel.MaintenanceHistory" />
+          <EntitySet Name="Stations" EntityType="db_a780fa_bilalModel.Station" />
+          <EntitySet Name="ReadyForDispatcheds" EntityType="db_a780fa_bilalModel.ReadyForDispatched" />
+          <EntitySet Name="GenerateOrders" EntityType="db_a780fa_bilalModel.GenerateOrder" />
+          <EntitySet Name="Logistics" EntityType="db_a780fa_bilalModel.Logistic" />
           <AssociationSet Name="FK_TripContainerType" Association="db_a780fa_bilalModel.FK_TripContainerType">
             <End Role="ContainerType" EntitySet="ContainerTypes" />
+            <End Role="Logistic" EntitySet="Logistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TripConta__Logis__3FD07829" Association="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829">
+            <End Role="Logistic" EntitySet="Logistics" />
+            <End Role="TripContainer" EntitySet="TripContainers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistics_tbl_Container_logistics_Status" Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status">
+            <End Role="tbl_Container_logistics_Status" EntitySet="tbl_Container_logistics_Status" />
             <End Role="Logistic" EntitySet="Logistics" />
           </AssociationSet>
         </EntityContainer>
@@ -1936,10 +2045,10 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Trip_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Operation_Date" Type="DateTime" Precision="3" />
-          <Property Name="Logistics_ID" Type="Int32" />
-          <Property Name="Drive_ID" Type="Int32" />
+          <Property Name="Logistics_ID" Type="Int32" Nullable="false" />
+          <Property Name="Drive_ID" Type="Int32" Nullable="false" />
           <Property Name="Driver2_ID" Type="Int32" />
-          <Property Name="Vechial_ID" Type="Int32" />
+          <Property Name="Vechial_ID" Type="Int32" Nullable="false" />
           <Property Name="ContainerStatus" Type="Int32" Nullable="false" />
           <Property Name="RecivedDate" Type="DateTime" Precision="0" />
           <Property Name="TotalExpense" Type="Int32" />
@@ -2066,60 +2175,12 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="GenerateOrder">
-          <Key>
-            <PropertyRef Name="OrderID" />
-          </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderNo" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerID" Type="Int32" />
-          <Property Name="BusinessDevisionID" Type="Int32" />
-          <Property Name="OrderType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CRO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InBond_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="isActive" Type="Boolean" />
-          <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="isCompleted" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="InventoryCategory">
           <Key>
             <PropertyRef Name="CatID" />
           </Key>
           <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Logistic">
-          <Key>
-            <PropertyRef Name="logisticsid" />
-          </Key>
-          <Property Name="logisticsid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="FromLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ToLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="JobType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ContainerNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContainerNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="JobType2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ContainerSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContainerWeight" Type="Int32" />
-          <Property Name="OrderServiceId" Type="Int32" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="ContainerTripStatus" Type="Int32" />
-          <Property Name="ContainerType" Type="Int32" />
-          <Property Name="EmptyReturnLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="EmptyReturnDate" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TripContainers" Relationship="db_a780fa_bilalModel.FK_Logistics" FromRole="Logistic" ToRole="TripContainer" />
-          <NavigationProperty Name="tbl_Container_logistics_Status" Relationship="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" FromRole="Logistic" ToRole="tbl_Container_logistics_Status" />
-          <NavigationProperty Name="ContainerType1" Relationship="db_a780fa_bilalModel.FK_TripContainerType" FromRole="Logistic" ToRole="ContainerType" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -2652,7 +2713,7 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BAtrip" Relationship="db_a780fa_bilalModel.FK_TripContainer" FromRole="TripContainer" ToRole="BAtrip" />
-          <NavigationProperty Name="Logistic" Relationship="db_a780fa_bilalModel.FK_Logistics" FromRole="TripContainer" ToRole="Logistic" />
+          <NavigationProperty Name="Logistic" Relationship="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829" FromRole="TripContainer" ToRole="Logistic" />
         </EntityType>
         <EntityType Name="VehicleRegistrationDetail">
           <Key>
@@ -2844,30 +2905,6 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Logistics">
-          <End Type="db_a780fa_bilalModel.Logistic" Role="Logistic" Multiplicity="0..1" />
-          <End Type="db_a780fa_bilalModel.TripContainer" Role="TripContainer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Logistic">
-              <PropertyRef Name="logisticsid" />
-            </Principal>
-            <Dependent Role="TripContainer">
-              <PropertyRef Name="LogisticsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Logistics_tbl_Container_logistics_Status">
-          <End Type="db_a780fa_bilalModel.tbl_Container_logistics_Status" Role="tbl_Container_logistics_Status" Multiplicity="0..1" />
-          <End Type="db_a780fa_bilalModel.Logistic" Role="Logistic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_Container_logistics_Status">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Logistic">
-              <PropertyRef Name="ContainerTripStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Purchase_Requisition_Detail_Purchase_Requisition">
           <End Type="db_a780fa_bilalModel.Purchase_Requisition" Role="Purchase_Requisition" Multiplicity="1" />
           <End Type="db_a780fa_bilalModel.Purchase_Requisition_Detail" Role="Purchase_Requisition_Detail" Multiplicity="*" />
@@ -3040,6 +3077,165 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
           <End Type="db_a780fa_bilalModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="db_a780fa_bilalModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="ClearingAgent">
+          <Key>
+            <PropertyRef Name="ClearingAgentId" />
+          </Key>
+          <Property Name="ClearingAgentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChallanNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortAndTerminal">
+          <Key>
+            <PropertyRef Name="PortAndTerminalId" />
+          </Key>
+          <Property Name="PortAndTerminalId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TerminalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TerminalName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PortOfDischarge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingAgent">
+          <Key>
+            <PropertyRef Name="ShippingAgentId" />
+          </Key>
+          <Property Name="ShippingAgentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Line" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LineCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OtherCharges" Type="Int32" Nullable="false" />
+          <Property Name="ChargesName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="BillDateType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShippingLine">
+          <Key>
+            <PropertyRef Name="ShippingLineId" />
+          </Key>
+          <Property Name="ShippingLineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShippingLineName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingLineCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingLineAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaintenanceHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaintenanceTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ProblemStatement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Solution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="StationID" />
+          </Key>
+          <Property Name="StationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ReadyForDispatched">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="OrderNo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContainerSize" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BLnumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DOGranty" Type="DateTime" Precision="3" />
+          <Property Name="ImportEIR" Type="DateTime" Precision="3" />
+          <Property Name="PortWeighment" Type="DateTime" Precision="3" />
+          <Property Name="OutSidePortWeighment" Type="DateTime" Precision="3" />
+          <Property Name="GD" Type="DateTime" Precision="3" />
+          <Property Name="BL" Type="DateTime" Precision="3" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GenerateOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNo" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="BusinessDevisionID" Type="Int32" />
+          <Property Name="OrderType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CRO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InBond_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="isCompleted" Type="Boolean" />
+          <Property Name="ShippingAgentId" Type="Int32" />
+          <Property Name="FreeDays" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VesselBerthingDate" Type="DateTime" Precision="3" />
+          <Property Name="ShippingLineId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Logistic">
+          <Key>
+            <PropertyRef Name="logisticsid" />
+          </Key>
+          <Property Name="logisticsid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="FromLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ToLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="JobType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobType2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerWeight" Type="Int32" />
+          <Property Name="OrderServiceId" Type="Int32" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="ContainerTripStatus" Type="Int32" />
+          <Property Name="ContainerType" Type="Int32" />
+          <Property Name="EmptyReturnLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EmptyReturnDate" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModeOfTransportation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreDispatched" Type="Boolean" />
+          <Property Name="Comodities" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContainerType1" Relationship="db_a780fa_bilalModel.FK_TripContainerType" FromRole="Logistic" ToRole="ContainerType" />
+          <NavigationProperty Name="TripContainers" Relationship="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829" FromRole="Logistic" ToRole="TripContainer" />
+          <NavigationProperty Name="tbl_Container_logistics_Status" Relationship="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" FromRole="Logistic" ToRole="tbl_Container_logistics_Status" />
+        </EntityType>
         <Association Name="FK_TripContainerType">
           <End Type="db_a780fa_bilalModel.ContainerType" Role="ContainerType" Multiplicity="0..1" />
           <End Type="db_a780fa_bilalModel.Logistic" Role="Logistic" Multiplicity="*" />
@@ -3049,6 +3245,30 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
             </Principal>
             <Dependent Role="Logistic">
               <PropertyRef Name="ContainerType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TripConta__Logis__3FD07829">
+          <End Type="db_a780fa_bilalModel.Logistic" Role="Logistic" Multiplicity="0..1" />
+          <End Type="db_a780fa_bilalModel.TripContainer" Role="TripContainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logistic">
+              <PropertyRef Name="logisticsid" />
+            </Principal>
+            <Dependent Role="TripContainer">
+              <PropertyRef Name="LogisticsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistics_tbl_Container_logistics_Status">
+          <End Type="db_a780fa_bilalModel.tbl_Container_logistics_Status" Role="tbl_Container_logistics_Status" Multiplicity="0..1" />
+          <End Type="db_a780fa_bilalModel.Logistic" Role="Logistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Container_logistics_Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Logistic">
+              <PropertyRef Name="ContainerTripStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3419,58 +3639,11 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GenerateOrders">
-            <EntityTypeMapping TypeName="db_a780fa_bilalModel.GenerateOrder">
-              <MappingFragment StoreEntitySet="GenerateOrder">
-                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
-                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="DeliveryNo" ColumnName="DeliveryNo" />
-                <ScalarProperty Name="InBond_Number" ColumnName="InBond_Number" />
-                <ScalarProperty Name="CRO" ColumnName="CRO" />
-                <ScalarProperty Name="BL" ColumnName="BL" />
-                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
-                <ScalarProperty Name="BusinessDevisionID" ColumnName="BusinessDevisionID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="InventoryCategories">
             <EntityTypeMapping TypeName="db_a780fa_bilalModel.InventoryCategory">
               <MappingFragment StoreEntitySet="InventoryCategory">
                 <ScalarProperty Name="CatName" ColumnName="CatName" />
                 <ScalarProperty Name="CatID" ColumnName="CatID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Logistics">
-            <EntityTypeMapping TypeName="db_a780fa_bilalModel.Logistic">
-              <MappingFragment StoreEntitySet="Logistics">
-                <ScalarProperty Name="EmptyReturnDate" ColumnName="EmptyReturnDate" />
-                <ScalarProperty Name="EmptyReturnLocation" ColumnName="EmptyReturnLocation" />
-                <ScalarProperty Name="ContainerType" ColumnName="ContainerType" />
-                <ScalarProperty Name="ContainerTripStatus" ColumnName="ContainerTripStatus" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="OrderServiceId" ColumnName="OrderServiceId" />
-                <ScalarProperty Name="ContainerWeight" ColumnName="ContainerWeight" />
-                <ScalarProperty Name="ContainerSize" ColumnName="ContainerSize" />
-                <ScalarProperty Name="JobType2" ColumnName="JobType2" />
-                <ScalarProperty Name="ContainerNo2" ColumnName="ContainerNo2" />
-                <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
-                <ScalarProperty Name="JobType" ColumnName="JobType" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
-                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="logisticsid" ColumnName="logisticsid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4126,6 +4299,171 @@ warning 6002: The table/view 'db_a780fa_bilal.dbo.stp_PaymentMode' does not have
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ClearingAgents">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.ClearingAgent">
+              <MappingFragment StoreEntitySet="ClearingAgent">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="ChallanNumber" ColumnName="ChallanNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ClearingAgentId" ColumnName="ClearingAgentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortAndTerminals">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.PortAndTerminal">
+              <MappingFragment StoreEntitySet="PortAndTerminal">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="PortOfDischarge" ColumnName="PortOfDischarge" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+                <ScalarProperty Name="TerminalCode" ColumnName="TerminalCode" />
+                <ScalarProperty Name="PortName" ColumnName="PortName" />
+                <ScalarProperty Name="PortAndTerminalId" ColumnName="PortAndTerminalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingAgents">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.ShippingAgent">
+              <MappingFragment StoreEntitySet="ShippingAgent">
+                <ScalarProperty Name="BillDateType" ColumnName="BillDateType" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="ChargesName" ColumnName="ChargesName" />
+                <ScalarProperty Name="OtherCharges" ColumnName="OtherCharges" />
+                <ScalarProperty Name="LineCode" ColumnName="LineCode" />
+                <ScalarProperty Name="Line" ColumnName="Line" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShippingAgentId" ColumnName="ShippingAgentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingLines">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.ShippingLine">
+              <MappingFragment StoreEntitySet="ShippingLine">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="ShippingLineAgent" ColumnName="ShippingLineAgent" />
+                <ScalarProperty Name="ShippingLineCode" ColumnName="ShippingLineCode" />
+                <ScalarProperty Name="ShippingLineName" ColumnName="ShippingLineName" />
+                <ScalarProperty Name="ShippingLineId" ColumnName="ShippingLineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceHistories">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.MaintenanceHistory">
+              <MappingFragment StoreEntitySet="MaintenanceHistory">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Solution" ColumnName="Solution" />
+                <ScalarProperty Name="ProblemStatement" ColumnName="ProblemStatement" />
+                <ScalarProperty Name="MaintenanceTypeId" ColumnName="MaintenanceTypeId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.Station">
+              <MappingFragment StoreEntitySet="Stations">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="StationName" ColumnName="StationName" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReadyForDispatcheds">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.ReadyForDispatched">
+              <MappingFragment StoreEntitySet="ReadyForDispatched">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="BL" ColumnName="BL" />
+                <ScalarProperty Name="GD" ColumnName="GD" />
+                <ScalarProperty Name="OutSidePortWeighment" ColumnName="OutSidePortWeighment" />
+                <ScalarProperty Name="PortWeighment" ColumnName="PortWeighment" />
+                <ScalarProperty Name="ImportEIR" ColumnName="ImportEIR" />
+                <ScalarProperty Name="DOGranty" ColumnName="DOGranty" />
+                <ScalarProperty Name="BLnumber" ColumnName="BLnumber" />
+                <ScalarProperty Name="ContainerSize" ColumnName="ContainerSize" />
+                <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenerateOrders">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.GenerateOrder">
+              <MappingFragment StoreEntitySet="GenerateOrder">
+                <ScalarProperty Name="ShippingLineId" ColumnName="ShippingLineId" />
+                <ScalarProperty Name="VesselBerthingDate" ColumnName="VesselBerthingDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+                <ScalarProperty Name="ShippingAgentId" ColumnName="ShippingAgentId" />
+                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryNo" ColumnName="DeliveryNo" />
+                <ScalarProperty Name="InBond_Number" ColumnName="InBond_Number" />
+                <ScalarProperty Name="CRO" ColumnName="CRO" />
+                <ScalarProperty Name="BL" ColumnName="BL" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="BusinessDevisionID" ColumnName="BusinessDevisionID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logistics">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.Logistic">
+              <MappingFragment StoreEntitySet="Logistics">
+                <ScalarProperty Name="Comodities" ColumnName="Comodities" />
+                <ScalarProperty Name="PreDispatched" ColumnName="PreDispatched" />
+                <ScalarProperty Name="ModeOfTransportation" ColumnName="ModeOfTransportation" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmptyReturnDate" ColumnName="EmptyReturnDate" />
+                <ScalarProperty Name="EmptyReturnLocation" ColumnName="EmptyReturnLocation" />
+                <ScalarProperty Name="ContainerType" ColumnName="ContainerType" />
+                <ScalarProperty Name="ContainerTripStatus" ColumnName="ContainerTripStatus" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="OrderServiceId" ColumnName="OrderServiceId" />
+                <ScalarProperty Name="ContainerWeight" ColumnName="ContainerWeight" />
+                <ScalarProperty Name="ContainerSize" ColumnName="ContainerSize" />
+                <ScalarProperty Name="JobType2" ColumnName="JobType2" />
+                <ScalarProperty Name="ContainerNo2" ColumnName="ContainerNo2" />
+                <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="logisticsid" ColumnName="logisticsid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

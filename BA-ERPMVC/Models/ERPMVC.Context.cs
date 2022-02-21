@@ -51,9 +51,7 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FromLocOil> FromLocOils { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
-        public virtual DbSet<GenerateOrder> GenerateOrders { get; set; }
         public virtual DbSet<InventoryCategory> InventoryCategories { get; set; }
-        public virtual DbSet<Logistic> Logistics { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Order_Expense_Mapping> Order_Expense_Mapping { get; set; }
         public virtual DbSet<Order_FacilityMapping> Order_FacilityMapping { get; set; }
@@ -101,5 +99,14 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<OilBalance> OilBalances { get; set; }
         public virtual DbSet<OilCompany> OilCompanies { get; set; }
         public virtual DbSet<stp_PaymentMode> stp_PaymentMode { get; set; }
+        public virtual DbSet<ClearingAgent> ClearingAgents { get; set; }
+        public virtual DbSet<PortAndTerminal> PortAndTerminals { get; set; }
+        public virtual DbSet<ShippingAgent> ShippingAgents { get; set; }
+        public virtual DbSet<ShippingLine> ShippingLines { get; set; }
+        public virtual DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
+        public virtual DbSet<Station> Stations { get; set; }
+        public virtual DbSet<ReadyForDispatched> ReadyForDispatcheds { get; set; }
+        public virtual DbSet<GenerateOrder> GenerateOrders { get; set; }
+        public virtual DbSet<Logistic> Logistics { get; set; }
     }
 }

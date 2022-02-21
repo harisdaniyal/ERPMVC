@@ -21,7 +21,9 @@ function save() {
             bl: $("#txt_BL").val(),
             cro: $("#txt_CRO").val(),
             orderDate: $("#txt_OrderDate").val(),
-            invoiceAmount: $("#txt_InvoiceAmount").val(),
+            vesselBerthingDate: $("#txt_VesselBerthingDate").val(),
+            freeDays: $("#txt_FreeDays").val(),
+            remarks: $("#txt_Remarks").val(),
             FacilityIds: facilities
         }),
         headers: {
@@ -132,6 +134,5 @@ function validateInputs() {
 }
 
 function onClick_BtnSubmitBookingOrder() {
-    debugger
     next();
 }

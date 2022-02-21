@@ -40,10 +40,14 @@ namespace BA_ERPMVC.Models
         public Nullable<int> ContainerType { get; set; }
         public string EmptyReturnLocation { get; set; }
         public string EmptyReturnDate { get; set; }
+        public string Status { get; set; }
+        public string ModeOfTransportation { get; set; }
+        public Nullable<bool> PreDispatched { get; set; }
+        public string Comodities { get; set; }
     
+        public virtual ContainerType ContainerType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TripContainer> TripContainers { get; set; }
         public virtual tbl_Container_logistics_Status tbl_Container_logistics_Status { get; set; }
-        public virtual ContainerType ContainerType1 { get; set; }
     }
 }

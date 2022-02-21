@@ -16,7 +16,15 @@
                     <input type="hidden" value="@Model.OrderNo" id="hf_OrderNo">
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.VesselBerthingDate.HasValue ? Model.VesselBerthingDate.Value.ToString("yyyy-MM-dd"): "")" id="txt_VesselBerthingDate" />
+                    <label>Vessel Berthing Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="input-group">
                     <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_Customers">
@@ -32,8 +40,6 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-
-
             <div class="col-md-6">
                 <div class="input-group">
                     <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_BusinessDivision">
@@ -53,6 +59,24 @@
                 <div class="input-group">
                     <input class="date-picker form-control" type="number" min="0" placeholder="" value="@(Model.InvoiceAmount)" id="txt_InvoiceAmount" />
                     <label>Invoice Amount</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="number" min="0" placeholder="" value="@(Model.FreeDays)" id="txt_FreeDays" />
+                    <label>Free Days</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="text" placeholder="" value="@(Model.Remarks)" id="txt_Remarks" />
+                    <label>Remarks</label>
                     <div class="form-status"><span></span></div>
                     <i class="fas fa-check"></i>
                     <i class="fas fa-times"></i>

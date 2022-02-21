@@ -868,3 +868,7 @@ td > .input-lableSwitch {
     vertical-align:top;
 }
     /*.dataTables_info { display:none;}*/
+
+.error {
+    border-color: red !important;
+}

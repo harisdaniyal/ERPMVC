@@ -28,6 +28,11 @@ namespace BA_ERPMVC.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<bool> isActive { get; set; }
         public Nullable<decimal> InvoiceAmount { get; set; }
-        public bool isCompleted { get; set; }
+        public Nullable<bool> isCompleted { get; set; }
+        public Nullable<int> ShippingAgentId { get; set; }
+        public Nullable<int> FreeDays { get; set; }
+        public string Remarks { get; set; }
+        public Nullable<System.DateTime> VesselBerthingDate { get; set; }
+        public Nullable<int> ShippingLineId { get; set; }
     }
 }

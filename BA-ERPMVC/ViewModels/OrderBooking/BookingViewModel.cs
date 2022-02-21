@@ -18,5 +18,10 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string CRO { get; set; }
         public DateTime? OrderDate { get; set; }
         public int InvoiceAmount { get; set; }
+        public int ShippingLineId { get; set; }
+        public int ShippingAgentId { get; set; }
+        public int FreeDays { get; set; }
+        public string Remarks { get; set; }
+        public DateTime? VesselBerthingDate { get; set; }
     }
 }

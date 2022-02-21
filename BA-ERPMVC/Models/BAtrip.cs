@@ -24,10 +24,10 @@ namespace BA_ERPMVC.Models
         public int ID { get; set; }
         public string Trip_ID { get; set; }
         public Nullable<System.DateTime> Operation_Date { get; set; }
-        public Nullable<int> Logistics_ID { get; set; }
-        public Nullable<int> Drive_ID { get; set; }
+        public int Logistics_ID { get; set; }
+        public int Drive_ID { get; set; }
         public Nullable<int> Driver2_ID { get; set; }
-        public Nullable<int> Vechial_ID { get; set; }
+        public int Vechial_ID { get; set; }
         public int ContainerStatus { get; set; }
         public Nullable<System.DateTime> RecivedDate { get; set; }
         public Nullable<int> TotalExpense { get; set; }

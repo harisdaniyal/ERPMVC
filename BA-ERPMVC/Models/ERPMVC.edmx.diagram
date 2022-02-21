@@ -31,9 +31,7 @@
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Employee" Width="1.5" PointX="13.75" PointY="21.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.FromLocOil" Width="1.5" PointX="19.75" PointY="15.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Gender" Width="1.5" PointX="0.75" PointY="22.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.GenerateOrder" Width="1.5" PointX="20.75" PointY="18.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.InventoryCategory" Width="1.5" PointX="21.75" PointY="2.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.Logistic" Width="1.5" PointX="6" PointY="1.125" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Menu" Width="1.5" PointX="21.75" PointY="5.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Order_Expense_Mapping" Width="1.5" PointX="21.75" PointY="8.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Order_FacilityMapping" Width="1.5" PointX="21.75" PointY="11.25" />
@@ -88,8 +86,6 @@
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripFromLocation" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripToLocation" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripVendor" />
-        <AssociationConnector Association="db_a780fa_bilalModel.FK_Logistics" />
-        <AssociationConnector Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_Purchase_Requisition_Detail_Purchase_Requisition" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_PurchaseDetail_PurchaseMaster" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_PurchaseDetail_tbl_Item" />
@@ -105,7 +101,18 @@
         <AssociationConnector Association="db_a780fa_bilalModel.FK__VendorExp__Vendo__5649C92D" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK__VendorExp__Vendo__5832119F" />
         <AssociationConnector Association="db_a780fa_bilalModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ClearingAgent" Width="1.5" PointX="5.375" PointY="27.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.PortAndTerminal" Width="1.5" PointX="27.375" PointY="14.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ShippingAgent" Width="1.5" PointX="24.375" PointY="27.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ShippingLine" Width="1.5" PointX="26.375" PointY="27.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.MaintenanceHistory" Width="1.5" PointX="28.375" PointY="4.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Station" Width="1.5" PointX="28.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReadyForDispatched" Width="1.5" PointX="28.375" PointY="18.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.GenerateOrder" Width="1.5" PointX="7.375" PointY="27.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Logistic" Width="1.5" PointX="30" PointY="9.625" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripContainerType" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

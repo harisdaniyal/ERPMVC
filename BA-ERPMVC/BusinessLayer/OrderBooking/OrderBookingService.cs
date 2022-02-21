@@ -10,6 +10,7 @@ using AutoMapper;
 using BA_ERPMVC.ViewModels;
 using BA_ERPMVC.ViewModels.OrderBooking;
 using System.Threading.Tasks;
+using BA_ERPMVC.UtilityClasses;
 
 namespace BA_ERPMVC.BusinessLayer.OrderBooking
 {
@@ -18,6 +19,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly ERPMVCEntities _dbContext;
         private readonly OrderRepository _orderRepository;
         private readonly LogisticsRepositry _logisticsRepositry;
+        private readonly ReadyForDispatchedRepositry _readyForDispatchedRepositry;
         private readonly OrderFacilityMapping _orderFacilityRepository;
         private readonly TripRepository _tripRepository;
         private readonly TripExpenseMapping _tripExpenseMapping;
@@ -29,6 +31,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _dbContext = new ERPMVCEntities();
             _orderRepository = new OrderRepository(_dbContext);
             _logisticsRepositry = new LogisticsRepositry(_dbContext);
+            _readyForDispatchedRepositry = new ReadyForDispatchedRepositry(_dbContext);
             _orderFacilityRepository = new OrderFacilityMapping(_dbContext);
             _tripRepository = new TripRepository(_dbContext);
             _tripExpenseMapping = new TripExpenseMapping(_dbContext);
@@ -126,6 +129,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             bookingModel.OrderDate = bookingViewModel.OrderDate;
             bookingModel.OrderType = bookingViewModel.OrderType;
             bookingModel.InvoiceAmount = bookingViewModel.InvoiceAmount;
+            bookingModel.VesselBerthingDate = bookingViewModel.VesselBerthingDate;
+            bookingModel.FreeDays = bookingViewModel.FreeDays;
+            bookingModel.Remarks = bookingViewModel.Remarks;
 
             if (bookingViewModel.OrderType == "Import")
             {
@@ -192,6 +198,93 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public Task<IEnumerable<Logistic>> GeLogisticsAsync(int orderBookingId)
         {
             return _logisticsRepositry.FindAsync(x => x.OrderId == orderBookingId);
+        }
+
+        public IEnumerable<ReadyForDispatchedViewModel> GetReadyForDispatchedAsync()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReadyForDispatched.ToString())
+                        on order.OrderID equals logistics.OrderId
+                    join RFD in _dbContext.ReadyForDispatcheds.Where(x => x.IsCompleted == false)
+                        on order.OrderID equals RFD.OrderId into RFDGroup
+                    from readyForDispatched in RFDGroup.DefaultIfEmpty()
+                    select new ReadyForDispatchedViewModel()
+                    {
+
+                        BLnumber = order.BL,
+                        OrderId = order.OrderID,
+                        OrderNo = order.OrderNo,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        DOGranty = readyForDispatched.DOGranty,
+                        ImportEIR = readyForDispatched.ImportEIR,
+                        PortWeighment = readyForDispatched.PortWeighment,
+                        OutSidePortWeighment = readyForDispatched.OutSidePortWeighment,
+
+                        ID = readyForDispatched.ID,
+                        GD = readyForDispatched.GD,
+                        BL = readyForDispatched.BL
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveReadyForDispatchedAsync(ReadyForDispatchedViewModel readyForDispatchedVM)
+        {
+
+            var readyForDispatched = Mapper.Map<ReadyForDispatchedViewModel, ReadyForDispatched>(readyForDispatchedVM);
+            if (readyForDispatched == null)
+            {
+                throw new ArgumentNullException(nameof(readyForDispatched));
+            }
+
+            _readyForDispatchedRepositry.Add(readyForDispatched);
+
+            await _dbContext.SaveChangesAsync();
+            readyForDispatchedVM.ID = readyForDispatched.ID;
+        }
+
+        public async Task UpdateReadyForDispatchedAsync(ReadyForDispatchedViewModel readyForDispatchedVM)
+        {
+
+            if (readyForDispatchedVM == null)
+            {
+                throw new ArgumentNullException(nameof(readyForDispatchedVM));
+            }
+
+            var readyForDispatched = await _readyForDispatchedRepositry.GetAsync(Convert.ToInt32(readyForDispatchedVM.ID));
+
+            if (readyForDispatched == null)
+            {
+                throw new InvalidOperationException($"Booking order:{readyForDispatchedVM.OrderNo}  not found.");
+            }
+
+            readyForDispatched.DOGranty = readyForDispatchedVM.DOGranty;
+            readyForDispatched.ImportEIR = readyForDispatchedVM.ImportEIR;
+            readyForDispatched.PortWeighment = readyForDispatchedVM.PortWeighment;
+            readyForDispatched.OutSidePortWeighment = readyForDispatchedVM.OutSidePortWeighment;
+            readyForDispatched.GD = readyForDispatchedVM.GD;
+            readyForDispatched.BL = readyForDispatchedVM.BL;
+            readyForDispatched.IsCompleted = readyForDispatchedVM.IsCompleted;
+            _readyForDispatchedRepositry.Update(readyForDispatched);
+
+            if (readyForDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReadyForDispatched.ToString()
+                    && x.ContainerNo == readyForDispatchedVM.ContainerNo && x.OrderId == readyForDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    if (logistic.PreDispatched.GetValueOrDefault())
+                    {
+                        logistic.Status = OrdersStatus.PreDispatched.ToString();
+                    }
+                    else
+                    {
+                        logistic.Status = OrdersStatus.Dispatched.ToString();
+                    }
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            readyForDispatchedVM.ID = readyForDispatched.ID;
         }
 
         public Task SaveLogisticsAsync(Logistic logistics)

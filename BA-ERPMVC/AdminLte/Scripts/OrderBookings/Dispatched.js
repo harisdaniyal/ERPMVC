@@ -132,6 +132,5 @@ function validateInputs() {
 }
 
 function onClick_BtnSubmitBookingOrder() {
-    debugger
     next();
 }
