@@ -25,6 +25,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly TripExpenseMapping _tripExpenseMapping;
         private readonly TripContainerRepositry _tripContainerRepositry;
         private readonly PartyRepository _partyRepository;
+        private readonly PreDispatchedMovementRepository _preDispatchedMovementRepository;
 
         public OrderBookingService()
         {
@@ -32,6 +33,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _orderRepository = new OrderRepository(_dbContext);
             _logisticsRepositry = new LogisticsRepositry(_dbContext);
             _readyForDispatchedRepositry = new ReadyForDispatchedRepositry(_dbContext);
+            _preDispatchedMovementRepository = new PreDispatchedMovementRepository(_dbContext);
             _orderFacilityRepository = new OrderFacilityMapping(_dbContext);
             _tripRepository = new TripRepository(_dbContext);
             _tripExpenseMapping = new TripExpenseMapping(_dbContext);
@@ -286,6 +288,94 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             await _dbContext.SaveChangesAsync();
             readyForDispatchedVM.ID = readyForDispatched.ID;
         }
+
+        ///******Pre Dispatched Movement*******///
+
+        public IEnumerable<PreDispatchedMovementViewModel> GetPreDispatchedMovementAsync()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.PreDispatched.ToString())
+                        on order.OrderID equals logistics.OrderId
+                    join PDM in _dbContext.PreDispatchedMovements.Where(x => x.IsCompleted == false)
+                        on order.OrderID equals PDM.OrderId into PDMGroup
+                    from PreDispatchedMovements in PDMGroup.DefaultIfEmpty()
+                    select new PreDispatchedMovementViewModel()
+                    {
+
+                        BLnumber = order.BL,
+                        OrderId = order.OrderID,
+                        OrderNo = order.OrderNo,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        FromLocation = PreDispatchedMovements.FromLocation,
+                        FromDateTime = PreDispatchedMovements.FromDateTime,
+                        ToLocation = PreDispatchedMovements.ToLocation,
+                        ToDateTime = PreDispatchedMovements.ToDateTime,
+                        TransporterName = PreDispatchedMovements.TransporterName,
+                        VehicleNumber = PreDispatchedMovements.VehicleNumber,
+
+
+
+                        ID = PreDispatchedMovements.ID,
+                        //GD = readyForDispatched.GD,
+                        //BL = readyForDispatched.BL
+                    }).Distinct().ToList();
+        }
+
+        public async Task SavePreDispatchedMovementAsync(PreDispatchedMovementViewModel preDispatchedMovementVM)
+        {
+
+            var preDispatchedMovement = Mapper.Map<PreDispatchedMovementViewModel, PreDispatchedMovement>(preDispatchedMovementVM);
+            if (preDispatchedMovement == null)
+            {
+                throw new ArgumentNullException(nameof(preDispatchedMovementVM));
+            }
+
+            _preDispatchedMovementRepository.Add(preDispatchedMovement);
+
+            await _dbContext.SaveChangesAsync();
+            preDispatchedMovementVM.ID = preDispatchedMovement.ID;
+        }
+
+        public async Task UpdatePreDispatchedMovementAsync(PreDispatchedMovementViewModel preDispatchedMovementVM)
+        {
+
+            if (preDispatchedMovementVM == null)
+            {
+                throw new ArgumentNullException(nameof(preDispatchedMovementVM));
+            }
+
+            var preDispatchedMovement = await _preDispatchedMovementRepository.GetAsync(Convert.ToInt32(preDispatchedMovementVM.ID));
+
+            if (preDispatchedMovement == null)
+            {
+                throw new InvalidOperationException($"Booking order:{preDispatchedMovementVM.OrderNo}  not found.");
+            }
+
+            preDispatchedMovement.FromLocation = preDispatchedMovementVM.FromLocation;
+            preDispatchedMovement.FromDateTime = preDispatchedMovementVM.FromDateTime;
+            preDispatchedMovement.ToLocation = preDispatchedMovementVM.ToLocation;
+            preDispatchedMovement.ToDateTime = preDispatchedMovementVM.ToDateTime;
+            preDispatchedMovement.TransporterName = preDispatchedMovementVM.TransporterName;
+            preDispatchedMovement.VehicleNumber = preDispatchedMovementVM.VehicleNumber;
+            preDispatchedMovement.IsCompleted = preDispatchedMovementVM.IsCompleted;
+            _preDispatchedMovementRepository.Update(preDispatchedMovement);
+
+            if (preDispatchedMovementVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.PreDispatched.ToString()
+                    && x.ContainerNo == preDispatchedMovementVM.ContainerNo && x.OrderId == preDispatchedMovementVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Dispatched.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            preDispatchedMovementVM.ID = preDispatchedMovement.ID;
+        }
+        /////********* PreDispatchedMovement*********////////
+        
 
         public Task SaveLogisticsAsync(Logistic logistics)
         {

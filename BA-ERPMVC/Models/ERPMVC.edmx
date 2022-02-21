@@ -381,11 +381,11 @@
           <Property Name="isActive" Type="bit" />
           <Property Name="InvoiceAmount" Type="numeric" Precision="18" Scale="0" />
           <Property Name="isCompleted" Type="bit" />
+          <Property Name="ShippingLineId" Type="int" />
           <Property Name="ShippingAgentId" Type="int" />
           <Property Name="FreeDays" Type="int" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="1000" />
           <Property Name="VesselBerthingDate" Type="datetime" />
-          <Property Name="ShippingLineId" Type="int" />
         </EntityType>
         <EntityType Name="InventoryCategory">
           <Key>
@@ -510,6 +510,24 @@ warning 6002: The table/view 'ERPMVC.dbo.OilCompany' does not have a primary key
           <Property Name="PortOfDischarge" Type="nvarchar(max)" />
           <Property Name="DeleteDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreDispatchedMovement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="FromLocation" Type="nvarchar" MaxLength="100" />
+          <Property Name="FromDateTime" Type="datetime" />
+          <Property Name="ToLocation" Type="nvarchar" MaxLength="100" />
+          <Property Name="ToDateTime" Type="datetime" />
+          <Property Name="TransporterName" Type="nvarchar" MaxLength="100" />
+          <Property Name="VehicleNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsCompleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Purchase_Requisition">
           <Key>
@@ -1467,6 +1485,7 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
           <EntitySet Name="Order_FacilityMapping" EntityType="Self.Order_FacilityMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderServices" EntityType="Self.OrderServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortAndTerminal" EntityType="Self.PortAndTerminal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreDispatchedMovement" EntityType="Self.PreDispatchedMovement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase_Requisition" EntityType="Self.Purchase_Requisition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase_Requisition_Detail" EntityType="Self.Purchase_Requisition_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
@@ -1808,7 +1827,6 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
           <EntitySet Name="ShippingLines" EntityType="db_a780fa_bilalModel.ShippingLine" />
           <EntitySet Name="MaintenanceHistories" EntityType="db_a780fa_bilalModel.MaintenanceHistory" />
           <EntitySet Name="Stations" EntityType="db_a780fa_bilalModel.Station" />
-          <EntitySet Name="ReadyForDispatcheds" EntityType="db_a780fa_bilalModel.ReadyForDispatched" />
           <EntitySet Name="GenerateOrders" EntityType="db_a780fa_bilalModel.GenerateOrder" />
           <EntitySet Name="Logistics" EntityType="db_a780fa_bilalModel.Logistic" />
           <AssociationSet Name="FK_TripContainerType" Association="db_a780fa_bilalModel.FK_TripContainerType">
@@ -1823,6 +1841,8 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
             <End Role="tbl_Container_logistics_Status" EntitySet="tbl_Container_logistics_Status" />
             <End Role="Logistic" EntitySet="Logistics" />
           </AssociationSet>
+          <EntitySet Name="PreDispatchedMovements" EntityType="db_a780fa_bilalModel.PreDispatchedMovement" />
+          <EntitySet Name="ReadyForDispatcheds" EntityType="db_a780fa_bilalModel.ReadyForDispatched" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -3157,28 +3177,6 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
         </EntityType>
-        <EntityType Name="ReadyForDispatched">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" />
-          <Property Name="OrderNo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="ContainerNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ContainerSize" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="BLnumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="DOGranty" Type="DateTime" Precision="3" />
-          <Property Name="ImportEIR" Type="DateTime" Precision="3" />
-          <Property Name="PortWeighment" Type="DateTime" Precision="3" />
-          <Property Name="OutSidePortWeighment" Type="DateTime" Precision="3" />
-          <Property Name="GD" Type="DateTime" Precision="3" />
-          <Property Name="BL" Type="DateTime" Precision="3" />
-          <Property Name="IsCompleted" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="GenerateOrder">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -3272,6 +3270,46 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PreDispatchedMovement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="FromLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FromDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ToLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ToDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TransporterName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ReadyForDispatched">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="OrderNo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContainerSize" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BLnumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DOGranty" Type="DateTime" Precision="3" />
+          <Property Name="ImportEIR" Type="DateTime" Precision="3" />
+          <Property Name="PortWeighment" Type="DateTime" Precision="3" />
+          <Property Name="OutSidePortWeighment" Type="DateTime" Precision="3" />
+          <Property Name="GD" Type="DateTime" Precision="3" />
+          <Property Name="BL" Type="DateTime" Precision="3" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4385,29 +4423,6 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReadyForDispatcheds">
-            <EntityTypeMapping TypeName="db_a780fa_bilalModel.ReadyForDispatched">
-              <MappingFragment StoreEntitySet="ReadyForDispatched">
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
-                <ScalarProperty Name="BL" ColumnName="BL" />
-                <ScalarProperty Name="GD" ColumnName="GD" />
-                <ScalarProperty Name="OutSidePortWeighment" ColumnName="OutSidePortWeighment" />
-                <ScalarProperty Name="PortWeighment" ColumnName="PortWeighment" />
-                <ScalarProperty Name="ImportEIR" ColumnName="ImportEIR" />
-                <ScalarProperty Name="DOGranty" ColumnName="DOGranty" />
-                <ScalarProperty Name="BLnumber" ColumnName="BLnumber" />
-                <ScalarProperty Name="ContainerSize" ColumnName="ContainerSize" />
-                <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GenerateOrders">
             <EntityTypeMapping TypeName="db_a780fa_bilalModel.GenerateOrder">
               <MappingFragment StoreEntitySet="GenerateOrder">
@@ -4461,6 +4476,48 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
                 <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="logisticsid" ColumnName="logisticsid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreDispatchedMovements">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.PreDispatchedMovement">
+              <MappingFragment StoreEntitySet="PreDispatchedMovement">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="TransporterName" ColumnName="TransporterName" />
+                <ScalarProperty Name="ToDateTime" ColumnName="ToDateTime" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDateTime" ColumnName="FromDateTime" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReadyForDispatcheds">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.ReadyForDispatched">
+              <MappingFragment StoreEntitySet="ReadyForDispatched">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="BL" ColumnName="BL" />
+                <ScalarProperty Name="GD" ColumnName="GD" />
+                <ScalarProperty Name="OutSidePortWeighment" ColumnName="OutSidePortWeighment" />
+                <ScalarProperty Name="PortWeighment" ColumnName="PortWeighment" />
+                <ScalarProperty Name="ImportEIR" ColumnName="ImportEIR" />
+                <ScalarProperty Name="DOGranty" ColumnName="DOGranty" />
+                <ScalarProperty Name="BLnumber" ColumnName="BLnumber" />
+                <ScalarProperty Name="ContainerSize" ColumnName="ContainerSize" />
+                <ScalarProperty Name="ContainerNo" ColumnName="ContainerNo" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

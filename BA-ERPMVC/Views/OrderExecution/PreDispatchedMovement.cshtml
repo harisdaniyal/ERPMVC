@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.PreDispatchedMovementViewModel>
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
+@{
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Ready For Dispatched</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-sm table-bordered mb-3 w-min-100">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>From Location</th>
+                            <th>From DateTime</th>
+                            <th>To Location</th>
+                            <th>To DateTime</th>
+                            <th>Transporter Name</th>
+                            <th>Vehicle Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var preDispatchedMovement in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@preDispatchedMovement.OrderId" class="form-control txt_OrderId" />
+                                    <input type="hidden" value="@preDispatchedMovement.BLnumber" class="form-control txt_BLnumber" />
+                                    <input type="hidden" value="@Convert.ToInt32(preDispatchedMovement.ID)" class="form-control txt_ID" />
+                                    <input type="text" disabled value="@preDispatchedMovement.OrderNo" class="form-control txt_OrderNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled value="@preDispatchedMovement.ContainerNo" class="form-control txt_ContainerNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled value="@preDispatchedMovement.ContainerSize" class="form-control txt_ContainerSize" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_DOGranty" style="width: 170px;" type="text" placeholder="" value="@(preDispatchedMovement.FromLocation.HasValue ? preDispatchedMovement.FromLocation.Value : "")" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_ImportEIR" style="width: 170px;" type="date" placeholder="" value="@(preDispatchedMovement.FromDateTime.HasValue ? preDispatchedMovement.FromDateTime.Value.ToString("yyyy-MM-dd"): "")" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_PortWeighment" style="width: 170px;" type="text" placeholder="" value="@(preDispatchedMovement.ToLocation.HasValue ? preDispatchedMovement.ToLocation.Value : "")" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_OutSidePortWeighment" style="width: 170px;" type="date" placeholder="" value="@(preDispatchedMovement.ToDateTime.HasValue ? preDispatchedMovement.ToDateTime.Value : "")" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_GD" style="width: 170px;" type="date" placeholder="" value="@(preDispatchedMovement.TransporterName.HasValue ? preDispatchedMovement.TransporterName.Value : "")" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_BL" style="width: 170px;" type="date" placeholder="" value="@(preDispatchedMovement.VehicleNumber.HasValue ? preDispatchedMovement.VehicleNumber.Value.ToString : "")" />
+                                </td>
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnReadyForDispatched">PreDispatched Movement</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ReadyForDispatched.js")"></script>

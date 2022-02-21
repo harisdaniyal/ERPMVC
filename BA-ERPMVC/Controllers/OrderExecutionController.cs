@@ -55,5 +55,43 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
+        // GET: PreDispatched
+        [HttpGet]
+        public ActionResult PreDispatched()
+        {
+            var PreDispatchedModel = orderBookingService.GetPreDispatchedMovementAsync();
+
+            return View(PreDispatchedModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PreDispatched(PreDispatchedMovementViewModel preDispatchedMovementVM)
+        {
+            if (preDispatchedMovementVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(preDispatchedMovementVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (preDispatchedMovementVM.ID == 0)
+                {
+                    await orderBookingService.SavePreDispatchedMovementAsync(preDispatchedMovementVM);
+
+                    return Json(new { success = true, Id = preDispatchedMovementVM.ID });
+                }
+
+                await orderBookingService.UpdatePreDispatchedMovementAsync(preDispatchedMovementVM);
+
+                return Json(new { success = true, Id = preDispatchedMovementVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
+
 }

@@ -107,12 +107,13 @@
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ShippingLine" Width="1.5" PointX="26.375" PointY="27.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.MaintenanceHistory" Width="1.5" PointX="28.375" PointY="4.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Station" Width="1.5" PointX="28.375" PointY="0.75" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReadyForDispatched" Width="1.5" PointX="28.375" PointY="18.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.GenerateOrder" Width="1.5" PointX="7.375" PointY="27.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Logistic" Width="1.5" PointX="30" PointY="9.625" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripContainerType" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.PreDispatchedMovement" Width="1.5" PointX="28.375" PointY="24.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReadyForDispatched" Width="1.5" PointX="28.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

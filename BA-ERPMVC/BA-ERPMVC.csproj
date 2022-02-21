@@ -271,6 +271,9 @@
     <Compile Include="Models\PortAndTerminal.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PreDispatchedMovement.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReadyForDispatched.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -286,11 +289,14 @@
     <Compile Include="Models\VendorExpens.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
+    <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\IRepositories\IReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
+    <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReadyForDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\OrderListViewModel.cs" />
     <Compile Include="ViewModels\VendorExpensesViewModel.cs" />
@@ -385,6 +391,7 @@
     <Content Include="AdminLte\Scripts\OrderBookings\ExecuteTrips.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\PreDispatchedMovement.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ReadyForDispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\TripExecution.js" />
     <Content Include="App_Code\Fingerprint.cs" />
@@ -3242,6 +3249,8 @@
     <Content Include="Views\OrderBooking\OrderExecutionPartials\_ExecuteTrips.cshtml" />
     <Content Include="Views\OrderBooking\OrderExecutionPartials\_OrderDelivery.cshtml" />
     <Content Include="Views\OrderBooking\Partials\_Logistics.cshtml" />
+    <Content Include="Views\OrderExecution\PreDispatchedMovement.cshtml" />
+    <Content Include="Views\OrderExecution\PreDispatched.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

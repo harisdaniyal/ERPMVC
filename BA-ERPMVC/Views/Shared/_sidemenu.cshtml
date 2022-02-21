@@ -205,8 +205,39 @@
             </a>
         </li>
 
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    Order Execution
 
+                </p>
+            </a>
 
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ReadyForDispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Ready For Dispatched
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/PreDispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Pre Dispatched
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -431,9 +462,9 @@
         </li>
 
 
-    }
-    else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
-    {
+        }
+        else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
+        {
         <li class="nav-item">
             <a href="/BLShippingLine/Index" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -443,7 +474,7 @@
             </a>
         </li>
 
-    }
+        }
 
-</ul>
+    </ul>
 
