@@ -3326,4 +3326,21 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL
 )
 
+Create table PreDispatchedMovement(
+ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+OrderId int,
+FromLocation nvarchar(100),
+FromDateTime datetime,
+ToLocation nvarchar(100),
+ToDateTime datetime, 
+TransporterName nvarchar(100), 
+VehicleNumber nvarchar(100), 
+
+IsCompleted bit default(0),
+[CreatedBy] [nvarchar](250) NULL,
+[CreateDate] datetime NULL,
+[UpdatedBy] [nvarchar](250) NULL,
+[UpdateDate] datetime NULL
+)
+
 ----2/21/2022 Aleem Last Run
