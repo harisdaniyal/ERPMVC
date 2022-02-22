@@ -495,11 +495,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         /////////////******InTransact Train*********////////////
 
-        
+
         public IEnumerable<InTransactTrainViewModel> GetInTransactTrainAsync()
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString())
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.InTransact.ToString())
                         on order.OrderID equals logistics.OrderId
                     join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
                         on order.OrderID equals dispatch.OrderId
@@ -510,7 +510,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     {
 
                         BLnumber = order.BL,
-                        ClientName = _dbContext.BACustomerRegistrations.Where(x=> x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                        ClientName = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
                         OrderId = order.OrderID,
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
@@ -518,7 +518,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         TrainID = dispatch.TrainID,
                         PriorityForDispatched = InTransactTrains.PriorityForDispatched,
                         ArrivalDate = InTransactTrains.ArrivalDate,
-                        LOLO= InTransactTrains.LOLO,
+                        LOLO = InTransactTrains.LOLO,
 
 
 
@@ -584,7 +584,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public Task SaveLogisticsAsync(Logistic logistics)
         {
-           
+
             _logisticsRepositry.Add(logistics);
             return _dbContext.SaveChangesAsync();
         }

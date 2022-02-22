@@ -27,5 +27,9 @@ namespace BA_ERPMVC.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string OrderNo { get; set; }
+        public string ContainerNo { get; set; }
+        public string ContainerSize { get; set; }
+        public string BLnumber { get; set; }
     }
 }

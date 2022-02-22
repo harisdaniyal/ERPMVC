@@ -23,6 +23,5 @@ namespace BA_ERPMVC.Models
         public string DeletedBy { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace BA_ERPMVC.Models
         public string ContainerSize { get; set; }
         public string BLnumber { get; set; }
         public string TrainID { get; set; }
+        public string Customer_Name { get; set; }
         public string PriorityForDispatched { get; set; }
         public Nullable<System.DateTime> ArrivalDate { get; set; }
         public Nullable<bool> LOLO { get; set; }

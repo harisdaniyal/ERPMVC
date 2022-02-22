@@ -16,6 +16,10 @@ namespace BA_ERPMVC.Models
     {
         public int ID { get; set; }
         public Nullable<int> OrderId { get; set; }
+        public string OrderNo { get; set; }
+        public string ContainerNo { get; set; }
+        public string ContainerSize { get; set; }
+        public string BLnumber { get; set; }
         public string PriorityForDispatched { get; set; }
         public string TrainID { get; set; }
         public Nullable<System.DateTime> DispatchedDate { get; set; }

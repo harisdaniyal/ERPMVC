@@ -3310,7 +3310,7 @@ GO
 	Go
 
 Create table ReadyForDispatched(
-[ID] [int] IDENTITY(1,1) NOT NULL primary key IDENTIFIED(1,1),
+	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
 	[OrderId] [int] NULL,
 	[OrderNo] [varchar](9) NULL,
 	[ContainerNo] [nvarchar](250) NULL,
@@ -3346,8 +3346,13 @@ INSERT INTO [dbo].[Stations] VALUES('LAHORE',null,null,null,null,null,null,1,0)
 INSERT INTO [dbo].[Stations] VALUES('KOT RADHA KISHAN',null,null,null,null,null,null,1,0)
 
 Create table PreDispatchedMovement(
-ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,
+[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+[OrderId] [int] NULL,
+[OrderNo] [varchar](9) NULL,
+[ContainerNo] [nvarchar](250) NULL,
+[ContainerSize] [nvarchar](250) NULL,
+[BLnumber] [nvarchar](250) NULL,
+
 FromLocation nvarchar(100),
 FromDateTime datetime,
 ToLocation nvarchar(100),
@@ -3361,10 +3366,14 @@ IsCompleted bit default(0),
 [UpdatedBy] [nvarchar](250) NULL,
 [UpdateDate] datetime NULL
 )
-
+Go
 Create table DispatchedOrder(
-ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,
+[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+[OrderId] [int] NULL,
+[OrderNo] [varchar](9) NULL,
+[ContainerNo] [nvarchar](250) NULL,
+[ContainerSize] [nvarchar](250) NULL,
+[BLnumber] [nvarchar](250) NULL,
 
 PriorityForDispatched nvarchar(100),
 TrainID nvarchar(100),
@@ -3384,7 +3393,7 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0)
 )
-
+Go
 Create table InTransactTrain(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 OrderId int,
@@ -3392,11 +3401,13 @@ OrderNo varchar(9) NULL,
 ContainerNo nvarchar(250) NULL,
 ContainerSize nvarchar(250) NULL,
 BLnumber nvarchar(250) NULL,
+
 TrainID nvarchar(100),
 Customer_Name nvarchar(100),
 PriorityForDispatched nvarchar(100),
 ArrivalDate datetime, 
 LOLO bit, 
+
 IsCompleted bit default(0),
 [CreatedBy] [nvarchar](250) NULL,
 [CreateDate] datetime NULL,
