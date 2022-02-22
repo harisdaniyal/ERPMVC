@@ -3392,15 +3392,15 @@ OrderNo varchar(9) NULL,
 ContainerNo nvarchar(250) NULL,
 ContainerSize nvarchar(250) NULL,
 BLnumber nvarchar(250) NULL,
-TrainID nvarchar(100),
-Customer_Name nvarchar(100),
+
 PriorityForDispatched nvarchar(100),
 ArrivalDate datetime, 
-LOLO bit, 
 IsCompleted bit default(0),
+
 [CreatedBy] [nvarchar](250) NULL,
 [CreateDate] datetime NULL,
 [UpdatedBy] [nvarchar](250) NULL,
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
+isActive bit, 
 )

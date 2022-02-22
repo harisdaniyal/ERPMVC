@@ -5,17 +5,17 @@
 
 })
 
-$(".btnDispatched").click(function () {
+$(".btnIntransact").click(function () {
     var row = $(this).closest("tr")
     save(row, true)
 })
 
 function save(row, isCompleted) {
 
-    if (!row.find('.txt_station').val()) {
-        row.find('.txt_station').addClass('error');
-        return false;
-    }
+    //if (!row.find('.txt_station').val()) {
+    //    row.find('.txt_station').addClass('error');
+    //    return false;
+    //}
     //else if (!row.find('.txt_ToLoc').val()) {
     //    row.find('.txt_ToLoc').addClass('error');
     //    return false;
@@ -25,24 +25,21 @@ function save(row, isCompleted) {
         'ID': row.find(".txt_ID").val(),
         'OrderId': row.find(".txt_OrderId").val(),
         'IsCompleted': isCompleted,
-        'BLnumber': row.find(".txt_BLnumber").val(),
+        'TrainID': row.find(".txt_BLnumber").val(),
 
         'OrderNo': row.find(".txt_OrderNo").val(),
         'ContainerNo': row.find(".txt_ContainerNo").val(),
         'ContainerSize': row.find(".txt_ContainerSize").val(),
         'PriorityForDispatched': row.find(".txt_Priority").val(),
         'TrainID': row.find(".txt_TrainID").val(),
-        'DispatchedDate': row.find(".txt_Dispatcheddate").val(),
-        'StationID': row.find(".txt_station").val(),
-        'StationName': row.find(".txt_station option:selected").text(),
-        'WagonNo': row.find(".txt_WagonNo").val(),
-        'WagonType': row.find(".txt_WagonType").val(),
-        'RRNo': row.find(".txt_RRNo").val(),
-        'EngineNo': row.find(".txt_EngineNo").val(),
-        'InvoiceNumber': row.find(".txt_InvoiceNumber").val(),
+        'Customer_Name': row.find(".txt_ClientName").val(),
+        'ArrivalDate': row.find(".txt_ArrivalDateTime").val(),
+        'LOLO': row.find(".txt_lolo").val(),
+        //'StationName': row.find(".txt_station option:selected").text(),
+        
     });
     showLoader();
-    fetch('/OrderExecution/Dispatched', {
+    fetch('/OrderExecution/InTransactTrain', {
         method: 'POST',
         body: dataObject,
         headers: {

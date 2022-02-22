@@ -92,6 +92,53 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
+
+        // GET: Dispatched
+        [HttpGet]
+        public ActionResult Dispatched()
+        {
+           this.ViewBag.Stations = orderBookingService.GetStationList();
+            var DispatchedModel = orderBookingService.GetDispatchedOrderAsync();
+
+            return View(DispatchedModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Dispatched(DispatchedOrderViewModel dispatchedOrderVM)
+        {
+            if (dispatchedOrderVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(dispatchedOrderVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (dispatchedOrderVM.ID == 0)
+                {
+                    await orderBookingService.SaveDispatchedOrderAsync(dispatchedOrderVM);
+
+                    return Json(new { success = true, Id = dispatchedOrderVM.ID });
+                }
+
+                await orderBookingService.UpdateDispatchedOrderAsync(dispatchedOrderVM);
+
+                return Json(new { success = true, Id = dispatchedOrderVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // GET: Dispatched
+        [HttpGet]
+        public ActionResult InTransactTrain()
+        {
+            var InTransactModel = orderBookingService.GetInTransactTrainAsync();
+
+            return View(InTransactModel);
+        }
+
     }
 
 }
