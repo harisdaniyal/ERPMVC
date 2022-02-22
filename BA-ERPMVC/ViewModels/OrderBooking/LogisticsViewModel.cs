@@ -19,5 +19,10 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string ToLocation { get; set; }
         public string EmptyReturnLocation { get; set; }
         public string EmptyReturnDate { get; set; }
+        public string ModeOfTransportation { get; set; }
+        public string Status { get; set; }
+        public bool? PreDispatched { get; set; }
+        public string Comodities { get; set; }
+
     }
 }

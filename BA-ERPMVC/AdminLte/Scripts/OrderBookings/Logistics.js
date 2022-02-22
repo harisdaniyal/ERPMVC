@@ -25,6 +25,18 @@ function initialize(logistics) {
             data: 'JobType',
             width: 10
         }, {
+            data: 'ModeOfTransportation',
+            width: 10
+        }, {
+            data: 'PreDispatched',
+            width: 10,
+            'render': function (data) {
+                return data ? "Yes" : "No";
+            }
+        }, {
+            data: 'Comodities',
+            width: 10
+        }, {
             data: 'FromLocation',
             width: 10
         }, {
@@ -38,6 +50,18 @@ function initialize(logistics) {
             width: 10,
             'render': function (date) {
                 return date ? moment(date).format("ll") : "--";
+            }
+        }, {
+            data: 'Status',
+            width: 10,
+            'render': function (data) {
+                if (!data) {
+                    return '<div class="badge badge-pill badge-success w-100 py-2">N/A</div>';
+                }
+                else {
+                    return '<div class="badge badge-pill badge-success w-100 py-2">' + data + '</div>';
+                }
+
             }
         }, {
             data: 'LogisticsId',
@@ -81,7 +105,7 @@ function save() {
 }
 
 function next() {
-    loadPartial('Trips');
+    loadPartial('Invoice');
 }
 
 function back() {
@@ -184,6 +208,8 @@ function clearInputs() {
     $("#ddl_ContainerSize").val('');
     $("#ddl_ContainerType").val('');
     $("#ddl_JobType").val('');
+    $("#txt_Comodities").val('');
+    $("#ddl_ModeOfTransportation").val('');
     $("#ddl_FromLocation").val('');
     $("#ddl_ToLocation").val('');
     $("#ddl_EmptyContainerReturnLocation").val('');
@@ -202,6 +228,9 @@ function getLogisticsObject() {
         'ContainerSize': $("#ddl_ContainerSize option:selected").text(),
         'ContainerType': $("#ddl_ContainerType").val(),
         'JobType': $("#ddl_JobType option:selected").text(),
+        'ModeOfTransportation': $('#ddl_ModeOfTransportation').val(),
+        'PreDispatched': $("#ddl_PreDispatched").val(),
+        'Comodities': $("#txt_Comodities").val(),
         'FromLocation': $("#ddl_FromLocation option:selected").text(),
         'ToLocation': $("#ddl_ToLocation option:selected").text(),
         'EmptyReturnLocation': $("#ddl_EmptyContainerReturnLocation option:selected").text(),

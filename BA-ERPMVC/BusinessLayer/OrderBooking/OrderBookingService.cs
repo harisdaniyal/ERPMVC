@@ -91,6 +91,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 bookingModel.BL = string.Empty;
             }
+            bookingModel.isCompleted = false;
 
             _orderRepository.Add(bookingModel);
 
@@ -134,6 +135,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             bookingModel.VesselBerthingDate = bookingViewModel.VesselBerthingDate;
             bookingModel.FreeDays = bookingViewModel.FreeDays;
             bookingModel.Remarks = bookingViewModel.Remarks;
+            bookingModel.ShippingLineId = bookingViewModel.ShippingLineId;
+            bookingModel.ShippingAgentId = bookingViewModel.ShippingAgentId;
+            bookingModel.BookingPOCName = bookingViewModel.BookingPOCName;
 
             if (bookingViewModel.OrderType == "Import")
             {
@@ -195,6 +199,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         {
             // to do : make repositry 
             return await _dbContext.stp_ProductCategory.Where(x => x.ProductCatID == 2 || x.ProductCatID == 7).ToListAsync();
+        }
+
+        public async Task<IEnumerable<PortAndTerminal>> GetPortAndTerminal()
+        {
+            // to do : make repositry 
+            return await _dbContext.PortAndTerminals.Where(x => x.IsDeleted == false).ToListAsync();
         }
 
         public Task<IEnumerable<Logistic>> GeLogisticsAsync(int orderBookingId)
@@ -375,10 +385,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             preDispatchedMovementVM.ID = preDispatchedMovement.ID;
         }
         /////********* PreDispatchedMovement*********////////
-        
+
 
         public Task SaveLogisticsAsync(Logistic logistics)
         {
+           
             _logisticsRepositry.Add(logistics);
             return _dbContext.SaveChangesAsync();
         }
@@ -463,6 +474,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         RemainingTrips = _dbContext.BAtrips.Count(x => x.ContainerStatus != 4 && x.OrderId == order.OrderID && x.IsActive == true),
                         VendorExpense = _dbContext.BAtrips.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Sum(x => x.PartyRate) ?? 0
                     }).Distinct().ToList();
+        }
+
+        public IEnumerable<ShippingAgent> GetShippingAgent()
+        {
+            return _dbContext.ShippingAgents.Where(x => x.IsDeleted == false).ToList();
+        }
+
+        public IEnumerable<ShippingLine> GetShippingLine()
+        {
+            return _dbContext.ShippingLines.Where(x => x.IsDeleted == false).ToList();
         }
     }
 }

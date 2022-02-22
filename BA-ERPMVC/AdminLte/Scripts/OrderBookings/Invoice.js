@@ -1,18 +1,15 @@
-﻿function Back() {
-
-}
-function Next() {
-
-}
-function OnLoad() {
-
-}
-function SaveData() {
-
+﻿function next() {
+    loadPartial('Invoice');
 }
 
 function back() {
-    // Validate: if there is unsaved data, show alert
+    loadPartial('Logistics');
+}
 
-    // load
+function onClick_BtnBack() {
+    back();
+}
+
+function onClick_BtnProceed() {
+    next();
 }

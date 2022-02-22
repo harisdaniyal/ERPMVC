@@ -57,6 +57,36 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group">
+                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_ShippingLine">
+                        <option value="">Please Select Shipping Line</option>
+                        @foreach (var shippingLine in ViewBag.ShippingLines)
+                        {
+                            <option value="@shippingLine.ShippingLineId" @(shippingLine.ShippingLineId == Model.ShippingLineId ? "selected=selected" : "")>@shippingLine.ShippingLineName</option>
+                        }
+                    </select>
+                    <label for="ddlState">Shipping Line</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_ShippingAgent">
+                        <option value="">Please Select Shipping Agent</option>
+                        @foreach (var shippingAgent in ViewBag.ShippingAgents)
+                        {
+                            <option value="@shippingAgent.ShippingAgentId" @(shippingAgent.ShippingAgentId == Model.ShippingAgentId ? "selected=selected" : "")>@shippingAgent.Name</option>
+                        }
+                    </select>
+                    <label for="ddlState">Shipping Agent</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
                     <input class="date-picker form-control" type="number" min="0" placeholder="" value="@(Model.InvoiceAmount)" id="txt_InvoiceAmount" />
                     <label>Invoice Amount</label>
                     <div class="form-status"><span></span></div>
@@ -68,6 +98,15 @@
                 <div class="input-group">
                     <input class="date-picker form-control" type="number" min="0" placeholder="" value="@(Model.FreeDays)" id="txt_FreeDays" />
                     <label>Free Days</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="text" min="0" placeholder="" value="@(Model.BookingPOCName)" id="txt_BookingPOCName" />
+                    <label>Booking POC Name</label>
                     <div class="form-status"><span></span></div>
                     <i class="fas fa-check"></i>
                     <i class="fas fa-times"></i>

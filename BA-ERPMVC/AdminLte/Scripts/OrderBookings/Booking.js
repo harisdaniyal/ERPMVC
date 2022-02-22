@@ -24,6 +24,10 @@ function save() {
             vesselBerthingDate: $("#txt_VesselBerthingDate").val(),
             freeDays: $("#txt_FreeDays").val(),
             remarks: $("#txt_Remarks").val(),
+            ShippingAgentId: $("#ddl_ShippingAgent").val(),
+            ShippingLineId: $("#ddl_ShippingLine").val(),
+            BookingPOCName: $("#txt_BookingPOCName").val(),
+            InvoiceAmount: $("#txt_InvoiceAmount").val(),
             FacilityIds: facilities
         }),
         headers: {

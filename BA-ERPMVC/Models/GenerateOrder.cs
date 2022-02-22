@@ -34,5 +34,6 @@ namespace BA_ERPMVC.Models
         public string Remarks { get; set; }
         public Nullable<System.DateTime> VesselBerthingDate { get; set; }
         public Nullable<int> ShippingLineId { get; set; }
+        public string BookingPOCName { get; set; }
     }
 }
