@@ -12,17 +12,25 @@ namespace BA_ERPMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Station
+    public partial class DispatchedOrder
     {
-        public long StationID { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> OrderId { get; set; }
+        public string PriorityForDispatched { get; set; }
+        public string TrainID { get; set; }
+        public Nullable<System.DateTime> DispatchedDate { get; set; }
+        public Nullable<int> StationID { get; set; }
         public string StationName { get; set; }
+        public string WagonNo { get; set; }
+        public string WagonType { get; set; }
+        public string RRNo { get; set; }
+        public string EngineNo { get; set; }
+        public string InvoiceNumber { get; set; }
+        public Nullable<bool> IsCompleted { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-        public string DeletedBy { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
-        public Nullable<bool> Status { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     }
 }

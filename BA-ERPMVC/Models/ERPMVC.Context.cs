@@ -109,5 +109,7 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<PreDispatchedMovement> PreDispatchedMovements { get; set; }
         public virtual DbSet<ReadyForDispatched> ReadyForDispatcheds { get; set; }
         public virtual DbSet<GenerateOrder> GenerateOrders { get; set; }
+        public virtual DbSet<DispatchedOrder> DispatchedOrders { get; set; }
+        public virtual DbSet<InTransactTrain> InTransactTrains { get; set; }
     }
 }
