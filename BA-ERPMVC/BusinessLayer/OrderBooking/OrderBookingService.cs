@@ -666,7 +666,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     && x.ContainerNo == reDispatchedVM.ContainerNo && x.OrderId == reDispatchedVM.OrderId).FirstOrDefault();
                 if (logistic != null)
                 {
-                    logistic.Status = OrdersStatus.Deilvery.ToString();
+                    logistic.Status = OrdersStatus.Delivery.ToString();
                     _logisticsRepositry.Update(logistic);
                 }
             }

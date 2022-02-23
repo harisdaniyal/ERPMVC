@@ -3299,7 +3299,7 @@ CREATE TABLE [dbo].[Stations](
 	alter table GenerateOrder add Remarks nvarchar(1000)
 	Go
 	alter table GenerateOrder add VesselBerthingDate Datetime
-GO
+	GO
 	alter table Logistics add Status nvarchar(50)
 	Go
 	alter table Logistics add ModeOfTransportation nvarchar(50)
@@ -3307,6 +3307,8 @@ GO
 	alter table Logistics add PreDispatched bit
 	Go
 	alter table Logistics add Comodities nvarchar(1000)
+	Go
+	alter table GenerateOrder add BookingPOCName nvarchar(250)
 	Go
 
 Create table ReadyForDispatched(
