@@ -265,6 +265,15 @@
     <Compile Include="Models\ClearingAgent.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeliveryTrain.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DispatchedOrder.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InTransactTrain.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MaintenanceHistory.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -289,16 +298,26 @@
     <Compile Include="Models\VendorExpens.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\DispatchedOrderRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
+    <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IDispatchedOrderRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IIntransactTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\IRepositories\IReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
+    <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\InTransactTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReadyForDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\OrderListViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\StationViewModel.cs" />
     <Compile Include="ViewModels\VendorExpensesViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Content Include="AdminLte\Assets\bootstrap-progressbar\bootstrap-progressbar.js" />
@@ -387,8 +406,10 @@
     <Content Include="AdminLte\Js\vfs_fonts.js" />
     <Content Include="AdminLte\Js\xlsx.min.js" />
     <Content Include="AdminLte\Scripts\Custom.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExecuteTrips.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\InTransactTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\PreDispatchedMovement.js" />
@@ -3249,8 +3270,10 @@
     <Content Include="Views\OrderBooking\OrderExecutionPartials\_ExecuteTrips.cshtml" />
     <Content Include="Views\OrderBooking\OrderExecutionPartials\_OrderDelivery.cshtml" />
     <Content Include="Views\OrderBooking\Partials\_Logistics.cshtml" />
-    <Content Include="Views\OrderExecution\PreDispatchedMovement.cshtml" />
     <Content Include="Views\OrderExecution\PreDispatched.cshtml" />
+    <Content Include="Views\OrderExecution\Dispatched.cshtml" />
+    <Content Include="Views\OrderExecution\InTransactTrain.cshtml" />
+    <Content Include="Views\OrderExecution\DeliveryTrain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

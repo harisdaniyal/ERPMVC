@@ -12,7 +12,7 @@ namespace BA_ERPMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PreDispatchedMovement
+    public partial class DeliveryTrain
     {
         public int ID { get; set; }
         public Nullable<int> OrderId { get; set; }
@@ -20,16 +20,18 @@ namespace BA_ERPMVC.Models
         public string ContainerNo { get; set; }
         public string ContainerSize { get; set; }
         public string BLnumber { get; set; }
-        public string FromLocation { get; set; }
-        public Nullable<System.DateTime> FromDateTime { get; set; }
-        public string ToLocation { get; set; }
-        public Nullable<System.DateTime> ToDateTime { get; set; }
-        public string TransporterName { get; set; }
-        public string VehicleNumber { get; set; }
+        public string PriorityForDispatched { get; set; }
+        public string TrainID { get; set; }
+        public Nullable<System.DateTime> DispatchedDate { get; set; }
+        public string DeliveryLocation { get; set; }
+        public string VehicleNo { get; set; }
+        public Nullable<System.DateTime> ArrivalDate { get; set; }
+        public Nullable<System.DateTime> DeliveryDate { get; set; }
         public Nullable<bool> IsCompleted { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     }
 }

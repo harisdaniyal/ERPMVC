@@ -130,13 +130,50 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
-        // GET: Dispatched
+        // GET: InTransact Train
         [HttpGet]
         public ActionResult InTransactTrain()
         {
+            this.ViewBag.Stations = orderBookingService.GetStationList();
             var InTransactModel = orderBookingService.GetInTransactTrainAsync();
 
             return View(InTransactModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> InTransactTrain(InTransactTrainViewModel intransacttrainVM)
+        {
+            if (intransacttrainVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(intransacttrainVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (intransacttrainVM.ID == 0)
+                {
+                    await orderBookingService.SaveIntransactTrainAsync(intransacttrainVM);
+
+                    return Json(new { success = true, Id = intransacttrainVM.ID });
+                }
+
+                await orderBookingService.UpdateIntransactTrainAsync(intransacttrainVM);
+
+                return Json(new { success = true, Id = intransacttrainVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // GET : Delivery Train
+        [HttpGet]
+        public ActionResult DeliveryTrain()
+        {
+            var DeliveryModel = orderBookingService.GetInDeliveryTrainAsync();
+
+            return View(DeliveryModel);
         }
 
     }
