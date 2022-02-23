@@ -3300,6 +3300,8 @@ CREATE TABLE [dbo].[Stations](
 	Go
 	alter table GenerateOrder add VesselBerthingDate Datetime
 	GO
+	alter table GenerateOrder add  [BookingPOCName] [nvarchar](250) 
+GO
 	alter table Logistics add Status nvarchar(50)
 	Go
 	alter table Logistics add ModeOfTransportation nvarchar(50)
