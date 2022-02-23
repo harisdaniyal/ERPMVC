@@ -3310,6 +3310,8 @@ GO
 	Go
 	alter table Logistics add Comodities nvarchar(1000)
 	Go
+	alter table GenerateOrder add BookingPOCName nvarchar(250)
+	Go
 
 Create table ReadyForDispatched(
 	[ID] [int] IDENTITY(1,1) NOT NULL primary key,

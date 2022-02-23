@@ -289,6 +289,9 @@
     <Compile Include="Models\ReadyForDispatched.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReDispatched.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ShippingAgent.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -305,12 +308,14 @@
     <Compile Include="Repositories\CoreRepositories\DispatchedOrderRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\ReDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\ReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDispatchedOrderRepository.cs" />
     <Compile Include="Repositories\IRepositories\IIntransactTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IReDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
@@ -319,6 +324,7 @@
     <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\InTransactTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\ReDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReadyForDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\OrderListViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\StationViewModel.cs" />
@@ -417,6 +423,7 @@
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\PreDispatchedMovement.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ReDispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ReadyForDispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\TripExecution.js" />
     <Content Include="App_Code\Fingerprint.cs" />
@@ -3274,6 +3281,7 @@
     <Content Include="Views\OrderExecution\PreDispatched.cshtml" />
     <Content Include="Views\OrderExecution\Dispatched.cshtml" />
     <Content Include="Views\OrderExecution\InTransactTrain.cshtml" />
+    <Content Include="Views\OrderExecution\ReDispatched.cshtml" />
     <Content Include="Views\OrderExecution\DeliveryTrain.cshtml" />
   </ItemGroup>
   <ItemGroup>

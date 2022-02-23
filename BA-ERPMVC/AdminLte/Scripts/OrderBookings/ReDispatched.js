@@ -5,36 +5,35 @@
 
 })
 
-$(".btnReadyForDispatched").click(function () {
+$(".btnReDispatched").click(function () {
     var row = $(this).closest("tr")
     save(row, true)
 })
 
 function save(row, isCompleted) {
 
-    if (!row.find('.txt_DOGranty').val()) {
-        row.find('.txt_DOGranty').addClass('error');
+    if (!row.find('.txt_VehicleNo').val()) {
+        row.find('.txt_VehicleNo').addClass('error');
         return false;
     }
     var dataObject = JSON.stringify({
         'ID': row.find(".txt_ID").val(),
         'OrderId': row.find(".txt_OrderId").val(),
         'IsCompleted': isCompleted,
+        'BLnumber': row.find(".txt_BLnumber").val(),
         'OrderNo': row.find(".txt_OrderNo").val(),
         'ContainerNo': row.find(".txt_ContainerNo").val(),
         'ContainerSize': row.find(".txt_ContainerSize").val(),
-        'BLnumber': row.find(".txt_BLnumber").val(),
-
-        'DOGranty': row.find(".txt_DOGranty").val(),
-        'ImportEIR': row.find(".txt_ImportEIR").val(),
-        'PortWeighment': row.find(".txt_PortWeighment").val(),
-        'OutSidePortWeighment': row.find(".txt_OutSidePortWeighment").val(),
-        'GD': row.find(".txt_GD").val(),
-        'BL': row.find(".txt_BL").val()
+        
+        'VehicleNo': row.find(".txt_VehicleNo").val(),
+        'ReDispatchedDate': row.find(".txt_ReDispatchedDate").val(),
+        'TranspoterName': row.find(".txt_TranspoterName").val(),
+        'BiltyNumber': row.find(".txt_BiltyNumber").val(),
+        'TransportationCost': row.find(".txt_TransportationCost").val()
 
     });
     showLoader();
-    fetch('/OrderExecution/ReadyForDispatched', {
+    fetch('/OrderExecution/ReDispatched', {
         method: 'POST',
         body: dataObject,
         headers: {
