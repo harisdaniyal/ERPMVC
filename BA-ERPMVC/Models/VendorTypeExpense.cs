@@ -18,7 +18,6 @@ namespace BA_ERPMVC.Models
         public VendorTypeExpense()
         {
             this.VendorExpenses = new HashSet<VendorExpens>();
-            this.VendorExpenses1 = new HashSet<VendorExpens>();
         }
     
         public int ExpenseID { get; set; }
@@ -33,7 +32,5 @@ namespace BA_ERPMVC.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorExpens> VendorExpenses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VendorExpens> VendorExpenses1 { get; set; }
     }
 }

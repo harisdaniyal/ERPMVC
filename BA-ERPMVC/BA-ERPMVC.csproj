@@ -271,6 +271,9 @@
     <Compile Include="Models\DispatchedOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenerateOrder.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\InTransactTrain.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>

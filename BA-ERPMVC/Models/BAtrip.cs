@@ -40,10 +40,10 @@ namespace BA_ERPMVC.Models
         public string PartyDriverCNIC { get; set; }
         public string PartyDriverContactNumber { get; set; }
         public string PartyVehicleNo { get; set; }
-        public Nullable<int> PartyRate { get; set; }
         public Nullable<int> OrderId { get; set; }
         public Nullable<decimal> FromLocation { get; set; }
         public Nullable<decimal> ToLocation { get; set; }
+        public Nullable<int> PartyRate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BAExpensesDetail> BAExpensesDetails { get; set; }
