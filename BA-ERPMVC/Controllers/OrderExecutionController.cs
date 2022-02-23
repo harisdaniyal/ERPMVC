@@ -207,6 +207,67 @@ namespace BA_ERPMVC.Controllers
             return View(DeliveryModel);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> DeliveryTrain(DeliveryTrainViewModel deliverytrainVM)
+        {
+            if (deliverytrainVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(deliverytrainVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (deliverytrainVM.ID == 0)
+                {
+                    await orderBookingService.SaveDeliveryTrainAsync(deliverytrainVM);
+
+                    return Json(new { success = true, Id = deliverytrainVM.ID });
+                }
+
+                await orderBookingService.UpdateDeliveryTrainAsync(deliverytrainVM);
+
+                return Json(new { success = true, Id = deliverytrainVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EmptyDropOff()
+        {
+            var EmptyDropOffModel = orderBookingService.GetEmptyDropOffAsync();
+
+            return View(EmptyDropOffModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EmptyDropOff(EmptyDropOffViewModel emptydropoffVM)
+        {
+            if (emptydropoffVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(emptydropoffVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (emptydropoffVM.ID == 0)
+                {
+                    await orderBookingService.SaveEmptyDropOffAsync(emptydropoffVM);
+
+                    return Json(new { success = true, Id = emptydropoffVM.ID });
+                }
+
+                await orderBookingService.UpdateEmptyDropOffAsync(emptydropoffVM);
+
+                return Json(new { success = true, Id = emptydropoffVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
     }
 
 }

@@ -30,6 +30,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly DispatchedOrderRepository _dispatchedOrderRepository;
         private readonly InTransactTrainRepository _intransactTrainRepository;
         private readonly DeliveryTrainRepository _deliveryTrainRepository;
+        private readonly EmptyDropOffRepository _emptyDropoffRepository;
 
 
         public OrderBookingService()
@@ -43,6 +44,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _dispatchedOrderRepository = new DispatchedOrderRepository(_dbContext);
             _intransactTrainRepository = new InTransactTrainRepository(_dbContext);
             _deliveryTrainRepository = new DeliveryTrainRepository(_dbContext);
+            _emptyDropoffRepository = new EmptyDropOffRepository(_dbContext);
             _orderFacilityRepository = new OrderFacilityMapping(_dbContext);
             _tripRepository = new TripRepository(_dbContext);
             _tripExpenseMapping = new TripExpenseMapping(_dbContext);
@@ -769,7 +771,100 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         /////*********** Delivery Train***********/////////
 
-        public Task SaveLogisticsAsync(Logistic logistics)
+
+        //////////******** EmptyDropOff********//////////
+
+
+        public IEnumerable<EmptyDropOffViewModel> GetEmptyDropOffAsync()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString())
+                        on order.OrderID equals logistics.OrderId
+                    
+                    join EDO in _dbContext.EmptyDropOffs.Where(x => x.IsCompleted == false)
+                        on order.OrderID equals EDO.OrderId into EDOGroup
+                    from EmptyDropOffs in EDOGroup.DefaultIfEmpty()
+                    select new EmptyDropOffViewModel()
+                    {
+
+                        BLnumber = order.BL,
+                        ShippingLineName = _dbContext.ShippingLines.Where(x => x.ShippingLineId == order.ShippingLineId).FirstOrDefault().ShippingLineName,
+                        OrderId = order.OrderID,
+                        OrderNo = order.OrderNo,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        //PortAndTerminalId = EmptyDropOffs.PortAndTerminalId,
+                        EIRNo= EmptyDropOffs.EIRNo,
+                        ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
+                        Remarks = EmptyDropOffs.Remarks,
+                        DeliveryDate = EmptyDropOffs.DeliveryDate,
+
+
+
+
+
+                        ID = EmptyDropOffs.ID,
+                        //ID = readyForDispatched.GD,
+                        //BL = readyForDispatched.BL
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveEmptyDropOffAsync(EmptyDropOffViewModel emptydropoffVM)
+        {
+
+            var emptydropoff = Mapper.Map<EmptyDropOffViewModel, EmptyDropOff>(emptydropoffVM);
+            if (emptydropoff == null)
+            {
+                throw new ArgumentNullException(nameof(emptydropoffVM));
+            }
+
+            _emptyDropoffRepository.Add(emptydropoff);
+
+            await _dbContext.SaveChangesAsync();
+            emptydropoffVM.ID = emptydropoff.ID;
+        }
+
+        public async Task UpdateEmptyDropOffAsync(EmptyDropOffViewModel emptydropoffVM)
+        {
+
+            if (emptydropoffVM == null)
+            {
+                throw new ArgumentNullException(nameof(emptydropoffVM));
+            }
+
+            var emptydropoff= await _emptyDropoffRepository.GetAsync(Convert.ToInt32(emptydropoffVM.ID));
+
+            if (emptydropoff == null)
+            {
+                throw new InvalidOperationException($"Booking order:{emptydropoffVM.OrderNo}  not found.");
+            }
+
+            emptydropoff.EIRNo = emptydropoffVM.EIRNo;
+            emptydropoff.ExpenseAtEmptyLocation = emptydropoffVM.ExpenseAtEmptyLocation;
+            emptydropoff.Remarks = emptydropoffVM.Remarks;
+            emptydropoff.DeliveryDate = emptydropoffVM.DeliveryDate;
+            emptydropoff.IsCompleted = emptydropoffVM.IsCompleted;
+            _emptyDropoffRepository.Update(emptydropoff);
+
+            if (emptydropoffVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString()
+                    && x.ContainerNo == emptydropoffVM.ContainerNo && x.OrderId == emptydropoffVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Completed.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            emptydropoffVM.ID = emptydropoff.ID;
+
+        }
+
+            /////////////******** End  EmptyDropOff********//////////
+
+
+            public Task SaveLogisticsAsync(Logistic logistics)
         {
 
             _logisticsRepositry.Add(logistics);

@@ -3471,4 +3471,29 @@ IsCompleted bit default(0),
 [IsDeleted] bit DEFAULT(0),
 )
 
+GO
+Create table EmptyDropOff(
+ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+OrderId int,
+OrderNo varchar(9) NULL,
+ContainerNo nvarchar(250) NULL,
+ContainerSize nvarchar(250) NULL,
+BLnumber nvarchar(250) NULL,
+
+
+ShippingLineName nvarchar(250),
+EIRNo nvarchar(250),
+ExpenseAtEmptyLocation numeric(18, 0),
+Remarks nvarchar(100), 
+DeliveryDate datetime, 
+ 
+
+IsCompleted bit default(0),
+[CreatedBy] [nvarchar](250) NULL,
+[CreateDate] datetime NULL,
+[UpdatedBy] [nvarchar](250) NULL,
+[UpdateDate] datetime NULL,
+[IsDeleted] bit DEFAULT(0),
+)
+
 

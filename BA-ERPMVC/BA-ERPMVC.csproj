@@ -271,6 +271,9 @@
     <Compile Include="Models\DispatchedOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmptyDropOff.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GenerateOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -306,6 +309,7 @@
     </Compile>
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DispatchedOrderRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\EmptyDropOffRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReDispatchedRepositry.cs" />
@@ -313,6 +317,7 @@
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDispatchedOrderRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IEmptyDropOffRepository.cs" />
     <Compile Include="Repositories\IRepositories\IIntransactTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\IRepositories\IReDispatchedRepositry.cs" />
@@ -322,6 +327,7 @@
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\EmptyDropOffViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\InTransactTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReDispatchedViewModel.cs" />
@@ -418,6 +424,7 @@
     <Content Include="AdminLte\Scripts\Custom.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\EmptyDropOff.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExecuteTrips.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\InTransactTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
@@ -3283,6 +3290,7 @@
     <Content Include="Views\OrderExecution\InTransactTrain.cshtml" />
     <Content Include="Views\OrderExecution\ReDispatched.cshtml" />
     <Content Include="Views\OrderExecution\DeliveryTrain.cshtml" />
+    <Content Include="Views\OrderExecution\EmptyDropOff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />
