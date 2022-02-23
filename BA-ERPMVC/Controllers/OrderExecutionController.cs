@@ -128,18 +128,10 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult InTransactTrain()
+        public ActionResult ReDispatched(int stationID = 0)
         {
             this.ViewBag.Stations = orderBookingService.GetStationList();
-            var InTransactModel = orderBookingService.GetInTransactTrainAsync();
-
-            return View(InTransactModel);
-        }
-
-        [HttpGet]
-        public ActionResult ReDispatched()
-        {
-            var reDispatchedModel = orderBookingService.GetReDispatchedAsync();
+            var reDispatchedModel = orderBookingService.GetReDispatchedAsync(stationID);
 
             return View(reDispatchedModel);
         }
@@ -171,6 +163,15 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult InTransactTrain(int stationID = 0)
+        {
+            this.ViewBag.Stations = orderBookingService.GetStationList();
+            var InTransactModel = orderBookingService.GetInTransactTrainAsync(stationID);
+
+            return View(InTransactModel);
+        }
+
         [HttpPost]
         public async Task<ActionResult> InTransactTrain(InTransactTrainViewModel intransacttrainVM)
         {
@@ -198,7 +199,6 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
-        // GET : Delivery Train
         [HttpGet]
         public ActionResult DeliveryTrain()
         {

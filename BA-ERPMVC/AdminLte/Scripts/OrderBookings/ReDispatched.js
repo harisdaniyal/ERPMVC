@@ -10,6 +10,11 @@ $(".btnReDispatched").click(function () {
     save(row, true)
 })
 
+$(".ddl_stations").change(function () {
+    stationID = $(this).val()
+    window.location.href = "/OrderExecution/ReDispatched?stationID=" + stationID;
+})
+
 function save(row, isCompleted) {
 
     if (!row.find('.txt_VehicleNo').val()) {
@@ -24,7 +29,7 @@ function save(row, isCompleted) {
         'OrderNo': row.find(".txt_OrderNo").val(),
         'ContainerNo': row.find(".txt_ContainerNo").val(),
         'ContainerSize': row.find(".txt_ContainerSize").val(),
-        
+        'StationID': row.find(".txt_StationID").val(),
         'VehicleNo': row.find(".txt_VehicleNo").val(),
         'ReDispatchedDate': row.find(".txt_ReDispatchedDate").val(),
         'TranspoterName': row.find(".txt_TranspoterName").val(),

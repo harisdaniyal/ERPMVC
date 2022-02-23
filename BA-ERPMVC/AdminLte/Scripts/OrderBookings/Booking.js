@@ -134,6 +134,15 @@ function validateInputs() {
         isValid = false;
     }
 
+    if (!$("#txt_FreeDays").val()) {
+        $("#txt_FreeDays").parent('.input-group').addClass('invalid');
+        isValid = false;
+    }
+    if (!$("#txt_VesselBerthingDate").val()) {
+        $("#txt_VesselBerthingDate").parent('.input-group').addClass('invalid');
+        isValid = false;
+    }
+    
     return isValid;
 }
 

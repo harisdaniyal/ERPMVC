@@ -18,6 +18,20 @@
             </div><!-- /.col -->
 
         </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <label for="ddlState">Station Name</label>
+                <select class="form-control  ddl_stations" aria-invalid="false" style="width: 100%;">
+                    <option value="0" data-select2-id="selected=selected" >Please Select Station</option>
+                    @foreach (var station in ViewBag.Stations)
+                    {
+                        <option value="@station.StationID" data-select2-id="@station.StationID" @(station.StationID == station.StationID ? "selected=selected" : "")>@station.StationName</option>
+                    }
+                </select>
+                <div class="form-status"><span></span></div>
+
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -28,6 +42,7 @@
                             <th>Booking No#</th>
                             <th>Container No#</th>
                             <th>Container Size</th>
+                            <th>Station Name</th>
 
                             <th>Arrival Date</th>
                             <th>Last Date of Empty Return</th>
@@ -48,6 +63,7 @@
                             <td>
                                 <input type="hidden" value="@reDispatched.OrderId" class="form-control txt_OrderId" />
                                 <input type="hidden" value="@reDispatched.BLnumber" class="form-control txt_BLnumber" />
+                                <input type="hidden" value="@reDispatched.StationID" class="form-control txt_StationID" />
                                 <input type="hidden" value="@Convert.ToInt32(reDispatched.ID)" class="form-control txt_ID" />
                                 <input type="text" disabled style="width: 90px;" value="@reDispatched.OrderNo" class="form-control txt_OrderNo" />
                             </td>
@@ -56,6 +72,9 @@
                             </td>
                             <td>
                                 <input type="text" disabled value="@reDispatched.ContainerSize" class="form-control txt_ContainerSize" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_StationName" style="width: 170px;" type="text" disabled placeholder="" value="@(reDispatched.StationName)" />
                             </td>
                             <td>
                                 <input class="date-picker form-control txt_ArrivalDate" disabled style="width: 170px;" type="date" placeholder="" value="@(reDispatched.ArrivalDate.HasValue ? reDispatched.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
