@@ -230,7 +230,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReadyForDispatched.ToString())
                         on order.OrderID equals logistics.OrderId
                     join RFD in _dbContext.ReadyForDispatcheds.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals RFD.OrderId into RFDGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RFD.OrderId, ContainerNo = RFD.ContainerNo } into RFDGroup
                     from readyForDispatched in RFDGroup.DefaultIfEmpty()
                     select new ReadyForDispatchedViewModel()
                     {
@@ -261,6 +261,24 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
 
             _readyForDispatchedRepositry.Add(readyForDispatched);
+
+            if (readyForDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReadyForDispatched.ToString()
+                    && x.ContainerNo == readyForDispatchedVM.ContainerNo && x.OrderId == readyForDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    if (logistic.PreDispatched.GetValueOrDefault())
+                    {
+                        logistic.Status = OrdersStatus.PreDispatched.ToString();
+                    }
+                    else
+                    {
+                        logistic.Status = OrdersStatus.Dispatched.ToString();
+                    }
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
 
             await _dbContext.SaveChangesAsync();
             readyForDispatchedVM.ID = readyForDispatched.ID;
@@ -320,7 +338,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.PreDispatched.ToString())
                         on order.OrderID equals logistics.OrderId
                     join PDM in _dbContext.PreDispatchedMovements.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals PDM.OrderId into PDMGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = PDM.OrderId, ContainerNo = PDM.ContainerNo } into PDMGroup
                     from PreDispatchedMovements in PDMGroup.DefaultIfEmpty()
                     select new PreDispatchedMovementViewModel()
                     {
@@ -356,6 +374,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _preDispatchedMovementRepository.Add(preDispatchedMovement);
 
+            if (preDispatchedMovementVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.PreDispatched.ToString()
+                    && x.ContainerNo == preDispatchedMovementVM.ContainerNo && x.OrderId == preDispatchedMovementVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Dispatched.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
             await _dbContext.SaveChangesAsync();
             preDispatchedMovementVM.ID = preDispatchedMovement.ID;
         }
@@ -404,10 +432,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public IEnumerable<DispatchedOrderViewModel> GetDispatchedOrderAsync()
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString())
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString() && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
                         on order.OrderID equals logistics.OrderId
                     join DPO in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals DPO.OrderId into DPOGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DPO.OrderId, ContainerNo = DPO.ContainerNo } into DPOGroup
                     from DispatchedOrders in DPOGroup.DefaultIfEmpty()
                     select new DispatchedOrderViewModel()
                     {
@@ -447,6 +475,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _dispatchedOrderRepository.Add(dispatchedOrder);
 
+            if (dispatchedOrderVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == dispatchedOrderVM.ContainerNo && x.OrderId == dispatchedOrderVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.InTransact.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
             await _dbContext.SaveChangesAsync();
             dispatchedOrderVM.ID = dispatchedOrder.ID;
         }
@@ -505,12 +543,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public IEnumerable<InTransactTrainViewModel> GetInTransactTrainAsync(int stationID)
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.InTransact.ToString())
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.InTransact.ToString() && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
                         on order.OrderID equals logistics.OrderId
                     join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true && stationID > 0 ? x.StationID == stationID : true)
-                        on order.OrderID equals dispatch.OrderId
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
                     join ITT in _dbContext.InTransactTrains.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals ITT.OrderId into ITTGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = ITT.OrderId, ContainerNo = ITT.ContainerNo } into ITTGroup
                     from InTransactTrains in ITTGroup.DefaultIfEmpty()
                     select new InTransactTrainViewModel()
                     {
@@ -549,6 +587,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _intransactTrainRepository.Add(intransacttrain);
 
+            if (intransacttrainVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.InTransact.ToString()
+                    && x.ContainerNo == intransacttrainVM.ContainerNo && x.OrderId == intransacttrainVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.ReDispatched.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
             await _dbContext.SaveChangesAsync();
             intransacttrainVM.ID = intransacttrain.ID;
         }
@@ -594,12 +642,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public IEnumerable<ReDispatchedViewModel> GetReDispatchedAsync(int stationID)
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReDispatched.ToString())
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReDispatched.ToString() && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
                         on order.OrderID equals logistics.OrderId
                     join inTransactTrains in _dbContext.InTransactTrains.Where(x => x.IsCompleted == true && stationID > 0 ? x.StationID == stationID : true)
-                        on order.OrderID equals inTransactTrains.OrderId
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = inTransactTrains.OrderId, ContainerNo = inTransactTrains.ContainerNo }
                     join RD in _dbContext.ReDispatcheds.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals RD.OrderId into RDGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RD.OrderId, ContainerNo = RD.ContainerNo } into RDGroup
                     from reDispatched in RDGroup.DefaultIfEmpty()
                     select new ReDispatchedViewModel()
                     {
@@ -636,6 +684,17 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
 
             _reDispatchedRepositry.Add(reDispatched);
+
+            if (reDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReDispatched.ToString()
+                    && x.ContainerNo == reDispatchedVM.ContainerNo && x.OrderId == reDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
 
             await _dbContext.SaveChangesAsync();
             reDispatchedVM.ID = reDispatched.ID;
@@ -684,15 +743,15 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         ///////*********** Delivery Train*********/////////
 
 
-        public IEnumerable<DeliveryTrainViewModel> GetInDeliveryTrainAsync()
+        public IEnumerable<DeliveryTrainViewModel> GetDeliveryTrainAsync()
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Delivery.ToString())
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Delivery.ToString() && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
                         on order.OrderID equals logistics.OrderId
                     join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on order.OrderID equals dispatch.OrderId
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
                     join DT in _dbContext.DeliveryTrains.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals DT.OrderId into DTGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
                     from DeliveryTrains in DTGroup.DefaultIfEmpty()
                     select new DeliveryTrainViewModel()
                     {
@@ -727,6 +786,17 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
 
             _deliveryTrainRepository.Add(deliverytrain);
+
+            if (deliverytrainVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Delivery.ToString()
+                    && x.ContainerNo == deliverytrainVM.ContainerNo && x.OrderId == deliverytrainVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.EmptyDropOff.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
 
             await _dbContext.SaveChangesAsync();
             deliverytrainVM.ID = deliverytrain.ID;
@@ -782,9 +852,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString())
                         on order.OrderID equals logistics.OrderId
-                    
                     join EDO in _dbContext.EmptyDropOffs.Where(x => x.IsCompleted == false)
-                        on order.OrderID equals EDO.OrderId into EDOGroup
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDO.OrderId, ContainerNo = EDO.ContainerNo } into EDOGroup
                     from EmptyDropOffs in EDOGroup.DefaultIfEmpty()
                     select new EmptyDropOffViewModel()
                     {
@@ -796,7 +865,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
                         //PortAndTerminalId = EmptyDropOffs.PortAndTerminalId,
-                        EIRNo= EmptyDropOffs.EIRNo,
+                        EIRNo = EmptyDropOffs.EIRNo,
                         ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
                         Remarks = EmptyDropOffs.Remarks,
                         DeliveryDate = EmptyDropOffs.DeliveryDate,
@@ -822,6 +891,17 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _emptyDropoffRepository.Add(emptydropoff);
 
+            if (emptydropoffVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString()
+                    && x.ContainerNo == emptydropoffVM.ContainerNo && x.OrderId == emptydropoffVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Completed.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+
             await _dbContext.SaveChangesAsync();
             emptydropoffVM.ID = emptydropoff.ID;
         }
@@ -834,7 +914,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(emptydropoffVM));
             }
 
-            var emptydropoff= await _emptyDropoffRepository.GetAsync(Convert.ToInt32(emptydropoffVM.ID));
+            var emptydropoff = await _emptyDropoffRepository.GetAsync(Convert.ToInt32(emptydropoffVM.ID));
 
             if (emptydropoff == null)
             {
@@ -863,10 +943,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         }
 
-            /////////////******** End  EmptyDropOff********//////////
+        /////////////******** End  EmptyDropOff********//////////
 
 
-            public Task SaveLogisticsAsync(Logistic logistics)
+        public Task SaveLogisticsAsync(Logistic logistics)
         {
 
             _logisticsRepositry.Add(logistics);

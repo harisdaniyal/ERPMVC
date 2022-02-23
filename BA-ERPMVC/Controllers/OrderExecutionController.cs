@@ -202,7 +202,7 @@ namespace BA_ERPMVC.Controllers
         [HttpGet]
         public ActionResult DeliveryTrain()
         {
-            var DeliveryModel = orderBookingService.GetInDeliveryTrainAsync();
+            var DeliveryModel = orderBookingService.GetDeliveryTrainAsync();
 
             return View(DeliveryModel);
         }

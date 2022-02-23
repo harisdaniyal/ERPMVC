@@ -3315,10 +3315,10 @@ GO
 
 Create table ReadyForDispatched(
 	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
-	[OrderId] [int] NULL,
-	[OrderNo] [varchar](9) NULL,
-	[ContainerNo] [nvarchar](250) NULL,
-	[ContainerSize] [nvarchar](250) NULL,
+	[OrderId] [int] NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
 	[BLnumber] [nvarchar](250) NULL,
 	
 	[DOGranty] [datetime] NULL,
@@ -3349,13 +3349,14 @@ INSERT INTO [dbo].[Stations] VALUES('TOKHER NIAZ BAIG',null,null,null,null,null,
 INSERT INTO [dbo].[Stations] VALUES('LAHORE',null,null,null,null,null,null,1,0)
 INSERT INTO [dbo].[Stations] VALUES('KOT RADHA KISHAN',null,null,null,null,null,null,1,0)
 Go
+
 Create table PreDispatchedMovement(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
-[OrderId] [int] NULL,
-[OrderNo] [varchar](9) NULL,
-[ContainerNo] [nvarchar](250) NULL,
-[ContainerSize] [nvarchar](250) NULL,
-[BLnumber] [nvarchar](250) NULL,
+[OrderId] [int] Not NULL,
+[OrderNo] [varchar](9) Not NULL,
+[ContainerNo] [nvarchar](250) Not NULL,
+[ContainerSize] [nvarchar](250) Not NULL,
+[BLnumber] [nvarchar](250)  NULL,
 
 FromLocation nvarchar(100),
 FromDateTime datetime,

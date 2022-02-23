@@ -2862,10 +2862,6 @@
     <Content Include="AdminLte\Scripts\url-parser.js" />
     <Content Include="AdminLte\Scripts\VehicleReg.js" />
     <Content Include="AdminLte\Scripts\VendorJS.js" />
-    <Content Include="App_Data\aspnet-BA-ERPMVC-20210427042840.mdf" />
-    <Content Include="App_Data\aspnet-BA-ERPMVC-20210427042840_log.ldf">
-      <DependentUpon>aspnet-BA-ERPMVC-20210427042840.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />

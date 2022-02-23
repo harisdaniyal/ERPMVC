@@ -41,8 +41,13 @@ function save(row, isCompleted) {
         },
     }).then(res => res.json()).then(function (response) {
         if (response.success) {
+            if (isCompleted) {
+                row.remove();
+            }
+            else {
+                row.find(".txt_ID").val(response.Id)
+            }
             hideLoader();
-            location.reload();
         }
         else showErrorMessage(response.message);
     });

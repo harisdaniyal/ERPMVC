@@ -22,10 +22,11 @@
             <div class="input-group">
                 <label for="ddlState">Station Name</label>
                 <select class="form-control  ddl_stations" aria-invalid="false" style="width: 100%;">
-                    <option value="0">Please Select Station</option>
+                    <option value="">Please Select Station</option>
+                    <option value="0">All</option>
                     @foreach (var station in ViewBag.Stations)
                     {
-                        <option value="@station.StationID" data-select2-id="@station.StationID" @(station.StationID == station.StationID ? "selected=selected" : "")>@station.StationName</option>
+                        <option value="@station.StationID" data-select2-id="@station.StationID">@station.StationName</option>
                     }
                 </select>
                 <div class="form-status"><span></span></div>

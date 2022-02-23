@@ -1,9 +1,11 @@
-﻿
-@{
+﻿@{
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     ViewBag.Title = "OrderListing";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.OrderListViewModel>
 
 <br />

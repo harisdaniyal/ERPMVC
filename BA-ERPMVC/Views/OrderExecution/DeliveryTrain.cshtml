@@ -30,6 +30,7 @@
                             <th>Container Size</th>
                             <th>Priority For Dispatched</th>
                             <th>Train ID</th>
+                            <th>Dispatched Date</th>
                             <th>Delivery Location</th>
                             <th>Vehicle No </th>
                             <th>Arrival Date </th>
@@ -62,20 +63,20 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control txt_TrainID" style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.TrainID)" />
+                                    <input class="form-control txt_TrainID" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.TrainID)" />
                                 </td>
                                 <td>
-                                    <input class="date-picker form-control txt_Dispatcheddate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DispatchedDate.HasValue ? DeliveryTrain.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
+                                    <input class="date-picker form-control txt_Dispatcheddate" disabled style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DispatchedDate.HasValue ? DeliveryTrain.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
                                 </td>
 
                                 <td>
-                                    <input class="form-control txt_DeliveryLoc" style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.DeliveryLocation)" />
+                                    <input class="form-control txt_DeliveryLoc" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.DeliveryLocation)" />
                                 </td>
                                 <td>
                                     <input class="form-control txt_VehicleNo" style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.VehicleNo)" />
                                 </td>
                                 <td>
-                                    <input class="date-picker form-control txt_Arrivaldate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DispatchedDate.HasValue ? DeliveryTrain.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
+                                    <input class="date-picker form-control txt_Arrivaldate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.ArrivalDate.HasValue ? DeliveryTrain.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
                                 </td>
                                 <td>
                                     <input class="date-picker form-control txt_Deliverydate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DeliveryDate.HasValue ? DeliveryTrain.DeliveryDate.Value.ToString("yyyy-MM-dd"): "")" />

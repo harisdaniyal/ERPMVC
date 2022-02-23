@@ -1,9 +1,12 @@
 ﻿
 @{
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
 
 
@@ -25,9 +28,9 @@
                     <label>Logistic</label>
                 </li>
                 @*<li class="stepCount" data-formstep="3">
-                    <div class="step-count">3</div>
-                    <label>Trips</label>
-                </li>*@
+                        <div class="step-count">3</div>
+                        <label>Trips</label>
+                    </li>*@
                 <li class="stepCount" data-formstep="4">
                     <div class="step-count">4</div>
                     <label>Invoice</label>

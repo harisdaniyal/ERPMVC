@@ -12,7 +12,7 @@ $(".btnIntransact").click(function () {
 
 $(".ddl_stations").change(function () {
     stationID = $(this).val()
-    window.location.href = "/OrderExecution/InTransactTrain?stationID="+stationID;
+    window.location.href = "/OrderExecution/InTransactTrain?stationID=" + stationID;
 })
 
 function save(row, isCompleted) {
@@ -46,7 +46,7 @@ function save(row, isCompleted) {
 
     });
     showLoader();
-    fetch('/OrderExecution/ReDispatched', {
+    fetch('/OrderExecution/InTransactTrain', {
         method: 'POST',
         body: dataObject,
         headers: {
@@ -54,8 +54,13 @@ function save(row, isCompleted) {
         },
     }).then(res => res.json()).then(function (response) {
         if (response.success) {
+            if (isCompleted) {
+                row.remove();
+            }
+            else {
+                row.find(".txt_ID").val(response.Id)
+            }
             hideLoader();
-            location.reload();
         }
         else showErrorMessage(response.message);
     });
