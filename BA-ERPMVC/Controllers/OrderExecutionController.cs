@@ -20,7 +20,7 @@ namespace BA_ERPMVC.Controllers
         {
             orderBookingService = new OrderBookingService();
         }
-        // GET: OrderExecution
+ 
         [HttpGet]
         public ActionResult ReadyForDispatched()
         {
@@ -55,8 +55,7 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
-
-        // GET: PreDispatched
+       
         [HttpGet]
         public ActionResult PreDispatched()
         {
@@ -92,8 +91,6 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
-
-        // GET: Dispatched
         [HttpGet]
         public ActionResult Dispatched()
         {
@@ -136,6 +133,41 @@ namespace BA_ERPMVC.Controllers
             var InTransactModel = orderBookingService.GetInTransactTrainAsync();
 
             return View(InTransactModel);
+        }
+
+        [HttpGet]
+        public ActionResult ReDispatched()
+        {
+            var reDispatchedModel = orderBookingService.GetReDispatchedAsync();
+
+            return View(reDispatchedModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ReDispatched(ReDispatchedViewModel reDispatchedVM)
+        {
+            if (reDispatchedVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(reDispatchedVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (reDispatchedVM.ID == 0)
+                {
+                    await orderBookingService.SaveReDispatchedAsync(reDispatchedVM);
+
+                    return Json(new { success = true, Id = reDispatchedVM.ID });
+                }
+
+                await orderBookingService.UpdateReDispatchedAsync(reDispatchedVM);
+
+                return Json(new { success = true, Id = reDispatchedVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
     }

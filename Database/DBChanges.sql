@@ -3415,3 +3415,27 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+GO
+
+----2/23/2022 Aleem Last Run
+Create table ReDispatched(
+[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+[OrderId] [int] NULL,
+[OrderNo] [varchar](9) NULL,
+[ContainerNo] [nvarchar](250) NULL,
+[ContainerSize] [nvarchar](250) NULL,
+[BLnumber] [nvarchar](250) NULL,
+
+VehicleNo nvarchar(250),
+ReDispatchedDate datetime,
+TranspoterName nvarchar(250),
+BiltyNumber nvarchar(250),
+TransportationCost numeric(18,0),
+
+IsCompleted bit default(0),
+[CreatedBy] [nvarchar](250) NULL,
+[CreateDate] datetime NULL,
+[UpdatedBy] [nvarchar](250) NULL,
+[UpdateDate] datetime NULL,
+[IsDeleted] bit DEFAULT(0)
+)
