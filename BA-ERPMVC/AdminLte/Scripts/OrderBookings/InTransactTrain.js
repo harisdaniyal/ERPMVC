@@ -10,6 +10,11 @@ $(".btnIntransact").click(function () {
     save(row, true)
 })
 
+$(".ddl_stations").change(function () {
+    stationID = $(this).val()
+    window.location.href = "/OrderExecution/InTransactTrain?stationID="+stationID;
+})
+
 function save(row, isCompleted) {
 
     //if (!row.find('.txt_station').val()) {
@@ -32,15 +37,16 @@ function save(row, isCompleted) {
         'ContainerSize': row.find(".txt_ContainerSize").val(),
         'PriorityForDispatched': row.find(".txt_Priority").val(),
         'TrainID': row.find(".txt_TrainID").val(),
-        'StationID': row.find(".txt_stations").val(),
+        'StationID': row.find(".txt_StationID").val(),
+        'StationName': row.find(".txt_StationName").val(),
         'Customer_Name': row.find(".txt_ClientName").val(),
         'ArrivalDate': row.find(".txt_ArrivalDateTime").val(),
         'LOLO': row.find(".txt_lolo").val(),
         //'StationName': row.find(".txt_station option:selected").text(),
-        
+
     });
     showLoader();
-    fetch('/OrderExecution/InTransactTrain', {
+    fetch('/OrderExecution/ReDispatched', {
         method: 'POST',
         body: dataObject,
         headers: {

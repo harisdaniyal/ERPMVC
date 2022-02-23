@@ -27,6 +27,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		
 		public string TrainID { get; set; }
 		public int? StationID  { get; set; }
-		public string  Customer_Name { get; set; }
+        public string StationName { get; set; }
+        public string  Customer_Name { get; set; }
     }
 }

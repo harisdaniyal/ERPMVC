@@ -502,12 +502,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
 
         /////////////******InTransact Train*********////////////
-        public IEnumerable<InTransactTrainViewModel> GetInTransactTrainAsync()
+        public IEnumerable<InTransactTrainViewModel> GetInTransactTrainAsync(int stationID)
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.InTransact.ToString())
                         on order.OrderID equals logistics.OrderId
-                    join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
+                    join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true && stationID > 0 ? x.StationID == stationID : true)
                         on order.OrderID equals dispatch.OrderId
                     join ITT in _dbContext.InTransactTrains.Where(x => x.IsCompleted == false)
                         on order.OrderID equals ITT.OrderId into ITTGroup
@@ -516,12 +516,13 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     {
 
                         BLnumber = order.BL,
-                        Customer_Name = _dbContext.BACustomerRegistrations.Where(x=> x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                        Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
                         OrderId = order.OrderID,
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
-                        StationID=dispatch.StationID,
+                        StationID = dispatch.StationID,
+                        StationName = _dbContext.Stations.Where(x => x.StationID == dispatch.StationID && x.Status == true).FirstOrDefault().StationName,
                         TrainID = dispatch.TrainID,
                         PriorityForDispatched = InTransactTrains.PriorityForDispatched,
                         ArrivalDate = InTransactTrains.ArrivalDate,
@@ -590,13 +591,13 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         ///
         /// 
         ///******Re-Dispatched Start*******///
-        public IEnumerable<ReDispatchedViewModel> GetReDispatchedAsync()
+        public IEnumerable<ReDispatchedViewModel> GetReDispatchedAsync(int stationID)
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.ReDispatched.ToString())
                         on order.OrderID equals logistics.OrderId
-                    join inTransactTrains in _dbContext.InTransactTrains.Where(x => x.IsCompleted == true)
-                        on order.OrderID equals inTransactTrains.OrderId 
+                    join inTransactTrains in _dbContext.InTransactTrains.Where(x => x.IsCompleted == true && stationID > 0 ? x.StationID == stationID : true)
+                        on order.OrderID equals inTransactTrains.OrderId
                     join RD in _dbContext.ReDispatcheds.Where(x => x.IsCompleted == false)
                         on order.OrderID equals RD.OrderId into RDGroup
                     from reDispatched in RDGroup.DefaultIfEmpty()
@@ -610,17 +611,18 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ContainerSize = logistics.ContainerSize,
 
                         ArrivalDate = inTransactTrains.ArrivalDate,
-                        LastDateofEmptyReturn = order.VesselBerthingDate != null ?
-                            order.VesselBerthingDate.GetValueOrDefault().AddDays(order.FreeDays != null ? order.FreeDays.GetValueOrDefault() : 0) :
-                            order.VesselBerthingDate.GetValueOrDefault(),
+                        LastDateofEmptyReturn = order.VesselBerthingDate,//.AddDays(Convert.ToDouble(order.FreeDays)),
                         DelieveryLocation = logistics.ToLocation,
                         EmptyDropOffLocation = logistics.EmptyReturnLocation,
 
+                        ID = reDispatched.ID,
                         VehicleNo = reDispatched.VehicleNo,
                         ReDispatchedDate = reDispatched.ReDispatchedDate,
                         TranspoterName = reDispatched.TranspoterName,
                         BiltyNumber = reDispatched.BiltyNumber,
-                        TransportationCost = reDispatched.TransportationCost
+                        TransportationCost = reDispatched.TransportationCost,
+                        StationName = _dbContext.Stations.Where(x => x.StationID == inTransactTrains.StationID).FirstOrDefault().StationName,
+                        StationID = inTransactTrains.StationID
                     }).Distinct().ToList();
         }
 
@@ -711,7 +713,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
 
                         ID = DeliveryTrains.ID,
-                        
+
                     }).Distinct().ToList();
         }
 

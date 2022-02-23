@@ -29,6 +29,8 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public DateTime? LastDateofEmptyReturn { get; set; }
         public string DelieveryLocation { get; set; }
         public string EmptyDropOffLocation { get; set; }
-        
-	}
+        public string StationName { get; set; }
+        public int? StationID { get; set; }
+
+    }
 }

@@ -3457,6 +3457,7 @@ ContainerNo nvarchar(250) NULL,
 ContainerSize nvarchar(250) NULL,
 BLnumber nvarchar(250) NULL,
 
+StationID int null,
 [VehicleNo] [nvarchar](250) NULL,
 [ReDispatchedDate] [datetime] NULL,
 [TranspoterName] [nvarchar](250) NULL,
