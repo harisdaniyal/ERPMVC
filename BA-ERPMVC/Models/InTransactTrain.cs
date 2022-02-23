@@ -20,6 +20,7 @@ namespace BA_ERPMVC.Models
         public string ContainerNo { get; set; }
         public string ContainerSize { get; set; }
         public string BLnumber { get; set; }
+        public Nullable<int> StationID { get; set; }
         public string TrainID { get; set; }
         public string Customer_Name { get; set; }
         public string PriorityForDispatched { get; set; }

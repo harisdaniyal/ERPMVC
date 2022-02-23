@@ -12,7 +12,7 @@ namespace BA_ERPMVC.UtilityClasses
         Dispatched = 3,
         InTransact = 4,
         ReDispatched = 5,
-        Deilvery = 6,
+        Delivery = 6,
         EmptyDropOff = 7,
         Completed = 8
     }

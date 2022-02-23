@@ -5,22 +5,17 @@
 
 })
 
-$(".btnIntransact").click(function () {
+$(".btnbtnDelivery").click(function () {
     var row = $(this).closest("tr")
     save(row, true)
 })
 
 function save(row, isCompleted) {
 
-    //if (!row.find('.txt_station').val()) {
-    //    row.find('.txt_station').addClass('error');
+    //if (!row.find('.txt_DOGranty').val()) {
+    //    row.find('.txt_DOGranty').addClass('error');
     //    return false;
     //}
-    //else if (!row.find('.txt_ToLoc').val()) {
-    //    row.find('.txt_ToLoc').addClass('error');
-    //    return false;
-    //}
-
     var dataObject = JSON.stringify({
         'ID': row.find(".txt_ID").val(),
         'OrderId': row.find(".txt_OrderId").val(),
@@ -32,15 +27,15 @@ function save(row, isCompleted) {
         'ContainerSize': row.find(".txt_ContainerSize").val(),
         'PriorityForDispatched': row.find(".txt_Priority").val(),
         'TrainID': row.find(".txt_TrainID").val(),
-        'StationID': row.find(".txt_stations").val(),
-        'Customer_Name': row.find(".txt_ClientName").val(),
-        'ArrivalDate': row.find(".txt_ArrivalDateTime").val(),
-        'LOLO': row.find(".txt_lolo").val(),
-        //'StationName': row.find(".txt_station option:selected").text(),
-        
+        'DispatchedDate': row.find(".txt_Dispatcheddate").val(),
+        'DeliveryLocation': row.find(".txt_DeliveryLoc").val(),
+        'VehicleNo': row.find(".txt_VehicleNo").val(),
+        'ArrivalDate': row.find(".txt_Arrivaldate").val(),
+        'DeliveryDate': row.find(".txt_Deliverydate").val()
+
     });
     showLoader();
-    fetch('/OrderExecution/InTransactTrain', {
+    fetch('/OrderExecution/DeliveryTrain', {
         method: 'POST',
         body: dataObject,
         headers: {

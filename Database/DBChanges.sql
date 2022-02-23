@@ -3344,7 +3344,7 @@ INSERT INTO [dbo].[Stations] VALUES('SHEIKHUPURA',null,null,null,null,null,null,
 INSERT INTO [dbo].[Stations] VALUES('TOKHER NIAZ BAIG',null,null,null,null,null,null,1,0)
 INSERT INTO [dbo].[Stations] VALUES('LAHORE',null,null,null,null,null,null,1,0)
 INSERT INTO [dbo].[Stations] VALUES('KOT RADHA KISHAN',null,null,null,null,null,null,1,0)
-
+Go
 Create table PreDispatchedMovement(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
 [OrderId] [int] NULL,
@@ -3402,6 +3402,7 @@ ContainerNo nvarchar(250) NULL,
 ContainerSize nvarchar(250) NULL,
 BLnumber nvarchar(250) NULL,
 
+StationID int,
 TrainID nvarchar(100),
 Customer_Name nvarchar(100),
 PriorityForDispatched nvarchar(100),
@@ -3416,26 +3417,28 @@ IsCompleted bit default(0),
 [IsDeleted] bit DEFAULT(0),
 )
 GO
+Create table DeliveryTrain(
+ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+OrderId int,
+OrderNo varchar(9) NULL,
+ContainerNo nvarchar(250) NULL,
+ContainerSize nvarchar(250) NULL,
+BLnumber nvarchar(250) NULL,
 
-----2/23/2022 Aleem Last Run
-Create table ReDispatched(
-[ID] [int] IDENTITY(1,1) NOT NULL primary key,
-[OrderId] [int] NULL,
-[OrderNo] [varchar](9) NULL,
-[ContainerNo] [nvarchar](250) NULL,
-[ContainerSize] [nvarchar](250) NULL,
-[BLnumber] [nvarchar](250) NULL,
 
-VehicleNo nvarchar(250),
-ReDispatchedDate datetime,
-TranspoterName nvarchar(250),
-BiltyNumber nvarchar(250),
-TransportationCost numeric(18,0),
+PriorityForDispatched nvarchar(100),
+TrainID nvarchar(100),
+DispatchedDate datetime,
+DeliveryLocation nvarchar(100),
+VehicleNo nvarchar(100),
+ArrivalDate datetime, 
+DeliveryDate datetime, 
+ 
 
 IsCompleted bit default(0),
 [CreatedBy] [nvarchar](250) NULL,
 [CreateDate] datetime NULL,
 [UpdatedBy] [nvarchar](250) NULL,
 [UpdateDate] datetime NULL,
-[IsDeleted] bit DEFAULT(0)
+[IsDeleted] bit DEFAULT(0),
 )

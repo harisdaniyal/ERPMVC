@@ -41,27 +41,39 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<BAMaritalStatu> BAMaritalStatus { get; set; }
         public virtual DbSet<BAShippingLine> BAShippingLines { get; set; }
         public virtual DbSet<BAtrip> BAtrips { get; set; }
+        public virtual DbSet<ClearingAgent> ClearingAgents { get; set; }
         public virtual DbSet<ContainerStatu> ContainerStatus { get; set; }
         public virtual DbSet<ContainerType> ContainerTypes { get; set; }
+        public virtual DbSet<DeliveryTrain> DeliveryTrains { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
+        public virtual DbSet<DispatchedOrder> DispatchedOrders { get; set; }
         public virtual DbSet<Emp_Child> Emp_Child { get; set; }
         public virtual DbSet<Emp_Parent> Emp_Parent { get; set; }
         public virtual DbSet<Emp_Spouse> Emp_Spouse { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FromLocOil> FromLocOils { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<InTransactTrain> InTransactTrains { get; set; }
         public virtual DbSet<InventoryCategory> InventoryCategories { get; set; }
+        public virtual DbSet<Logistic> Logistics { get; set; }
+        public virtual DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Order_Expense_Mapping> Order_Expense_Mapping { get; set; }
         public virtual DbSet<Order_FacilityMapping> Order_FacilityMapping { get; set; }
         public virtual DbSet<OrderService> OrderServices { get; set; }
+        public virtual DbSet<PortAndTerminal> PortAndTerminals { get; set; }
+        public virtual DbSet<PreDispatchedMovement> PreDispatchedMovements { get; set; }
         public virtual DbSet<Purchase_Requisition> Purchase_Requisition { get; set; }
         public virtual DbSet<Purchase_Requisition_Detail> Purchase_Requisition_Detail { get; set; }
         public virtual DbSet<PurchaseDetail> PurchaseDetails { get; set; }
         public virtual DbSet<PurchaseMaster> PurchaseMasters { get; set; }
+        public virtual DbSet<ReadyForDispatched> ReadyForDispatcheds { get; set; }
         public virtual DbSet<Setup_Item_Master> Setup_Item_Master { get; set; }
         public virtual DbSet<Setup_Item_Unit> Setup_Item_Unit { get; set; }
+        public virtual DbSet<ShippingAgent> ShippingAgents { get; set; }
+        public virtual DbSet<ShippingLine> ShippingLines { get; set; }
+        public virtual DbSet<Station> Stations { get; set; }
         public virtual DbSet<stp_BusinessDivision> stp_BusinessDivision { get; set; }
         public virtual DbSet<stp_City> stp_City { get; set; }
         public virtual DbSet<stp_Company> stp_Company { get; set; }
@@ -99,17 +111,6 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<OilBalance> OilBalances { get; set; }
         public virtual DbSet<OilCompany> OilCompanies { get; set; }
         public virtual DbSet<stp_PaymentMode> stp_PaymentMode { get; set; }
-        public virtual DbSet<ClearingAgent> ClearingAgents { get; set; }
-        public virtual DbSet<PortAndTerminal> PortAndTerminals { get; set; }
-        public virtual DbSet<ShippingAgent> ShippingAgents { get; set; }
-        public virtual DbSet<ShippingLine> ShippingLines { get; set; }
-        public virtual DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
-        public virtual DbSet<Logistic> Logistics { get; set; }
-        public virtual DbSet<PreDispatchedMovement> PreDispatchedMovements { get; set; }
-        public virtual DbSet<ReadyForDispatched> ReadyForDispatcheds { get; set; }
-        public virtual DbSet<DispatchedOrder> DispatchedOrders { get; set; }
         public virtual DbSet<GenerateOrder> GenerateOrders { get; set; }
-        public virtual DbSet<InTransactTrain> InTransactTrains { get; set; }
-        public virtual DbSet<Station> Stations { get; set; }
     }
 }

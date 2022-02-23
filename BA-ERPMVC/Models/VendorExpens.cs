@@ -25,6 +25,5 @@ namespace BA_ERPMVC.Models
         public string ModifiedBy { get; set; }
     
         public virtual VendorTypeExpense VendorTypeExpense { get; set; }
-        public virtual VendorTypeExpense VendorTypeExpense1 { get; set; }
     }
 }
