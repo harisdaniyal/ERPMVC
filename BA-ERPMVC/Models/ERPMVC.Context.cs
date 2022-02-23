@@ -104,8 +104,6 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<ShippingAgent> ShippingAgents { get; set; }
         public virtual DbSet<ShippingLine> ShippingLines { get; set; }
         public virtual DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
-        public virtual DbSet<Station> Stations { get; set; }
-        public virtual DbSet<GenerateOrder> GenerateOrders { get; set; }
         public virtual DbSet<Logistic> Logistics { get; set; }
         public virtual DbSet<ReadyForDispatched> ReadyForDispatcheds { get; set; }
         public virtual DbSet<DispatchedOrder> DispatchedOrders { get; set; }

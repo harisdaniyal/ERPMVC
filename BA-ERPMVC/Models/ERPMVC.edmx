@@ -432,11 +432,12 @@
           <Property Name="isActive" Type="bit" />
           <Property Name="InvoiceAmount" Type="numeric" Precision="18" Scale="0" />
           <Property Name="isCompleted" Type="bit" />
-          <Property Name="ShippingLineId" Type="int" />
           <Property Name="ShippingAgentId" Type="int" />
           <Property Name="FreeDays" Type="int" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="1000" />
           <Property Name="VesselBerthingDate" Type="datetime" />
+          <Property Name="ShippingLineId" Type="int" />
+          <Property Name="BookingPOCName" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="InTransactTrain">
           <Key>
@@ -757,7 +758,6 @@ warning 6002: The table/view 'ERPMVC.dbo.OilCompany' does not have a primary key
           <Property Name="DeletedBy" Type="nvarchar" MaxLength="250" />
           <Property Name="DeleteDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
-          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="stp_BusinessDivision">
           <Key>
@@ -1908,8 +1908,6 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
           <EntitySet Name="ShippingAgents" EntityType="db_a780fa_bilalModel.ShippingAgent" />
           <EntitySet Name="ShippingLines" EntityType="db_a780fa_bilalModel.ShippingLine" />
           <EntitySet Name="MaintenanceHistories" EntityType="db_a780fa_bilalModel.MaintenanceHistory" />
-          <EntitySet Name="Stations" EntityType="db_a780fa_bilalModel.Station" />
-          <EntitySet Name="GenerateOrders" EntityType="db_a780fa_bilalModel.GenerateOrder" />
           <EntitySet Name="Logistics" EntityType="db_a780fa_bilalModel.Logistic" />
           <AssociationSet Name="FK_TripContainerType" Association="db_a780fa_bilalModel.FK_TripContainerType">
             <End Role="ContainerType" EntitySet="ContainerTypes" />
@@ -3248,46 +3246,6 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
           <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Station">
-          <Key>
-            <PropertyRef Name="StationID" />
-          </Key>
-          <Property Name="StationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StationName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="IsDeleted" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="GenerateOrder">
-          <Key>
-            <PropertyRef Name="OrderID" />
-          </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderNo" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerID" Type="Int32" />
-          <Property Name="BusinessDevisionID" Type="Int32" />
-          <Property Name="OrderType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CRO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InBond_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="isActive" Type="Boolean" />
-          <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="isCompleted" Type="Boolean" />
-          <Property Name="ShippingAgentId" Type="Int32" />
-          <Property Name="FreeDays" Type="Int32" />
-          <Property Name="Remarks" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="VesselBerthingDate" Type="DateTime" Precision="3" />
-          <Property Name="ShippingLineId" Type="Int32" />
-        </EntityType>
         <EntityType Name="Logistic">
           <Key>
             <PropertyRef Name="logisticsid" />
@@ -3356,6 +3314,28 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PreDispatchedMovement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="FromLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FromDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ToLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ToDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TransporterName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderNo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContainerSize" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BLnumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="ReadyForDispatched">
           <Key>
             <PropertyRef Name="ID" />
@@ -4572,48 +4552,6 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Stations">
-            <EntityTypeMapping TypeName="db_a780fa_bilalModel.Station">
-              <MappingFragment StoreEntitySet="Stations">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="StationName" ColumnName="StationName" />
-                <ScalarProperty Name="StationID" ColumnName="StationID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GenerateOrders">
-            <EntityTypeMapping TypeName="db_a780fa_bilalModel.GenerateOrder">
-              <MappingFragment StoreEntitySet="GenerateOrder">
-                <ScalarProperty Name="ShippingLineId" ColumnName="ShippingLineId" />
-                <ScalarProperty Name="VesselBerthingDate" ColumnName="VesselBerthingDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
-                <ScalarProperty Name="ShippingAgentId" ColumnName="ShippingAgentId" />
-                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
-                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="DeliveryNo" ColumnName="DeliveryNo" />
-                <ScalarProperty Name="InBond_Number" ColumnName="InBond_Number" />
-                <ScalarProperty Name="CRO" ColumnName="CRO" />
-                <ScalarProperty Name="BL" ColumnName="BL" />
-                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
-                <ScalarProperty Name="BusinessDevisionID" ColumnName="BusinessDevisionID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Logistics">
             <EntityTypeMapping TypeName="db_a780fa_bilalModel.Logistic">
               <MappingFragment StoreEntitySet="Logistics">
@@ -4718,6 +4656,33 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GenerateOrders">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.GenerateOrder">
+              <MappingFragment StoreEntitySet="GenerateOrder">
+                <ScalarProperty Name="BookingPOCName" ColumnName="BookingPOCName" />
+                <ScalarProperty Name="ShippingLineId" ColumnName="ShippingLineId" />
+                <ScalarProperty Name="VesselBerthingDate" ColumnName="VesselBerthingDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="FreeDays" ColumnName="FreeDays" />
+                <ScalarProperty Name="ShippingAgentId" ColumnName="ShippingAgentId" />
+                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryNo" ColumnName="DeliveryNo" />
+                <ScalarProperty Name="InBond_Number" ColumnName="InBond_Number" />
+                <ScalarProperty Name="CRO" ColumnName="CRO" />
+                <ScalarProperty Name="BL" ColumnName="BL" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="BusinessDevisionID" ColumnName="BusinessDevisionID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="InTransactTrains">
             <EntityTypeMapping TypeName="db_a780fa_bilalModel.InTransactTrain">
               <MappingFragment StoreEntitySet="InTransactTrain">
@@ -4764,6 +4729,21 @@ warning 6002: The table/view 'ERPMVC.dbo.stp_PaymentMode' does not have a primar
                 <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="db_a780fa_bilalModel.Station">
+              <MappingFragment StoreEntitySet="Stations">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="StationName" ColumnName="StationName" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

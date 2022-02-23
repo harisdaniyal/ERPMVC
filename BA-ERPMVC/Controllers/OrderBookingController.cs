@@ -9,6 +9,7 @@ using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.ViewModels.OrderBooking;
 using AutoMapper;
 using BA_ERPMVC.ViewModels;
+using BA_ERPMVC.UtilityClasses;
 
 namespace BA_ERPMVC.Controllers
 {
@@ -51,6 +52,8 @@ namespace BA_ERPMVC.Controllers
             {
                 return Json(new { success = false, message = $"{nameof(orderBookingId)} should be a valid id" });
             }
+            this.ViewBag.ShippingLines = orderBookingService.GetShippingLine();
+            this.ViewBag.ShippingAgents =  orderBookingService.GetShippingAgent();
 
             this.ViewBag.Customers = await customerService.GetAllCustomersAsync();
             this.ViewBag.Facilities = await facilityService.GetAllFacilitiesAsync();
@@ -108,6 +111,7 @@ namespace BA_ERPMVC.Controllers
             this.ViewBag.Locations = await locationService.GetLocationsAsync();
             this.ViewBag.ContainerTypes = await containerTypeService.GetAllContainerTypesAsync();
             this.ViewBag.ContainerSizes = await orderBookingService.GetContainerSizesAsync();
+            this.ViewBag.PortAndTerminals = await orderBookingService.GetPortAndTerminal();
 
             var logisticsModel = await orderBookingService.GeLogisticsAsync(orderBookingId);
 
@@ -133,8 +137,9 @@ namespace BA_ERPMVC.Controllers
 
             try
             {
-                var logistics = Mapper.Map<LogisticsViewModel, Logistic>(logisticsViewModels);
 
+                var logistics = Mapper.Map<LogisticsViewModel, Logistic>(logisticsViewModels);
+                logistics.Status = OrdersStatus.ReadyForDispatched.ToString();
                 await orderBookingService.SaveLogisticsAsync(logistics);
 
                 return Json(new { success = true, logisticsId = logistics.logisticsid });

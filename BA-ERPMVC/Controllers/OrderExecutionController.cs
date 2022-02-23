@@ -130,7 +130,6 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
-        // GET: InTransact Train
         [HttpGet]
         public ActionResult InTransactTrain()
         {
