@@ -3446,3 +3446,29 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+
+GO
+
+CREATE TABLE [dbo].[ReDispatched](
+ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+OrderId int,
+OrderNo varchar(9) NULL,
+ContainerNo nvarchar(250) NULL,
+ContainerSize nvarchar(250) NULL,
+BLnumber nvarchar(250) NULL,
+
+[VehicleNo] [nvarchar](250) NULL,
+[ReDispatchedDate] [datetime] NULL,
+[TranspoterName] [nvarchar](250) NULL,
+[BiltyNumber] [nvarchar](250) NULL,
+[TransportationCost] [numeric](18, 0) NULL,
+
+IsCompleted bit default(0),
+[CreatedBy] [nvarchar](250) NULL,
+[CreateDate] datetime NULL,
+[UpdatedBy] [nvarchar](250) NULL,
+[UpdateDate] datetime NULL,
+[IsDeleted] bit DEFAULT(0),
+)
+
+
