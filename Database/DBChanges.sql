@@ -3350,34 +3350,35 @@ INSERT INTO [dbo].[Stations] VALUES('LAHORE',null,null,null,null,null,null,1,0)
 INSERT INTO [dbo].[Stations] VALUES('KOT RADHA KISHAN',null,null,null,null,null,null,1,0)
 Go
 
-Create table PreDispatchedMovement(
+Create table ReadyForDispatched(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
-[OrderId] [int] Not NULL,
-[OrderNo] [varchar](9) Not NULL,
-[ContainerNo] [nvarchar](250) Not NULL,
-[ContainerSize] [nvarchar](250) Not NULL,
-[BLnumber] [nvarchar](250)  NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
-FromLocation nvarchar(100),
-FromDateTime datetime,
-ToLocation nvarchar(100),
-ToDateTime datetime, 
-TransporterName nvarchar(100), 
-VehicleNumber nvarchar(100), 
+[DOGranty] [datetime] NULL,
+[ImportEIR] [datetime] NULL,
+[PortWeighment] [datetime] NULL,
+[OutSidePortWeighment] [datetime] NULL,
+[GD] [datetime] NULL,
+[BL] [datetime] NULL,
 
-IsCompleted bit default(0),
+[IsCompleted] [bit] NULL default(0),
 [CreatedBy] [nvarchar](250) NULL,
-[CreateDate] datetime NULL,
+[CreateDate] [datetime] NULL,
 [UpdatedBy] [nvarchar](250) NULL,
-[UpdateDate] datetime NULL
+[UpdateDate] [datetime] NULL
 )
 Go
+
 Create table DispatchedOrder(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
-[OrderId] [int] NULL,
-[OrderNo] [varchar](9) NULL,
-[ContainerNo] [nvarchar](250) NULL,
-[ContainerSize] [nvarchar](250) NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
 [BLnumber] [nvarchar](250) NULL,
 
 PriorityForDispatched nvarchar(100),
@@ -3400,12 +3401,12 @@ IsCompleted bit default(0),
 )
 Go
 Create table InTransactTrain(
-ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,
-OrderNo varchar(9) NULL,
-ContainerNo nvarchar(250) NULL,
-ContainerSize nvarchar(250) NULL,
-BLnumber nvarchar(250) NULL,
+[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
 StationID int,
 TrainID nvarchar(100),
@@ -3424,11 +3425,11 @@ IsCompleted bit default(0),
 GO
 Create table DeliveryTrain(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,
-OrderNo varchar(9) NULL,
-ContainerNo nvarchar(250) NULL,
-ContainerSize nvarchar(250) NULL,
-BLnumber nvarchar(250) NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
 
 PriorityForDispatched nvarchar(100),
@@ -3452,11 +3453,11 @@ GO
 
 CREATE TABLE [dbo].[ReDispatched](
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,
-OrderNo varchar(9) NULL,
-ContainerNo nvarchar(250) NULL,
-ContainerSize nvarchar(250) NULL,
-BLnumber nvarchar(250) NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
 StationID int null,
 [VehicleNo] [nvarchar](250) NULL,
@@ -3476,11 +3477,11 @@ IsCompleted bit default(0),
 GO
 Create table EmptyDropOff(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,
-OrderNo varchar(9) NULL,
-ContainerNo nvarchar(250) NULL,
-ContainerSize nvarchar(250) NULL,
-BLnumber nvarchar(250) NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
 
 ShippingLineName nvarchar(250),
