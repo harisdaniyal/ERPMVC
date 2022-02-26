@@ -31,6 +31,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly InTransactTrainRepository _intransactTrainRepository;
         private readonly DeliveryTrainRepository _deliveryTrainRepository;
         private readonly EmptyDropOffRepository _emptyDropoffRepository;
+        private readonly DispatchedTruckRepository _dispatchedtruckRepository;
+        private readonly DeliveryTruckRepository _deliverytruckRepository;
 
 
         public OrderBookingService()
@@ -42,8 +44,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _reDispatchedRepositry = new ReDispatchedRepositry(_dbContext);
             _preDispatchedMovementRepository = new PreDispatchedMovementRepository(_dbContext);
             _dispatchedOrderRepository = new DispatchedOrderRepository(_dbContext);
+            _dispatchedtruckRepository = new DispatchedTruckRepository(_dbContext);
             _intransactTrainRepository = new InTransactTrainRepository(_dbContext);
             _deliveryTrainRepository = new DeliveryTrainRepository(_dbContext);
+            _deliverytruckRepository = new DeliveryTruckRepository(_dbContext);
             _emptyDropoffRepository = new EmptyDropOffRepository(_dbContext);
             _orderFacilityRepository = new OrderFacilityMapping(_dbContext);
             _tripRepository = new TripRepository(_dbContext);
@@ -559,10 +563,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
+                        PriorityForDispatched = dispatch.PriorityForDispatched,
                         StationID = dispatch.StationID,
                         StationName = _dbContext.Stations.Where(x => x.StationID == dispatch.StationID && x.Status == true).FirstOrDefault().StationName,
                         TrainID = dispatch.TrainID,
-                        PriorityForDispatched = InTransactTrains.PriorityForDispatched,
                         ArrivalDate = InTransactTrains.ArrivalDate,
                         LOLO = InTransactTrains.LOLO,
 
@@ -655,6 +659,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         BLnumber = order.BL,
                         OrderId = order.OrderID,
                         OrderNo = order.OrderNo,
+                        FreeDays = order.FreeDays,
+
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
 
@@ -742,7 +748,6 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         ///////*********** Delivery Train*********/////////
 
-
         public IEnumerable<DeliveryTrainViewModel> GetDeliveryTrainAsync()
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
@@ -761,16 +766,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
-                        PriorityForDispatched = DeliveryTrains.PriorityForDispatched,
+                        EmptyDropOffLocation = logistics.EmptyReturnLocation,
+                        PriorityForDispatched = dispatch.PriorityForDispatched,
+
+
                         TrainID = dispatch.TrainID,
                         DispatchedDate = dispatch.DispatchedDate,
                         DeliveryLocation = logistics.ToLocation,
                         VehicleNo = DeliveryTrains.VehicleNo,
                         ArrivalDate = DeliveryTrains.ArrivalDate,
                         DeliveryDate = DeliveryTrains.DeliveryDate,
-
-
-
                         ID = DeliveryTrains.ID,
 
                     }).Distinct().ToList();
@@ -847,10 +852,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         //////////******** EmptyDropOff********//////////
 
 
-        public IEnumerable<EmptyDropOffViewModel> GetEmptyDropOffAsync()
+        public IEnumerable<EmptyDropOffViewModel> GetEmptyDropOffAsync(int PortAndTerminalId)
         {
+            string PortName = string.Empty;
+            var terminal = _dbContext.PortAndTerminals.Where(x => x.PortAndTerminalId == PortAndTerminalId).FirstOrDefault();
+            if (terminal != null)
+            {
+                PortName = terminal.PortName;
+            }
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString())
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString() && (!string.IsNullOrEmpty(PortName) ? x.EmptyReturnLocation == PortName : true) )
                         on order.OrderID equals logistics.OrderId
                     join EDO in _dbContext.EmptyDropOffs.Where(x => x.IsCompleted == false)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDO.OrderId, ContainerNo = EDO.ContainerNo } into EDOGroup
@@ -864,19 +875,15 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
-                        //PortAndTerminalId = EmptyDropOffs.PortAndTerminalId,
+                        PortName = logistics.EmptyReturnLocation,
+                        
+
+
+                        ID = EmptyDropOffs.ID,
                         EIRNo = EmptyDropOffs.EIRNo,
                         ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
                         Remarks = EmptyDropOffs.Remarks,
                         DeliveryDate = EmptyDropOffs.DeliveryDate,
-
-
-
-
-
-                        ID = EmptyDropOffs.ID,
-                        //ID = readyForDispatched.GD,
-                        //BL = readyForDispatched.BL
                     }).Distinct().ToList();
         }
 
@@ -923,6 +930,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             emptydropoff.EIRNo = emptydropoffVM.EIRNo;
             emptydropoff.ExpenseAtEmptyLocation = emptydropoffVM.ExpenseAtEmptyLocation;
+            emptydropoff.TerminalName= emptydropoffVM.PortName;
             emptydropoff.Remarks = emptydropoffVM.Remarks;
             emptydropoff.DeliveryDate = emptydropoffVM.DeliveryDate;
             emptydropoff.IsCompleted = emptydropoffVM.IsCompleted;
@@ -943,7 +951,215 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         }
 
+        public IEnumerable<PortAndTerminal> GetTerminalList()
+        {
+            return _dbContext.PortAndTerminals.Where(x => x.IsDeleted== false).ToList();
+        }
+
         /////////////******** End  EmptyDropOff********//////////
+
+        /// ********** DispatchedTruck*********** ///
+
+        public IEnumerable<DispatchedTruckViewModel> GetDispatchedTruckAsync()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString() && x.ModeOfTransportation == ModeOfTransaction.Truck.ToString())
+                        on order.OrderID equals logistics.OrderId
+                   
+                    join DT in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
+                    from DispatchedTrucks in DTGroup.DefaultIfEmpty()
+                    select new DispatchedTruckViewModel()
+                    {
+
+                        BLnumber = order.BL,
+                        OrderId = order.OrderID,
+                        OrderNo = order.OrderNo,
+                        LastDateofEmptyReturn = order.VesselBerthingDate,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        FromLocation = logistics.FromLocation,
+                        ToLocation = logistics.ToLocation,
+                        FreeDays = order.FreeDays,
+
+                        DispatchedDate = DispatchedTrucks.DispatchedDate,
+                        VehicleNo = DispatchedTrucks.VehicleNo,
+                        DriverName = DispatchedTrucks.DriverName,
+                        DriverNo = DispatchedTrucks.DriverNo,
+                        TransporterName = DispatchedTrucks.TransporterName,
+                        BiltyNo = DispatchedTrucks.BiltyNo,
+                        ID = DispatchedTrucks.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveDispatchedTruckAsync(DispatchedTruckViewModel dispatchedtruckVM)
+        {
+
+            var dispatchedtruck = Mapper.Map<DispatchedTruckViewModel, DispatchedTruck>(dispatchedtruckVM);
+            if (dispatchedtruck == null)
+            {
+                throw new ArgumentNullException(nameof(dispatchedtruckVM));
+            }
+
+            _dispatchedtruckRepository.Add(dispatchedtruck);
+
+            if (dispatchedtruckVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == dispatchedtruckVM.ContainerNo && x.OrderId == dispatchedtruckVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+
+            await _dbContext.SaveChangesAsync();
+            dispatchedtruckVM.ID = dispatchedtruck.ID;
+        }
+
+        public async Task UpdateDispatchedTruckAsync(DispatchedTruckViewModel dispatchedtruckVM)
+        {
+
+            if (dispatchedtruckVM == null)
+            {
+                throw new ArgumentNullException(nameof(dispatchedtruckVM));
+            }
+
+            var dispatchedtruck = await _dispatchedtruckRepository.GetAsync(Convert.ToInt32(dispatchedtruckVM.ID));
+
+            if (dispatchedtruck == null)
+            {
+                throw new InvalidOperationException($"Booking order:{dispatchedtruckVM.OrderNo}  not found.");
+            }
+
+            dispatchedtruck.DispatchedDate = dispatchedtruckVM.DispatchedDate;
+            dispatchedtruck.VehicleNo = dispatchedtruckVM.VehicleNo;
+            dispatchedtruck.DriverName = dispatchedtruckVM.DriverName;
+            dispatchedtruck.DriverNo= dispatchedtruckVM.DriverNo;
+            dispatchedtruck.TransporterName = dispatchedtruckVM.TransporterName;
+            dispatchedtruck.BiltyNo = dispatchedtruckVM.BiltyNo;
+            dispatchedtruck.IsCompleted = dispatchedtruckVM.IsCompleted;
+            _dispatchedtruckRepository.Update(dispatchedtruck);
+
+            if (dispatchedtruckVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == dispatchedtruckVM.ContainerNo && x.OrderId == dispatchedtruckVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            dispatchedtruckVM.ID = dispatchedtruck.ID;
+        }
+
+        /// ******* End*******/////
+
+
+        ///////*********** Delivery Truck*********/////////
+
+        public IEnumerable<DeliveryTruckViewModel> GetDeliveryTruckAsync()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Delivery.ToString() && x.ModeOfTransportation == ModeOfTransaction.Truck.ToString())
+                        on order.OrderID equals logistics.OrderId
+                    join dispatch in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                    join DT in _dbContext.DeliveryTrucks.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
+                    from DeliveryTrucks in DTGroup.DefaultIfEmpty()
+                    select new DeliveryTruckViewModel()
+                    {
+
+                        BLnumber = order.BL,
+                        OrderId = order.OrderID,
+                        OrderNo = order.OrderNo,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        FromLocation = logistics.FromLocation,
+                        ToLocation = logistics.ToLocation,
+                        DeliveryLocation = logistics.EmptyReturnLocation,
+                        DriverName = dispatch.DriverName,
+                        DriverNo = dispatch.DriverNo,
+                        DispatchedDate = dispatch.DispatchedDate,
+                        VehicleNo = dispatch.VehicleNo,
+                        ArrivalDate = DeliveryTrucks.ArrivalDate,
+                        DeliveryDate = DeliveryTrucks.DeliveryDate,
+
+
+                        ID = DeliveryTrucks.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveDeliveryTruckAsync(DeliveryTruckViewModel deliverytruckVM)
+        {
+
+            var deliverytruck = Mapper.Map<DeliveryTruckViewModel, DeliveryTruck>(deliverytruckVM);
+            if (deliverytruck == null)
+            {
+                throw new ArgumentNullException(nameof(deliverytruckVM));
+            }
+
+            _deliverytruckRepository.Add(deliverytruck);
+
+            if (deliverytruckVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Delivery.ToString()
+                    && x.ContainerNo == deliverytruckVM.ContainerNo && x.OrderId == deliverytruckVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.EmptyDropOff.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+
+            await _dbContext.SaveChangesAsync();
+            deliverytruckVM.ID = deliverytruck.ID;
+        }
+
+        public async Task UpdateDeliveryTrucknAsync(DeliveryTruckViewModel deliverytruckVM)
+        {
+
+            if (deliverytruckVM == null)
+            {
+                throw new ArgumentNullException(nameof(deliverytruckVM));
+            }
+
+            var deliverytruck = await _deliverytruckRepository.GetAsync(Convert.ToInt32(deliverytruckVM.ID));
+
+            if (deliverytruck == null)
+            {
+                throw new InvalidOperationException($"Booking order:{deliverytruckVM.OrderNo}  not found.");
+            }
+
+            deliverytruck.ArrivalDate = deliverytruckVM.ArrivalDate;
+            deliverytruck.DeliveryDate= deliverytruckVM.DeliveryDate;
+          
+            deliverytruck.IsCompleted = deliverytruckVM.IsCompleted;
+            _deliverytruckRepository.Update(deliverytruck);
+
+            if (deliverytruckVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Delivery.ToString()
+                    && x.ContainerNo == deliverytruckVM.ContainerNo && x.OrderId == deliverytruckVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.EmptyDropOff.ToString();
+                    _logisticsRepositry.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            deliverytruckVM.ID = deliverytruck.ID;
+        }
+
+
+        /////*********** Delivery Truck***********/////////
+
 
 
         public Task SaveLogisticsAsync(Logistic logistics)
@@ -953,11 +1169,23 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             return _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteLogisticsAsync(int logisticsId)
+        public bool DeleteLogistics(int logisticsId)
         {
-            _logisticsRepositry.Remove(logisticsId);
+            bool isSuccess = false;
+            var logistics = _dbContext.Logistics.Where(x => x.Status != OrdersStatus.ReadyForDispatched.ToString() && x.logisticsid == logisticsId).FirstOrDefault();
+            if (logistics != null)
+            {
+                isSuccess= false;
+            }
+            else
+            {
+                _logisticsRepositry.Remove(logisticsId);
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
 
-            return _dbContext.SaveChangesAsync();
+            return isSuccess;
+            
         }
 
         public async Task<IEnumerable<BAtrip>> GetTripsDetailAsync(int orderBookingId)
@@ -1031,7 +1259,17 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderType = order.OrderType,
                         InvoiceAmount = (order.InvoiceAmount ?? 0).ToString(),
                         RemainingTrips = _dbContext.BAtrips.Count(x => x.ContainerStatus != 4 && x.OrderId == order.OrderID && x.IsActive == true),
-                        VendorExpense = _dbContext.BAtrips.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Sum(x => x.PartyRate) ?? 0
+                        VendorExpense = _dbContext.BAtrips.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Sum(x => x.PartyRate) ?? 0,
+                        ReadyForDispatched = _dbContext.Logistics.Where(x=> x.OrderId == order.OrderID && x.Status == OrdersStatus.ReadyForDispatched.ToString()).ToList().Count().ToString(),
+                        PreDispatched = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.PreDispatched.ToString()).ToList().Count().ToString(),
+                        Dispatched = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Dispatched.ToString()).ToList().Count().ToString(),
+                        InTransact = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.InTransact.ToString()).ToList().Count().ToString(),
+                        ReDispatched = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.ReDispatched.ToString()).ToList().Count().ToString(),
+                        Delivery = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Delivery.ToString()).ToList().Count().ToString(),
+                        EmptyDropOff = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.EmptyDropOff.ToString()).ToList().Count().ToString(),
+                        Completed = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Completed.ToString()).ToList().Count().ToString(),
+                        ContainerCount = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.IsActive == true).ToList().Count(),
+
                     }).Distinct().ToList();
         }
 

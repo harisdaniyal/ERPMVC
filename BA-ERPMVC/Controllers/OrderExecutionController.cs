@@ -235,9 +235,10 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult EmptyDropOff()
+        public ActionResult EmptyDropOff(int PortAndTerminalId = 0)
         {
-            var EmptyDropOffModel = orderBookingService.GetEmptyDropOffAsync();
+            this.ViewBag.PortAndTerminals = orderBookingService.GetTerminalList();
+            var EmptyDropOffModel = orderBookingService.GetEmptyDropOffAsync(PortAndTerminalId);
 
             return View(EmptyDropOffModel);
         }
@@ -262,6 +263,76 @@ namespace BA_ERPMVC.Controllers
                 await orderBookingService.UpdateEmptyDropOffAsync(emptydropoffVM);
 
                 return Json(new { success = true, Id = emptydropoffVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DispatchedTruck()
+        {
+            var DispatchedtruckModel = orderBookingService.GetDispatchedTruckAsync();
+
+            return View(DispatchedtruckModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DispatchedTruck(DispatchedTruckViewModel dispatchedtruckVM)
+        {
+            if (dispatchedtruckVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(dispatchedtruckVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (dispatchedtruckVM.ID == 0)
+                {
+                    await orderBookingService.SaveDispatchedTruckAsync(dispatchedtruckVM);
+
+                    return Json(new { success = true, Id = dispatchedtruckVM.ID });
+                }
+
+                await orderBookingService.UpdateDispatchedTruckAsync(dispatchedtruckVM);
+
+                return Json(new { success = true, Id = dispatchedtruckVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeliveryTruck()
+        {
+            var DeliveryTruckModel = orderBookingService.GetDeliveryTruckAsync();
+
+            return View(DeliveryTruckModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeliveryTruck(DeliveryTruckViewModel deliverytruckVM)
+        {
+            if (deliverytruckVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(deliverytruckVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (deliverytruckVM.ID == 0)
+                {
+                    await orderBookingService.SaveDeliveryTruckAsync(deliverytruckVM);
+
+                    return Json(new { success = true, Id = deliverytruckVM.ID });
+                }
+
+                await orderBookingService.UpdateDeliveryTrucknAsync(deliverytruckVM);
+
+                return Json(new { success = true, Id = deliverytruckVM.ID });
             }
             catch (Exception ex)
             {

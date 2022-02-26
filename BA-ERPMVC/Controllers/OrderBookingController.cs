@@ -121,6 +121,7 @@ namespace BA_ERPMVC.Controllers
                 {
                 });
             }
+            //logisticsModel = logisticsModel.Where(x => x.Status != OrdersStatus.Completed.ToString()); //  For Completed Status Hidden
 
             var logisticsViewModel = Mapper.Map<IEnumerable<Logistic>, IEnumerable<LogisticsViewModel>>(logisticsModel);
 
@@ -159,7 +160,11 @@ namespace BA_ERPMVC.Controllers
 
             try
             {
-                await orderBookingService.DeleteLogisticsAsync(logisticsId);
+                if (!orderBookingService.DeleteLogistics(logisticsId))
+                {
+                    return Json(new { success = false, message = $"Logistic can not be delete after Ready For Dispatched." });
+                }
+                
             }
             catch (Exception ex)
             {

@@ -35,58 +35,58 @@
                             <th>Vehicle No </th>
                             <th>Arrival Date </th>
                             <th>Delivery Date</th>
+                            <th>EmptyDropOff Location</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var DeliveryTrain in Model.ToList())
                         {
-                            <tr class="bg-light tbl-valign-top">
-                                <td>
-                                    <input type="hidden" value="@DeliveryTrain.OrderId" class="form-control txt_OrderId" />
-                                    <input type="hidden" value="@DeliveryTrain.BLnumber" class="form-control txt_BLnumber" />
-                                    <input type="hidden" value="@Convert.ToInt32(DeliveryTrain.ID)" class="form-control txt_ID" />
-                                    <input type="text" disabled style="width: 90px;" value="@DeliveryTrain.OrderNo" class="form-control txt_OrderNo" />
-                                </td>
-                                <td>
-                                    <input type="text" disabled style="width: 132px;" value="@DeliveryTrain.ContainerNo" class="form-control txt_ContainerNo" />
-                                </td>
-                                <td>
-                                    <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.ContainerSize" class="form-control txt_ContainerSize" />
-                                </td>
-                                <td>
-                                    <select class="form-control txt_Priority" aria-invalid="false" style="width: 145px;">
-                                        <option value="">Select Priority</option>
-                                        <option value="1" @((string.IsNullOrWhiteSpace(DeliveryTrain.PriorityForDispatched) ? "0" : DeliveryTrain.PriorityForDispatched) == "1" ? "selected=selected" : "")>1</option>
-                                        <option value="2" @((string.IsNullOrWhiteSpace(DeliveryTrain.PriorityForDispatched) ? "0" : DeliveryTrain.PriorityForDispatched) == "2" ? "selected=selected" : "")>2</option>
-                                        <option value="3" @((string.IsNullOrWhiteSpace(DeliveryTrain.PriorityForDispatched) ? "0" : DeliveryTrain.PriorityForDispatched) == "3" ? "selected=selected" : "")>3</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input class="form-control txt_TrainID" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.TrainID)" />
-                                </td>
-                                <td>
-                                    <input class="date-picker form-control txt_Dispatcheddate" disabled style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DispatchedDate.HasValue ? DeliveryTrain.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
-                                </td>
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="@DeliveryTrain.OrderId" class="form-control txt_OrderId" />
+                                <input type="hidden" value="@DeliveryTrain.BLnumber" class="form-control txt_BLnumber" />
+                                <input type="hidden" value="@Convert.ToInt32(DeliveryTrain.ID)" class="form-control txt_ID" />
+                                <input type="text" disabled style="width: 90px;" value="@DeliveryTrain.OrderNo" class="form-control txt_OrderNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 132px;" value="@DeliveryTrain.ContainerNo" class="form-control txt_ContainerNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.ContainerSize" class="form-control txt_ContainerSize" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.PriorityForDispatched" class="form-control txt_Priority" />
+                            </td>
 
-                                <td>
-                                    <input class="form-control txt_DeliveryLoc" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.DeliveryLocation)" />
-                                </td>
-                                <td>
-                                    <input class="form-control txt_VehicleNo" style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.VehicleNo)" />
-                                </td>
-                                <td>
-                                    <input class="date-picker form-control txt_Arrivaldate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.ArrivalDate.HasValue ? DeliveryTrain.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
-                                </td>
-                                <td>
-                                    <input class="date-picker form-control txt_Deliverydate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DeliveryDate.HasValue ? DeliveryTrain.DeliveryDate.Value.ToString("yyyy-MM-dd"): "")" />
-                                </td>
+                            <td>
+                                <input class="form-control txt_TrainID" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.TrainID)" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Dispatcheddate" disabled style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DispatchedDate.HasValue ? DeliveryTrain.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
 
-                                <td class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
-                                    <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDelivery">Delivered</button>
-                                </td>
-                            </tr>
+                            <td>
+                                <input class="form-control txt_DeliveryLoc" disabled style="width: 140px;" type="text" placeholder="" value="@(DeliveryTrain.DeliveryLocation)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_VehicleNo" style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.VehicleNo)" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Arrivaldate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.ArrivalDate.HasValue ? DeliveryTrain.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Deliverydate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DeliveryDate.HasValue ? DeliveryTrain.DeliveryDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_EmptyDropOffLoc" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.EmptyDropOffLocation)" />
+                            </td>
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDelivery">Delivered</button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

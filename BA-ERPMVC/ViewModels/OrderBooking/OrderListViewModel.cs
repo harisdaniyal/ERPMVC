@@ -15,5 +15,14 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public int RemainingTrips { get; set; }
         public string InvoiceAmount { get; set; }
         public int VendorExpense { get; set; }
+        public int? ContainerCount { get; set; }
+        public string ReadyForDispatched { get; set; }
+        public string PreDispatched { get; set; }
+        public string Dispatched { get; set; }
+        public string InTransact { get; set; }
+        public string ReDispatched { get; set; }
+        public string Delivery { get; set; }
+        public string EmptyDropOff { get; set; }
+        public string Completed { get; set; }
     }
 }

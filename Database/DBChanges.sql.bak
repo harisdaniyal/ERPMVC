@@ -3497,8 +3497,8 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+
 Go
---------Haris 02/26/2022
 Create table DispatchedTruck(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 OrderId int NOT NULL,
@@ -3509,7 +3509,6 @@ BLnumber nvarchar(250) NOT NULL,
 
 
 DispatchedDate datetime,
-LastDateOfEmptyReturn datetime,
 VehicleNo nvarchar(100),
 DriverName nvarchar(100),
 DriverNo nvarchar(100),

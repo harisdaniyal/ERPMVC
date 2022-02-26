@@ -47,10 +47,10 @@
 
                             <th>Arrival Date</th>
                             <th>Last Date of Empty Return</th>
-                            <th>Delievery Location</th>
+                            <th>Delivery Location</th>
                             <th>Vehicle No#</th>
                             <th>Re-Dispatched Date</th>
-                            <th>Transpoter Name</th>
+                            <th>Transporter Name</th>
                             <th>Bilty Number</th>
                             <th>Transportation Cost</th>
                             <th>Empty DropOff Location</th>
@@ -81,7 +81,7 @@
                                 <input class="date-picker form-control txt_ArrivalDate" disabled style="width: 170px;" type="date" placeholder="" value="@(reDispatched.ArrivalDate.HasValue ? reDispatched.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
                             </td>
                             <td>
-                                <input class="date-picker form-control txt_LastDateofEmptyReturn" disabled style="width: 170px;" type="date" placeholder="" value="@(reDispatched.LastDateofEmptyReturn.HasValue ? reDispatched.LastDateofEmptyReturn.Value.ToString("yyyy-MM-dd"): "")" />
+                                <input class="date-picker form-control txt_LastDateofEmptyReturn" disabled style="width: 170px;" type="date" placeholder="" value="@(reDispatched.LastDateofEmptyReturn.HasValue ? reDispatched.LastDateofEmptyReturn.Value.AddDays(reDispatched.FreeDays > 0 ? Convert.ToDouble(reDispatched.FreeDays): 0).ToString("yyyy-MM-dd"): "")" />
                             </td>
                             <td>
                                 <input class=" form-control txt_DelieveryLocation" disabled style="width: 170px;" type="text" placeholder="" value="@(reDispatched.DelieveryLocation)" />

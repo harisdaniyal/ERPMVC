@@ -31,6 +31,8 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string EmptyDropOffLocation { get; set; }
         public string StationName { get; set; }
         public int? StationID { get; set; }
+		public int? FreeDays { get; set; }
 
-    }
+
+	}
 }

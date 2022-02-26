@@ -79,15 +79,11 @@
                                 </td>
                                 <td>
                                     <input class="form-control txt_ClientName" style="width: 170px;" type="text" disabled placeholder="" value="@(inTransactTrain.Customer_Name)" />
-                                </td>
+                                </td> 
                                 <td>
-                                    <select class="form-control txt_Priority" aria-invalid="false" style="width: 145px;">
-                                        <option value="">Select Priority</option>
-                                        <option value="1" @(inTransactTrain.PriorityForDispatched == "1" ? "selected=selected" : "")>1</option>
-                                        <option value="2" @(inTransactTrain.PriorityForDispatched == "2" ? "selected=selected" : "")>2</option>
-                                        <option value="3" @(inTransactTrain.PriorityForDispatched == "3" ? "selected=selected" : "")>3</option>
-                                    </select>
+                                    <input class="form-control txt_Priority" style="width: 100px;" type="text" disabled placeholder="" value="@(inTransactTrain.PriorityForDispatched)" />
                                 </td>
+                                
 
                                 <td>
                                     <input class="date-picker form-control txt_ArrivalDateTime" style="width: 170px;" type="date" placeholder="" value="@(inTransactTrain.ArrivalDate.HasValue ? inTransactTrain.ArrivalDate.Value.ToString("yyyy-MM-dd") : "")" />

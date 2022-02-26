@@ -17,6 +17,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public string TrainID { get; set; }
 		public DateTime? DispatchedDate { get; set; }
 		public string DeliveryLocation { get; set; }
+		public string EmptyDropOffLocation { get; set; }
 		public string VehicleNo { get; set; }
 		public DateTime? ArrivalDate { get; set; }
 		public DateTime? DeliveryDate { get; set; }

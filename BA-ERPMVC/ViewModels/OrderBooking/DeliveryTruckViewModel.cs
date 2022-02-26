@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BA_ERPMVC.ViewModels.OrderBooking
 {
-    public class EmptyDropOffViewModel
+    public class DeliveryTruckViewModel
     {
 		public int? ID { get; set; }
 		public int OrderId { get; set; }
@@ -13,12 +13,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public string ContainerNo { get; set; }
 		public string ContainerSize { get; set; }
 		public string BLnumber { get; set; }
-		public int? PortAndTerminalId { get; set; }
-		public string PortName { get; set; }
-		public string ShippingLineName { get; set; }
-		public string EIRNo { get; set; }
-		public decimal? ExpenseAtEmptyLocation { get; set; }
-		public string Remarks { get; set; }
+		public DateTime? ArrivalDate { get; set; }
 		public DateTime? DeliveryDate { get; set; }
 		public bool? IsCompleted { get; set; }
 		public string CreatedBy { get; set; }
@@ -26,6 +21,15 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public string UpdatedBy { get; set; }
 		public DateTime? UpdateDate { get; set; }
 		public bool? IsDeleted { get; set; }
+
+		//  Add On  //
+		public string ToLocation { get; set; }
+		public string FromLocation { get; set; }
+		public string DriverName { get; set; }
+		public string DriverNo { get; set; }
+		public string VehicleNo { get; set; }
+		public string DeliveryLocation { get; set; }
+		public DateTime? DispatchedDate { get; set; }
 
 	}
 }
