@@ -3349,28 +3349,29 @@ INSERT INTO [dbo].[Stations] VALUES('TOKHER NIAZ BAIG',null,null,null,null,null,
 INSERT INTO [dbo].[Stations] VALUES('LAHORE',null,null,null,null,null,null,1)
 INSERT INTO [dbo].[Stations] VALUES('KOT RADHA KISHAN',null,null,null,null,null,null,1)
 
-Create table PreDispatchedMovement(
+Create table ReadyForDispatched(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
-[OrderId] [int] Not NULL,
-[OrderNo] [varchar](9) Not NULL,
-[ContainerNo] [nvarchar](250) Not NULL,
-[ContainerSize] [nvarchar](250) Not NULL,
-[BLnumber] [nvarchar](250)  NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
-FromLocation nvarchar(100),
-FromDateTime datetime,
-ToLocation nvarchar(100),
-ToDateTime datetime, 
-TransporterName nvarchar(100), 
-VehicleNumber nvarchar(100), 
+[DOGranty] [datetime] NULL,
+[ImportEIR] [datetime] NULL,
+[PortWeighment] [datetime] NULL,
+[OutSidePortWeighment] [datetime] NULL,
+[GD] [datetime] NULL,
+[BL] [datetime] NULL,
 
-IsCompleted bit default(0),
+[IsCompleted] [bit] NULL default(0),
 [CreatedBy] [nvarchar](250) NULL,
-[CreateDate] datetime NULL,
+[CreateDate] [datetime] NULL,
 [UpdatedBy] [nvarchar](250) NULL,
-[UpdateDate] datetime NULL
+[UpdateDate] [datetime] NULL
 )
 Go
+
 Create table DispatchedOrder(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
 [OrderId] [int] NOT NULL,
