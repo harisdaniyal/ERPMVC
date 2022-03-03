@@ -861,7 +861,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 PortName = terminal.PortName;
             }
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString() && (!string.IsNullOrEmpty(PortName) ? x.EmptyReturnLocation == PortName : true) )
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.EmptyDropOff.ToString() && (!string.IsNullOrEmpty(PortName) ? x.EmptyReturnLocation == PortName : true))
                         on order.OrderID equals logistics.OrderId
                     join EDO in _dbContext.EmptyDropOffs.Where(x => x.IsCompleted == false)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDO.OrderId, ContainerNo = EDO.ContainerNo } into EDOGroup
@@ -876,7 +876,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
                         PortName = logistics.EmptyReturnLocation,
-                        
+
 
 
                         ID = EmptyDropOffs.ID,
@@ -930,7 +930,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             emptydropoff.EIRNo = emptydropoffVM.EIRNo;
             emptydropoff.ExpenseAtEmptyLocation = emptydropoffVM.ExpenseAtEmptyLocation;
-            emptydropoff.TerminalName= emptydropoffVM.PortName;
+            emptydropoff.TerminalName = emptydropoffVM.PortName;
             emptydropoff.Remarks = emptydropoffVM.Remarks;
             emptydropoff.DeliveryDate = emptydropoffVM.DeliveryDate;
             emptydropoff.IsCompleted = emptydropoffVM.IsCompleted;
@@ -953,7 +953,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public IEnumerable<PortAndTerminal> GetTerminalList()
         {
-            return _dbContext.PortAndTerminals.Where(x => x.IsDeleted== false).ToList();
+            return _dbContext.PortAndTerminals.Where(x => x.IsDeleted == false).ToList();
         }
 
         /////////////******** End  EmptyDropOff********//////////
@@ -965,7 +965,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.Status == OrdersStatus.Dispatched.ToString() && x.ModeOfTransportation == ModeOfTransaction.Truck.ToString())
                         on order.OrderID equals logistics.OrderId
-                   
+
                     join DT in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == false)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
                     from DispatchedTrucks in DTGroup.DefaultIfEmpty()
@@ -1037,7 +1037,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             dispatchedtruck.DispatchedDate = dispatchedtruckVM.DispatchedDate;
             dispatchedtruck.VehicleNo = dispatchedtruckVM.VehicleNo;
             dispatchedtruck.DriverName = dispatchedtruckVM.DriverName;
-            dispatchedtruck.DriverNo= dispatchedtruckVM.DriverNo;
+            dispatchedtruck.DriverNo = dispatchedtruckVM.DriverNo;
             dispatchedtruck.TransporterName = dispatchedtruckVM.TransporterName;
             dispatchedtruck.BiltyNo = dispatchedtruckVM.BiltyNo;
             dispatchedtruck.IsCompleted = dispatchedtruckVM.IsCompleted;
@@ -1138,8 +1138,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
 
             deliverytruck.ArrivalDate = deliverytruckVM.ArrivalDate;
-            deliverytruck.DeliveryDate= deliverytruckVM.DeliveryDate;
-          
+            deliverytruck.DeliveryDate = deliverytruckVM.DeliveryDate;
+
             deliverytruck.IsCompleted = deliverytruckVM.IsCompleted;
             _deliverytruckRepository.Update(deliverytruck);
 
@@ -1175,7 +1175,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             var logistics = _dbContext.Logistics.Where(x => x.Status != OrdersStatus.ReadyForDispatched.ToString() && x.logisticsid == logisticsId).FirstOrDefault();
             if (logistics != null)
             {
-                isSuccess= false;
+                isSuccess = false;
             }
             else
             {
@@ -1185,8 +1185,100 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
 
             return isSuccess;
-            
+
         }
+
+        ////****** Train Report *******////
+        public IEnumerable<TrainOrderReportViewModel> TrainOrderReport()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
+                        on order.OrderID equals logistics.OrderId
+
+                    join RFD in _dbContext.ReadyForDispatcheds.Where(x => x.IsCompleted == true)
+                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RFD.OrderId, ContainerNo = RFD.ContainerNo } into RFDGroup
+                    from ReadyForDispatcheds in RFDGroup.DefaultIfEmpty()
+                    join PDM in _dbContext.PreDispatchedMovements.Where(x => x.IsCompleted == true)
+                   on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = PDM.OrderId, ContainerNo = PDM.ContainerNo } into PDMGroup
+                    from PreDispatchedMovements in PDMGroup.DefaultIfEmpty()
+                    join DPO in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
+                   on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DPO.OrderId, ContainerNo = DPO.ContainerNo } into DPOGroup
+                    from DispatchedOrders in DPOGroup.DefaultIfEmpty()
+                    join ITT in _dbContext.InTransactTrains.Where(x => x.IsCompleted == true)
+                    on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = ITT.OrderId, ContainerNo = ITT.ContainerNo } into ITTGroup
+                    from InTransactTrains in ITTGroup.DefaultIfEmpty()
+                    join RD in _dbContext.ReDispatcheds.Where(x => x.IsCompleted == true)
+                   on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RD.OrderId, ContainerNo = RD.ContainerNo } into RDGroup
+                    from ReDispatcheds in RDGroup.DefaultIfEmpty()
+                    join DT in _dbContext.DeliveryTrains.Where(x => x.IsCompleted == true)
+                    on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
+                    from DeliveryTrains in DTGroup.DefaultIfEmpty()
+                    join EDO in _dbContext.EmptyDropOffs.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDO.OrderId, ContainerNo = EDO.ContainerNo } into EDOGroup
+                    from EmptyDropOffs in EDOGroup.DefaultIfEmpty()
+                    select new TrainOrderReportViewModel()
+                    {
+
+
+                        BLNumber = order.BL,
+                        OrderNo = order.OrderNo,
+                        LastDateofEmptyReturn = order.VesselBerthingDate,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerTypeName = _dbContext.ContainerTypes.Where(x => x.ContainerTypeID == logistics.ContainerType).FirstOrDefault().ContainerTypeName,
+                        FromLocation = logistics.FromLocation,
+                        ToLocation = logistics.ToLocation,
+                        FreeDays = order.FreeDays,
+                        CustomerName = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                        BusinessDivisionName = _dbContext.stp_BusinessDivision.Where(x => x.BusinessDivisionID == order.BusinessDevisionID).FirstOrDefault().BusinessDivisionName,
+                        OrderType = order.OrderType,
+                        CRO = order.CRO,
+                        OrderDate = order.OrderDate,
+                        InvoiceAmount = order.InvoiceAmount,
+                        ShippingAgentName = _dbContext.ShippingAgents.Where(x => x.ShippingAgentId == order.ShippingAgentId).FirstOrDefault().Name,
+                        Remarks = order.Remarks,
+                        VesselBerthingDate = order.VesselBerthingDate,
+                        ShippingLineName = _dbContext.ShippingLines.Where(x => x.ShippingLineId == order.ShippingLineId).FirstOrDefault().ShippingLineName,
+                        BookingPOCName = order.BookingPOCName,
+                        JobType = logistics.JobType,
+                        EmptyReturnLocation = logistics.EmptyReturnLocation,
+                        EmptyReturnDate = logistics.EmptyReturnDate.ToString(),
+                        ModeOfTransportation = logistics.ModeOfTransportation,
+                        PreDispatched = logistics.PreDispatched,
+                        Commodities = logistics.Comodities,
+                        DoGuaranteeDate = ReadyForDispatcheds.DOGranty,
+                        ImportEIR = ReadyForDispatcheds.ImportEIR,
+                        PortWeighment = ReadyForDispatcheds.PortWeighment,
+                        OutsidePortWeighment = ReadyForDispatcheds.OutSidePortWeighment,
+                        GD = ReadyForDispatcheds.GD,
+                        BL = ReadyForDispatcheds.BL,
+                        FromDateTime = PreDispatchedMovements.FromDateTime,
+                        ToDateTime = PreDispatchedMovements.ToDateTime,
+                        TransporterName = ReDispatcheds.TranspoterName,
+                        VehicleNumber = ReDispatcheds.VehicleNo,
+                        PriorityForDispatched = DispatchedOrders.PriorityForDispatched,
+                        DispatchedDate = DispatchedOrders.DispatchedDate,
+                        StationName = DispatchedOrders.StationName,
+                        WagonNumber = DispatchedOrders.WagonNo,
+                        WagonType = DispatchedOrders.WagonType,
+                        RRNo = DispatchedOrders.RRNo,
+                        EngineNo = DispatchedOrders.EngineNo,
+                        InvoiceNumber = DispatchedOrders.InvoiceNumber,
+                        ArrivalDate = InTransactTrains.ArrivalDate,
+                        LOLO = InTransactTrains.LOLO,
+                        ReDispatchedDate = ReDispatcheds.ReDispatchedDate,
+                        BiltyNo = ReDispatcheds.BiltyNumber,
+                        TransportationCost = ReDispatcheds.TransportationCost,
+                        DeliveryDate = DeliveryTrains.DeliveryDate,
+                        EIRNo = EmptyDropOffs.EIRNo,
+                        ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
+                   
+
+
+
+                    }).Distinct().ToList();
+        }
+        ///***End***///
 
         public async Task<IEnumerable<BAtrip>> GetTripsDetailAsync(int orderBookingId)
         {
@@ -1260,7 +1352,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         InvoiceAmount = (order.InvoiceAmount ?? 0).ToString(),
                         RemainingTrips = _dbContext.BAtrips.Count(x => x.ContainerStatus != 4 && x.OrderId == order.OrderID && x.IsActive == true),
                         VendorExpense = _dbContext.BAtrips.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Sum(x => x.PartyRate) ?? 0,
-                        ReadyForDispatched = _dbContext.Logistics.Where(x=> x.OrderId == order.OrderID && x.Status == OrdersStatus.ReadyForDispatched.ToString()).ToList().Count().ToString(),
+                        ReadyForDispatched = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.ReadyForDispatched.ToString()).ToList().Count().ToString(),
                         PreDispatched = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.PreDispatched.ToString()).ToList().Count().ToString(),
                         Dispatched = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Dispatched.ToString()).ToList().Count().ToString(),
                         InTransact = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.InTransact.ToString()).ToList().Count().ToString(),

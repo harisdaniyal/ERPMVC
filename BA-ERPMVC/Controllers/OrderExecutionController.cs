@@ -339,6 +339,14 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
+        [HttpGet]
+        public ActionResult TrainReport()
+        {
+            var TrainReport = orderBookingService.TrainOrderReport();
+
+            return View(TrainReport);
+        }
     }
 
 }

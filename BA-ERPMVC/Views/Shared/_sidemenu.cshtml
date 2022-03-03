@@ -205,6 +205,15 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="/OrderExecution/TrainReport" class="nav-link ">
+                <i class="nav-icon fas fa-train"></i>
+                <p>
+                    Train Order Report
+                </p>
+            </a>
+        </li>
+
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -533,9 +542,9 @@
         </li>
 
 
-        }
-        else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
-        {
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
+    {
         <li class="nav-item">
             <a href="/BLShippingLine/Index" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -545,7 +554,7 @@
             </a>
         </li>
 
-        }
+    }
 
-    </ul>
+</ul>
 

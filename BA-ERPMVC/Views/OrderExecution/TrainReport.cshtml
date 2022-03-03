@@ -1,0 +1,161 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.TrainOrderReportViewModel>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/datatables.css" />
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/datatables.js"></script>
+
+@{
+    ViewBag.Title = "TrainReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Train Report</h2><br/>
+<button class="btn btn-outline-success mb-3" onclick="fnExcelReport()">Export to Excel</button>
+<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive">
+    <thead class="thead-light text-center">
+        <tr>
+            <th>Order No</th>
+            <th>Customer Name</th>
+            <th>Business Division</th>
+            <th>Order Type</th>
+            <th>BLNo</th>
+            <th>Container No </th>
+            <th>Container Size </th>
+            <th>Container Type Name </th>
+            <th>CRO</th>
+            <th>Order Date</th>
+            <th>Invoice Amount</th>
+            <th>Shipping Agent Name</th>
+            <th>Free Days</th>
+            <th>Remarks</th>
+            <th>Vessel Berthing Date</th>
+            <th>Shipping Line Name</th>
+            <th>Booking POC Name</th>
+            <th>From Location</th>
+            <th>To Location</th>
+            <th>Job Type</th>
+            <th>Empty Return Location</th>
+            <th>Empty Return Date</th>
+            <th>Mode Of Transportation</th>
+            <th>PreDispatched</th>
+            <th>Commodities</th>
+            <th>DO Guarantee Date</th>
+            <th>Import EIR</th>
+            <th>Port Weighment</th>
+            <th>Outside Port Weighment</th>
+            <th>GD</th>
+            <th>BL</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Transporter Name</th>
+            <th>Vehicle No</th>
+            <th>Priority Of Dispatched</th>
+            <th>TrainId</th>
+            <th>DispatchedDate</th>
+            <th>Station Name</th>
+            <th>Wagon No</th>
+            <th>Wagon Type</th>
+            <th>RR No</th>
+            <th>Engine No</th>
+            <th>Invoice No</th>
+            <th>Arrival Date</th>
+            <th>LOLO</th>
+            <th>ReDispatched</th>
+            <th>BiltyNo</th>
+            <th>Transportation Cost</th>
+            <th>Delivery Date</th>
+            <th>Expense At EmptyLocation</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: white ;"class="text-center">
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderNo</td>
+                <td>@order.CustomerName</td>
+                <td>@order.BusinessDivisionName</td>
+                <td>@order.OrderType</td>
+                <td>@order.BLNumber</td>
+                <td>@order.ContainerNo</td>
+                <td>@order.ContainerSize</td>
+                <td>@order.ContainerTypeName</td>
+                <td>@order.CRO</td>
+                <td>@order.OrderDate</td>
+                <td>@order.InvoiceAmount</td>
+                <td>@order.ShippingAgentName</td>
+                <td>@order.FreeDays</td>
+                <td>@order.Remarks</td>
+                <td>@order.VesselBerthingDate</td>
+                <td>@order.ShippingLineName</td>
+                <td>@order.BookingPOCName</td>
+                <td>@order.FromLocation</td>
+                <td>@order.ToLocation</td>
+                <td>@order.JobType</td>
+                <td>@order.EmptyReturnLocation</td>
+                <td>@order.EmptyReturnDate</td>
+                <td>@order.ModeOfTransportation</td>
+                <td>@order.PreDispatched</td>
+                <td>@order.Commodities</td>
+                <td>@order.DoGuaranteeDate</td>
+                <td>@order.ImportEIR</td>
+                <td>@order.PortWeighment</td>
+                <td>@order.OutsidePortWeighment</td>
+                <td>@order.GD</td>
+                <td>@order.BL</td>
+                <td>@order.FromDateTime</td>
+                <td>@order.ToDateTime</td>
+                <td>@order.TransporterName</td>
+                <td>@order.VehicleNumber</td>
+                <td>@order.PriorityForDispatched</td>
+                <td>@order.TrainId</td>
+                <td>@order.DispatchedDate</td>
+                <td>@order.StationName</td>
+                <td>@order.WagonNumber</td>
+                <td>@order.WagonType</td>
+                <td>@order.RRNo</td>
+                <td>@order.EngineNo</td>
+                <td>@order.InvoiceNumber</td>
+                <td>@order.ArrivalDate</td>
+                <td>@order.LOLO</td>
+                <td>@order.ReDispatchedDate</td>
+                <td>@order.BiltyNo</td>
+                <td>@order.TransportationCost</td>
+                <td>@order.DeliveryDate</td>
+                <td>@order.ExpenseAtEmptyLocation</td>
+
+                <!--<td class="text-center">-->
+                @* <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>*@
+                @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
+                <!--</td>-->
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function fnExcelReport() {
+        var tab_text = "<table border='2px'><tr>";
+        var textRange; var j = 0;
+        tab = document.getElementById('example'); // id of table
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+        tab_text = tab_text + "</table>";
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        }
+        else                 //other browser not tested on IE 11
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        return (sa);
+    }
+</script>
