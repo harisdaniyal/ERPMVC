@@ -3548,3 +3548,13 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+
+
+---Aleem new 03/04/2022
+drop table FromLocOil
+go
+CREATE TABLE [dbo].[Location](
+	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+	[LocationName] [nvarchar](50) NULL,
+	[CompanyID] [int] NOT NULL,
+ )
