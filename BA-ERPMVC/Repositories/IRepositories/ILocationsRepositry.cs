@@ -7,7 +7,7 @@ using BA_ERPMVC.Models;
 
 namespace BA_ERPMVC.Repositories.IRepositories
 {
-    interface ILocationsRepositry: IRepository<stp_City>
+    interface ILocationsRepositry: IRepository<Location>
     {
     }
 }

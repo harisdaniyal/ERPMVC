@@ -7,7 +7,7 @@ using BA_ERPMVC.Models;
 
 namespace BA_ERPMVC.Repositories.CoreRepositories
 {
-    public class LocationsRepositry : Repository<stp_City>, ILocationsRepositry
+    public class LocationsRepositry : Repository<Location>, ILocationsRepositry
     {
         private ERPMVCEntities _dbContext
         {

@@ -24,7 +24,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _locationsRepositry = new LocationsRepositry(_dbContext);
         }
 
-        public Task<IEnumerable<stp_City>> GetLocationsAsync()
+        public Task<IEnumerable<Location>> GetLocationsAsync()
         {
             return _locationsRepositry.GetAllAsync();
         }

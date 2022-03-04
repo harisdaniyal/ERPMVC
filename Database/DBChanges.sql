@@ -3472,18 +3472,19 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+Go
+--------Haris 02/26/2022
 
-GO
 Create table EmptyDropOff(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,NOT NULL,
+OrderId int NOT NULL,
 OrderNo varchar(9) NOT NULL,
 ContainerNo nvarchar(250) NOT NULL,
 ContainerSize nvarchar(250)NOT NULL,
 BLnumber nvarchar(250) NOT NULL,
 
 PortAndTerminalId int,
-TerminalName nvarchar(250)
+TerminalName nvarchar(250),
 ShippingLineName nvarchar(250),
 EIRNo nvarchar(250),
 ExpenseAtEmptyLocation numeric(18, 0),
@@ -3499,7 +3500,6 @@ IsCompleted bit default(0),
 [IsDeleted] bit DEFAULT(0),
 )
 Go
---------Haris 02/26/2022
 Create table DispatchedTruck(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 OrderId int NOT NULL,
