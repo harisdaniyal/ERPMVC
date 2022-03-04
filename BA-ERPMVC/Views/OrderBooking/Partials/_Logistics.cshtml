@@ -78,18 +78,18 @@
                         <td>
                             <select id="ddl_FromLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 150px;">
                                 <option value="">From Location</option>
-                                @foreach (var location in ViewBag.Locations)
+                                @foreach (var location in ViewBag.Location)
                                 {
-                                    <option value="@location.CityID">@location.CityName</option>
+                                    <option value="@location.ID">@location.LocationName</option>
                                 }
                             </select>
                         </td>
                         <td>
                             <select id="ddl_ToLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 150px;">
                                 <option value="">To Location</option>
-                                @foreach (var location in ViewBag.Locations)
+                                @foreach (var location in ViewBag.Location)
                                 {
-                                    <option value="@location.CityID">@location.CityName</option>
+                                    <option value="@location.ID">@location.LocationName</option>
                                 }
                             </select>
                         </td>
