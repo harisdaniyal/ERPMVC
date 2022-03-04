@@ -3557,4 +3557,5 @@ CREATE TABLE [dbo].[Location](
 	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
 	[LocationName] [nvarchar](50) NULL,
 	[CompanyID] [int] NOT NULL,
+	IsDeleted bit default(0) 
  )

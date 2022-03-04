@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a31bf995892c41e88612df44eafa85dd" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.PreDispatchedMovement" Width="1.5" PointX="15.375" PointY="29.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="4.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.AspNetRole" Width="1.5" PointX="5.75" PointY="4.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="2.75" />
@@ -25,17 +24,14 @@
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ClearingAgent" Width="1.5" PointX="18.75" PointY="9.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ContainerStatu" Width="1.5" PointX="19.75" PointY="2.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ContainerType" Width="1.5" PointX="0.75" PointY="26.5" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.DeliveryTrain" Width="1.5" PointX="19.75" PointY="12.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Department" Width="1.5" PointX="19.75" PointY="5.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Designation" Width="1.5" PointX="19.75" PointY="18.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.DispatchedOrder" Width="1.5" PointX="19.75" PointY="21.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Emp_Child" Width="1.5" PointX="0.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Emp_Parent" Width="1.5" PointX="20.75" PointY="8.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Emp_Spouse" Width="1.5" PointX="9.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Employee" Width="1.5" PointX="11.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.FromLocOil" Width="1.5" PointX="13.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Gender" Width="1.5" PointX="21.75" PointY="2.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.InTransactTrain" Width="1.5" PointX="21.75" PointY="17.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.InventoryCategory" Width="1.5" PointX="21.75" PointY="5.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Logistic" Width="1.5" PointX="3" PointY="25.625" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.MaintenanceHistory" Width="1.5" PointX="15.75" PointY="23.25" />
@@ -48,7 +44,6 @@
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Purchase_Requisition_Detail" Width="1.5" PointX="17" PointY="6.125" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.PurchaseDetail" Width="1.5" PointX="12.25" PointY="8.5" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.PurchaseMaster" Width="1.5" PointX="10" PointY="12.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReadyForDispatched" Width="1.5" PointX="7.75" PointY="25.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Setup_Item_Master" Width="1.5" PointX="23.75" PointY="11.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Setup_Item_Unit" Width="1.5" PointX="23.75" PointY="16.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ShippingAgent" Width="1.5" PointX="23.75" PointY="20.25" />
@@ -116,6 +111,15 @@
         <AssociationConnector Association="db_a780fa_bilalModel.FK__VendorExp__Vendo__54CB950F" />
         <AssociationConnector Association="db_a780fa_bilalModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.GenerateOrder" Width="1.5" PointX="30.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReadyForDispatched" Width="1.5" PointX="30.375" PointY="18.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DeliveryTrain" Width="1.5" PointX="20.375" PointY="12.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DispatchedOrder" Width="1.5" PointX="5.375" PointY="28.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.InTransactTrain" Width="1.5" PointX="30.375" PointY="12.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.PreDispatchedMovement" Width="1.5" PointX="22.375" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReDispatched" Width="1.5" PointX="30.375" PointY="24.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DeliveryTruck" Width="1.5" PointX="18.375" PointY="22.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DispatchedTruck" Width="1.5" PointX="24.375" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.EmptyDropOff" Width="1.5" PointX="30.375" PointY="6.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

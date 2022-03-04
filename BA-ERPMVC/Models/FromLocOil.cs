@@ -12,10 +12,10 @@ namespace BA_ERPMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FromLocOil
+    public partial class Location
     {
-        public int FLocationID { get; set; }
-        public string FromLocation { get; set; }
+        public int ID { get; set; }
+        public string LocationName { get; set; }
         public int CompanyID { get; set; }
     }
 }
