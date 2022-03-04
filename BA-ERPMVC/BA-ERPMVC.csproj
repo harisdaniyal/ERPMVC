@@ -3303,6 +3303,7 @@
     <Content Include="Views\OrderExecution\EmptyDropOff.cshtml" />
     <Content Include="Views\OrderExecution\DispatchedTruck.cshtml" />
     <Content Include="Views\OrderExecution\DeliveryTruck.cshtml" />
+    <Content Include="Views\OrderExecution\TrainReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />
