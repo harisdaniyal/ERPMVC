@@ -149,7 +149,7 @@ namespace BA_ERPMVC.Controllers
         }
 
 
-        public ActionResult AddOrEditeLocationDropDown(FromLocOil obj)
+        public ActionResult AddOrEditeLocationDropDown(Location obj)
         {
             var done = 0;
             var responseText = "";
@@ -157,11 +157,11 @@ namespace BA_ERPMVC.Controllers
             {
                 try
                 {
-                    if (obj.FLocationID != 0)
+                    if (obj.ID != 0)
                     {
-                        FromLocOil a = db.FromLocOils.First(i => i.FLocationID == obj.FLocationID);
+                        Location a = db.FromLocOils.First(i => i.ID == obj.ID);
 
-                        a.FromLocation = obj.FromLocation;
+                        a.LocationName = obj.LocationName;
                         a.CompanyID = obj.CompanyID;
                         done = db.SaveChanges();
                         responseText = "Data Updated Successfully.";
@@ -203,13 +203,13 @@ namespace BA_ERPMVC.Controllers
             using (ERPMVCEntities db = new ERPMVCEntities())
             {
 
-                var LocationDrop = from opo in db.FromLocOils.Where(a => a.FLocationID == id)
+                var LocationDrop = from opo in db.FromLocOils.Where(a => a.ID == id)
                                    join div in db.stp_Company on opo.CompanyID equals div.CompanyID
                                    select new
                                   {
                                       //  ID = opo.ID,
-                                    //  ID = opo.FLocationID,
-                                      FromLoc = opo.FromLocation,
+                                    //  ID = opo.ID,
+                                      FromLoc = opo.LocationName,
                                       CompanyID = div.CompanyName,
                                   };
 
@@ -234,11 +234,9 @@ namespace BA_ERPMVC.Controllers
                                join div in db.stp_Company on opo.CompanyID equals div.CompanyID
                                select new
                                    {
-                                       ID = opo.FLocationID,
-                                       FromLoc = opo.FromLocation,
+                                       ID = opo.ID,
+                                       FromLoc = opo.LocationName,
                                        CompanyID = div.CompanyName,
-
-
                                    }).ToList();
 
                 return Json(new { LocDrop });

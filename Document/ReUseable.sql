@@ -1,9 +1,16 @@
+
+select * from stati
+select * from BACustomerRegistration where Customer_Name like '%MUGHAL STEEL%'
+
+
+select * from GenerateOrder
 select * from Logistics
 select * from ReadyForDispatched
 select * from predispatchedmovement
 select * from DispatchedOrder
 select * from IntransactTrain
 select * from ReDispatched
+select * from DeliveryTrain
 select * from EmptyDropOff
  update Logistics set status='ReDispatched', PreDispatched=1
 truncate table EmptyDropOff

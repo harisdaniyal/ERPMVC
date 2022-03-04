@@ -115,8 +115,8 @@ if (isEdit == 1) {
                     type: "POST", //HTTP POST Method  
                     url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
                     data: { //Passing data  
-                        FLocationID: empid,
-                        FromLocation: $("#txtfromLoc").val(),
+                        ID: empid,
+                        LocationName: $("#txtfromLoc").val(),
                         CompanyID: $("#txtCustomerName option:selected").val(),
                     },
                             
@@ -337,7 +337,7 @@ $(document).on('click', '#btnSubmit', function () {
                     type: "POST", //HTTP POST Method  
                     url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
                     data: { //Passing data  
-                        FromLocation: $("#txtfromLoc").val(),
+                        LocationName: $("#txtfromLoc").val(),
                         CompanyID: $("#txtCustomerName option:selected").val(),
 
                     },
