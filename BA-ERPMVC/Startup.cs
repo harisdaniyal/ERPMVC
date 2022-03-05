@@ -108,6 +108,8 @@ namespace BA_ERPMVC
 
                 config.CreateMap<TripContainersViewModel, Logistic>()
                     .ForMember(to => to.ContainerNo, opt => opt.MapFrom(from => from.ContainerNumber));
+                config.CreateMap<EmptyDropOffViewModel, EmptyDropOff>()
+                    .ForMember(to => to.TerminalName, opt => opt.MapFrom(from => from.PortName));
 
                 config.CreateMap<ViewModels.OrderBooking.TripViewModel, BAtrip>()
                     .ForMember(to => to.ID, opt => opt.MapFrom(from => from.TripId))

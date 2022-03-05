@@ -1,8 +1,12 @@
-﻿using BA_ERPMVC.Models;
+﻿using AutoMapper;
+using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.Models;
+using BA_ERPMVC.ViewModels;
 //using InfiSolMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +14,13 @@ namespace BA_ERPMVC.Controllers
 {
     public class DropDownMenuController : Controller
     {
+
+        private readonly ShippingService shippingService;
+
+        public DropDownMenuController()
+        {
+            shippingService = new ShippingService();
+        }
         // GET: DropDownMenu
         public ActionResult Expenses()
         {
@@ -21,7 +32,41 @@ namespace BA_ERPMVC.Controllers
             return View();
         }
 
-      
+        public ActionResult ShippingAgent()
+        {
+            var shippingagent = shippingService.GetShippingAgentAsync();
+            return View(shippingagent);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> ShippingAgent(ShippingAgentViewModel shippingagentVM)
+        {
+            if (shippingagentVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(shippingagentVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (shippingagentVM.ShippingAgentId == 0)
+                {
+                    await shippingService.SaveShippingAgentAsync(shippingagentVM);
+
+                    return Json(new { success = true, Id = shippingagentVM.ShippingAgentId });
+                }
+
+                await shippingService.UpdateShippingAgentAsync(shippingagentVM);
+
+                return Json(new { success = true, Id = shippingagentVM.ShippingAgentId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
 
         public ActionResult Facility()
         {
@@ -159,7 +204,7 @@ namespace BA_ERPMVC.Controllers
                 {
                     if (obj.ID != 0)
                     {
-                        Location a = db.FromLocOils.First(i => i.ID == obj.ID);
+                        var a = db.Locations.First(i => i.ID == obj.ID);
 
                         a.LocationName = obj.LocationName;
                         a.CompanyID = obj.CompanyID;
@@ -169,7 +214,7 @@ namespace BA_ERPMVC.Controllers
                     else
                     {
 
-                        db.FromLocOils.Add(obj);
+                        db.Locations.Add(obj);
                         done = db.SaveChanges();
                         responseText = "Data Inserted Successfully.";
 
@@ -203,14 +248,14 @@ namespace BA_ERPMVC.Controllers
             using (ERPMVCEntities db = new ERPMVCEntities())
             {
 
-                var LocationDrop = from opo in db.FromLocOils.Where(a => a.ID == id)
-                                   join div in db.stp_Company on opo.CompanyID equals div.CompanyID
+                var LocationDrop = from opo in db.Locations.Where(a => a.ID == id)
+                                   //join div in db.stp_Company on opo.CompanyID equals div.CompanyID
                                    select new
                                   {
                                       //  ID = opo.ID,
                                     //  ID = opo.ID,
                                       FromLoc = opo.LocationName,
-                                      CompanyID = div.CompanyName,
+                                      CompanyID = opo.CompanyID,
                                   };
 
 
@@ -230,7 +275,7 @@ namespace BA_ERPMVC.Controllers
             using (ERPMVCEntities db = new ERPMVCEntities())
             {
 
-                var LocDrop = (from opo in db.FromLocOils
+                var LocDrop = (from opo in db.Locations
                                join div in db.stp_Company on opo.CompanyID equals div.CompanyID
                                select new
                                    {

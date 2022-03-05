@@ -7,7 +7,7 @@
 
 
 var delay = 5;
-setTimeout( delay * 2000);
+setTimeout(delay * 2000);
 
 
 
@@ -20,18 +20,18 @@ function editClick(id) {
 
 
 
-$(document).ready(function() {
-  $('.row').hover(
-    function() {
-      $(this).children('.form-group')
-        .delay(1000) // set duration of delay in milliseconds here
-        .slideDown(200);
-    },
-    function() {
-      $(this).children('.form-group')
-      .clearQueue()
-      .slideUp(0);
-    })
+$(document).ready(function () {
+    $('.row').hover(
+        function () {
+            $(this).children('.form-group')
+                .delay(1000) // set duration of delay in milliseconds here
+                .slideDown(200);
+        },
+        function () {
+            $(this).children('.form-group')
+                .clearQueue()
+                .slideUp(0);
+        })
 });
 
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
 
 
-   $.ajax({
+    $.ajax({
         type: "GET",
         url: "/DropDownMenu/GetCustomerName",
         data: "{}",
@@ -57,46 +57,38 @@ $(document).ready(function () {
         }
     });
 
+    var empid = $.url().param("id");
+    var isEdit = $.url().param("edit");
+    if (isEdit == 1) {
+        $("#lloForm").show();
 
-
-
-
-
-
-
-
-
-var empid = $.url().param("id");
-var isEdit = $.url().param("edit");
-if (isEdit == 1) {
-    $("#lloForm").show();
-
-  function getLocDropbyid(empid) {
+        function getLocDropbyid(empid) {
             services.getLocDropbyid(JSON.stringify({
                 id: empid
             })).then(function (response) {
                 var data = response.result;
-                $("#txtfromLoc").val(data[0].FromLoc).delay( 100 );
-                $("#txtCustomerName").val(data[0].CompanyID).change().delay();
+                $("#txtfromLoc").val(data[0].FromLoc).delay(100);
+                $("#txtCustomerName").val(data[0].CompanyID).change().delay(100);
             });
-       
-        } getLocDropbyid(empid);
 
-        
-  $.ajax({
-        type: "GET",
-        url: "/DropDownMenu/GetCustomerName",
-        data: "{}",
-        success: function (data) {
-            var s = '<option value="-1">Please Select a CustomerName</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option value="' + data[i].CID + '">' + data[i].CName + '</option>';
-            }
-            $("#txtCustomerName").html(s);
-//setTimeout(4000);
         }
- 
-    }, 5000);
+        getLocDropbyid(empid);
+
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "/DropDownMenu/GetCustomerName",
+        //    data: "{}",
+        //    success: function (data) {
+        //        var s = '<option value="-1">Please Select a CustomerName</option>';
+        //        for (var i = 0; i < data.length; i++) {
+        //            s += '<option value="' + data[i].CID + '">' + data[i].CName + '</option>';
+        //        }
+        //        $("#txtCustomerName").html(s);
+        //        //setTimeout(4000);
+        //    }
+
+        //}, 5000);
 
 
         $("#btnBack").click(function () {
@@ -105,12 +97,12 @@ if (isEdit == 1) {
         });
 
 
-  // Submit Button
+        // Submit Button
         var toastCount = 0;
         $("#btnSubmit").click(function () {
-         //  ValidateAll();
-           //                return false;
-          $.ajax(
+            //  ValidateAll();
+            //                return false;
+            $.ajax(
                 {
                     type: "POST", //HTTP POST Method  
                     url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
@@ -119,16 +111,16 @@ if (isEdit == 1) {
                         LocationName: $("#txtfromLoc").val(),
                         CompanyID: $("#txtCustomerName option:selected").val(),
                     },
-                            
+
                     success: function (response) {
-                          
+
                         if (response.success) {
                             window.location.href = "Location";
                             $("#txtfromLoc").val("");
                             $("#txtCustomerName").val("-1");
-                           
+
                             var shortCutFunction = "success";
-                            
+
                             var msg = response.responseText;
                             var title = $('#title').val() || '';
                             var $showDuration = 300;
@@ -141,7 +133,7 @@ if (isEdit == 1) {
                             var $hideMethod = "fadeOut";
                             var toastIndex = toastCount++;
                             var addClear = $('#addClear').prop('checked');
-                              
+
 
                             toastr.options = {
                                 closeButton: $('#closeButton').prop('checked'),
@@ -160,7 +152,7 @@ if (isEdit == 1) {
                             if (typeof $toast === 'undefined') {
                                 return;
 
-                                  
+
                             }
                         } else {
                             DoSomethingElse()
@@ -234,7 +226,7 @@ if (isEdit == 1) {
                 });
 
         });
-///
+        ///
 
 
 
@@ -242,36 +234,35 @@ if (isEdit == 1) {
 
 
 
-    
+
 
 
 
 
 
     }
-    else
-{
+    else {
 
-  $("#gridShow").removeClass("d-none");
+        $("#gridShow").removeClass("d-none");
 
- //Back Button
-    $("#btnBack").click(function () {
-        // Remove this line if it worked
-        $("#gridShow").show();
-        $("#lloForm").hide();
-    });
-
+        //Back Button
+        $("#btnBack").click(function () {
+            // Remove this line if it worked
+            $("#gridShow").show();
+            $("#lloForm").hide();
+        });
 
 
 
- //Add Button
-    $("#btnADD").click(function () {
-        // Remove this line if it worked
-        $("#gridShow").hide();
-        $("#lloForm").show();
-    });
 
-  function getLocDropGridDetail() {
+        //Add Button
+        $("#btnADD").click(function () {
+            // Remove this line if it worked
+            $("#gridShow").hide();
+            $("#lloForm").show();
+        });
+
+        function getLocDropGridDetail() {
             services.getLocDropGridDetail(JSON.stringify({
             })).then(function (response) {
 
@@ -288,16 +279,16 @@ if (isEdit == 1) {
                     data: response.LocDrop,
 
                     columns: [
-                         {
+                        {
                             "render": function (data, type, FromLocOil, row) {
 
 
                                 return '<button class="btn btn-primary" id="btnEdit" onclick="editClick(' + FromLocOil.ID + ')" >Edit</button>';
                             }
                         },
-                        {'data': 'ID', visible:false},
-                        { 'data': 'FromLoc'},
-                        { 'data': 'CompanyID'},
+                        { 'data': 'ID', visible: false },
+                        { 'data': 'FromLoc' },
+                        { 'data': 'CompanyID' },
                     ],
                     buttons: []
                 });
@@ -311,7 +302,7 @@ if (isEdit == 1) {
 
 
 
-$(document).on('click', '#btnSubmit', function () {
+        $(document).on('click', '#btnSubmit', function () {
             $("#_addCustomerReg").valid();
         });
 
@@ -319,77 +310,76 @@ $(document).on('click', '#btnSubmit', function () {
 
         // Submit Button
         var toastCount = 0;
-          $("#_addCustomerReg").validate({
-        rules: {
-            txtfromLoc: "required",
-            txtCustomerName: { min: 1} 
-        },
-        messages: {
-            txtfromLoc: "*",
-            txtCustomerName: "*"
+        $("#_addCustomerReg").validate({
+            rules: {
+                txtfromLoc: "required",
+                txtCustomerName: { min: 1 }
+            },
+            messages: {
+                txtfromLoc: "*",
+                txtCustomerName: "*"
 
-        },
-        submitHandler: function (form) {
-         //  ValidateAll();
-           //                return false;
-          $.ajax(
-                {
-                    type: "POST", //HTTP POST Method  
-                    url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
-                    data: { //Passing data  
-                        LocationName: $("#txtfromLoc").val(),
-                        CompanyID: $("#txtCustomerName option:selected").val(),
+            },
+            submitHandler: function (form) {
+                //  ValidateAll();
+                //                return false;
+                $.ajax(
+                    {
+                        type: "POST", //HTTP POST Method  
+                        url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
+                        data: { //Passing data  
+                            LocationName: $("#txtfromLoc").val(),
+                            CompanyID: $("#txtCustomerName option:selected").val(),
 
-                    },
-                            
-                    success: function (response) {
-                          
-                        if (response.success) {
-                           getLocDropGridDetail();
-                            
-                           $("#txtCustomerName").val("-1");
-                           $("#txtfromLoc").val("");
+                        },
 
-                                  
-                  toastr.success("Customer Detail has been inserted successfully");
-                } else {
-                    // DoSomethingElse()
-                    toastr.warn("Kindly Check Your Detail");
-                }
-           },
-            error: function (response) {
-                toastr.error("Server error,Please check your internet connection");
-                }
-            });
+                        success: function (response) {
+
+                            if (response.success) {
+                                getLocDropGridDetail();
+
+                                $("#txtCustomerName").val("-1");
+                                $("#txtfromLoc").val("");
+
+
+                                toastr.success("Customer Detail has been inserted successfully");
+                            } else {
+                                // DoSomethingElse()
+                                toastr.warn("Kindly Check Your Detail");
+                            }
+                        },
+                        error: function (response) {
+                            toastr.error("Server error,Please check your internet connection");
+                        }
+                    });
+            }
+
+        });
+        ///
+
+
+
+
+
+
+
+
+
+        // });
+
+
+
+
+
+
+
     }
 
-    });
-///
 
-
-
-
-
-
-
-
-              
-// });
-
-
-
-
-
-
-
-}
-    
-    
 });
 
 
 
 
 
-   
-                
+

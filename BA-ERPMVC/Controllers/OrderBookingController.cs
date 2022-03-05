@@ -108,7 +108,7 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = $"{nameof(orderBookingId)} should be positive integer" });
             }
 
-            this.ViewBag.Locations = await locationService.GetLocationsAsync();
+            this.ViewBag.Location = await locationService.GetLocationsAsync();
             this.ViewBag.ContainerTypes = await containerTypeService.GetAllContainerTypesAsync();
             this.ViewBag.ContainerSizes = await orderBookingService.GetContainerSizesAsync();
             this.ViewBag.PortAndTerminals = await orderBookingService.GetPortAndTerminal();

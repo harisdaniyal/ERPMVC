@@ -16,7 +16,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string BLNumber { get; set; }
         public string ContainerNo { get; set; }
         public string ContainerSize { get; set; }
-        public string ContainerWeight { get; set; }
+        public int? ContainerWeight { get; set; }
         public string ContainerTypeName { get; set; }
         public string EmptyReturnLocation { get; set; }
         public string ModeOfTransportation { get; set; }
@@ -31,6 +31,8 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string BookingPOCName { get; set; }
         public string StationName { get; set; }
         public string TransporterName { get; set; }
+        public string PreDispatchedTransporterName { get; set; }
+        public string DeliveryVehicleNumber { get; set; }
         public string VehicleNumber { get; set; }
         public string WagonNumber { get; set; }
         public string WagonType { get; set; }
@@ -40,9 +42,12 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public Nullable<decimal> TransportationCost { get; set; }
         public string PriorityForDispatched { get; set; }
         public string FromLocation { get; set; }
+        public string PreDispatchedFromLocation { get; set; }
         public string ToLocation { get; set; }
+        public string PreDispatchedToLocation { get; set; }
         public int? FreeDays { get; set; }
         public string Remarks { get; set; }
+        public string EmptyDropOffRemarks { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? VesselBerthingDate { get; set; }
         public string EmptyReturnDate { get; set; }
@@ -55,6 +60,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public DateTime? DispatchedDate { get; set; }
         public DateTime? ReDispatchedDate { get; set; }
         public DateTime? ArrivalDate { get; set; }
+        public DateTime? DeliveryArrivalDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public DateTime? LastDateofEmptyReturn { get; set; }
         public decimal? ExpenseAtEmptyLocation { get; set; }
