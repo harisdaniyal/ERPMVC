@@ -56,15 +56,34 @@
                         <div class="badge badge-pill badge-success w-80 py-2">@order.OrderType</div>
                     </td>
                     <td>
-                        <div class="badge badge-pill badge-success w-80 py-2 mb-1 ">ReadyForDispatched: @order.ReadyForDispatched</div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">PreDispatched: @order.PreDispatched</div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">Dispatched: @order.Dispatched</div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">ReDispatched: @order.ReDispatched</div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">InTransact: @order.InTransact</div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">Delivery: @order.Delivery</div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">EmptyDropOff: @order.EmptyDropOff </div>
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">Completed: @order.Completed</div>
-
+                        @if (Convert.ToInt32(order.ReadyForDispatched) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-80 py-2 mb-1 ">ReadyForDispatched: @order.ReadyForDispatched</div>
+                        }
+                        @if (Convert.ToInt32(order.PreDispatched) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">PreDispatched: @order.PreDispatched</div>
+                        }
+                        @if (Convert.ToInt32(order.Dispatched) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">Dispatched: @order.Dispatched</div>
+                        }
+                        @if (Convert.ToInt32(order.ReDispatched) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">ReDispatched: @order.ReDispatched</div>
+                        }
+                        @if (Convert.ToInt32(order.InTransact) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">InTransact: @order.InTransact</div>
+                        }
+                        @if (Convert.ToInt32(order.EmptyDropOff) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">EmptyDropOff: @order.EmptyDropOff </div>
+                        }
+                        @if (Convert.ToInt32(order.Completed) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">Completed: @order.Completed</div>
+                        }
                     </td>
                     <td>
                         <div class="badge badge-pill badge-success w-100 py-2 mb-1">QTY: @order.ContainerCount</div>

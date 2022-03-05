@@ -346,6 +346,7 @@
     <Compile Include="ViewModels\OrderBooking\ReadyForDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\OrderListViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\StationViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\TrainOrderReportViewModel.cs" />
     <Compile Include="ViewModels\VendorExpensesViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Content Include="AdminLte\Assets\bootstrap-progressbar\bootstrap-progressbar.js" />
