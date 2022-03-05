@@ -14,7 +14,7 @@ setTimeout(delay * 2000);
 function editClick(id) {
 
     var referenceNum = id;
-    window.location.href = "Location?id=" + referenceNum + "&edit=1";
+    window.location.href = "EmptyDropOffLoc?id=" + referenceNum + "&edit=1";
 }
 
 
@@ -63,12 +63,12 @@ $(document).ready(function () {
         $("#lloForm").show();
 
         function getLocDropbyid(empid) {
-            services.getLocDropbyid(JSON.stringify({
+            services.getEmptyDropOffLocById(JSON.stringify({
                 id: empid
             })).then(function (response) {
                 var data = response.result;
                 $("#txtfromLoc").val(data[0].FromLoc).delay(100);
-               // $("#txtCustomerName").val(data[0].CompanyID).change().delay(100);
+                // $("#txtCustomerName").val(data[0].CompanyID).change().delay(100);
             });
 
         }
@@ -93,7 +93,7 @@ $(document).ready(function () {
 
         $("#btnBack").click(function () {
             // Remove this line if it worked
-            window.location.href = "Location";
+            window.location.href = "EmptyDropOffLoc";
         });
 
 
@@ -105,7 +105,7 @@ $(document).ready(function () {
             $.ajax(
                 {
                     type: "POST", //HTTP POST Method  
-                    url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
+                    url: "/DropDownMenu/AddOrEditEmptyDropOffLocation", // Controller/View
                     data: { //Passing data  
                         ID: empid,
                         LocationName: $("#txtfromLoc").val(),
@@ -115,7 +115,7 @@ $(document).ready(function () {
                     success: function (response) {
 
                         if (response.success) {
-                            window.location.href = "Location";
+                            window.location.href = "EmptyDropOffLoc";
                             $("#txtfromLoc").val("");
                             //$("#txtCustomerName").val("-1");
 
@@ -263,7 +263,7 @@ $(document).ready(function () {
         });
 
         function getLocDropGridDetail() {
-            services.getLocDropGridDetail(JSON.stringify({
+            services.getEmptyDropOffLoc(JSON.stringify({
             })).then(function (response) {
 
                 $('#LocGride').dataTable().fnClearTable();
@@ -288,7 +288,7 @@ $(document).ready(function () {
                         },
                         { 'data': 'ID', visible: false },
                         { 'data': 'FromLoc' },
-                       // { 'data': 'CompanyID' },
+                        // { 'data': 'CompanyID' },
                     ],
                     buttons: []
                 });
@@ -326,7 +326,7 @@ $(document).ready(function () {
                 $.ajax(
                     {
                         type: "POST", //HTTP POST Method  
-                        url: "/DropDownMenu/AddOrEditeLocationDropDown", // Controller/View   
+                        url: "/DropDownMenu/AddOrEditEmptyDropOffLocation", // Controller/View
                         data: { //Passing data  
                             LocationName: $("#txtfromLoc").val(),
                             //CompanyID: $("#txtCustomerName option:selected").val(),

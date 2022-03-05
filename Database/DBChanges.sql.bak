@@ -3349,28 +3349,29 @@ INSERT INTO [dbo].[Stations] VALUES('TOKHER NIAZ BAIG',null,null,null,null,null,
 INSERT INTO [dbo].[Stations] VALUES('LAHORE',null,null,null,null,null,null,1)
 INSERT INTO [dbo].[Stations] VALUES('KOT RADHA KISHAN',null,null,null,null,null,null,1)
 
-Create table PreDispatchedMovement(
+Create table ReadyForDispatched(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
-[OrderId] [int] Not NULL,
-[OrderNo] [varchar](9) Not NULL,
-[ContainerNo] [nvarchar](250) Not NULL,
-[ContainerSize] [nvarchar](250) Not NULL,
-[BLnumber] [nvarchar](250)  NULL,
+[OrderId] [int] NOT NULL,
+[OrderNo] [varchar](9) NOT NULL,
+[ContainerNo] [nvarchar](250) NOT NULL,
+[ContainerSize] [nvarchar](250) NOT NULL,
+[BLnumber] [nvarchar](250) NULL,
 
-FromLocation nvarchar(100),
-FromDateTime datetime,
-ToLocation nvarchar(100),
-ToDateTime datetime, 
-TransporterName nvarchar(100), 
-VehicleNumber nvarchar(100), 
+[DOGranty] [datetime] NULL,
+[ImportEIR] [datetime] NULL,
+[PortWeighment] [datetime] NULL,
+[OutSidePortWeighment] [datetime] NULL,
+[GD] [datetime] NULL,
+[BL] [datetime] NULL,
 
-IsCompleted bit default(0),
+[IsCompleted] [bit] NULL default(0),
 [CreatedBy] [nvarchar](250) NULL,
-[CreateDate] datetime NULL,
+[CreateDate] [datetime] NULL,
 [UpdatedBy] [nvarchar](250) NULL,
-[UpdateDate] datetime NULL
+[UpdateDate] [datetime] NULL
 )
 Go
+
 Create table DispatchedOrder(
 [ID] [int] IDENTITY(1,1) NOT NULL primary key,
 [OrderId] [int] NOT NULL,
@@ -3471,18 +3472,19 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+Go
+--------Haris 02/26/2022
 
-GO
 Create table EmptyDropOff(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-OrderId int,NOT NULL,
+OrderId int NOT NULL,
 OrderNo varchar(9) NOT NULL,
 ContainerNo nvarchar(250) NOT NULL,
 ContainerSize nvarchar(250)NOT NULL,
 BLnumber nvarchar(250) NOT NULL,
 
 PortAndTerminalId int,
-TerminalName nvarchar(250)
+TerminalName nvarchar(250),
 ShippingLineName nvarchar(250),
 EIRNo nvarchar(250),
 ExpenseAtEmptyLocation numeric(18, 0),
@@ -3497,7 +3499,6 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
-
 Go
 Create table DispatchedTruck(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -3509,6 +3510,7 @@ BLnumber nvarchar(250) NOT NULL,
 
 
 DispatchedDate datetime,
+LastDateOfEmptyReturn datetime,
 VehicleNo nvarchar(100),
 DriverName nvarchar(100),
 DriverNo nvarchar(100),
@@ -3546,3 +3548,98 @@ IsCompleted bit default(0),
 [UpdateDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )
+
+
+
+
+---Aleem new 03/04/2022
+drop table FromLocOil
+go
+CREATE TABLE [dbo].[Location](
+	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+	[LocationName] [nvarchar](50) NULL,
+	[CompanyID] [int] NOT NULL,
+ )
+
+
+ ---- Haris new 03/05/22
+
+ USE [ERPMVC]
+GO
+/****** Object:  Table [dbo].[ShippingLine]    Script Date: 3/5/2022 12:34:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ShippingLine](
+	[ShippingLineId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ShippingLineName] [nvarchar](max) NULL,
+	[ShippingLineCode] [nvarchar](max) NULL ,
+	[ShippingLineAgent] [nvarchar](max) NULL,
+	[DeleteDate] [datetime2](7) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_ShippingLine] PRIMARY KEY CLUSTERED 
+(
+	[ShippingLineId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[ShippingLine] ON 
+
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (1, N'SHIPPING LINE ', N'001', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (4, N'SHIPPING LINE 2', N'002', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (5, N'GLOBE LINK', N'03', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (6, N'HAPAG LLOYD', N'HLL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (7, N'COSCO', N'COSCO', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (8, N'TEST', N'123', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (9, N'BALTIC SHIPPING', N'BALT', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (10, N'OCEAN NETWORK EXPRESS', N'ONE', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (11, N'CMA CGM TRANSPORT COMPANY', N'CMA', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (15, N'AA', N'A', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 1)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (17, N'a', N'a', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (18, N'a', N'a', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (19, N'a', N'a', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (20, N'a', N'a', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (22, N'TEST SHIPING LINE', N'0011', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (23, N'AT', N'AAAAT', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (24, N'QER', N'QER', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (25, N'AD', N'AD', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (26, N'TQ', N'TQ', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (27, N'OOCL', N'222', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (28, N'MEDITERRANIAN SHIPPING COMPANY', N'MSC', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (29, N'MODERN SHIPPING AGENCIES PRIVATE LIMITED', N'MSA', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (30, N'COSCO SHANGHAI', N'COS SHANGHAI', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (31, N'MAXICON CONTAINER LINE PTE LTD', N'MCL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (32, N'FOCUS FREIGHT SOLUTION', N'FFS', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (33, N'ANL SINGAPORE PTE LTD', N'ANL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (34, N'COMPAGNIE MARITIME DAFFRETEMENT', N'CMD', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (35, N'UNIVERSAL SHIPPING PVT LTD.', N'USL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (36, N'GLOBAL FEEDER SHIPPING', N'GFS', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (37, N'EVERGREEN LINE', N'ERNL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (38, N'WAN HAI LINES LTD', N'WHL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (39, N'HYUNDAI MERCHANT MARINE', N'HMM', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (40, N'KOREA MARINE TRANSPORT CONTAINERS', N'KMTC', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (41, N'AAA SHIPPING & LOGISTIC', N'AAASL', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (42, N'AAA SHIPPING & LOGISTICS PVT LTD', N'AAA', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (43, N'YANG MING MARINE TRANSPORT CORPORATION', N'YML', NULL, CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (44, N'PERMA SHIPPING LINE UK LTD', N'PSL', NULL, CAST(N'2021-01-05T19:21:06.9617032' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (45, N'LAUREL NAVIGATION (MAURITIUS) LTD', N'LNL', NULL, CAST(N'2021-01-14T15:34:50.4573087' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (46, N'ECU LINE PAKISTAN PVT LTD', N'ECU', NULL, CAST(N'2021-01-21T00:18:07.7467330' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (47, N'MAERSK LINE', N'MAERSK LINE', NULL, CAST(N'2021-02-02T01:28:35.4350943' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (48, N'COMPAGINE INTERNATIONAL MARITIMOS', N'-', NULL, CAST(N'2021-03-24T19:12:54.6133557' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (49, N'CLEAR FREIGHT INTERNATIONAL', N'CFI', NULL, CAST(N'2021-03-25T02:48:57.4287801' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (50, N'WEST EUROPEAN CONTAINER LINES', N'009', NULL, CAST(N'2021-04-10T15:51:52.5420305' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (51, N'COASTAL CONTAINER LINES', N'CCL', NULL, CAST(N'2021-05-21T12:49:45.7795579' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (52, N'HAMBURG SUED CONTAINER LINE ', N'HSCL', NULL, CAST(N'2021-06-24T21:09:16.8895389' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (53, N'PAK LINER AGENCIES PVT LTD', N'PLA', NULL, CAST(N'2021-07-09T20:37:58.5530354' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (54, N'POLLUX & CASTOR INTERNATIONAL (FZC)', N'PCI', NULL, CAST(N'2021-07-30T22:51:36.6063571' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (55, N'T K C', N'T K CORPORATION', NULL, CAST(N'2021-08-13T16:32:05.8296947' AS DateTime2), 1)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (56, N'FACILITIES SHIPPING AGENCY.', N'FSA', NULL, CAST(N'2021-08-13T21:01:07.9533813' AS DateTime2), 0)
+INSERT [dbo].[ShippingLine] ([ShippingLineId], [ShippingLineName], [ShippingLineCode], [ShippingLineAgent], [DeleteDate], [IsDeleted]) VALUES (57, N'PACIFIC INTERNATIONAL LINE', N'PIL', NULL, CAST(N'2021-09-08T05:01:06.6794872' AS DateTime2), 1)
+SET IDENTITY_INSERT [dbo].[ShippingLine] OFF
+GO
+ALTER TABLE [dbo].[ShippingLine] ADD  DEFAULT ('0001-01-01T00:00:00.0000000') FOR [DeleteDate]
+GO
+ALTER TABLE [dbo].[ShippingLine] ADD  DEFAULT ((0)) FOR [IsDeleted]
+GO
+

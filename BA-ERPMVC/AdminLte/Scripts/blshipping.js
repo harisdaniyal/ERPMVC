@@ -370,7 +370,7 @@ function getblshippingGride() {
            
             '<div class="row" style="margin-left:4px;">' +
             
-            '<a data-id="' + id + '" class="p-1 fa fa-eye _view" ></a>' +
+/*            '<a data-id="' + id + '" class="p-1 fa fa-eye _view" ></a>' +*/
            
             '<a data-id="' + id + '" class="p-1 fa fa-edit _edit" ></a>' +
              
@@ -381,11 +381,11 @@ function getblshippingGride() {
         //'</div>'
         return html;
     }
-    $(document).on("click", "._view", function (e) {
+    //$(document).on("click", "._view", function (e) {
 
-        var ID = $(this).attr('data-id');
-        window.location.href = "/Account/Register?id=" + ID + "&edit=0";
-    });
+    //    var ID = $(this).attr('data-id');
+    //    window.location.href = "/Account/Register?id=" + ID + "&edit=0";
+    //});
 
     $(document).on("click", "._edit", function (e) {
         var ID = $(this).attr('data-id');
@@ -394,7 +394,7 @@ function getblshippingGride() {
 
     $(document).on("click", "._remove", function (e) {
         var ID = $(this).attr('data-id');
-        deleteUserDetail(ID);
+        window.location.href = "/BLShippingLine/PrintGDReport?id=" + ID + "&edit=1";
     });
 
 

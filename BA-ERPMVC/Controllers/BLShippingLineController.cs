@@ -1,7 +1,9 @@
 ﻿using BA_ERPMVC.Extensions;
 using BA_ERPMVC.Models;
+using CrystalDecisions.CrystalReports.Engine;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -241,7 +243,34 @@ namespace BA_ERPMVC.Controllers
 
         }
 
+        public ActionResult PrintGDReport(int id)
+        {
+            ERPMVCEntities context = new ERPMVCEntities();
 
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "GDReport.rpt"));
+            rd.SetDataSource(context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
+            {
+                BLShippingID = c.BLShippingID,
+                BL = c.BL,
+                Consignee = c.Consignee,
+                Shipper = c.Shipper
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            return File(stream, "application/pdf", "GD-Report.pdf");
+        }
+        
 
 
 

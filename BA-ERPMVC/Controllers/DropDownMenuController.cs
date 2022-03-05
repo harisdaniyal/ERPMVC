@@ -28,7 +28,12 @@ namespace BA_ERPMVC.Controllers
         }
 
         public ActionResult Location()
-        { 
+        {
+            return View();
+        }
+
+        public ActionResult EmptyDropOffLoc()
+        {
             return View();
         }
 
@@ -36,6 +41,12 @@ namespace BA_ERPMVC.Controllers
         {
             var shippingagent = shippingService.GetShippingAgentAsync();
             return View(shippingagent);
+        }
+
+        public ActionResult ShippingLine()
+        {
+            var shippingline = shippingService.GetShippingLineAsync();
+            return View(shippingline);
         }
 
 
@@ -66,6 +77,34 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
+
+
+        [HttpPost]
+        public async Task<ActionResult> ShippingLine(ShippingLineViewModel shippinglineVM)
+        {
+            if (shippinglineVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(shippinglineVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (shippinglineVM.ShippingLineId == 0)
+                {
+                    await shippingService.SaveShippingLineAsync(shippinglineVM);
+
+                    return Json(new { success = true, Id = shippinglineVM.ShippingLineId });
+                }
+
+                await shippingService.UpdateShippingLineAsync(shippinglineVM);
+
+                return Json(new { success = true, Id = shippinglineVM.ShippingLineId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
 
 
         public ActionResult Facility()
@@ -249,14 +288,14 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var LocationDrop = from opo in db.Locations.Where(a => a.ID == id)
-                                   //join div in db.stp_Company on opo.CompanyID equals div.CompanyID
+                                       //join div in db.stp_Company on opo.CompanyID equals div.CompanyID
                                    select new
-                                  {
-                                      //  ID = opo.ID,
-                                    //  ID = opo.ID,
-                                      FromLoc = opo.LocationName,
-                                      CompanyID = opo.CompanyID,
-                                  };
+                                   {
+                                       //  ID = opo.ID,
+                                       //  ID = opo.ID,
+                                       FromLoc = opo.LocationName,
+                                       CompanyID = opo.CompanyID,
+                                   };
 
 
                 return Json(new { result = LocationDrop.ToList() }, JsonRequestBehavior.AllowGet);
@@ -276,19 +315,66 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var LocDrop = (from opo in db.Locations
-                               join div in db.stp_Company on opo.CompanyID equals div.CompanyID
+                                   //join div in db.stp_Company on opo.CompanyID equals div.CompanyID
                                select new
-                                   {
-                                       ID = opo.ID,
-                                       FromLoc = opo.LocationName,
-                                       CompanyID = div.CompanyName,
-                                   }).ToList();
+                               {
+                                   ID = opo.ID,
+                                   FromLoc = opo.LocationName,
+                                   // CompanyID = div.CompanyName,
+                               }).ToList();
 
                 return Json(new { LocDrop });
                 // return Json(new { data = Customer.ToList() }, JsonRequestBehavior.AllowGet);
             }
 
         }
+        ///********* Empty DropOff Location setup******////
+
+
+        public ActionResult AddOrEditEmptyDropOffLocation(EmptyDropOffLoc obj)
+        {
+            var done = 0;
+            var responseText = "";
+            using (ERPMVCEntities db = new ERPMVCEntities())
+            {
+                try
+                {
+                    if (obj.ID != 0)
+                    {
+                        var a = db.EmptyDropOffLocs.First(i => i.ID == obj.ID);
+
+                        a.LocationName = obj.LocationName;
+                        done = db.SaveChanges();
+                        responseText = "Data Updated Successfully.";
+                    }
+                    else
+                    {
+
+                        db.EmptyDropOffLocs.Add(obj);
+                        done = db.SaveChanges();
+                        responseText = "Data Inserted Successfully.";
+
+                    }
+
+                    if (done == 1)
+                    {
+
+                        return Json(new { success = true, responseText }, JsonRequestBehavior.AllowGet);
+                    }
+                    return Json(new { success = false, responseText = "Data Not Inserted Successfully." }, JsonRequestBehavior.AllowGet);
+
+
+                }
+                catch (Exception E)
+                {
+
+                    return Json(new { success = false, responseText = E }, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+        }
+
+
 
 
 
@@ -355,7 +441,49 @@ namespace BA_ERPMVC.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult GetEmptyDropOffLoc()
+        {
+            //#1 Create Instance of DatabaseContext class for Accessing Database.
+            using (ERPMVCEntities db = new ERPMVCEntities())
+            {
 
+                var LocDrop = (from opo in db.EmptyDropOffLocs
+                                   //join div in db.stp_Company on opo.CompanyID equals div.CompanyID
+                               select new
+                               {
+                                   ID = opo.ID,
+                                   FromLoc = opo.LocationName,
+                                   // CompanyID = div.CompanyName,
+                               }).ToList();
+
+                return Json(new { LocDrop });
+                // return Json(new { data = Customer.ToList() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult EditEmptyDropOffLoc(int id)
+        {
+
+            using (ERPMVCEntities db = new ERPMVCEntities())
+            {
+
+                var LocationDrop = from opo in db.EmptyDropOffLocs.Where(a => a.ID == id)
+                                       //join div in db.stp_Company on opo.CompanyID equals div.CompanyID
+                                   select new
+                                   {
+                                       //  ID = opo.ID,
+                                       //  ID = opo.ID,
+                                       FromLoc = opo.LocationName,
+                                       CompanyID = opo.CompanyID,
+                                   };
+
+
+                return Json(new { result = LocationDrop.ToList() }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
 
 
         [HttpPost]

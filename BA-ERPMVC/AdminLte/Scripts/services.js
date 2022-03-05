@@ -803,6 +803,16 @@ class Services {
         return response;
     }
 
+    getEmptyDropOffLocById(params) {
+        var response = fetch(URLs.GET_EmptyDropOffLocById, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: params
+        }).then(res => res.json());
+        return response;
+    }
 
 
     getLocDropGridDetail(params) {
@@ -816,7 +826,16 @@ class Services {
         return response;
     }
 
-
+    getEmptyDropOffLoc(params) {
+        var response = fetch(URLs.GET_EmptyDropOffLoc, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: []
+        }).then(res => res.json());
+        return response;
+    }
 
 
     getOilInvoiceGridDetail(params) {

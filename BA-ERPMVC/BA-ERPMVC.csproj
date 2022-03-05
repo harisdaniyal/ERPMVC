@@ -284,6 +284,9 @@
     <Compile Include="Models\EmptyDropOff.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmptyDropOffLoc.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GenerateOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -325,27 +328,37 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\GDReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GDReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTruckRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DispatchedOrderRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DispatchedTruckRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\EmptyDropOffLocRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\EmptyDropOffRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\ReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingAgentRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTruckRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDispatchedOrderRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDispatchedTruckRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IEmptyDropOffLocRepository.cs" />
     <Compile Include="Repositories\IRepositories\IEmptyDropOffRepository.cs" />
     <Compile Include="Repositories\IRepositories\IIntransactTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\IRepositories\IReDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IShippingAgentRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IShippingLineRepository.cs" />
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
@@ -362,6 +375,7 @@
     <Compile Include="ViewModels\OrderBooking\StationViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\TrainOrderReportViewModel.cs" />
     <Compile Include="ViewModels\ShippingAgentViewModel.cs" />
+    <Compile Include="ViewModels\ShippingLineViewModel.cs" />
     <Compile Include="ViewModels\VendorExpensesViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Content Include="AdminLte\Assets\bootstrap-progressbar\bootstrap-progressbar.js" />
@@ -450,6 +464,7 @@
     <Content Include="AdminLte\Js\vfs_fonts.js" />
     <Content Include="AdminLte\Js\xlsx.min.js" />
     <Content Include="AdminLte\Scripts\Custom.js" />
+    <Content Include="AdminLte\Scripts\EmptyDropOffLoc.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTruck.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
@@ -464,6 +479,7 @@
     <Content Include="AdminLte\Scripts\OrderBookings\ReadyForDispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\TripExecution.js" />
     <Content Include="AdminLte\Scripts\ShippingAgent.js" />
+    <Content Include="AdminLte\Scripts\ShippingLine.js" />
     <Content Include="App_Code\Fingerprint.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -3895,6 +3911,8 @@
     <Content Include="Views\OrderExecution\DeliveryTruck.cshtml" />
     <Content Include="Views\OrderExecution\TrainReport.cshtml" />
     <Content Include="Views\DropDownMenu\ShippingAgent.cshtml" />
+    <Content Include="Views\DropDownMenu\ShippingLine.cshtml" />
+    <Content Include="Views\DropDownMenu\EmptyDropOffLoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />
@@ -3958,6 +3976,10 @@
     <EmbeddedResource Include="Reports\DriverSlip.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DriverSlip.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\GDReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GDReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\LocalDetailInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

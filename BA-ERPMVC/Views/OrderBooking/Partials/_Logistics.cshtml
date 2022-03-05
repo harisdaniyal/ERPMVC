@@ -96,9 +96,9 @@
                         <td>
                             <select id="ddl_EmptyContainerReturnLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 150px;">
                                 <option value="">Empty Return Location</option>
-                                @foreach (var portAndTerminal in ViewBag.PortAndTerminals)
+                                @foreach (var location in ViewBag.EmptyDropOffLocation)
                                 {
-                                    <option value="@portAndTerminal.PortAndTerminalId">@portAndTerminal.PortName</option>
+                                    <option value="@location.ID">@location.LocationName</option>
                                 }
                             </select>
                         </td>

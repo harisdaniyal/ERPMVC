@@ -14,11 +14,13 @@ namespace BA_ERPMVC.BusinessLayer
     {
         private readonly ERPMVCEntities _dbContext;
         private readonly ShippingAgentRepository _shippingAgentRepository;
+        private readonly ShippingLineRepository _shippingLineRepository;
 
         public ShippingService()
         {
             _dbContext = new ERPMVCEntities();
             _shippingAgentRepository = new ShippingAgentRepository(_dbContext);
+            _shippingLineRepository = new ShippingLineRepository(_dbContext);
         }
 
         public IEnumerable<ShippingAgentViewModel> GetShippingAgentAsync()
@@ -74,6 +76,63 @@ namespace BA_ERPMVC.BusinessLayer
 
             await _dbContext.SaveChangesAsync();
             shippingagentVM.ShippingAgentId = shippingagent.ShippingAgentId;
+        }
+
+                       /////******** ShippingLine ********/////
+        
+        public IEnumerable<ShippingLineViewModel> GetShippingLineAsync()
+        {
+            return (from shippingline in _dbContext.ShippingLines.Where(x => x.IsDeleted == false)
+                    select new ShippingLineViewModel()
+                    {
+                        ShippingLineId = shippingline.ShippingLineId,
+                        ShippingLineName = shippingline.ShippingLineName
+                    }).OrderByDescending(x => x.ShippingLineId);
+
+        }
+
+        public async Task SaveShippingLineAsync(ShippingLineViewModel shippinglineVM)
+        {
+
+            var shippingline = Mapper.Map<ShippingLineViewModel, ShippingLine>(shippinglineVM);
+            if (shippingline == null)
+            {
+                throw new ArgumentNullException(nameof(shippinglineVM));
+            }
+
+            shippingline.IsDeleted = false;
+            _shippingLineRepository.Add(shippingline);
+
+            await _dbContext.SaveChangesAsync();
+            shippinglineVM.ShippingLineId = shippingline.ShippingLineId;
+        }
+
+        public async Task UpdateShippingLineAsync(ShippingLineViewModel shippinglineVM)
+        {
+
+            if (shippinglineVM == null)
+            {
+                throw new ArgumentNullException(nameof(shippinglineVM));
+            }
+
+            var shippingline = await _shippingLineRepository.GetAsync(Convert.ToInt32(shippinglineVM.ShippingLineId));
+
+            if (shippingline == null)
+            {
+                throw new InvalidOperationException($"Booking order:{shippinglineVM.ShippingLineId}  not found.");
+            }
+
+            shippingline.ShippingLineName = shippinglineVM.ShippingLineName;
+            shippingline.IsDeleted = shippinglineVM.IsDeleted.GetValueOrDefault();
+
+
+
+
+            _shippingLineRepository.Update(shippingline);
+
+
+            await _dbContext.SaveChangesAsync();
+            shippinglineVM.ShippingLineId = shippingline.ShippingLineId;
         }
     }
 }
