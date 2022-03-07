@@ -1,4 +1,14 @@
-﻿$(".btnSave").click(function () {
+﻿$(document).ready(function myfunction() {
+
+    $('#tbl_Logistics').dataTable({
+
+        "lengthChange": true,
+        "paging": true,
+        'searching': true,
+    });
+
+
+$(".btnSave").click(function () {
     row = $(this).closest("tr")
     console.log(row.find(".txt_OrderId").val())
     save(row, false)
@@ -60,4 +70,5 @@ function save(row, isCompleted) {
         }
         else showErrorMessage(response.message);
     });
-}
+    }
+});

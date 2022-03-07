@@ -374,7 +374,7 @@ function getblshippingGride() {
            
             '<a data-id="' + id + '" class="p-1 fa fa-edit _edit" ></a>' +
              
-            '<a data-id="' + id + '" class="p-1 fa fa-trash _remove" ></a>' +
+            '<a data-id="' + id + '" class="p-1 fa fa-print _remove" ></a>' +
              
             '</div>'
            
