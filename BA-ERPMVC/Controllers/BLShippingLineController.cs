@@ -66,7 +66,7 @@ namespace BA_ERPMVC.Controllers
                         a.NumberOfConatinerPack = obj.NumberOfConatinerPack;
                         a.KindOfPackagesDescriptionOfGoods = obj.KindOfPackagesDescriptionOfGoods;
                         a.GrossWeight = obj.GrossWeight;
-                        a.NetWeight = obj.NetWeight;
+                        a.Measurement = obj.Measurement;
                         a.Frightandcharges = obj.Frightandcharges;
                         a.TypeOfService = obj.TypeOfService;
                         a.NumberOfOrignalBL = obj.NumberOfOrignalBL;
@@ -181,7 +181,7 @@ namespace BA_ERPMVC.Controllers
                                  numberOfConatinerPack = opo.NumberOfConatinerPack,
                                  kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
                                  grossWeight = opo.GrossWeight,
-                                 netWeight = opo.NetWeight,
+                                 netWeight = opo.Measurement,
                                  Frightandcharges = opo.Frightandcharges,
                                  TypeOfService = opo.TypeOfService,
                                  NumberOfOrignalBL = opo.NumberOfOrignalBL,
@@ -229,7 +229,7 @@ namespace BA_ERPMVC.Controllers
                                     numberOfConatinerPack = opo.NumberOfConatinerPack,
                                     kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
                                     grossWeight = opo.GrossWeight,
-                                    netWeight = opo.NetWeight,
+                                    netWeight = opo.Measurement,
                                     Frightandcharges = opo.Frightandcharges,
                                     TypeOfService = opo.TypeOfService,
                                     NumberOfOrignalBL = opo.NumberOfOrignalBL,
@@ -248,14 +248,16 @@ namespace BA_ERPMVC.Controllers
             ERPMVCEntities context = new ERPMVCEntities();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "GDReport.rpt"));
-            rd.SetDataSource(context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "GDPDF.rpt"));
+            var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
             {
-                BLShippingID = c.BLShippingID,
                 BL = c.BL,
+                Shipper = c.Shipper,
                 Consignee = c.Consignee,
-                Shipper = c.Shipper
-            }).ToList());
+                NotifyParty = c.NotifyParty
+
+            }).ToList();
+            rd.SetDataSource(data);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -268,7 +270,7 @@ namespace BA_ERPMVC.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", "GD-Report.pdf");
+            return File(stream, "application/pdf", "GDReport.pdf");
         }
         
 

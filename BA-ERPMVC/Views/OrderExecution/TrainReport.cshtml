@@ -146,6 +146,17 @@
 </table>
 
 <script>
+    $(document).ready(function myfunction() {
+        $('#example').dataTable({
+            dom: 'Bfrtip',
+            "lengthChange": false,
+            "paging": true,
+            'searching': true,
+        });
+
+    });
+
+
     function fnExcelReport() {
         var tab_text = "<table border='2px'><tr>";
         var textRange; var j = 0;
@@ -170,7 +181,5 @@
         return (sa);
     }
 
-    $('#example').dataTable({
-        "paging": true
-    });
+    
 </script>

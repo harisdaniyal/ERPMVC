@@ -16,14 +16,14 @@ namespace BA_ERPMVC.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class GDReport : ReportClass {
+    public class GDPDF : ReportClass {
         
-        public GDReport() {
+        public GDPDF() {
         }
         
         public override string ResourceName {
             get {
-                return "GDReport.rpt";
+                return "GDPDF.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace BA_ERPMVC.Reports {
         
         public override string FullResourceName {
             get {
-                return "BA_ERPMVC.Reports.GDReport.rpt";
+                return "BA_ERPMVC.Reports.GDPDF.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace BA_ERPMVC.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedGDReport : Component, ICachedReport {
+    public class CachedGDPDF : Component, ICachedReport {
         
-        public CachedGDReport() {
+        public CachedGDPDF() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace BA_ERPMVC.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            GDReport rpt = new GDReport();
+            GDPDF rpt = new GDPDF();
             rpt.Site = this.Site;
             return rpt;
         }

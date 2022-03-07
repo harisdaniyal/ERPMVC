@@ -3558,7 +3558,13 @@ go
 CREATE TABLE [dbo].[Location](
 	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
 	[LocationName] [nvarchar](50) NULL,
-	[CompanyID] [int] NOT NULL,
+	[CompanyID] [int] NULL,
+ )
+go
+CREATE TABLE [dbo].[EmptyDropOffLoc](
+	[ID] [int] IDENTITY(1,1) NOT NULL primary key,
+	[LocationName] [nvarchar](50) NULL,
+	[CompanyID] [int] NULL,
  )
 
 

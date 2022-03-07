@@ -548,6 +548,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\GDPDF.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GDPDF.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\InvoiceData.Designer.cs">
       <DependentUpon>InvoiceData.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -601,11 +606,6 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Reports\Report1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Report1.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\Rpt_LocalLogisticsInvoice.cs">
       <DependentUpon>Rpt_LocalLogisticsInvoice.rpt</DependentUpon>
@@ -1035,7 +1035,6 @@
     <Content Include="AdminLte\dist\js\adminlte.min.js" />
     <Content Include="AdminLte\dist\js\adminlte.min.js.map" />
     <Content Include="AdminLte\dist\js\Custom.js" />
-    <Content Include="AdminLte\dist\js\dataTable.js" />
     <Content Include="AdminLte\dist\js\dataTables.bootstrap.min.js" />
     <Content Include="AdminLte\dist\js\dataTables.bootstrap4.js" />
     <Content Include="AdminLte\dist\js\dataTables.bootstrap4.min.js" />
@@ -3960,6 +3959,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DriverSlip.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\GDPDF.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GDPDF.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\LocalDetailInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LocalDetailInvoice.cs</LastGenOutput>
@@ -3987,10 +3990,6 @@
     <EmbeddedResource Include="Reports\OrderInvoiceWeight.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>OrderInvoiceWeight.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Report1.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Report1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Rpt_LocalLogisticsInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
