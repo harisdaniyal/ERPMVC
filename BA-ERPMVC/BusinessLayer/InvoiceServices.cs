@@ -235,7 +235,7 @@ namespace BA_ERPMVC.BusinessLayer
             return (from opo in db.Logistics
                     join go in db.GenerateOrders on opo.OrderId equals go.OrderID into table1
                     from Orders in table1.ToList()
-                    join bd in db.stp_BusinessDivision on Orders.BusinessDevisionID equals bd.BusinessDivisionID into table2
+                    join bd in db.stp_BusinessDivision on Orders.BusinessDivisionId equals bd.BusinessDivisionID into table2
                     from Business in table2.ToList()
                     join c in db.BACustomerRegistrations on Orders.CustomerID equals c.CustomerID into table3
                     from Cust in table3.ToList()
@@ -273,7 +273,7 @@ namespace BA_ERPMVC.BusinessLayer
             return (from inv in _dbContext.tbl_Invoice
                     join genOrd in _dbContext.GenerateOrders on inv.OrderID equals genOrd.OrderID
                     join cust in _dbContext.BACustomerRegistrations on genOrd.CustomerID equals cust.CustomerID
-                    join bd in _dbContext.stp_BusinessDivision on genOrd.BusinessDevisionID equals bd.BusinessDivisionID
+                    join bd in _dbContext.stp_BusinessDivision on genOrd.BusinessDivisionId equals bd.BusinessDivisionID
                     join st in _dbContext.stp_Status on inv.Status equals st.StatusID
                     where inv.InvoiceDate >= fromDate && inv.InvoiceDate <= ToDate
                 //    where x => x.ExpenseDate >= fromDate && x.ExpenseDate <= ToDate
@@ -449,7 +449,7 @@ namespace BA_ERPMVC.BusinessLayer
             return (from inv in _dbContext.tbl_Invoice
                     join genOrd in _dbContext.GenerateOrders on inv.OrderID equals genOrd.OrderID
                     join cust in _dbContext.BACustomerRegistrations on genOrd.CustomerID equals cust.CustomerID
-                    join bd in _dbContext.stp_BusinessDivision on genOrd.BusinessDevisionID equals bd.BusinessDivisionID
+                    join bd in _dbContext.stp_BusinessDivision on genOrd.BusinessDivisionId equals bd.BusinessDivisionID
                     join st in _dbContext.stp_Status on inv.Status equals st.StatusID
                     where inv.InvoiceNumber == invoiceNo
                     //  where cust.Customer_Name == invoiceNo

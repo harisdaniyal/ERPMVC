@@ -106,7 +106,7 @@ namespace BA_ERPMVC.Controllers
 
                 a.OrderNo = tvm.OrderNo;
                 a.CustomerID = tvm.CustomerID;
-                a.BusinessDevisionID = tvm.BusinessDevisionID;
+                a.BusinessDivisionId = tvm.BusinessDivisionId;
                 //  a.CustomerID = tvm.CustomerID;
                 a.OrderType = tvm.OrderType;
                 a.BL = tvm.BL;
@@ -416,7 +416,7 @@ namespace BA_ERPMVC.Controllers
             dynamic result = null;
             OrderGridViewModels orderGridServicesModel = _orderService.GetOrderServiceDetail();
             result = from e in orderGridServicesModel.OrderDetail
-                     join d in orderGridServicesModel.DivisionList on e.BusinessDevisionID equals d.BusinessDivisionID into table1
+                     join d in orderGridServicesModel.DivisionList on e.BusinessDivisionId equals d.BusinessDivisionID into table1
                      from d in table1.ToList()
                      join i in orderGridServicesModel.CustomerList on e.CustomerID equals i.CustomerID into table2
                      from i in table2.ToList()
@@ -924,7 +924,7 @@ namespace BA_ERPMVC.Controllers
                                   OID = opo.OrderID,
                                   OOrderNo = opo.OrderNo,
                                   OCustomerID = opo.CustomerID,
-                                  OBussinessDivision = opo.BusinessDevisionID,
+                                  OBussinessDivision = opo.BusinessDivisionId,
                                   OOrderType = opo.OrderType,
                                   OBLCRo = opo.BL,
                                   CRO = opo.CRO,
@@ -994,7 +994,7 @@ namespace BA_ERPMVC.Controllers
 
             OrderGridViewModels orderGridServicesModel = _orderService.GetOrderServiceDetail();
             result = from e in orderGridServicesModel.OrderDetail
-                     join d in orderGridServicesModel.DivisionList on e.BusinessDevisionID equals d.BusinessDivisionID into table1
+                     join d in orderGridServicesModel.DivisionList on e.BusinessDivisionId equals d.BusinessDivisionID into table1
                      from d in table1.ToList()
                      join i in orderGridServicesModel.CustomerList on e.CustomerID equals i.CustomerID into table2
                      from i in table2.ToList()
@@ -1129,7 +1129,7 @@ namespace BA_ERPMVC.Controllers
                     CustomLogger.Debug("Expense Id is Null");
                     OrderGridViewModels orderGridServicesModel = _orderService.GetOrderServiceDetail();
                     result = from e in orderGridServicesModel.OrderDetail.Where(x => x.OrderDate >= FromDate && x.OrderDate <= ToDate)
-                             join d in orderGridServicesModel.DivisionList on e.BusinessDevisionID equals d.BusinessDivisionID into table1
+                             join d in orderGridServicesModel.DivisionList on e.BusinessDivisionId equals d.BusinessDivisionID into table1
                              from d in table1.ToList()
                              join i in orderGridServicesModel.CustomerList on e.CustomerID equals i.CustomerID into table2
                              from i in table2.ToList()
