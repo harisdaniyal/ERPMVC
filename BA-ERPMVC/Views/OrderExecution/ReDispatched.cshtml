@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.ReDispatchedViewModel>
-
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
 @{
     if (Session["UserName"] == null)
     {
@@ -37,7 +37,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
-                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height: 400px;">
                     <thead class="thead-light text-center">
                         <tr>
                             <th>Booking No#</th>
@@ -115,7 +115,7 @@
             </div>
         </div>
         <!-- LOADING SHOW HIDE -->
-        @*<div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>*@
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
     </div>
 </div>
 <script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ReDispatched.js")"></script>

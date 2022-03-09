@@ -1,4 +1,4 @@
-﻿$(document).ready(function myfunction() {
+﻿
 
 $(".btnSave").click(function () {
     row = $(this).closest("tr")
@@ -58,5 +58,4 @@ function save(row, isCompleted) {
         }
         else showErrorMessage(response.message);
     });
-    }
-});
+}
