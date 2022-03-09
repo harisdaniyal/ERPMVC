@@ -317,9 +317,6 @@
     <Compile Include="Models\ContainerType.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomizeGD.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -359,6 +356,21 @@
     <Compile Include="Models\Emp_Spouse.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ERPMVC.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPMVC.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ERPMVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ERPMVC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPMVC.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Gender.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -369,9 +381,6 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InventoryCategory.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Location.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Logistic.cs">
@@ -845,20 +854,71 @@
       <DependentUpon>202104292034479_AddLockColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ERPMVC.Context.cs">
+    <Compile Include="Reports\DriverSlip.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ERPMVC.Context.tt</DependentUpon>
+      <DependentUpon>DriverSlip.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Models\ERPMVC.cs">
+    <Compile Include="Reports\InvoiceData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ERPMVC.tt</DependentUpon>
+      <DependentUpon>InvoiceData.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Models\ERPMVC.Designer.cs">
+    <Compile Include="Reports\LocalDetailInvoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ERPMVC.edmx</DependentUpon>
+      <DependentUpon>LocalDetailInvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LocalLogistics.aspx.cs">
+      <DependentUpon>LocalLogistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LocalLogistics.aspx.designer.cs">
+      <DependentUpon>LocalLogistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LocalLogistics.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalLogistics.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LocalLogisticsReportDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalLogisticsReportDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LocalLogisticsSingleReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalLogisticsSingleReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OrderInvoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderInvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OrderInvoiceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderInvoiceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OrderInvoiceWeight.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderInvoiceWeight.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Rpt_LocalLogisticsInvoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Rpt_LocalLogisticsInvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Repositories\CoreRepositories\BusinessDivisionRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\CityRepository.cs" />
