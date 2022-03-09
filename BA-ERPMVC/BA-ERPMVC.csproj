@@ -552,6 +552,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GDPDF.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\InvoiceData.Designer.cs">
       <DependentUpon>InvoiceData.xsd</DependentUpon>
@@ -734,6 +735,8 @@
     <Content Include="AdminLte\dist\css\ERPMAINCSS.css" />
     <Content Include="AdminLte\dist\css\jquery-confirm.css" />
     <Content Include="AdminLte\dist\css\styles.css" />
+    <Content Include="AdminLte\dist\js\dataTable.js" />
+    <Content Include="AdminLte\dist\js\jquery-confirm.js" />
     <Content Include="AdminLte\dist\js\scrpts-ui.js" />
     <Content Include="AdminLte\Js\buttons.colVis.min.js" />
     <Content Include="AdminLte\Js\buttons.html5.min.js" />

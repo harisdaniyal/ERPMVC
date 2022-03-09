@@ -1,10 +1,8 @@
 ﻿
-<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 <!--
 <link href="~/Content/toastr.css" rel="stylesheet" />
     -->
-
 @{
     if (Session["UserName"] == null)
     {
@@ -15,7 +13,12 @@
 }
 
 
-
+<style>
+    .head{
+        background-color: grey;
+        color:white;
+    }
+</style>
 
 <br />
 
@@ -37,31 +40,31 @@
                 <table id="BLShippingGride" class="table table-bordered dataTable" style="width: 100%;">
                     <thead class="_changeHeaderColor datatable-head">
                         <tr>
-                            <th scope="col">Approval</th>
-                            <th scope="col">BL</th>
-                            <th scope="col">ShippingNameAndAddress</th>
-                            <th scope="col">ConsignesNameAndAddress</th>
-                            <th scope="col">NotifyPartyNameAndAdress</th>
-                            <th scope="col">PreCarriageBy</th>
-                            <th scope="col">PlaceOfReceipt</th>
-                            <th scope="col">OceanVessel</th>
-                            <th scope="col">VoyNo</th>
-                            <th scope="col">PortOfLanding</th>
-                            <th scope="col">PortOfDischarge</th>
-                            <th scope="col">PlaceOfDelivery</th>
-                            <th scope="col">ContainerNo</th>
-                            <th scope="col">SealNo</th>
-                            <th scope="col">NumberOfContainerPack</th>
-                            <th scope="col">KindOfPackDescriptionOfGoods</th>
-                            <th scope="col">GrossWeight</th>
-                            <th scope="col">NetWeight</th>
-                            <th scope="col">FreightAndCharges</th>
-                            <th scope="col">TypeOfService</th>
-                            <th scope="col">NumberOfOrignalBL</th>
-                            <th scope="col">FrightPayable</th>
-                            <th scope="col">placeOfDateofIssue</th>
+                            <th class="head" scope="col">Approval</th>
+                            <th class="head"scope="col">BL</th>
+                            <th class="head"scope="col">ShippingNameAndAddress</th>
+                            <th class="head"scope="col">ConsigneeNameAndAddress</th>
+                            <th class="head"scope="col">NotifyPartyNameAndAdress</th>
+                            <th class="head"scope="col">PreCarriageBy</th>
+                            <th class="head"scope="col">PlaceOfReceipt</th>
+                            <th class="head"scope="col">OceanVessel</th>
+                            <th class="head"scope="col">VoyNo</th>
+                            <th class="head"scope="col">PortOfLanding</th>
+                            <th class="head"scope="col">PortOfDischarge</th>
+                            <th class="head"scope="col">PlaceOfDelivery</th>
+                            <th class="head"scope="col">ContainerNo</th>
+                            <th class="head"scope="col">SealNo</th>
+                            <th class="head"scope="col">NumberOfContainerPack</th>
+                            <th class="head"scope="col">KindOfPackDescriptionOfGoods</th>
+                            <th class="head"scope="col">GrossWeight</th>
+                            <th class="head"scope="col">Measurement</th>
+                            <th class="head"scope="col">FreightAndCharges</th>
+                            <th class="head"scope="col">TypeOfService</th>
+                            <th class="head"scope="col">NumberOfOrignalBL</th>
+                            <th class="head"scope="col">FrightPayable</th>
+                            <th class="head"scope="col">placeOfDateofIssue</th>
                             
-                            <th scope="col" sec:authorize="hasRole('Amin')">Action</th>
+                            <th class="head"scope="col" sec:authorize="hasRole('Amin')">Action</th>
                             
                             </tr>
                     </thead>
@@ -346,7 +349,7 @@
                         <label for="txtEDob">Place of Date<label id="_txtCustomerName-error" class="error" for="txtEDob"></label></label>
 
                         <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                            <input type="text" id="txtOperationDate" name="txtOperationDate" class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                            <input type="text" id="txtOperationDate" name="txtOperationDate" class="form-control datetimepicker-input" data-target="#reservationdate1"/>
                             <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>

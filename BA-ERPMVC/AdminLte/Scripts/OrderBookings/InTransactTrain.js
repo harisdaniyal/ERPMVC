@@ -1,13 +1,5 @@
 ﻿$(document).ready(function myfunction() {
 
-    $('#tbl_Logistics').dataTable({
-
-        "lengthChange": true,
-        "paging": true,
-        'searching': true,
-    });
-
-
 
 $(".btnSave").click(function () {
     row = $(this).closest("tr")

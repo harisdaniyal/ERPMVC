@@ -1,20 +1,14 @@
 ﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.TrainOrderReportViewModel>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/datatables.css" />
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/datatables.js"></script>
-
-
 @{
     ViewBag.Title = "TrainReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Train Report</h2><br/>
-<button class="btn btn-outline-success mb-3" onclick="fnExcelReport()">Export to Excel</button>
-<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive" style="height: 550px;">
+<h2>Train Report</h2>
+<br />
+
+<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
     <thead class="thead-light text-center">
         <tr>
             <th>Order No</th>
@@ -74,7 +68,7 @@
             <th>Expense At EmptyLocation</th>
         </tr>
     </thead>
-    <tbody style="background-color: white ;"class="text-center">
+    <tbody style="background-color: white ;" class="text-center">
         @foreach (var order in Model)
         {
             <tr>
@@ -133,8 +127,8 @@
                 <td>@order.DeliveryArrivalDate</td>
                 <td>@order.DeliveryDate</td>
                 <td>@order.ExpenseAtEmptyLocation</td>
-                <td>@order.FromDateTime</td>
-                <td>@order.ToDateTime</td>
+                @*<td>@order.FromDateTime</td>
+                    <td>@order.ToDateTime</td>*@
 
                 <!--<td class="text-center">-->
                 @* <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>*@
@@ -143,43 +137,36 @@
             </tr>
         }
     </tbody>
+
 </table>
 
 <script>
-    $(document).ready(function myfunction() {
-        $('#example').dataTable({
-            dom: 'Bfrtip',
-            "lengthChange": false,
-            "paging": true,
-            'searching': true,
-        });
-
-    });
 
 
-    function fnExcelReport() {
-        var tab_text = "<table border='2px'><tr>";
-        var textRange; var j = 0;
-        tab = document.getElementById('example'); // id of table
-        for (j = 0; j < tab.rows.length; j++) {
-            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
-            //tab_text=tab_text+"</tr>";
-        }
-        tab_text = tab_text + "</table>";
-        var ua = window.navigator.userAgent;
-        var msie = ua.indexOf("MSIE ");
-        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-        {
-            txtArea1.document.open("txt/html", "replace");
-            txtArea1.document.write(tab_text);
-            txtArea1.document.close();
-            txtArea1.focus();
-            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
-        }
-        else                 //other browser not tested on IE 11
-            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
-        return (sa);
-    }
 
-    
+    //function fnExcelReport() {
+    //    var tab_text = "<table border='2px'><tr>";
+    //    var textRange; var j = 0;
+    //    tab = document.getElementById('example'); // id of table
+    //    for (j = 0; j < tab.rows.length; j++) {
+    //        tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+    //        //tab_text=tab_text+"</tr>";
+    //    }
+    //    tab_text = tab_text + "</table>";
+    //    var ua = window.navigator.userAgent;
+    //    var msie = ua.indexOf("MSIE ");
+    //    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    //    {
+    //        txtArea1.document.open("txt/html", "replace");
+    //        txtArea1.document.write(tab_text);
+    //        txtArea1.document.close();
+    //        txtArea1.focus();
+    //        sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+    //    }
+    //    else                 //other browser not tested on IE 11
+    //        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+    //    return (sa);
+    //}
+
+
 </script>

@@ -66,7 +66,7 @@ namespace BA_ERPMVC.Controllers
                         a.NumberOfConatinerPack = obj.NumberOfConatinerPack;
                         a.KindOfPackagesDescriptionOfGoods = obj.KindOfPackagesDescriptionOfGoods;
                         a.GrossWeight = obj.GrossWeight;
-                        a.Measurement = obj.Measurement;
+                        a.NetWeight = obj.NetWeight;
                         a.Frightandcharges = obj.Frightandcharges;
                         a.TypeOfService = obj.TypeOfService;
                         a.NumberOfOrignalBL = obj.NumberOfOrignalBL;
@@ -181,7 +181,7 @@ namespace BA_ERPMVC.Controllers
                                  numberOfConatinerPack = opo.NumberOfConatinerPack,
                                  kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
                                  grossWeight = opo.GrossWeight,
-                                 netWeight = opo.Measurement,
+                                 netWeight = opo.NetWeight,
                                  Frightandcharges = opo.Frightandcharges,
                                  TypeOfService = opo.TypeOfService,
                                  NumberOfOrignalBL = opo.NumberOfOrignalBL,
@@ -229,7 +229,7 @@ namespace BA_ERPMVC.Controllers
                                     numberOfConatinerPack = opo.NumberOfConatinerPack,
                                     kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
                                     grossWeight = opo.GrossWeight,
-                                    netWeight = opo.Measurement,
+                                    netWeight = opo.NetWeight,
                                     Frightandcharges = opo.Frightandcharges,
                                     TypeOfService = opo.TypeOfService,
                                     NumberOfOrignalBL = opo.NumberOfOrignalBL,
@@ -252,9 +252,27 @@ namespace BA_ERPMVC.Controllers
             var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
             {
                 BL = c.BL,
-                Shipper = c.Shipper,
+               Shipper = c.Shipper,
                 Consignee = c.Consignee,
-                NotifyParty = c.NotifyParty
+                NotifyParty = c.NotifyParty,
+                precarriageby = c.precarriageby,
+                placeofreceipt = c.placeofreceipt,
+                OceanVessel = c.OceanVessel,
+                VoyNo = c.VoyNo,
+                //Portoflanding = c.Portoflanding,
+                //PortofDischarge = c.PortofDischarge,
+                //PlaceOfDelivery = c.PlaceOfDelivery,
+                ContainerNo = c.ContainerNo,
+                //SealNo = c.SealNo,
+                //NumberOfConatinerPack = c.NumberOfConatinerPack,
+                //KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
+                //GrossWeight = c.GrossWeight,
+                //Measurement = c.Measurement,
+                //Frightandcharges = c.Frightandcharges,
+                //FrightPayable = c.FrightPayable,
+                //TypeOfService = c.TypeOfService,
+                //NumberOfOrignalBL = c.NumberOfOrignalBL,
+                //placeOfDateofIssue = c.placeOfDateofIssue,
 
             }).ToList();
             rd.SetDataSource(data);
