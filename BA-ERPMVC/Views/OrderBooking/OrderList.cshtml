@@ -33,7 +33,7 @@
             <button type="button" class="btn btn-primary btn-v2" onclick="onChange_BtnNewOrder()">New Order</button>
         </div>
     </div>
-    <table class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle">
+    <table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle">
         <thead class="thead-light">
             <tr>
                 <th>ID</th>
@@ -133,4 +133,20 @@
     function onChange_BtnNewOrder() {
         location.href = "Index";
     }
+
+    $(document).ready(function myfunction() {
+        $('#example').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5'
+            ],
+            "Sorting": false,
+            "lengthChange": true,
+            "pageLength": 5,
+            "paging": true,
+            'searching': true
+        });
+
+    });
 </script>

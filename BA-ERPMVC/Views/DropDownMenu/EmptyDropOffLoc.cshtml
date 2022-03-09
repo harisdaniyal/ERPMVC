@@ -1,9 +1,6 @@
 ﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="~/Content/toastr.css" rel="stylesheet" />
 
-
-
-
 @{
     if (Session["UserName"] == null)
     {
@@ -13,11 +10,6 @@
     ViewBag.Title = "Location";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
-
-
 
 <br />
 
@@ -38,9 +30,9 @@
                 <table id="LocGride" class="table table-bordered" style="width: 100%;">
                     <thead class="_changeHeaderColor datatable-head">
                         <tr>
-                            <th scope="col">Action</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Location</th>
+                            <th style="color:black;" scope="col">Action</th>
+                            <th style="color:black;" scope="col">ID</th>
+                            <th style="color:black;" scope="col">Location</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

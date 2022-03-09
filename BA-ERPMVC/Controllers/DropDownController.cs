@@ -192,7 +192,7 @@ namespace BA_ERPMVC.Controllers
                 public JsonResult OrderDropdown()
                 {
                     
-                        var result = (from opo in db.GenerateOrders.Where(a=>a.BusinessDevisionID==1 || a.BusinessDevisionID==4 || a.BusinessDevisionID == 20009)
+                        var result = (from opo in db.GenerateOrders.Where(a=>a.BusinessDivisionId ==1 || a.BusinessDivisionId == 4 || a.BusinessDivisionId == 20009)
                                      join VV in db.Order_FacilityMapping.Where(a=> a.FacilityID==1 || a.FacilityID==2) on opo.OrderID equals VV.OrderID
                                      
                                      select new 

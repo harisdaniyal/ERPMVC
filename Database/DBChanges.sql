@@ -3649,3 +3649,4 @@ GO
 ALTER TABLE [dbo].[ShippingLine] ADD  DEFAULT ((0)) FOR [IsDeleted]
 GO
 
+EXEC SP_RENAME 'generateorder.BusinessDevisionID' , 'BusinessDivisionId', 'COLUMN'

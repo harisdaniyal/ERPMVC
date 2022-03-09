@@ -248,14 +248,34 @@ namespace BA_ERPMVC.Controllers
             ERPMVCEntities context = new ERPMVCEntities();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "GDReport.rpt"));
-            rd.SetDataSource(context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "GDPDF.rpt"));
+            var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
             {
-                BLShippingID = c.BLShippingID,
                 BL = c.BL,
+               Shipper = c.Shipper,
                 Consignee = c.Consignee,
-                Shipper = c.Shipper
-            }).ToList());
+                NotifyParty = c.NotifyParty,
+                precarriageby = c.precarriageby,
+                placeofreceipt = c.placeofreceipt,
+                OceanVessel = c.OceanVessel,
+                VoyNo = c.VoyNo,
+                //Portoflanding = c.Portoflanding,
+                //PortofDischarge = c.PortofDischarge,
+                //PlaceOfDelivery = c.PlaceOfDelivery,
+                ContainerNo = c.ContainerNo,
+                //SealNo = c.SealNo,
+                //NumberOfConatinerPack = c.NumberOfConatinerPack,
+                //KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
+                //GrossWeight = c.GrossWeight,
+                //Measurement = c.Measurement,
+                //Frightandcharges = c.Frightandcharges,
+                //FrightPayable = c.FrightPayable,
+                //TypeOfService = c.TypeOfService,
+                //NumberOfOrignalBL = c.NumberOfOrignalBL,
+                //placeOfDateofIssue = c.placeOfDateofIssue,
+
+            }).ToList();
+            rd.SetDataSource(data);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -268,7 +288,7 @@ namespace BA_ERPMVC.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", "GD-Report.pdf");
+            return File(stream, "application/pdf", "GDReport.pdf");
         }
         
 

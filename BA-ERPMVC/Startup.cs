@@ -82,11 +82,7 @@ namespace BA_ERPMVC
             {
                 config.ValidateInlineMaps = false;
 
-                config.CreateMap<GenerateOrder, BookingViewModel>()
-                    .ForMember(to => to.BusinessDivisionId, opt => opt.MapFrom(from => from.BusinessDevisionID));
-
-                config.CreateMap<BookingViewModel, GenerateOrder>()
-                    .ForMember(to => to.BusinessDevisionID, opt => opt.MapFrom(from => from.BusinessDivisionId));
+               
 
                 config.CreateMap<LogisticsViewModel, Logistic>()
                     .ForMember(to => to.CreatedBy, opt => opt.MapFrom(from => "Admin"))

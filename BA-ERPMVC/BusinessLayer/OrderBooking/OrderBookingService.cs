@@ -141,7 +141,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
 
             bookingModel.CustomerID = bookingViewModel.CustomerId;
-            bookingModel.BusinessDevisionID = bookingViewModel.BusinessDivisionId;
+            bookingModel.BusinessDivisionId = bookingViewModel.BusinessDivisionId;
             bookingModel.BL = bookingViewModel.BL;
             bookingModel.CRO = bookingViewModel.CRO;
             bookingModel.OrderDate = bookingViewModel.OrderDate;
@@ -1225,7 +1225,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         LastDateofEmptyReturn = order.VesselBerthingDate,
                         FreeDays = order.FreeDays,
                         CustomerName = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
-                        BusinessDivisionName = _dbContext.stp_BusinessDivision.Where(x => x.BusinessDivisionID == order.BusinessDevisionID).FirstOrDefault().BusinessDivisionName,
+                        BusinessDivisionName = _dbContext.stp_BusinessDivision.Where(x => x.BusinessDivisionID == order.BusinessDivisionId).FirstOrDefault().BusinessDivisionName,
                         OrderType = order.OrderType,
                         CRO = order.CRO,
                         OrderDate = order.OrderDate,
@@ -1345,7 +1345,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
-                            on order.BusinessDevisionID equals bDivision.BusinessDivisionID
+                            on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                     join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
                     select new OrderListViewModel()
                     {

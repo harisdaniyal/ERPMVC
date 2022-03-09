@@ -100,7 +100,7 @@ namespace BA_ERPMVC.Controllers
                 var Results = (from opo in db.Logistics
                                join go in db.GenerateOrders on opo.OrderId equals go.OrderID into table1
                                from Orders in table1.ToList()
-                               join bd in db.stp_BusinessDivision on Orders.BusinessDevisionID equals bd.BusinessDivisionID into table2
+                               join bd in db.stp_BusinessDivision on Orders.BusinessDivisionId equals bd.BusinessDivisionID into table2
                                from Business in table2.ToList()
                                join c in db.BACustomerRegistrations on Orders.CustomerID equals c.CustomerID into table3
                                from Cust in table3.ToList()

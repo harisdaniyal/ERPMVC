@@ -177,7 +177,7 @@ namespace BA_ERPMVC.Controllers
             try
             {
                 
-                result = _orderService.GetAll().Where(x => x.BusinessDevisionID == BusinessDevisionID).Select (x => new
+                result = _orderService.GetAll().Where(x => x.BusinessDivisionId == BusinessDevisionID).Select (x => new
                 {
                     x.OrderID,
                     x.OrderNo,
@@ -199,7 +199,7 @@ namespace BA_ERPMVC.Controllers
             {
                 OrderGridViewModels orderGridServicesModel = _orderService.GetOrderServiceDetail();
                 result = from e in orderGridServicesModel.OrderDetail
-                         join d in orderGridServicesModel.DivisionList on e.BusinessDevisionID equals d.BusinessDivisionID into table1
+                         join d in orderGridServicesModel.DivisionList on e.BusinessDivisionId equals d.BusinessDivisionID into table1
                          from d in table1.ToList()
                          join i in orderGridServicesModel.CustomerList on e.CustomerID equals i.CustomerID into table2
                          from i in table2.ToList()

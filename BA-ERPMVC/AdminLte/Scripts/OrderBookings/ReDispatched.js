@@ -1,4 +1,6 @@
-﻿$(".btnSave").click(function () {
+﻿$(document).ready(function myfunction() {
+
+$(".btnSave").click(function () {
     row = $(this).closest("tr")
     console.log(row.find(".txt_OrderId").val())
     save(row, false)
@@ -56,4 +58,5 @@ function save(row, isCompleted) {
         }
         else showErrorMessage(response.message);
     });
-}
+    }
+});
