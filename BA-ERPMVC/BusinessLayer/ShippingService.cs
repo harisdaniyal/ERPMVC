@@ -15,12 +15,15 @@ namespace BA_ERPMVC.BusinessLayer
         private readonly ERPMVCEntities _dbContext;
         private readonly ShippingAgentRepository _shippingAgentRepository;
         private readonly ShippingLineRepository _shippingLineRepository;
+        private readonly BLShippingContainerRepository _blshippingContainerRepository;
+
 
         public ShippingService()
         {
             _dbContext = new ERPMVCEntities();
             _shippingAgentRepository = new ShippingAgentRepository(_dbContext);
             _shippingLineRepository = new ShippingLineRepository(_dbContext);
+            _blshippingContainerRepository = new BLShippingContainerRepository(_dbContext);
         }
 
         public IEnumerable<ShippingAgentViewModel> GetShippingAgentAsync()
@@ -133,6 +136,65 @@ namespace BA_ERPMVC.BusinessLayer
 
             await _dbContext.SaveChangesAsync();
             shippinglineVM.ShippingLineId = shippingline.ShippingLineId;
+        }
+
+        /////******* BL Shipping Container ********/////
+
+        public IEnumerable<BLShippingContainerViewModel> GetBLShippingContainerAsync()
+        {
+            return (from blshippingcontainer in _dbContext.BLShippingContainers.Where(x => x.IsDeleted == false)
+                    select new BLShippingContainerViewModel()
+                    {
+                        ID = blshippingcontainer.ID,
+                        ContainerNo = blshippingcontainer.ContainerNo,
+                        ContainerType = blshippingcontainer.ContainerType,
+                    }).OrderByDescending(x => x.ID);
+
+        }
+
+        public async Task SaveBLShippingContainerAsync(BLShippingContainerViewModel blshippingcontainerVM)
+        {
+
+            var blshippingcontainer = Mapper.Map<BLShippingContainerViewModel, BLShippingContainer>(blshippingcontainerVM);
+            if (blshippingcontainer == null)
+            {
+                throw new ArgumentNullException(nameof(blshippingcontainerVM));
+            }
+
+            blshippingcontainer.IsDeleted = false;
+            _blshippingContainerRepository.Add(blshippingcontainer);
+
+            await _dbContext.SaveChangesAsync();
+            blshippingcontainerVM.ID = blshippingcontainer.ID;
+        }
+
+        public async Task UpdateBLShippingContainerAsync(BLShippingContainerViewModel blshippingcontainerVM)
+        {
+
+            if (blshippingcontainerVM == null)
+            {
+                throw new ArgumentNullException(nameof(blshippingcontainerVM));
+            }
+
+            var blshippingcontainer = await _blshippingContainerRepository.GetAsync(Convert.ToInt32(blshippingcontainerVM.ID));
+
+            if (blshippingcontainer == null)
+            {
+                throw new InvalidOperationException($"Booking order:{blshippingcontainerVM.ID}  not found.");
+            }
+
+            blshippingcontainer.ContainerNo = blshippingcontainerVM.ContainerNo;
+            blshippingcontainer.ContainerType = blshippingcontainerVM.ContainerType;
+            blshippingcontainer.IsDeleted = blshippingcontainerVM.IsDeleted.GetValueOrDefault();
+
+
+
+
+            _blshippingContainerRepository.Update(blshippingcontainer);
+
+
+            await _dbContext.SaveChangesAsync();
+            blshippingcontainerVM.ID = blshippingcontainer.ID;
         }
     }
 }

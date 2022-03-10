@@ -26,7 +26,7 @@
     <div class="card-header" style="background:white;">
         <div class="row" style="margin-bottom:10px">
             <div class="col-sm-6 float-sm-left">
-                <button type="submit" id="btnADD" class="btn btn-primary">Add BL Shipping line</button>
+                <button type="submit" id="btnADD" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"> </i> BL Shipping line</button>
             </div><!-- /.col -->
 
         </div>
@@ -60,9 +60,9 @@
                             <th class="head"scope="col">Measurement</th>
                             <th class="head"scope="col">FreightAndCharges</th>
                             <th class="head"scope="col">TypeOfService</th>
-                            <th class="head"scope="col">NumberOfOrignalBL</th>
+                            <th class="head"scope="col">NumberOfOriginalBL</th>
                             <th class="head"scope="col">FrightPayable</th>
-                            <th class="head"scope="col">placeOfDateofIssue</th>
+                            <th class="head"scope="col">Place and DateofIssue</th>
                             
                             <th class="head"scope="col" sec:authorize="hasRole('Amin')">Action</th>
                             
@@ -83,7 +83,7 @@
 </div>
 <div id="lloForm" class="card card-default collapse">
     <div class="card-header">
-        <h3 class="card-title">BLShippingLine Name</h3>
+        <h3 class="card-title">BLShippingLine</h3>
     </div>
 
     <form id="_addShippingLine">
@@ -94,7 +94,7 @@
                     <div class="form-group">
                         <label for="txtblNo">BL No<label id="_txtCustomerName-error" class="error" for="txtblNo"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtblNo" name="txtblNo" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtblNo" name="txtblNo" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -114,27 +114,27 @@
             <div class="row">
 
                 <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="txtshipping">Shipping(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtshipping"></label></label>
+                    <div class="form-group" /> 
+                        <label for="txtshipping">SHIPPER(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtshipping"></label></label>
                         <div class="input-group">
-                            <textarea type="text" id="txtshipping" name="txtshipping" class="form-control"></textarea>
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtshipping" name="txtshipping" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtConsignee">Consignee(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtConsignee"></label></label>
+                        <label for="txtConsignee">CONSIGNEE(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtConsignee"></label></label>
                         <div class="input-group">
-                            <textarea type="text" id="txtConsignee" name="txtConsignee" class="form-control"></textarea>
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtConsignee" name="txtConsignee" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtNotifyParty">Notify Party(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtNotifyParty"></label></label>
+                        <label for="txtNotifyParty">NOTIFY PARTY(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtNotifyParty"></label></label>
                         <div class="input-group">
-                            <textarea type="text" id="txtNotifyParty" name="txtNotifyParty" class="form-control"></textarea>
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtNotifyParty" name="txtNotifyParty" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -144,27 +144,27 @@
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtprecarriageby">Pre-carriage by<label id="_txtCustomerName-error" class="error" for="txtprecarriageby"></label></label>
+                        <label for="txtprecarriageby">PRE-CARRIAGE BY<label id="_txtCustomerName-error" class="error" for="txtprecarriageby"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtprecarriageby" name="txtprecarriageby" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtprecarriageby" name="txtprecarriageby" class="form-control">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtplaceofReceipt">Place of receipt<label id="_txtCustomerName-error" class="error" for="txtplaceofReceipt"></label></label>
+                        <label for="txtplaceofReceipt">PLACE OF RECEIPT<label id="_txtCustomerName-error" class="error" for="txtplaceofReceipt"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtplaceofReceipt" name="txtplaceofReceipt" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtplaceofReceipt" name="txtplaceofReceipt" class="form-control">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtOceanVessel">Ocean Vessel<label id="_txtCustomerName-error" class="error" for="txtOceanVessel"></label></label>
+                        <label for="txtOceanVessel">OCEAN VESSEL<label id="_txtCustomerName-error" class="error" for="txtOceanVessel"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtOceanVessel" name="txtOceanVessel" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtOceanVessel" name="txtOceanVessel" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -177,26 +177,26 @@
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtVoyNo">Voy No.<label id="_txtCustomerName-error" class="error" for="txtVoyNo"></label></label>
+                        <label for="txtVoyNo">VOYAGE NO<label id="_txtCustomerName-error" class="error" for="txtVoyNo"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtVoyNo" name="txtVoyNo" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtVoyNo" name="txtVoyNo" class="form-control">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtPortOfLanding">Port of landing.<label id="_txtCustomerName-error" class="error" for="txtPortOfLanding"></label></label>
+                        <label for="txtPortOfLoading">PORT OF LOADING<label id="_txtCustomerName-error" class="error" for="txtPortOfLanding"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtPortOfLanding" name="txtPortOfLanding" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtPortOfLanding" name="txtPortOfLanding" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtPortOfDischarge">Port of Discharge.<label id="_txtCustomerName-error" class="error" for="txtPortOfDischarge"></label></label>
+                        <label for="txtPortOfDischarge">PORT OF DISCHARGE<label id="_txtCustomerName-error" class="error" for="txtPortOfDischarge"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtPortOfDischarge" name="txtPortOfDischarge" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtPortOfDischarge" name="txtPortOfDischarge" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -207,26 +207,26 @@
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtPlaceofDeilvery">Place Of Delivery.<label id="_txtCustomerName-error" class="error" for="txtPlaceofDeilvery"></label></label>
+                        <label for="txtPlaceofDeilvery">PLACE OF DELIVERY<label id="_txtCustomerName-error" class="error" for="txtPlaceofDeilvery"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtPlaceofDeilvery" name="txtPlaceofDeilvery" class="form-control">
+                            <input  oninput="this.value= this.value.toUpperCase()" type="text" id="txtPlaceofDeilvery" name="txtPlaceofDeilvery" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtContainerNo">ContainerNo.<label id="_txtCustomerName-error" class="error" for="txtContainerNo"></label></label>
+                        <label for="txtContainerNo">CONTAINER NO<label id="_txtCustomerName-error" class="error" for="txtContainerNo"></label></label>
                         <div class="input-group">
-                            <textarea type="text" id="txtContainerNo" name="txtContainerNo" class="form-control"></textarea>
+                            <textarea oninput="this.value= this.value.toUpperCase()"  type="text" id="txtContainerNo" name="txtContainerNo" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtSealNo">Seal No.<label id="_txtCustomerName-error" class="error" for="txtSealNo"></label></label>
+                        <label for="txtSealNo">SEAL NO<label id="_txtCustomerName-error" class="error" for="txtSealNo"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtSealNo" name="txtSealNo" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtSealNo" name="txtSealNo" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -240,27 +240,27 @@
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtConatinerOrPackage">Number of Container or Packages<label id="_txtCustomerName-error" class="error" for="txtConatinerOrPackage"></label></label>
+                        <label for="txtConatinerOrPackage">NUMBER OF CONTAINERS OR PACKAGES<label id="_txtCustomerName-error" class="error" for="txtConatinerOrPackage"></label></label>
                         <div class="input-group">
-                            <textarea type="text" id="txtConatinerOrPackage" name="txtConatinerOrPackage" class="form-control"></textarea>
+                            <textarea oninput="this.value= this.value.toUpperCase()"  type="text" id="txtConatinerOrPackage" name="txtConatinerOrPackage" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtkindofpack">Kind Of packages;Description of goods<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
+                        <label for="txtkindofpack">KIND OF PACKAGES & DISCRIPTION OF GOODS *<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
                         <div class="input-group">
-                            <textarea type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
+                            <textarea oninput="this.value= this.value.toUpperCase()"  type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtGrossWeight">Gross Weight<label id="_txtCustomerName-error" class="error" for="txtGrossWeight"></label></label>
+                        <label for="txtGrossWeight">GROSS WEIGHT<label id="_txtCustomerName-error" class="error" for="txtGrossWeight"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtGrossWeight" name="txtGrossWeight" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtGrossWeight" name="txtGrossWeight" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -271,27 +271,33 @@
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtNetWeight">Net Weight<label id="_txtCustomerName-error" class="error" for="txtNetWeight"></label></label>
+                        <label for="txtNetWeight">MEASUREMENT<label id="_txtCustomerName-error" class="error" for="txtNetWeight"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtNetWeight" name="txtNetWeight" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtNetWeight" name="txtNetWeight" class="form-control">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtfreightandcharges">Freight and Charges<label id="_txtCustomerName-error" class="error" for="txtfreightandcharges"></label></label>
+                        <label for="txtfreightandcharges">FREIGHT & CHARGES<label id="_txtCustomerName-error" class="error" for="txtfreightandcharges"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtfreightandcharges" name="txtfreightandcharges" class="form-control">
+                            @*<input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtfreightandcharges" name="txtfreightandcharges" class="form-control">*@
+
+                            <select id="txtfreightandcharges" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 p-3" style="width: 100px;">
+                                <option value="">Select</option>
+                                <option value="FREIGHT PREPAID">FREIGHT PREPAID</option>
+                                <option value="AS ARRANGE">AS ARRANGE</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtCollect">Collect<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
+                        <label for="txtCollect">COLLECT<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtCollect" name="txtCollect" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtCollect" name="txtCollect" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -313,27 +319,27 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtypeofservice">Type of Service<label id="_txtCustomerName-error" class="error" for="txtypeofservice"></label></label>
+                        <label for="txtypeofservice">TYPE OF SERVICE<label id="_txtCustomerName-error" class="error" for="txtypeofservice"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtypeofservice" name="txtypeofservice" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtypeofservice" name="txtypeofservice" class="form-control">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtNumberofOrignal">Number of Orignal B(s)/L<label id="_txtCustomerName-error" class="error" for="txtNumberofOrignal"></label></label>
+                        <label for="txtNumberofOrignal">NUMBER OF ORIGINAL B(s)/L<label id="_txtCustomerName-error" class="error" for="txtNumberofOrignal"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtNumberofOrignal" name="txtNumberofOrignal" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtNumberofOrignal" name="txtNumberofOrignal" class="form-control">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="txtfreightPayable">Freight Payable<label id="_txtCustomerName-error" class="error" for="txtfreightPayable"></label></label>
+                        <label for="txtfreightPayable">FREIGHT PAYABLE<label id="_txtCustomerName-error" class="error" for="txtfreightPayable"></label></label>
                         <div class="input-group">
-                            <input type="text" id="txtfreightPayable" name="txtfreightPayable" class="form-control">
+                            <input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtfreightPayable" name="txtfreightPayable" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -346,10 +352,10 @@
                 <div class="col-lg-4">
                     <!-- text input -->
                     <div class="form-group">
-                        <label for="txtEDob">Place of Date<label id="_txtCustomerName-error" class="error" for="txtEDob"></label></label>
+                        <label for="txtEDob">PLACE & DATE OF ISSUE<label id="_txtCustomerName-error" class="error" for="txtEDob"></label></label>
 
                         <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                            <input type="text" id="txtOperationDate" name="txtOperationDate" class="form-control datetimepicker-input" data-target="#reservationdate1"/>
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtOperationDate" name="txtOperationDate" class="form-control datetimepicker-input" data-target="#reservationdate1"/>
                             <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>

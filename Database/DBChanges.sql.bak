@@ -3649,3 +3649,17 @@ GO
 ALTER TABLE [dbo].[ShippingLine] ADD  DEFAULT ((0)) FOR [IsDeleted]
 GO
 
+EXEC SP_RENAME 'generateorder.BusinessDevisionID' , 'BusinessDivisionId', 'COLUMN'
+
+
+GO
+Create table BLShippingContainer(
+Create table BLShippingContainer(
+ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+
+ContainerNo NVARCHAR(MAX) NULL,
+ContainerType NVARCHAR(MAX) NULL,
+
+[DeleteDate] [datetime2](7) NULL,
+[IsDeleted] bit DEFAULT(0),
+)

@@ -161,7 +161,7 @@ $(document).ready(function () {
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
                             GrossWeight: $("#txtGrossWeight").val(),
                             NetWeight: $("#txtNetWeight").val(),
-                            Frightandcharges: $("#txtfreightandcharges").val(),
+                            Frightandcharges: $("#txtfreightandcharges option:selected").val(),
                             TypeOfService: $("#txtypeofservice").val(),
                             NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
                             FrightPayable: $("#txtfreightPayable").val(),
@@ -452,6 +452,7 @@ $(document).ready(function () {
                 txtContainerNo: "required",
                 txtSealNo: "required",
                 txtConatinerOrPackage: "required",
+                txtkindofpack: "required"
 
 
             },
@@ -498,7 +499,7 @@ $(document).ready(function () {
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
                             GrossWeight: $("#txtGrossWeight").val(),
                             NetWeight: $("#txtNetWeight").val(),
-                            Frightandcharges: $("#txtfreightandcharges").val(),
+                            Frightandcharges: $("#txtfreightandcharges option:selected").val(),
                             TypeOfService: $("#txtypeofservice").val(),
                             NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
                             FrightPayable: $("#txtfreightPayable").val(),

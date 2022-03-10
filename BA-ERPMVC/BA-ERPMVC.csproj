@@ -308,6 +308,9 @@
     <Compile Include="Models\BA_Bank.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BLShippingContainer.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClearingAgent.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -315,6 +318,9 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContainerType.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomizeGD.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -381,6 +387,9 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InventoryCategory.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Logistic.cs">
@@ -623,6 +632,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Repositories\CoreRepositories\BLShippingContainerRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTruckRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DispatchedOrderRepository.cs" />
@@ -636,6 +646,7 @@
     <Compile Include="Repositories\CoreRepositories\ShippingAgentRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
+    <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTruckRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDispatchedOrderRepository.cs" />
@@ -651,6 +662,7 @@
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
+    <Compile Include="ViewModels\BLShippingContainerViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
@@ -754,6 +766,7 @@
     <Content Include="AdminLte\Js\pdfmake.min.js" />
     <Content Include="AdminLte\Js\vfs_fonts.js" />
     <Content Include="AdminLte\Js\xlsx.min.js" />
+    <Content Include="AdminLte\Scripts\BLShippingContainer.js" />
     <Content Include="AdminLte\Scripts\Custom.js" />
     <Content Include="AdminLte\Scripts\EmptyDropOffLoc.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
@@ -3958,6 +3971,7 @@
     <Content Include="Views\DropDownMenu\ShippingAgent.cshtml" />
     <Content Include="Views\DropDownMenu\ShippingLine.cshtml" />
     <Content Include="Views\DropDownMenu\EmptyDropOffLoc.cshtml" />
+    <Content Include="Views\DropDownMenu\BLShippingContainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

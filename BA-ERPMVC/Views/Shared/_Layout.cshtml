@@ -400,17 +400,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         $(document).ready(function myfunction() {
             $('.datatable').dataTable({
-                dom: 'Bfrtip',
+                
                 buttons: [
                     'copyHtml5',
                     'excelHtml5'
                 ],
-                "Sorting": false,
-                "lengthChange": true,
-                "pageLength": 10,
-                "paging": true,
-                'searching': true,
+                "columnDefs": [
+                    { "searchable": false, "targets": 0 }
+                ],
+                //"Sorting": false,
+                //"lengthChange": true,
+                //"pageLength": 10,
+                //"paging": true,
+                //"searching": true,
+                //"filter": true,
+                //"visible": true,
+
             });
+
 
         });
     </script>

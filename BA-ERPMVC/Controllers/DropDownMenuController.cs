@@ -49,6 +49,11 @@ namespace BA_ERPMVC.Controllers
             return View(shippingline);
         }
 
+        public ActionResult BLShippingContainer()
+        {
+            var blshippingcontainer = shippingService.GetBLShippingContainerAsync();
+            return View(blshippingcontainer);
+        }
 
         [HttpPost]
         public async Task<ActionResult> ShippingAgent(ShippingAgentViewModel shippingagentVM)
@@ -70,6 +75,35 @@ namespace BA_ERPMVC.Controllers
                 await shippingService.UpdateShippingAgentAsync(shippingagentVM);
 
                 return Json(new { success = true, Id = shippingagentVM.ShippingAgentId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+                     ///////********** BLShipping Container**********//////////
+                     
+        [HttpPost]
+        public async Task<ActionResult> BLShippingContainer(BLShippingContainerViewModel blshippingcontainerVM)
+        {
+            if (blshippingcontainerVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(blshippingcontainerVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (blshippingcontainerVM.ID == 0)
+                {
+                    await shippingService.SaveBLShippingContainerAsync(blshippingcontainerVM);
+
+                    return Json(new { success = true, Id = blshippingcontainerVM.ID});
+                }
+
+                await shippingService.UpdateBLShippingContainerAsync(blshippingcontainerVM);
+
+                return Json(new { success = true, Id = blshippingcontainerVM.ID });
             }
             catch (Exception ex)
             {
