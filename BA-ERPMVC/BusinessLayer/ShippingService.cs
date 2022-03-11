@@ -147,7 +147,9 @@ namespace BA_ERPMVC.BusinessLayer
                     {
                         ID = blshippingcontainer.ID,
                         ContainerNo = blshippingcontainer.ContainerNo,
+                        SealNo = blshippingcontainer.SealNo,
                         ContainerType = blshippingcontainer.ContainerType,
+                        ContainerSize = blshippingcontainer.ContainerSize,
                     }).OrderByDescending(x => x.ID);
 
         }
@@ -184,7 +186,9 @@ namespace BA_ERPMVC.BusinessLayer
             }
 
             blshippingcontainer.ContainerNo = blshippingcontainerVM.ContainerNo;
+            blshippingcontainer.SealNo = blshippingcontainerVM.SealNo;
             blshippingcontainer.ContainerType = blshippingcontainerVM.ContainerType;
+            blshippingcontainer.ContainerSize = blshippingcontainerVM.ContainerSize;
             blshippingcontainer.IsDeleted = blshippingcontainerVM.IsDeleted.GetValueOrDefault();
 
 

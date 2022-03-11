@@ -23,11 +23,13 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12 table-responsive center">
-                <table id="example" class="table table-sm table-bordered mb-3 w-min-80">
+            <div class="col-12 table-responsive center">
+                <table id="example" class="table table-sm table-bordered mb-3  datatable" style="height: auto">
                     <thead class="thead-light ">
                         <tr>
                             <th>Container No</th>
+                            <th>Seal No</th>
+                            <th>Container Size</th>
                             <th>Container Type</th>
                             <th>Actions</th>
                         </tr>
@@ -37,13 +39,34 @@
                             <td>
                                 <input type="hidden" value="0" class="form-control txt_ID" />
 
-                                <input type="text" style="width: 300px;" value="" class="form-control  txt_containerno" />
+                                <input type="text" style="width: 200px;" value="" class="form-control  txt_containerno" />
 
                             </td>
                             <td>
-                                <input type="text" style="width: 300px;" value="" class="form-control  txt_containertype" />
+
+                                <input type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
 
                             </td>
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize"  style="width: 200px;" >
+                                    <option value="">Container Size</option>
+                                    @foreach (var containerSize in ViewBag.ContainerSizes)
+                                    {
+                                        <option value="@containerSize.ProductCatName" data-select2-id="@containerSize.ProductCatName">@containerSize.ProductCatName</option>
+                                    }
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerType" style="width: 200px;">
+                                    <option value="">Container Type</option>
+                                    @foreach (var containerType in ViewBag.ContainerTypes)
+                                    {
+                                        <option value="@containerType.ContainerTypeName" data-select2-id="@containerType.ContainerTypeName">@containerType.ContainerTypeName</option>
+                                    }
+                                </select>
+                            </td>
+
 
 
                             <td class="btn-group">
@@ -57,11 +80,32 @@
                                 <td>
                                     <input type="hidden" value="@bLShippingContainer.ID" class="form-control txt_ID" />
 
-                                    <input type="text" style="width: 300px;" value="@bLShippingContainer.ContainerNo" class="form-control  txt_containerno" />
-                                </td>
+                                    <input type="text" style="width: 200px;" value="@bLShippingContainer.ContainerNo" class="form-control  txt_containerno" />
+                                </td> 
                                 <td>
-                                    <input type="text" style="width: 300px;" value="@bLShippingContainer.ContainerType" class="form-control  txt_containertype" />
+                                    <input type="hidden" value="@bLShippingContainer.SealNo" class="form-control txt_ID" />
 
+                                    <input type="text" style="width: 200px;" value="@bLShippingContainer.SealNo" class="form-control  txt_sealno" />
+                                </td>
+
+                                <td>
+                                    <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize" style="width: 200px;">
+                                        <option value="">Container Size</option>
+                                        @foreach (var containerSize in ViewBag.ContainerSizes)
+                                        {
+                                            <option value="@containerSize.ProductCatName" data-select2-id="@containerSize.ProductCatName" @(containerSize.ProductCatName == bLShippingContainer.ContainerSize ? "selected=selected" : "")>@containerSize.ProductCatName</option>
+                                        }
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerType" style="width: 200px;">
+                                        <option value="">Container Type</option>
+                                        @foreach (var containerType in ViewBag.ContainerTypes)
+                                        {
+                                            <option value="@containerType.ContainerTypeName" data-select2-id="@containerType.ContainerTypeName" @(containerType.ContainerTypeName == bLShippingContainer.ContainerType ? "selected=selected" : "")>@containerType.ContainerTypeName</option>
+                                        }
+                                    </select>
                                 </td>
 
 

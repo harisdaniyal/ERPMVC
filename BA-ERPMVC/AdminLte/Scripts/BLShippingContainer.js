@@ -12,10 +12,6 @@
         save(row, true)
     })
 
-    $('#example').dataTable({
-        "paging": true
-    });
-
     function save(row, IsDeleted) {
 
         if (row.find(".txt_ID").val() == 0 && IsDeleted == true) {
@@ -26,7 +22,9 @@
             'ID': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,
             'ContainerNo': row.find(".txt_containerno").val(),
-            'ContainerType': row.find(".txt_containertype").val()
+            'SealNo': row.find(".txt_sealno").val(),
+            'ContainerType': row.find(".txt_ContainerType").val(),
+            'ContainerSize': row.find(".txt_ContainerSize").val()
 
         });
         showLoader();
@@ -43,22 +41,7 @@
                 }
                 else {
                     if (row.find(".txt_ID").val() == 0) {
-                        $('#example').prepend(`<tr class="bg-light tbl-valign-top">
-                            <td>
-                                <input type="hidden" value="" class="form-control txt_ID" />
-
-                                <input type="text" style="width: 300px;" value="" class="form-control  txt_containerno" />
-
-                            </td>
-                            <td>
-                               <input type="text" style="width: 300px;" value="" class="form-control  txt_containertype" />
-                           </td> 
-
-                            <td class="btn-group">
-                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
-                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                            </td>
-                        </tr>`)
+                        $('#example').prepend(` <tr class="bg-light tbl-valign-top">` + row.html().trim() + ` </tr>`)
                     }
 
                     row.find(".txt_ID").val(response.Id)

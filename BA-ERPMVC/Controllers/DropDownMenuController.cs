@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
 //using InfiSolMVC.Models;
@@ -14,12 +15,16 @@ namespace BA_ERPMVC.Controllers
 {
     public class DropDownMenuController : Controller
     {
-
+        ERPMVCEntities db = new ERPMVCEntities();
         private readonly ShippingService shippingService;
+        private readonly ContainerTypeService containerTypeService;
+        private readonly OrderBookingService orderBookingService; 
 
         public DropDownMenuController()
         {
             shippingService = new ShippingService();
+            containerTypeService = new ContainerTypeService();
+            orderBookingService = new OrderBookingService();
         }
         // GET: DropDownMenu
         public ActionResult Expenses()
@@ -49,9 +54,11 @@ namespace BA_ERPMVC.Controllers
             return View(shippingline);
         }
 
-        public ActionResult BLShippingContainer()
+        public async  Task<ActionResult> BLShippingContainer()
         {
             var blshippingcontainer = shippingService.GetBLShippingContainerAsync();
+            this.ViewBag.ContainerTypes = await containerTypeService.GetAllContainerTypesAsync();
+            this.ViewBag.ContainerSizes = await orderBookingService.GetContainerSizesAsync();
             return View(blshippingcontainer);
         }
 
@@ -90,6 +97,12 @@ namespace BA_ERPMVC.Controllers
             if (blshippingcontainerVM == null)
             {
                 return Json(new { success = false, message = $"{nameof(blshippingcontainerVM)} should not be null or empty" });
+            }
+
+            if (db.BLShippingContainers.Any(x=> x.ContainerNo == blshippingcontainerVM.ContainerNo) && blshippingcontainerVM.ID == 0)
+            {
+                return Json(new { success = false, message = $" This {blshippingcontainerVM.ContainerNo} Container No is already exists." });
+
             }
 
             try

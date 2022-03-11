@@ -43,16 +43,46 @@ $(document).ready(function () {
     var services = new Services();
 
 
+    //$.ajax({
+    //    type: "GET",
+    //    url: "/BLShippingLine/GetApproval",
+    //    data: "{}",
+    //    success: function (data) {
+    //        var s = '<option value="">Please Select a Approval</option>';
+    //        for (var i = 0; i < data.length; i++) {
+    //            s += '<option value="' + data[i].SID + '">' + data[i].SStatus + '</option>';
+    //        }
+    //        $("#txtApproval").html(s);
+    //    }
+
+    //}, 5000);
+
     $.ajax({
         type: "GET",
-        url: "/BLShippingLine/GetApproval",
+        url: "/BLShippingLine/GetContainerNo",
         data: "{}",
         success: function (data) {
-            var s = '<option value="">Please Select a Approval</option>';
+            var s = '<option value="">Please Select Container</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option value="' + data[i].SID + '">' + data[i].SStatus + '</option>';
+                s += '<option value="' + data[i].ContainerNo + '">' + data[i].ContainerNo + '</option>';
             }
-            $("#txtApproval").html(s);
+            $("#txtContainerNo").html(s);
+            $('.txtContainerNo').select2();
+        }
+
+    }, 5000);
+
+    $.ajax({
+        type: "GET",
+        url: "/BLShippingLine/GetBlAgent",
+        data: "{}",
+        success: function (data) {
+            var s = '<option value=""disable >Please Select Agent</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].BLAgent + '">' + data[i].BLAgent + '</option>';
+            }
+            $("#txtagent").html(s);
+            //$('.txtContainerNo').select2();
         }
 
     }, 5000);
@@ -80,29 +110,35 @@ $(document).ready(function () {
             })).then(function (response) {
                 var data = response.result;
 
-                var data1 = data[0].placeOfDateofIssue ? moment(data[0].placeOfDateofIssue).format("DD/MM/YYYY hh:mm A") : "--";
+                var data1 = data[0].DateOfIssue ? moment(data[0].DateOfIssue).format("YYYY-MM-DD") : "--";
                 $("#txtblNo").val(data[0].bl);
-                $("#txtApproval").val(data[0].Approv).change();
-                $("#txtshipping").val(data[0].shipper);
+                //$("#txtApproval").val(data[0].Approv).change();
+                //$("#txtshipping").val(data[0].shipper);
                 $("#txtConsignee").val(data[0].consignee);
                 $("#txtNotifyParty").val(data[0].notifyParty);
                 $("#txtprecarriageby").val(data[0].precarriageby);
+                $("#txtCollect").val(data[0].Collect);
                 $("#txtplaceofReceipt").val(data[0].placeofreceipt);
                 $("#txtOceanVessel").val(data[0].oceanVessel);
                 $("#txtVoyNo").val(data[0].voyNo);
                 $("#txtPortOfLanding").val(data[0].portoflanding);
                 $("#txtPortOfDischarge").val(data[0].portofDischarge);
                 $("#txtPlaceofDeilvery").val(data[0].placeOfDelivery);
-                $("#txtContainerNo").val(data[0].ContainerNo);
+            /*    $("#txtContainerNo").val(data[0].ContainerNo);*/
+                $(".txtContainerNo").select2().val([data[0].ContainerNo]).trigger("change");
                 $("#txtSealNo").val(data[0].SealNo);
                 $("#txtConatinerOrPackage").val(data[0].numberOfConatinerPack);
                 $("#txtkindofpack").val(data[0].kindOfPackagesDescriptionOfGoods);
                 $("#txtGrossWeight").val(data[0].grossWeight);
                 $("#txtNetWeight").val(data[0].netWeight);
                 $("#txtfreightandcharges").val(data[0].Frightandcharges);
+                $("#txtagent").val(data[0].BLAgent);
                 $("#txtypeofservice").val(data[0].TypeOfService);
                 $("#txtNumberofOrignal").val(data[0].NumberOfOrignalBL);
+                $("#txtforwardingagent").val(data[0].ForwardingAgent);
+                $("#txtfinaldestination").val(data[0].FinalDestination);
                 $("#txtfreightPayable").val(data[0].FrightPayable);
+                $("#txtplaceofissue").val(data[0].PlaceOfIssue);
                 $("#txtOperationDate").val(data1);
 
             });
@@ -144,28 +180,33 @@ $(document).ready(function () {
                         data: { //Passing data  
                             BLShippingID: empid,
                             BL: $("#txtblNo").val(),
-                            Approval: $("#txtApproval option:selected").val(),
+                           // Approval: $("#txtApproval option:selected").val(),
                             Shipper: $("#txtshipping").val(),
                             Consignee: $("#txtConsignee").val(),
                             NotifyParty: $("#txtNotifyParty").val(),
                             precarriageby: $("#txtprecarriageby").val(),
+                            Collect: $("#txtCollect").val(),
                             placeofreceipt: $("#txtplaceofReceipt").val(),
                             OceanVessel: $("#txtOceanVessel").val(),
                             VoyNo: $("#txtVoyNo").val(),
                             Portoflanding: $("#txtPortOfLanding").val(),
                             PortofDischarge: $("#txtPortOfDischarge").val(),
                             PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            ContainerNo: $("#txtContainerNo").val(),
+                            ContainerNo: $(".txtContainerNo").select2("val").toString(),
                             SealNo: $("#txtSealNo").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
                             GrossWeight: $("#txtGrossWeight").val(),
                             NetWeight: $("#txtNetWeight").val(),
                             Frightandcharges: $("#txtfreightandcharges option:selected").val(),
+                            BLAgent: $("#txtagent option:selected").val(),
                             TypeOfService: $("#txtypeofservice").val(),
                             NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
+                            ForwardingAgent: $("#txtforwardingagent").val(),
+                            FinalDestination: $("#txtfinaldestination").val(),
                             FrightPayable: $("#txtfreightPayable").val(),
-                            placeOfDateofIssue: $("#txtOperationDate").val()
+                            PlaceOfIssue: $("#txtplaceofissue").val(),
+                            DateofIssue: $("#txtOperationDate").val()
 
                         },
 
@@ -260,6 +301,9 @@ $(document).ready(function () {
                         data: 'precarriageby',
                         width: 10
                     }, {
+                        data: 'Collect',
+                        width: 10
+                    }, {
                         data: 'placeofreceipt',
                         width: 10
                     }, {
@@ -299,30 +343,44 @@ $(document).ready(function () {
                         data: 'Frightandcharges',
                         width: 10
                     }, {
+                        data: 'BLAgent',
+                        width: 10
+                    }, {
                         data: 'TypeOfService',
                         width: 10
                     }, {
                         data: 'NumberOfOrignalBL',
                         width: 10
                     }, {
+                        data: 'ForwardingAgent',
+                        width: 10
+                    },
+                    {
+                        data: 'FinalDestination',
+                        width: 10
+                    },
+                    {
                         data: 'FrightPayable',
                         width: 10
                     }, {
-                        data: 'placeOfDateofIssue',
+                        data: 'PlaceOfIssue',
+                        width: 10
+                    }, {
+                        data: 'DateOfIssue',
                         width: 10,
                         'render': function (date) {
                             //var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
                             var data = date ? moment(date).format("ll") : "--"
                             return data;
                         }
-                    }, {
-                        data: 'ID',
-                        width: 5,
-                        "render": function (data) {
-                            var html = appendActionMenu(data);
+                    //}, {
+                    //    data: 'ID',
+                    //    width: 5,
+                    //    "render": function (data) {
+                    //        var html = appendActionMenu(data);
 
-                            return html;
-                        }
+                    //        return html;
+                    //    }
 
 
 
@@ -330,26 +388,26 @@ $(document).ready(function () {
 
                     // dropDown Search Start
 
-                    initComplete: function () {
-                        this.api().columns().every(function () {
-                            var column = this;
-                            var select = $('<select><option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
+                    //initComplete: function () {
+                    //    this.api().columns().every(function () {
+                    //        var column = this;
+                    //        var select = $('<select><option value=""></option></select>')
+                    //            .appendTo($(column.footer()).empty())
+                    //            .on('change', function () {
+                    //                var val = $.fn.dataTable.util.escapeRegex(
+                    //                    $(this).val()
+                    //                );
 
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
+                    //                column
+                    //                    .search(val ? '^' + val + '$' : '', true, false)
+                    //                    .draw();
+                    //            });
 
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        });
-                    }
+                    //        column.data().unique().sort().each(function (d, j) {
+                    //            select.append('<option value="' + d + '">' + d + '</option>')
+                    //        });
+                    //    });
+                    //}
                     // dropDown Search End 
 
                 });
@@ -449,6 +507,8 @@ $(document).ready(function () {
                 txtPortOfLanding: "required",
                 txtPortOfDischarge: "required",
                 txtPlaceofDeilvery: "required",
+                txtforwardingagent: "required",
+                txtfinaldestination: "required",
                 txtContainerNo: "required",
                 txtSealNo: "required",
                 txtConatinerOrPackage: "required",
@@ -487,23 +547,28 @@ $(document).ready(function () {
                             Consignee: $("#txtConsignee").val(),
                             NotifyParty: $("#txtNotifyParty").val(),
                             precarriageby: $("#txtprecarriageby").val(),
+                            Collect: $("#txtCollect").val(),
                             placeofreceipt: $("#txtplaceofReceipt").val(),
                             OceanVessel: $("#txtOceanVessel").val(),
                             VoyNo: $("#txtVoyNo").val(),
                             Portoflanding: $("#txtPortOfLanding").val(),
                             PortofDischarge: $("#txtPortOfDischarge").val(),
                             PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            ContainerNo: $("#txtContainerNo").val(),
+                            ContainerNo: $(".txtContainerNo").select2("val").toString(),
                             SealNo: $("#txtSealNo").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
                             GrossWeight: $("#txtGrossWeight").val(),
                             NetWeight: $("#txtNetWeight").val(),
                             Frightandcharges: $("#txtfreightandcharges option:selected").val(),
+                            BLAgent: $("#txtagent option:selected").val(),
                             TypeOfService: $("#txtypeofservice").val(),
                             NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
+                            ForwardingAgent: $("#txtforwardingagent").val(),
+                            FinalDestination: $("#txtfinaldestination").val(),
                             FrightPayable: $("#txtfreightPayable").val(),
-                            placeOfDateofIssue: $("#txtOperationDate").val()
+                            PlaceOfIssue: $("#txtplaceofissue").val(),
+                            DateofIssue: $("#txtOperationDate").val()
 
                         },
 
@@ -512,11 +577,12 @@ $(document).ready(function () {
                                 if (response.success) {
                                     getblshippingGride();
                                     $("#txtblNo").val("");
-                                    $("#txtApproval").val("");
+                                    //$("#txtApproval").val("");
                                     $("#txtshipping").val("");
                                     $("#txtConsignee").val("");
                                     $("#txtNotifyParty").val("");
                                     $("#txtprecarriageby").val("");
+                                    $("#txtCollect").val("");
                                     $("#txtplaceofReceipt").val("");
                                     $("#txtOceanVessel").val("");
                                     $("#txtVoyNo").val("");
@@ -530,9 +596,13 @@ $(document).ready(function () {
                                     $("#txtGrossWeight").val("");
                                     $("#txtNetWeight").val("");
                                     $("#txtfreightandcharges").val("");
+                                    $("txtagent").val("");
                                     $("#txtypeofservice").val("");
                                     $("#txtNumberofOrignal").val("");
                                     $("#txtfreightPayable").val("");
+                                    $("#txtforwardingagent").val("");
+                                    $("#txtfinaldestination").val("");
+                                    $("#txtplaceofissue").val("");
                                     $("#txtOperationDate").val("");
                                     toastr.success("BL Shipping Details has been inserted successfully.");
                                     returncondition = true;

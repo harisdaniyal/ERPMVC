@@ -308,6 +308,9 @@
     <Compile Include="Models\BA_Bank.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BLAgentDetail.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BLShippingContainer.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -559,6 +562,11 @@
     </Compile>
     <Compile Include="Models\VendorTypeExpense.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\BLReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BLReport.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\DriverSlip.cs">
       <DependentUpon>DriverSlip.rpt</DependentUpon>
@@ -4031,6 +4039,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104292034479_AddLockColumn.resx">
       <DependentUpon>202104292034479_AddLockColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BLReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BLReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DriverSlip.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

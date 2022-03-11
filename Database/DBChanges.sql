@@ -3651,16 +3651,60 @@ GO
 
 EXEC SP_RENAME 'generateorder.BusinessDevisionID' , 'BusinessDivisionId', 'COLUMN'
 
+   -------------------- 10-03-2022-------------------------- 
 
 GO
 
-Create table BLShippingContainer(
-ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+CREATE TABLE [dbo].[BLAgentDetail](
+	[AgentId] [bigint] IDENTITY(1,1) NOT NULL Primary key,
+	[BLAgent] [nvarchar](max) NULL,
+	
+	[DeleteDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+	)
 
-ContainerNo NVARCHAR(250) NULL,
-ContainerType NVARCHAR(250) NULL,
-ContainerSize NVARCHAR(50) NULL
-
-[DeleteDate] [datetime2](7) NULL,
-[IsDeleted] bit DEFAULT(0),
+CREATE TABLE [dbo].[BAShippingLine](
+	[BLShippingID] [int] IDENTITY(1,1) NOT NULL Primary key,
+	[BL] [nvarchar](50) NULL,
+	[Approval] [int] NOT NULL,
+	[Collect] [int] NOT NULL,
+	[NumberOfOrignalBL] [nvarchar](50) NULL,
+	[Shipper] [nvarchar](max) NULL,
+	[Consignee] [nvarchar](max) NULL,
+	[NotifyParty] [nvarchar](max) NULL,
+	[precarriageby] [nvarchar](50) NULL,
+	[ForwardingAgent] [nvarchar](250) NULL,
+	[FinalDestination] [nvarchar](250) NULL,
+	[placeofreceipt] [nvarchar](50) NULL,
+	[OceanVessel] [nvarchar](50) NULL,
+	[VoyNo] [nvarchar](20) NULL,
+	[Portoflanding] [nvarchar](50) NULL,
+	[PortofDischarge] [nvarchar](50) NULL,
+	[PlaceOfIssue] [nvarchar](250) NULL,
+	[DateOfIssue] [datetime] NULL,
+	[PlaceOfDelivery] [nvarchar](50) NULL,
+	[ContainerNo] [nvarchar](max) NULL,
+	[SealNo] [varchar](50) NULL,
+	[NumberOfConatinerPack] [nvarchar](max) NULL,
+	[KindOfPackagesDescriptionOfGoods] [nvarchar](max) NULL,
+	[GrossWeight] [nvarchar](50) NULL,
+	[NetWeight] [nvarchar](50) NULL,
+	[Frightandcharges] [nvarchar](50) NULL,
+	[TypeOfService] [nvarchar](50) NULL,
+	[BLAgent] [nvarchar](700) NULL,
+	[FrightPayable] [nvarchar](50) NULL,
+	[placeOfDateofIssue] [datetime] NULL,
+	[UserID] [varchar](50) NULL,
+	[UpdateBy] [varchar](50) NULL,
+	[CreateDate] [varchar](50) NULL,
+	[UpdateDate] [varchar](50) NULL
 )
+ CONSTRAINT [PK_BAShippingLine] PRIMARY KEY CLUSTERED 
+(
+	[BLShippingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+Drop Table BAShippingLine

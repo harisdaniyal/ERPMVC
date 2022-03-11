@@ -17,7 +17,24 @@ namespace BA_ERPMVC.Controllers
         // GET: BLShippingLine
         public ActionResult Index()
         {
+
             return View();
+        }
+
+        public ActionResult GetContainerNo()
+        {
+            return Json(db.BLShippingContainers.Where(x=> x.IsDeleted== false).Select(x=> new
+            {
+            ContainerNo = x.ContainerNo
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetBlAgent()
+        {
+            return Json(db.BLAgentDetails.Where(x => x.IsDeleted == false).Select(x => new
+            {
+                BLAgent = x.BLAgent
+            }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -55,6 +72,7 @@ namespace BA_ERPMVC.Controllers
                         a.Consignee = obj.Consignee;
                         a.NotifyParty = obj.NotifyParty;
                         a.precarriageby = obj.precarriageby;
+                        a.Collect = obj.Collect;
                         a.placeofreceipt = obj.placeofreceipt;
                         a.OceanVessel = obj.OceanVessel;
                         a.VoyNo = obj.VoyNo;
@@ -68,10 +86,14 @@ namespace BA_ERPMVC.Controllers
                         a.GrossWeight = obj.GrossWeight;
                         a.NetWeight = obj.NetWeight;
                         a.Frightandcharges = obj.Frightandcharges;
+                        a.BLAgent = obj.BLAgent;
                         a.TypeOfService = obj.TypeOfService;
                         a.NumberOfOrignalBL = obj.NumberOfOrignalBL;
+                        a.ForwardingAgent = obj.ForwardingAgent;
+                        a.FinalDestination = obj.FinalDestination;
                         a.FrightPayable = obj.FrightPayable;
-                        a.placeOfDateofIssue = obj.placeOfDateofIssue;
+                        a.PlaceOfIssue = obj.PlaceOfIssue;
+                        a.DateOfIssue = obj.DateOfIssue;
                         a.UpdateDate = obj.UpdateDate = DateTime.Now.ToString();
                         a.UpdateBy = obj.UpdateBy = Session["UserName"].ToString();
                         done = db.SaveChanges();
@@ -170,6 +192,7 @@ namespace BA_ERPMVC.Controllers
                                  consignee = opo.Consignee,
                                  notifyParty = opo.NotifyParty,
                                  precarriageby = opo.precarriageby,
+                                 Collect = opo.Collect,
                                  placeofreceipt = opo.placeofreceipt,
                                  oceanVessel = opo.OceanVessel,
                                  voyNo = opo.VoyNo,
@@ -183,10 +206,14 @@ namespace BA_ERPMVC.Controllers
                                  grossWeight = opo.GrossWeight,
                                  netWeight = opo.NetWeight,
                                  Frightandcharges = opo.Frightandcharges,
+                                  BLAgent = opo.BLAgent,
                                  TypeOfService = opo.TypeOfService,
                                  NumberOfOrignalBL = opo.NumberOfOrignalBL,
+                                  ForwardingAgent = opo.ForwardingAgent,
+                                  FinalDestination = opo.FinalDestination,
                                  FrightPayable = opo.FrightPayable,
-                                 placeOfDateofIssue = opo.placeOfDateofIssue,
+                                  PlaceOfIssue = opo.PlaceOfIssue,
+                                  DateOfIssue = opo.DateOfIssue,
 
                               };
 
@@ -218,6 +245,7 @@ namespace BA_ERPMVC.Controllers
                                     consignee = opo.Consignee,
                                     notifyParty = opo.NotifyParty,
                                     precarriageby = opo.precarriageby,
+                                    Collect= opo.Collect,
                                     placeofreceipt = opo.placeofreceipt,
                                     oceanVessel = opo.OceanVessel,
                                     voyNo = opo.VoyNo,
@@ -231,10 +259,14 @@ namespace BA_ERPMVC.Controllers
                                     grossWeight = opo.GrossWeight,
                                     netWeight = opo.NetWeight,
                                     Frightandcharges = opo.Frightandcharges,
+                                    BLAgent = opo.BLAgent,
                                     TypeOfService = opo.TypeOfService,
                                     NumberOfOrignalBL = opo.NumberOfOrignalBL,
+                                    ForwardingAgent = opo.ForwardingAgent,
+                                    FinalDestination = opo.FinalDestination,
                                     FrightPayable = opo.FrightPayable,
-                                    placeOfDateofIssue = opo.placeOfDateofIssue,
+                                    PlaceOfIssue = opo.PlaceOfIssue,
+                                    DateOfIssue = opo.DateOfIssue,
 
                                 }).ToList();
 
@@ -252,16 +284,16 @@ namespace BA_ERPMVC.Controllers
             var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
             {
                 BL = c.BL,
-               Shipper = c.Shipper,
+                Shipper = c.Shipper,
                 Consignee = c.Consignee,
                 NotifyParty = c.NotifyParty,
                 precarriageby = c.precarriageby,
                 placeofreceipt = c.placeofreceipt,
                 OceanVessel = c.OceanVessel,
                 VoyNo = c.VoyNo,
-                //Portoflanding = c.Portoflanding,
-                //PortofDischarge = c.PortofDischarge,
-                //PlaceOfDelivery = c.PlaceOfDelivery,
+                Portoflanding = c.Portoflanding,
+                PortofDischarge = c.PortofDischarge,
+                PlaceOfDelivery = c.PlaceOfDelivery,
                 ContainerNo = c.ContainerNo,
                 //SealNo = c.SealNo,
                 //NumberOfConatinerPack = c.NumberOfConatinerPack,
