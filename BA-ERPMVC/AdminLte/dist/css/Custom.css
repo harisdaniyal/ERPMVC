@@ -1,4 +1,4 @@
-﻿table.display thead  {
+﻿table.display thead {
     padding: 8px 18px 8px 10px;
     border-bottom: 1px solid black;
     font-weight: bold;
@@ -446,3 +446,25 @@ ul.verticle_bars {
         }
 
 /* *********  /moris  **************************** */
+
+
+.error {
+    border-color: red !important;
+}
+
+.loading-dimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(255,255,255,.5);
+    z-index: 200;
+}
+
+    .loading-dimmer.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

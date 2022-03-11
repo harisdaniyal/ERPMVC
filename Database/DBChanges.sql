@@ -3656,11 +3656,9 @@ GO
 
 Create table BLShippingContainer(
 ID [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-
 ContainerNo NVARCHAR(250) NULL,
 ContainerType NVARCHAR(250) NULL,
-ContainerSize NVARCHAR(50) NULL
-
-[DeleteDate] [datetime2](7) NULL,
+ContainerSize NVARCHAR(50) NULL,
+[DeleteDate] datetime NULL,
 [IsDeleted] bit DEFAULT(0),
 )

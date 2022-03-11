@@ -109,7 +109,7 @@ function next() {
 }
 
 function back() {
-    loadPartial('Booking');
+    window.location.href =  'OrderBooking/Booking';
 }
 
 function onClick_BtnBackToBooking() {
