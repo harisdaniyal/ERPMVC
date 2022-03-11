@@ -97,6 +97,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentException($"{nameof(bookingModel.BL)}/{nameof(bookingModel.CRO)} already exist. ");
             }
 
+            if (bookingViewModel.FacilityIds == null || bookingViewModel.FacilityIds.Length == 0)
+            {
+                throw new ArgumentNullException(nameof(bookingViewModel.FacilityIds));
+            }
+
             if (bookingModel.OrderType == "Import")
             {
                 bookingModel.CRO = string.Empty;
@@ -109,9 +114,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             bookingModel.isCompleted = false;
 
             _orderRepository.Add(bookingModel);
-
-            await _dbContext.SaveChangesAsync();
             await AddOrderFacilitiesAsync(bookingViewModel.FacilityIds, bookingModel.OrderID);
+            await _dbContext.SaveChangesAsync();
+
 
             bookingViewModel.OrderId = bookingModel.OrderID;
         }
@@ -194,11 +199,6 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         private Task AddFacilitiesAsync(int[] facilityIds, int orderBookingId)
         {
-            if (facilityIds == null || facilityIds.Length == 0)
-            {
-                throw new ArgumentNullException(nameof(facilityIds));
-            }
-
             _orderFacilityRepository.AddRange(
                 facilityIds.Select(x => new Order_FacilityMapping
                 {
@@ -1275,9 +1275,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         DeliveryArrivalDate = DeliveryTrains.ArrivalDate,
                         DeliveryVehicleNumber = DeliveryTrains.VehicleNo,
                         EIRNo = EmptyDropOffs.EIRNo,
-                        EmptyDropOffRemarks =EmptyDropOffs.Remarks,
+                        EmptyDropOffRemarks = EmptyDropOffs.Remarks,
                         ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
-                   
+
 
 
 

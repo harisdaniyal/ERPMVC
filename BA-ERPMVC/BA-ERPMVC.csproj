@@ -323,9 +323,6 @@
     <Compile Include="Models\ContainerType.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomizeGD.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
