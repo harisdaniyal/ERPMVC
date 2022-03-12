@@ -373,14 +373,14 @@ $(document).ready(function () {
                             var data = date ? moment(date).format("ll") : "--"
                             return data;
                         }
-                    //}, {
-                    //    data: 'ID',
-                    //    width: 5,
-                    //    "render": function (data) {
-                    //        var html = appendActionMenu(data);
+                    }, {
+                        data: 'ID',
+                        width: 5,
+                        "render": function (data) {
+                            var html = appendActionMenu(data);
 
-                    //        return html;
-                    //    }
+                            return html;
+                        }
 
 
 

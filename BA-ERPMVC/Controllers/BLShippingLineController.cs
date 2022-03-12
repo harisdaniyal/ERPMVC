@@ -280,7 +280,7 @@ namespace BA_ERPMVC.Controllers
             ERPMVCEntities context = new ERPMVCEntities();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "GDPDF.rpt"));
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
             var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
             {
                 BL = c.BL,
@@ -294,17 +294,22 @@ namespace BA_ERPMVC.Controllers
                 Portoflanding = c.Portoflanding,
                 PortofDischarge = c.PortofDischarge,
                 PlaceOfDelivery = c.PlaceOfDelivery,
+                ForwardingAgent = c.ForwardingAgent,
+                FinalDestination = c.FinalDestination,
                 ContainerNo = c.ContainerNo,
-                //SealNo = c.SealNo,
-                //NumberOfConatinerPack = c.NumberOfConatinerPack,
-                //KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
-                //GrossWeight = c.GrossWeight,
-                //Measurement = c.Measurement,
-                //Frightandcharges = c.Frightandcharges,
-                //FrightPayable = c.FrightPayable,
-                //TypeOfService = c.TypeOfService,
-                //NumberOfOrignalBL = c.NumberOfOrignalBL,
-                //placeOfDateofIssue = c.placeOfDateofIssue,
+                SealNo = c.SealNo,
+                NumberOfConatinerPack = c.NumberOfConatinerPack,
+                KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
+                GrossWeight = c.GrossWeight,
+                NetWeight = c.NetWeight,
+                Frightandcharges = c.Frightandcharges,
+                FrightPayable = c.FrightPayable,
+                TypeOfService = c.TypeOfService,
+                NumberOfOrignalBL = c.NumberOfOrignalBL,
+                PlaceOfIssue = c.PlaceOfIssue,
+                Collect = c.Collect,
+                DateOfIssue = c.DateOfIssue.ToString(),
+                BLAgent = c.BLAgent,
 
             }).ToList();
             rd.SetDataSource(data);
@@ -314,13 +319,13 @@ namespace BA_ERPMVC.Controllers
 
 
             rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
+            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
             rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", "GDReport.pdf");
+            return File(stream, "application/pdf", "BLReport.pdf");
         }
         
 

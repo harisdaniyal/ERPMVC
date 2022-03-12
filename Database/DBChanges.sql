@@ -3708,3 +3708,16 @@ GO
 
 
 Drop Table BAShippingLine
+
+
+GO
+
+CREATE TABLE [dbo].[BLShippingContainer](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ContainerNo] [nvarchar](250) NULL,
+	[SealNo] [nvarchar](250) NULL,
+	[ContainerType] [nvarchar](250) NULL,
+	[ContainerSize] [nvarchar](50) NULL,
+	[DeleteDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+	)
