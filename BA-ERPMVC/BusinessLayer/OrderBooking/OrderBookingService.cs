@@ -21,6 +21,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly LogisticsRepositry _logisticsRepositry;
         private readonly ReadyForDispatchedRepositry _readyForDispatchedRepositry;
         private readonly ReDispatchedRepositry _reDispatchedRepositry;
+        private readonly BLApprovalRepository _blapprovalRepository;
         private readonly OrderFacilityMapping _orderFacilityRepository;
         private readonly TripRepository _tripRepository;
         private readonly TripExpenseMapping _tripExpenseMapping;
@@ -33,6 +34,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly EmptyDropOffRepository _emptyDropoffRepository;
         private readonly DispatchedTruckRepository _dispatchedtruckRepository;
         private readonly DeliveryTruckRepository _deliverytruckRepository;
+
 
 
         public OrderBookingService()
@@ -54,6 +56,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _tripExpenseMapping = new TripExpenseMapping(_dbContext);
             _tripContainerRepositry = new TripContainerRepositry(_dbContext);
             _partyRepository = new PartyRepository(_dbContext);
+            _blapprovalRepository = new BLApprovalRepository(_dbContext);
         }
 
         public async Task<BookingViewModel> GetOrderBookingAsync(int orderBookingId)
@@ -1379,5 +1382,65 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         {
             return _dbContext.ShippingLines.Where(x => x.IsDeleted == false).ToList();
         }
+
+        public IEnumerable<BLApprovalViewModel> GetBLApprovalAsync()
+        {
+            return (from BLA in _dbContext.BLApprovals
+                    join BSL in _dbContext.BAShippingLines
+                            on BLA.BLnumber equals BSL.BL into BSLGroup
+                    from bAShippingLines in BSLGroup.DefaultIfEmpty()
+                    select new BLApprovalViewModel()
+                    {
+                        BLnumber= bAShippingLines.BL,
+                        ContainerNo = bAShippingLines.ContainerNo,
+                        SealNo = bAShippingLines.SealNo,
+                        ID = BLA.ID
+
+                    }).Distinct().ToList();
+
+
+        }
+
+        public async Task SaveBLApprovalAsync( BLApprovalViewModel blapprovalVM)
+        {
+
+            var blapproval = Mapper.Map<BLApprovalViewModel, BLApproval>(blapprovalVM);
+            if (blapproval == null)
+            {
+                throw new ArgumentNullException(nameof(blapproval));
+            }
+
+            _blapprovalRepository.Add(blapproval);
+
+            
+
+            await _dbContext.SaveChangesAsync();
+            blapprovalVM.ID = blapproval.ID;
+        }
+
+        public async Task UpdateBLApprovalAsync(BLApprovalViewModel blapprovalVM)
+        {
+
+            if (blapprovalVM == null)
+            {
+                throw new ArgumentNullException(nameof(blapprovalVM));
+            }
+
+            var blapproval = await _blapprovalRepository.GetAsync(Convert.ToInt32(blapprovalVM.ID));
+
+            if (blapproval == null)
+            {
+                throw new InvalidOperationException($"BL:{blapprovalVM.BLnumber}  not found.");
+            }
+
+            blapproval.Approval = blapprovalVM.Approval;
+            _blapprovalRepository.Update(blapproval);
+
+          
+            await _dbContext.SaveChangesAsync();
+            blapprovalVM.ID = blapproval.ID;
+        }
+
     }
+
 }

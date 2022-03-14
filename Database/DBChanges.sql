@@ -3663,10 +3663,12 @@ CREATE TABLE [dbo].[BLAgentDetail](
 	[IsDeleted] [bit] NULL,
 	)
 
+GO
+
 CREATE TABLE [dbo].[BAShippingLine](
-	[BLShippingID] [int] IDENTITY(1,1) NOT NULL Primary key,
+	[BLShippingID] [int] IDENTITY(1,1) NOT NULL,
 	[BL] [nvarchar](50) NULL,
-	[Approval] [int] NOT NULL,
+	[Approval] [nvarchar](200) NULL,
 	[Collect] [int] NOT NULL,
 	[NumberOfOrignalBL] [nvarchar](50) NULL,
 	[Shipper] [nvarchar](max) NULL,
@@ -3697,15 +3699,8 @@ CREATE TABLE [dbo].[BAShippingLine](
 	[UserID] [varchar](50) NULL,
 	[UpdateBy] [varchar](50) NULL,
 	[CreateDate] [varchar](50) NULL,
-	[UpdateDate] [varchar](50) NULL
-)
- CONSTRAINT [PK_BAShippingLine] PRIMARY KEY CLUSTERED 
-(
-	[BLShippingID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
+	[UpdateDate] [varchar](50) NULL,
+	)
 
 Drop Table BAShippingLine
 
@@ -3721,3 +3716,20 @@ CREATE TABLE [dbo].[BLShippingContainer](
 	[DeleteDate] [datetime] NULL,
 	[IsDeleted] [bit] NULL,
 	)
+	
+	/****** 14-03-2022 *****/
+	
+CREATE TABLE [dbo].[BLApproval](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+
+	[Approval] [nvarchar](250) NULL,
+	[ContainerNo] [nvarchar](250) NULL,
+	[BLnumber] [nvarchar](250) NOT NULL,
+	[SealNo] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+)

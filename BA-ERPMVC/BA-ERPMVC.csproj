@@ -311,6 +311,9 @@
     <Compile Include="Models\BLAgentDetail.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BLApproval.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BLShippingContainer.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -351,6 +354,9 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmptyDropOffLoc.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmptyReturnLocation.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Emp_Child.cs">
@@ -564,6 +570,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BLReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DriverSlip.cs">
       <DependentUpon>DriverSlip.rpt</DependentUpon>
@@ -637,6 +644,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Repositories\CoreRepositories\BLApprovalRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\BLShippingContainerRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTruckRepository.cs" />
@@ -651,6 +659,7 @@
     <Compile Include="Repositories\CoreRepositories\ShippingAgentRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
+    <Compile Include="Repositories\IRepositories\IBLApprovalRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTruckRepository.cs" />
@@ -667,6 +676,7 @@
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
+    <Compile Include="ViewModels\BLApprovalViewModel.cs" />
     <Compile Include="ViewModels\BLShippingContainerViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />

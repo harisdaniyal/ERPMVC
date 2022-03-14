@@ -23,9 +23,9 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult GetContainerNo()
         {
-            return Json(db.BLShippingContainers.Where(x=> x.IsDeleted== false).Select(x=> new
+            return Json(db.BLShippingContainers.Where(x => x.IsDeleted == false).Select(x => new
             {
-            ContainerNo = x.ContainerNo
+                ContainerNo = x.ContainerNo
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -67,7 +67,7 @@ namespace BA_ERPMVC.Controllers
                         BAShippingLine a = db.BAShippingLines.First(i => i.BLShippingID == obj.BLShippingID);
 
                         a.BL = obj.BL;
-                        a.Approval = obj.Approval;
+                        //a.Approval = obj.Approval;
                         a.Shipper = obj.Shipper;
                         a.Consignee = obj.Consignee;
                         a.NotifyParty = obj.NotifyParty;
@@ -119,7 +119,7 @@ namespace BA_ERPMVC.Controllers
                                     //  obj.UserID = Session["UserName"].ToString();
                                     obj.CreateDate = DateTime.Now.ToString();
                                     obj.UserID = Session["UserName"].ToString();
-                                    obj.Approval = 1;
+                                    //obj.Approval = 1;
                                     db.BAShippingLines.Add(obj);
                                     done = db.SaveChanges();
                                     responseText = "Data Inserted Successfully.";
@@ -132,7 +132,7 @@ namespace BA_ERPMVC.Controllers
                                 obj.UserID = Session["UserName"].ToString();
                                 //  obj.CreateDate = DateTime.Now.ToString();
                                 //obj.UserID = Session["UserName"].ToString();
-                                obj.Approval = 1;
+                                obj.Approval = "1";
                                 db.BAShippingLines.Add(obj);
                                 done = db.SaveChanges();
                                 responseText = "Data Inserted Successfully.";
@@ -182,40 +182,40 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var BL = from opo in db.BAShippingLines.Where(a => a.BLShippingID == id)
-                              join VV in db.stp_Status on opo.Approval equals VV.StatusID
-                              select new
-                              {
-                                 ID = opo.BLShippingID,
-                                 bl = opo.BL,
-                                 Approv = opo.Approval,
-                                 shipper = opo.Shipper,
-                                 consignee = opo.Consignee,
-                                 notifyParty = opo.NotifyParty,
-                                 precarriageby = opo.precarriageby,
-                                 Collect = opo.Collect,
-                                 placeofreceipt = opo.placeofreceipt,
-                                 oceanVessel = opo.OceanVessel,
-                                 voyNo = opo.VoyNo,
-                                 portoflanding = opo.Portoflanding,
-                                 portofDischarge = opo.PortofDischarge,
-                                 placeOfDelivery = opo.PlaceOfDelivery,
-                                 ContainerNo = opo.ContainerNo,
-                                 SealNo = opo.SealNo,
-                                 numberOfConatinerPack = opo.NumberOfConatinerPack,
-                                 kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
-                                 grossWeight = opo.GrossWeight,
-                                 netWeight = opo.NetWeight,
-                                 Frightandcharges = opo.Frightandcharges,
-                                  BLAgent = opo.BLAgent,
-                                 TypeOfService = opo.TypeOfService,
-                                 NumberOfOrignalBL = opo.NumberOfOrignalBL,
-                                  ForwardingAgent = opo.ForwardingAgent,
-                                  FinalDestination = opo.FinalDestination,
-                                 FrightPayable = opo.FrightPayable,
-                                  PlaceOfIssue = opo.PlaceOfIssue,
-                                  DateOfIssue = opo.DateOfIssue,
+                             // join VV in db.stp_Status on opo.Approval equals VV.StatusID
+                         select new
+                         {
+                             ID = opo.BLShippingID,
+                             bl = opo.BL,
+                             //Approv = opo.Approval,
+                             shipper = opo.Shipper,
+                             consignee = opo.Consignee,
+                             notifyParty = opo.NotifyParty,
+                             precarriageby = opo.precarriageby,
+                             Collect = opo.Collect,
+                             placeofreceipt = opo.placeofreceipt,
+                             oceanVessel = opo.OceanVessel,
+                             voyNo = opo.VoyNo,
+                             portoflanding = opo.Portoflanding,
+                             portofDischarge = opo.PortofDischarge,
+                             placeOfDelivery = opo.PlaceOfDelivery,
+                             ContainerNo = opo.ContainerNo,
+                             SealNo = opo.SealNo,
+                             numberOfConatinerPack = opo.NumberOfConatinerPack,
+                             kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
+                             grossWeight = opo.GrossWeight,
+                             netWeight = opo.NetWeight,
+                             Frightandcharges = opo.Frightandcharges,
+                             BLAgent = opo.BLAgent,
+                             TypeOfService = opo.TypeOfService,
+                             NumberOfOrignalBL = opo.NumberOfOrignalBL,
+                             ForwardingAgent = opo.ForwardingAgent,
+                             FinalDestination = opo.FinalDestination,
+                             FrightPayable = opo.FrightPayable,
+                             PlaceOfIssue = opo.PlaceOfIssue,
+                             DateOfIssue = opo.DateOfIssue,
 
-                              };
+                         };
 
 
                 return Json(new { result = BL.ToList() }, JsonRequestBehavior.AllowGet);
@@ -235,40 +235,40 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var BL = (from opo in db.BAShippingLines
-                                join VV in db.stp_Status on opo.Approval equals VV.StatusID
-                                select new
-                                {
-                                    ID = opo.BLShippingID,
-                                    bl = opo.BL,
-                                    Approv = VV.Status, 
-                                    shipper = opo.Shipper,
-                                    consignee = opo.Consignee,
-                                    notifyParty = opo.NotifyParty,
-                                    precarriageby = opo.precarriageby,
-                                    Collect= opo.Collect,
-                                    placeofreceipt = opo.placeofreceipt,
-                                    oceanVessel = opo.OceanVessel,
-                                    voyNo = opo.VoyNo,
-                                    portoflanding = opo.Portoflanding,
-                                    portofDischarge = opo.PortofDischarge,
-                                    placeOfDelivery = opo.PlaceOfDelivery,
-                                    ContainerNo = opo.ContainerNo,
-                                    SealNo = opo.SealNo,
-                                    numberOfConatinerPack = opo.NumberOfConatinerPack,
-                                    kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
-                                    grossWeight = opo.GrossWeight,
-                                    netWeight = opo.NetWeight,
-                                    Frightandcharges = opo.Frightandcharges,
-                                    BLAgent = opo.BLAgent,
-                                    TypeOfService = opo.TypeOfService,
-                                    NumberOfOrignalBL = opo.NumberOfOrignalBL,
-                                    ForwardingAgent = opo.ForwardingAgent,
-                                    FinalDestination = opo.FinalDestination,
-                                    FrightPayable = opo.FrightPayable,
-                                    PlaceOfIssue = opo.PlaceOfIssue,
-                                    DateOfIssue = opo.DateOfIssue,
+                              //join VV in db.stp_Status on opo.Approval equals VV.StatusID
+                          select new
+                          {
+                              ID = opo.BLShippingID,
+                              bl = opo.BL,
+                              //Approv = VV.Status, 
+                              shipper = opo.Shipper,
+                              consignee = opo.Consignee,
+                              notifyParty = opo.NotifyParty,
+                              precarriageby = opo.precarriageby,
+                              Collect = opo.Collect,
+                              placeofreceipt = opo.placeofreceipt,
+                              oceanVessel = opo.OceanVessel,
+                              voyNo = opo.VoyNo,
+                              portoflanding = opo.Portoflanding,
+                              portofDischarge = opo.PortofDischarge,
+                              placeOfDelivery = opo.PlaceOfDelivery,
+                              ContainerNo = opo.ContainerNo,
+                              SealNo = opo.SealNo,
+                              numberOfConatinerPack = opo.NumberOfConatinerPack,
+                              kindOfPackagesDescriptionOfGoods = opo.KindOfPackagesDescriptionOfGoods,
+                              grossWeight = opo.GrossWeight,
+                              netWeight = opo.NetWeight,
+                              Frightandcharges = opo.Frightandcharges,
+                              BLAgent = opo.BLAgent,
+                              TypeOfService = opo.TypeOfService,
+                              NumberOfOrignalBL = opo.NumberOfOrignalBL,
+                              ForwardingAgent = opo.ForwardingAgent,
+                              FinalDestination = opo.FinalDestination,
+                              FrightPayable = opo.FrightPayable,
+                              PlaceOfIssue = opo.PlaceOfIssue,
+                              DateOfIssue = opo.DateOfIssue,
 
-                                }).ToList();
+                          }).ToList();
 
                 return Json(new { BL });
             }
@@ -309,7 +309,7 @@ namespace BA_ERPMVC.Controllers
                 PlaceOfIssue = c.PlaceOfIssue,
                 Collect = c.Collect,
                 DateOfIssue = c.DateOfIssue.ToString(),
-                BLAgent = c.BLAgent,
+                BLAgent = $"{c.BLAgent} /n {c.DateOfIssue.ToString()}",
 
             }).ToList();
             rd.SetDataSource(data);
@@ -327,7 +327,7 @@ namespace BA_ERPMVC.Controllers
 
             return File(stream, "application/pdf", "BLReport.pdf");
         }
-        
+
 
 
 

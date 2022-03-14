@@ -61,33 +61,35 @@ $(document).ready(function () {
         type: "GET",
         url: "/BLShippingLine/GetContainerNo",
         data: "{}",
+        async: false,
         success: function (data) {
-            var s = '<option value="">Please Select Container</option>';
+            var _data = '<option value="">Please Select Container</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option value="' + data[i].ContainerNo + '">' + data[i].ContainerNo + '</option>';
+                _data += '<option value="' + data[i].ContainerNo + '">' + data[i].ContainerNo + '</option>';
             }
-            $("#txtContainerNo").html(s);
+            $(".txtContainerNo").html(_data);
             $('.txtContainerNo').select2();
         }
 
-    }, 5000);
+    });
 
     $.ajax({
         type: "GET",
         url: "/BLShippingLine/GetBlAgent",
         data: "{}",
+        async: false,
         success: function (data) {
             var s = '<option value=""disable >Please Select Agent</option>';
             for (var i = 0; i < data.length; i++) {
                 s += '<option value="' + data[i].BLAgent + '">' + data[i].BLAgent + '</option>';
             }
             $("#txtagent").html(s);
-            //$('.txtContainerNo').select2();
+            
         }
 
-    }, 5000);
+    });
 
-
+    
     var empid = $.url().param("id");
     var isEdit = $.url().param("edit");
     if (isEdit == 1) {
@@ -113,7 +115,7 @@ $(document).ready(function () {
                 var data1 = data[0].DateOfIssue ? moment(data[0].DateOfIssue).format("YYYY-MM-DD") : "--";
                 $("#txtblNo").val(data[0].bl);
                 //$("#txtApproval").val(data[0].Approv).change();
-                //$("#txtshipping").val(data[0].shipper);
+                $("#txtshipping").val(data[0].shipper);
                 $("#txtConsignee").val(data[0].consignee);
                 $("#txtNotifyParty").val(data[0].notifyParty);
                 $("#txtprecarriageby").val(data[0].precarriageby);
@@ -124,8 +126,7 @@ $(document).ready(function () {
                 $("#txtPortOfLanding").val(data[0].portoflanding);
                 $("#txtPortOfDischarge").val(data[0].portofDischarge);
                 $("#txtPlaceofDeilvery").val(data[0].placeOfDelivery);
-            /*    $("#txtContainerNo").val(data[0].ContainerNo);*/
-                $(".txtContainerNo").select2().val([data[0].ContainerNo]).trigger("change");
+                $(".txtContainerNo").select2().val(data[0].ContainerNo.split(',')).trigger("change");
                 $("#txtSealNo").val(data[0].SealNo);
                 $("#txtConatinerOrPackage").val(data[0].numberOfConatinerPack);
                 $("#txtkindofpack").val(data[0].kindOfPackagesDescriptionOfGoods);
@@ -180,7 +181,7 @@ $(document).ready(function () {
                         data: { //Passing data  
                             BLShippingID: empid,
                             BL: $("#txtblNo").val(),
-                           // Approval: $("#txtApproval option:selected").val(),
+                            // Approval: $("#txtApproval option:selected").val(),
                             Shipper: $("#txtshipping").val(),
                             Consignee: $("#txtConsignee").val(),
                             NotifyParty: $("#txtNotifyParty").val(),
@@ -192,7 +193,7 @@ $(document).ready(function () {
                             Portoflanding: $("#txtPortOfLanding").val(),
                             PortofDischarge: $("#txtPortOfDischarge").val(),
                             PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            ContainerNo: $(".txtContainerNo").select2("val").toString(),
+                            ContainerNo: $(".txtContainerNo").val().toString(),
                             SealNo: $("#txtSealNo").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
@@ -283,9 +284,6 @@ $(document).ready(function () {
                     data: response.BL,
 
                     columns: [{
-                        data: 'Approv',
-                        width: 10
-                    }, {
                         data: 'bl',
                         width: 10
                     }, {
@@ -663,7 +661,7 @@ $(document).ready(function () {
 
     }
 
-
+   
 });
 
 
