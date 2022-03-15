@@ -1,10 +1,13 @@
-﻿using BA_ERPMVC.Extensions;
+﻿using BA_ERPMVC.BusinessLayer.OrderBooking;
+using BA_ERPMVC.Extensions;
 using BA_ERPMVC.Models;
+using BA_ERPMVC.ViewModels;
 using CrystalDecisions.CrystalReports.Engine;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,6 +17,12 @@ namespace BA_ERPMVC.Controllers
     {
         ERPMVCEntities db = new ERPMVCEntities();
         ApiResponse _apiResponse = new ApiResponse();
+        private readonly OrderBookingService orderBookingService;
+
+        public BLShippingLineController()
+        {
+            orderBookingService = new OrderBookingService();
+        }
         // GET: BLShippingLine
         public ActionResult Index()
         {
@@ -34,6 +43,8 @@ namespace BA_ERPMVC.Controllers
             return Json(db.BLAgentDetails.Where(x => x.IsDeleted == false).Select(x => new
             {
                 BLAgent = x.BLAgent
+              
+
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -87,6 +98,7 @@ namespace BA_ERPMVC.Controllers
                         a.NetWeight = obj.NetWeight;
                         a.Frightandcharges = obj.Frightandcharges;
                         a.BLAgent = obj.BLAgent;
+                        a.BLAgentDetail = obj.BLAgentDetail;
                         a.TypeOfService = obj.TypeOfService;
                         a.NumberOfOrignalBL = obj.NumberOfOrignalBL;
                         a.ForwardingAgent = obj.ForwardingAgent;
@@ -132,7 +144,7 @@ namespace BA_ERPMVC.Controllers
                                 obj.UserID = Session["UserName"].ToString();
                                 //  obj.CreateDate = DateTime.Now.ToString();
                                 //obj.UserID = Session["UserName"].ToString();
-                                obj.Approval = "1";
+                                //obj.Approval = "1";
                                 db.BAShippingLines.Add(obj);
                                 done = db.SaveChanges();
                                 responseText = "Data Inserted Successfully.";
@@ -207,6 +219,7 @@ namespace BA_ERPMVC.Controllers
                              netWeight = opo.NetWeight,
                              Frightandcharges = opo.Frightandcharges,
                              BLAgent = opo.BLAgent,
+                             BLAgentDetail = opo.BLAgentDetail,
                              TypeOfService = opo.TypeOfService,
                              NumberOfOrignalBL = opo.NumberOfOrignalBL,
                              ForwardingAgent = opo.ForwardingAgent,
@@ -260,6 +273,7 @@ namespace BA_ERPMVC.Controllers
                               netWeight = opo.NetWeight,
                               Frightandcharges = opo.Frightandcharges,
                               BLAgent = opo.BLAgent,
+                              BLAgentDetail = opo.BLAgentDetail,
                               TypeOfService = opo.TypeOfService,
                               NumberOfOrignalBL = opo.NumberOfOrignalBL,
                               ForwardingAgent = opo.ForwardingAgent,
@@ -309,7 +323,9 @@ namespace BA_ERPMVC.Controllers
                 PlaceOfIssue = c.PlaceOfIssue,
                 Collect = c.Collect,
                 DateOfIssue = c.DateOfIssue.ToString(),
-                BLAgent = $"{c.BLAgent} /n {c.DateOfIssue.ToString()}",
+                BLAgent = c.BLAgent,
+                BLAgentDetail= c.BLAgentDetail
+                //BLAgent = $"{c.BLAgent} /n {c.DateOfIssue.ToString()}",
 
             }).ToList();
             rd.SetDataSource(data);
@@ -328,7 +344,42 @@ namespace BA_ERPMVC.Controllers
             return File(stream, "application/pdf", "BLReport.pdf");
         }
 
+                        //***** BL Approval*****//
 
+        [HttpGet]
+        public ActionResult BLApproval()
+        {
+            var Blapproval = orderBookingService.GetBLApprovalAsync();
+
+            return View(Blapproval);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> BLApproval(BLApprovalViewModel blapprovalVM)
+        {
+            if (blapprovalVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(blapprovalVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (blapprovalVM.ID == 0)
+                {
+                    await orderBookingService.SaveBLApprovalAsync(blapprovalVM);
+
+                    return Json(new { success = true, Id = blapprovalVM.ID });
+                }
+
+                await orderBookingService.UpdateBLApprovalAsync(blapprovalVM);
+
+                return Json(new { success = true, Id = blapprovalVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
 
 
 

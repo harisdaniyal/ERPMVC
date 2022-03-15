@@ -356,9 +356,6 @@
     <Compile Include="Models\EmptyDropOffLoc.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmptyReturnLocation.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Emp_Child.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -781,6 +778,7 @@
     <Content Include="AdminLte\Js\pdfmake.min.js" />
     <Content Include="AdminLte\Js\vfs_fonts.js" />
     <Content Include="AdminLte\Js\xlsx.min.js" />
+    <Content Include="AdminLte\Scripts\BLApproval.js" />
     <Content Include="AdminLte\Scripts\BLShippingContainer.js" />
     <Content Include="AdminLte\Scripts\Custom.js" />
     <Content Include="AdminLte\Scripts\EmptyDropOffLoc.js" />
@@ -3987,6 +3985,7 @@
     <Content Include="Views\DropDownMenu\ShippingLine.cshtml" />
     <Content Include="Views\DropDownMenu\EmptyDropOffLoc.cshtml" />
     <Content Include="Views\DropDownMenu\BLShippingContainer.cshtml" />
+    <Content Include="Views\BLShippingLine\BLApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

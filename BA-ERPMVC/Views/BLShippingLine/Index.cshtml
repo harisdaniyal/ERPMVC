@@ -59,6 +59,7 @@
                             <th class="head" scope="col">Measurement</th>
                             <th class="head" scope="col">FreightAndCharges</th>
                             <th class="head" scope="col">BLAgent</th>
+                            <th class="head" scope="col">BLAgentDetail</th>
                             <th class="head" scope="col">TypeOfService</th>
                             <th class="head" scope="col">NumberOfOriginalBL</th>
                             <th class="head" scope="col">ForwardingAgent</th>
@@ -307,15 +308,16 @@
 
         </div>
         <div class="row">
-
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="txtCollect">COLLECT<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
+                    <label for="txtagentdetail">AGENT DETAIL<label id="_txtCustomerName-error" class="error" for="txtagentdetail"></label></label>
                     <div class="input-group">
-                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtCollect" name="txtCollect" class="form-control">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtagentdetail" name="txtagentdetail" class="form-control">
                     </div>
                 </div>
             </div>
+
+           
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="txtypeofservice">TYPE OF SERVICE<label id="_txtCustomerName-error" class="error" for="txtypeofservice"></label></label>
@@ -362,6 +364,14 @@
         </div>
 
         <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtCollect">COLLECT<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtCollect" name="txtCollect" class="form-control">
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-4">
                 <!-- text input -->
                 <div class="form-group">

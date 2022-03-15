@@ -134,6 +134,7 @@ $(document).ready(function () {
                 $("#txtNetWeight").val(data[0].netWeight);
                 $("#txtfreightandcharges").val(data[0].Frightandcharges);
                 $("#txtagent").val(data[0].BLAgent);
+                $("#txtagentdetail").val(data[0].BLAgentDetail);
                 $("#txtypeofservice").val(data[0].TypeOfService);
                 $("#txtNumberofOrignal").val(data[0].NumberOfOrignalBL);
                 $("#txtforwardingagent").val(data[0].ForwardingAgent);
@@ -201,6 +202,7 @@ $(document).ready(function () {
                             NetWeight: $("#txtNetWeight").val(),
                             Frightandcharges: $("#txtfreightandcharges option:selected").val(),
                             BLAgent: $("#txtagent option:selected").val(),
+                            BLAgentDetail: $("#txtagentdetail").val(),
                             TypeOfService: $("#txtypeofservice").val(),
                             NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
                             ForwardingAgent: $("#txtforwardingagent").val(),
@@ -342,6 +344,9 @@ $(document).ready(function () {
                         width: 10
                     }, {
                         data: 'BLAgent',
+                        width: 10
+                    },{
+                        data: 'BLAgentDetail',
                         width: 10
                     }, {
                         data: 'TypeOfService',
@@ -560,6 +565,7 @@ $(document).ready(function () {
                             NetWeight: $("#txtNetWeight").val(),
                             Frightandcharges: $("#txtfreightandcharges option:selected").val(),
                             BLAgent: $("#txtagent option:selected").val(),
+                            BLAgentDetail: $("#txtagentdetail").val(),
                             TypeOfService: $("#txtypeofservice").val(),
                             NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
                             ForwardingAgent: $("#txtforwardingagent").val(),
@@ -595,6 +601,7 @@ $(document).ready(function () {
                                     $("#txtNetWeight").val("");
                                     $("#txtfreightandcharges").val("");
                                     $("txtagent").val("");
+                                    $("txtagentdetail").val("");
                                     $("#txtypeofservice").val("");
                                     $("#txtNumberofOrignal").val("");
                                     $("#txtfreightPayable").val("");
