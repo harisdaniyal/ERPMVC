@@ -49,7 +49,7 @@
                             <option value="@businessDivision.BusinessDivisionID" @(businessDivision.BusinessDivisionID == Model.BusinessDivisionId ? "selected=selected" : "")>@businessDivision.BusinessDivisionName</option>
                         }
                     </select>
-                    <label for="ddlState">Business Devision</label>
+                    <label for="ddlState">Business Division</label>
                     <div class="form-status"><span></span></div>
                     <i class="fas fa-check"></i>
                     <i class="fas fa-times"></i>
@@ -130,7 +130,7 @@
                         <select class="form-control select2" id="ddl_OrderType" aria-invalid="false" style="width: 100%;" onchange="onChange_OrderType(this)">
                             <option value="">Select Order Type</option>
                             <option value="Import" @(Model.OrderType == "Import" ? "selected=selected" : "")>Import</option>
-                            <option value="Export" @(Model.OrderType == "Export" ? "selected=selected" : "")>Export</option>
+                            
                         </select>
                         <label for="ddlState">Order Type</label>
                         <div class="form-status"><span></span></div>
@@ -140,16 +140,16 @@
                 </div>
                 <div class="col-md-6" id="tr_BL_CRO" @(string.IsNullOrEmpty(Model.OrderType) ? "style=display:none;" : "")>
 
-                    <div class="input-group d-flex flex-row">
+                    <div class="input-group">
                         <input type="text" id="txt_BL" class="form-control staticLabel w-25" value="@Model.BL" @(string.IsNullOrEmpty(Model.OrderType) || Model.OrderType == "Export" ? "style=display:none;" : "") />
-                        <input type="text" id="txt_CRO" class="form-control staticLabel w-25" value="@Model.CRO" @(string.IsNullOrEmpty(Model.OrderType) || Model.OrderType == "Import" ? "style=display:none;" : "") />
+                        @*<input type="text" id="txt_CRO" class="form-control staticLabel w-25" value="@Model.CRO" @(string.IsNullOrEmpty(Model.OrderType) || Model.OrderType == "Import" ? "style=display:none;" : "") />*@
                         @if (Model.OrderType == "Import")
                         {
                             <label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">BL</label>
                         }
                         else if (Model.OrderType == "Export")
                         {
-                            <label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">CRO</label>
+                            @*<label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">CRO</label>*@
                         }
                         else
                         {

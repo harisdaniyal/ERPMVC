@@ -10,6 +10,7 @@ using BA_ERPMVC.ViewModels.OrderBooking;
 using AutoMapper;
 using BA_ERPMVC.ViewModels;
 using BA_ERPMVC.UtilityClasses;
+using BA_ERPMVC.ViewModels.ExportOrderBooking;
 
 namespace BA_ERPMVC.Controllers
 {
@@ -465,6 +466,96 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
+
+        //////*************************Export Booking Order**********************************///////
+
+        //Get ExportOrder
+
+        public ActionResult ExportOrder()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ExportBooking(int orderBookingId)
+        {
+            if (orderBookingId < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(orderBookingId)} should be a valid id" });
+            }
+            //this.ViewBag.ShippingLines = orderBookingService.GetShippingLine();
+            this.ViewBag.LoadingStation = await locationService.GetLocationsAsync();
+
+            var bookingViewModel = await orderBookingService.GetExportOrderBookingAsync(orderBookingId);
+
+            if (bookingViewModel == null)
+            {
+                var orderNo = await orderBookingService.GetExportNewOrderNumber();
+
+                return PartialView("ExportPartials/_ExportBooking", new ExportOrderBookingViewModel
+                {
+                    OrderNo = orderNo
+                });
+            }
+            return PartialView("ExportPartials/_ExportBooking", bookingViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportBooking(ExportOrderBookingViewModel bookingViewModel)
+        {
+            if (bookingViewModel == null)
+            {
+                return Json(new { success = false, message = $"{nameof(bookingViewModel)} should be null or empty" });
+            }
+
+            try
+            {
+                if (bookingViewModel.OrderID == 0)
+                {
+                    await orderBookingService.CreateExportOrderBookingAsync(bookingViewModel);
+
+                    return Json(new { success = true, orderBookingId = bookingViewModel.OrderID});
+                }
+
+                await orderBookingService.UpdateExportOrderBookingAsync(bookingViewModel);
+
+                return Json(new { success = true, orderBookingId = bookingViewModel.OrderID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        ////////********** Export Logistic**********///////
+
+        [HttpGet]
+        public async Task<ActionResult> ExportLogistic(int orderBookingId)
+        {
+            if (orderBookingId < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(orderBookingId)} should be positive integer" });
+            }
+
+            this.ViewBag.ShippingLines = orderBookingService.GetShippingLine();
+            this.ViewBag.ContainerTypes = await containerTypeService.GetAllContainerTypesAsync();
+
+            var exportlogisticsModel = await orderBookingService.GetExportLogisticsAsync(orderBookingId);
+
+            if (exportlogisticsModel == null || !exportlogisticsModel.Any())
+            {
+                return PartialView("Partials/_Logistics", new List<ExportLogisticViewModel>
+                {
+                });
+            }
+            //logisticsModel = logisticsModel.Where(x => x.Status != OrdersStatus.Completed.ToString()); //  For Completed Status Hidden
+
+            var exportlogisticsViewModel = Mapper.Map<IEnumerable<ExportLogistic>, IEnumerable<ExportLogisticViewModel>>(exportlogisticsModel);
+
+            return PartialView("Partials/_Logistics", exportlogisticsViewModel);
+        }
+
 
     }
 }

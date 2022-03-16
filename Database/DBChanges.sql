@@ -3733,3 +3733,71 @@ CREATE TABLE [dbo].[BLApproval](
 	[UpdateDate] [datetime] NULL,
 	[IsDeleted] [bit] NULL,
 )
+
+
+---------- 15-03-2022----------
+
+select * from  [ExportBookingOrder]
+CREATE TABLE [dbo].[ExportBookingOrder](
+	[OrderId] [int] IDENTITY(1,1) NOT NULL Primary Key ,
+	[OrderNo] [varchar](9) NOT NULL,
+
+	[DateOfBooking] [datetime] NULL,
+	[Forwarder] [nvarchar](500)  NULL,
+	[ShipperName] [nvarchar](500) NULL,
+	[ShipperContact] [nvarchar](250) NULL,
+	[TwentyContainerQty] [int] NULL,
+	[FortyContainerQty] [int] NULL,
+	[TwentyContainerPrice] [nvarchar](250) NULL,
+	[FortyContainerPrice] [nvarchar](250) NULL,
+	[RateOfTransportation] [nvarchar](250) NULL,
+	[PointOfLoadingStation] [nvarchar](250) NULL,
+
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)
+Go
+alter table [GenerateOrder] alter column [OrderNo] [varchar](9)
+Go
+select * from GenerateOrder
+update GenerateOrder set OrderNo=concat('IMP',OrderNo) where OrderNo not like '%IMP%'
+GO
+
+
+-----------------16-03-2022---------------------------
+
+CREATE TABLE [dbo].[ExportLogistic](
+	[OrderId] [int]  NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+
+	[LogisticId] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[ContainerNo] [nvarchar](250) NULL,
+	[ContainerType] [nvarchar](500)  NULL,
+	[ContainerSize] [nvarchar](20) NULL,
+	[EGNo] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[vessel] [nvarchar] (250) NULL,
+	[Voyage] [nvarchar](250) NULL,
+	[ETD] [datetime] NULL,
+	[VesselCutOff] [datetime] NULL,
+	[ShippingLine] [nvarchar](500) NULL,
+	[ClearingAgentName] [nvarchar](250) NULL,
+	[CAContactNo] [nvarchar](250) NULL,
+	[BookingPort] [nvarchar](50) NULL,
+	[ModeOfTransportation] [nvarchar](20) NULL,
+	[DateOfReceivingCargo] [datetime] NULL,
+	[PreDispatched] [nvarchar](20) NULL,
+	[Status] [nvarchar](50) NULL,
+
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)
+

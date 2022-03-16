@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
 
 
-<h2>Import Order</h2>
+<h2>Export Order</h2>
 <br />
 <div id="orderCreating" class="card cardV2">
     <div class="card-header">
@@ -53,14 +53,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 
-<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/OrderBooking.js")"></script>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/ExportOrderBooking.js")"></script>
 
 <script>
     $(document).ready(function () {
         var stepNo = new URLSearchParams(window.location.search).get("stepNo");
 
         if (!stepNo) {
-            stepNo = 'Booking';
+            stepNo = 'ExportBooking';
         }
 
         loadPartial(stepNo);

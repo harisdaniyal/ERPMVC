@@ -19,7 +19,7 @@ function save() {
             businessDivisionId: $("#ddl_BusinessDivision").val(),
             orderType: $("#ddl_OrderType option:selected").val(),
             bl: $("#txt_BL").val(),
-            cro: $("#txt_CRO").val(),
+            /*cro: $("#txt_CRO").val(),*/
             orderDate: $("#txt_OrderDate").val(),
             vesselBerthingDate: $("#txt_VesselBerthingDate").val(),
             freeDays: $("#txt_FreeDays").val(),
@@ -80,19 +80,19 @@ function onChange_OrderType(item) {
 
         if (orderType == "Import") {
             $("#txt_BL").show();
-            $("#txt_CRO").hide();
+           /* $("#txt_CRO").hide();*/
             $("#lbl_BL_CRO").text("BL");
         }
-        else if (orderType == "Export") {
-            $("#txt_BL").hide();
-            $("#txt_CRO").show();
-            $("#lbl_BL_CRO").text("CRO");
-        }
+        //else if (orderType == "Export") {
+        //    $("#txt_BL").hide();
+        //    $("#txt_CRO").show();
+        //    $("#lbl_BL_CRO").text("CRO");
+        //}
     }
 
     $("#cbx_HOrates").prop("checked", false)
     $("#txt_BL").val('');
-    $("#txt_CRO").val('');
+    /*$("#txt_CRO").val('');*/
 }
 
 

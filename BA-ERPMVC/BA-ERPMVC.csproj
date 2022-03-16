@@ -380,6 +380,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERPMVC.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExportBookingOrder.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExportLogistic.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Gender.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -649,6 +655,8 @@
     <Compile Include="Repositories\CoreRepositories\DispatchedTruckRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\EmptyDropOffLocRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\EmptyDropOffRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportBookingOrderRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportLogisticRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReDispatchedRepositry.cs" />
@@ -656,6 +664,8 @@
     <Compile Include="Repositories\CoreRepositories\ShippingAgentRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
+    <Compile Include="Repositories\IRepositories\Export\IExportBookingOrderRepository.cs" />
+    <Compile Include="Repositories\IRepositories\Export\IExportLogisticRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLApprovalRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
@@ -675,6 +685,8 @@
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
     <Compile Include="ViewModels\BLApprovalViewModel.cs" />
     <Compile Include="ViewModels\BLShippingContainerViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportLogisticViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportOrderBookingViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
@@ -782,12 +794,14 @@
     <Content Include="AdminLte\Scripts\BLShippingContainer.js" />
     <Content Include="AdminLte\Scripts\Custom.js" />
     <Content Include="AdminLte\Scripts\EmptyDropOffLoc.js" />
+    <Content Include="AdminLte\Scripts\ExportOrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTruck.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DispatchedTruck.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\EmptyDropOff.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExecuteTrips.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\InTransactTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
@@ -3986,6 +4000,9 @@
     <Content Include="Views\DropDownMenu\EmptyDropOffLoc.cshtml" />
     <Content Include="Views\DropDownMenu\BLShippingContainer.cshtml" />
     <Content Include="Views\BLShippingLine\BLApproval.cshtml" />
+    <Content Include="Views\OrderBooking\ExportOrder.cshtml" />
+    <Content Include="Views\OrderBooking\ExportPartials\_ExportBooking.cshtml" />
+    <Content Include="Views\OrderBooking\ExportPartials\ExportLogistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

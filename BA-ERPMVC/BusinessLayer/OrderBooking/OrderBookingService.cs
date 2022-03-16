@@ -11,6 +11,8 @@ using BA_ERPMVC.ViewModels;
 using BA_ERPMVC.ViewModels.OrderBooking;
 using System.Threading.Tasks;
 using BA_ERPMVC.UtilityClasses;
+using BA_ERPMVC.Repositories.CoreRepositories.Export;
+using BA_ERPMVC.ViewModels.ExportOrderBooking;
 
 namespace BA_ERPMVC.BusinessLayer.OrderBooking
 {
@@ -35,6 +37,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly DispatchedTruckRepository _dispatchedtruckRepository;
         private readonly DeliveryTruckRepository _deliverytruckRepository;
 
+        private readonly ExportBookingOrderRepository _exportbookingorderRepository;  //*****Export******///
+        private readonly ExportLogisticRepository _exportlogisticRepository;
+
+
 
 
         public OrderBookingService()
@@ -57,6 +63,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _tripContainerRepositry = new TripContainerRepositry(_dbContext);
             _partyRepository = new PartyRepository(_dbContext);
             _blapprovalRepository = new BLApprovalRepository(_dbContext);
+
+            _exportbookingorderRepository = new ExportBookingOrderRepository(_dbContext);   /////******Export******/////
+            _exportlogisticRepository = new ExportLogisticRepository(_dbContext);
         }
 
         public async Task<BookingViewModel> GetOrderBookingAsync(int orderBookingId)
@@ -75,7 +84,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 .Select(x => x.OrderNo)
                 .FirstOrDefaultAsync();
 
-            return string.IsNullOrEmpty(orderNo) ? 1.ToString("000000") : (Convert.ToInt64(orderNo) + 1).ToString("000000");
+            if (!string.IsNullOrEmpty(orderNo))
+            {
+                orderNo = orderNo.Replace("IMP", "");
+            }
+            return string.IsNullOrEmpty(orderNo) ? 1.ToString("IMP000000") : (Convert.ToInt64(orderNo) + 1).ToString("IMP000000");
         }
 
         public async Task CreateOrderBookingAsync(BookingViewModel bookingViewModel)
@@ -1391,7 +1404,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     from bAShippingLines in BSLGroup.DefaultIfEmpty()
                     select new BLApprovalViewModel()
                     {
-                        BLnumber= bAShippingLines.BL,
+                        BLnumber = bAShippingLines.BL,
                         ContainerNo = bAShippingLines.ContainerNo,
                         SealNo = bAShippingLines.SealNo,
                         ID = BLA.ID
@@ -1401,7 +1414,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         }
 
-        public async Task SaveBLApprovalAsync( BLApprovalViewModel blapprovalVM)
+        public async Task SaveBLApprovalAsync(BLApprovalViewModel blapprovalVM)
         {
 
             var blapproval = Mapper.Map<BLApprovalViewModel, BLApproval>(blapprovalVM);
@@ -1412,7 +1425,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _blapprovalRepository.Add(blapproval);
 
-            
+
 
             await _dbContext.SaveChangesAsync();
             blapprovalVM.ID = blapproval.ID;
@@ -1436,9 +1449,85 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             blapproval.Approval = blapprovalVM.Approval;
             _blapprovalRepository.Update(blapproval);
 
-          
+
             await _dbContext.SaveChangesAsync();
             blapprovalVM.ID = blapproval.ID;
+        }
+
+
+
+        ///////******************************Export Booking Order*******************************////////
+
+        public async Task<string> GetExportNewOrderNumber()
+        {
+            var orderNo = await _dbContext.ExportBookingOrders
+                .OrderByDescending(x => x.OrderNo)
+                .Select(x => x.OrderNo)
+                .FirstOrDefaultAsync();
+            if (!string.IsNullOrEmpty(orderNo))
+            {
+                orderNo = orderNo.Replace("EXP", "");
+            }
+            return string.IsNullOrEmpty(orderNo) ? 1.ToString("EXP000000") : (Convert.ToInt64(orderNo) + 1).ToString("EXP000000");
+        }
+
+        public async Task<ExportOrderBookingViewModel> GetExportOrderBookingAsync(int orderBookingId)
+        {
+            var exportbookingModel = await _exportbookingorderRepository.GetAsync(orderBookingId);
+            var exportorderbookingViewModel = Mapper.Map<ExportBookingOrder, ExportOrderBookingViewModel>(exportbookingModel);
+
+            return exportorderbookingViewModel;
+        }
+
+        public async Task CreateExportOrderBookingAsync(ExportOrderBookingViewModel exportorderbookingViewModel)
+        {
+            var exportbookingModel = Mapper.Map<ExportOrderBookingViewModel, ExportBookingOrder>(exportorderbookingViewModel);
+            if (exportbookingModel == null)
+            {
+                throw new ArgumentNullException(nameof(exportbookingModel));
+            }
+
+            var order = await _exportbookingorderRepository.FindAsync(x => x.OrderNo == exportbookingModel.OrderNo);
+
+            if (order.Any())
+            {
+                throw new ArgumentException($"{nameof(exportbookingModel.OrderNo)} already exist. Please try again");
+            }
+
+            exportbookingModel.IsCompleted = false;
+
+            _exportbookingorderRepository.Add(exportbookingModel);
+            await _dbContext.SaveChangesAsync();
+
+
+            exportbookingModel.OrderId = exportorderbookingViewModel.OrderID;
+        }
+
+        public async Task UpdateExportOrderBookingAsync(ExportOrderBookingViewModel exportbookingViewModel)
+        {
+            if (exportbookingViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(exportbookingViewModel));
+            }
+
+            ExportBookingOrder exportbookingModel = await _exportbookingorderRepository.GetAsync(exportbookingViewModel.OrderID);
+
+            if (exportbookingModel == null)
+            {
+                throw new InvalidOperationException($"{nameof(exportbookingModel.OrderId)} is invalid");
+            }
+            exportbookingModel = Mapper.Map<ExportOrderBookingViewModel, ExportBookingOrder>(exportbookingViewModel);
+
+            _exportbookingorderRepository.Update(exportbookingModel);
+
+            await _dbContext.SaveChangesAsync();
+
+            exportbookingViewModel.OrderID = exportbookingModel.OrderId;
+        }
+
+        public Task<IEnumerable<ExportLogistic>> GetExportLogisticsAsync(int orderBookingId)
+        {
+            return _exportlogisticRepository.FindAsync(x => x.OrderId == orderBookingId);
         }
 
     }
