@@ -383,7 +383,19 @@
     <Compile Include="Models\ExportBookingOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExportDispatchedTrain.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExportDispatchedTruck.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ExportLogistic.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExportPreDispatched.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExportReDispatched.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gender.cs">
@@ -655,8 +667,13 @@
     <Compile Include="Repositories\CoreRepositories\DispatchedTruckRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\EmptyDropOffLocRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\EmptyDropOffRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\ExportOrderListRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\Export\ExportBookingOrderRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportDispatchedTrainRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportDispatchedTruckRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\Export\ExportLogisticRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportPreDispatchedRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportReDispatchedRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReDispatchedRepositry.cs" />
@@ -665,7 +682,10 @@
     <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportBookingOrderRepository.cs" />
+    <Compile Include="Repositories\IRepositories\Export\IExportDispatchedTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportLogisticRepository.cs" />
+    <Compile Include="Repositories\IRepositories\Export\IExportPreDispatchedRepository.cs" />
+    <Compile Include="Repositories\IRepositories\Export\IExportReDispatchedRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLApprovalRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
@@ -674,6 +694,8 @@
     <Compile Include="Repositories\IRepositories\IDispatchedTruckRepository.cs" />
     <Compile Include="Repositories\IRepositories\IEmptyDropOffLocRepository.cs" />
     <Compile Include="Repositories\IRepositories\IEmptyDropOffRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IExportDispatchedTruckRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IExportOrderListRepository.cs" />
     <Compile Include="Repositories\IRepositories\IIntransactTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\IRepositories\IReDispatchedRepositry.cs" />
@@ -685,8 +707,12 @@
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
     <Compile Include="ViewModels\BLApprovalViewModel.cs" />
     <Compile Include="ViewModels\BLShippingContainerViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportDispatchedTrainViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportDispatchedTruckViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportLogisticViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportOrderBookingViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportPreDispatchedViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportReDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
@@ -802,6 +828,10 @@
     <Content Include="AdminLte\Scripts\OrderBookings\EmptyDropOff.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExecuteTrips.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExportBooking.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportDispatchedTrain.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportDispatchedTruck.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportLogistic.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportRedispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\InTransactTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
@@ -3795,6 +3825,7 @@
     <Content Include="Models\ERPMVC.edmx.diagram">
       <DependentUpon>ERPMVC.edmx</DependentUpon>
     </Content>
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportPreDispatched.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Reports\InvoiceData.xsd">
       <SubType>Designer</SubType>
@@ -4002,7 +4033,12 @@
     <Content Include="Views\BLShippingLine\BLApproval.cshtml" />
     <Content Include="Views\OrderBooking\ExportOrder.cshtml" />
     <Content Include="Views\OrderBooking\ExportPartials\_ExportBooking.cshtml" />
-    <Content Include="Views\OrderBooking\ExportPartials\ExportLogistic.cshtml" />
+    <Content Include="Views\OrderBooking\ExportPartials\_ExportLogistic.cshtml" />
+    <Content Include="Views\OrderExecution\ExportPreDispatched.cshtml" />
+    <Content Include="Views\OrderExecution\ExportDispatchedTrain.cshtml" />
+    <Content Include="Views\OrderExecution\ExportDispatchedTruck.cshtml" />
+    <Content Include="Views\OrderExecution\ExportReDispatched.cshtml" />
+    <Content Include="Views\OrderBooking\ExportOrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

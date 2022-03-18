@@ -25,7 +25,7 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		public string BookingPort { get; set; }
 		public string ModeOfTransportation { get; set; }
 		public DateTime? DateOfReceivingCargo { get; set; }
-		public string PreDispatched { get; set; }
+		public bool PreDispatched { get; set; }
 		public string Status { get; set; }
 		public bool? IsCompleted { get; set; }
 		public string CreatedBy { get; set; }

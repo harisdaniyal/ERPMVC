@@ -1,7 +1,7 @@
 ﻿
 function save() {
-///*    */if (!validateInputs())
-//        return false;
+   if (!validateInputs())
+        return false;
 
   
     showLoader();
@@ -73,7 +73,7 @@ async function next() {
     var isSucceeded = await saveDraft(false);
 
     if (isSucceeded) {
-        loadPartial('Logistics');
+        loadPartial('ExportLogistic');
     }
 }
 
@@ -110,19 +110,21 @@ async function next() {
 //}
 
 
-//function validateInputs() {
-//    var isValid = true;
-//    $('.input-group').removeClass('invalid');
+function validateInputs() {
+    
+    var isValid = true;
+    $('.input-group').removeClass('invalid');
 
-//    if (!$("#sp_OrderNo").html()) {
-//        isValid = false;
-//    }
+    if (!$("#txt_Forwarder").val()) {
+        $("#txt_Forwarder").parent('.input-group').addClass('invalid');
+        isValid = false;
+    }
+    if (!$("#txt_OrderDate").val()) {
+        $("#txt_OrderDate").parent('.input-group').addClass('invalid');
+        isValid = false;
+    }
 
-//    if (!$("#ddl_Customers").val()) {
-//        $("#ddl_Customers").parent('.input-group').addClass('invalid');
-//        isValid = false;
-//    }
-
+ 
 //    if (!$("#ddl_BusinessDivision").val()) {
 //        $("#ddl_BusinessDivision").parent('.input-group').addClass('invalid');
 //        isValid = false;
@@ -157,8 +159,8 @@ async function next() {
 //        isValid = false;
 //    }
 
-//    return isValid;
-//}
+   return isValid;
+}
 
 function onClick_BtnSubmitBookingOrder() {
     next();

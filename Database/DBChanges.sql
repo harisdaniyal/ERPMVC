@@ -3771,10 +3771,9 @@ GO
 -----------------16-03-2022---------------------------
 
 CREATE TABLE [dbo].[ExportLogistic](
-	[OrderId] [int]  NOT NULL,
-	[OrderNo] [varchar](9) NOT NULL,
-
 	[LogisticId] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[OrderId] [int]  NOT NULL,
+
 	[ContainerNo] [nvarchar](250) NULL,
 	[ContainerType] [nvarchar](500)  NULL,
 	[ContainerSize] [nvarchar](20) NULL,
@@ -3790,7 +3789,7 @@ CREATE TABLE [dbo].[ExportLogistic](
 	[BookingPort] [nvarchar](50) NULL,
 	[ModeOfTransportation] [nvarchar](20) NULL,
 	[DateOfReceivingCargo] [datetime] NULL,
-	[PreDispatched] [nvarchar](20) NULL,
+	[PreDispatched] bit,
 	[Status] [nvarchar](50) NULL,
 
 	[IsCompleted] [bit] default(0) NULL,
@@ -3801,3 +3800,133 @@ CREATE TABLE [dbo].[ExportLogistic](
 	[IsDeleted] [bit] default(0) NULL
 )
 
+----------17-03-2022-------------------
+
+CREATE TABLE [dbo].[ExportPreDispatched](
+	[ID] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[OrderId] [int]  NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[CRO] [nvarchar](250) NULL,
+
+
+	[PickupFrom] [datetime] NULL,
+	[VehicleNo] [nvarchar](250) NULL,
+	[TransporterName] [nvarchar](250) NULL,
+	[TransporterCost] [int] NULL,
+	
+	
+	
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)
+
+
+CREATE TABLE [dbo].[ExportDispatchedTrain](
+	[ID] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[OrderId] [int]  NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500)  NULL,
+	[CRO] [nvarchar](250) NULL,
+
+	[TrainID] [nvarchar] (50) NULL,
+	[DispatchedOfDate] [datetime] NULL,
+	[WagonNo] [nvarchar](250) NULL,
+	[RRNo] [nvarchar](250) NULL,
+	[EngineNo] [nvarchar](250) NULL,
+	[ShipperName] [nvarchar](250) NULL,
+	[WagonType] [nvarchar](250) NULL,
+	[ReDispatched] [nvarchar](100) NULL,
+	[CargoWeight] [nvarchar](250) NULL,
+	[TareWeight] [nvarchar](250) NULL,
+	
+	
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)
+
+   -------------18-03-2022----------------
+
+CREATE TABLE [dbo].[ExportDispatchedTruck](
+	[ID] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[OrderId] [int]  NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NOT NULL,
+	[CRO] [nvarchar](250)  NULL,
+
+	[TruckNo] [nvarchar] (150) NULL,
+	[DateOfDispatched] [datetime] NULL,
+	[CustomerName] [nvarchar](250) NULL,
+	[TruckContactNo] [nvarchar](250) NULL,
+	[BiltyNo] [nvarchar](250) NULL,
+	[DeliveryLocation] [nvarchar](250) NULL,
+	
+	
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)
+
+
+
+CREATE TABLE [dbo].[ExportReDispatched](
+	[ID] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[OrderId] [int]  NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NOT NULL,
+	[CRO] [nvarchar](250) NULL,
+
+	[TransporterName] [nvarchar] (250) NULL,
+	[VehicleNo] [nvarchar] (250) NULL,
+	[CustomerName] [nvarchar](250) NULL,
+	[TruckingCost] [int] NULL,
+	
+	
+	
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)
+
+CREATE TABLE [dbo].[ExportDelivery](
+	[ID] [int] IDENTITY(1,1) Primary Key NOT NULL ,
+	[OrderId] [int]  NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NOT NULL,
+	[CRO] [nvarchar](250) NULL,
+
+	[VehicleNo] [nvarchar] (250) NULL,
+	[TruckNo] [nvarchar] (150) NULL,
+	[WagonNo] [nvarchar](250) NULL,
+	[DeliveryDate] [datetime] NULL,
+	
+	[IsCompleted] [bit] default(0) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] default(0) NULL
+)

@@ -313,6 +313,22 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
+        //*****Export OrderList********///
+        [HttpGet]
+        public async Task<ActionResult> ExportOrderList()
+        {
+            try
+            {
+                //this.ViewBag.BusinessDivisions = await businessDivisionService.GetAllBusinessDivisionsAsync();
+                var upcomingTrips = orderBookingService.GetExportOrderList();
+                return View("ExportOrderList", upcomingTrips);
+            }
+            catch (Exception ex)
+            {
+                return View("ExportOrderList", new List<OrderListViewModel>());
+            }
+        }
+
         [HttpGet]
         public async Task<ActionResult> Dispatched(int orderBookingId)
         {
@@ -540,12 +556,13 @@ namespace BA_ERPMVC.Controllers
 
             this.ViewBag.ShippingLines = orderBookingService.GetShippingLine();
             this.ViewBag.ContainerTypes = await containerTypeService.GetAllContainerTypesAsync();
+            this.ViewBag.ContainerSizes = await orderBookingService.GetContainerSizesAsync();
 
             var exportlogisticsModel = await orderBookingService.GetExportLogisticsAsync(orderBookingId);
 
             if (exportlogisticsModel == null || !exportlogisticsModel.Any())
             {
-                return PartialView("Partials/_Logistics", new List<ExportLogisticViewModel>
+                return PartialView("ExportPartials/_ExportLogistic", new List<ExportLogisticViewModel>
                 {
                 });
             }
@@ -553,7 +570,51 @@ namespace BA_ERPMVC.Controllers
 
             var exportlogisticsViewModel = Mapper.Map<IEnumerable<ExportLogistic>, IEnumerable<ExportLogisticViewModel>>(exportlogisticsModel);
 
-            return PartialView("Partials/_Logistics", exportlogisticsViewModel);
+            return PartialView("ExportPartials/_ExportLogistic", exportlogisticsViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportLogistic(ExportLogisticViewModel exportlogisticsViewModels)
+        {
+            if (exportlogisticsViewModels == null)
+            {
+                return Json(new { success = false, message = $"{nameof(exportlogisticsViewModels)} should be null or empty" });
+            }
+
+            try
+            {
+                await orderBookingService.SaveExportLogisticsAsync(exportlogisticsViewModels);
+
+                return Json(new { success = true, logisticsId = exportlogisticsViewModels.LogisticId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteExportLogistic(int logisticId)
+        {
+            if (logisticId < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(logisticId)} should be a valid id" });
+            }
+
+            try
+            {
+                if (!orderBookingService.ExportDeleteLogistic(logisticId))
+                {
+                    return Json(new { success = false, message = $"Logistic can not be delete after PreDispatched." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Container can not be deleted, it is InProcessed." });
+            }
+
+            return Json(new { success = true });
         }
 
 

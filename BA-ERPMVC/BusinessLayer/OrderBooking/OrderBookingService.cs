@@ -39,6 +39,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         private readonly ExportBookingOrderRepository _exportbookingorderRepository;  //*****Export******///
         private readonly ExportLogisticRepository _exportlogisticRepository;
+        private readonly ExportPreDispatchedRepository _exportpredispatchedRepository;
+        private readonly ExportDispatchedTrainRepository _exportdispatchedtrainRepository;
+        private readonly ExportDispatchedTruckRepository _exportdispatchedtruckRepository;
+        private readonly ExportReDispatchedRepository _exportRedispatchedRepository;
 
 
 
@@ -66,6 +70,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _exportbookingorderRepository = new ExportBookingOrderRepository(_dbContext);   /////******Export******/////
             _exportlogisticRepository = new ExportLogisticRepository(_dbContext);
+            _exportpredispatchedRepository = new ExportPreDispatchedRepository(_dbContext);
+            _exportdispatchedtrainRepository = new ExportDispatchedTrainRepository(_dbContext);
+            _exportdispatchedtruckRepository = new ExportDispatchedTruckRepository(_dbContext);
+            _exportRedispatchedRepository = new ExportReDispatchedRepository(_dbContext);
         }
 
         public async Task<BookingViewModel> GetOrderBookingAsync(int orderBookingId)
@@ -1386,6 +1394,32 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     }).Distinct().ToList();
         }
 
+        /////********* Export OrderList*********//////
+
+
+
+        public IEnumerable<OrderListViewModel> GetExportOrderList()
+        {
+            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+                    //join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
+                    //        on order.BusinessDivisionId equals bDivision.BusinessDivisionID
+                    //join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
+                    select new OrderListViewModel()
+                    {
+                        OrderId = order.OrderId,
+                        OrderNo = order.OrderNo,
+                        ExportPreDispatched = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.PreDispatched.ToString()).ToList().Count().ToString(),
+                        ExportDispatchedTrain = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Dispatched.ToString()).ToList().Count().ToString(),
+                        ExportDispatchedTruck = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Dispatched.ToString()).ToList().Count().ToString(),
+                        ExportReDispatched = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.ReDispatched.ToString()).ToList().Count().ToString(),
+                        //ExportDelivery = _dbContext.ExportDelivery.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Delivery.ToString()).ToList().Count().ToString(),
+                        //Completed = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Completed.ToString()).ToList().Count().ToString(),
+                        ContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.IsCompleted == true).ToList().Count(),
+
+                    }).Distinct().ToList();
+        }
+
+
         public IEnumerable<ShippingAgent> GetShippingAgent()
         {
             return _dbContext.ShippingAgents.Where(x => x.IsDeleted == false).ToList();
@@ -1500,7 +1534,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             await _dbContext.SaveChangesAsync();
 
 
-            exportbookingModel.OrderId = exportorderbookingViewModel.OrderID;
+            exportorderbookingViewModel.OrderID = exportbookingModel.OrderId;
         }
 
         public async Task UpdateExportOrderBookingAsync(ExportOrderBookingViewModel exportbookingViewModel)
@@ -1528,6 +1562,424 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public Task<IEnumerable<ExportLogistic>> GetExportLogisticsAsync(int orderBookingId)
         {
             return _exportlogisticRepository.FindAsync(x => x.OrderId == orderBookingId);
+        }
+
+        public async Task SaveExportLogisticsAsync(ExportLogisticViewModel exportlogisticsViewModels)
+        {
+            var exportlogistic = Mapper.Map<ExportLogisticViewModel, ExportLogistic>(exportlogisticsViewModels);
+            exportlogistic.Status = OrdersStatus.PreDispatched.ToString();
+
+            var logistic = await _exportlogisticRepository.FindAsync(x => x.CRO == exportlogistic.CRO);
+            if (logistic.Any())
+            {
+                throw new ArgumentException($"{nameof(exportlogistic.CRO)} already exist. ");
+            }
+            if (!exportlogistic.PreDispatched.GetValueOrDefault())
+            {
+                exportlogistic.Status = OrdersStatus.Dispatched.ToString();
+            }
+            _exportlogisticRepository.Add(exportlogistic);
+            await _dbContext.SaveChangesAsync();
+            exportlogisticsViewModels.LogisticId = exportlogistic.LogisticId;
+        }
+
+        public bool ExportDeleteLogistic(int LogisticId)
+        {
+            bool isSuccess = false;
+            var exportlogistic = _dbContext.ExportLogistics.Where(x => x.Status != OrdersStatus.PreDispatched.ToString() && x.LogisticId == LogisticId).FirstOrDefault();
+            if (exportlogistic != null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                _exportlogisticRepository.Remove(LogisticId);
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
+        }
+
+        ////*************** Export PreDispatched***********/////
+
+        public IEnumerable<ExportPreDispatchedViewModel> GetExportPreDispatchedAsync()
+        {
+            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+                    join logistics in _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.PreDispatched.ToString() && x.PreDispatched == true)
+                        on order.OrderId equals logistics.OrderId
+                    join PD in _dbContext.ExportPreDispatcheds.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = PD.OrderId, ContainerNo = PD.ContainerNo } into PDGroup
+                    from ExportPreDispatched in PDGroup.DefaultIfEmpty()
+                    select new ExportPreDispatchedViewModel()
+                    {
+
+                        OrderId = order.OrderId,
+                        OrderNo = order.OrderNo,
+                        CRO = logistics.CRO,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+
+
+                        PickupFrom = ExportPreDispatched.PickupFrom,
+                        VehicleNo = ExportPreDispatched.VehicleNo,
+                        TransporterName = ExportPreDispatched.TransporterName,
+                        TransporterCost = ExportPreDispatched.TransporterCost,
+                        ID = ExportPreDispatched.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveExportPreDispatchedAsync(ExportPreDispatchedViewModel ExportpreDispatchedVM)
+        {
+
+            var ExportpreDispatched = Mapper.Map<ExportPreDispatchedViewModel, ExportPreDispatched>(ExportpreDispatchedVM);
+            if (ExportpreDispatched == null)
+            {
+                throw new ArgumentNullException(nameof(ExportpreDispatchedVM));
+            }
+
+            _exportpredispatchedRepository.Add(ExportpreDispatched);
+
+            if (ExportpreDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.PreDispatched.ToString()
+                    && x.ContainerNo == ExportpreDispatchedVM.ContainerNo && x.OrderId == ExportpreDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Dispatched.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportpreDispatchedVM.ID = ExportpreDispatched.ID;
+        }
+
+        public async Task UpdateExportPreDispatchedAsync(ExportPreDispatchedViewModel ExportpreDispatchedVM)
+        {
+
+            if (ExportpreDispatchedVM == null)
+            {
+                throw new ArgumentNullException(nameof(ExportpreDispatchedVM));
+            }
+
+            var ExportpreDispatched = await _exportpredispatchedRepository.GetAsync(Convert.ToInt32(ExportpreDispatchedVM.ID));
+
+            if (ExportpreDispatched == null)
+            {
+                throw new InvalidOperationException($"Booking order:{ExportpreDispatchedVM.OrderNo}  not found.");
+            }
+
+            ExportpreDispatched.PickupFrom = ExportpreDispatchedVM.PickupFrom;
+            ExportpreDispatched.TransporterName = ExportpreDispatchedVM.TransporterName;
+            ExportpreDispatched.VehicleNo = ExportpreDispatchedVM.VehicleNo;
+            ExportpreDispatched.TransporterCost = ExportpreDispatchedVM.TransporterCost;
+            ExportpreDispatched.IsCompleted = ExportpreDispatchedVM.IsCompleted;
+            _exportpredispatchedRepository.Update(ExportpreDispatched);
+
+            if (ExportpreDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.PreDispatched.ToString()
+                    && x.ContainerNo == ExportpreDispatchedVM.ContainerNo && x.OrderId == ExportpreDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Dispatched.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportpreDispatchedVM.ID = ExportpreDispatched.ID;
+        }
+
+        ////*************** Export Dispatched Train***********/////
+
+        public IEnumerable<ExportDispatchedTrainViewModel> GetExportDispatchedTrainAsync()
+        {
+            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+                    join logistics in _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Dispatched.ToString() && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
+                        on order.OrderId equals logistics.OrderId
+                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDT.OrderId, ContainerNo = EDT.ContainerNo } into EDTGroup
+                    from ExportDispatchedTrains in EDTGroup.DefaultIfEmpty()
+                    select new ExportDispatchedTrainViewModel()
+                    {
+
+                        OrderId = order.OrderId,
+                        OrderNo = order.OrderNo,
+                        CRO = logistics.CRO,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerType = logistics.ContainerType,
+                        EngineNo = logistics.EGNo,
+                        ShipperName = order.ShipperName,
+
+
+                        TrainID = ExportDispatchedTrains.TrainID,
+                        DispatchedOfDate = ExportDispatchedTrains.DispatchedOfDate,
+                        WagonNo = ExportDispatchedTrains.WagonNo,
+                        RRNo = ExportDispatchedTrains.RRNo,
+                        WagonType = ExportDispatchedTrains.WagonType,
+                        ReDispatched = ExportDispatchedTrains.ReDispatched,
+                        CargoWeight = ExportDispatchedTrains.CargoWeight,
+                        TareWeight = ExportDispatchedTrains.TareWeight,
+                        ID = ExportDispatchedTrains.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveExportDispatchedTrainAsync(ExportDispatchedTrainViewModel ExportDispatchedTrainVM)
+        {
+
+            var ExportDispatchedTrain = Mapper.Map<ExportDispatchedTrainViewModel, ExportDispatchedTrain>(ExportDispatchedTrainVM);
+            if (ExportDispatchedTrain == null)
+            {
+                throw new ArgumentNullException(nameof(ExportDispatchedTrainVM));
+            }
+
+            _exportdispatchedtrainRepository.Add(ExportDispatchedTrain);
+
+            if (ExportDispatchedTrainVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == ExportDispatchedTrainVM.ContainerNo && x.OrderId == ExportDispatchedTrainVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.ReDispatched.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportDispatchedTrainVM.ID = ExportDispatchedTrain.ID;
+        }
+
+        public async Task UpdateExportDispatchedTrainAsync(ExportDispatchedTrainViewModel ExportDispatchedTrainVM)
+        {
+
+            if (ExportDispatchedTrainVM == null)
+            {
+                throw new ArgumentNullException(nameof(ExportDispatchedTrainVM));
+            }
+
+            var ExportDispatchedTrain = await _exportdispatchedtrainRepository.GetAsync(Convert.ToInt32(ExportDispatchedTrainVM.ID));
+
+            if (ExportDispatchedTrain == null)
+            {
+                throw new InvalidOperationException($"Booking order:{ExportDispatchedTrainVM.OrderNo}  not found.");
+            }
+
+            ExportDispatchedTrain.TrainID = ExportDispatchedTrainVM.TrainID;
+            ExportDispatchedTrain.DispatchedOfDate = ExportDispatchedTrainVM.DispatchedOfDate;
+            ExportDispatchedTrain.WagonNo = ExportDispatchedTrainVM.WagonNo;
+            ExportDispatchedTrain.RRNo = ExportDispatchedTrainVM.RRNo;
+            ExportDispatchedTrain.WagonType = ExportDispatchedTrainVM.WagonType;
+            ExportDispatchedTrain.ReDispatched = ExportDispatchedTrainVM.ReDispatched;
+            ExportDispatchedTrain.CargoWeight = ExportDispatchedTrainVM.CargoWeight;
+            ExportDispatchedTrain.TareWeight = ExportDispatchedTrainVM.TareWeight;
+            ExportDispatchedTrain.IsCompleted = ExportDispatchedTrainVM.IsCompleted;
+            _exportdispatchedtrainRepository.Update(ExportDispatchedTrain);
+
+            if (ExportDispatchedTrainVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == ExportDispatchedTrainVM.ContainerNo && x.OrderId == ExportDispatchedTrainVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.ReDispatched.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportDispatchedTrainVM.ID = ExportDispatchedTrain.ID;
+        }
+
+        ///////********* Export Dispatched Truck***********////////
+
+
+        public IEnumerable<ExportDispatchedTruckViewModel> GetExportDispatchedTruckAsync()
+        {
+            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+                    join logistics in _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Dispatched.ToString() && x.ModeOfTransportation == ModeOfTransaction.Truck.ToString())
+                        on order.OrderId equals logistics.OrderId
+                    join DT in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
+                    from ExportDispatchedTrucks in DTGroup.DefaultIfEmpty()
+                    select new ExportDispatchedTruckViewModel()
+                    {
+
+                        OrderId = order.OrderId,
+                        OrderNo = order.OrderNo,
+                        CRO = logistics.CRO,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerType = logistics.ContainerType,
+
+
+                        TruckNo = ExportDispatchedTrucks.TruckNo,
+                        DateOfDispatched = ExportDispatchedTrucks.DateOfDispatched,
+                        CustomerName = ExportDispatchedTrucks.CustomerName,
+                        TruckContactNo = ExportDispatchedTrucks.TruckContactNo,
+                        BiltyNo = ExportDispatchedTrucks.BiltyNo,
+                        DeliveryLocation = ExportDispatchedTrucks.DeliveryLocation,
+                        ID = ExportDispatchedTrucks.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveExportDispatchedTruckAsync(ExportDispatchedTruckViewModel ExportDispatchedTruckVM)
+        {
+
+            var ExportDispatchedTruck = Mapper.Map<ExportDispatchedTruckViewModel, ExportDispatchedTruck>(ExportDispatchedTruckVM);
+            if (ExportDispatchedTruck == null)
+            {
+                throw new ArgumentNullException(nameof(ExportDispatchedTruckVM));
+            }
+
+            _exportdispatchedtruckRepository.Add(ExportDispatchedTruck);
+
+            if (ExportDispatchedTruckVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == ExportDispatchedTruckVM.ContainerNo && x.OrderId == ExportDispatchedTruckVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportDispatchedTruckVM.ID = ExportDispatchedTruck.ID;
+        }
+
+        public async Task UpdateExportDispatchedTruckAsync(ExportDispatchedTruckViewModel ExportDispatchedTruckVM)
+        {
+
+            if (ExportDispatchedTruckVM == null)
+            {
+                throw new ArgumentNullException(nameof(ExportDispatchedTruckVM));
+            }
+
+            var ExportDispatchedTruck = await _exportdispatchedtruckRepository.GetAsync(Convert.ToInt32(ExportDispatchedTruckVM.ID));
+
+            if (ExportDispatchedTruck == null)
+            {
+                throw new InvalidOperationException($"Booking order:{ExportDispatchedTruckVM.OrderNo}  not found.");
+            }
+
+            ExportDispatchedTruck.TruckNo = ExportDispatchedTruckVM.TruckNo;
+            ExportDispatchedTruck.DateOfDispatched = ExportDispatchedTruckVM.DateOfDispatched;
+            ExportDispatchedTruck.CustomerName = ExportDispatchedTruckVM.CustomerName;
+            ExportDispatchedTruck.TruckContactNo = ExportDispatchedTruckVM.TruckContactNo;
+            ExportDispatchedTruck.BiltyNo = ExportDispatchedTruckVM.BiltyNo;
+            ExportDispatchedTruck.DeliveryLocation = ExportDispatchedTruckVM.DeliveryLocation;
+
+            ExportDispatchedTruck.IsCompleted = ExportDispatchedTruckVM.IsCompleted;
+            _exportdispatchedtruckRepository.Update(ExportDispatchedTruck);
+
+            if (ExportDispatchedTruckVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Dispatched.ToString()
+                    && x.ContainerNo == ExportDispatchedTruckVM.ContainerNo && x.OrderId == ExportDispatchedTruckVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportDispatchedTruckVM.ID = ExportDispatchedTruck.ID;
+        }
+
+        ////*************** Export ReDispatched***********/////
+
+        public IEnumerable<ExportReDispatchedViewModel> GetExportReDispatchedAsync()
+        {
+            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+                    join logistics in _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.ReDispatched.ToString())
+                        on order.OrderId equals logistics.OrderId
+                    join PD in _dbContext.ExportReDispatcheds.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = PD.OrderId, ContainerNo = PD.ContainerNo } into PDGroup
+                    from ExportReDispatcheds in PDGroup.DefaultIfEmpty()
+                    select new ExportReDispatchedViewModel()
+                    {
+
+                        OrderId = order.OrderId,
+                        OrderNo = order.OrderNo,
+                        CRO = logistics.CRO,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerType = logistics.ContainerType,
+
+
+                        TransporterName = ExportReDispatcheds.TransporterName,
+                        VehicleNo = ExportReDispatcheds.VehicleNo,
+                        CustomerName = ExportReDispatcheds.CustomerName,
+                        TruckingCost = ExportReDispatcheds.TruckingCost,
+                        ID = ExportReDispatcheds.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveExportReDispatchedAsync(ExportReDispatchedViewModel ExportReDispatchedVM)
+        {
+
+            var ExportReDispatched = Mapper.Map<ExportReDispatchedViewModel, ExportReDispatched>(ExportReDispatchedVM);
+            if (ExportReDispatched == null)
+            {
+                throw new ArgumentNullException(nameof(ExportReDispatchedVM));
+            }
+
+            _exportRedispatchedRepository.Add(ExportReDispatched);
+
+            if (ExportReDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.ReDispatched.ToString()
+                    && x.ContainerNo == ExportReDispatchedVM.ContainerNo && x.OrderId == ExportReDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportReDispatchedVM.ID = ExportReDispatched.ID;
+        }
+
+        public async Task UpdateExportReDispatchedAsync(ExportReDispatchedViewModel ExportReDispatchedVM)
+        {
+
+            if (ExportReDispatchedVM == null)
+            {
+                throw new ArgumentNullException(nameof(ExportReDispatchedVM));
+            }
+
+            var ExportReDispatched = await _exportRedispatchedRepository.GetAsync(Convert.ToInt32(ExportReDispatchedVM.ID));
+
+            if (ExportReDispatched == null)
+            {
+                throw new InvalidOperationException($"Booking order:{ExportReDispatchedVM.OrderNo}  not found.");
+            }
+
+            ExportReDispatched.TransporterName = ExportReDispatchedVM.TransporterName;
+            ExportReDispatched.VehicleNo = ExportReDispatchedVM.VehicleNo;
+            ExportReDispatched.CustomerName = ExportReDispatchedVM.CustomerName;
+            ExportReDispatched.TruckingCost = ExportReDispatchedVM.TruckingCost;
+
+            ExportReDispatched.IsCompleted = ExportReDispatchedVM.IsCompleted;
+            _exportRedispatchedRepository.Update(ExportReDispatched);
+
+            if (ExportReDispatchedVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.IsCompleted == true && x.Status == OrdersStatus.ReDispatched.ToString()
+                    && x.ContainerNo == ExportReDispatchedVM.ContainerNo && x.OrderId == ExportReDispatchedVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Delivery.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportReDispatchedVM.ID = ExportReDispatched.ID;
         }
 
     }

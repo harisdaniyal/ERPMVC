@@ -9,6 +9,7 @@ using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.ViewModels.OrderBooking;
 using AutoMapper;
 using BA_ERPMVC.ViewModels;
+using BA_ERPMVC.ViewModels.ExportOrderBooking;
 
 namespace BA_ERPMVC.Controllers
 {
@@ -347,6 +348,158 @@ namespace BA_ERPMVC.Controllers
 
             return View(TrainReport);
         }
+
+        ////********* Export PreDispatched**********/////////////
+
+        [HttpGet]
+        public ActionResult ExportPreDispatched()
+        {
+            var ExportPreDispatchedModel = orderBookingService.GetExportPreDispatchedAsync();
+
+            return View(ExportPreDispatchedModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportPreDispatched(ExportPreDispatchedViewModel ExportpreDispatchedVM)
+        {
+            if (ExportpreDispatchedVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(ExportpreDispatchedVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (ExportpreDispatchedVM.ID == 0)
+                {
+                    await orderBookingService.SaveExportPreDispatchedAsync(ExportpreDispatchedVM);
+
+                    return Json(new { success = true, Id = ExportpreDispatchedVM.ID });
+                }
+
+                await orderBookingService.UpdateExportPreDispatchedAsync(ExportpreDispatchedVM);
+
+                return Json(new { success = true, Id = ExportpreDispatchedVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        ////////////********* Export DispatchedTrain**************////////////
+
+        [HttpGet]
+        public ActionResult ExportDispatchedTrain()
+        {
+            
+            var exportDispatchedtrainModel = orderBookingService.GetExportDispatchedTrainAsync();
+
+            return View(exportDispatchedtrainModel);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> ExportDispatchedTrain(ExportDispatchedTrainViewModel ExportDispatchedTrainVM)
+        {
+            if (ExportDispatchedTrainVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(ExportDispatchedTrainVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (ExportDispatchedTrainVM.ID == 0)
+                {
+                    await orderBookingService.SaveExportDispatchedTrainAsync(ExportDispatchedTrainVM);
+
+                    return Json(new { success = true, Id = ExportDispatchedTrainVM.ID });
+                }
+
+                await orderBookingService.UpdateExportDispatchedTrainAsync(ExportDispatchedTrainVM);
+
+                return Json(new { success = true, Id = ExportDispatchedTrainVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        /////********* Export Dispatched Truck*********/////
+
+        [HttpGet]
+        public ActionResult ExportDispatchedTruck()
+        {
+
+            var exportDispatchedtruckModel= orderBookingService.GetExportDispatchedTruckAsync();
+
+            return View(exportDispatchedtruckModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportDispatchedTruck(ExportDispatchedTruckViewModel ExportDispatchedTruckVM)
+        {
+            if (ExportDispatchedTruckVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(ExportDispatchedTruckVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (ExportDispatchedTruckVM.ID == 0)
+                {
+                    await orderBookingService.SaveExportDispatchedTruckAsync(ExportDispatchedTruckVM);
+
+                    return Json(new { success = true, Id = ExportDispatchedTruckVM.ID });
+                }
+
+                await orderBookingService.UpdateExportDispatchedTruckAsync(ExportDispatchedTruckVM);
+
+                return Json(new { success = true, Id = ExportDispatchedTruckVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        /////********* Export ReDispatched *********/////
+
+        [HttpGet]
+        public ActionResult ExportReDispatched()
+        {
+
+            var exportReDispatchedModel = orderBookingService.GetExportReDispatchedAsync();
+
+            return View(exportReDispatchedModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportReDispatched(ExportReDispatchedViewModel ExportReDispatchedVM)
+        {
+            if (ExportReDispatchedVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(ExportReDispatchedVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (ExportReDispatchedVM.ID == 0)
+                {
+                    await orderBookingService.SaveExportReDispatchedAsync(ExportReDispatchedVM);
+
+                    return Json(new { success = true, Id = ExportReDispatchedVM.ID });
+                }
+
+                await orderBookingService.UpdateExportReDispatchedAsync(ExportReDispatchedVM);
+
+                return Json(new { success = true, Id = ExportReDispatchedVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 
 }

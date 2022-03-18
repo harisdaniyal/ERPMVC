@@ -35,7 +35,7 @@ function highlightCurrentTab(stepName) {
 
     if (stepName == 'ExportBooking')
         $("ul.steps-wrapper").find("li[data-formstep='1']").addClass("active");
-    if (stepName == 'Logistics')
+    if (stepName == 'ExportLogistic')
         $("ul.steps-wrapper").find("li[data-formstep='2']").addClass("active");
     if (stepName == 'Trips')
         $("ul.steps-wrapper").find("li[data-formstep='3']").addClass("active");
