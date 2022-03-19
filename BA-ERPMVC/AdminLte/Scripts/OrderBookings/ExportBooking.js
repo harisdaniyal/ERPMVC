@@ -2,7 +2,10 @@
 function save() {
    if (!validateInputs())
         return false;
-
+    var facilities = [];
+    $("input:checkbox[name='cbx_Facilities']:checked").each(function () {
+        facilities.push($(this).val());
+    });
   
     showLoader();
 
@@ -21,7 +24,7 @@ function save() {
             FortyContainerPrice: $("#txt_Fortycontainerprice").val(),
             RateOfTransportation: $("#txt_Rateoftransportation").val(),
             PointOfLoadingStation: $("#txt_LoadingStation option:selected").val(),
-           
+            FacilityIds: facilities
         }),
         headers: {
             'Content-Type': 'application/json;charset=utf-8'

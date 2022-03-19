@@ -109,7 +109,8 @@ function next() {
 }
 
 function back() {
-    window.location.href =  'OrderBooking/Booking';
+    var orderBookingId = getBookingOrderId();
+    window.location.href = `/OrderBooking/Index?orderBookingId=${orderBookingId}&stepNo=Booking`;
 }
 
 function onClick_BtnBackToBooking() {

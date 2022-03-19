@@ -3908,6 +3908,7 @@ CREATE TABLE [dbo].[ExportReDispatched](
 	[UpdateDate] [datetime] NULL,
 	[IsDeleted] [bit] default(0) NULL
 )
+---------------Last ran 18-03-2022
 
 CREATE TABLE [dbo].[ExportDelivery](
 	[ID] [int] IDENTITY(1,1) Primary Key NOT NULL ,
@@ -3930,3 +3931,34 @@ CREATE TABLE [dbo].[ExportDelivery](
 	[UpdateDate] [datetime] NULL,
 	[IsDeleted] [bit] default(0) NULL
 )
+
+Go
+
+
+CREATE TABLE [dbo].[GenerateOrder](
+	[OrderID] [int] IDENTITY(1,1) Primary key NOT NULL,
+	[OrderNo] [varchar](9) NULL,
+	[CustomerID] [int] NULL,
+	[BusinessDivisionId] [int] NULL,
+	[OrderType] [nvarchar](20) NULL,
+	[BL] [nvarchar](50) NULL,
+	[CRO] [nvarchar](50) NULL,
+	[InBond_Number] [nvarchar](50) NULL,
+	[DeliveryNo] [nvarchar](50) NULL,
+	[TwentyContainerQty] [int] NULL,
+	[FortyContainerQty] [int] NULL,
+	[TwentyContainerPrice] [nvarchar](250) NULL,
+	[FortyContainerPrice] [nvarchar](250) NULL,
+	[OrderDate] [date] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[CreatedDate] [datetime] NULL,
+	[isActive] [bit] NULL,
+	[InvoiceAmount] [numeric](18, 0) NULL,
+	[isCompleted] [bit] NULL,
+	[ShippingLineId] [int] NULL,
+	[ShippingAgentId] [int] NULL,
+	[FreeDays] [int] NULL,
+	[Remarks] [nvarchar](1000) NULL,
+	[VesselBerthingDate] [datetime] NULL,
+	[BookingPOCName] [nvarchar](250) NULL
+) 

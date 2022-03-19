@@ -500,7 +500,7 @@ namespace BA_ERPMVC.Controllers
             {
                 return Json(new { success = false, message = $"{nameof(orderBookingId)} should be a valid id" });
             }
-            //this.ViewBag.ShippingLines = orderBookingService.GetShippingLine();
+            this.ViewBag.Facilities = await facilityService.GetAllFacilitiesAsync();
             this.ViewBag.LoadingStation = await locationService.GetLocationsAsync();
 
             var bookingViewModel = await orderBookingService.GetExportOrderBookingAsync(orderBookingId);

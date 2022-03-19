@@ -11,7 +11,7 @@
 <br />
 <div id="orderListing" class="card cardV2">
     <div class="card-header">
-        <h5 class="m-0 font-weight-bold centerHead">Order Listing</h5>
+        <h5 class="m-0 font-weight-bold centerHead">Import Order Listing</h5>
     </div>
     <div class="filterBar d-flex align-content-center justify-content-between w-100 bg-light p-2 border-top border-lighter">
         <div class="mr-2 mt-1">
@@ -39,7 +39,6 @@
                 <th>ID</th>
                 <th>Customer Name</th>
                 <th>Business Devision</th>
-                <th>Order Type</th>
                 <th style="width:120px;">Status</th>
                 <th> Container Qty</th>
                 <th>Actions</th>
@@ -120,7 +119,7 @@
 </div>
 <script>
     function onClick_btnView(orderBookingId) {
-        location.href = "Index?orderBookingId=" + orderBookingId + "&stepNo=Logistics";
+        location.href = "Index?orderBookingId=" + orderBookingId + "&stepNo=Booking";
     }
     function onClick_btnTripExecution(orderBookingId) {
         location.href = "TripsExecution?orderBookingId=" + orderBookingId + "&stepNo=Dispatched";
@@ -143,7 +142,7 @@
             ],
             "Sorting": false,
             "lengthChange": true,
-            "pageLength": 5,
+            "pageLength": 10,
             "paging": true,
             'searching': true
         });

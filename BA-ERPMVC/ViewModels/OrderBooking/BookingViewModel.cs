@@ -16,6 +16,10 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string OrderType { get; set; }
         public string BL { get; set; }
         public string CRO { get; set; }
+        public int? TwentyContainerQty { get; set; }
+        public int? FortyContainerQty { get; set; }
+        public string TwentyContainerPrice { get; set; }
+        public string FortyContainerPrice { get; set; }
         public DateTime? OrderDate { get; set; }
         public int InvoiceAmount { get; set; }
         public int ShippingLineId { get; set; }

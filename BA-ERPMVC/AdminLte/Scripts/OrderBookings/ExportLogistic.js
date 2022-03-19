@@ -125,7 +125,8 @@ function next() {
 }
 
 function back() {
-    window.location.href = 'OrderBooking/ExportBooking';
+    var orderBookingId = getBookingOrderId();
+    window.location.href = `/OrderBooking/ExportOrder?orderBookingId=${orderBookingId}&stepNo=ExportBooking`;
 }
 
 function onClick_BtnBackToBooking() {

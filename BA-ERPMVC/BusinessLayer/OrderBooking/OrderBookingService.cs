@@ -43,6 +43,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly ExportDispatchedTrainRepository _exportdispatchedtrainRepository;
         private readonly ExportDispatchedTruckRepository _exportdispatchedtruckRepository;
         private readonly ExportReDispatchedRepository _exportRedispatchedRepository;
+        private readonly ExportDeliveryRepository _exportDeliveryRepository;
 
 
 
@@ -74,6 +75,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _exportdispatchedtrainRepository = new ExportDispatchedTrainRepository(_dbContext);
             _exportdispatchedtruckRepository = new ExportDispatchedTruckRepository(_dbContext);
             _exportRedispatchedRepository = new ExportReDispatchedRepository(_dbContext);
+            _exportDeliveryRepository = new ExportDeliveryRepository(_dbContext);
         }
 
         public async Task<BookingViewModel> GetOrderBookingAsync(int orderBookingId)
@@ -175,6 +177,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             bookingModel.CRO = bookingViewModel.CRO;
             bookingModel.OrderDate = bookingViewModel.OrderDate;
             bookingModel.OrderType = bookingViewModel.OrderType;
+            bookingModel.TwentyContainerQty = bookingViewModel.TwentyContainerQty;
+            bookingModel.FortyContainerQty = bookingViewModel.FortyContainerQty;
+            bookingModel.TwentyContainerPrice = bookingViewModel.TwentyContainerPrice;
+            bookingModel.FortyContainerPrice = bookingViewModel.FortyContainerPrice;
             bookingModel.InvoiceAmount = bookingViewModel.InvoiceAmount;
             bookingModel.VesselBerthingDate = bookingViewModel.VesselBerthingDate;
             bookingModel.FreeDays = bookingViewModel.FreeDays;
@@ -1412,9 +1418,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ExportDispatchedTrain = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Dispatched.ToString()).ToList().Count().ToString(),
                         ExportDispatchedTruck = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Dispatched.ToString()).ToList().Count().ToString(),
                         ExportReDispatched = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.ReDispatched.ToString()).ToList().Count().ToString(),
-                        //ExportDelivery = _dbContext.ExportDelivery.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Delivery.ToString()).ToList().Count().ToString(),
-                        //Completed = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Completed.ToString()).ToList().Count().ToString(),
-                        ContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.IsCompleted == true).ToList().Count(),
+                        ExportDelivery = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Delivery.ToString()).ToList().Count().ToString(),
+                        Completed = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Completed.ToString()).ToList().Count().ToString(),
+                        ContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId).ToList().Count(),
 
                     }).Distinct().ToList();
         }
@@ -1509,7 +1515,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         {
             var exportbookingModel = await _exportbookingorderRepository.GetAsync(orderBookingId);
             var exportorderbookingViewModel = Mapper.Map<ExportBookingOrder, ExportOrderBookingViewModel>(exportbookingModel);
-
+            if (exportorderbookingViewModel != null)
+                exportorderbookingViewModel.FacilityIds = await GetOrderFacilitiesAsync(orderBookingId);
             return exportorderbookingViewModel;
         }
 
@@ -1532,7 +1539,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             _exportbookingorderRepository.Add(exportbookingModel);
             await _dbContext.SaveChangesAsync();
-
+            await AddOrderFacilitiesAsync(exportorderbookingViewModel.FacilityIds, exportbookingModel.OrderId);
 
             exportorderbookingViewModel.OrderID = exportbookingModel.OrderId;
         }
@@ -1544,19 +1551,31 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(exportbookingViewModel));
             }
 
-            ExportBookingOrder exportbookingModel = await _exportbookingorderRepository.GetAsync(exportbookingViewModel.OrderID);
+            ExportBookingOrder exportBookingModel = await _exportbookingorderRepository.GetAsync(exportbookingViewModel.OrderID);
 
-            if (exportbookingModel == null)
+            if (exportBookingModel == null)
             {
-                throw new InvalidOperationException($"{nameof(exportbookingModel.OrderId)} is invalid");
+                throw new InvalidOperationException($"{nameof(exportbookingViewModel.OrderID)} is invalid");
             }
-            exportbookingModel = Mapper.Map<ExportOrderBookingViewModel, ExportBookingOrder>(exportbookingViewModel);
 
-            _exportbookingorderRepository.Update(exportbookingModel);
 
+            exportBookingModel.DateOfBooking = exportbookingViewModel.DateOfBooking;
+            exportBookingModel.TwentyContainerQty = exportbookingViewModel.TwentyContainerQty;
+            exportBookingModel.FortyContainerQty = exportbookingViewModel.FortyContainerQty;
+            exportBookingModel.TwentyContainerPrice = exportbookingViewModel.TwentyContainerPrice;
+            exportBookingModel.FortyContainerPrice = exportbookingViewModel.FortyContainerPrice;
+            exportBookingModel.RateOfTransportation = exportbookingViewModel.RateOfTransportation;
+            exportBookingModel.PointOfLoadingStation = exportbookingViewModel.PointOfLoadingStation;
+            exportBookingModel.Forwarder = exportbookingViewModel.Forwarder;
+            exportBookingModel.ShipperName = exportbookingViewModel.ShipperName;
+            exportBookingModel.ShipperContact = exportbookingViewModel.ShipperContact;
+
+            _exportbookingorderRepository.Update(exportBookingModel);
+            
             await _dbContext.SaveChangesAsync();
+            await AddOrderFacilitiesAsync(exportbookingViewModel.FacilityIds, exportBookingModel.OrderId);
 
-            exportbookingViewModel.OrderID = exportbookingModel.OrderId;
+            exportbookingViewModel.OrderID = exportBookingModel.OrderId;
         }
 
         public Task<IEnumerable<ExportLogistic>> GetExportLogisticsAsync(int orderBookingId)
@@ -1970,7 +1989,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             if (ExportReDispatchedVM.IsCompleted.GetValueOrDefault())
             {
-                var logistic = _dbContext.ExportLogistics.Where(x => x.IsCompleted == true && x.Status == OrdersStatus.ReDispatched.ToString()
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.ReDispatched.ToString()
                     && x.ContainerNo == ExportReDispatchedVM.ContainerNo && x.OrderId == ExportReDispatchedVM.OrderId).FirstOrDefault();
                 if (logistic != null)
                 {
@@ -1982,6 +2001,105 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             ExportReDispatchedVM.ID = ExportReDispatched.ID;
         }
 
+        ////*************** Export Delivery***********/////
+
+        public IEnumerable<ExportDeliveryViewModel> GetExportDeliveryAsync()
+        {
+            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+                    join logistics in _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Delivery.ToString())
+                        on order.OrderId equals logistics.OrderId
+                    join RD in _dbContext.ExportReDispatcheds.Where(x => x.IsCompleted == true)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RD.OrderId, ContainerNo = RD.ContainerNo } into RDGroup
+                        from ExportReDispatcheds in RDGroup.DefaultIfEmpty()
+                    join DT in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == true)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
+                        from ExportDispatchedTrucks in DTGroup.DefaultIfEmpty()
+                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true && x.ReDispatched.ToLower() == "no")
+                    on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDT.OrderId, ContainerNo = EDT.ContainerNo } into EDTGroup
+                    from ExportDispatchedTrains in EDTGroup.DefaultIfEmpty()
+                    join ED in _dbContext.ExportDeliveries.Where(x => x.IsCompleted == false)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = ED.OrderId, ContainerNo = ED.ContainerNo } into EDGroup
+                    from ExportDeliveries in EDGroup.DefaultIfEmpty()
+                    select new ExportDeliveryViewModel()
+                    {
+
+                        OrderId = order.OrderId,
+                        OrderNo = order.OrderNo,
+                        CRO = logistics.CRO,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerType = logistics.ContainerType,
+
+
+                        VehicleNo = ExportReDispatcheds.VehicleNo,
+                        TruckNo = ExportDispatchedTrucks.TruckNo,
+                        WagonNo = ExportDispatchedTrains.WagonNo,
+                        DeliveryDate = ExportDeliveries.DeliveryDate,
+                        ID = ExportDeliveries.ID,
+
+                    }).Distinct().ToList();
+        }
+
+        public async Task SaveExportDeliveryAsync(ExportDeliveryViewModel ExportDeliveryVM)
+        {
+
+            var ExportDelivery = Mapper.Map<ExportDeliveryViewModel, ExportDelivery>(ExportDeliveryVM);
+            if (ExportDelivery == null)
+            {
+                throw new ArgumentNullException(nameof(ExportDeliveryVM));
+            }
+
+            _exportDeliveryRepository.Add(ExportDelivery);
+
+            if (ExportDeliveryVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Delivery.ToString()
+                    && x.ContainerNo == ExportDeliveryVM.ContainerNo && x.OrderId == ExportDeliveryVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Completed.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportDeliveryVM.ID = ExportDelivery.ID;
+        }
+        public async Task UpdateExportDeliveryAsync(ExportDeliveryViewModel ExportDeliveryVM)
+        {
+
+            if (ExportDeliveryVM == null)
+            {
+                throw new ArgumentNullException(nameof(ExportDeliveryVM));
+            }
+
+            var ExportDelivery = await _exportDeliveryRepository.GetAsync(Convert.ToInt32(ExportDeliveryVM.ID));
+
+            if (ExportDelivery == null)
+            {
+                throw new InvalidOperationException($"Booking order:{ExportDeliveryVM.OrderNo}  not found.");
+            }
+
+            ExportDelivery.VehicleNo = ExportDeliveryVM.VehicleNo;
+            ExportDelivery.TruckNo = ExportDeliveryVM.TruckNo;
+            ExportDelivery.WagonNo = ExportDeliveryVM.WagonNo;
+            ExportDelivery.DeliveryDate = ExportDeliveryVM.DeliveryDate;
+
+            ExportDelivery.IsCompleted = ExportDeliveryVM.IsCompleted;
+            _exportDeliveryRepository.Update(ExportDelivery);
+
+            if (ExportDeliveryVM.IsCompleted.GetValueOrDefault())
+            {
+                var logistic = _dbContext.ExportLogistics.Where(x => x.Status == OrdersStatus.Delivery.ToString()
+                    && x.ContainerNo == ExportDeliveryVM.ContainerNo && x.OrderId == ExportDeliveryVM.OrderId).FirstOrDefault();
+                if (logistic != null)
+                {
+                    logistic.Status = OrdersStatus.Completed.ToString();
+                    _exportlogisticRepository.Update(logistic);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
+            ExportDeliveryVM.ID = ExportDelivery.ID;
+        }
     }
 
 }

@@ -7,7 +7,8 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 {
 	public class ExportOrderBookingViewModel
 	{
-		    public int OrderID { get; set; }
+			public int[] FacilityIds { get; set; }
+			public int OrderID { get; set; }
 		    public string OrderNo { get; set; }
 			public DateTime? DateOfBooking { get; set; }
 			public string Forwarder { get; set; }

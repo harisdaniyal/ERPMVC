@@ -8,15 +8,15 @@
 
     })
 
-    $(".btnReDispatched").click(function () {
+    $(".btnDelivery").click(function () {
         var row = $(this).closest("tr")
         save(row, true)
     })
 
     function save(row, isCompleted) {
 
-        if (!row.find('.txt_TruckingCost').val()) {
-            row.find('.txt_TruckingCost').addClass('error');
+        if (!row.find('.txt_DeliveryDate').val()) {
+            row.find('.txt_DeliveryDate').addClass('error');
             return false;
         }
         //else if (!row.find('.txt_ToLoc').val()) {
@@ -34,14 +34,14 @@
             'ContainerSize': row.find(".txt_ContainerSize").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),
 
-            'TransporterName': row.find(".txt_TransporterName").val(),
-            'VehicleNo': row.find(".txt_Vehicleno").val(),
-            'CustomerName': row.find(".txt_CustomerName").val(),
-            'TruckingCost': row.find(".txt_TruckingCost").val(),
+            'VehicleNo': row.find(".txt_VehicleNo").val(),
+            'TruckNo': row.find(".txt_TruckNo").val(),
+            'WagonNo': row.find(".txt_WagonNo").val(),
+            'DeliveryDate': row.find(".txt_DeliveryDate").val(),
 
         });
         showLoader();
-        fetch('/OrderExecution/ExportReDispatched', {
+        fetch('/OrderExecution/ExportDelivery', {
             method: 'POST',
             body: dataObject,
             headers: {

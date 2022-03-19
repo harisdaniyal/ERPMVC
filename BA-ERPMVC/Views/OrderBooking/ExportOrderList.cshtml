@@ -118,7 +118,7 @@
 </div>
 <script>
     function onClick_btnView(orderBookingId) {
-        location.href = "Index?orderBookingId=" + orderBookingId + "&stepNo=ExportBooking";
+        location.href = "ExportOrder?orderBookingId=" + orderBookingId + "&stepNo=ExportBooking";
     }
     //function onClick_btnTripExecution(orderBookingId) {
     //    location.href = "TripsExecution?orderBookingId=" + orderBookingId + "&stepNo=Dispatched";
@@ -139,9 +139,9 @@
                 'copyHtml5',
                 'excelHtml5'
             ],
-            "Sorting": false,
+            "Sorting": true,
             "lengthChange": true,
-            "pageLength": 5,
+            "pageLength": 10,
             "paging": true,
             'searching': true
         });

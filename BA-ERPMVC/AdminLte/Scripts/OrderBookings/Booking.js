@@ -19,6 +19,10 @@ function save() {
             businessDivisionId: $("#ddl_BusinessDivision").val(),
             orderType: $("#ddl_OrderType option:selected").val(),
             bl: $("#txt_BL").val(),
+            TwentyContainerQty: $("#txt_TwentycontainerQty").val(),
+            FortyContainerQty: $("#txt_FortycontainerQty").val(),
+            TwentyContainerPrice: $("#txt_Twentycontainerprice").val(),
+            FortyContainerPrice: $("#txt_Fortycontainerprice").val(),
             /*cro: $("#txt_CRO").val(),*/
             orderDate: $("#txt_OrderDate").val(),
             vesselBerthingDate: $("#txt_VesselBerthingDate").val(),
@@ -34,6 +38,27 @@ function save() {
             'Content-Type': 'application/json;charset=utf-8'
         },
     }).then(res => res.json());
+}
+
+function CalculateTotalAmount() {
+    var twentycontainer = $("#txt_Twentycontainerprice").val();
+    var fortycontainer = $("#txt_Fortycontainerprice").val();
+    var total = 0;
+    if (twentycontainer != "" && fortycontainer != "") {
+        total = parseInt(twentycontainer) + parseInt(fortycontainer);
+        $("#txt_InvoiceAmount").val(total);
+    }
+    else if (twentycontainer != "") {
+        total = parseInt(twentycontainer);
+        $("#txt_InvoiceAmount").val(total);
+    }
+    else if (fortycontainer != "") {
+        total = parseInt(fortycontainer);
+        $("#txt_InvoiceAmount").val(total);
+    }
+    else {
+        $("#txt_InvoiceAmount").val(0);
+    }
 }
 
 async function saveDraft(showSuccessBanner) {

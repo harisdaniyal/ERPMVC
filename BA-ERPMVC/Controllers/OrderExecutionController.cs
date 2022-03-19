@@ -500,6 +500,44 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
+        /////********* Export Delivery *********/////
+
+        [HttpGet]
+        public ActionResult ExportDelivery()
+        {
+
+            var exportDeliveryModel = orderBookingService.GetExportDeliveryAsync();
+
+            return View(exportDeliveryModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportDelivery(ExportDeliveryViewModel ExportDeliveryVM)
+        {
+            if (ExportDeliveryVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(ExportDeliveryVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (ExportDeliveryVM.ID == 0)
+                {
+                    await orderBookingService.SaveExportDeliveryAsync(ExportDeliveryVM);
+
+                    return Json(new { success = true, Id = ExportDeliveryVM.ID });
+                }
+
+                await orderBookingService.UpdateExportDeliveryAsync(ExportDeliveryVM);
+
+                return Json(new { success = true, Id = ExportDeliveryVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 
 }

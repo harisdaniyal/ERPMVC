@@ -87,7 +87,45 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group">
-                    <input class="date-picker form-control" type="number" min="0" placeholder="" value="@(Model.InvoiceAmount)" id="txt_InvoiceAmount" />
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" placeholder="" value="@(Model.TwentyContainerQty)" id="txt_TwentycontainerQty" />
+                    <label>Twenty Container QTY</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" placeholder="" value="@(Model.FortyContainerQty)" id="txt_FortycontainerQty" />
+                    <label>Forty Container QTY</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" oninput="CalculateTotalAmount()" name="txt_Twentycontainerprice" placeholder="" value="@(Model.TwentyContainerPrice)" id="txt_Twentycontainerprice" />
+                    <label>Twenty Container Price</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" oninput="CalculateTotalAmount()" name="txt_Fortycontainerprice" placeholder="" value="@(Model.FortyContainerPrice)" id="txt_Fortycontainerprice" />
+                    <label>Forty Container Price</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" disabled type="number" min="0" placeholder="" value="@(Model.InvoiceAmount)" id="txt_InvoiceAmount" />
                     <label>Invoice Amount</label>
                     <div class="form-status"><span></span></div>
                     <i class="fas fa-check"></i>
@@ -182,7 +220,7 @@
                     {
                         <div class="form-check w-md-25">
                             <input class="form-check-input" type="checkbox" name="cbx_Facilities" value="@facility.facilityID" @(Model.FacilityIds != null && Model.FacilityIds.Any(x => x == (int)facility.facilityID) ? "checked='checked'" : "")>
-                            <label class="form-check-label" for="inlineCheckbox1">@facility.FacilityName</label>
+                            <label class="form-check-label"for="inlineCheckbox1">@facility.FacilityName</label>
                         </div>
                     }
                 </div>
