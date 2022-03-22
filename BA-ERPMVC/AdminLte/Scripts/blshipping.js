@@ -299,7 +299,11 @@ $(document).ready(function () {
                             data: 'Approval',
                             width: 10,
                             'render': function (data) {
-                                return data == true ? "ACCEPTED" : "REJECTED";
+                                if (data == null) {
+                                    return 'N/A'
+                                } else {
+                                    return data == true ? "ACCEPTED" : "REJECTED";
+                                }
                             }
                         },
                         {
