@@ -99,7 +99,6 @@ namespace BA_ERPMVC.Controllers
                         a.NetWeight = obj.NetWeight;
                         a.Frightandcharges = obj.Frightandcharges;
                         a.BLAgent = obj.BLAgent;
-                        a.BLAgentDetail = obj.BLAgentDetail;
                         a.TypeOfService = obj.TypeOfService;
                         a.NumberOfOrignalBL = obj.NumberOfOrignalBL;
                         a.ForwardingAgent = obj.ForwardingAgent;
@@ -220,7 +219,6 @@ namespace BA_ERPMVC.Controllers
                              netWeight = opo.NetWeight,
                              Frightandcharges = opo.Frightandcharges,
                              BLAgent = opo.BLAgent,
-                             BLAgentDetail = opo.BLAgentDetail,
                              TypeOfService = opo.TypeOfService,
                              NumberOfOrignalBL = opo.NumberOfOrignalBL,
                              ForwardingAgent = opo.ForwardingAgent,
@@ -274,7 +272,6 @@ namespace BA_ERPMVC.Controllers
                               netWeight = opo.NetWeight,
                               Frightandcharges = opo.Frightandcharges,
                               BLAgent = opo.BLAgent,
-                              BLAgentDetail = opo.BLAgentDetail,
                               TypeOfService = opo.TypeOfService,
                               NumberOfOrignalBL = opo.NumberOfOrignalBL,
                               ForwardingAgent = opo.ForwardingAgent,
