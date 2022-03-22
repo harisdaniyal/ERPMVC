@@ -23,7 +23,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly LogisticsRepositry _logisticsRepositry;
         private readonly ReadyForDispatchedRepositry _readyForDispatchedRepositry;
         private readonly ReDispatchedRepositry _reDispatchedRepositry;
-        private readonly BLApprovalRepository _blapprovalRepository;
+        private readonly BLShippingLineRepository _blshippinglineRepository;
         private readonly OrderFacilityMapping _orderFacilityRepository;
         private readonly TripRepository _tripRepository;
         private readonly TripExpenseMapping _tripExpenseMapping;
@@ -67,7 +67,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _tripExpenseMapping = new TripExpenseMapping(_dbContext);
             _tripContainerRepositry = new TripContainerRepositry(_dbContext);
             _partyRepository = new PartyRepository(_dbContext);
-            _blapprovalRepository = new BLApprovalRepository(_dbContext);
+            _blshippinglineRepository = new BLShippingLineRepository(_dbContext);
 
             _exportbookingorderRepository = new ExportBookingOrderRepository(_dbContext);   /////******Export******/////
             _exportlogisticRepository = new ExportLogisticRepository(_dbContext);
@@ -1436,62 +1436,33 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             return _dbContext.ShippingLines.Where(x => x.IsDeleted == false).ToList();
         }
 
-        public IEnumerable<BLApprovalViewModel> GetBLApprovalAsync()
+        public IEnumerable<BAShippingLine> GetBLApprovalAsync()
         {
-            return (from BLA in _dbContext.BLApprovals
-                    join BSL in _dbContext.BAShippingLines
-                            on BLA.BLnumber equals BSL.BL into BSLGroup
-                    from bAShippingLines in BSLGroup.DefaultIfEmpty()
-                    select new BLApprovalViewModel()
-                    {
-                        BLnumber = bAShippingLines.BL,
-                        ContainerNo = bAShippingLines.ContainerNo,
-                        SealNo = bAShippingLines.SealNo,
-                        ID = BLA.ID
-
-                    }).Distinct().ToList();
-
-
+            return _dbContext.BAShippingLines.ToList().OrderByDescending(x=> x.BLShippingID);
         }
 
-        public async Task SaveBLApprovalAsync(BLApprovalViewModel blapprovalVM)
+
+        public async Task UpdateBLApprovalAsync(BLShippingLineViewModel BlshippinglineVM)
         {
 
-            var blapproval = Mapper.Map<BLApprovalViewModel, BLApproval>(blapprovalVM);
-            if (blapproval == null)
+            if (BlshippinglineVM == null)
             {
-                throw new ArgumentNullException(nameof(blapproval));
+                throw new ArgumentNullException(nameof(BlshippinglineVM));
             }
 
-            _blapprovalRepository.Add(blapproval);
+            var blshippingline = await _blshippinglineRepository.GetAsync(Convert.ToInt32(BlshippinglineVM.BLShippingID));
 
+            if (blshippingline == null)
+            {
+                throw new InvalidOperationException($"BL:{BlshippinglineVM.BL}  not found.");
+            }
+
+            blshippingline.Approval = BlshippinglineVM.Approval;
+            _blshippinglineRepository.Update(blshippingline);
 
 
             await _dbContext.SaveChangesAsync();
-            blapprovalVM.ID = blapproval.ID;
-        }
-
-        public async Task UpdateBLApprovalAsync(BLApprovalViewModel blapprovalVM)
-        {
-
-            if (blapprovalVM == null)
-            {
-                throw new ArgumentNullException(nameof(blapprovalVM));
-            }
-
-            var blapproval = await _blapprovalRepository.GetAsync(Convert.ToInt32(blapprovalVM.ID));
-
-            if (blapproval == null)
-            {
-                throw new InvalidOperationException($"BL:{blapprovalVM.BLnumber}  not found.");
-            }
-
-            blapproval.Approval = blapprovalVM.Approval;
-            _blapprovalRepository.Update(blapproval);
-
-
-            await _dbContext.SaveChangesAsync();
-            blapprovalVM.ID = blapproval.ID;
+            BlshippinglineVM.BLShippingID = blshippingline.BLShippingID;
         }
 
 
@@ -2014,7 +1985,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     join DT in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == true)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
                         from ExportDispatchedTrucks in DTGroup.DefaultIfEmpty()
-                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true && x.ReDispatched.ToLower() == "no")
+                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true && x.ReDispatched.ToLower() == "false")
                     on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDT.OrderId, ContainerNo = EDT.ContainerNo } into EDTGroup
                     from ExportDispatchedTrains in EDTGroup.DefaultIfEmpty()
                     join ED in _dbContext.ExportDeliveries.Where(x => x.IsCompleted == false)

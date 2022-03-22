@@ -32,10 +32,11 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult GetContainerNo()
         {
-            return Json(db.BLShippingContainers.Where(x => x.IsDeleted == false).Select(x => new
+            var data =  Json(db.BLShippingContainers.Where(x => x.IsDeleted == false).Select(x => new
             {
                 ContainerNo = x.ContainerNo
             }).ToList(), JsonRequestBehavior.AllowGet);
+            return data;
         }
 
         public ActionResult GetBlAgent()
@@ -248,12 +249,12 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var BL = (from opo in db.BAShippingLines
-                              //join VV in db.stp_Status on opo.Approval equals VV.StatusID
+                              //join status in db.stp_Status on opo.Approval equals VV.StatusID
                           select new
                           {
                               ID = opo.BLShippingID,
                               bl = opo.BL,
-                              //Approv = VV.Status, 
+                              Approval = opo.Approval, 
                               shipper = opo.Shipper,
                               consignee = opo.Consignee,
                               notifyParty = opo.NotifyParty,
@@ -282,7 +283,7 @@ namespace BA_ERPMVC.Controllers
                               PlaceOfIssue = opo.PlaceOfIssue,
                               DateOfIssue = opo.DateOfIssue,
 
-                          }).ToList();
+                          }).ToList().OrderByDescending(x=> x.ID);
 
                 return Json(new { BL });
             }
@@ -324,7 +325,7 @@ namespace BA_ERPMVC.Controllers
                 Collect = c.Collect,
                 DateOfIssue = c.DateOfIssue.ToString(),
                 BLAgent = c.BLAgent,
-                BLAgentDetail= c.BLAgentDetail
+                BLAgentDetail= context.BLAgentDetails.Where(x=> x.BLAgent== c.BLAgent).Select(x=> x.BLAgentDetail1).FirstOrDefault()
                 //BLAgent = $"{c.BLAgent} /n {c.DateOfIssue.ToString()}",
 
             }).ToList();
@@ -341,7 +342,7 @@ namespace BA_ERPMVC.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", "BLReport.pdf");
+            return File(stream, "application/pdf", $"BL_{data.Select(x=> x.BL).FirstOrDefault()}.pdf");
         }
 
                         //***** BL Approval*****//
@@ -355,25 +356,17 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> BLApproval(BLApprovalViewModel blapprovalVM)
+        public async Task<ActionResult> BLApproval(BLShippingLineViewModel BlshippinglineVM)
         {
-            if (blapprovalVM == null)
+            if (BlshippinglineVM.BLShippingID == 0)
             {
-                return Json(new { success = false, message = $"{nameof(blapprovalVM)} should not be null or empty" });
+                return Json(new { success = false, message = $"{nameof(BlshippinglineVM)} should not be null or empty" });
             }
 
             try
             {
-                if (blapprovalVM.ID == 0)
-                {
-                    await orderBookingService.SaveBLApprovalAsync(blapprovalVM);
-
-                    return Json(new { success = true, Id = blapprovalVM.ID });
-                }
-
-                await orderBookingService.UpdateBLApprovalAsync(blapprovalVM);
-
-                return Json(new { success = true, Id = blapprovalVM.ID });
+                await orderBookingService.UpdateBLApprovalAsync(BlshippinglineVM);
+                return Json(new { success = true, Id = BlshippinglineVM.BLShippingID });
             }
             catch (Exception ex)
             {

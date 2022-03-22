@@ -664,6 +664,7 @@
     </Compile>
     <Compile Include="Repositories\CoreRepositories\BLApprovalRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\BLShippingContainerRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\BLShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTruckRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DispatchedOrderRepository.cs" />
@@ -693,6 +694,7 @@
     <Compile Include="Repositories\IRepositories\Export\IExportReDispatchedRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLApprovalRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IBLShippingLineRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTruckRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDispatchedOrderRepository.cs" />
@@ -712,6 +714,7 @@
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
     <Compile Include="ViewModels\BLApprovalViewModel.cs" />
     <Compile Include="ViewModels\BLShippingContainerViewModel.cs" />
+    <Compile Include="ViewModels\BLShippingLineViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportDeliveryViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportDispatchedTrainViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportDispatchedTruckViewModel.cs" />

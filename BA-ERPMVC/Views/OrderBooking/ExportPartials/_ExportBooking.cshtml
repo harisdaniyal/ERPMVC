@@ -98,12 +98,18 @@
 
             <div class="col-md-6">
                 <div class="input-group" style="padding-top: 26px;">
-                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_LoadingStation">
-                        <option value="">Please Select Loading Station</option>
-                        @foreach (var loadingStation in ViewBag.LoadingStation)
-                        {
-                            <option value="@loadingStation.LocationName" @(loadingStation.LocationName == Model.PointOfLoadingStation ? "selected=selected" : "")>@loadingStation.LocationName</option>
-                        }
+                    @*<select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_LoadingStation">
+            <option value="">Please Select Loading Station</option>
+            @foreach (var loadingStation in ViewBag.LoadingStation)
+            {
+                <option value="@loadingStation.LocationName" @(loadingStation.LocationName == Model.PointOfLoadingStation ? "selected=selected" : "")>@loadingStation.LocationName</option>
+            }
+        </select>*@
+                    <select id="txt_LoadingStation" class="form-control select2" aria-invalid="false" style="width: 100%;">
+                        <option value="0">Point Of Loading</option>
+                        <option value="SAPT">SAPT</option>
+                        <option value="JUMMA GOTH">JUMMA GOTH</option>
+                        <option value="KRK LAHORE">KRK LAHORE</option>
                     </select>
                     <label for="ddlState">Loading Station</label>
                     <div class="form-status"><span></span></div>

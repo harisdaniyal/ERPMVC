@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BA_ERPMVC.ViewModels.BLApprovalViewModel>
+﻿@model IEnumerable<BA_ERPMVC.Models.BAShippingLine>
 <link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
 
 
@@ -23,81 +23,70 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12 table-responsive center">
+            <div class="col-l10  table-responsive center">
                 <table id="example" class="table table-sm table-bordered mb-3 w-min-80 datatable h-auto d-inline-block w-auto">
                     <thead class="thead-light ">
                         <tr>
                             <th>BLNo#</th>
-                            <th>ContainerNo#</th>
-                            <th>SealNo#</th>
+                            <th>Shipper Name</th>
+                            <th>Consignee Name</th>
+                            <th>NotifyParty Name</th>
                             <th>Approval</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
-                        <tr class="bg-light tbl-valign-top">
-                            <td>
-                                <input type="hidden" value="" class="form-control txt_ID" />
-                                <input type="text" disabled style="width: 200px;" value="" class="form-control  txt_BLnumber" />
-                            </td>
-                            <td>
-                                <input type="text" disabled style="width: 200px;" value="" class="form-control  txt_ContainerNo" />
-                            </td>
-                            <td>
-                                <input type="text" style="width: 200px;" value="" class="form-control  txt_SealNo" />
-                            </td>
-                            <td>
-                                <select id="txt_approval" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_approval" style="width: 200px;">
-                                    <option value="">Approval</option>
-                                    <option value="ACCEPTED">ACCEPTED</option>
-                                    <option value="REJECTED">REJECTED</option>
-                                </select>
-                            </td>
 
-                            <td class="btn-group">
-                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
-                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                            </td>
-                        </tr>
-                        
-                            @foreach (var Bl in Model.ToList())
-                            {
-                                <tr class="bg-light tbl-valign-top">
-                                    <td>
-                                        <input type="hidden" value="@Bl.ID" class="form-control txt_ID" />
+                        @foreach (var Bl in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@Bl.BLShippingID" class="form-control txt_ID" />
 
-                                        <input type="text" disabled style="width: 200px;" value="@Bl.BLnumber" class="form-control  txt_BLnumber" />
-                                    </td>
-                                    <td>
-                                        <input type="text" disabled style="width: 200px;" value="@Bl.ContainerNo" class="form-control  txt_ContainerNo" />
-                                    </td>
-                                    <td>
-                                        <input type="text" disabled style="width: 200px;" value="@Bl.SealNo" class="form-control  txt_SealNo" />
-                                    </td>
-
-                                    <td>
-                                        <select id="txt_approval" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_approval" style="width: 100px;">
-                                            <option value="">Approval</option>
-                                            <option value="ACCEPTED">ACCEPTED</option>
-                                            <option value="REJECTED">REJECTED</option>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.BL" class="form-control  txt_BLnumber" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.Shipper" class="form-control  txt_Shipper" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.Consignee" class="form-control  txt_Consignee" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.NotifyParty" class="form-control  txt_Notifyparty" />
+                                </td>
+                                <td>
+                                    @if (Bl.Approval != null)
+                                    {
+                                        <select id="txt_approval" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_approval"  disabled style="width: 200px;">
+                                            <option value="">Select</option>
+                                            <option value="true"  @(Bl.Approval == true? "selected=selected" : "")>ACCEPTED</option>
+                                            <option value="false"  @(Bl.Approval == false ? "selected=selected" : "")>REJECTED</option>
                                         </select>
-                                    </td>
+                                    }
+                                    else
+                                    {
+                                        <select id="txt_approval" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_approval" style="width: 200px;">
+                                            <option value="">Select</option>
+                                            <option value="true">ACCEPTED</option>
+                                            <option value="false">REJECTED</option>
+                                        </select>
+                                    }
 
-                                    <td class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
-                                        <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                                    </td>
-                                </tr>
-                            }
+                                </td>
 
-                        </tbody>
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
                 </table>
             </div>
         </div>
         <!-- LOADING SHOW HIDE -->
         <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
     </div>
-   
+
 
     <script src="@Fingerprint.Tag("/AdminLte/Scripts/BLApproval.js")"></script>

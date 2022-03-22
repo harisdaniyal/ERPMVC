@@ -38,17 +38,18 @@
                 <table id="BLShippingGride" class="table table-bordered dataTable" style="width: 100%;">
                     <thead class="_changeHeaderColor datatable-head">
                         <tr>
-                            @*<th class="head" scope="col">Approval</th>*@
+                            <th class="head" scope="col" sec:authorize="hasRole('Amin')">Action</th>
+                            <th class="head" scope="col">Approval</th>
                             <th class="head" scope="col">BL No#</th>
-                            <th class="head" scope="col">ShippingNameAndAddress</th>
-                            <th class="head" scope="col">ConsigneeNameAndAddress</th>
-                            <th class="head" scope="col">NotifyPartyNameAndAdress</th>
+                            <th class="head" scope="col">ShipperName&Address</th>
+                            <th class="head" scope="col">ConsigneeName&Address</th>
+                            <th class="head" scope="col">NotifyPartyName&Address</th>
                             <th class="head" scope="col">PreCarriageBy</th>
                             <th class="head" scope="col">Collect</th>
                             <th class="head" scope="col">PlaceOfReceipt</th>
                             <th class="head" scope="col">OceanVessel</th>
                             <th class="head" scope="col">VoyNo</th>
-                            <th class="head" scope="col">PortOfLanding</th>
+                            <th class="head" scope="col">PortOfLoading</th>
                             <th class="head" scope="col">PortOfDischarge</th>
                             <th class="head" scope="col">PlaceOfDelivery</th>
                             <th class="head" scope="col">ContainerNo</th>
@@ -67,7 +68,6 @@
                             <th class="head" scope="col">FrightPayable</th>
                             <th class="head" scope="col">Place Of Issue</th>
                             <th class="head" scope="col">Date Of Issue</th>
-                            <th class="head" scope="col" sec:authorize="hasRole('Amin')">Action</th>
 
                         </tr>
                     </thead>
@@ -229,14 +229,14 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            @*<div class="col-lg-4">
                 <div class="form-group">
                     <label for="txtSealNo">SEAL NO<label id="_txtCustomerName-error" class="error" for="txtSealNo"></label></label>
                     <div class="input-group">
                         <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtSealNo" name="txtSealNo" class="form-control">
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
 
         <div class="row">
@@ -251,7 +251,7 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="txtkindofpack">KIND OF PACKAGES & DISCRIPTION OF GOODS *<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
+                    <label for="txtkindofpack">KIND OF PACKAGES & DISCRIPTION OF GOODS<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
                     <div class="input-group">
                         <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
                     </div>
@@ -308,14 +308,14 @@
 
         </div>
         <div class="row">
-            <div class="col-lg-4">
+            @*<div class="col-lg-4">
                 <div class="form-group">
                     <label for="txtagentdetail">AGENT DETAIL<label id="_txtCustomerName-error" class="error" for="txtagentdetail"></label></label>
                     <div class="input-group">
                         <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtagentdetail" name="txtagentdetail" class="form-control">
                     </div>
                 </div>
-            </div>
+            </div>*@
 
            
             <div class="col-lg-4">

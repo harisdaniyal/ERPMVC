@@ -84,12 +84,12 @@ $(document).ready(function () {
                 s += '<option value="' + data[i].BLAgent + '">' + data[i].BLAgent + '</option>';
             }
             $("#txtagent").html(s);
-            
+
         }
 
     });
 
-    
+
     var empid = $.url().param("id");
     var isEdit = $.url().param("edit");
     if (isEdit == 1) {
@@ -114,7 +114,7 @@ $(document).ready(function () {
 
                 var data1 = data[0].DateOfIssue ? moment(data[0].DateOfIssue).format("YYYY-MM-DD") : "--";
                 $("#txtblNo").val(data[0].bl);
-                //$("#txtApproval").val(data[0].Approv).change();
+                // $("#txtApproval").val(data[0].Approval)
                 $("#txtshipping").val(data[0].shipper);
                 $("#txtConsignee").val(data[0].consignee);
                 $("#txtNotifyParty").val(data[0].notifyParty);
@@ -285,109 +285,117 @@ $(document).ready(function () {
 
                     data: response.BL,
 
-                    columns: [{
-                        data: 'bl',
-                        width: 10
-                    }, {
-                        data: 'shipper',
-                        width: 10
-                    }, {
-                        data: 'consignee',
-                        width: 10
-                    }, {
-                        data: 'notifyParty',
-                        width: 10
-                    }, {
-                        data: 'precarriageby',
-                        width: 10
-                    }, {
-                        data: 'Collect',
-                        width: 10
-                    }, {
-                        data: 'placeofreceipt',
-                        width: 10
-                    }, {
-                        data: 'oceanVessel',
-                        width: 10
-                    }, {
-                        data: 'voyNo',
-                        width: 10
-                    }, {
-                        data: 'portoflanding',
-                        width: 10
-                    }, {
-                        data: 'portofDischarge',
-                        width: 10
-                    }, {
-                        data: 'placeOfDelivery',
-                        width: 10
-                    }, {
-                        data: 'ContainerNo',
-                        width: 10
-                    }, {
-                        data: 'SealNo',
-                        width: 10
-                    }, {
-                        data: 'numberOfConatinerPack',
-                        width: 10
-                    }, {
-                        data: 'kindOfPackagesDescriptionOfGoods',
-                        width: 10
-                    }, {
-                        data: 'grossWeight',
-                        width: 10
-                    }, {
-                        data: 'netWeight',
-                        width: 10
-                    }, {
-                        data: 'Frightandcharges',
-                        width: 10
-                    }, {
-                        data: 'BLAgent',
-                        width: 10
-                    },{
-                        data: 'BLAgentDetail',
-                        width: 10
-                    }, {
-                        data: 'TypeOfService',
-                        width: 10
-                    }, {
-                        data: 'NumberOfOrignalBL',
-                        width: 10
-                    }, {
-                        data: 'ForwardingAgent',
-                        width: 10
-                    },
-                    {
-                        data: 'FinalDestination',
-                        width: 10
-                    },
-                    {
-                        data: 'FrightPayable',
-                        width: 10
-                    }, {
-                        data: 'PlaceOfIssue',
-                        width: 10
-                    }, {
-                        data: 'DateOfIssue',
-                        width: 10,
-                        'render': function (date) {
-                            //var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
-                            var data = date ? moment(date).format("ll") : "--"
-                            return data;
-                        }
-                    }, {
-                        data: 'ID',
-                        width: 5,
-                        "render": function (data) {
-                            var html = appendActionMenu(data);
+                    columns: [
+                        {
+                            data: 'ID',
+                            width: 5,
+                            "render": function (data) {
+                                var html = appendActionMenu(data);
 
-                            return html;
-                        }
+                                return html;
+                            }
+                        },
+                        {
+                            data: 'Approval',
+                            width: 10,
+                            'render': function (data) {
+                                return data == true ? "ACCEPTED" : "REJECTED";
+                            }
+                        },
+                        {
+                            data: 'bl',
+                            width: 10
+                        },
 
-
-
-                    }],
+                        {
+                            data: 'shipper',
+                            width: 10
+                        }, {
+                            data: 'consignee',
+                            width: 10
+                        }, {
+                            data: 'notifyParty',
+                            width: 10
+                        }, {
+                            data: 'precarriageby',
+                            width: 10
+                        }, {
+                            data: 'Collect',
+                            width: 10
+                        }, {
+                            data: 'placeofreceipt',
+                            width: 10
+                        }, {
+                            data: 'oceanVessel',
+                            width: 10
+                        }, {
+                            data: 'voyNo',
+                            width: 10
+                        }, {
+                            data: 'portoflanding',
+                            width: 10
+                        }, {
+                            data: 'portofDischarge',
+                            width: 10
+                        }, {
+                            data: 'placeOfDelivery',
+                            width: 10
+                        }, {
+                            data: 'ContainerNo',
+                            width: 10
+                        }, {
+                            data: 'SealNo',
+                            width: 10
+                        }, {
+                            data: 'numberOfConatinerPack',
+                            width: 10
+                        }, {
+                            data: 'kindOfPackagesDescriptionOfGoods',
+                            width: 10
+                        }, {
+                            data: 'grossWeight',
+                            width: 10
+                        }, {
+                            data: 'netWeight',
+                            width: 10
+                        }, {
+                            data: 'Frightandcharges',
+                            width: 10
+                        }, {
+                            data: 'BLAgent',
+                            width: 10
+                        }, {
+                            data: 'BLAgentDetail',
+                            width: 10
+                        }, {
+                            data: 'TypeOfService',
+                            width: 10
+                        }, {
+                            data: 'NumberOfOrignalBL',
+                            width: 10
+                        }, {
+                            data: 'ForwardingAgent',
+                            width: 10
+                        },
+                        {
+                            data: 'FinalDestination',
+                            width: 10
+                        },
+                        {
+                            data: 'FrightPayable',
+                            width: 10
+                        }, {
+                            data: 'PlaceOfIssue',
+                            width: 10
+                        }, {
+                            data: 'DateOfIssue',
+                            width: 10,
+                            'render': function (date) {
+                                //var data = date ? moment(date).format("DD/MM/YYYY hh:mm A") : "--"
+                                var data = date ? moment(date).format("ll") : "--"
+                                return data;
+                            }
+                        }],
 
                     // dropDown Search Start
 
@@ -510,12 +518,20 @@ $(document).ready(function () {
                 txtPortOfLanding: "required",
                 txtPortOfDischarge: "required",
                 txtPlaceofDeilvery: "required",
-                txtforwardingagent: "required",
-                txtfinaldestination: "required",
+                // txtforwardingagent: "required",
+                //txtfinaldestination: "required",
                 txtContainerNo: "required",
                 txtSealNo: "required",
                 txtConatinerOrPackage: "required",
-                txtkindofpack: "required"
+                txtkindofpack: "required",
+                txtGrossWeight: "required",
+                txtNetWeight: "required",
+                txtfreightandcharges: "required",
+                txtCollect: "required",
+                txtNumberofOrignal: "required",
+                txtEDob: "required",
+                txtplaceofissue: "required",
+
 
 
             },
@@ -534,7 +550,16 @@ $(document).ready(function () {
                 txtPlaceofDeilvery: "*",
                 txtContainerNo: "*",
                 txtSealNo: "*",
+                txtVoyNo: "*",
                 txtConatinerOrPackage: "*",
+                txtkindofpack: "*",
+                txtGrossWeight: "*",
+                txtNetWeight: "*",
+                txtfreightandcharges: "*",
+                txtCollect: "*",
+                txtNumberofOrignal: "*",
+                txtEDob: "*",
+                txtplaceofissue: "*",
 
 
             },
@@ -601,7 +626,7 @@ $(document).ready(function () {
                                     $("#txtNetWeight").val("");
                                     $("#txtfreightandcharges").val("");
                                     $("txtagent").val("");
-                                    $("txtagentdetail").val("");
+                                    //$("txtagentdetail").val("");
                                     $("#txtypeofservice").val("");
                                     $("#txtNumberofOrignal").val("");
                                     $("#txtfreightPayable").val("");
@@ -668,7 +693,7 @@ $(document).ready(function () {
 
     }
 
-   
+
 });
 
 
