@@ -3721,26 +3721,10 @@ CREATE TABLE [dbo].[BLShippingContainer](
 	)
 	
 	/****** 14-03-2022 *****/
-	
-CREATE TABLE [dbo].[BLApproval](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-
-	[Approval] [nvarchar](250) NULL,
-	[ContainerNo] [nvarchar](250) NULL,
-	[BLnumber] [nvarchar](250) NOT NULL,
-	[SealNo] [nvarchar](250) NULL,
-	[IsCompleted] [bit] NULL,
-	[CreatedBy] [nvarchar](250) NULL,
-	[CreateDate] [datetime] NULL,
-	[UpdatedBy] [nvarchar](250) NULL,
-	[UpdateDate] [datetime] NULL,
-	[IsDeleted] [bit] NULL,
-)
 
 
 ---------- 15-03-2022----------
 
-select * from  [ExportBookingOrder]
 CREATE TABLE [dbo].[ExportBookingOrder](
 	[OrderId] [int] IDENTITY(1,1) NOT NULL Primary Key ,
 	[OrderNo] [varchar](9) NOT NULL,
@@ -3764,11 +3748,7 @@ CREATE TABLE [dbo].[ExportBookingOrder](
 	[IsDeleted] [bit] default(0) NULL
 )
 Go
-alter table [GenerateOrder] alter column [OrderNo] [varchar](9)
-Go
-select * from GenerateOrder
-update GenerateOrder set OrderNo=concat('IMP',OrderNo) where OrderNo not like '%IMP%'
-GO
+
 
 
 -----------------16-03-2022---------------------------
@@ -3937,8 +3917,6 @@ CREATE TABLE [dbo].[ExportDelivery](
 
 Go
 
-drop table [GenerateOrder]
-go
 CREATE TABLE [dbo].[GenerateOrder](
 	[OrderID] [int] IDENTITY(1,1) Primary key NOT NULL,
 	[OrderNo] [varchar](9) NULL,
