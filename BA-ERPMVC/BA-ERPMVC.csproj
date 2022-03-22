@@ -311,9 +311,6 @@
     <Compile Include="Models\BLAgentDetail.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BLApproval.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BLShippingContainer.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -662,7 +659,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Repositories\CoreRepositories\BLApprovalRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\BLShippingContainerRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\BLShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
@@ -692,7 +688,6 @@
     <Compile Include="Repositories\IRepositories\Export\IExportLogisticRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportPreDispatchedRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportReDispatchedRepository.cs" />
-    <Compile Include="Repositories\IRepositories\IBLApprovalRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingLineRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />

@@ -274,7 +274,6 @@ namespace BA_ERPMVC.Controllers
                               netWeight = opo.NetWeight,
                               Frightandcharges = opo.Frightandcharges,
                               BLAgent = opo.BLAgent,
-                              BLAgentDetail = opo.BLAgentDetail,
                               TypeOfService = opo.TypeOfService,
                               NumberOfOrignalBL = opo.NumberOfOrignalBL,
                               ForwardingAgent = opo.ForwardingAgent,
