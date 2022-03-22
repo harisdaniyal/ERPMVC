@@ -1444,7 +1444,6 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public async Task UpdateBLApprovalAsync(BLShippingLineViewModel BlshippinglineVM)
         {
-
             if (BlshippinglineVM == null)
             {
                 throw new ArgumentNullException(nameof(BlshippinglineVM));
