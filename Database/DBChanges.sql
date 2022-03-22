@@ -3658,17 +3658,17 @@ GO
 CREATE TABLE [dbo].[BLAgentDetail](
 	[AgentId] [bigint] IDENTITY(1,1) NOT NULL Primary key,
 	[BLAgent] [nvarchar](max) NULL,
-	
+	[BLAgentDetail] [nvarchar](700) NULL,
 	[DeleteDate] [datetime] NULL,
 	[IsDeleted] [bit] NULL,
 	)
-
+drop table BAShippingLine
 GO
 
 CREATE TABLE [dbo].[BAShippingLine](
-	[BLShippingID] [int] IDENTITY(1,1) NOT NULL,
+	[BLShippingID] [int] IDENTITY(1,1) primary key NOT NULL,
 	[BL] [nvarchar](50) NULL,
-	[Approval] [nvarchar](200) NULL,
+	[Approval] [bit] NULL,
 	[Collect] [int] NOT NULL,
 	[NumberOfOrignalBL] [nvarchar](50) NULL,
 	[Shipper] [nvarchar](max) NULL,
@@ -3694,8 +3694,11 @@ CREATE TABLE [dbo].[BAShippingLine](
 	[Frightandcharges] [nvarchar](50) NULL,
 	[TypeOfService] [nvarchar](50) NULL,
 	[BLAgent] [nvarchar](700) NULL,
+	
 	[FrightPayable] [nvarchar](50) NULL,
 	[placeOfDateofIssue] [datetime] NULL,
+
+	
 	[UserID] [varchar](50) NULL,
 	[UpdateBy] [varchar](50) NULL,
 	[CreateDate] [varchar](50) NULL,
@@ -3934,7 +3937,8 @@ CREATE TABLE [dbo].[ExportDelivery](
 
 Go
 
-
+drop table [GenerateOrder]
+go
 CREATE TABLE [dbo].[GenerateOrder](
 	[OrderID] [int] IDENTITY(1,1) Primary key NOT NULL,
 	[OrderNo] [varchar](9) NULL,
