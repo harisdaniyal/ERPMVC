@@ -26,6 +26,12 @@ function save() {
             /*cro: $("#txt_CRO").val(),*/
             orderDate: $("#txt_OrderDate").val(),
             vesselBerthingDate: $("#txt_VesselBerthingDate").val(),
+            DOGuarantee: $("#txt_DoGuarantee").val(),
+            ImportEIR: $("#txt_ImportEIR").val(),
+            PortWeighment: $("#txt_PortWeighment").val(),
+            OutSidePortWeighment: $("#txt_OutSidePortWeighment").val(),
+            BLDate: $("#txt_BLDate").val(),
+            GD: $("#txt_GD").val(),
             freeDays: $("#txt_FreeDays").val(),
             remarks: $("#txt_Remarks").val(),
             ShippingAgentId: $("#ddl_ShippingAgent").val(),
@@ -167,6 +173,7 @@ function validateInputs() {
         $("#txt_VesselBerthingDate").parent('.input-group').addClass('invalid');
         isValid = false;
     }
+   
     
     return isValid;
 }

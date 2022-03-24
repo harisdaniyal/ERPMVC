@@ -3665,47 +3665,7 @@ CREATE TABLE [dbo].[BLAgentDetail](
 drop table BAShippingLine
 GO
 
-CREATE TABLE [dbo].[BAShippingLine](
-	[BLShippingID] [int] IDENTITY(1,1) primary key NOT NULL,
-	[BL] [nvarchar](50) NULL,
-	[Approval] [bit] NULL,
-	[Collect] [int] NOT NULL,
-	[NumberOfOrignalBL] [nvarchar](50) NULL,
-	[Shipper] [nvarchar](max) NULL,
-	[Consignee] [nvarchar](max) NULL,
-	[NotifyParty] [nvarchar](max) NULL,
-	[precarriageby] [nvarchar](50) NULL,
-	[ForwardingAgent] [nvarchar](250) NULL,
-	[FinalDestination] [nvarchar](250) NULL,
-	[placeofreceipt] [nvarchar](50) NULL,
-	[OceanVessel] [nvarchar](50) NULL,
-	[VoyNo] [nvarchar](20) NULL,
-	[Portoflanding] [nvarchar](50) NULL,
-	[PortofDischarge] [nvarchar](50) NULL,
-	[PlaceOfIssue] [nvarchar](250) NULL,
-	[DateOfIssue] [datetime] NULL,
-	[PlaceOfDelivery] [nvarchar](50) NULL,
-	[ContainerNo] [nvarchar](max) NULL,
-	[SealNo] [varchar](50) NULL,
-	[NumberOfConatinerPack] [nvarchar](max) NULL,
-	[KindOfPackagesDescriptionOfGoods] [nvarchar](max) NULL,
-	[GrossWeight] [nvarchar](50) NULL,
-	[NetWeight] [nvarchar](50) NULL,
-	[Frightandcharges] [nvarchar](50) NULL,
-	[TypeOfService] [nvarchar](50) NULL,
-	[BLAgent] [nvarchar](700) NULL,
-	
-	[FrightPayable] [nvarchar](50) NULL,
-	[placeOfDateofIssue] [datetime] NULL,
 
-	
-	[UserID] [varchar](50) NULL,
-	[UpdateBy] [varchar](50) NULL,
-	[CreateDate] [varchar](50) NULL,
-	[UpdateDate] [varchar](50) NULL,
-	)
-
-Drop Table BAShippingLine
 
 
 GO
@@ -3944,3 +3904,97 @@ CREATE TABLE [dbo].[GenerateOrder](
 	[VesselBerthingDate] [datetime] NULL,
 	[BookingPOCName] [nvarchar](250) NULL
 ) 
+             --Last Run---- 22-03-2022----
+GO
+CREATE TABLE [dbo].[BAShippingLine](
+	[BLShippingID] [int] IDENTITY(1,1) primary key NOT NULL,
+	[BL] [nvarchar](50) NULL,
+	[Approval] [bit] NULL,
+	[Collect] [int] NOT NULL,
+	[NumberOfOrignalBL] [nvarchar](50) NULL,
+	[Shipper] [nvarchar](max) NULL,
+	[Consignee] [nvarchar](max) NULL,
+	[NotifyParty] [nvarchar](max) NULL,
+	[precarriageby] [nvarchar](50) NULL,
+	[ForwardingAgent] [nvarchar](250) NULL,
+	[FinalDestination] [nvarchar](250) NULL,
+	[placeofreceipt] [nvarchar](50) NULL,
+	[OceanVessel] [nvarchar](50) NULL,
+	[VoyNo] [nvarchar](20) NULL,
+	[Portoflanding] [nvarchar](50) NULL,
+	[PortofDischarge] [nvarchar](50) NULL,
+	[PlaceOfIssue] [nvarchar](250) NULL,
+	[DateOfIssue] [datetime] NULL,
+	[PlaceOfDelivery] [nvarchar](50) NULL,
+	[ContainerNo] [nvarchar](max) NULL,
+	[SealNo] [varchar](50) NULL,
+	[NumberOfConatinerPack] [nvarchar](max) NULL,
+	[KindOfPackagesDescriptionOfGoods] [nvarchar](max) NULL,
+	[GrossWeight] [nvarchar](50) NULL,
+	[NetWeight] [nvarchar](50) NULL,
+	[Frightandcharges] [nvarchar](50) NULL,
+	[TypeOfService] [nvarchar](50) NULL,
+	[BLAgent] [nvarchar](700) NULL,
+	[FrightPayable] [nvarchar](50) NULL,
+	[placeOfDateofIssue] [datetime] NULL,
+
+	[IsCompleted] [bit] default(0) NULL,
+	[UserID] [varchar](50) NULL,
+	[UpdateBy] [varchar](50) NULL,
+	[CreateDate] [varchar](50) NULL,
+	[UpdateDate] [varchar](50) NULL,
+	)
+
+Drop Table BAShippingLine
+
+--- 24-03-2022--
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[GenerateOrder]    Script Date: 3/24/2022 2:36:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GenerateOrder](
+	[OrderID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderNo] [varchar](9) NULL,
+	[CustomerID] [int] NULL,
+	[BusinessDivisionId] [int] NULL,
+	[OrderType] [nvarchar](20) NULL,
+	[BL] [nvarchar](50) NULL,
+	[CRO] [nvarchar](50) NULL,
+	[InBond_Number] [nvarchar](50) NULL,
+	[DeliveryNo] [nvarchar](50) NULL,
+	[TwentyContainerQty] [int] NULL,
+	[FortyContainerQty] [int] NULL,
+	[TwentyContainerPrice] [nvarchar](250) NULL,
+	[FortyContainerPrice] [nvarchar](250) NULL,
+	[OrderDate] [date] NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[CreatedDate] [datetime] NULL,
+	[isActive] [bit] NULL,
+	[InvoiceAmount] [numeric](18, 0) NULL,
+	[isCompleted] [bit] NULL,
+	[ShippingLineId] [int] NULL,
+	[ShippingAgentId] [int] NULL,
+	[FreeDays] [int] NULL,
+	[Remarks] [nvarchar](1000) NULL,
+	[VesselBerthingDate] [datetime] NULL,
+	[BookingPOCName] [nvarchar](250) NULL,
+	[DOGuarantee] [datetime] NULL,
+	[ImportEIR] [datetime] NULL,
+	[PortWeighment] [datetime] NULL,
+	[OutSidePortWeighment] [datetime] NULL,
+	[GD] [datetime] NULL,
+	[BLDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

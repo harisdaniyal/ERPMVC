@@ -188,6 +188,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             bookingModel.ShippingLineId = bookingViewModel.ShippingLineId;
             bookingModel.ShippingAgentId = bookingViewModel.ShippingAgentId;
             bookingModel.BookingPOCName = bookingViewModel.BookingPOCName;
+            bookingModel.DOGuarantee = bookingViewModel.DOGuarantee;
+            bookingModel.BLDate = bookingViewModel.BLDate;
+            bookingModel.GD = bookingViewModel.GD;
+            bookingModel.ImportEIR = bookingViewModel.ImportEIR;
+            bookingModel.PortWeighment = bookingViewModel.PortWeighment;
+            bookingModel.OutSidePortWeighment = bookingViewModel.OutSidePortWeighment;
 
             if (bookingViewModel.OrderType == "Import")
             {
@@ -1202,7 +1208,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public bool DeleteLogistics(int logisticsId)
         {
             bool isSuccess = false;
-            var logistics = _dbContext.Logistics.Where(x => x.Status != OrdersStatus.ReadyForDispatched.ToString() && x.logisticsid == logisticsId).FirstOrDefault();
+            var logistics = _dbContext.Logistics.Where(x => x.Status != OrdersStatus.Dispatched.ToString() && x.logisticsid == logisticsId).FirstOrDefault();
             if (logistics != null)
             {
                 isSuccess = false;
@@ -1438,7 +1444,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public IEnumerable<BAShippingLine> GetBLApprovalAsync()
         {
-            return _dbContext.BAShippingLines.ToList().OrderByDescending(x=> x.BLShippingID);
+            
+            return _dbContext.BAShippingLines.Where(x=> x.IsCompleted== true).ToList().OrderByDescending(x=> x.BLShippingID);
+
         }
 
 

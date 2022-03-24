@@ -311,6 +311,9 @@
     <Compile Include="Models\BLAgentDetail.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BLApproval.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BLShippingContainer.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -581,11 +584,22 @@
     <Compile Include="Models\VendorTypeExpense.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Reports\BLReportWithoutMark.cs">
+      <DependentUpon>BLReportWithoutMark.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\BLReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BLReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\DriverSlip.cs">
       <DependentUpon>DriverSlip.rpt</DependentUpon>
@@ -3832,6 +3846,17 @@
     </Content>
     <Content Include="AdminLte\Scripts\OrderBookings\ExportPreDispatched.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Reports\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="Reports\InvoiceData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -4104,6 +4129,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104292034479_AddLockColumn.resx">
       <DependentUpon>202104292034479_AddLockColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BLReportWithoutMark.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BLReportWithoutMark.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\BLReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

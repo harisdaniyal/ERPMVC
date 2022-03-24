@@ -142,7 +142,14 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var logistics = Mapper.Map<LogisticsViewModel, Logistic>(logisticsViewModels);
-                logistics.Status = OrdersStatus.ReadyForDispatched.ToString();
+                if (logistics.PreDispatched.GetValueOrDefault())
+                {
+                    logistics.Status = OrdersStatus.PreDispatched.ToString();
+                }
+                else
+                {
+                logistics.Status = OrdersStatus.Dispatched.ToString();
+                }
                 await orderBookingService.SaveLogisticsAsync(logistics);
 
                 return Json(new { success = true, logisticsId = logistics.logisticsid });
@@ -164,7 +171,7 @@ namespace BA_ERPMVC.Controllers
             {
                 if (!orderBookingService.DeleteLogistics(logisticsId))
                 {
-                    return Json(new { success = false, message = $"Logistic can not be delete after Ready For Dispatched." });
+                    return Json(new { success = false, message = $"Logistic can not be delete after Dispatched." });
                 }
                 
             }

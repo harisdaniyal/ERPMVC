@@ -1,6 +1,4 @@
-﻿<!--
-<link href="~/Content/toastr.css" rel="stylesheet" />
-    -->
+﻿
 @{
     if (Session["UserName"] == null)
     {
@@ -60,7 +58,6 @@
                             <th class="head" scope="col">Measurement</th>
                             <th class="head" scope="col">FreightAndCharges</th>
                             <th class="head" scope="col">BLAgent</th>
-                            <th class="head" scope="col">BLAgentDetail</th>
                             <th class="head" scope="col">TypeOfService</th>
                             <th class="head" scope="col">NumberOfOriginalBL</th>
                             <th class="head" scope="col">ForwardingAgent</th>
@@ -98,6 +95,9 @@
                         <label for="txtblNo">BL No<label id="_txtCustomerName-error" class="error" for="txtblNo"></label></label>
                         <div class="input-group">
                             <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtblNo" name="txtblNo" class="form-control">
+                            <input type="hidden" id="txtIsCompleted" value="" />
+                            <input type="hidden" id="txtBLShippingID" value="" />
+
                         </div>
                     </div>
                 </div>
@@ -399,8 +399,10 @@
 
 
         <div class="card-footer">
-            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
-            <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+            <button type="button" id="btnBack" class="btn btn-dark">Back</button>
+            <button type="submit" id="btnDraft" class="btn btn-warning">Draft</button>
+            <button type="submit" id="btnSubmit" class="btn btn-success">Finalized</button>
+            <button type="submit" id="btnPrint"  class="btn btn-primary">Print</button>
 
         </div>
     </form>

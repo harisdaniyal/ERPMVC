@@ -38,6 +38,7 @@ namespace BA_ERPMVC.ViewModels
 		public string BLAgentDetail { get; set; }
 		public string FrightPayable { get; set; }
 		public DateTime? placeOfDateofIssue { get; set; }
+		public bool? IsCompleted { get; set; }
 		public string UserID { get; set; }
 		public string UpdateBy { get; set; }
 		public string CreateDate { get; set; }

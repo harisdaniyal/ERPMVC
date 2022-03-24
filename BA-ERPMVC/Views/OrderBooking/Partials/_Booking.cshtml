@@ -25,6 +25,66 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.DOGuarantee.HasValue ? Model.DOGuarantee.Value.ToString("yyyy-MM-dd"): "")" id="txt_DoGuarantee" />
+                    <label>DO Guarantee</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.ImportEIR.HasValue ? Model.ImportEIR.Value.ToString("yyyy-MM-dd"): "")" id="txt_ImportEIR" />
+                    <label>Import EIR</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.PortWeighment.HasValue ? Model.PortWeighment.Value.ToString("yyyy-MM-dd"): "")" id="txt_PortWeighment" />
+                    <label>Port Weightment</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.OutSidePortWeighment.HasValue ? Model.OutSidePortWeighment.Value.ToString("yyyy-MM-dd"): "")" id="txt_OutSidePortWeighment" />
+                    <label>OutSide Port Weightment</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.GD.HasValue ? Model.GD.Value.ToString("yyyy-MM-dd"): "")" id="txt_GD" />
+                    <label>GD Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.BLDate.HasValue ? Model.BLDate.Value.ToString("yyyy-MM-dd"): "")" id="txt_BLDate" />
+                    <label>BL Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="input-group">
                     <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_Customers">

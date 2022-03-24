@@ -16,14 +16,14 @@ namespace BA_ERPMVC.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class BLReport : ReportClass {
+    public class BLReportWithoutMark : ReportClass {
         
-        public BLReport() {
+        public BLReportWithoutMark() {
         }
         
         public override string ResourceName {
             get {
-                return "BLReport.rpt";
+                return "BLReportWithoutMark.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace BA_ERPMVC.Reports {
         
         public override string FullResourceName {
             get {
-                return "BA_ERPMVC.Reports.BLReport.rpt";
+                return "BA_ERPMVC.Reports.BLReportWithoutMark.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace BA_ERPMVC.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedBLReport : Component, ICachedReport {
+    public class CachedBLReportWithoutMark : Component, ICachedReport {
         
-        public CachedBLReport() {
+        public CachedBLReportWithoutMark() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace BA_ERPMVC.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            BLReport rpt = new BLReport();
+            BLReportWithoutMark rpt = new BLReportWithoutMark();
             rpt.Site = this.Site;
             return rpt;
         }

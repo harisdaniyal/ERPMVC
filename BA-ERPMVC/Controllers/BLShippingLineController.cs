@@ -32,7 +32,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult GetContainerNo()
         {
-            var data =  Json(db.BLShippingContainers.Where(x => x.IsDeleted == false).Select(x => new
+            var data = Json(db.BLShippingContainers.Where(x => x.IsDeleted == false).Select(x => new
             {
                 ContainerNo = x.ContainerNo
             }).ToList(), JsonRequestBehavior.AllowGet);
@@ -44,7 +44,7 @@ namespace BA_ERPMVC.Controllers
             return Json(db.BLAgentDetails.Where(x => x.IsDeleted == false).Select(x => new
             {
                 BLAgent = x.BLAgent
-              
+
 
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
@@ -81,6 +81,8 @@ namespace BA_ERPMVC.Controllers
                         a.BL = obj.BL;
                         //a.Approval = obj.Approval;
                         a.Shipper = obj.Shipper;
+                        a.BLShippingID = obj.BLShippingID;
+                        a.IsCompleted = obj.IsCompleted;
                         a.Consignee = obj.Consignee;
                         a.NotifyParty = obj.NotifyParty;
                         a.precarriageby = obj.precarriageby;
@@ -199,6 +201,7 @@ namespace BA_ERPMVC.Controllers
                          {
                              ID = opo.BLShippingID,
                              bl = opo.BL,
+                             IsCompleted = opo.IsCompleted,
                              //Approv = opo.Approval,
                              shipper = opo.Shipper,
                              consignee = opo.Consignee,
@@ -252,7 +255,7 @@ namespace BA_ERPMVC.Controllers
                           {
                               ID = opo.BLShippingID,
                               bl = opo.BL,
-                              Approval = opo.Approval, 
+                              Approval = opo.Approval,
                               shipper = opo.Shipper,
                               consignee = opo.Consignee,
                               notifyParty = opo.NotifyParty,
@@ -279,8 +282,9 @@ namespace BA_ERPMVC.Controllers
                               FrightPayable = opo.FrightPayable,
                               PlaceOfIssue = opo.PlaceOfIssue,
                               DateOfIssue = opo.DateOfIssue,
+                              IsCompleted = opo.IsCompleted
 
-                          }).ToList().OrderByDescending(x=> x.ID);
+                          }).ToList().OrderByDescending(x => x.ID);
 
                 return Json(new { BL });
             }
@@ -309,7 +313,7 @@ namespace BA_ERPMVC.Controllers
                 ForwardingAgent = c.ForwardingAgent,
                 FinalDestination = c.FinalDestination,
                 ContainerNo = c.ContainerNo,
-                SealNo = c.SealNo,
+                ////SealNo = c.SealNo,
                 NumberOfConatinerPack = c.NumberOfConatinerPack,
                 KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
                 GrossWeight = c.GrossWeight,
@@ -322,10 +326,17 @@ namespace BA_ERPMVC.Controllers
                 Collect = c.Collect,
                 DateOfIssue = c.DateOfIssue.ToString(),
                 BLAgent = c.BLAgent,
-                BLAgentDetail= context.BLAgentDetails.Where(x=> x.BLAgent== c.BLAgent).Select(x=> x.BLAgentDetail1).FirstOrDefault()
-                //BLAgent = $"{c.BLAgent} /n {c.DateOfIssue.ToString()}",
-
+                BLAgentDetail = context.BLAgentDetails.Where(x => x.BLAgent == c.BLAgent).Select(x => x.BLAgentDetail1).FirstOrDefault()
             }).ToList();
+            if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
+            {
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
+            }
+            else
+            {
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
+            }
+
             rd.SetDataSource(data);
             Response.Buffer = false;
             Response.ClearContent();
@@ -339,10 +350,12 @@ namespace BA_ERPMVC.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", $"BL_{data.Select(x=> x.BL).FirstOrDefault()}.pdf");
+            return File(stream, "application/pdf", $"BL_{data.Select(x => x.BL).FirstOrDefault()}.pdf");
         }
 
-                        //***** BL Approval*****//
+
+
+        //***** BL Approval*****//
 
         [HttpGet]
         public ActionResult BLApproval()

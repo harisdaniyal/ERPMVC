@@ -28,5 +28,11 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string Remarks { get; set; }
         public DateTime? VesselBerthingDate { get; set; }
         public string BookingPOCName { get; set; }
+        public DateTime? DOGuarantee { get; set; }
+        public DateTime? ImportEIR { get; set; }
+        public DateTime? PortWeighment { get; set; }
+        public DateTime? OutSidePortWeighment { get; set; }
+        public DateTime? GD { get; set; }
+        public DateTime? BLDate { get; set; }
     }
 }

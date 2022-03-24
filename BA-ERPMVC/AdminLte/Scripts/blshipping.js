@@ -1,35 +1,4 @@
-﻿
-/*
-  $("#gridShow").removeClass("d-none");
-
-
-
- //Back Button
-    $("#btnBack").click(function () {
-        // Remove this line if it worked
-        $("#gridShow").show();
-        $("#lloForm").hide();
-    });
-
-
-
-
- //Add Button
-    $("#btnADD").click(function () {
-        // Remove this line if it worked
-        $("#gridShow").hide();
-        $("#lloForm").show();
-    });
-
-*/
-
-
-
-
-
-
-
-function editClick(id) {
+﻿function editClick(id) {
 
     var referenceNum = id;
     window.location.href = "Index?id=" + referenceNum + "&edit=1";
@@ -37,25 +6,12 @@ function editClick(id) {
 
 
 
-
+$("#btnDraft").click(function () {
+    save(true)
+})
 
 $(document).ready(function () {
     var services = new Services();
-
-
-    //$.ajax({
-    //    type: "GET",
-    //    url: "/BLShippingLine/GetApproval",
-    //    data: "{}",
-    //    success: function (data) {
-    //        var s = '<option value="">Please Select a Approval</option>';
-    //        for (var i = 0; i < data.length; i++) {
-    //            s += '<option value="' + data[i].SID + '">' + data[i].SStatus + '</option>';
-    //        }
-    //        $("#txtApproval").html(s);
-    //    }
-
-    //}, 5000);
 
     $.ajax({
         type: "GET",
@@ -96,12 +52,8 @@ $(document).ready(function () {
 
         $("#lloForm").show();
 
-
         //Back Button
         $("#btnBack").click(function () {
-            // Remove this line if it worked
-            //     $("#gridShow").show();
-            //   $("#lloForm").hide();
             window.location.href = "Index";
         });
 
@@ -114,7 +66,8 @@ $(document).ready(function () {
 
                 var data1 = data[0].DateOfIssue ? moment(data[0].DateOfIssue).format("YYYY-MM-DD") : "--";
                 $("#txtblNo").val(data[0].bl);
-                // $("#txtApproval").val(data[0].Approval)
+                $("#txtIsCompleted").val(data[0].IsCompleted);
+                $("#txtBLShippingID").val(empid);
                 $("#txtshipping").val(data[0].shipper);
                 $("#txtConsignee").val(data[0].consignee);
                 $("#txtNotifyParty").val(data[0].notifyParty);
@@ -146,33 +99,30 @@ $(document).ready(function () {
             });
         } getBlShippingLineByid(empid);
 
-
-
-
-        $(document).on('click', '#btnSubmit', function () {
+        $(document).on('click', '#btnDraft', function () {
+            $("#txtIsCompleted").val(false)
             $("#_addShippingLine").valid();
         });
 
+        $(document).on('click', '#btnSubmit', function () {
+            $("#txtIsCompleted").val(true)
+            $("#_addShippingLine").valid();
+        });
 
+        $(document).on("click", "#btnPrint", function (e) {
+            var ID = $("#txtBLShippingID").val();
+            let url = "/BLShippingLine/PrintGDReport?id=" + ID;
+            let link = document.createElement("a");
+            link.href = url;
+            link.click();
+        });
 
         // Submit Button
         var toastCount = 0;
         $("#_addShippingLine").validate({
             rules: {
-                /*
-                txtCityCode: "required",
-                txtCityName: "required",
-                txtCityPhoneCode: "required",
-                txtCountryName: { min: 1}
-                */
             },
             messages: {
-                /*
-                txtCityCode: "*",
-                txtCityName: "*",
-                txtCityPhoneCode: "*",
-                txtCountryName: "*"
-                */
             },
             submitHandler: function (form) {
                 $.ajax(
@@ -182,6 +132,7 @@ $(document).ready(function () {
                         data: { //Passing data  
                             BLShippingID: empid,
                             BL: $("#txtblNo").val(),
+                            IsCompleted: $("#txtIsCompleted").val(),
                             // Approval: $("#txtApproval option:selected").val(),
                             Shipper: $("#txtshipping").val(),
                             Consignee: $("#txtConsignee").val(),
@@ -237,20 +188,11 @@ $(document).ready(function () {
             }
 
         });
-        ///
-
-
-
-        //$("#DX").removeClass("d-none");
-
-
 
     }
     else {
         $("#DX").addClass("d-none");
         $("#gridShow").removeClass("d-none");
-        //$("#DX").removeClass("d-none");
-
 
         function getblshippingGride() {
             services.getblshippingGride().then(function (response) {
@@ -258,20 +200,8 @@ $(document).ready(function () {
                 $('#BLShippingGride').dataTable().fnClearTable();
                 $('#BLShippingGride').dataTable().fnDestroy();
                 $('#BLShippingGride').dataTable({
-
-
                     dom: 'Bfrtip',
-
-
                     "buttons": [
-                        /*
-                        {  
-                            extend: 'print',  
-                            className: 'btn btn-primary rounded-0',  
-                            text: '<i class="far fa-file-print"></i> Print'  
-                        },
-                        */
-                        // 'excel'
                         {
                             extend: 'excel',
                             className: 'btn btn-success rounded-0',
@@ -289,9 +219,8 @@ $(document).ready(function () {
                         {
                             data: 'ID',
                             width: 5,
-                            "render": function (data) {
-                                var html = appendActionMenu(data);
-
+                            "render": function (data, type, row) {
+                                var html = appendActionMenu(row);
                                 return html;
                             }
                         },
@@ -369,9 +298,6 @@ $(document).ready(function () {
                             data: 'BLAgent',
                             width: 10
                         }, {
-                            data: 'BLAgentDetail',
-                            width: 10
-                        }, {
                             data: 'TypeOfService',
                             width: 10
                         }, {
@@ -400,65 +326,22 @@ $(document).ready(function () {
                                 return data;
                             }
                         }],
-
-                    // dropDown Search Start
-
-                    //initComplete: function () {
-                    //    this.api().columns().every(function () {
-                    //        var column = this;
-                    //        var select = $('<select><option value=""></option></select>')
-                    //            .appendTo($(column.footer()).empty())
-                    //            .on('change', function () {
-                    //                var val = $.fn.dataTable.util.escapeRegex(
-                    //                    $(this).val()
-                    //                );
-
-                    //                column
-                    //                    .search(val ? '^' + val + '$' : '', true, false)
-                    //                    .draw();
-                    //            });
-
-                    //        column.data().unique().sort().each(function (d, j) {
-                    //            select.append('<option value="' + d + '">' + d + '</option>')
-                    //        });
-                    //    });
-                    //}
-                    // dropDown Search End 
-
                 });
 
             });
         }
+
         getblshippingGride();
 
-        function appendActionMenu(id) {
-            var html =
-                //@if '(ViewContext.HttpContext.User.IsInRole("Admin"))'+
-                // '{'+
-                //'<div class="dropdown">' +
-                // '<a class="dropdown-toggle"  href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >' +
-                //     '<span class="vertical-icon"></span>' +
-                //       '<span class="fa fa-ellipsis-v"></span>' +
-                //     '</a>' +
-
-                '<div class="row" style="margin-left:4px;">' +
-
-                /*            '<a data-id="' + id + '" class="p-1 fa fa-eye _view" ></a>' +*/
-
-                '<a data-id="' + id + '" class="p-1 fa fa-edit _edit" ></a>' +
-
-                '<a data-id="' + id + '" class="p-1 fa fa-print _remove" ></a>' +
-
-                '</div>'
-
-            //'</div>'
+        function appendActionMenu(row) {
+            var html = `<div class="row" style="margin-left:4px;">`;
+            if (row.IsCompleted == false) {
+                html = html + `<a data-id="` + row.ID + `" class="p-1 fa fa-edit _edit" ></a>`;
+            }
+            html = html + `<a data-id="` + row.ID + `" class="p-1 fa fa-print _remove" ></a>
+                </div>`
             return html;
         }
-        //$(document).on("click", "._view", function (e) {
-
-        //    var ID = $(this).attr('data-id');
-        //    window.location.href = "/Account/Register?id=" + ID + "&edit=0";
-        //});
 
         $(document).on("click", "._edit", function (e) {
             var ID = $(this).attr('data-id');
@@ -470,20 +353,12 @@ $(document).ready(function () {
             window.location.href = "/BLShippingLine/PrintGDReport?id=" + ID + "&edit=1";
         });
 
-
-
-
-
-
         //Back Button
         $("#btnBack").click(function () {
             // Remove this line if it worked
             $("#gridShow").show();
             $("#lloForm").hide();
         });
-
-
-
 
         //Add Button
         $("#btnADD").click(function () {
@@ -493,18 +368,15 @@ $(document).ready(function () {
         });
 
 
-
-
-
-
-
-
-
-        $(document).on('click', '#btnSubmit', function () {
+        $(document).on('click', '#btnDraft', function () {
+            $("#txtIsCompleted").val(false)
             $("#_addShippingLine").valid();
         });
 
-
+        $(document).on('click', '#btnSubmit', function () {
+            $("#txtIsCompleted").val(true)
+            $("#_addShippingLine").valid();
+        });
 
         // Submit Button
         var toastCount = 0;
@@ -515,15 +387,11 @@ $(document).ready(function () {
                 txtshipping: "required",
                 txtConsignee: "required",
                 txtNotifyParty: "required",
-                // txtprecarriageby: "required",
-                //  txtplaceofReceipt: "required",
                 txtOceanVessel: "required",
                 txtVoyNo: "required",
                 txtPortOfLanding: "required",
                 txtPortOfDischarge: "required",
                 txtPlaceofDeilvery: "required",
-                // txtforwardingagent: "required",
-                //txtfinaldestination: "required",
                 txtContainerNo: "required",
                 txtSealNo: "required",
                 txtConatinerOrPackage: "required",
@@ -535,9 +403,6 @@ $(document).ready(function () {
                 txtNumberofOrignal: "required",
                 txtEDob: "required",
                 txtplaceofissue: "required",
-
-
-
             },
             messages: {
 
@@ -545,8 +410,6 @@ $(document).ready(function () {
                 txtshipping: "*",
                 txtConsignee: "*",
                 txtNotifyParty: "*",
-                // txtprecarriageby: "*",
-                //  txtplaceofReceipt: "*",
                 txtOceanVessel: "*",
                 txtVoyNo: "*",
                 txtPortOfLanding: "*",
@@ -574,7 +437,7 @@ $(document).ready(function () {
                         url: "/BLShippingLine/AddOrEditeBLShippingLine", // Controller/View   
                         data: { //Passing data  
                             BL: $("#txtblNo").val(),
-                            // Approval: $("#txtApproval option:selected").val(),
+                            IsCompleted: $("#txtIsCompleted").val(),
                             Shipper: $("#txtshipping").val(),
                             Consignee: $("#txtConsignee").val(),
                             NotifyParty: $("#txtNotifyParty").val(),
@@ -649,43 +512,6 @@ $(document).ready(function () {
                                 returncondition = false;
                             }
                         },
-
-                        /*
-                                                if (response.success) {
-                                                
-                                                getblshippingGride();
-                                                $("#txtblNo").val("");
-                                                $("#txtApproval").val("");
-                                                $("#txtshipping").val("");
-                                                $("#txtConsignee").val("");
-                                                $("#txtNotifyParty").val("");
-                                                $("#txtprecarriageby").val("");
-                                                $("#txtplaceofReceipt").val("");
-                                                $("#txtOceanVessel").val("");
-                                                $("#txtVoyNo").val("");
-                                                $("#txtPortOfLanding").val("");
-                                                $("#txtPortOfDischarge").val("");
-                                                $("#txtPlaceofDeilvery").val("");
-                                                $("#txtContainerNo").val("");
-                                                $("#txtSealNo").val("");
-                                                $("#txtConatinerOrPackage").val("");
-                                                $("#txtkindofpack").val("");
-                                                $("#txtGrossWeight").val("");
-                                                $("#txtNetWeight").val("");
-                                                $("#txtfreightandcharges").val("");
-                                                $("#txtypeofservice").val("");
-                                                $("#txtNumberofOrignal").val("");
-                                                $("#txtfreightPayable").val("");
-                                                $("#txtOperationDate").val("");
-                        
-                        
-                                                          
-                                          toastr.success("BL Shipping Detail has been inserted successfully");
-                                        } else {
-                                            // DoSomethingElse()
-                                            toastr.warn("Kindly Check Your Detail");
-                                        }
-                                   }, */
                         error: function (response) {
                             toastr.error("Server error,Please check your internet connection");
                         }
@@ -693,10 +519,8 @@ $(document).ready(function () {
             }
 
         });
-        ///
 
     }
-
 
 });
 
