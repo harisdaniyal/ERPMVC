@@ -31,6 +31,17 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
+        url: "/BLShippingLine/GetBLNumber",
+        data: "{}",
+        async: false,
+        success: function (data) {
+            $("#txtblNo").val(data);
+        }
+
+    });
+
+    $.ajax({
+        type: "GET",
         url: "/BLShippingLine/GetBlAgent",
         data: "{}",
         async: false,
