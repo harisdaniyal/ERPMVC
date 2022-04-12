@@ -10,7 +10,6 @@
                         <th>Container Type</th>
                         <th>Container Size</th>
                         <th>EG NO#</th>
-                        <th>CRO</th>
                         <th>Vessel</th>
                         <th>Voyage</th>
                         <th>ETD Date</th>
@@ -18,6 +17,7 @@
                         <th>ShippingLine</th>
                         <th>Clearing Agent Name</th>
                         <th>Clearing Agent No#</th>
+                        <th>ReferenceContainer</th>
                         <th>Booking Port</th>
                         <th>Mode Of Transportation</th>
                         <th>Date Of Receiving Of Cargo</th>
@@ -47,7 +47,7 @@
 
                         <td>
                             <select id="txt_ContainerSize" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 125px;">
-                                
+
                                 <option value="">Container Size</option>
                                 @foreach (var containerSize in ViewBag.ContainerSizes)
                                 {
@@ -59,9 +59,7 @@
                         <td>
                             <input type="text" id="txt_EgNo" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 130px;" />
                         </td>
-                        <td>
-                            <input type="text" id="txt_Cro" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 130px;" />
-                        </td>
+
                         <td>
                             <input type="text" id="txt_Vessel" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 150px;" />
                         </td>
@@ -91,7 +89,9 @@
                         </td>
 
 
-
+                        <td>
+                            <input type="text" id="txt_ReferenceContainer" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 150px;" />
+                        </td>
 
                         <td>
                             <select id="txt_Bookingport" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
@@ -119,8 +119,6 @@
                                 <option value="false">No</option>
                             </select>
                         </td>
-
-
 
 
                         <td>

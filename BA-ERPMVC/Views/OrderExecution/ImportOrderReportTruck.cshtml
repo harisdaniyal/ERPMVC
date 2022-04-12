@@ -1,0 +1,121 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.ImportBookingReportViewModel>
+
+@{
+    ViewBag.Title = "TrainReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Import Truck Report</h2>
+<br />
+
+
+
+<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive" style="height:auto;">
+    <thead class="thead-light text-center">
+        <tr>
+            <th>Order No</th>
+            <th>BLNo</th>
+            <th>Order Type</th>
+            <th>Order Date</th>
+            <th>Customer Name</th>
+            <th>Container No </th>
+            <th>Container Size </th>
+            <th>Container Weight </th>
+            <th>Container Type Name </th>
+            <th>Shipping Agent Name</th>
+            <th>Shipping Line Name</th>
+            <th>Booking POC Name</th>
+            <th>Twenty Container QTY</th>
+            <th>Twenty Container Price</th>
+            <th>Forty Container QTY</th>
+            <th>Forty Container Price</th>
+            <th>Invoice Amount</th>
+            <th>Free Days</th>
+            <th>Vessel Berthing Date</th>
+            <th>DO Guarantee Date</th>
+            <th>Import EIR</th>
+            <th>Port Weighment</th>
+            <th>Outside Port Weighment</th>
+            <th>GD Date</th>
+            <th>BL Date</th>
+            <th>From Location</th>
+            <th>To Location</th>
+            <th>Empty Return Location</th>
+            <th style="width:100px;">Empty Return Date</th>
+            <th>Mode Of Transportation</th>
+            <th>PreDispatched</th>
+            <th>Commodities</th>
+            <th style="width:80px;">Remarks</th>
+
+        </tr>
+
+    </thead>
+    <tbody style="background-color: white ;" class="text-center">
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderNo</td>
+                <td>@order.BL</td>
+                <td>@order.OrderType</td>
+                <td>@order.OrderDate</td>
+                <td>@order.CustomerName</td>
+                <td>@order.ContainerNo</td>
+                <td>@order.ContainerSize</td>
+                <td>@order.ContainerWeight</td>
+                <td>@order.ContainerTypeName</td>
+                <td>@order.ShippingAgentName</td>
+                <td>@order.ShippingLineName</td>
+                <td>@order.BookingPOCName</td>
+                <td>@order.TwentyContainerQty</td>
+                <td>@order.TwentyContainerPrice</td>
+                <td>@order.FortyContainerQty</td>
+                <td>@order.FortyContainerPrice</td>
+                <td>@order.InvoiceAmount</td>
+                <td>@order.FreeDays</td>
+                <td>@order.VesselBerthingDate</td>
+                <td>@order.DOGuarantee</td>
+                <td>@order.ImportEIR</td>
+                <td>@order.PortWeighment</td>
+                <td>@order.OutSidePortWeighment</td>
+                <td>@order.GD</td>
+                <td>@order.BLDate</td>
+                <td>@order.FromLocation</td>
+                <td>@order.ToLocation</td>
+                <td>@order.EmptyReturnLocation</td>
+                <td>@order.EmptyReturnDate</td>
+                <td>@order.ModeOfTransportation</td>
+                <td>@order.PreDispatched</td>
+                <td>@order.Comodities</td>
+                <td>@order.Remarks</td>
+
+                @*<td>@order.FromDateTime</td>
+                    <td>@order.ToDateTime</td>*@
+
+                <!--<td class="text-center">-->
+                @* <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>*@
+                @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
+                <!--</td>-->
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<script>
+    $(document).ready(function myfunction() {
+        $('#example').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+
+            ],
+            "Sorting": false,
+            "lengthChange": true,
+            "pageLength": 10,
+            "paging": true,
+            'searching': true
+        });
+
+    });
+</script>

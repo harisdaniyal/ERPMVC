@@ -14,6 +14,7 @@ function save() {
         body: JSON.stringify({
             orderId: getBookingOrderId(),
             orderNo: $("#sp_OrderNo").html(),
+            CRO: $("#txt_CRO").val(),
             DateOfBooking: $("#txt_OrderDate").val(),
             Forwarder: $("#txt_Forwarder").val(),
             ShipperName: $("#txt_Shipper").val(),

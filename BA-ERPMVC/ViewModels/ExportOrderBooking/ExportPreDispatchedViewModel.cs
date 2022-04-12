@@ -12,6 +12,7 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		public string OrderNo { get; set; }
 		public string ContainerNo { get; set; }
 		public string ContainerSize { get; set; }
+		public string RefrenceContainer { get; set; }
 		public DateTime? PickupFrom { get; set; }
 		public string VehicleNo { get; set; }
 		public string TransporterName { get; set; }

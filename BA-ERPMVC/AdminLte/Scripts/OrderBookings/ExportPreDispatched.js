@@ -29,6 +29,7 @@
             'OrderId': row.find(".txt_OrderId").val(),
             'IsCompleted': isCompleted,
             'CRO': row.find(".txt_CROnumber").val(),
+            'RefrenceContainer': row.find(".txt_ReferenceContainer").val(),
 
             'OrderNo': row.find(".txt_OrderNo").val(),
             'ContainerNo': row.find(".txt_ContainerNo").val(),

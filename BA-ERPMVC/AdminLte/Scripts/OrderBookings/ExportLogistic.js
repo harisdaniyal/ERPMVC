@@ -22,9 +22,6 @@ function initialize(logistics) {
             data: 'EGNo',
             width: 10
         }, {
-            data: 'CRO',
-            width: 10
-        }, {
             data: 'vessel',
             width: 10
         }, {
@@ -47,6 +44,9 @@ function initialize(logistics) {
             width: 10
         }, {
             data: 'CAContactNo',
+            width: 10
+        },  {
+            data: 'RefrenceContainer',
             width: 10
         }, {
             data: 'BookingPort',
@@ -178,10 +178,7 @@ function validateInputs() {
         isValid = false;
     }
 
-    if (!$("#txt_Cro").val()) {
-        $("#txt_Cro").addClass('error');
-        isValid = false;
-    }
+ 
 
     if (!$("#txt_ContainerSize").val()) {
         $("#txt_ContainerSize").addClass('error');
@@ -229,13 +226,14 @@ function clearInputs() {
     $("#txt_ContainerSize").val('');
     $("#txt_ContainerType").val('');
     $("#txt_EgNo").val('');
-    $("#txt_Cro").val('');
+   // $("#txt_Cro").val('');
     $("#txt_Vessel").val('');
     $("#txt_Voyage").val('');
     $("#txt_ETD").val('');
     $("#txt_VesselCutoff").val('');
     $("#txt_Clearingagent").val('');
     $("#txt_Clearingagentno").val('');
+    $("#txt_ReferenceContainer").val('');
     $("#txt_ShippingLine").val('');
     $("#txt_Bookingport").val('');
     $("#txt_ModeOfTransportation").val('');
@@ -255,13 +253,14 @@ function getLogisticsObject() {
         'ContainerSize': $("#txt_ContainerSize option:selected").val(),
         'ContainerType': $("#txt_ContainerType option:selected").val(),
         'EGNo': $("#txt_EgNo").val(),
-        'CRO': $('#txt_Cro').val(),
+        //'CRO': $('#txt_Cro').val(),
         'vessel': $("#txt_Vessel").val(),
         'Voyage': $("#txt_Voyage").val(),
         'ETD': $("#txt_ETD").val(),
         'VesselCutOff': $("#txt_VesselCutoff").val(),
         'ClearingAgentName': $("#txt_Clearingagent").val(),
         'CAContactNo': $("#txt_Clearingagentno").val(),
+        'RefrenceContainer': $("#txt_ReferenceContainer").val(),
         'ShippingLine': $("#txt_ShippingLine option:selected").val(),
         'BookingPort': $("#txt_Bookingport option:selected").val(),
         'ModeOfTransportation': $("#txt_ModeOfTransportation option:selected").val(),

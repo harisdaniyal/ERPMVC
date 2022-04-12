@@ -10,6 +10,8 @@ using BA_ERPMVC.ViewModels.OrderBooking;
 using AutoMapper;
 using BA_ERPMVC.ViewModels;
 using BA_ERPMVC.ViewModels.ExportOrderBooking;
+using System.Data;
+using System.IO;
 
 namespace BA_ERPMVC.Controllers
 {
@@ -21,7 +23,7 @@ namespace BA_ERPMVC.Controllers
         {
             orderBookingService = new OrderBookingService();
         }
- 
+
         [HttpGet]
         public ActionResult ReadyForDispatched()
         {
@@ -56,7 +58,7 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
-       
+
         [HttpGet]
         public ActionResult PreDispatched()
         {
@@ -95,7 +97,7 @@ namespace BA_ERPMVC.Controllers
         [HttpGet]
         public ActionResult Dispatched()
         {
-           this.ViewBag.Stations = orderBookingService.GetStationList();
+            this.ViewBag.Stations = orderBookingService.GetStationList();
             var DispatchedModel = orderBookingService.GetDispatchedOrderAsync();
 
             return View(DispatchedModel);
@@ -349,6 +351,125 @@ namespace BA_ERPMVC.Controllers
             return View(TrainReport);
         }
 
+        [HttpGet]
+        public ActionResult ImportOrderReport()
+        {
+            var ImportOrderReport = orderBookingService.ImportBookingReportTrain();
+
+            return View(ImportOrderReport);
+        }
+
+        //[HttpPost]
+        //public FileResult ExportExcel()
+        //{
+        //    var ImportOrderReport = orderBookingService.ImportBookingReportTrain();
+        //    DataTable dt = new DataTable("Grid");
+        //    dt.Columns.AddRange(new DataColumn[38] { new DataColumn("BL"),
+        //                                    new DataColumn("BLDate"),
+        //                                    new DataColumn("BookingPOCName"),
+        //                                    new DataColumn("Comodities"),
+        //                                    new DataColumn("ContainerNo"),
+        //                                    new DataColumn("ContainerSize"),
+        //                                    new DataColumn("ContainerType"),
+        //                                    new DataColumn("ContainerTypeName"),
+        //                                    new DataColumn("ContainerWeight"),
+        //                                    new DataColumn("CustomerName"),
+        //                                    new DataColumn("DOGuarantee"),
+        //                                    new DataColumn("EmptyReturnDate"),
+        //                                    new DataColumn("EmptyReturnLocation"),
+        //                                    new DataColumn("FortyContainerPrice"),
+        //                                    new DataColumn("FortyContainerQty"),
+        //                                    new DataColumn("TwentyContainerPrice"),
+        //                                    new DataColumn("TwentyContainerQty"),
+        //                                    new DataColumn("FreeDays"),
+        //                                    new DataColumn("FromLocation"),
+        //                                    new DataColumn("GD"),
+        //                                    new DataColumn("ImportEIR"),
+        //                                    new DataColumn("InvoiceAmount"),
+        //                                    new DataColumn("JobType"),
+        //                                    new DataColumn("ModeOfTransportation"),
+        //                                    new DataColumn("OrderDate"),
+        //                                    new DataColumn("OrderId"),
+        //                                    new DataColumn("OrderNo"),
+        //                                    new DataColumn("OrderType"),
+        //                                    new DataColumn("OutSidePortWeighment"),
+        //                                    new DataColumn("PortWeighment"),
+        //                                    new DataColumn("PreDispatched"),
+        //                                    new DataColumn("Remarks"),
+        //                                    new DataColumn("ShippingAgentName"),
+        //                                    new DataColumn("ShippingLineName"),
+        //                                    new DataColumn("ShippingLineId"),
+        //                                    new DataColumn("ShippingAgentId"),
+        //                                    new DataColumn("ToLocation"),
+        //                                    new DataColumn("VesselBerthingDate"),
+
+        //    });
+
+
+
+        //    foreach (var order in ImportOrderReport)
+        //    {
+        //        dt.Rows.Add(order.BL,
+        //                order.BLDate,
+        //                order.BookingPOCName,
+        //                order.Comodities,
+        //                order.ContainerNo,
+        //                order.ContainerSize,
+        //                order.ContainerType,
+        //                order.ContainerTypeName,
+        //                order.ContainerWeight,
+        //                order.CustomerName,
+        //                order.DOGuarantee,
+        //                order.EmptyReturnDate,
+        //                order.EmptyReturnLocation,
+        //                order.FortyContainerPrice,
+        //                order.FortyContainerQty,
+        //                order.TwentyContainerPrice,
+        //                order.TwentyContainerQty,
+        //                order.FreeDays,
+        //                order.FromLocation,
+        //                order.GD,
+        //                order.ImportEIR,
+        //                order.InvoiceAmount,
+        //                order.JobType,
+        //                order.ModeOfTransportation,
+        //                order.OrderDate,
+        //                order.OrderId,
+        //                order.OrderNo,
+        //                order.OrderType,
+        //                order.OutSidePortWeighment,
+        //                order.PortWeighment,
+        //                order.PreDispatched,
+        //                order.Remarks,
+        //                order.ShippingAgentName,
+        //                order.ShippingLineName,
+        //                order.ShippingLineId,
+        //                order.ShippingAgentId,
+        //                order.ToLocation,
+        //                order.VesselBerthingDate
+        //            );
+        //    }
+
+        //    using (XLWorkbook wb = new XLWorkbook())
+        //    {
+        //        wb.Worksheets.Add(dt);
+        //        using (MemoryStream stream = new MemoryStream())
+        //        {
+        //            wb.SaveAs(stream);
+        //            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+        //        }
+        //    }
+        //}
+
+
+        [HttpGet]
+        public ActionResult ImportOrderReportTruck()
+        {
+            var ImportOrderReporttruck = orderBookingService.ImportBookingReportTruck();
+
+            return View(ImportOrderReporttruck);
+        }
+
         ////********* Export PreDispatched**********/////////////
 
         [HttpGet]
@@ -390,7 +511,7 @@ namespace BA_ERPMVC.Controllers
         [HttpGet]
         public ActionResult ExportDispatchedTrain()
         {
-            
+
             var exportDispatchedtrainModel = orderBookingService.GetExportDispatchedTrainAsync();
 
             return View(exportDispatchedtrainModel);
@@ -430,7 +551,7 @@ namespace BA_ERPMVC.Controllers
         public ActionResult ExportDispatchedTruck()
         {
 
-            var exportDispatchedtruckModel= orderBookingService.GetExportDispatchedTruckAsync();
+            var exportDispatchedtruckModel = orderBookingService.GetExportDispatchedTruckAsync();
 
             return View(exportDispatchedtruckModel);
         }

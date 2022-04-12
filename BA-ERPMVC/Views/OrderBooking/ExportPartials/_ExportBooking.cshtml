@@ -99,12 +99,12 @@
             <div class="col-md-6">
                 <div class="input-group" style="padding-top: 26px;">
                     @*<select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_LoadingStation">
-            <option value="">Please Select Loading Station</option>
-            @foreach (var loadingStation in ViewBag.LoadingStation)
-            {
-                <option value="@loadingStation.LocationName" @(loadingStation.LocationName == Model.PointOfLoadingStation ? "selected=selected" : "")>@loadingStation.LocationName</option>
-            }
-        </select>*@
+                    <option value="">Please Select Loading Station</option>
+                    @foreach (var loadingStation in ViewBag.LoadingStation)
+                    {
+                        <option value="@loadingStation.LocationName" @(loadingStation.LocationName == Model.PointOfLoadingStation ? "selected=selected" : "")>@loadingStation.LocationName</option>
+                    }
+                </select>*@
                     <select id="txt_LoadingStation" class="form-control select2" aria-invalid="false" style="width: 100%;">
                         <option value="0">Point Of Loading</option>
                         <option value="SAPT">SAPT</option>
@@ -117,25 +117,37 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col-12 text-left">
-                    <h5 class="text-uppercase border-bottom py-1 mb-4">Facilities List</h5>
-                    <div class="d-flex mb-4 flex-wrap">
-                        @foreach (var facility in ViewBag.Facilities)
-                        {
-                            <div class=" form-check w-md-49">
-                                <input class="form-check-input ml-1" type="checkbox" name="cbx_Facilities" value="@facility.facilityID" @(Model.FacilityIds != null && Model.FacilityIds.Any(x => x == (int)facility.facilityID) ? "checked='checked'" : "")>
-                                <label class="form-check-label ml-4" for="inlineCheckbox1">@facility.FacilityName</label>
+      
+                    <div class="col-md-6" id="tr_BL_CRO" >
+
+                        <div class="input-group">
+                           <input type="text" id="txt_CRO" class="form-control staticLabel w-25" value="@Model.CRO" />
+                           <label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">CRO</label>
+
+                            <div class="form-status"><span></span></div>
+                            <i class="fas fa-check"></i>
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 text-left">
+                            <h5 class="text-uppercase border-bottom py-1 mb-4">Facilities List</h5>
+                            <div class="d-flex mb-4 flex-wrap">
+                                @foreach (var facility in ViewBag.Facilities)
+                                {
+                                    <div class=" form-check w-md-49">
+                                        <input class="form-check-input ml-1" type="checkbox" name="cbx_Facilities" value="@facility.facilityID" @(Model.FacilityIds != null && Model.FacilityIds.Any(x => x == (int)facility.facilityID) ? "checked='checked'" : "")>
+                                        <label class="form-check-label ml-4" for="inlineCheckbox1">@facility.FacilityName</label>
+                                    </div>
+                                }
                             </div>
-                        }
+                        </div>
+
+                        <div class="col-md-12 text-left mt-5">
+                            <button type="submit" id="btn_SubmitBookingOrder" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnSubmitBookingOrder()">PROCEED <i class="fas fa-angle-double-right"></i></button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-md-12 text-left mt-5">
-                    <button type="submit" id="btn_SubmitBookingOrder" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnSubmitBookingOrder()">PROCEED <i class="fas fa-angle-double-right"></i></button>
-                </div>
-            </div>
-        </div>
 </fieldset>
 @*</form>*@
 

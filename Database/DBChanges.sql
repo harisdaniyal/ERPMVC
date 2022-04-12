@@ -3998,3 +3998,335 @@ PRIMARY KEY CLUSTERED
 GO
 
 
+---- 12--04-2022 -----
+
+
+
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportBookingOrder]    Script Date: 4/12/2022 10:31:23 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportBookingOrder](
+	[OrderId] [int] IDENTITY(1,1) NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[DateOfBooking] [datetime] NULL,
+	[Forwarder] [nvarchar](500) NULL,
+	[ShipperName] [nvarchar](500) NULL,
+	[ShipperContact] [nvarchar](250) NULL,
+	[TwentyContainerQty] [int] NULL,
+	[FortyContainerQty] [int] NULL,
+	[TwentyContainerPrice] [nvarchar](250) NULL,
+	[FortyContainerPrice] [nvarchar](250) NULL,
+	[RateOfTransportation] [nvarchar](250) NULL,
+	[PointOfLoadingStation] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+	[CRO] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportBookingOrder] ADD  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportBookingOrder] ADD  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+-------------------------------------------------------------------------------------------------
+
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportLogistic]    Script Date: 4/12/2022 10:29:13 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportLogistic](
+	[LogisticId] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[ContainerNo] [nvarchar](250) NULL,
+	[ContainerType] [nvarchar](500) NULL,
+	[ContainerSize] [nvarchar](20) NULL,
+	[EGNo] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[vessel] [nvarchar](250) NULL,
+	[Voyage] [nvarchar](250) NULL,
+	[ETD] [datetime] NULL,
+	[VesselCutOff] [datetime] NULL,
+	[ShippingLine] [nvarchar](500) NULL,
+	[ClearingAgentName] [nvarchar](250) NULL,
+	[CAContactNo] [nvarchar](250) NULL,
+	[RefrenceContainer] [nvarchar](250) NULL,
+	[BookingPort] [nvarchar](50) NULL,
+	[ModeOfTransportation] [nvarchar](20) NULL,
+	[DateOfReceivingCargo] [datetime] NULL,
+	[PreDispatched] [bit] NULL,
+	[Status] [nvarchar](50) NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__ExportLo__FAAA7286A55F933F] PRIMARY KEY CLUSTERED 
+(
+	[LogisticId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportLogistic] ADD  CONSTRAINT [DF__ExportLog__IsCom__2C1E8537]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportLogistic] ADD  CONSTRAINT [DF__ExportLog__IsDel__2D12A970]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+----------------------------------------------------------------------------------------------------------------
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportPreDispatched]    Script Date: 4/12/2022 10:32:11 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportPreDispatched](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[RefrenceContainer] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[PickupFrom] [datetime] NULL,
+	[VehicleNo] [nvarchar](250) NULL,
+	[TransporterName] [nvarchar](250) NULL,
+	[TransporterCost] [int] NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__ExportPr__3214EC273D43D7C8] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportPreDispatched] ADD  CONSTRAINT [DF__ExportPre__IsCom__2FEF161B]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportPreDispatched] ADD  CONSTRAINT [DF__ExportPre__IsDel__30E33A54]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportDispatchedTrain]    Script Date: 4/12/2022 10:32:51 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportDispatchedTrain](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NULL,
+	[RefrenceContainer] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[TrainID] [nvarchar](50) NULL,
+	[DispatchedOfDate] [datetime] NULL,
+	[WagonNo] [nvarchar](250) NULL,
+	[RRNo] [nvarchar](250) NULL,
+	[EngineNo] [nvarchar](250) NULL,
+	[ShipperName] [nvarchar](250) NULL,
+	[WagonType] [nvarchar](250) NULL,
+	[ReDispatched] [nvarchar](100) NULL,
+	[CargoWeight] [nvarchar](250) NULL,
+	[TareWeight] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__ExportDi__3214EC27C32C015A] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportDispatchedTrain] ADD  CONSTRAINT [DF__ExportDis__IsCom__33BFA6FF]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportDispatchedTrain] ADD  CONSTRAINT [DF__ExportDis__IsDel__34B3CB38]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportDispatchedTruck]    Script Date: 4/12/2022 10:33:24 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportDispatchedTruck](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NOT NULL,
+	[RefrenceContainer] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[TruckNo] [nvarchar](150) NULL,
+	[DateOfDispatched] [datetime] NULL,
+	[CustomerName] [nvarchar](250) NULL,
+	[TruckContactNo] [nvarchar](250) NULL,
+	[BiltyNo] [nvarchar](250) NULL,
+	[DeliveryLocation] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__ExportDi__3214EC279A735F33] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportDispatchedTruck] ADD  CONSTRAINT [DF__ExportDis__IsCom__379037E3]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportDispatchedTruck] ADD  CONSTRAINT [DF__ExportDis__IsDel__38845C1C]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportReDispatched]    Script Date: 4/12/2022 10:35:58 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportReDispatched](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NOT NULL,
+	[RefrenceContainer] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[TransporterName] [nvarchar](250) NULL,
+	[VehicleNo] [nvarchar](250) NULL,
+	[CustomerName] [nvarchar](250) NULL,
+	[TruckingCost] [int] NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__ExportRe__3214EC27F14A9E1B] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportReDispatched] ADD  CONSTRAINT [DF__ExportReD__IsCom__3B60C8C7]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportReDispatched] ADD  CONSTRAINT [DF__ExportReD__IsDel__3C54ED00]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+------------------------------------------------------------------------------------------------------------------------------
+USE [ERPMVC]
+GO
+
+/****** Object:  Table [dbo].[ExportDelivery]    Script Date: 4/12/2022 10:36:45 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExportDelivery](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[OrderNo] [varchar](9) NOT NULL,
+	[ContainerNo] [nvarchar](250) NOT NULL,
+	[ContainerSize] [nvarchar](250) NOT NULL,
+	[ContainerType] [nvarchar](500) NOT NULL,
+	[RefrenceContainer] [nvarchar](250) NULL,
+	[CRO] [nvarchar](250) NULL,
+	[VehicleNo] [nvarchar](250) NULL,
+	[TruckNo] [nvarchar](150) NULL,
+	[WagonNo] [nvarchar](250) NULL,
+	[DeliveryDate] [datetime] NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__ExportDe__3214EC27BD4628B3] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ExportDelivery] ADD  CONSTRAINT [DF__ExportDel__IsCom__48BAC3E5]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+ALTER TABLE [dbo].[ExportDelivery] ADD  CONSTRAINT [DF__ExportDel__IsDel__49AEE81E]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+

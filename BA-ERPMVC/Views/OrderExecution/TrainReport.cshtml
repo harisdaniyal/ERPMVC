@@ -8,7 +8,7 @@
 <h2>Train Report</h2>
 <br />
 
-<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
+<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive">
     <thead class="thead-light text-center">
         <tr>
             <th>Order No</th>
@@ -139,3 +139,20 @@
     </tbody>
 
 </table>
+<script>
+    $(document).ready(function myfunction() {
+        $('#example').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5'
+            ],
+            "Sorting": false,
+            "lengthChange": true,
+            "pageLength": 10,
+            "paging": true,
+            'searching': true
+        });
+
+    });
+</script>

@@ -291,66 +291,142 @@ namespace BA_ERPMVC.Controllers
 
         }
 
+        //public ActionResult PrintGDReport(int id)
+        //{
+        //    try
+        //    {
+        //        ERPMVCEntities context = new ERPMVCEntities();
+
+        //        ReportDocument rd = new ReportDocument();
+
+        //        var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
+        //        {
+        //            BL = c.BL,
+        //            //Shipper = c.Shipper,
+        //            //Consignee = c.Consignee,
+        //            //NotifyParty = c.NotifyParty,
+        //            //precarriageby = c.precarriageby,
+        //            //placeofreceipt = c.placeofreceipt,
+        //            //OceanVessel = c.OceanVessel,
+        //            //VoyNo = c.VoyNo,
+        //            //Portoflanding = c.Portoflanding,
+        //            //PortofDischarge = c.PortofDischarge,
+        //            //PlaceOfDelivery = c.PlaceOfDelivery,
+        //            //ForwardingAgent = c.ForwardingAgent,
+        //            //FinalDestination = c.FinalDestination,
+        //            //ContainerNo = c.ContainerNo,
+        //            //////SealNo = c.SealNo,
+        //            //NumberOfConatinerPack = c.NumberOfConatinerPack,
+        //            //KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
+        //            //GrossWeight = c.GrossWeight,
+        //            //NetWeight = c.NetWeight,
+        //            //Frightandcharges = c.Frightandcharges,
+        //            //FrightPayable = c.FrightPayable,
+        //            //TypeOfService = c.TypeOfService,
+        //            //NumberOfOrignalBL = c.NumberOfOrignalBL,
+        //            //PlaceOfIssue = c.PlaceOfIssue,
+        //            //Collect = c.Collect,
+        //            //DateOfIssue = c.DateOfIssue.ToString(),
+        //            //BLAgent = c.BLAgent,
+        //            //BLAgentDetail = context.BLAgentDetails.Where(x => x.BLAgent == c.BLAgent).Select(x => x.BLAgentDetail1).FirstOrDefault()
+        //        }).ToList();
+        //        if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
+        //        {
+        //            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport2.rpt"));
+        //        }
+        //        else
+        //        {
+        //            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport2.rpt"));
+        //        }
+
+
+        //        rd.SetDataSource(data);
+        //        Response.Buffer = false;
+        //        Response.ClearContent();
+        //        Response.ClearHeaders();
+
+
+        //        rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+        //        rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
+        //        rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+        //        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //        stream.Seek(0, SeekOrigin.Begin);
+        //        return File(stream, "application/pdf", $"BL_{data.Select(x => x.BL).FirstOrDefault()}.pdf");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { success = false, message = ex.Message });
+        //    }
+        //}
+
+
         public ActionResult PrintGDReport(int id)
         {
-            ERPMVCEntities context = new ERPMVCEntities();
+            try
+            {
+                ERPMVCEntities context = new ERPMVCEntities();
 
-            ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
-            var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
-            {
-                BL = c.BL,
-                Shipper = c.Shipper,
-                Consignee = c.Consignee,
-                NotifyParty = c.NotifyParty,
-                precarriageby = c.precarriageby,
-                placeofreceipt = c.placeofreceipt,
-                OceanVessel = c.OceanVessel,
-                VoyNo = c.VoyNo,
-                Portoflanding = c.Portoflanding,
-                PortofDischarge = c.PortofDischarge,
-                PlaceOfDelivery = c.PlaceOfDelivery,
-                ForwardingAgent = c.ForwardingAgent,
-                FinalDestination = c.FinalDestination,
-                ContainerNo = c.ContainerNo,
-                ////SealNo = c.SealNo,
-                NumberOfConatinerPack = c.NumberOfConatinerPack,
-                KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
-                GrossWeight = c.GrossWeight,
-                NetWeight = c.NetWeight,
-                Frightandcharges = c.Frightandcharges,
-                FrightPayable = c.FrightPayable,
-                TypeOfService = c.TypeOfService,
-                NumberOfOrignalBL = c.NumberOfOrignalBL,
-                PlaceOfIssue = c.PlaceOfIssue,
-                Collect = c.Collect,
-                DateOfIssue = c.DateOfIssue.ToString(),
-                BLAgent = c.BLAgent,
-                BLAgentDetail = context.BLAgentDetails.Where(x => x.BLAgent == c.BLAgent).Select(x => x.BLAgentDetail1).FirstOrDefault()
-            }).ToList();
-            if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
-            {
+                ReportDocument rd = new ReportDocument();
                 rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
+                var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
+                {
+                    BL = c.BL,
+                    Shipper = c.Shipper,
+                    Consignee = c.Consignee,
+                    NotifyParty = c.NotifyParty,
+                    precarriageby = c.precarriageby,
+                    placeofreceipt = c.placeofreceipt,
+                    OceanVessel = c.OceanVessel,
+                    VoyNo = c.VoyNo,
+                    Portoflanding = c.Portoflanding,
+                    PortofDischarge = c.PortofDischarge,
+                    PlaceOfDelivery = c.PlaceOfDelivery,
+                    ForwardingAgent = c.ForwardingAgent,
+                    FinalDestination = c.FinalDestination,
+                    ContainerNo = c.ContainerNo,
+                    ////SealNo = c.SealNo,
+                    NumberOfConatinerPack = c.NumberOfConatinerPack,
+                    KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
+                    GrossWeight = c.GrossWeight,
+                    NetWeight = c.NetWeight,
+                    Frightandcharges = c.Frightandcharges,
+                    FrightPayable = c.FrightPayable,
+                    TypeOfService = c.TypeOfService,
+                    NumberOfOrignalBL = c.NumberOfOrignalBL,
+                    PlaceOfIssue = c.PlaceOfIssue,
+                    Collect = c.Collect,
+                    DateOfIssue = c.DateOfIssue.ToString(),
+                    BLAgent = c.BLAgent,
+                    BLAgentDetail = context.BLAgentDetails.Where(x => x.BLAgent == c.BLAgent).Select(x => x.BLAgentDetail1).FirstOrDefault()
+                }).ToList();
+                if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
+                {
+                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
+                }
+                else
+                {
+                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
+                }
+
+                rd.SetDataSource(data);
+                Response.Buffer = false;
+                Response.ClearContent();
+                Response.ClearHeaders();
+
+
+                rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+                rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
+                rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stream.Seek(0, SeekOrigin.Begin);
+                return File(stream, "application/pdf", $"BL_{data.Select(x => x.BL).FirstOrDefault()}.pdf");
             }
-            else
+            catch (Exception ex)
             {
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
+                return Json(new { success = false, message = ex.Message });
             }
-
-            rd.SetDataSource(data);
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
-
-
-            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
-            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
-
-            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            stream.Seek(0, SeekOrigin.Begin);
-
-            return File(stream, "application/pdf", $"BL_{data.Select(x => x.BL).FirstOrDefault()}.pdf");
         }
 
 

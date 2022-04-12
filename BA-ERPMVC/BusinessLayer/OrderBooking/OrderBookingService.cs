@@ -468,7 +468,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         /////********* PreDispatchedMovement*********////////
 
 
-        /////////*********** Dispatched Order ***************//////////
+        /////////*********** Dispatched Order ***************//////////u
         public IEnumerable<DispatchedOrderViewModel> GetDispatchedOrderAsync()
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
@@ -1321,6 +1321,105 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         }
         ///***End***///
 
+
+        ////****** Import Booking Report *******////
+        public IEnumerable<ImportBookingReportViewModel> ImportBookingReportTrain()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.ModeOfTransportation == ModeOfTransaction.Train.ToString() && x.Status == OrdersStatus.PreDispatched.ToString())
+                    on order.OrderID equals logistics.OrderId 
+
+                   
+                    select new ImportBookingReportViewModel()
+                    {
+
+                        BL = order.BL,
+                        OrderNo = order.OrderNo,
+                        FreeDays = order.FreeDays,
+                        EmptyReturnDate = logistics.EmptyReturnDate.ToString(),
+                        CustomerName = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                        OrderType = order.OrderType,
+                        OrderDate = order.OrderDate,
+                        InvoiceAmount = order.InvoiceAmount,
+                        ShippingAgentName = _dbContext.ShippingAgents.Where(x => x.ShippingAgentId == order.ShippingAgentId).FirstOrDefault().Name,
+                        Remarks = order.Remarks,
+                        VesselBerthingDate = order.VesselBerthingDate,
+                        ShippingLineName = _dbContext.ShippingLines.Where(x => x.ShippingLineId == order.ShippingLineId).FirstOrDefault().ShippingLineName,
+                        BookingPOCName = order.BookingPOCName,
+                        TwentyContainerQty = order.TwentyContainerQty,
+                        FortyContainerQty = order.FortyContainerQty,
+                        TwentyContainerPrice = order.TwentyContainerPrice,
+                        FortyContainerPrice = order.FortyContainerPrice,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerTypeName = _dbContext.ContainerTypes.Where(x => x.ContainerTypeID == logistics.ContainerType).FirstOrDefault().ContainerTypeName,
+                        FromLocation = logistics.FromLocation,
+                        ToLocation = logistics.ToLocation,
+                        JobType = logistics.JobType,
+                        EmptyReturnLocation = logistics.EmptyReturnLocation,
+                        ModeOfTransportation = logistics.ModeOfTransportation,
+                        ContainerWeight = logistics.ContainerWeight,
+                        PreDispatched = logistics.PreDispatched,
+                        Comodities = logistics.Comodities,
+                        DOGuarantee = order.DOGuarantee,
+                        ImportEIR = order.ImportEIR,
+                        PortWeighment = order.PortWeighment,
+                        OutSidePortWeighment = order.OutSidePortWeighment,
+                        GD = order.GD,
+                        BLDate = order.BLDate,
+
+                    }).Distinct().ToList();
+        }
+
+        public IEnumerable<ImportBookingReportViewModel> ImportBookingReportTruck()
+        {
+            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.ModeOfTransportation == ModeOfTransaction.Truck.ToString() && x.Status == OrdersStatus.Dispatched.ToString())
+                    on order.OrderID equals logistics.OrderId
+
+
+                    select new ImportBookingReportViewModel()
+                    {
+
+                        BL = order.BL,
+                        OrderNo = order.OrderNo,
+                        FreeDays = order.FreeDays,
+                        EmptyReturnDate = logistics.EmptyReturnDate.ToString(),
+                        CustomerName = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                        OrderType = order.OrderType,
+                        OrderDate = order.OrderDate,
+                        InvoiceAmount = order.InvoiceAmount,
+                        ShippingAgentName = _dbContext.ShippingAgents.Where(x => x.ShippingAgentId == order.ShippingAgentId).FirstOrDefault().Name,
+                        Remarks = order.Remarks,
+                        VesselBerthingDate = order.VesselBerthingDate,
+                        ShippingLineName = _dbContext.ShippingLines.Where(x => x.ShippingLineId == order.ShippingLineId).FirstOrDefault().ShippingLineName,
+                        BookingPOCName = order.BookingPOCName,
+                        TwentyContainerQty = order.TwentyContainerQty,
+                        FortyContainerQty = order.FortyContainerQty,
+                        TwentyContainerPrice = order.TwentyContainerPrice,
+                        FortyContainerPrice = order.FortyContainerPrice,
+                        ContainerNo = logistics.ContainerNo,
+                        ContainerSize = logistics.ContainerSize,
+                        ContainerTypeName = _dbContext.ContainerTypes.Where(x => x.ContainerTypeID == logistics.ContainerType).FirstOrDefault().ContainerTypeName,
+                        FromLocation = logistics.FromLocation,
+                        ToLocation = logistics.ToLocation,
+                        JobType = logistics.JobType,
+                        EmptyReturnLocation = logistics.EmptyReturnLocation,
+                        ModeOfTransportation = logistics.ModeOfTransportation,
+                        ContainerWeight = logistics.ContainerWeight,
+                        PreDispatched = logistics.PreDispatched,
+                        Comodities = logistics.Comodities,
+                        DOGuarantee = order.DOGuarantee,
+                        ImportEIR = order.ImportEIR,
+                        PortWeighment = order.PortWeighment,
+                        OutSidePortWeighment = order.OutSidePortWeighment,
+                        GD = order.GD,
+                        BLDate = order.BLDate,
+
+                    }).Distinct().ToList();
+        }
+        ///***End***///
+
         public async Task<IEnumerable<BAtrip>> GetTripsDetailAsync(int orderBookingId)
         {
             return await _tripRepository.FindAsync(x => x.OrderId == orderBookingId);
@@ -1413,9 +1512,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         public IEnumerable<OrderListViewModel> GetExportOrderList()
         {
             return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
-                    //join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
-                    //        on order.BusinessDivisionId equals bDivision.BusinessDivisionID
-                    //join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
+                        //join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
+                        //        on order.BusinessDivisionId equals bDivision.BusinessDivisionID
+                        //join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
                     select new OrderListViewModel()
                     {
                         OrderId = order.OrderId,
@@ -1444,8 +1543,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public IEnumerable<BAShippingLine> GetBLApprovalAsync()
         {
-            
-            return _dbContext.BAShippingLines.Where(x=> x.IsCompleted== true).ToList().OrderByDescending(x=> x.BLShippingID);
+
+            return _dbContext.BAShippingLines.Where(x => x.IsCompleted == true).ToList().OrderByDescending(x => x.BLShippingID);
 
         }
 
@@ -1512,6 +1611,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentException($"{nameof(exportbookingModel.OrderNo)} already exist. Please try again");
             }
+            order = await _exportbookingorderRepository.FindAsync(x => x.CRO == exportbookingModel.CRO);
+            if (order.Any())
+            {
+                throw new ArgumentException($"{nameof(exportbookingModel.CRO)} already exist. ");
+            }
 
             exportbookingModel.IsCompleted = false;
 
@@ -1538,6 +1642,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
 
             exportBookingModel.DateOfBooking = exportbookingViewModel.DateOfBooking;
+            exportBookingModel.CRO = exportbookingViewModel.CRO;
             exportBookingModel.TwentyContainerQty = exportbookingViewModel.TwentyContainerQty;
             exportBookingModel.FortyContainerQty = exportbookingViewModel.FortyContainerQty;
             exportBookingModel.TwentyContainerPrice = exportbookingViewModel.TwentyContainerPrice;
@@ -1549,7 +1654,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             exportBookingModel.ShipperContact = exportbookingViewModel.ShipperContact;
 
             _exportbookingorderRepository.Update(exportBookingModel);
-            
+
             await _dbContext.SaveChangesAsync();
             await AddOrderFacilitiesAsync(exportbookingViewModel.FacilityIds, exportBookingModel.OrderId);
 
@@ -1566,11 +1671,6 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             var exportlogistic = Mapper.Map<ExportLogisticViewModel, ExportLogistic>(exportlogisticsViewModels);
             exportlogistic.Status = OrdersStatus.PreDispatched.ToString();
 
-            var logistic = await _exportlogisticRepository.FindAsync(x => x.CRO == exportlogistic.CRO);
-            if (logistic.Any())
-            {
-                throw new ArgumentException($"{nameof(exportlogistic.CRO)} already exist. ");
-            }
             if (!exportlogistic.PreDispatched.GetValueOrDefault())
             {
                 exportlogistic.Status = OrdersStatus.Dispatched.ToString();
@@ -1614,9 +1714,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         OrderId = order.OrderId,
                         OrderNo = order.OrderNo,
-                        CRO = logistics.CRO,
+                        CRO = order.CRO,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
+                        RefrenceContainer = logistics.RefrenceContainer,
 
 
                         PickupFrom = ExportPreDispatched.PickupFrom,
@@ -1704,10 +1805,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         OrderId = order.OrderId,
                         OrderNo = order.OrderNo,
-                        CRO = logistics.CRO,
+                        CRO = order.CRO,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
                         ContainerType = logistics.ContainerType,
+                        RefrenceContainer = logistics.RefrenceContainer,
                         EngineNo = logistics.EGNo,
                         ShipperName = order.ShipperName,
 
@@ -1806,10 +1908,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         OrderId = order.OrderId,
                         OrderNo = order.OrderNo,
-                        CRO = logistics.CRO,
+                        CRO = order.CRO,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
                         ContainerType = logistics.ContainerType,
+                        RefrenceContainer = logistics.RefrenceContainer,
 
 
                         TruckNo = ExportDispatchedTrucks.TruckNo,
@@ -1902,10 +2005,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         OrderId = order.OrderId,
                         OrderNo = order.OrderNo,
-                        CRO = logistics.CRO,
+                        CRO = order.CRO,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
                         ContainerType = logistics.ContainerType,
+                        RefrenceContainer = logistics.RefrenceContainer,
 
 
                         TransporterName = ExportReDispatcheds.TransporterName,
@@ -1988,10 +2092,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         on order.OrderId equals logistics.OrderId
                     join RD in _dbContext.ExportReDispatcheds.Where(x => x.IsCompleted == true)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RD.OrderId, ContainerNo = RD.ContainerNo } into RDGroup
-                        from ExportReDispatcheds in RDGroup.DefaultIfEmpty()
+                    from ExportReDispatcheds in RDGroup.DefaultIfEmpty()
                     join DT in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == true)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
-                        from ExportDispatchedTrucks in DTGroup.DefaultIfEmpty()
+                    from ExportDispatchedTrucks in DTGroup.DefaultIfEmpty()
                     join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true && x.ReDispatched.ToLower() == "false")
                     on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDT.OrderId, ContainerNo = EDT.ContainerNo } into EDTGroup
                     from ExportDispatchedTrains in EDTGroup.DefaultIfEmpty()
@@ -2003,10 +2107,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         OrderId = order.OrderId,
                         OrderNo = order.OrderNo,
-                        CRO = logistics.CRO,
+                        CRO = order.CRO,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
                         ContainerType = logistics.ContainerType,
+                        RefrenceContainer = logistics.RefrenceContainer,
 
 
                         VehicleNo = ExportReDispatcheds.VehicleNo,

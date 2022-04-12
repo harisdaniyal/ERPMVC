@@ -33,6 +33,7 @@
             'ContainerNo': row.find(".txt_ContainerNo").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),
+            'RefrenceContainer': row.find(".txt_RefrenceContainer").val(),
 
             'TransporterName': row.find(".txt_TransporterName").val(),
             'VehicleNo': row.find(".txt_Vehicleno").val(),

@@ -14,7 +14,6 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		public string ContainerType { get; set; }
 		public string ContainerSize { get; set; }
 		public string EGNo { get; set; }
-		public string CRO { get; set; }
 		public string vessel { get; set; }
 		public string Voyage { get; set; }
 		public DateTime? ETD { get; set; }
@@ -22,6 +21,7 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		public string ShippingLine { get; set; }
 		public string ClearingAgentName { get; set; }
 		public string CAContactNo { get; set; }
+		public string RefrenceContainer { get; set; }
 		public string BookingPort { get; set; }
 		public string ModeOfTransportation { get; set; }
 		public DateTime? DateOfReceivingCargo { get; set; }

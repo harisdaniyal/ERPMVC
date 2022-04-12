@@ -12,6 +12,7 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		    public string OrderNo { get; set; }
 			public DateTime? DateOfBooking { get; set; }
 			public string Forwarder { get; set; }
+			public string CRO { get; set; }
 			public string ShipperName { get; set; }
 			public string ShipperContact { get; set; }
 			public int? TwentyContainerQty { get; set; }

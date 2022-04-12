@@ -13,6 +13,7 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		public string ContainerNo { get; set; }
 		public string ContainerSize { get; set; }
 		public string ContainerType { get; set; }
+		public string RefrenceContainer { get; set; }
 		public string CRO { get; set; }
 		public string VehicleNo { get; set; }
 		public string TruckNo { get; set; }
