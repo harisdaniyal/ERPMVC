@@ -39,6 +39,34 @@ namespace BA_ERPMVC.Controllers
             return data;
         }
 
+        public ActionResult GetBLNumber()
+        {
+            var newBLNumber = "OCL";
+            var oldBL = db.BAShippingLines.OrderByDescending(x => x.BL).FirstOrDefault();
+            if (oldBL != null)
+            {
+                int oldSerialNo = Convert.ToInt32(oldBL.BL.Split('/')[1]);
+                oldSerialNo++;
+                int oldBLYear = Convert.ToInt32(oldBL.BL.Split('/')[2]);
+                
+                if (oldBLYear == DateTime.Now.Year)
+                {
+                    newBLNumber = $"{newBLNumber}/{oldSerialNo.ToString("000000")}/{DateTime.Now.Year}";
+                }
+                else
+                {
+                    newBLNumber = $"{newBLNumber}/000001/{DateTime.Now.Year}";
+                }
+
+            }
+            else
+            {
+                newBLNumber = $"{newBLNumber}/000001/{DateTime.Now.Year}";
+            }
+            var data = Json(newBLNumber, JsonRequestBehavior.AllowGet);
+            return data;
+        }
+
         public ActionResult GetBlAgent()
         {
             return Json(db.BLAgentDetails.Where(x => x.IsDeleted == false).Select(x => new
