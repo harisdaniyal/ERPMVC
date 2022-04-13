@@ -735,6 +735,7 @@
     <Compile Include="Repositories\IRepositories\IShippingAgentRepository.cs" />
     <Compile Include="Repositories\IRepositories\IShippingLineRepository.cs" />
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
+    <Compile Include="UtilityClasses\Common.cs" />
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
     <Compile Include="ViewModels\BLApprovalViewModel.cs" />

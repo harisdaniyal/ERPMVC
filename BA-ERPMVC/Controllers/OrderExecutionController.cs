@@ -12,6 +12,9 @@ using BA_ERPMVC.ViewModels;
 using BA_ERPMVC.ViewModels.ExportOrderBooking;
 using System.Data;
 using System.IO;
+using ClosedXML.Excel;
+using Hangfire;
+using System.Web.Hosting;
 
 namespace BA_ERPMVC.Controllers
 {
@@ -359,107 +362,122 @@ namespace BA_ERPMVC.Controllers
             return View(ImportOrderReport);
         }
 
-        //[HttpPost]
-        //public FileResult ExportExcel()
-        //{
-        //    var ImportOrderReport = orderBookingService.ImportBookingReportTrain();
-        //    DataTable dt = new DataTable("Grid");
-        //    dt.Columns.AddRange(new DataColumn[38] { new DataColumn("BL"),
-        //                                    new DataColumn("BLDate"),
-        //                                    new DataColumn("BookingPOCName"),
-        //                                    new DataColumn("Comodities"),
-        //                                    new DataColumn("ContainerNo"),
-        //                                    new DataColumn("ContainerSize"),
-        //                                    new DataColumn("ContainerType"),
-        //                                    new DataColumn("ContainerTypeName"),
-        //                                    new DataColumn("ContainerWeight"),
-        //                                    new DataColumn("CustomerName"),
-        //                                    new DataColumn("DOGuarantee"),
-        //                                    new DataColumn("EmptyReturnDate"),
-        //                                    new DataColumn("EmptyReturnLocation"),
-        //                                    new DataColumn("FortyContainerPrice"),
-        //                                    new DataColumn("FortyContainerQty"),
-        //                                    new DataColumn("TwentyContainerPrice"),
-        //                                    new DataColumn("TwentyContainerQty"),
-        //                                    new DataColumn("FreeDays"),
-        //                                    new DataColumn("FromLocation"),
-        //                                    new DataColumn("GD"),
-        //                                    new DataColumn("ImportEIR"),
-        //                                    new DataColumn("InvoiceAmount"),
-        //                                    new DataColumn("JobType"),
-        //                                    new DataColumn("ModeOfTransportation"),
-        //                                    new DataColumn("OrderDate"),
-        //                                    new DataColumn("OrderId"),
-        //                                    new DataColumn("OrderNo"),
-        //                                    new DataColumn("OrderType"),
-        //                                    new DataColumn("OutSidePortWeighment"),
-        //                                    new DataColumn("PortWeighment"),
-        //                                    new DataColumn("PreDispatched"),
-        //                                    new DataColumn("Remarks"),
-        //                                    new DataColumn("ShippingAgentName"),
-        //                                    new DataColumn("ShippingLineName"),
-        //                                    new DataColumn("ShippingLineId"),
-        //                                    new DataColumn("ShippingAgentId"),
-        //                                    new DataColumn("ToLocation"),
-        //                                    new DataColumn("VesselBerthingDate"),
+        [HttpGet]
+        public string AutomaticReportsOnEmail()
+        {
+            const string jobRegisteredMessage = "Hangfire Scheduler! Background jobs are registered successfully.";
+            RecurringJob.AddOrUpdate(() => ExportExcel(), Cron.Daily);
+            return jobRegisteredMessage;
+        }
 
-        //    });
+        [AutomaticRetry(Attempts = 1, LogEvents = true, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
+        public ActionResult ExportExcel()
+        {
+            var ImportOrderReport = orderBookingService.ImportBookingReportTrain();
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[38] { new DataColumn("BL"),
+                                            new DataColumn("BLDate"),
+                                            new DataColumn("BookingPOCName"),
+                                            new DataColumn("Comodities"),
+                                            new DataColumn("ContainerNo"),
+                                            new DataColumn("ContainerSize"),
+                                            new DataColumn("ContainerType"),
+                                            new DataColumn("ContainerTypeName"),
+                                            new DataColumn("ContainerWeight"),
+                                            new DataColumn("CustomerName"),
+                                            new DataColumn("DOGuarantee"),
+                                            new DataColumn("EmptyReturnDate"),
+                                            new DataColumn("EmptyReturnLocation"),
+                                            new DataColumn("FortyContainerPrice"),
+                                            new DataColumn("FortyContainerQty"),
+                                            new DataColumn("TwentyContainerPrice"),
+                                            new DataColumn("TwentyContainerQty"),
+                                            new DataColumn("FreeDays"),
+                                            new DataColumn("FromLocation"),
+                                            new DataColumn("GD"),
+                                            new DataColumn("ImportEIR"),
+                                            new DataColumn("InvoiceAmount"),
+                                            new DataColumn("JobType"),
+                                            new DataColumn("ModeOfTransportation"),
+                                            new DataColumn("OrderDate"),
+                                            new DataColumn("OrderId"),
+                                            new DataColumn("OrderNo"),
+                                            new DataColumn("OrderType"),
+                                            new DataColumn("OutSidePortWeighment"),
+                                            new DataColumn("PortWeighment"),
+                                            new DataColumn("PreDispatched"),
+                                            new DataColumn("Remarks"),
+                                            new DataColumn("ShippingAgentName"),
+                                            new DataColumn("ShippingLineName"),
+                                            new DataColumn("ShippingLineId"),
+                                            new DataColumn("ShippingAgentId"),
+                                            new DataColumn("ToLocation"),
+                                            new DataColumn("VesselBerthingDate"),
 
+            });
 
+            foreach (var order in ImportOrderReport)
+            {
+                dt.Rows.Add(order.BL,
+                        order.BLDate,
+                        order.BookingPOCName,
+                        order.Comodities,
+                        order.ContainerNo,
+                        order.ContainerSize,
+                        order.ContainerType,
+                        order.ContainerTypeName,
+                        order.ContainerWeight,
+                        order.CustomerName,
+                        order.DOGuarantee,
+                        order.EmptyReturnDate,
+                        order.EmptyReturnLocation,
+                        order.FortyContainerPrice,
+                        order.FortyContainerQty,
+                        order.TwentyContainerPrice,
+                        order.TwentyContainerQty,
+                        order.FreeDays,
+                        order.FromLocation,
+                        order.GD,
+                        order.ImportEIR,
+                        order.InvoiceAmount,
+                        order.JobType,
+                        order.ModeOfTransportation,
+                        order.OrderDate,
+                        order.OrderId,
+                        order.OrderNo,
+                        order.OrderType,
+                        order.OutSidePortWeighment,
+                        order.PortWeighment,
+                        order.PreDispatched,
+                        order.Remarks,
+                        order.ShippingAgentName,
+                        order.ShippingLineName,
+                        order.ShippingLineId,
+                        order.ShippingAgentId,
+                        order.ToLocation,
+                        order.VesselBerthingDate
+                    );
+            }
 
-        //    foreach (var order in ImportOrderReport)
-        //    {
-        //        dt.Rows.Add(order.BL,
-        //                order.BLDate,
-        //                order.BookingPOCName,
-        //                order.Comodities,
-        //                order.ContainerNo,
-        //                order.ContainerSize,
-        //                order.ContainerType,
-        //                order.ContainerTypeName,
-        //                order.ContainerWeight,
-        //                order.CustomerName,
-        //                order.DOGuarantee,
-        //                order.EmptyReturnDate,
-        //                order.EmptyReturnLocation,
-        //                order.FortyContainerPrice,
-        //                order.FortyContainerQty,
-        //                order.TwentyContainerPrice,
-        //                order.TwentyContainerQty,
-        //                order.FreeDays,
-        //                order.FromLocation,
-        //                order.GD,
-        //                order.ImportEIR,
-        //                order.InvoiceAmount,
-        //                order.JobType,
-        //                order.ModeOfTransportation,
-        //                order.OrderDate,
-        //                order.OrderId,
-        //                order.OrderNo,
-        //                order.OrderType,
-        //                order.OutSidePortWeighment,
-        //                order.PortWeighment,
-        //                order.PreDispatched,
-        //                order.Remarks,
-        //                order.ShippingAgentName,
-        //                order.ShippingLineName,
-        //                order.ShippingLineId,
-        //                order.ShippingAgentId,
-        //                order.ToLocation,
-        //                order.VesselBerthingDate
-        //            );
-        //    }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
 
-        //    using (XLWorkbook wb = new XLWorkbook())
-        //    {
-        //        wb.Worksheets.Add(dt);
-        //        using (MemoryStream stream = new MemoryStream())
-        //        {
-        //            wb.SaveAs(stream);
-        //            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
-        //        }
-        //    }
-        //}
+                string rootPath = HostingEnvironment.ApplicationPhysicalPath;
+                string filePath = $"{rootPath}\\ExcelReports\\{DateTime.Now.ToString("ddMMyyyy_HHmmss")}_Report.xlsx";
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    //write to file
+                    FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+                    stream.WriteTo(file);
+                    file.Close();
+                    stream.Close();
+                }
+                UtilityClasses.UserDetail.email_send(filePath);
+                return Json(new { success = true, path = filePath });
+            }
+        }
 
 
         [HttpGet]

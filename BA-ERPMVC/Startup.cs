@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 using System;
+using Hangfire;
 using System.Linq;
 
 [assembly: OwinStartupAttribute(typeof(BA_ERPMVC.Startup))]
@@ -17,6 +18,11 @@ namespace BA_ERPMVC
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            GlobalConfiguration.Configuration.UseSqlServerStorage("DefaultConnection");
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
+
+
             createRolesandUsers();
             MappingConfigurations();
         }

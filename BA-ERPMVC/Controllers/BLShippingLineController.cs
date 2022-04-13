@@ -42,7 +42,7 @@ namespace BA_ERPMVC.Controllers
         public ActionResult GetBLNumber()
         {
             var newBLNumber = "OCL";
-            var oldBL = db.BAShippingLines.OrderByDescending(x => x.BL).FirstOrDefault();
+            var oldBL = db.BAShippingLines.OrderByDescending(x => x.BLShippingID).FirstOrDefault();
             if (oldBL != null)
             {
                 int oldSerialNo = Convert.ToInt32(oldBL.BL.Split('/')[1]);
@@ -394,9 +394,8 @@ namespace BA_ERPMVC.Controllers
             try
             {
                 ERPMVCEntities context = new ERPMVCEntities();
-
                 ReportDocument rd = new ReportDocument();
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
+
                 var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
                 {
                     BL = c.BL,
@@ -434,7 +433,8 @@ namespace BA_ERPMVC.Controllers
                 }
                 else
                 {
-                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
+                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
+                    //rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
                 }
 
                 rd.SetDataSource(data);

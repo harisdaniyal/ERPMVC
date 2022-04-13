@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Net;
+using System.Net.Mail;
 
 namespace BA_ERPMVC.UtilityClasses
 {
@@ -26,7 +28,6 @@ namespace BA_ERPMVC.UtilityClasses
                 HttpContext.Current.Session["EmpId"] = value;
             }
         }
-
 
         public static int LoginId
         {
@@ -447,5 +448,25 @@ namespace BA_ERPMVC.UtilityClasses
 
         }
 
+        public  static void email_send(string filePath)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("supremeftp21@gmail.com");
+            mail.To.Add("harisdaniyal@bilal-group.com,ashraf@bilal-group.com");
+            mail.Subject = "Testing";
+            mail.Body = "mail with attachment";
+
+            System.Net.Mail.Attachment attachment;
+            attachment = new System.Net.Mail.Attachment(filePath);
+            mail.Attachments.Add(attachment);
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("supremeftp21@gmail.com", "a!d@m#i$n");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+        }
     }
 }
