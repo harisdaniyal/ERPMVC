@@ -3,6 +3,7 @@ using BA_ERPMVC.BusinessLayer;
 using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
+using MasterLayer;
 //using InfiSolMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,9 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult ShippingAgent()
         {
+            CustomLogger.Info("Get ShippingAgent started");
             var shippingagent = shippingService.GetShippingAgentAsync();
+            CustomLogger.Info("Get ShippingAgent Ended");
             return View(shippingagent);
         }
 

@@ -15,6 +15,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public int ContainerType { get; set; }
         public string ContainerTypeName { get; set; }
         public string JobType { get; set; }
+        public string ReferenceContainer { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }
         public string EmptyReturnLocation { get; set; }

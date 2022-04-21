@@ -6,9 +6,10 @@
             <table id="tbl_Logistics" class="table table-sm table-bordered mb-3 w-min-100">
                 <thead class="thead-light">
                     <tr>
-                        <th>Container #</th>
+                        <th>ContainerNo #</th>
                         <th>Container Weight</th>
                         <th>Container Size</th>
+                        <th>Reference Container</th>
                         <th>Container Type</th>
                         <th>Job Type</th>
                         <th>Mode Of Transportation</th>
@@ -27,12 +28,15 @@
                 <tfoot class="mb-4">
                     <tr id="tr_addLogistics" class="bg-light tbl-valign-top">
                         <td>
-                            <input type="text" id="txt_ContainerNo" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="Container number" onchange="onChange_ContainerNumber(this)" />
+                            <input type="text" id="txt_ContainerNo" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width:120px;" placeholder="Container number" onchange="onChange_ContainerNumber(this)" />
                             <span id="sp_containerError" class="error-msg" style="display:none;">DUPLICATE</span>
                         </td>
+
+
                         <td>
                             <input type="number" id="txt_ContainerWeight" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="Container Weight" />
                         </td>
+
                         <td>
                             <select id="ddl_ContainerSize" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0">
                                 <option value="">Container Size</option>
@@ -42,6 +46,12 @@
                                 }
                             </select>
                         </td>
+
+                        <td>
+                            <input type="text" id="txt_RefrenceContainer" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="ReferenceContainer" style="width: 150px;" />
+                        </td>
+
+
                         <td>
                             <select id="ddl_ContainerType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 170px;">
                                 <option value="">Container Type</option>
@@ -65,6 +75,7 @@
                                 <option value="Truck">Truck</option>
                             </select>
                         </td>
+
                         <td>
                             <select id="ddl_PreDispatched" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
                                 <option value="">Pre-Dispatched</option>
@@ -73,10 +84,10 @@
                             </select>
                         </td>
                         <td>
-                            <input type="text" id="txt_Comodities" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="Comodities" style="width: 150px;"/>
+                            <input type="text" id="txt_Comodities" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="Comodities" style="width: 150px;" />
                         </td>
                         <td>
-                            <select id="ddl_FromLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 select2"   style="width: 150px;">
+                            <select id="ddl_FromLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 select2" style="width: 150px;">
                                 <option value="">From Location</option>
                                 @foreach (var location in ViewBag.Location)
                                 {
@@ -106,7 +117,7 @@
                             <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_EmptyContainerReturnDate" type="date" placeholder="Empty Return Date">
                         </td>
                         <td>
-                         
+
                             <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_Status" type="text" disabled style="width: 150px;">
                         </td>
                         <td style="width:50px">

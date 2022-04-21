@@ -13,6 +13,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public string ContainerNo { get; set; }
 		public string ContainerSize { get; set; }
 		public string BLnumber { get; set; }
+		public string ReferenceContainer { get; set; }
 		public int? PortAndTerminalId { get; set; }
 		public string PortName { get; set; }
 		public string ShippingLineName { get; set; }

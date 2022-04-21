@@ -11,11 +11,17 @@ using AutoMapper;
 using BA_ERPMVC.ViewModels;
 using BA_ERPMVC.UtilityClasses;
 using BA_ERPMVC.ViewModels.ExportOrderBooking;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+using MasterLayer;
+using System.Data;
 
 namespace BA_ERPMVC.Controllers
 {
     public class OrderBookingController : Controller
     {
+        ERPMVCEntities db = new ERPMVCEntities();
+        ReportDocument rd = new ReportDocument();
         private readonly OrderBookingService orderBookingService;
         private readonly BusinessDivisionService businessDivisionService;
         private readonly ContainerTypeService containerTypeService;
@@ -54,7 +60,7 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = $"{nameof(orderBookingId)} should be a valid id" });
             }
             this.ViewBag.ShippingLines = orderBookingService.GetShippingLine();
-            this.ViewBag.ShippingAgents =  orderBookingService.GetShippingAgent();
+            this.ViewBag.ShippingAgents = orderBookingService.GetShippingAgent();
 
             this.ViewBag.Customers = await customerService.GetAllCustomersAsync();
             this.ViewBag.Facilities = await facilityService.GetAllFacilitiesAsync();
@@ -148,7 +154,7 @@ namespace BA_ERPMVC.Controllers
                 }
                 else
                 {
-                logistics.Status = OrdersStatus.Dispatched.ToString();
+                    logistics.Status = OrdersStatus.Dispatched.ToString();
                 }
                 await orderBookingService.SaveLogisticsAsync(logistics);
 
@@ -173,7 +179,7 @@ namespace BA_ERPMVC.Controllers
                 {
                     return Json(new { success = false, message = $"Logistic can not be delete after Dispatched." });
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -538,7 +544,7 @@ namespace BA_ERPMVC.Controllers
                 {
                     await orderBookingService.CreateExportOrderBookingAsync(bookingViewModel);
 
-                    return Json(new { success = true, orderBookingId = bookingViewModel.OrderID});
+                    return Json(new { success = true, orderBookingId = bookingViewModel.OrderID });
                 }
 
                 await orderBookingService.UpdateExportOrderBookingAsync(bookingViewModel);
@@ -623,7 +629,79 @@ namespace BA_ERPMVC.Controllers
 
             return Json(new { success = true });
         }
+        public ActionResult BLOrCROReport()
+        {
+            return View();
+        }
+
+        // Get BL and CRO DropDown //
+
+        public ActionResult GetBlByCustomerNo()
+        {
+            var data = Json(db.GenerateOrders.Where( x => x.isCompleted == false && x.BL != null).Select(x => new
+            {
+                BL = x.BL
+
+            }
+            ).ToList(), JsonRequestBehavior.AllowGet);
+            return data;
 
 
-    }
+            }
+        public ActionResult GetCROByCustomerNo()
+        {
+            var data = Json(db.ExportBookingOrders.Where(x => x.IsCompleted == false && x.CRO != null).Select(x => new
+            {
+                CRO = x.CRO
+            }
+            ).ToList(), JsonRequestBehavior.AllowGet);
+            return data;
+        }
+
+        public ActionResult GetCustomerName()
+        {
+            var data = Json(db.BACustomerRegistrations.Where(x => x.Customer_Status == true).Select(x => new
+            {
+                CustomerId = x.CustomerID,
+                Customer_Name = x.Customer_Name
+            }
+            ).ToList(), JsonRequestBehavior.AllowGet);
+            return data;
+        }
+
+        public ActionResult PrintImportBLReport()
+        {
+            var ImportReport = orderBookingService.PrintImportReport().Select(c => new
+            {
+                c.OrderType,
+                c.BL,
+                c.ContainerNo,
+                //c.Customer_Name,
+                c.ContainerSize,
+                c.ContainerWeight,
+                c.Remarks,
+                c.WagonNo,
+                InvoiceAmount = c.InvoiceAmount.GetValueOrDefault(),
+
+
+            }).ToList();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
+            //rd.SetDataSource(ImportReport);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ImportBLReport.pdf");
+
+               }
+
+
+        }
 }

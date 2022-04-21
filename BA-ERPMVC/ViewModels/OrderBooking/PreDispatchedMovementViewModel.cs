@@ -12,6 +12,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public string OrderNo { get; set; }
 
 		public string BLnumber { get; set; }
+		public string ReferenceContainer { get; set; }
 		public string FromLocation { get; set; }
 		public DateTime? FromDateTime { get; set; }
 		public string ToLocation { get; set; }

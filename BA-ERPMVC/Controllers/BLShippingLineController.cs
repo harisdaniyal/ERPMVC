@@ -1,4 +1,5 @@
-﻿using BA_ERPMVC.BusinessLayer.OrderBooking;
+﻿using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Extensions;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
@@ -18,16 +19,22 @@ namespace BA_ERPMVC.Controllers
         ERPMVCEntities db = new ERPMVCEntities();
         ApiResponse _apiResponse = new ApiResponse();
         private readonly OrderBookingService orderBookingService;
+        private readonly ShippingService shippingService;
+
 
         public BLShippingLineController()
         {
             orderBookingService = new OrderBookingService();
+            shippingService = new ShippingService();
+
         }
         // GET: BLShippingLine
         public ActionResult Index()
         {
+            var blshippingcontainerdetail = shippingService.GetBLShippingContainerDetailAsync();
+            this.ViewBag.BLShippingContainers = shippingService.GetBLShippingContainerAsync();
+            return View(blshippingcontainerdetail);
 
-            return View();
         }
 
         public ActionResult GetContainerNo()
@@ -48,7 +55,7 @@ namespace BA_ERPMVC.Controllers
                 int oldSerialNo = Convert.ToInt32(oldBL.BL.Split('/')[1]);
                 oldSerialNo++;
                 int oldBLYear = Convert.ToInt32(oldBL.BL.Split('/')[2]);
-                
+
                 if (oldBLYear == DateTime.Now.Year)
                 {
                     newBLNumber = $"{newBLNumber}/{oldSerialNo.ToString("000000")}/{DateTime.Now.Year}";
@@ -76,6 +83,9 @@ namespace BA_ERPMVC.Controllers
 
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
+
+    
+
 
 
         public ActionResult GetApproval()
@@ -267,9 +277,6 @@ namespace BA_ERPMVC.Controllers
         }
 
 
-
-
-
         [HttpPost]
         public ActionResult GetBLShippingGride()
         {
@@ -318,76 +325,6 @@ namespace BA_ERPMVC.Controllers
             }
 
         }
-
-        //public ActionResult PrintGDReport(int id)
-        //{
-        //    try
-        //    {
-        //        ERPMVCEntities context = new ERPMVCEntities();
-
-        //        ReportDocument rd = new ReportDocument();
-
-        //        var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
-        //        {
-        //            BL = c.BL,
-        //            //Shipper = c.Shipper,
-        //            //Consignee = c.Consignee,
-        //            //NotifyParty = c.NotifyParty,
-        //            //precarriageby = c.precarriageby,
-        //            //placeofreceipt = c.placeofreceipt,
-        //            //OceanVessel = c.OceanVessel,
-        //            //VoyNo = c.VoyNo,
-        //            //Portoflanding = c.Portoflanding,
-        //            //PortofDischarge = c.PortofDischarge,
-        //            //PlaceOfDelivery = c.PlaceOfDelivery,
-        //            //ForwardingAgent = c.ForwardingAgent,
-        //            //FinalDestination = c.FinalDestination,
-        //            //ContainerNo = c.ContainerNo,
-        //            //////SealNo = c.SealNo,
-        //            //NumberOfConatinerPack = c.NumberOfConatinerPack,
-        //            //KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
-        //            //GrossWeight = c.GrossWeight,
-        //            //NetWeight = c.NetWeight,
-        //            //Frightandcharges = c.Frightandcharges,
-        //            //FrightPayable = c.FrightPayable,
-        //            //TypeOfService = c.TypeOfService,
-        //            //NumberOfOrignalBL = c.NumberOfOrignalBL,
-        //            //PlaceOfIssue = c.PlaceOfIssue,
-        //            //Collect = c.Collect,
-        //            //DateOfIssue = c.DateOfIssue.ToString(),
-        //            //BLAgent = c.BLAgent,
-        //            //BLAgentDetail = context.BLAgentDetails.Where(x => x.BLAgent == c.BLAgent).Select(x => x.BLAgentDetail1).FirstOrDefault()
-        //        }).ToList();
-        //        if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
-        //        {
-        //            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport2.rpt"));
-        //        }
-        //        else
-        //        {
-        //            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport2.rpt"));
-        //        }
-
-
-        //        rd.SetDataSource(data);
-        //        Response.Buffer = false;
-        //        Response.ClearContent();
-        //        Response.ClearHeaders();
-
-
-        //        rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-        //        rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
-        //        rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
-
-        //        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //        stream.Seek(0, SeekOrigin.Begin);
-        //        return File(stream, "application/pdf", $"BL_{data.Select(x => x.BL).FirstOrDefault()}.pdf");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { success = false, message = ex.Message });
-        //    }
-        //}
-
 
         public ActionResult PrintGDReport(int id)
         {
@@ -487,8 +424,39 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+        // BLShippingContainerDetail////
+        //public ActionResult BlShippingContainerDetail()
+        //{
+        //    var blshippingcontainerdetail = shippingService.GetBLShippingContainerDetailAsync();
+        //    this.ViewBag.BLShippingContainers = shippingService.GetBLShippingContainerAsync();
+        //    return View(blshippingcontainerdetail);
+        //}
 
+        [HttpPost]
+        public async Task<ActionResult> BlShippingContainerDetail(BLShippingContainerDetailViewModel blshippingcontainerdetailVM)
+        {
+            if (blshippingcontainerdetailVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(blshippingcontainerdetailVM)} should not be null or empty" });
+            }
 
+            try
+            {
+                if (blshippingcontainerdetailVM.Id == 0)
+                {
+                    await shippingService.SaveBLShippingContainerDetailAsync(blshippingcontainerdetailVM);
 
+                    return Json(new { success = true, Id = blshippingcontainerdetailVM.Id });
+                }
+
+                await shippingService.UpdateBLShippingContainerDetailAsync(blshippingcontainerdetailVM);
+
+                return Json(new { success = true, Id = blshippingcontainerdetailVM.Id });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
     }
 }

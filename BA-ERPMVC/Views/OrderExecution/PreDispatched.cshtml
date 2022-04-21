@@ -21,11 +21,12 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
-                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto;">
                     <thead class="thead-light">
                         <tr>
                             <th>Booking No#</th>
                             <th>Container No#</th>
+                            <th>ReferenceContainer#</th>
                             <th>Container Size</th>
                             <th>From Location</th>
                             <th>From DateTime</th>
@@ -47,11 +48,17 @@
                                     <input type="text" class="form-control txt_OrderNo" style="width: 110px;" disabled value="@preDispatchedMovement.OrderNo" />
                                 </td>
                                 <td>
-                                    <input class="form-control txt_ContainerNo" style="width: 150px;" type="text" disabled value="@preDispatchedMovement.ContainerNo"  />
+                                    <input class="form-control txt_ContainerNo" style="width: 300px;" type="text" disabled value="@preDispatchedMovement.ContainerNo"  />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_ReferenceContainer" style="width: 300px;" type="text" disabled value="@preDispatchedMovement.ReferenceContainer"  />
+                                    
                                 </td>
                                 <td>
                                     <input class="form-control txt_ContainerSize" style="width: 100px;" type="text" disabled value="@preDispatchedMovement.ContainerSize"  />
+                                    
                                 </td>
+                                
                                 <td>
                                     <input class="form-control txt_FromLoc" style="width: 170px;" type="text" placeholder="" value="@(preDispatchedMovement.FromLocation)" />
                                 </td>

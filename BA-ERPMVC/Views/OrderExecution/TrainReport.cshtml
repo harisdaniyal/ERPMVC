@@ -17,6 +17,7 @@
             <th>Order Type</th>
             <th>BLNo</th>
             <th>Container No </th>
+            <th>Reference Container </th>
             <th>Container Size </th>
             <th>Container Weight </th>
             <th>Container Type Name </th>
@@ -78,6 +79,7 @@
                 <td>@order.OrderType</td>
                 <td>@order.BLNumber</td>
                 <td>@order.ContainerNo</td>
+                <td>@order.ReferenceContainer</td>
                 <td>@order.ContainerSize</td>
                 <td>@order.ContainerWeight</td>
                 <td>@order.ContainerTypeName</td>
@@ -127,8 +129,7 @@
                 <td>@order.DeliveryArrivalDate</td>
                 <td>@order.DeliveryDate</td>
                 <td>@order.ExpenseAtEmptyLocation</td>
-                @*<td>@order.FromDateTime</td>
-                    <td>@order.ToDateTime</td>*@
+               
 
                 <!--<td class="text-center">-->
                 @* <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>*@

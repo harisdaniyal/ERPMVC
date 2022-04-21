@@ -45,8 +45,10 @@ namespace MasterLayer
 
         public static void CreateFolderIfNotExists(string path)
         {
-            FileInfo file = new FileInfo(path);
-            file.Directory.Create();
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
 
         private static void WriteLine(string text, bool append = true)

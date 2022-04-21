@@ -27,6 +27,7 @@
                             <th>Booking No#</th>
                             <th>Container No#</th>
                             <th>Container Size</th>
+                            <th>Reference Container</th>
                             <th>Priority For Dispatched</th>
                             <th>Train ID</th>
                             <th>Dispatched Date</th>
@@ -50,10 +51,13 @@
                                     <input type="text" disabled style="width: 110px;" value="@DispatchedOrder.OrderNo" class="form-control txt_OrderNo" />
                                 </td>
                                 <td>
-                                    <input type="text" disabled style="width: 132px;" value="@DispatchedOrder.ContainerNo" class="form-control txt_ContainerNo" />
+                                    <input type="text" disabled style="width: 300px;" value="@DispatchedOrder.ContainerNo" class="form-control txt_ContainerNo" />
                                 </td>
                                 <td>
                                     <input type="text" disabled style="width: 80px;" value="@DispatchedOrder.ContainerSize" class="form-control txt_ContainerSize" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 300px;" value="@DispatchedOrder.ReferenceContainer" class="form-control txt_ReferenceContainer" />
                                 </td>
                                 <td>
                                     <select class="form-control txt_Priority" aria-invalid="false" style="width: 145px;">

@@ -333,6 +333,9 @@
     <Compile Include="Models\BLShippingContainer.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BLShippingContainerDetail.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClearingAgent.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -629,6 +632,12 @@
       <DependentUpon>GDPDF.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ImportBLReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportBLReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\InvoiceData.Designer.cs">
       <DependentUpon>InvoiceData.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -683,12 +692,18 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Report.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Rpt_LocalLogisticsInvoice.cs">
       <DependentUpon>Rpt_LocalLogisticsInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Repositories\CoreRepositories\BLShippingContainerDetailRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\BLShippingContainerRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\BLShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\DeliveryTrainRepository.cs" />
@@ -718,6 +733,7 @@
     <Compile Include="Repositories\IRepositories\Export\IExportLogisticRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportPreDispatchedRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportReDispatchedRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IBLShippingContainerDetailRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingLineRepository.cs" />
     <Compile Include="Repositories\IRepositories\IDeliveryTrainRepository.cs" />
@@ -739,6 +755,7 @@
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
     <Compile Include="UtilityClasses\OrdersStatus.cs" />
     <Compile Include="ViewModels\BLApprovalViewModel.cs" />
+    <Compile Include="ViewModels\BLShippingContainerDetailViewModel.cs" />
     <Compile Include="ViewModels\BLShippingContainerViewModel.cs" />
     <Compile Include="ViewModels\BLShippingLineViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportDeliveryViewModel.cs" />
@@ -756,6 +773,7 @@
     <Compile Include="ViewModels\OrderBooking\ImportBookingReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\InTransactTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\PrintImportReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReadyForDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\OrderListViewModel.cs" />
@@ -854,9 +872,11 @@
     <Content Include="AdminLte\Js\xlsx.min.js" />
     <Content Include="AdminLte\Scripts\BLApproval.js" />
     <Content Include="AdminLte\Scripts\BLShippingContainer.js" />
+    <Content Include="AdminLte\Scripts\BLShippingContainerDetail.js" />
     <Content Include="AdminLte\Scripts\Custom.js" />
     <Content Include="AdminLte\Scripts\EmptyDropOffLoc.js" />
     <Content Include="AdminLte\Scripts\ExportOrderBooking.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\BLCROReport.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTruck.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
@@ -3749,6 +3769,9 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\toastr.less" />
     <Content Include="Content\toastr.scss" />
+    <Content Include="Logs\2022-04-16__log.txt" />
+    <Content Include="Logs\2022-04-18__log.txt" />
+    <Content Include="Logs\2022-04-19__log.txt" />
     <Content Include="Models\ERPMVC.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ERPMVC.edmx</DependentUpon>
@@ -3863,6 +3886,9 @@
       <DependentUpon>ERPMVC.edmx</DependentUpon>
     </Content>
     <Content Include="AdminLte\Scripts\OrderBookings\ExportPreDispatched.js" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Reports\DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
@@ -4090,6 +4116,7 @@
     <Content Include="Views\OrderExecution\ExportDelivery.cshtml" />
     <Content Include="Views\OrderExecution\ImportOrderReport.cshtml" />
     <Content Include="Views\OrderExecution\ImportOrderReportTruck.cshtml" />
+    <Content Include="Views\OrderBooking\BLOrCROReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />
@@ -4166,6 +4193,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>GDPDF.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ImportBLReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImportBLReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\LocalDetailInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LocalDetailInvoice.cs</LastGenOutput>
@@ -4193,6 +4224,10 @@
     <EmbeddedResource Include="Reports\OrderInvoiceWeight.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>OrderInvoiceWeight.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Report.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Rpt_LocalLogisticsInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

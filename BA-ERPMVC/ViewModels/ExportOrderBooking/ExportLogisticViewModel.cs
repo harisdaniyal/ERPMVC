@@ -21,7 +21,6 @@ namespace BA_ERPMVC.ViewModels.ExportOrderBooking
 		public string ShippingLine { get; set; }
 		public string ClearingAgentName { get; set; }
 		public string CAContactNo { get; set; }
-		public string RefrenceContainer { get; set; }
 		public string BookingPort { get; set; }
 		public string ModeOfTransportation { get; set; }
 		public DateTime? DateOfReceivingCargo { get; set; }

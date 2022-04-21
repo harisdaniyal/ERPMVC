@@ -21,12 +21,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
-                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto;">
                     <thead class="thead-light">
                         <tr>
                             <th>Booking No#</th>
                             <th>Container No#</th>
                             <th>Container Size</th>
+                            <th>Reference Container</th>
                             <th>Priority For Dispatched</th>
                             <th>Train ID</th>
                             <th>Dispatched Date</th>
@@ -49,11 +50,15 @@
                                 <input type="text" disabled style="width: 110px;" value="@DeliveryTrain.OrderNo" class="form-control txt_OrderNo" />
                             </td>
                             <td>
-                                <input type="text" disabled style="width: 132px;" value="@DeliveryTrain.ContainerNo" class="form-control txt_ContainerNo" />
+                                <input type="text" disabled style="width: 300px;" value="@DeliveryTrain.ContainerNo" class="form-control txt_ContainerNo" />
                             </td>
                             <td>
                                 <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.ContainerSize" class="form-control txt_ContainerSize" />
                             </td>
+                            <td>
+                                <input type="text" disabled style="width: 300px;" value="@DeliveryTrain.ReferenceContainer" class="form-control txt_ReferenceContainer" />
+                            </td>
+                           
                             <td>
                                 <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.PriorityForDispatched" class="form-control txt_Priority" />
                             </td>

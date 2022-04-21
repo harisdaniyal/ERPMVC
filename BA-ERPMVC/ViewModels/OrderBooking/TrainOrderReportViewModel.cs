@@ -48,6 +48,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public int? FreeDays { get; set; }
         public string Remarks { get; set; }
         public string EmptyDropOffRemarks { get; set; }
+        public string ReferenceContainer { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? VesselBerthingDate { get; set; }
         public string EmptyReturnDate { get; set; }

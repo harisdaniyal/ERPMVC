@@ -11,9 +11,11 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public int OrderId { get; set; }
 		public string OrderNo { get; set; }
 		public string BLnumber { get; set; }
+		public string ReferenceContainer { get; set; }
 		public string PriorityForDispatched { get; set; }
 		public string TrainID { get; set; }
 		public DateTime? DispatchedDate { get; set; }
+		public DateTime? DispatchedDateTrain { get; set; }
 		public int? StationID { get; set; }
 		public string StationName { get; set; }
 		public string WagonNo { get; set; }

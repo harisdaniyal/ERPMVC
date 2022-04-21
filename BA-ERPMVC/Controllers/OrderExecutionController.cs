@@ -15,11 +15,14 @@ using System.IO;
 using ClosedXML.Excel;
 using Hangfire;
 using System.Web.Hosting;
+using MasterLayer;
 
 namespace BA_ERPMVC.Controllers
 {
     public class OrderExecutionController : Controller
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly OrderBookingService orderBookingService;
 
         public OrderExecutionController()
@@ -365,6 +368,7 @@ namespace BA_ERPMVC.Controllers
         [HttpGet]
         public string AutomaticReportsOnEmail()
         {
+            CustomLogger.Info("AutomaticReportsOnEmail started");
             const string jobRegisteredMessage = "Hangfire Scheduler! Background jobs are registered successfully.";
             RecurringJob.AddOrUpdate(() => ExportExcel(), Cron.Daily);
             return jobRegisteredMessage;
@@ -462,8 +466,9 @@ namespace BA_ERPMVC.Controllers
             using (XLWorkbook wb = new XLWorkbook())
             {
 
-                string rootPath = HostingEnvironment.ApplicationPhysicalPath;
-                string filePath = $"{rootPath}\\ExcelReports\\{DateTime.Now.ToString("ddMMyyyy_HHmmss")}_Report.xlsx";
+                string rootPath = AppDomain.CurrentDomain.BaseDirectory;
+                string filePath = $"{rootPath}ExcelReports\\{DateTime.Now.ToString("ddMMyyyy_HHmmss")}_Report.xlsx";
+                CustomLogger.Info(filePath);
                 wb.Worksheets.Add(dt);
                 using (MemoryStream stream = new MemoryStream())
                 {

@@ -13,6 +13,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 		public string ContainerNo { get; set; }
 		public string ContainerSize { get; set; }
 		public string BLnumber { get; set; }
+		public string ReferenceContainer { get; set; }
 		public string VehicleNo { get; set; }
 		public DateTime? ReDispatchedDate { get; set; }
 		public string TranspoterName { get; set; }
