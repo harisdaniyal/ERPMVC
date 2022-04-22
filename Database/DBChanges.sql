@@ -4329,4 +4329,16 @@ ALTER TABLE [dbo].[ExportDelivery] ADD  CONSTRAINT [DF__ExportDel__IsDel__49AEE8
 GO
 
 
+---- sp For 22-04-2022 ----
+
+ alter proc SP_GetContainerWiseInvoice(@BL nvarchar(100))--SP_GetContainerWiseInvoice 'A9022011439'
+ as
+
+ SELECT GenerateOrder.OrderType, GenerateOrder.BL, GenerateOrder.InvoiceAmount, GenerateOrder.Remarks, Logistics.ContainerSize, 
+ Logistics.ContainerWeight, DispatchedOrder.ContainerNo, DispatchedOrder.WagonNo, BACustomerRegistration.Customer_Name
+ FROM   ERPMVC.dbo.Logistics Logistics INNER JOIN (ERPMVC.dbo.DispatchedOrder DispatchedOrder 
+ INNER JOIN ERPMVC.dbo.GenerateOrder GenerateOrder ON DispatchedOrder.OrderId=GenerateOrder.OrderID) ON Logistics.OrderId=GenerateOrder.OrderID
+ INNER JOIN BACustomerRegistration on BACustomerRegistration.CustomerID = GenerateOrder.CustomerID
+ where GenerateOrder.BL=@BL
+
 

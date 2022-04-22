@@ -133,6 +133,7 @@ namespace BA_ERPMVC.Controllers
 
             var logisticsViewModel = Mapper.Map<IEnumerable<Logistic>, IEnumerable<LogisticsViewModel>>(logisticsModel);
 
+            logisticsViewModel = logisticsViewModel.OrderByDescending(x => x.LogisticsId);
             return PartialView("Partials/_Logistics", logisticsViewModel);
         }
 
@@ -638,7 +639,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult GetBlByCustomerNo()
         {
-            var data = Json(db.GenerateOrders.Where( x => x.isCompleted == false && x.BL != null).Select(x => new
+            var data = Json(db.GenerateOrders.Where(x => x.isCompleted == false && x.BL != null).Select(x => new
             {
                 BL = x.BL
 
@@ -647,7 +648,7 @@ namespace BA_ERPMVC.Controllers
             return data;
 
 
-            }
+        }
         public ActionResult GetCROByCustomerNo()
         {
             var data = Json(db.ExportBookingOrders.Where(x => x.IsCompleted == false && x.CRO != null).Select(x => new
@@ -669,23 +670,25 @@ namespace BA_ERPMVC.Controllers
             return data;
         }
 
-        public ActionResult PrintImportBLReport()
+        public ActionResult PrintImportBLReport(string bl)
         {
-            var ImportReport = orderBookingService.PrintImportReport().Select(c => new
-            {
-                c.OrderType,
-                c.BL,
-                c.ContainerNo,
-                //c.Customer_Name,
-                c.ContainerSize,
-                c.ContainerWeight,
-                c.Remarks,
-                c.WagonNo,
-                InvoiceAmount = c.InvoiceAmount.GetValueOrDefault(),
+            //var ImportReport = orderBookingService.PrintImportReport().Select(c => new
+            //{
+            //    c.OrderType,
+            //    c.BL,
+            //    c.ContainerNo,
+            //    c.Customer_Name,
+            //    c.ContainerSize,
+            //    c.ContainerWeight,
+            //    c.Remarks,
+            //    c.WagonNo,
+            //    InvoiceAmount = c.InvoiceAmount.GetValueOrDefault(),
 
 
-            }).ToList();
+
+            //}).ToList();
             rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
+            rd.SetParameterValue("BL", bl);
             //rd.SetDataSource(ImportReport);
             Response.Buffer = false;
             Response.ClearContent();
@@ -698,10 +701,10 @@ namespace BA_ERPMVC.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "ImportBLReport.pdf");
-
-               }
-
+            return File(stream, "application/pdf", "ImportBl.pdf");
 
         }
+
+
+    }
 }

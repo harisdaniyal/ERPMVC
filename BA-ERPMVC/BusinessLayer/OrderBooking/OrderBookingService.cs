@@ -395,13 +395,15 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ToDateTime = PreDispatchedMovements.ToDateTime,
                         TransporterName = PreDispatchedMovements.TransporterName,
                         VehicleNumber = PreDispatchedMovements.VehicleNumber,
+                        LogisticsId = logistics.logisticsid,
+
 
 
 
                         ID = PreDispatchedMovements.ID,
                         //GD = readyForDispatched.GD,
                         //BL = readyForDispatched.BL
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
         public async Task SavePreDispatchedMovementAsync(PreDispatchedMovementViewModel preDispatchedMovementVM)
@@ -498,13 +500,14 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         RRNo = DispatchedOrders.RRNo,
                         EngineNo = DispatchedOrders.EngineNo,
                         InvoiceNumber = DispatchedOrders.InvoiceNumber,
+                        LogisticsId = logistics.logisticsid,
 
 
 
                         ID = DispatchedOrders.ID,
                         //ID = readyForDispatched.GD,
                         //BL = readyForDispatched.BL
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x=> x.LogisticsId);
         }
 
         public async Task SaveDispatchedOrderAsync(DispatchedOrderViewModel dispatchedOrderVM)
@@ -607,6 +610,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
+                        LogisticsId = logistics.logisticsid,
+
 
                         PriorityForDispatched = dispatch.PriorityForDispatched,
                         StationID = dispatch.StationID,
@@ -618,7 +623,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         LOLO = InTransactTrains.LOLO,
                         ID = InTransactTrains.ID,
                         
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
         public async Task SaveIntransactTrainAsync(InTransactTrainViewModel intransacttrainVM)
@@ -714,6 +719,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         DelieveryLocation = logistics.ToLocation,
                         EmptyDropOffLocation = logistics.EmptyReturnLocation,
                         ReferenceContainer = logistics.ReferenceContainer,
+                        LogisticsId = logistics.logisticsid,
+
                         ArrivalDate = inTransactTrains.ArrivalDate,
 
                         ID = reDispatched.ID,
@@ -724,7 +731,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         TransportationCost = reDispatched.TransportationCost,
                         StationName = _dbContext.Stations.Where(x => x.StationID == inTransactTrains.StationID).FirstOrDefault().StationName,
                         StationID = inTransactTrains.StationID
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
         public async Task SaveReDispatchedAsync(ReDispatchedViewModel reDispatchedVM)
@@ -813,6 +820,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
                         ContainerSize = logistics.ContainerSize,
+                        LogisticsId = logistics.logisticsid,
+
                         EmptyDropOffLocation = logistics.EmptyReturnLocation,
                         DeliveryLocation = logistics.ToLocation,
                         ReferenceContainer = logistics.ReferenceContainer,
@@ -825,7 +834,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         DeliveryDate = DeliveryTrains.DeliveryDate,
                         ID = DeliveryTrains.ID,
 
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
         public async Task SaveDeliveryTrainAsync(DeliveryTrainViewModel deliverytrainVM)
@@ -921,9 +930,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderId = order.OrderID,
                         OrderNo = order.OrderNo,
                         ContainerNo = logistics.ContainerNo,
+                        LogisticsId = logistics.logisticsid,
+
                         ContainerSize = logistics.ContainerSize,
                         PortName = logistics.EmptyReturnLocation,
                         ReferenceContainer = logistics.ReferenceContainer,
+
 
 
                         ID = EmptyDropOffs.ID,
@@ -931,7 +943,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
                         Remarks = EmptyDropOffs.Remarks,
                         DeliveryDate = EmptyDropOffs.DeliveryDate,
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
         public async Task SaveEmptyDropOffAsync(EmptyDropOffViewModel emptydropoffVM)
@@ -1038,7 +1050,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         BiltyNo = DispatchedTrucks.BiltyNo,
                         ID = DispatchedTrucks.ID,
 
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.ContainerNo);
         }
 
         public async Task SaveDispatchedTruckAsync(DispatchedTruckViewModel dispatchedtruckVM)
@@ -1142,7 +1154,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
                         ID = DeliveryTrucks.ID,
 
-                    }).Distinct().ToList();
+                    }).Distinct().ToList().OrderByDescending(x => x.ContainerNo);
         }
 
         public async Task SaveDeliveryTruckAsync(DeliveryTruckViewModel deliverytruckVM)

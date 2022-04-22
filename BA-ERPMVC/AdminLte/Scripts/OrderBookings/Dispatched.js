@@ -32,6 +32,7 @@
             'OrderNo': row.find(".txt_OrderNo").val(),
             'ContainerNo': row.find(".txt_ContainerNo").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val(),
+            'ReferenceContainer': row.find(".txt_ReferenceContainer").val(),
             'PriorityForDispatched': row.find(".txt_Priority").val(),
             'TrainID': row.find(".txt_TrainID").val(),
             'DispatchedDate': row.find(".txt_Dispatcheddate").val(),

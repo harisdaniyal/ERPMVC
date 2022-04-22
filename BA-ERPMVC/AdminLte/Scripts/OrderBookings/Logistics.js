@@ -12,11 +12,16 @@ function initialize(logistics) {
         columns: [{
             data: 'ContainerNo',
             width: 10
-        }, {
+        },
+        
+        {
             data: 'ContainerWeight',
             width: 10
         }, {
             data: 'ContainerSize',
+            width: 10
+        }, {
+            data: 'ReferenceContainer',
             width: 10
         }, {
             data: 'ContainerTypeName',
@@ -207,6 +212,7 @@ function clearInputs() {
     $("#txt_ContainerNo").val('');
     $("#txt_ContainerWeight").val('');
     $("#ddl_ContainerSize").val('');
+    $("#txt_RefrenceContainer").val('');
     $("#ddl_ContainerType").val('');
     $("#ddl_JobType").val('');
     $("#txt_Comodities").val('');
@@ -227,6 +233,7 @@ function getLogisticsObject() {
         'ContainerNo': $("#txt_ContainerNo").val(),
         'ContainerWeight': $("#txt_ContainerWeight").val(),
         'ContainerSize': $("#ddl_ContainerSize option:selected").text(),
+        'ReferenceContainer': $("#txt_RefrenceContainer").val(),
         'ContainerType': $("#ddl_ContainerType").val(),
         'JobType': $("#ddl_JobType option:selected").text(),
         'ModeOfTransportation': $('#ddl_ModeOfTransportation').val(),

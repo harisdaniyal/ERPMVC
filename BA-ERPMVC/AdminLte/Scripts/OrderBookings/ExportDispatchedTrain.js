@@ -30,7 +30,6 @@
             'IsCompleted': isCompleted,
             'CRO': row.find(".txt_CROnumber").val(),
             'OrderNo': row.find(".txt_OrderNo").val(),
-            'RefrenceContainer': row.find(".txt_ReferenceContainer").val(),
             'ContainerNo': row.find(".txt_ContainerNo").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),

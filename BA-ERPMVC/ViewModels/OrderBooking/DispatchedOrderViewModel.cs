@@ -31,6 +31,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
 
 		//Added By Own////
 		public string ContainerNo { get; set; }
+		public int? LogisticsId { get; set; }
 		public string ContainerSize { get; set; }
 	}
 }

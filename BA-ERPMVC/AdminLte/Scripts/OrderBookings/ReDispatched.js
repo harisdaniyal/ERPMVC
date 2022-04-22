@@ -28,6 +28,7 @@ function save(row, isCompleted) {
         'OrderId': row.find(".txt_OrderId").val(),
         'IsCompleted': isCompleted,
         'BLnumber': row.find(".txt_BLnumber").val(),
+        'ReferenceContainer': row.find(".txt_ReferenceContainer").val(),
         'OrderNo': row.find(".txt_OrderNo").val(),
         'ContainerNo': row.find(".txt_ContainerNo").val(),
         'ContainerSize': row.find(".txt_ContainerSize").val(),

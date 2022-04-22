@@ -33,6 +33,7 @@
             'OrderNo': row.find(".txt_OrderNo").val(),
             'ContainerNo': row.find(".txt_ContainerNo").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val(),
+            'ReferenceContainer': row.find(".txt_ReferenceContainer").val(),
             'FromLocation': row.find(".txt_FromLoc").val(),
             'FromDateTime': row.find(".txt_FromDateTime").val(),
             'ToLocation': row.find(".txt_ToLoc").val(),

@@ -35,7 +35,7 @@ $(document).ready(function () {
         data: "{}",
         async: false,
         success: function (data) {
-            $("#txtblNo").val(data);
+            $(".txtblNo").val(data);
         }
 
     });
@@ -76,7 +76,7 @@ $(document).ready(function () {
                 var data = response.result;
 
                 var data1 = data[0].DateOfIssue ? moment(data[0].DateOfIssue).format("YYYY-MM-DD") : "--";
-                $("#txtblNo").val(data[0].bl);
+                $(".txtblNo").val(data[0].bl);
                 $("#txtIsCompleted").val(data[0].IsCompleted);
                 $("#txtBLShippingID").val(empid);
                 $("#txtshipping").val(data[0].shipper);
@@ -142,7 +142,7 @@ $(document).ready(function () {
                         url: "/BLShippingLine/AddOrEditeBLShippingLine", // Controller/View   
                         data: { //Passing data  
                             BLShippingID: empid,
-                            BL: $("#txtblNo").val(),
+                            BL: $(".txtblNo").val(),
                             IsCompleted: $("#txtIsCompleted").val(),
                             // Approval: $("#txtApproval option:selected").val(),
                             Shipper: $("#txtshipping").val(),
@@ -447,7 +447,7 @@ $(document).ready(function () {
                         type: "POST", //HTTP POST Method  
                         url: "/BLShippingLine/AddOrEditeBLShippingLine", // Controller/View   
                         data: { //Passing data  
-                            BL: $("#txtblNo").val(),
+                            BL: $(".txtblNo").val(),
                             IsCompleted: $("#txtIsCompleted").val(),
                             Shipper: $("#txtshipping").val(),
                             Consignee: $("#txtConsignee").val(),
@@ -460,7 +460,7 @@ $(document).ready(function () {
                             Portoflanding: $("#txtPortOfLanding").val(),
                             PortofDischarge: $("#txtPortOfDischarge").val(),
                             PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            ContainerNo: $(".txtContainerNo").select2("val").toString(),
+                            //ContainerNo: $(".txtContainerNo").select2("val").toString(),
                             SealNo: $("#txtSealNo").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
@@ -483,7 +483,7 @@ $(document).ready(function () {
                             if (response.success != null) {
                                 if (response.success) {
                                     getblshippingGride();
-                                    $("#txtblNo").val("");
+                                    $(".txtblNo").val("");
                                     //$("#txtApproval").val("");
                                     $("#txtshipping").val("");
                                     $("#txtConsignee").val("");
@@ -496,7 +496,7 @@ $(document).ready(function () {
                                     $("#txtPortOfLanding").val("");
                                     $("#txtPortOfDischarge").val("");
                                     $("#txtPlaceofDeilvery").val("");
-                                    $("#txtContainerNo").val("");
+                                    //$("#txtContainerNo").val("");
                                     $("#txtSealNo").val("");
                                     $("#txtConatinerOrPackage").val("");
                                     $("#txtkindofpack").val("");
