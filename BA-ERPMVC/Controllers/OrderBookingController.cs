@@ -637,9 +637,9 @@ namespace BA_ERPMVC.Controllers
 
         // Get BL and CRO DropDown //
 
-        public ActionResult GetBlByCustomerNo()
+        public ActionResult GetBlByCustomerNo(int customerID)
         {
-            var data = Json(db.GenerateOrders.Where(x => x.isCompleted == false && x.BL != null).Select(x => new
+            var data = Json(db.GenerateOrders.Where(x => x.isCompleted == false && x.BL != null && x.CustomerID == customerID).Select(x => new
             {
                 BL = x.BL
 
@@ -670,8 +670,26 @@ namespace BA_ERPMVC.Controllers
             return data;
         }
 
-        public ActionResult PrintImportBLReport(string bl, string customername)
+        public ActionResult PrintImportBLReport(string orderType, string bl)
         {
+            ERPMVCEntities context = new ERPMVCEntities();
+            GenerateOrder generateOrder = new GenerateOrder();
+
+            if (orderType.ToLower().Trim() == "import")
+            {
+                generateOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
+            }
+            else if (orderType.ToLower().Trim() == "export")
+            {
+                generateOrder = context.GenerateOrders.Where(x => x.CRO == bl.Trim()).FirstOrDefault();
+            }
+            if (generateOrder!= null)
+            {
+                generateOrder.InvoiceNo = GetInvoiceNo(orderType, generateOrder.OrderNo.Substring(3));
+                generateOrder.isCompleted = true;
+                context.SaveChanges();
+            }
+           
             //var ImportReport = orderBookingService.PrintImportReport().Select(c => new
             //{
             //    c.OrderType,
@@ -702,10 +720,32 @@ namespace BA_ERPMVC.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "ImportBl.pdf");
+            return File(stream, "application/pdf", $"Invoice{generateOrder.InvoiceNo}.pdf");
 
         }
 
+        private string GetInvoiceNo(string orderType, string orderNo)
+        {
+            //string InvoiceNo = "";
+            string code = "";
+            int maxValue = 0;
+
+            //InvoiceNo = db.GenerateOrders.OrderByDescending(x => x.OrderID).Select(x => x.InvoiceNo).FirstOrDefault();
+            //if (!string.IsNullOrEmpty(InvoiceNo))
+            //{
+            //    int invoicenumber = Convert.ToInt32(InvoiceNo);
+            //    maxValue = invoicenumber;
+            //    maxValue++;
+            //}
+            //else
+            //{
+            //    maxValue = 1;
+            //}
+            var upDown = orderType.ToLower() == "import" ? "UP" : "DW";
+            var type = orderType.ToLower() == "export" ? "EXP" : "IMP";
+            code = maxValue.ToString($"{type}/{upDown}/{DateTime.Now.Date.ToString("ddMMyyyy")}/{orderNo}");
+            return code;
+        }
 
     }
 }
