@@ -403,13 +403,13 @@
 
         </li>
         @*<li class="nav-item">
-            <a href="/sales/OrderBooking" class="nav-link ">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                    Create Order
-                </p>
-            </a>
-        </li>*@
+                <a href="/sales/OrderBooking" class="nav-link ">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>
+                        Create Order
+                    </p>
+                </a>
+            </li>*@
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -441,7 +441,7 @@
                 </li>
             </ul>
 
-         
+
 
             <ul class="nav nav-treeview">
                 <li class="nav-item">
@@ -560,84 +560,201 @@
 
 
         </li>
-
-        @*<li class="nav-item">
-            <a href="/OrderBooking/Index" class="nav-link ">
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
                 <p>
-                    Create Import Order
+                    <i class="fas fa-angle-left right"></i>
+                    EXPORT
+
                 </p>
             </a>
-        </li>*@
-        <li class="nav-item">
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderBooking/ExportOrder" class="nav-link ">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>
+                            Create Order
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderBooking/ExportOrderList" class="nav-link ">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>
+                            OrderListing
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ExportPreDispatched" class="nav-link ">
+                        <i class="nav-icon fas fa-train"></i>
+                        <p>
+                            PreDispatched
+                        </p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ExportDispatchedTrain" class="nav-link ">
+                        <i class="fas fa-truck nav-icon"></i>
+                        <p>
+                            Dispatched Train
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ExportDispatchedTruck" class="nav-link ">
+                        <i class="fas fa-train nav-icon"></i>
+                        <p>
+                            Dispatched Truck
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/PreDispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Pre Dispatched
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/Dispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Dispatched (Train)
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/DispatchedTruck" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Dispatched (Truck)
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ExportReDispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            ReDispatched
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ExportDelivery" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Delivery
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+
+        @*<li class="nav-item">
+                <a href="/OrderBooking/Index" class="nav-link ">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>
+                        Create Import Order
+                    </p>
+                </a>
+            </li>*@
+        @*<li class="nav-item">
             <a href="/OrderBooking/ExportOrder" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
                 <p>
                     Create Export Order
                 </p>
             </a>
-        </li>
+        </li>*@
 
         @*<li class="nav-item">
-            <a href="/OrderBooking/OrderList" class="nav-link ">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                    Import OrderListing
-                </p>
-            </a>
-        </li>*@
-        <li class="nav-item">
+                <a href="/OrderBooking/OrderList" class="nav-link ">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>
+                        Import OrderListing
+                    </p>
+                </a>
+            </li>*@
+        @*<li class="nav-item">
             <a href="/OrderBooking/ExportOrderList" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
                 <p>
                     Export OrderListing
                 </p>
             </a>
-        </li>
+        </li>*@
 
         @*<li class="nav-item">
-            <a href="/OrderExecution/TrainReport" class="nav-link ">
-                <i class="nav-icon fas fa-train"></i>
-                <p>
-                    Train Order Report
-                </p>
-            </a>
-        </li>*@
+                <a href="/OrderExecution/TrainReport" class="nav-link ">
+                    <i class="nav-icon fas fa-train"></i>
+                    <p>
+                        Train Order Report
+                    </p>
+                </a>
+            </li>*@
 
         @*<li class="nav-item has-treeview">
-            <a href="#" class="nav-link ">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                    <i class="fas fa-angle-left right"></i>
-                    Import Order Reports
+                <a href="#" class="nav-link ">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>
+                        <i class="fas fa-angle-left right"></i>
+                        Import Order Reports
 
-                </p>
-            </a>
+                    </p>
+                </a>
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="/OrderExecution/ImportOrderReportTruck" class="nav-link ">
-                        <i class="fas fa-truck nav-icon"></i>
-                        <p>
-                            Truck Report
-                        </p>
-                    </a>
-                </li>
-            </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ImportOrderReportTruck" class="nav-link ">
+                            <i class="fas fa-truck nav-icon"></i>
+                            <p>
+                                Truck Report
+                            </p>
+                        </a>
+                    </li>
+                </ul>
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="/OrderExecution/ImportOrderReport" class="nav-link ">
-                        <i class="fas fa-train nav-icon"></i>
-                        <p>
-                            Train Report
-                        </p>
-                    </a>
-                </li>
-            </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ImportOrderReport" class="nav-link ">
+                            <i class="fas fa-train nav-icon"></i>
+                            <p>
+                                Train Report
+                            </p>
+                        </a>
+                    </li>
+                </ul>
 
 
-        </li>*@
+            </li>*@
 
 
         <!--<li class="nav-item has-treeview">
@@ -650,18 +767,18 @@
                 </p>
             </a>-->
 
-            @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/OrderExecution/ReadyForDispatched" class="nav-link ">
-                            <i class="fas fa-car nav-icon"></i>
-                            <p>
-                                Ready For Dispatched
-                            </p>
-                        </a>
-                    </li>
-                </ul>*@
+        @*<ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ReadyForDispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Ready For Dispatched
+                        </p>
+                    </a>
+                </li>
+            </ul>*@
 
-            <!--<ul class="nav nav-treeview">
+        <!--<ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="/OrderExecution/PreDispatched" class="nav-link ">
                         <i class="fas fa-car nav-icon"></i>
@@ -745,7 +862,7 @@
 
         </li>-->
 
-        <li class="nav-item has-treeview">
+        <!--<li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
                 <p>
@@ -805,7 +922,7 @@
                         </p>
                     </a>
                 </li>
-            </ul>
+            </ul>-->
             @*<ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/OrderExecution/ReDispatched" class="nav-link ">
@@ -848,7 +965,7 @@
                     </li>
                 </ul>*@
 
-        </li>
+        <!--</li>-->
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1039,9 +1156,9 @@
         </li>
 
 
-        }
-        else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
-        {
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
+    {
         <li class="nav-item">
             <a href="/BLShippingLine/Index" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1051,9 +1168,9 @@
             </a>
         </li>
 
-        }
-        else if (ViewContext.HttpContext.User.IsInRole("Lahore"))
-        {
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("Lahore"))
+    {
         <li class="nav-item">
             <a href="/OrderBooking/OrderList" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1062,10 +1179,10 @@
                 </p>
             </a>
         </li>
-        }
+    }
 
-        else if (ViewContext.HttpContext.User.IsInRole("Operation"))
-        {
+    else if (ViewContext.HttpContext.User.IsInRole("Operation"))
+    {
         <li class="nav-item">
             <a href="/OrderBooking/OrderList" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1170,10 +1287,10 @@
             </ul>
 
         </li>
-        }
+    }
 
-        else if (ViewContext.HttpContext.User.IsInRole("Sales"))
-        {
+    else if (ViewContext.HttpContext.User.IsInRole("Sales"))
+    {
 
         <li class="nav-item">
             <a href="/OrderBooking/Index" class="nav-link ">
@@ -1214,7 +1331,17 @@
                 </li>
             </ul>
         </li>
-        }
+    }
 
-    </ul>
+</ul>
+
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>
 

@@ -15,6 +15,19 @@
 
     })
 
+    $(document).on('click', '#btn_view', function () {
+
+
+        var CustomerName = $('.txtCustomerName').val();
+        var OrderType = $('#txt_OrderType').val();
+        var BL = $('#txtBlNo').val();
+        var Type = $('.type').val();
+
+        window.location.href = '/OrderBooking/PrintImportBLReport?CustomerName=' + CustomerName + '&ordertype=' + OrderType + '&bl=' + BL + '&type=' + Type;
+
+    })
+
+
     $.ajax({
         type: "GET",
         url: "/OrderBooking/GetCROByCustomerNo",

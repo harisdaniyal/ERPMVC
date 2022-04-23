@@ -670,7 +670,7 @@ namespace BA_ERPMVC.Controllers
             return data;
         }
 
-        public ActionResult PrintImportBLReport(string bl)
+        public ActionResult PrintImportBLReport(string bl, string customername)
         {
             //var ImportReport = orderBookingService.PrintImportReport().Select(c => new
             //{
@@ -688,7 +688,8 @@ namespace BA_ERPMVC.Controllers
 
             //}).ToList();
             rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
-            rd.SetParameterValue("BL", bl);
+            //rd.SetParameterValue("BL", "123" );
+            //rd.SetParameterValue("Customer", customername);
             //rd.SetDataSource(ImportReport);
             Response.Buffer = false;
             Response.ClearContent();
