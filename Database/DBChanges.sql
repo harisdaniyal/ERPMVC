@@ -4329,6 +4329,41 @@ ALTER TABLE [dbo].[ExportDelivery] ADD  CONSTRAINT [DF__ExportDel__IsDel__49AEE8
 GO
 
 
+CREATE TABLE [dbo].[BLApproval](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Approval] [nvarchar](250) NULL,
+	[ContainerNo] [nvarchar](250) NULL,
+	[BLnumber] [nvarchar](250) NOT NULL,
+	[SealNo] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdatedBy] [nvarchar](250) NULL,
+	[UpdateDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL
+) ON [PRIMARY]
+
+GO
+
+
+CREATE TABLE [dbo].[BLShippingContainerDetail](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ContainerNo] [nvarchar](250) NULL,
+	[SealNo] [nvarchar](250) NULL,
+	[Bl] [nvarchar](50) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_ShippingContainerDetail] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+alter table Logistics add [ReferenceContainer] [nvarchar](250) NULL
+GO
+alter table DispatchedOrder add [ReferenceContainer] [nvarchar](250) NULL
+Go
+
 ---- sp For 22-04-2022 ----
 
  alter proc SP_GetContainerWiseInvoice(@BL nvarchar(100))--SP_GetContainerWiseInvoice 'A9022011439'
@@ -4341,4 +4376,5 @@ GO
  INNER JOIN BACustomerRegistration on BACustomerRegistration.CustomerID = GenerateOrder.CustomerID
  where GenerateOrder.BL=@BL
 
+GO
 
