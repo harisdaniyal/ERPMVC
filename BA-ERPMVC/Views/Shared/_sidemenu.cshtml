@@ -430,6 +430,8 @@
                     </a>
                 </li>
             </ul>
+            
+       
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="/OrderBooking/OrderList" class="nav-link ">
@@ -687,13 +689,13 @@
                 </a>
             </li>*@
         @*<li class="nav-item">
-            <a href="/OrderBooking/ExportOrder" class="nav-link ">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                    Create Export Order
-                </p>
-            </a>
-        </li>*@
+                <a href="/OrderBooking/ExportOrder" class="nav-link ">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>
+                        Create Export Order
+                    </p>
+                </a>
+            </li>*@
 
         @*<li class="nav-item">
                 <a href="/OrderBooking/OrderList" class="nav-link ">
@@ -704,13 +706,13 @@
                 </a>
             </li>*@
         @*<li class="nav-item">
-            <a href="/OrderBooking/ExportOrderList" class="nav-link ">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                    Export OrderListing
-                </p>
-            </a>
-        </li>*@
+                <a href="/OrderBooking/ExportOrderList" class="nav-link ">
+                    <i class="nav-icon fas fa-truck"></i>
+                    <p>
+                        Export OrderListing
+                    </p>
+                </a>
+            </li>*@
 
         @*<li class="nav-item">
                 <a href="/OrderExecution/TrainReport" class="nav-link ">
@@ -766,7 +768,6 @@
 
                 </p>
             </a>-->
-
         @*<ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="/OrderExecution/ReadyForDispatched" class="nav-link ">
@@ -861,7 +862,6 @@
             </ul>
 
         </li>-->
-
         <!--<li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -923,47 +923,47 @@
                     </a>
                 </li>
             </ul>-->
-            @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/OrderExecution/ReDispatched" class="nav-link ">
-                            <i class="fas fa-car nav-icon"></i>
-                            <p>
-                                Re-Dispatched (Train)
-                            </p>
-                        </a>
-                    </li>
-                </ul>*@
-            @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/OrderExecution/DeliveryTrain" class="nav-link ">
-                            <i class="fas fa-car nav-icon"></i>
-                            <p>
-                                Delivery (Train)
-                            </p>
-                        </a>
-                    </li>
-                </ul>*@
-            @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/OrderExecution/DeliveryTruck" class="nav-link ">
-                            <i class="fas fa-car nav-icon"></i>
-                            <p>
-                                Delivery (Truck)
-                            </p>
-                        </a>
-                    </li>
-                </ul>*@
+        @*<ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ReDispatched" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Re-Dispatched (Train)
+                        </p>
+                    </a>
+                </li>
+            </ul>*@
+        @*<ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/DeliveryTrain" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Delivery (Train)
+                        </p>
+                    </a>
+                </li>
+            </ul>*@
+        @*<ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/DeliveryTruck" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Delivery (Truck)
+                        </p>
+                    </a>
+                </li>
+            </ul>*@
 
-            @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/OrderExecution/EmptyDropOff" class="nav-link ">
-                            <i class="fas fa-car nav-icon"></i>
-                            <p>
-                                Empty DropOff
-                            </p>
-                        </a>
-                    </li>
-                </ul>*@
+        @*<ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/EmptyDropOff" class="nav-link ">
+                        <i class="fas fa-car nav-icon"></i>
+                        <p>
+                            Empty DropOff
+                        </p>
+                    </a>
+                </li>
+            </ul>*@
 
         <!--</li>-->
         <li class="nav-item has-treeview">
@@ -1091,7 +1091,7 @@
                 <li class="nav-item">
                     <a href="/OrderBooking/BLOrCROReport" class="nav-link">
                         <i class="fas fa-tools nav-icon"></i>
-                        <p>Order Invoice</p>
+                        <p>Print Order Invoice</p>
                     </a>
 
                 </li>
@@ -1164,9 +1164,9 @@
         </li>
 
 
-    }
-    else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
-    {
+        }
+        else if (ViewContext.HttpContext.User.IsInRole("BLINCHARGE"))
+        {
         <li class="nav-item">
             <a href="/BLShippingLine/Index" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1176,9 +1176,9 @@
             </a>
         </li>
 
-    }
-    else if (ViewContext.HttpContext.User.IsInRole("Lahore"))
-    {
+        }
+        else if (ViewContext.HttpContext.User.IsInRole("Lahore"))
+        {
         <li class="nav-item">
             <a href="/OrderBooking/OrderList" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1187,10 +1187,10 @@
                 </p>
             </a>
         </li>
-    }
+        }
 
-    else if (ViewContext.HttpContext.User.IsInRole("Operation"))
-    {
+        else if (ViewContext.HttpContext.User.IsInRole("Operation"))
+        {
         <li class="nav-item">
             <a href="/OrderBooking/OrderList" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1295,10 +1295,10 @@
             </ul>
 
         </li>
-    }
+        }
 
-    else if (ViewContext.HttpContext.User.IsInRole("Sales"))
-    {
+        else if (ViewContext.HttpContext.User.IsInRole("Sales"))
+        {
 
         <li class="nav-item">
             <a href="/OrderBooking/Index" class="nav-link ">
@@ -1339,9 +1339,9 @@
                 </li>
             </ul>
         </li>
-    }
+        }
 
-</ul>
+    </ul>
 
 <script>
 $(document).ready(function(){

@@ -683,17 +683,12 @@ namespace BA_ERPMVC.Controllers
             {
                 generateOrder = context.GenerateOrders.Where(x => x.CRO == bl.Trim()).FirstOrDefault();
             }
-            if (generateOrder!= null)
-            {
-                generateOrder.InvoiceNo = GetInvoiceNo(orderType, generateOrder.OrderNo.Substring(3));
-                generateOrder.isCompleted = true;
-                context.SaveChanges();
-            }
-           
-            //var ImportReport = orderBookingService.PrintImportReport().Select(c => new
+
+
+            var ImportReport = orderBookingService.PrintImportReport().ToList();
             //{
-            //    c.OrderType,
             //    c.BL,
+            //    c.OrderType,
             //    c.ContainerNo,
             //    c.Customer_Name,
             //    c.ContainerSize,
@@ -706,9 +701,14 @@ namespace BA_ERPMVC.Controllers
 
             //}).ToList();
             rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
-            //rd.SetParameterValue("BL", "123" );
+            //foreach (ParameterFieldDefinition param in rd.DataDefinition.ParameterFields)
+            //{
+            //    rd.SetParameterValue(param.ParameterFieldName, "123");
+            //}
+            //rd.ParameterFields["@BL"].CurrentValues.IsNoValue = true;
+            rd.SetParameterValue("@BL", "123");
             //rd.SetParameterValue("Customer", customername);
-            //rd.SetDataSource(ImportReport);
+            rd.SetDataSource(ImportReport);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -720,7 +720,13 @@ namespace BA_ERPMVC.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", $"Invoice{generateOrder.InvoiceNo}.pdf");
+            if (generateOrder != null)
+            {
+                generateOrder.InvoiceNo = GetInvoiceNo(orderType, generateOrder.OrderNo.Substring(3));
+                generateOrder.isCompleted = true;
+                context.SaveChanges();
+            }
+            return File(stream, "application/pdf", $"{generateOrder.InvoiceNo}.pdf");
 
         }
 
