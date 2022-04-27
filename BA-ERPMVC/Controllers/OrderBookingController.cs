@@ -15,13 +15,13 @@ using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using MasterLayer;
 using System.Data;
+using BA_ERPMVC.Reports;
 
 namespace BA_ERPMVC.Controllers
 {
     public class OrderBookingController : Controller
     {
         ERPMVCEntities db = new ERPMVCEntities();
-        ReportDocument rd = new ReportDocument();
         private readonly OrderBookingService orderBookingService;
         private readonly BusinessDivisionService businessDivisionService;
         private readonly ContainerTypeService containerTypeService;
@@ -673,61 +673,74 @@ namespace BA_ERPMVC.Controllers
         public ActionResult PrintImportBLReport(string orderType, string bl)
         {
             ERPMVCEntities context = new ERPMVCEntities();
-            GenerateOrder generateOrder = new GenerateOrder();
+            InvoiceData invoiceDataDataSet = new InvoiceData();
+            string invoiceNo = string.Empty;
 
             if (orderType.ToLower().Trim() == "import")
             {
-                generateOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
+                var importOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
+                importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3));
+                importOrder.isCompleted = true;
+                invoiceNo = importOrder.InvoiceNo;
+                //Header Section
+                var importReportHeaderData = orderBookingService.PrintImportReport("header", bl).ToList();
+
+                DataTable orderMainDataTable = invoiceDataDataSet.OrderHeaderData;
+                DataRow headerRow = orderMainDataTable.NewRow();
+
+                foreach (var item in importReportHeaderData)
+                {
+                    headerRow["Customer_Name"] = item.Customer_Name;
+                    headerRow["InvoiceNo"] = importOrder.InvoiceNo;
+                    headerRow["OrderType"] = item.OrderType;
+                    headerRow["BL"] = item.BL;
+                    headerRow["Remarks"] = string.IsNullOrEmpty(item.Remarks) ? string.Empty : item.Remarks;
+                    headerRow["CurrentDate"] = DateTime.Now;
+                    headerRow["OrderDate"] = item.OrderDate;
+                    headerRow["ContainerCount"] = item.ContainerCount;
+                    orderMainDataTable.Rows.Add(headerRow);
+                }
+
+                //Detail Section
+                var importReportDetailData = orderBookingService.PrintImportReport("detail", bl).ToList();
+
+                DataTable orderDetailDataTable = invoiceDataDataSet.OrderDetailData;
+                DataRow detailRow = orderDetailDataTable.NewRow();
+
+                foreach (var item in importReportDetailData)
+                {
+                    detailRow["BL"] = item.BL;
+                    detailRow["ContainerSize"] = item.ContainerSize;
+                    detailRow["ContainerNo"] = item.ContainerNo;
+                    detailRow["WagonNo"] = item.WagonNo;
+                    detailRow["ContainerWeight"] = item.ContainerWeight;
+                    detailRow["InvoiceAmount"] = item.InvoiceAmount;
+                    orderDetailDataTable.Rows.Add(detailRow);
+                }
+
             }
             else if (orderType.ToLower().Trim() == "export")
             {
-                generateOrder = context.GenerateOrders.Where(x => x.CRO == bl.Trim()).FirstOrDefault();
+                var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == bl.Trim()).FirstOrDefault();
+                exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3));
+                exportOrder.IsCompleted = true;
+                invoiceNo = exportOrder.InvoiceNo;
             }
 
 
-            var ImportReport = orderBookingService.PrintImportReport().ToList();
-            //{
-            //    c.BL,
-            //    c.OrderType,
-            //    c.ContainerNo,
-            //    c.Customer_Name,
-            //    c.ContainerSize,
-            //    c.ContainerWeight,
-            //    c.Remarks,
-            //    c.WagonNo,
-            //    InvoiceAmount = c.InvoiceAmount.GetValueOrDefault(),
-
-
-
-            //}).ToList();
+            ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
-            //foreach (ParameterFieldDefinition param in rd.DataDefinition.ParameterFields)
-            //{
-            //    rd.SetParameterValue(param.ParameterFieldName, "123");
-            //}
-            //rd.ParameterFields["@BL"].CurrentValues.IsNoValue = true;
-            rd.SetParameterValue("@BL", "123");
-            //rd.SetParameterValue("Customer", customername);
-            rd.SetDataSource(ImportReport);
+            rd.SetDataSource(invoiceDataDataSet);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
-
-
             rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
             rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
             rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
-
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            stream.Seek(0, SeekOrigin.Begin);
-            if (generateOrder != null)
-            {
-                generateOrder.InvoiceNo = GetInvoiceNo(orderType, generateOrder.OrderNo.Substring(3));
-                generateOrder.isCompleted = true;
-                context.SaveChanges();
-            }
-            return File(stream, "application/pdf", $"{generateOrder.InvoiceNo}.pdf");
-
+            //stream.Seek(0, SeekOrigin.Begin);
+            context.SaveChanges();
+            return File(stream, "application/pdf", $"{invoiceNo}.pdf");
         }
 
         private string GetInvoiceNo(string orderType, string orderNo)

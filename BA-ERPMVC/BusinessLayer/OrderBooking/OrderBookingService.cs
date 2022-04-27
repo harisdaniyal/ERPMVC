@@ -507,7 +507,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ID = DispatchedOrders.ID,
                         //ID = readyForDispatched.GD,
                         //BL = readyForDispatched.BL
-                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x=> x.LogisticsId);
+                    }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
         public async Task SaveDispatchedOrderAsync(DispatchedOrderViewModel dispatchedOrderVM)
@@ -622,7 +622,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ArrivalDate = InTransactTrains.ArrivalDate,
                         LOLO = InTransactTrains.LOLO,
                         ID = InTransactTrains.ID,
-                        
+
                     }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
 
@@ -1036,7 +1036,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         OrderNo = order.OrderNo,
                         LastDateofEmptyReturn = order.VesselBerthingDate,
                         ContainerNo = logistics.ContainerNo,
-                        
+
                         ContainerSize = logistics.ContainerSize,
                         FromLocation = logistics.FromLocation,
                         ToLocation = logistics.ToLocation,
@@ -1353,9 +1353,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.ModeOfTransportation == ModeOfTransaction.Train.ToString() && x.Status == OrdersStatus.PreDispatched.ToString())
-                    on order.OrderID equals logistics.OrderId 
+                    on order.OrderID equals logistics.OrderId
 
-                   
+
                     select new ImportBookingReportViewModel()
                     {
 
@@ -2206,40 +2206,44 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         }
 
         // --- Import Report --- //
-        public IEnumerable<PrintImportReportViewModel> PrintImportReport()
+        public IEnumerable<PrintImportReportViewModel> PrintImportReport(string section, string bl)
         {
-            return (from order in _dbContext.GenerateOrders//.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true)
-                    on order.OrderID equals logistics.OrderId
-                    join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                    on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
-                    //join DT in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == false)
-                    //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo }
-                    select new PrintImportReportViewModel()
-                    {
+            if (section == "header")
+            {
+                return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false && x.BL == bl)
+                        select new PrintImportReportViewModel()
+                        {
 
-                        BL = order.BL,
-                        Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
-                        OrderType = order.OrderType,
-                        Remarks = order.Remarks,
-                      
-                        InvoiceAmount = order.InvoiceAmount,
-                        ContainerNo = logistics.ContainerNo,
-                        ContainerSize = logistics.ContainerSize,
-                        TrainID = dispatch.TrainID,
-                        //DispatchedDateTrain = dispatch.DispatchedDate,
-                        WagonNo = dispatch.WagonNo,
-                        //VehicleNo = DT.VehicleNo,
-
-                    }).Distinct().ToList();
+                            BL = order.BL,
+                            Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                            OrderType = order.OrderType,
+                            Remarks = order.Remarks,
+                            OrderDate = order.OrderDate,
+                            ContainerCount = _dbContext.Logistics.Where(x => x.IsActive == true && x.OrderId == order.OrderID).Count()
+                        }).Distinct().ToList();
+            }
+            else if (section == "detail")
+            {
+                return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false && x.BL == bl)
+                        join logistics in _dbContext.Logistics.Where(x => x.IsActive == true)
+                        on order.OrderID equals logistics.OrderId
+                        join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        select new PrintImportReportViewModel()
+                        {
+                            BL = order.BL,
+                            ContainerSize = logistics.ContainerSize,
+                            ContainerNo = logistics.ContainerNo,
+                            WagonNo = dispatch.WagonNo,
+                            ContainerWeight = logistics.ContainerWeight,
+                            InvoiceAmount = order.InvoiceAmount
+                        }).Distinct().ToList();
+            }
+            return null;
         }
 
-
-
-
-
     }
-      
+
 
 
 }

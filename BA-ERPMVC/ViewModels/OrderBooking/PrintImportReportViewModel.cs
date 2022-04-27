@@ -9,20 +9,19 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
     {
         public int OrderId { get; set; }
         public int LogisticsId { get; set; }
-       // public string OrderNo { get; set; }
+        // public string OrderNo { get; set; }
         public int CustomerId { get; set; }
         public string Customer_Name { get; set; }
         public string ContainerNo { get; set; }
         public string ContainerSize { get; set; }
-        public int ContainerWeight { get; set; }
+        public int? ContainerWeight { get; set; }
         public string WagonNo { get; set; }
         public string OrderType { get; set; }
         public string BL { get; set; }
         public string TrainID { get; set; }
-       // public string VehicleNo { get; set; }
         public decimal? InvoiceAmount { get; set; }
         public string Remarks { get; set; }
-        //public DateTime? DispatchedDate { get; set; }
-        //public DateTime? DispatchedDateTrain { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public int? ContainerCount { get; set; }
     }
 }
