@@ -2210,7 +2210,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         {
             if (section == "header")
             {
-                return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false && x.BL == bl)
+                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
                         select new PrintImportReportViewModel()
                         {
 
@@ -2224,17 +2224,21 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
             else if (section == "detail")
             {
-                return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false && x.BL == bl)
+                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
                         join logistics in _dbContext.Logistics.Where(x => x.IsActive == true)
                         on order.OrderID equals logistics.OrderId
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        join dispatchtrain in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtrain.OrderId, ContainerNo = dispatchtrain.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
                             ContainerSize = logistics.ContainerSize,
                             ContainerNo = logistics.ContainerNo,
+                            TransportationType = logistics.ModeOfTransportation,
                             WagonNo = dispatch.WagonNo,
+                            VehicleNo = dispatchtrain.VehicleNo,
                             ContainerWeight = logistics.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount
                         }).Distinct().ToList();

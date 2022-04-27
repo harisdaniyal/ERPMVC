@@ -639,7 +639,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult GetBlByCustomerNo(int customerID)
         {
-            var data = Json(db.GenerateOrders.Where(x => x.isCompleted == false && x.BL != null && x.CustomerID == customerID).Select(x => new
+            var data = Json(db.GenerateOrders.Where(x =>  x.BL != null && x.CustomerID == customerID).Select(x => new
             {
                 BL = x.BL
 
@@ -651,7 +651,7 @@ namespace BA_ERPMVC.Controllers
         }
         public ActionResult GetCROByCustomerNo()
         {
-            var data = Json(db.ExportBookingOrders.Where(x => x.IsCompleted == false && x.CRO != null).Select(x => new
+            var data = Json(db.ExportBookingOrders.Where(x =>  x.CRO != null).Select(x => new
             {
                 CRO = x.CRO
             }
@@ -672,6 +672,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult PrintImportBLReport(string orderType, string bl)
         {
+
             ERPMVCEntities context = new ERPMVCEntities();
             InvoiceData invoiceDataDataSet = new InvoiceData();
             string invoiceNo = string.Empty;
@@ -679,9 +680,14 @@ namespace BA_ERPMVC.Controllers
             if (orderType.ToLower().Trim() == "import")
             {
                 var importOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
-                importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3));
-                importOrder.isCompleted = true;
+                if (string.IsNullOrEmpty(importOrder.InvoiceNo))
+                {
+                    importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3));
+                    importOrder.isCompleted = true;
+                }
                 invoiceNo = importOrder.InvoiceNo;
+
+
                 //Header Section
                 var importReportHeaderData = orderBookingService.PrintImportReport("header", bl).ToList();
 
@@ -693,6 +699,7 @@ namespace BA_ERPMVC.Controllers
                     headerRow["Customer_Name"] = item.Customer_Name;
                     headerRow["InvoiceNo"] = importOrder.InvoiceNo;
                     headerRow["OrderType"] = item.OrderType;
+                    headerRow["TransportationType"] = "Train";//db.Logistics.Where(x=> x.OrderId).Select(X => X.ModeOfTransportation).ToString();
                     headerRow["BL"] = item.BL;
                     headerRow["Remarks"] = string.IsNullOrEmpty(item.Remarks) ? string.Empty : item.Remarks;
                     headerRow["CurrentDate"] = DateTime.Now;
@@ -712,10 +719,11 @@ namespace BA_ERPMVC.Controllers
                     detailRow["BL"] = item.BL;
                     detailRow["ContainerSize"] = item.ContainerSize;
                     detailRow["ContainerNo"] = item.ContainerNo;
-                    detailRow["WagonNo"] = item.WagonNo;
+                    detailRow["WagonNo"] = string.IsNullOrEmpty(item.WagonNo) ? string.Empty : item.WagonNo;
+                    detailRow["VehicleNo"] = string.IsNullOrEmpty(item.VehicleNo) ? string.Empty : item.VehicleNo;
                     detailRow["ContainerWeight"] = item.ContainerWeight;
                     detailRow["InvoiceAmount"] = item.InvoiceAmount;
-                    orderDetailDataTable.Rows.Add(detailRow);
+                    orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
 
             }
@@ -741,6 +749,7 @@ namespace BA_ERPMVC.Controllers
             //stream.Seek(0, SeekOrigin.Begin);
             context.SaveChanges();
             return File(stream, "application/pdf", $"{invoiceNo}.pdf");
+
         }
 
         private string GetInvoiceNo(string orderType, string orderNo)

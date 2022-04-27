@@ -615,6 +615,11 @@
       <DependentUpon>BLReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ContainerReportData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContainerReportData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3899,6 +3904,17 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Reports\DataSet2.xsc">
       <DependentUpon>DataSet2.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\ContainerReportData.xsc">
+      <DependentUpon>ContainerReportData.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\ContainerReportData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ContainerReportData.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\ContainerReportData.xss">
+      <DependentUpon>ContainerReportData.xsd</DependentUpon>
     </Content>
     <None Include="Reports\DataSet2.xsd">
       <Generator>MSDataSetGenerator</Generator>
