@@ -82,7 +82,7 @@ namespace BA_ERPMVC.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection3 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,9 +90,9 @@ namespace BA_ERPMVC.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BL {
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.DataDefinition.ParameterFields[0];
+                return this.ReportDefinition.Sections[5];
             }
         }
     }

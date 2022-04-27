@@ -29,14 +29,19 @@ function initialize(logistics) {
             width: 10
         }, {
             data: 'ETD',
-            width: 10
-        }, {
-            data: 'VesselCutOff',
             width: 10,
             'render': function (date) {
                 return date ? moment(date).format("ll") : "--";
             }
         }, {
+            data: 'VesselCutOff',
+            width: 10,
+            'render': function (date) {
+                return date ? moment(date).format("ll") : "--";
+
+            }
+        },
+        {
             data: 'ShippingLine',
             width: 10
         }, {
@@ -45,10 +50,13 @@ function initialize(logistics) {
         }, {
             data: 'CAContactNo',
             width: 10
-        },  {
-            data: 'RefrenceContainer',
-            width: 10
-        }, {
+        }
+            //},  {
+            //    data: 'RefrenceContainer',
+            //    width: 10
+            //}
+
+            , {
             data: 'BookingPort',
             width: 10,
 
@@ -174,11 +182,11 @@ function validateInputs() {
 
     if (!$("#txt_ContainerNo").val()) {
         $("#txt_ContainerNo").addClass('error');
-       /* $("#sp_containerError").show();*/
+        /* $("#sp_containerError").show();*/
         isValid = false;
     }
 
- 
+
 
     if (!$("#txt_ContainerSize").val()) {
         $("#txt_ContainerSize").addClass('error');
@@ -226,14 +234,14 @@ function clearInputs() {
     $("#txt_ContainerSize").val('');
     $("#txt_ContainerType").val('');
     $("#txt_EgNo").val('');
-   // $("#txt_Cro").val('');
+    // $("#txt_Cro").val('');
     $("#txt_Vessel").val('');
     $("#txt_Voyage").val('');
     $("#txt_ETD").val('');
     $("#txt_VesselCutoff").val('');
     $("#txt_Clearingagent").val('');
     $("#txt_Clearingagentno").val('');
-    $("#txt_ReferenceContainer").val('');
+    //$("#txt_ReferenceContainer").val('');
     $("#txt_ShippingLine").val('');
     $("#txt_Bookingport").val('');
     $("#txt_ModeOfTransportation").val('');
@@ -260,7 +268,7 @@ function getLogisticsObject() {
         'VesselCutOff': $("#txt_VesselCutoff").val(),
         'ClearingAgentName': $("#txt_Clearingagent").val(),
         'CAContactNo': $("#txt_Clearingagentno").val(),
-        'RefrenceContainer': $("#txt_ReferenceContainer").val(),
+        //'RefrenceContainer': $("#txt_ReferenceContainer").val(),
         'ShippingLine': $("#txt_ShippingLine option:selected").val(),
         'BookingPort': $("#txt_Bookingport option:selected").val(),
         'ModeOfTransportation': $("#txt_ModeOfTransportation option:selected").val(),
