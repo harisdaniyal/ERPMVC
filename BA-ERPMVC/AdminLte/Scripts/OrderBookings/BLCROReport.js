@@ -6,17 +6,22 @@
 
         var OrderType = $('#txt_OrderType').val();
         var BL = $('#txtBlNo').val();
+        var CRO = $('#txtCRONo').val();
 
-        if ($('#txt_OrderType').val() == '') {
+        if (OrderType == '') {
             alert('Please select Order Type')
             return false;
         }
-        else if (BL == '' || BL == undefined) {
-            alert('Please select BL/CRO')
+        else if ((BL == '' || BL == undefined) && OrderType == 'Import') {
+            alert('Please select BL')
+            return false;
+        }
+        else if ((CRO == '' || CRO == undefined) && OrderType == 'Export') {
+            alert('Please select CRO')
             return false;
         }
 
-        window.location.href = '/OrderBooking/PrintImportBLReport?ordertype=' + OrderType + '&bl=' + BL;//+ '&type=' + Type ;
+        window.location.href = '/OrderBooking/PrintImportBLReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
     })
 
 

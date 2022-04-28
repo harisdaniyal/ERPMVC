@@ -637,6 +637,12 @@
       <DependentUpon>GDPDF.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ExportCRO.cs">
+      <DependentUpon>ExportCRO.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\ImportOrderReport .cs">
       <DependentUpon>ImportOrderReport .rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -4215,6 +4221,10 @@
     <EmbeddedResource Include="Reports\GDPDF.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>GDPDF.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ExportCRO.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ExportCRO.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ImportOrderReport .rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

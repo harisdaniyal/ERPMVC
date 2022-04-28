@@ -639,7 +639,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult GetBlByCustomerNo(int customerID)
         {
-            var data = Json(db.GenerateOrders.Where(x =>  x.BL != null && x.CustomerID == customerID).Select(x => new
+            var data = Json(db.GenerateOrders.Where(x => x.BL != null && x.CustomerID == customerID).Select(x => new
             {
                 BL = x.BL
 
@@ -651,7 +651,7 @@ namespace BA_ERPMVC.Controllers
         }
         public ActionResult GetCROByCustomerNo()
         {
-            var data = Json(db.ExportBookingOrders.Where(x =>  x.CRO != null).Select(x => new
+            var data = Json(db.ExportBookingOrders.Where(x => x.CRO != null).Select(x => new
             {
                 CRO = x.CRO
             }
@@ -670,11 +670,12 @@ namespace BA_ERPMVC.Controllers
             return data;
         }
 
-        public ActionResult PrintImportBLReport(string orderType, string bl)
+        public ActionResult PrintImportBLReport(string orderType, string bl, string cro)
         {
 
             ERPMVCEntities context = new ERPMVCEntities();
             InvoiceData invoiceDataDataSet = new InvoiceData();
+            ReportDocument rd = new ReportDocument();
             string invoiceNo = string.Empty;
 
             if (orderType.ToLower().Trim() == "import")
@@ -699,7 +700,7 @@ namespace BA_ERPMVC.Controllers
                     headerRow["Customer_Name"] = item.Customer_Name;
                     headerRow["InvoiceNo"] = importOrder.InvoiceNo;
                     headerRow["OrderType"] = item.OrderType;
-                    headerRow["TransportationType"] = "Train";//db.Logistics.Where(x=> x.OrderId).Select(X => X.ModeOfTransportation).ToString();
+                    //headerRow["TransportationType"] = "Train";//db.Logistics.Where(x=> x.OrderId).Select(X => X.ModeOfTransportation).ToString();
                     headerRow["BL"] = item.BL;
                     headerRow["Remarks"] = string.IsNullOrEmpty(item.Remarks) ? string.Empty : item.Remarks;
                     headerRow["CurrentDate"] = DateTime.Now;
@@ -719,25 +720,77 @@ namespace BA_ERPMVC.Controllers
                     detailRow["BL"] = item.BL;
                     detailRow["ContainerSize"] = item.ContainerSize;
                     detailRow["ContainerNo"] = item.ContainerNo;
-                    detailRow["WagonNo"] = string.IsNullOrEmpty(item.WagonNo) ? string.Empty : item.WagonNo;
-                    detailRow["VehicleNo"] = string.IsNullOrEmpty(item.VehicleNo) ? string.Empty : item.VehicleNo;
                     detailRow["ContainerWeight"] = item.ContainerWeight;
                     detailRow["InvoiceAmount"] = item.InvoiceAmount;
+                    detailRow["WagonNo"] = item.WagonNo;
+                    //detailRow["VehicleNo"] = item.VehicleNo;
+
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
             }
             else if (orderType.ToLower().Trim() == "export")
             {
-                var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == bl.Trim()).FirstOrDefault();
-                exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3));
-                exportOrder.IsCompleted = true;
+                var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == cro.Trim()).FirstOrDefault();
+                               
+                if (string.IsNullOrEmpty(exportOrder.InvoiceNo))
+                {
+                    exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3));
+                    exportOrder.IsCompleted = true;
+                }
                 invoiceNo = exportOrder.InvoiceNo;
+                //Header Section
+                var exportReportHeaderData = orderBookingService.PrintExportReport("header", cro).ToList();
+
+                DataTable orderMainDataTable = invoiceDataDataSet.ExportHeaderdata;
+                DataRow headerRow = orderMainDataTable.NewRow();
+
+                foreach (var item in exportReportHeaderData)
+                {
+                    // headerRow["Customer_Name"] = item.Customer_Name;
+                    headerRow["InvoiceNO"] = exportOrder.InvoiceNo;
+                    headerRow["CRO"] = item.CRO;
+                    headerRow["CurrentDate"] = DateTime.Now;
+                    headerRow["DateOfBooking"] = item.DateOfBooking;
+                    headerRow["ContainerCount"] = item.ContainerCount;
+                    orderMainDataTable.Rows.Add(headerRow);
+                    // headerRow["OrderType"] = item.OrderType;
+                    //headerRow["TransportationType"] = "Train";//db.Logistics.Where(x=> x.OrderId).Select(X => X.ModeOfTransportation).ToString();
+                    //headerRow["Remarks"] = string.IsNullOrEmpty(item.Remarks) ? string.Empty : item.Remarks;
+
+                }
+
+                //Detail Section
+                var exportReportDetailData = orderBookingService.PrintExportReport("detail", cro).ToList();
+
+                DataTable orderDetailDataTable = invoiceDataDataSet.ExportOrderDetailData;
+                DataRow detailRow = orderDetailDataTable.NewRow();
+
+                foreach (var item in exportReportDetailData.Take(2))
+                {
+                    detailRow["CRO"] = item.CRO;
+                    detailRow["ContainerSize"] = item.ContainerSize;
+                    detailRow["ContainerNo"] = item.ContainerNo;
+                    detailRow["WagonNo"] = item.WagonNo;
+                    detailRow["RateOfTransportation"] = Convert.ToInt32(item.RateOfTransportation);
+                    //detailRow["ExportTruckNo"] =  item.TruckNo;
+                    //detailRow["ContainerWeight"] = item.ContainerWeight;
+
+                  //  detailRow["BL"] = "123";
+                    //detailRow["ContainerWeight"] = 100;
+                    //detailRow["InvoiceAmount"] = Convert.ToInt32(item.RateOfTransportation);
+                   // detailRow["VehicleNo"] = "1234";
+                    //detailRow["ContainerSize"] = item.ContainerSize;
+                    //detailRow["ContainerNo"] = item.ContainerNo;
+                    //detailRow["WagonNo"] = item.WagonNo;
+                    orderDetailDataTable.Rows.Add(detailRow.ItemArray);
+                }
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCRO.rpt"));
             }
 
 
-            ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
+
+
             rd.SetDataSource(invoiceDataDataSet);
             Response.Buffer = false;
             Response.ClearContent();

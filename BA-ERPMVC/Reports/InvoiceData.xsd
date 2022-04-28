@@ -217,7 +217,19 @@
               <xs:element name="CurrentDate" msprop:Generator_ColumnVarNameInTable="columnCurrentDate" msprop:Generator_ColumnPropNameInRow="CurrentDate" msprop:Generator_ColumnPropNameInTable="CurrentDateColumn" msprop:Generator_UserColumnName="CurrentDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="OrderDate" msprop:Generator_ColumnVarNameInTable="columnOrderDate" msprop:Generator_ColumnPropNameInRow="OrderDate" msprop:Generator_ColumnPropNameInTable="OrderDateColumn" msprop:Generator_UserColumnName="OrderDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="ContainerCount" msprop:Generator_ColumnVarNameInTable="columnContainerCount" msprop:Generator_ColumnPropNameInRow="ContainerCount" msprop:Generator_ColumnPropNameInTable="ContainerCountColumn" msprop:Generator_UserColumnName="ContainerCount" type="xs:int" minOccurs="0" />
-              <xs:element name="TransportationType" msprop:Generator_ColumnVarNameInTable="columnTransportationType" msprop:Generator_ColumnPropNameInRow="TransportationType" msprop:Generator_ColumnPropNameInTable="TransportationTypeColumn" msprop:Generator_UserColumnName="TransportationType" type="xs:string" minOccurs="0" />
+              <xs:element name="CRO" msprop:Generator_ColumnVarNameInTable="columnCRO" msprop:Generator_ColumnPropNameInRow="CRO" msprop:Generator_ColumnPropNameInTable="CROColumn" msprop:Generator_UserColumnName="CRO" type="xs:string" minOccurs="0" />
+              <xs:element name="DateOfBooking" msprop:Generator_ColumnVarNameInTable="columnDateOfBooking" msprop:Generator_ColumnPropNameInRow="DateOfBooking" msprop:Generator_ColumnPropNameInTable="DateOfBookingColumn" msprop:Generator_UserColumnName="DateOfBooking" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ExportOrderDetailData" msprop:Generator_TableClassName="ExportOrderDetailDataDataTable" msprop:Generator_TableVarName="tableExportOrderDetailData" msprop:Generator_RowChangedName="ExportOrderDetailDataRowChanged" msprop:Generator_TablePropName="ExportOrderDetailData" msprop:Generator_RowDeletingName="ExportOrderDetailDataRowDeleting" msprop:Generator_RowChangingName="ExportOrderDetailDataRowChanging" msprop:Generator_RowEvHandlerName="ExportOrderDetailDataRowChangeEventHandler" msprop:Generator_RowDeletedName="ExportOrderDetailDataRowDeleted" msprop:Generator_RowClassName="ExportOrderDetailDataRow" msprop:Generator_UserTableName="ExportOrderDetailData" msprop:Generator_RowEvArgName="ExportOrderDetailDataRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CRO" msprop:Generator_ColumnVarNameInTable="columnCRO" msprop:Generator_ColumnPropNameInRow="CRO" msprop:Generator_ColumnPropNameInTable="CROColumn" msprop:Generator_UserColumnName="CRO" type="xs:string" minOccurs="0" />
+              <xs:element name="ContainerNo" msprop:Generator_ColumnVarNameInTable="columnContainerNo" msprop:Generator_ColumnPropNameInRow="ContainerNo" msprop:Generator_ColumnPropNameInTable="ContainerNoColumn" msprop:Generator_UserColumnName="ContainerNo" type="xs:string" minOccurs="0" />
+              <xs:element name="ContainerSize" msprop:Generator_ColumnVarNameInTable="columnContainerSize" msprop:Generator_ColumnPropNameInRow="ContainerSize" msprop:Generator_ColumnPropNameInTable="ContainerSizeColumn" msprop:Generator_UserColumnName="ContainerSize" type="xs:string" minOccurs="0" />
+              <xs:element name="WagonNo" msprop:Generator_ColumnVarNameInTable="columnWagonNo" msprop:Generator_ColumnPropNameInRow="WagonNo" msprop:Generator_ColumnPropNameInTable="WagonNoColumn" msprop:Generator_UserColumnName="WagonNo" type="xs:string" minOccurs="0" />
+              <xs:element name="RateOfTransportation" msprop:Generator_ColumnVarNameInTable="columnRateOfTransportation" msprop:Generator_ColumnPropNameInRow="RateOfTransportation" msprop:Generator_ColumnPropNameInTable="RateOfTransportationColumn" msprop:Generator_UserColumnName="RateOfTransportation" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -230,7 +242,17 @@
               <xs:element name="WagonNo" msprop:Generator_ColumnVarNameInTable="columnWagonNo" msprop:Generator_ColumnPropNameInRow="WagonNo" msprop:Generator_ColumnPropNameInTable="WagonNoColumn" msprop:Generator_UserColumnName="WagonNo" type="xs:string" minOccurs="0" />
               <xs:element name="ContainerWeight" msprop:Generator_ColumnVarNameInTable="columnContainerWeight" msprop:Generator_ColumnPropNameInRow="ContainerWeight" msprop:Generator_ColumnPropNameInTable="ContainerWeightColumn" msprop:Generator_UserColumnName="ContainerWeight" type="xs:int" minOccurs="0" />
               <xs:element name="InvoiceAmount" msprop:Generator_ColumnVarNameInTable="columnInvoiceAmount" msprop:Generator_ColumnPropNameInRow="InvoiceAmount" msprop:Generator_ColumnPropNameInTable="InvoiceAmountColumn" msprop:Generator_UserColumnName="InvoiceAmount" type="xs:decimal" minOccurs="0" />
-              <xs:element name="VehicleNo" msprop:Generator_ColumnVarNameInTable="columnVehicleNo" msprop:Generator_ColumnPropNameInRow="VehicleNo" msprop:Generator_ColumnPropNameInTable="VehicleNoColumn" msprop:Generator_UserColumnName="VehicleNo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ExportHeaderdata" msprop:Generator_TableClassName="ExportHeaderdataDataTable" msprop:Generator_TableVarName="tableExportHeaderdata" msprop:Generator_RowChangedName="ExportHeaderdataRowChanged" msprop:Generator_TablePropName="ExportHeaderdata" msprop:Generator_RowDeletingName="ExportHeaderdataRowDeleting" msprop:Generator_RowChangingName="ExportHeaderdataRowChanging" msprop:Generator_RowEvHandlerName="ExportHeaderdataRowChangeEventHandler" msprop:Generator_RowDeletedName="ExportHeaderdataRowDeleted" msprop:Generator_RowClassName="ExportHeaderdataRow" msprop:Generator_UserTableName="ExportHeaderdata" msprop:Generator_RowEvArgName="ExportHeaderdataRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CRO" msprop:Generator_ColumnVarNameInTable="columnCRO" msprop:Generator_ColumnPropNameInRow="CRO" msprop:Generator_ColumnPropNameInTable="CROColumn" msprop:Generator_UserColumnName="CRO" type="xs:string" minOccurs="0" />
+              <xs:element name="InvoiceNO" msprop:Generator_ColumnVarNameInTable="columnInvoiceNO" msprop:Generator_ColumnPropNameInRow="InvoiceNO" msprop:Generator_ColumnPropNameInTable="InvoiceNOColumn" msprop:Generator_UserColumnName="InvoiceNO" type="xs:string" minOccurs="0" />
+              <xs:element name="CurrentDate" msprop:Generator_ColumnVarNameInTable="columnCurrentDate" msprop:Generator_ColumnPropNameInRow="CurrentDate" msprop:Generator_ColumnPropNameInTable="CurrentDateColumn" msprop:Generator_UserColumnName="CurrentDate" type="xs:string" minOccurs="0" />
+              <xs:element name="ContainerCount" msprop:Generator_ColumnVarNameInTable="columnContainerCount" msprop:Generator_ColumnPropNameInRow="ContainerCount" msprop:Generator_ColumnPropNameInTable="ContainerCountColumn" msprop:Generator_UserColumnName="ContainerCount" type="xs:string" minOccurs="0" />
+              <xs:element name="DateOfBooking" msprop:Generator_ColumnVarNameInTable="columnDateOfBooking" msprop:Generator_ColumnPropNameInRow="DateOfBooking" msprop:Generator_ColumnPropNameInTable="DateOfBookingColumn" msprop:Generator_UserColumnName="DateOfBooking" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

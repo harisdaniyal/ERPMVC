@@ -2229,18 +2229,60 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         on order.OrderID equals logistics.OrderId
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
-                        join dispatchtrain in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
-                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtrain.OrderId, ContainerNo = dispatchtrain.ContainerNo }
+                        //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
+                        //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
                             ContainerSize = logistics.ContainerSize,
                             ContainerNo = logistics.ContainerNo,
-                            TransportationType = logistics.ModeOfTransportation,
+                            //TransportationType = logistics.ModeOfTransportation,
                             WagonNo = dispatch.WagonNo,
-                            VehicleNo = dispatchtrain.VehicleNo,
+                           // VehicleNo = dispatchtruck.VehicleNo,
                             ContainerWeight = logistics.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount
+                        }).Distinct().ToList();
+            }
+            return null;
+        }
+
+
+        // --- Export Report --- //
+        public IEnumerable<PrintImportReportViewModel> PrintExportReport(string section, string cro)
+        {
+            if (section == "header")
+            {
+                return (from order in _dbContext.ExportBookingOrders.Where(x => x.CRO == cro)
+                        select new PrintImportReportViewModel()
+                        {
+
+                            CRO = order.CRO,
+                            //Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                            //OrderType = order.,
+                            //Remarks = order.Remarks,
+                            DateOfBooking = order.DateOfBooking,
+                            ContainerCount = _dbContext.ExportLogistics.Where(x => x.IsCompleted == true && x.OrderId == order.OrderId).Count()
+                        }).Distinct().ToList();
+            }
+            else if (section == "detail")
+            {
+                return (from order in _dbContext.ExportBookingOrders.Where(x => x.CRO == cro)
+                        join exportlogistics in _dbContext.ExportLogistics
+                        on order.OrderId equals exportlogistics.OrderId
+                        //join dispatchtruck in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == true)
+                        //on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
+                        join dispatchtrain in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true)
+                        on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = dispatchtrain.OrderId, ContainerNo = dispatchtrain.ContainerNo }
+                        select new PrintImportReportViewModel()
+                        {
+                            CRO = order.CRO,
+                            ContainerSize = exportlogistics.ContainerSize,
+                            ContainerNo = exportlogistics.ContainerNo,
+                            //TransportationType = exportlogistics.ModeOfTransportation,
+                            WagonNo = dispatchtrain.WagonNo,
+                            //TruckNo = dispatchtruck.TruckNo,
+                           // ContainerWeight = exportlogistics.,
+                            RateOfTransportation = order.RateOfTransportation
                         }).Distinct().ToList();
             }
             return null;
