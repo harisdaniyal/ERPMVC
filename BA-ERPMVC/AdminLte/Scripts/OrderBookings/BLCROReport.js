@@ -21,7 +21,7 @@
             return false;
         }
 
-        window.location.href = '/OrderBooking/PrintImportBLReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
+        window.location.href = '/OrderBooking/PrintContainerWiseReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
     })
 
 
@@ -68,7 +68,8 @@
                     _data += '<option value="' + data[i].BL + '">' + data[i].BL + '</option>';
                 }
                 $(".txtBlNo").html(_data);
-                $('.txtBlNo').select2();
+                $(".blwisetxtBlNo").html(_data);
+                $('.blwisetxtBlNo').select2();
             }
 
         })
@@ -78,14 +79,35 @@
 function onChange_OrderType(item) {
     var value = $(item).val();
     if (value == "Import") {
+        $("#txtCustomerName").parent().parent().show();
         $("#txtBlNo").parent().parent().show();
+        $("#txtexportCustomerName ").parent().parent().hide();
         $("#txtCRONo").parent().parent().hide();
         // $("#lbl_BL_CRO").text("BL");
     }
     else if (value == "Export") {
         $("#txtBlNo").parent().parent().hide();
+        $("#txtCustomerName").parent().parent().hide();
         $("#txtCRONo").parent().parent().show();
+        $("#txtexportCustomerName ").parent().parent().show();
         //$("#lbl_BL_CRO").text("CRO");
     }
 }
+
+function onChange_Type(item) {
+    var value = $(item).val();
+    if (value == "ContainerWise") {
+        $(".BLWise").hide();
+        $(".ContainerWise").show();
+      
+        // $("#lbl_BL_CRO").text("BL");
+    }
+    else if (value == "BlWise") {
+        $(".BLWise").show();
+        $(".ContainerWise").hide();
+        //$("#lbl_BL_CRO").text("CRO");
+    }
+}
+
+
 

@@ -670,7 +670,7 @@ namespace BA_ERPMVC.Controllers
             return data;
         }
 
-        public ActionResult PrintImportBLReport(string orderType, string bl, string cro)
+        public ActionResult PrintContainerWiseReport(string orderType, string bl, string cro, string customerName)
         {
 
             ERPMVCEntities context = new ERPMVCEntities();
@@ -681,16 +681,13 @@ namespace BA_ERPMVC.Controllers
             if (orderType.ToLower().Trim() == "import")
             {
                 var importOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
-                if (string.IsNullOrEmpty(importOrder.InvoiceNo))
-                {
-                    importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3));
-                    importOrder.isCompleted = true;
-                }
+                importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3), "CW", importOrder.InvoiceNo);
+                importOrder.isCompleted = true;
                 invoiceNo = importOrder.InvoiceNo;
 
 
                 //Header Section
-                var importReportHeaderData = orderBookingService.PrintImportReport("header", bl).ToList();
+                var importReportHeaderData = orderBookingService.PrintContainerWiseReport("header", bl).ToList();
 
                 DataTable orderMainDataTable = invoiceDataDataSet.OrderHeaderData;
                 DataRow headerRow = orderMainDataTable.NewRow();
@@ -710,7 +707,7 @@ namespace BA_ERPMVC.Controllers
                 }
 
                 //Detail Section
-                var importReportDetailData = orderBookingService.PrintImportReport("detail", bl).ToList();
+                var importReportDetailData = orderBookingService.PrintContainerWiseReport("detail", bl).ToList();
 
                 DataTable orderDetailDataTable = invoiceDataDataSet.OrderDetailData;
                 DataRow detailRow = orderDetailDataTable.NewRow();
@@ -727,20 +724,17 @@ namespace BA_ERPMVC.Controllers
 
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBl.rpt"));
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportContainerWiseInvoiceReport.rpt"));
             }
             else if (orderType.ToLower().Trim() == "export")
             {
                 var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == cro.Trim()).FirstOrDefault();
-                               
-                if (string.IsNullOrEmpty(exportOrder.InvoiceNo))
-                {
-                    exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3));
-                    exportOrder.IsCompleted = true;
-                }
+                exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3), "BW", exportOrder.InvoiceNo);
+                exportOrder.IsCompleted = true;
                 invoiceNo = exportOrder.InvoiceNo;
+
                 //Header Section
-                var exportReportHeaderData = orderBookingService.PrintExportReport("header", cro).ToList();
+                var exportReportHeaderData = orderBookingService.PrintExportContainerWiseReport("header", cro).ToList();
 
                 DataTable orderMainDataTable = invoiceDataDataSet.ExportHeaderdata;
                 DataRow headerRow = orderMainDataTable.NewRow();
@@ -761,12 +755,12 @@ namespace BA_ERPMVC.Controllers
                 }
 
                 //Detail Section
-                var exportReportDetailData = orderBookingService.PrintExportReport("detail", cro).ToList();
+                var exportReportDetailData = orderBookingService.PrintExportContainerWiseReport("detail", cro).ToList();
 
                 DataTable orderDetailDataTable = invoiceDataDataSet.ExportOrderDetailData;
                 DataRow detailRow = orderDetailDataTable.NewRow();
 
-                foreach (var item in exportReportDetailData.Take(2))
+                foreach (var item in exportReportDetailData)
                 {
                     detailRow["CRO"] = item.CRO;
                     detailRow["ContainerSize"] = item.ContainerSize;
@@ -776,16 +770,16 @@ namespace BA_ERPMVC.Controllers
                     //detailRow["ExportTruckNo"] =  item.TruckNo;
                     //detailRow["ContainerWeight"] = item.ContainerWeight;
 
-                  //  detailRow["BL"] = "123";
+                    //  detailRow["BL"] = "123";
                     //detailRow["ContainerWeight"] = 100;
                     //detailRow["InvoiceAmount"] = Convert.ToInt32(item.RateOfTransportation);
-                   // detailRow["VehicleNo"] = "1234";
+                    // detailRow["VehicleNo"] = "1234";
                     //detailRow["ContainerSize"] = item.ContainerSize;
                     //detailRow["ContainerNo"] = item.ContainerNo;
                     //detailRow["WagonNo"] = item.WagonNo;
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCRO.rpt"));
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportContainerWiseInvoiceReport.rpt"));
             }
 
 
@@ -804,28 +798,161 @@ namespace BA_ERPMVC.Controllers
             return File(stream, "application/pdf", $"{invoiceNo}.pdf");
 
         }
-
-        private string GetInvoiceNo(string orderType, string orderNo)
+        public ActionResult PrintImportBLWiseReport(string orderType, string bl, string cro, string customerName)
         {
-            //string InvoiceNo = "";
-            string code = "";
-            int maxValue = 0;
 
-            //InvoiceNo = db.GenerateOrders.OrderByDescending(x => x.OrderID).Select(x => x.InvoiceNo).FirstOrDefault();
-            //if (!string.IsNullOrEmpty(InvoiceNo))
-            //{
-            //    int invoicenumber = Convert.ToInt32(InvoiceNo);
-            //    maxValue = invoicenumber;
-            //    maxValue++;
-            //}
-            //else
-            //{
-            //    maxValue = 1;
-            //}
-            var upDown = orderType.ToLower() == "import" ? "UP" : "DW";
-            var type = orderType.ToLower() == "export" ? "EXP" : "IMP";
-            code = maxValue.ToString($"{type}/{upDown}/{DateTime.Now.Date.ToString("ddMMyyyy")}/{orderNo}");
-            return code;
+            ERPMVCEntities context = new ERPMVCEntities();
+            InvoiceData invoiceDataDataSet = new InvoiceData();
+            ReportDocument rd = new ReportDocument();
+            string invoiceNo = string.Empty;
+
+            if (orderType.ToLower().Trim() == "import")
+            {
+                var importOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
+                importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3), "CW", importOrder.InvoiceNo);
+                importOrder.isCompleted = true;
+                invoiceNo = importOrder.InvoiceNo;
+
+
+                //Header Section
+                var importReportHeaderData = orderBookingService.PrintImportBLWiseImportReport("header", bl).ToList();
+
+                DataTable orderMainDataTable = invoiceDataDataSet.ContainerWiseImportHeaderData;
+                DataRow headerRow = orderMainDataTable.NewRow();
+
+                foreach (var item in importReportHeaderData)
+                {
+                    headerRow["Customer_Name"] = item.Customer_Name;
+                    headerRow["InvoiceNo"] = importOrder.InvoiceNo;
+                    headerRow["OrderType"] = item.OrderType;
+                    headerRow["BL"] = item.BL;
+                    headerRow["CurrentDate"] = DateTime.Now;
+                    headerRow["TotalContainerCount"] = item.TotalContainerCount;
+                    orderMainDataTable.Rows.Add(headerRow);
+                }
+
+                //Detail Section
+                var importReportDetailData = orderBookingService.PrintImportBLWiseImportReport("detail", bl).ToList();
+
+                DataTable orderDetailDataTable = invoiceDataDataSet.ContainerWiseImportDetailData;
+                DataRow detailRow = orderDetailDataTable.NewRow();
+
+                foreach (var item in importReportDetailData)
+                {
+                    detailRow["BL"] = item.BL;
+                    detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
+                    detailRow["ContainerCountForty"] = item.ContainerCountForty;
+                    detailRow["TotalContainerCount"] = item.TotalContainerCount;
+                    detailRow["RateTwenty"] = item.RateTwenty;
+                    detailRow["RateForty"] = item.RateForty;
+
+                    orderDetailDataTable.Rows.Add(detailRow.ItemArray);
+                }
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBLWiseInvoiceReport.rpt"));
+            }
+            else if (orderType.ToLower().Trim() == "export")
+            {
+                var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == cro.Trim()).FirstOrDefault();
+
+                exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3), "BW", exportOrder.InvoiceNo);
+                exportOrder.IsCompleted = true;
+                invoiceNo = exportOrder.InvoiceNo;
+                //Header Section
+                var exportReportHeaderData = orderBookingService.PrintExportCROWiseReport("header", cro).ToList();
+
+                DataTable orderMainDataTable = invoiceDataDataSet.ExportCROWiseHeaderData;
+                DataRow headerRow = orderMainDataTable.NewRow();
+
+                foreach (var item in exportReportHeaderData)
+                {
+                    headerRow["Customer_Name"] = item.Customer_Name;
+                    headerRow["InvoiceNo"] = exportOrder.InvoiceNo;
+                    headerRow["CRO"] = item.CRO;
+                    headerRow["CurrentDate"] = DateTime.Now;
+                    headerRow["TotalContainerCount"] = item.TotalContainerCount;
+                    orderMainDataTable.Rows.Add(headerRow);
+                }
+
+                //Detail Section
+                var exportReportDetailData = orderBookingService.PrintExportCROWiseReport("detail", cro).ToList();
+
+                DataTable orderDetailDataTable = invoiceDataDataSet.ExportCROWiseDetailData;
+                DataRow detailRow = orderDetailDataTable.NewRow();
+
+                foreach (var item in exportReportDetailData)
+                {
+                    detailRow["CRO"] = item.CRO;
+                    detailRow["TwentyRate"] = item.RateTwenty;
+                    detailRow["FortyRate"] = item.RateForty;
+                    detailRow["ContainerQtyTwenty"] = item.ContainerCountTwenty;
+                    detailRow["ContainerQtyForty"] = item.ContainerCountForty;
+                    detailRow["TotalContainerCount"] = item.TotalContainerCount;                   
+                    orderDetailDataTable.Rows.Add(detailRow.ItemArray);
+                }
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCROWiseInvoiceReport.rpt"));
+            }
+
+            rd.SetDataSource(invoiceDataDataSet);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(4, 4, 4, 4));
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            //stream.Seek(0, SeekOrigin.Begin);
+            context.SaveChanges();
+            return File(stream, "application/pdf", $"{invoiceNo}.pdf");
+
+        }
+
+        private string GetInvoiceNo(string orderType, string orderNo, string reportType, string oldInvoiceNo)
+        {
+            string invoiceNo = "";
+            int maxValue = 0;
+            int reprintNo = 0;
+            if (string.IsNullOrEmpty(oldInvoiceNo))
+            {
+                reprintNo = 1;
+                var upDown = orderType.ToLower() == "import" ? "UP" : "DW";
+                var type = orderType.ToLower() == "export" ? "EXP" : "IMP";
+                invoiceNo = maxValue.ToString($"{type}/{upDown}/{DateTime.Now.Date.ToString("ddMMyyyy")}/{orderNo}/{reprintNo.ToString("000")}");
+                if (!string.IsNullOrEmpty(reportType))
+                {
+                    invoiceNo = $"{reportType}/{invoiceNo}";
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(reportType))
+                {
+                    if (string.IsNullOrEmpty(oldInvoiceNo.Split('/')[4].ToString()))
+                    {
+                        reprintNo = 1;
+                    }
+                    else
+                    {
+                        reprintNo = Convert.ToInt32(oldInvoiceNo.Split('/')[4]) + 1;
+                    }
+                    invoiceNo = $"{oldInvoiceNo}/{reprintNo.ToString("000")}";
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(oldInvoiceNo.Split('/')[5].ToString()))
+                    {
+                        reprintNo = 1;
+                    }
+                    else
+                    {
+                        reprintNo = Convert.ToInt32(oldInvoiceNo.Split('/')[5]) + 1;
+                    }
+                    invoiceNo = $"{oldInvoiceNo}/{reprintNo.ToString("000")}";
+                }
+
+
+            }
+
+            return invoiceNo;
         }
 
     }

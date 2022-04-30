@@ -16,14 +16,14 @@ namespace BA_ERPMVC.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ImportBLReport : ReportClass {
+    public class ExportContainerWiseInvoiceReport : ReportClass {
         
-        public ImportBLReport() {
+        public ExportContainerWiseInvoiceReport() {
         }
         
         public override string ResourceName {
             get {
-                return "ImportBLReport.rpt";
+                return "ExportContainerWiseInvoiceReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace BA_ERPMVC.Reports {
         
         public override string FullResourceName {
             get {
-                return "BA_ERPMVC.Reports.ImportBLReport.rpt";
+                return "BA_ERPMVC.Reports.ExportContainerWiseInvoiceReport.rpt";
             }
             set {
                 // Do nothing
@@ -74,7 +74,7 @@ namespace BA_ERPMVC.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection2 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,17 +82,25 @@ namespace BA_ERPMVC.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection3 {
             get {
                 return this.ReportDefinition.Sections[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[5];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedImportBLReport : Component, ICachedReport {
+    public class CachedExportContainerWiseInvoiceReport : Component, ICachedReport {
         
-        public CachedImportBLReport() {
+        public CachedExportContainerWiseInvoiceReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +137,7 @@ namespace BA_ERPMVC.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ImportBLReport rpt = new ImportBLReport();
+            ExportContainerWiseInvoiceReport rpt = new ExportContainerWiseInvoiceReport();
             rpt.Site = this.Site;
             return rpt;
         }
