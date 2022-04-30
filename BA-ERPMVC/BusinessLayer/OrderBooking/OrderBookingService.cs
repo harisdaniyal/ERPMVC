@@ -2228,12 +2228,13 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         join logistics in _dbContext.Logistics.Where(x => x.IsActive == true)
                         on order.OrderID equals logistics.OrderId
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo }
+                            equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
                             ContainerSize = logistics.ContainerSize,
-                            ContainerNo = logistics.ContainerNo,
+                            ContainerNo = string.IsNullOrEmpty(logistics.ReferenceContainer) ? logistics.ContainerNo : logistics.ReferenceContainer,
                             WagonNo = dispatch.WagonNo,
                             ContainerWeight = logistics.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount
