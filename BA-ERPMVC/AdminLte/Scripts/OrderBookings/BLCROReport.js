@@ -68,8 +68,8 @@
                     _data += '<option value="' + data[i].BL + '">' + data[i].BL + '</option>';
                 }
                 $(".txtBlNo").html(_data);
-                $(".blwisetxtBlNo").html(_data);
-                $('.blwisetxtBlNo').select2();
+                //$(".blwisetxtBlNo").html(_data);
+                $('.txtBlNo').select2();
             }
 
         })
@@ -81,7 +81,7 @@ function onChange_OrderType(item) {
     if (value == "Import") {
         $("#txtCustomerName").parent().parent().show();
         $("#txtBlNo").parent().parent().show();
-        $("#txtexportCustomerName ").parent().parent().hide();
+        $("#txtexportCustomerName").parent().parent().hide();
         $("#txtCRONo").parent().parent().hide();
         // $("#lbl_BL_CRO").text("BL");
     }
@@ -99,13 +99,10 @@ function onChange_Type(item) {
     if (value == "ContainerWise") {
         $(".BLWise").hide();
         $(".ContainerWise").show();
-      
-        // $("#lbl_BL_CRO").text("BL");
     }
     else if (value == "BlWise") {
         $(".BLWise").show();
         $(".ContainerWise").hide();
-        //$("#lbl_BL_CRO").text("CRO");
     }
 }
 

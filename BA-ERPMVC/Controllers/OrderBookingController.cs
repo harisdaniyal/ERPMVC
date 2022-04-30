@@ -860,33 +860,33 @@ namespace BA_ERPMVC.Controllers
                 //Header Section
                 var exportReportHeaderData = orderBookingService.PrintExportCROWiseReport("header", cro).ToList();
 
-                DataTable orderMainDataTable = invoiceDataDataSet.ExportCROWiseHeaderData;
+                DataTable orderMainDataTable = invoiceDataDataSet.ExportCROHeader;
                 DataRow headerRow = orderMainDataTable.NewRow();
 
                 foreach (var item in exportReportHeaderData)
                 {
                     headerRow["Customer_Name"] = item.Customer_Name;
                     headerRow["InvoiceNo"] = exportOrder.InvoiceNo;
-                    headerRow["CRO"] = item.CRO;
                     headerRow["CurrentDate"] = DateTime.Now;
                     headerRow["TotalContainerCount"] = item.TotalContainerCount;
+                    headerRow["CRO"] = item.CRO;
                     orderMainDataTable.Rows.Add(headerRow);
                 }
 
                 //Detail Section
                 var exportReportDetailData = orderBookingService.PrintExportCROWiseReport("detail", cro).ToList();
 
-                DataTable orderDetailDataTable = invoiceDataDataSet.ExportCROWiseDetailData;
+                DataTable orderDetailDataTable = invoiceDataDataSet.ExportCRODetail;
                 DataRow detailRow = orderDetailDataTable.NewRow();
 
                 foreach (var item in exportReportDetailData)
                 {
                     detailRow["CRO"] = item.CRO;
-                    detailRow["TwentyRate"] = item.RateTwenty;
-                    detailRow["FortyRate"] = item.RateForty;
-                    detailRow["ContainerQtyTwenty"] = item.ContainerCountTwenty;
-                    detailRow["ContainerQtyForty"] = item.ContainerCountForty;
+                    detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
+                    detailRow["RateTwenty"] = item.RateTwenty;
                     detailRow["TotalContainerCount"] = item.TotalContainerCount;                   
+                    detailRow["ContainerCountForty"] = item.ContainerCountForty;
+                    detailRow["RateForty"] = item.RateForty;
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
                 rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCROWiseInvoiceReport.rpt"));
