@@ -724,7 +724,7 @@ namespace BA_ERPMVC.Controllers
 
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportContainerWiseInvoiceReport.rpt"));
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportContainerWiseReport.rpt"));
             }
             else if (orderType.ToLower().Trim() == "export")
             {
@@ -779,7 +779,7 @@ namespace BA_ERPMVC.Controllers
                     //detailRow["WagonNo"] = item.WagonNo;
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportContainerWiseInvoiceReport.rpt"));
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportContainerWiseReport.rpt"));
             }
 
 
@@ -848,7 +848,7 @@ namespace BA_ERPMVC.Controllers
 
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBLWiseInvoiceReport.rpt"));
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ImportBLWiseReport.rpt"));
             }
             else if (orderType.ToLower().Trim() == "export")
             {
@@ -889,7 +889,7 @@ namespace BA_ERPMVC.Controllers
                     detailRow["RateForty"] = item.RateForty;
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
-                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCROWiseInvoiceReport.rpt"));
+                rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCROReport.rpt"));
             }
 
             rd.SetDataSource(invoiceDataDataSet);
