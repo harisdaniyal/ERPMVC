@@ -34,7 +34,23 @@ namespace BA_ERPMVC.Reports {
         
         private OrderHeaderDataDataTable tableOrderHeaderData;
         
+        private ExportOrderDetailDataDataTable tableExportOrderDetailData;
+        
         private OrderDetailDataDataTable tableOrderDetailData;
+        
+        private ExportHeaderdataDataTable tableExportHeaderdata;
+        
+        private ContainerWiseImportHeaderDataDataTable tableContainerWiseImportHeaderData;
+        
+        private ContainerWiseImportDetailDataDataTable tableContainerWiseImportDetailData;
+        
+        private ExportCROHeaderDataDataTable tableExportCROHeaderData;
+        
+        private ExportCRODetailDataDataTable tableExportCRODetailData;
+        
+        private ExportCROHeaderDataTable tableExportCROHeader;
+        
+        private ExportCRODetailDataTable tableExportCRODetail;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -79,8 +95,32 @@ namespace BA_ERPMVC.Reports {
                 if ((ds.Tables["OrderHeaderData"] != null)) {
                     base.Tables.Add(new OrderHeaderDataDataTable(ds.Tables["OrderHeaderData"]));
                 }
+                if ((ds.Tables["ExportOrderDetailData"] != null)) {
+                    base.Tables.Add(new ExportOrderDetailDataDataTable(ds.Tables["ExportOrderDetailData"]));
+                }
                 if ((ds.Tables["OrderDetailData"] != null)) {
                     base.Tables.Add(new OrderDetailDataDataTable(ds.Tables["OrderDetailData"]));
+                }
+                if ((ds.Tables["ExportHeaderdata"] != null)) {
+                    base.Tables.Add(new ExportHeaderdataDataTable(ds.Tables["ExportHeaderdata"]));
+                }
+                if ((ds.Tables["ContainerWiseImportHeaderData"] != null)) {
+                    base.Tables.Add(new ContainerWiseImportHeaderDataDataTable(ds.Tables["ContainerWiseImportHeaderData"]));
+                }
+                if ((ds.Tables["ContainerWiseImportDetailData"] != null)) {
+                    base.Tables.Add(new ContainerWiseImportDetailDataDataTable(ds.Tables["ContainerWiseImportDetailData"]));
+                }
+                if ((ds.Tables["ExportCROHeaderData"] != null)) {
+                    base.Tables.Add(new ExportCROHeaderDataDataTable(ds.Tables["ExportCROHeaderData"]));
+                }
+                if ((ds.Tables["ExportCRODetailData"] != null)) {
+                    base.Tables.Add(new ExportCRODetailDataDataTable(ds.Tables["ExportCRODetailData"]));
+                }
+                if ((ds.Tables["ExportCROHeader"] != null)) {
+                    base.Tables.Add(new ExportCROHeaderDataTable(ds.Tables["ExportCROHeader"]));
+                }
+                if ((ds.Tables["ExportCRODetail"] != null)) {
+                    base.Tables.Add(new ExportCRODetailDataTable(ds.Tables["ExportCRODetail"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -154,9 +194,89 @@ namespace BA_ERPMVC.Reports {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ExportOrderDetailDataDataTable ExportOrderDetailData {
+            get {
+                return this.tableExportOrderDetailData;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public OrderDetailDataDataTable OrderDetailData {
             get {
                 return this.tableOrderDetailData;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ExportHeaderdataDataTable ExportHeaderdata {
+            get {
+                return this.tableExportHeaderdata;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ContainerWiseImportHeaderDataDataTable ContainerWiseImportHeaderData {
+            get {
+                return this.tableContainerWiseImportHeaderData;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ContainerWiseImportDetailDataDataTable ContainerWiseImportDetailData {
+            get {
+                return this.tableContainerWiseImportDetailData;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ExportCROHeaderDataDataTable ExportCROHeaderData {
+            get {
+                return this.tableExportCROHeaderData;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ExportCRODetailDataDataTable ExportCRODetailData {
+            get {
+                return this.tableExportCRODetailData;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ExportCROHeaderDataTable ExportCROHeader {
+            get {
+                return this.tableExportCROHeader;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ExportCRODetailDataTable ExportCRODetail {
+            get {
+                return this.tableExportCRODetail;
             }
         }
         
@@ -242,8 +362,32 @@ namespace BA_ERPMVC.Reports {
                 if ((ds.Tables["OrderHeaderData"] != null)) {
                     base.Tables.Add(new OrderHeaderDataDataTable(ds.Tables["OrderHeaderData"]));
                 }
+                if ((ds.Tables["ExportOrderDetailData"] != null)) {
+                    base.Tables.Add(new ExportOrderDetailDataDataTable(ds.Tables["ExportOrderDetailData"]));
+                }
                 if ((ds.Tables["OrderDetailData"] != null)) {
                     base.Tables.Add(new OrderDetailDataDataTable(ds.Tables["OrderDetailData"]));
+                }
+                if ((ds.Tables["ExportHeaderdata"] != null)) {
+                    base.Tables.Add(new ExportHeaderdataDataTable(ds.Tables["ExportHeaderdata"]));
+                }
+                if ((ds.Tables["ContainerWiseImportHeaderData"] != null)) {
+                    base.Tables.Add(new ContainerWiseImportHeaderDataDataTable(ds.Tables["ContainerWiseImportHeaderData"]));
+                }
+                if ((ds.Tables["ContainerWiseImportDetailData"] != null)) {
+                    base.Tables.Add(new ContainerWiseImportDetailDataDataTable(ds.Tables["ContainerWiseImportDetailData"]));
+                }
+                if ((ds.Tables["ExportCROHeaderData"] != null)) {
+                    base.Tables.Add(new ExportCROHeaderDataDataTable(ds.Tables["ExportCROHeaderData"]));
+                }
+                if ((ds.Tables["ExportCRODetailData"] != null)) {
+                    base.Tables.Add(new ExportCRODetailDataDataTable(ds.Tables["ExportCRODetailData"]));
+                }
+                if ((ds.Tables["ExportCROHeader"] != null)) {
+                    base.Tables.Add(new ExportCROHeaderDataTable(ds.Tables["ExportCROHeader"]));
+                }
+                if ((ds.Tables["ExportCRODetail"] != null)) {
+                    base.Tables.Add(new ExportCRODetailDataTable(ds.Tables["ExportCRODetail"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -308,10 +452,58 @@ namespace BA_ERPMVC.Reports {
                     this.tableOrderHeaderData.InitVars();
                 }
             }
+            this.tableExportOrderDetailData = ((ExportOrderDetailDataDataTable)(base.Tables["ExportOrderDetailData"]));
+            if ((initTable == true)) {
+                if ((this.tableExportOrderDetailData != null)) {
+                    this.tableExportOrderDetailData.InitVars();
+                }
+            }
             this.tableOrderDetailData = ((OrderDetailDataDataTable)(base.Tables["OrderDetailData"]));
             if ((initTable == true)) {
                 if ((this.tableOrderDetailData != null)) {
                     this.tableOrderDetailData.InitVars();
+                }
+            }
+            this.tableExportHeaderdata = ((ExportHeaderdataDataTable)(base.Tables["ExportHeaderdata"]));
+            if ((initTable == true)) {
+                if ((this.tableExportHeaderdata != null)) {
+                    this.tableExportHeaderdata.InitVars();
+                }
+            }
+            this.tableContainerWiseImportHeaderData = ((ContainerWiseImportHeaderDataDataTable)(base.Tables["ContainerWiseImportHeaderData"]));
+            if ((initTable == true)) {
+                if ((this.tableContainerWiseImportHeaderData != null)) {
+                    this.tableContainerWiseImportHeaderData.InitVars();
+                }
+            }
+            this.tableContainerWiseImportDetailData = ((ContainerWiseImportDetailDataDataTable)(base.Tables["ContainerWiseImportDetailData"]));
+            if ((initTable == true)) {
+                if ((this.tableContainerWiseImportDetailData != null)) {
+                    this.tableContainerWiseImportDetailData.InitVars();
+                }
+            }
+            this.tableExportCROHeaderData = ((ExportCROHeaderDataDataTable)(base.Tables["ExportCROHeaderData"]));
+            if ((initTable == true)) {
+                if ((this.tableExportCROHeaderData != null)) {
+                    this.tableExportCROHeaderData.InitVars();
+                }
+            }
+            this.tableExportCRODetailData = ((ExportCRODetailDataDataTable)(base.Tables["ExportCRODetailData"]));
+            if ((initTable == true)) {
+                if ((this.tableExportCRODetailData != null)) {
+                    this.tableExportCRODetailData.InitVars();
+                }
+            }
+            this.tableExportCROHeader = ((ExportCROHeaderDataTable)(base.Tables["ExportCROHeader"]));
+            if ((initTable == true)) {
+                if ((this.tableExportCROHeader != null)) {
+                    this.tableExportCROHeader.InitVars();
+                }
+            }
+            this.tableExportCRODetail = ((ExportCRODetailDataTable)(base.Tables["ExportCRODetail"]));
+            if ((initTable == true)) {
+                if ((this.tableExportCRODetail != null)) {
+                    this.tableExportCRODetail.InitVars();
                 }
             }
         }
@@ -334,8 +526,24 @@ namespace BA_ERPMVC.Reports {
             base.Tables.Add(this.tableLocalLogitcisData);
             this.tableOrderHeaderData = new OrderHeaderDataDataTable();
             base.Tables.Add(this.tableOrderHeaderData);
+            this.tableExportOrderDetailData = new ExportOrderDetailDataDataTable();
+            base.Tables.Add(this.tableExportOrderDetailData);
             this.tableOrderDetailData = new OrderDetailDataDataTable();
             base.Tables.Add(this.tableOrderDetailData);
+            this.tableExportHeaderdata = new ExportHeaderdataDataTable();
+            base.Tables.Add(this.tableExportHeaderdata);
+            this.tableContainerWiseImportHeaderData = new ContainerWiseImportHeaderDataDataTable();
+            base.Tables.Add(this.tableContainerWiseImportHeaderData);
+            this.tableContainerWiseImportDetailData = new ContainerWiseImportDetailDataDataTable();
+            base.Tables.Add(this.tableContainerWiseImportDetailData);
+            this.tableExportCROHeaderData = new ExportCROHeaderDataDataTable();
+            base.Tables.Add(this.tableExportCROHeaderData);
+            this.tableExportCRODetailData = new ExportCRODetailDataDataTable();
+            base.Tables.Add(this.tableExportCRODetailData);
+            this.tableExportCROHeader = new ExportCROHeaderDataTable();
+            base.Tables.Add(this.tableExportCROHeader);
+            this.tableExportCRODetail = new ExportCRODetailDataTable();
+            base.Tables.Add(this.tableExportCRODetail);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -370,7 +578,55 @@ namespace BA_ERPMVC.Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeExportOrderDetailData() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializeOrderDetailData() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeExportHeaderdata() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeContainerWiseImportHeaderData() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeContainerWiseImportDetailData() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeExportCROHeaderData() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeExportCRODetailData() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeExportCROHeader() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeExportCRODetail() {
             return false;
         }
         
@@ -445,7 +701,31 @@ namespace BA_ERPMVC.Reports {
         public delegate void OrderHeaderDataRowChangeEventHandler(object sender, OrderHeaderDataRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ExportOrderDetailDataRowChangeEventHandler(object sender, ExportOrderDetailDataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void OrderDetailDataRowChangeEventHandler(object sender, OrderDetailDataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ExportHeaderdataRowChangeEventHandler(object sender, ExportHeaderdataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ContainerWiseImportHeaderDataRowChangeEventHandler(object sender, ContainerWiseImportHeaderDataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ContainerWiseImportDetailDataRowChangeEventHandler(object sender, ContainerWiseImportDetailDataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ExportCROHeaderDataRowChangeEventHandler(object sender, ExportCROHeaderDataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ExportCRODetailDataRowChangeEventHandler(object sender, ExportCRODetailDataRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ExportCROHeaderRowChangeEventHandler(object sender, ExportCROHeaderRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void ExportCRODetailRowChangeEventHandler(object sender, ExportCRODetailRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -3733,6 +4013,10 @@ namespace BA_ERPMVC.Reports {
             
             private global::System.Data.DataColumn columnContainerCount;
             
+            private global::System.Data.DataColumn columnCRO;
+            
+            private global::System.Data.DataColumn columnDateOfBooking;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public OrderHeaderDataDataTable() {
@@ -3832,6 +4116,22 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DateOfBookingColumn {
+                get {
+                    return this.columnDateOfBooking;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3867,7 +4167,7 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public OrderHeaderDataRow AddOrderHeaderDataRow(string Customer_Name, string InvoiceNo, string OrderType, string BL, string Remarks, System.DateTime CurrentDate, System.DateTime OrderDate, int ContainerCount) {
+            public OrderHeaderDataRow AddOrderHeaderDataRow(string Customer_Name, string InvoiceNo, string OrderType, string BL, string Remarks, System.DateTime CurrentDate, System.DateTime OrderDate, int ContainerCount, string CRO, string DateOfBooking) {
                 OrderHeaderDataRow rowOrderHeaderDataRow = ((OrderHeaderDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Customer_Name,
@@ -3877,7 +4177,9 @@ namespace BA_ERPMVC.Reports {
                         Remarks,
                         CurrentDate,
                         OrderDate,
-                        ContainerCount};
+                        ContainerCount,
+                        CRO,
+                        DateOfBooking};
                 rowOrderHeaderDataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowOrderHeaderDataRow);
                 return rowOrderHeaderDataRow;
@@ -3908,6 +4210,8 @@ namespace BA_ERPMVC.Reports {
                 this.columnCurrentDate = base.Columns["CurrentDate"];
                 this.columnOrderDate = base.Columns["OrderDate"];
                 this.columnContainerCount = base.Columns["ContainerCount"];
+                this.columnCRO = base.Columns["CRO"];
+                this.columnDateOfBooking = base.Columns["DateOfBooking"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3929,6 +4233,10 @@ namespace BA_ERPMVC.Reports {
                 base.Columns.Add(this.columnOrderDate);
                 this.columnContainerCount = new global::System.Data.DataColumn("ContainerCount", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContainerCount);
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+                this.columnDateOfBooking = new global::System.Data.DataColumn("DateOfBooking", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDateOfBooking);
                 this.columnCustomer_Name.MaxLength = 1000;
                 this.columnInvoiceNo.MaxLength = 1000;
             }
@@ -4017,6 +4325,309 @@ namespace BA_ERPMVC.Reports {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "OrderHeaderDataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ExportOrderDetailDataDataTable : global::System.Data.TypedTableBase<ExportOrderDetailDataRow> {
+            
+            private global::System.Data.DataColumn columnCRO;
+            
+            private global::System.Data.DataColumn columnContainerNo;
+            
+            private global::System.Data.DataColumn columnContainerSize;
+            
+            private global::System.Data.DataColumn columnWagonNo;
+            
+            private global::System.Data.DataColumn columnRateOfTransportation;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportOrderDetailDataDataTable() {
+                this.TableName = "ExportOrderDetailData";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportOrderDetailDataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ExportOrderDetailDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerNoColumn {
+                get {
+                    return this.columnContainerNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerSizeColumn {
+                get {
+                    return this.columnContainerSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn WagonNoColumn {
+                get {
+                    return this.columnWagonNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateOfTransportationColumn {
+                get {
+                    return this.columnRateOfTransportation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportOrderDetailDataRow this[int index] {
+                get {
+                    return ((ExportOrderDetailDataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportOrderDetailDataRowChangeEventHandler ExportOrderDetailDataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportOrderDetailDataRowChangeEventHandler ExportOrderDetailDataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportOrderDetailDataRowChangeEventHandler ExportOrderDetailDataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportOrderDetailDataRowChangeEventHandler ExportOrderDetailDataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddExportOrderDetailDataRow(ExportOrderDetailDataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportOrderDetailDataRow AddExportOrderDetailDataRow(string CRO, string ContainerNo, string ContainerSize, string WagonNo, int RateOfTransportation) {
+                ExportOrderDetailDataRow rowExportOrderDetailDataRow = ((ExportOrderDetailDataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CRO,
+                        ContainerNo,
+                        ContainerSize,
+                        WagonNo,
+                        RateOfTransportation};
+                rowExportOrderDetailDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowExportOrderDetailDataRow);
+                return rowExportOrderDetailDataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ExportOrderDetailDataDataTable cln = ((ExportOrderDetailDataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ExportOrderDetailDataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCRO = base.Columns["CRO"];
+                this.columnContainerNo = base.Columns["ContainerNo"];
+                this.columnContainerSize = base.Columns["ContainerSize"];
+                this.columnWagonNo = base.Columns["WagonNo"];
+                this.columnRateOfTransportation = base.Columns["RateOfTransportation"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+                this.columnContainerNo = new global::System.Data.DataColumn("ContainerNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerNo);
+                this.columnContainerSize = new global::System.Data.DataColumn("ContainerSize", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerSize);
+                this.columnWagonNo = new global::System.Data.DataColumn("WagonNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWagonNo);
+                this.columnRateOfTransportation = new global::System.Data.DataColumn("RateOfTransportation", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRateOfTransportation);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportOrderDetailDataRow NewExportOrderDetailDataRow() {
+                return ((ExportOrderDetailDataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ExportOrderDetailDataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ExportOrderDetailDataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ExportOrderDetailDataRowChanged != null)) {
+                    this.ExportOrderDetailDataRowChanged(this, new ExportOrderDetailDataRowChangeEvent(((ExportOrderDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ExportOrderDetailDataRowChanging != null)) {
+                    this.ExportOrderDetailDataRowChanging(this, new ExportOrderDetailDataRowChangeEvent(((ExportOrderDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ExportOrderDetailDataRowDeleted != null)) {
+                    this.ExportOrderDetailDataRowDeleted(this, new ExportOrderDetailDataRowChangeEvent(((ExportOrderDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ExportOrderDetailDataRowDeleting != null)) {
+                    this.ExportOrderDetailDataRowDeleting(this, new ExportOrderDetailDataRowChangeEvent(((ExportOrderDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveExportOrderDetailDataRow(ExportOrderDetailDataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ExportOrderDetailDataDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4334,6 +4945,2185 @@ namespace BA_ERPMVC.Reports {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "OrderDetailDataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ExportHeaderdataDataTable : global::System.Data.TypedTableBase<ExportHeaderdataRow> {
+            
+            private global::System.Data.DataColumn columnCRO;
+            
+            private global::System.Data.DataColumn columnInvoiceNO;
+            
+            private global::System.Data.DataColumn columnCurrentDate;
+            
+            private global::System.Data.DataColumn columnContainerCount;
+            
+            private global::System.Data.DataColumn columnDateOfBooking;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportHeaderdataDataTable() {
+                this.TableName = "ExportHeaderdata";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportHeaderdataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ExportHeaderdataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn InvoiceNOColumn {
+                get {
+                    return this.columnInvoiceNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CurrentDateColumn {
+                get {
+                    return this.columnCurrentDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerCountColumn {
+                get {
+                    return this.columnContainerCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DateOfBookingColumn {
+                get {
+                    return this.columnDateOfBooking;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportHeaderdataRow this[int index] {
+                get {
+                    return ((ExportHeaderdataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportHeaderdataRowChangeEventHandler ExportHeaderdataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportHeaderdataRowChangeEventHandler ExportHeaderdataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportHeaderdataRowChangeEventHandler ExportHeaderdataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportHeaderdataRowChangeEventHandler ExportHeaderdataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddExportHeaderdataRow(ExportHeaderdataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportHeaderdataRow AddExportHeaderdataRow(string CRO, string InvoiceNO, string CurrentDate, string ContainerCount, string DateOfBooking) {
+                ExportHeaderdataRow rowExportHeaderdataRow = ((ExportHeaderdataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CRO,
+                        InvoiceNO,
+                        CurrentDate,
+                        ContainerCount,
+                        DateOfBooking};
+                rowExportHeaderdataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowExportHeaderdataRow);
+                return rowExportHeaderdataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ExportHeaderdataDataTable cln = ((ExportHeaderdataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ExportHeaderdataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCRO = base.Columns["CRO"];
+                this.columnInvoiceNO = base.Columns["InvoiceNO"];
+                this.columnCurrentDate = base.Columns["CurrentDate"];
+                this.columnContainerCount = base.Columns["ContainerCount"];
+                this.columnDateOfBooking = base.Columns["DateOfBooking"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+                this.columnInvoiceNO = new global::System.Data.DataColumn("InvoiceNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceNO);
+                this.columnCurrentDate = new global::System.Data.DataColumn("CurrentDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrentDate);
+                this.columnContainerCount = new global::System.Data.DataColumn("ContainerCount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerCount);
+                this.columnDateOfBooking = new global::System.Data.DataColumn("DateOfBooking", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDateOfBooking);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportHeaderdataRow NewExportHeaderdataRow() {
+                return ((ExportHeaderdataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ExportHeaderdataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ExportHeaderdataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ExportHeaderdataRowChanged != null)) {
+                    this.ExportHeaderdataRowChanged(this, new ExportHeaderdataRowChangeEvent(((ExportHeaderdataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ExportHeaderdataRowChanging != null)) {
+                    this.ExportHeaderdataRowChanging(this, new ExportHeaderdataRowChangeEvent(((ExportHeaderdataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ExportHeaderdataRowDeleted != null)) {
+                    this.ExportHeaderdataRowDeleted(this, new ExportHeaderdataRowChangeEvent(((ExportHeaderdataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ExportHeaderdataRowDeleting != null)) {
+                    this.ExportHeaderdataRowDeleting(this, new ExportHeaderdataRowChangeEvent(((ExportHeaderdataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveExportHeaderdataRow(ExportHeaderdataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ExportHeaderdataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ContainerWiseImportHeaderDataDataTable : global::System.Data.TypedTableBase<ContainerWiseImportHeaderDataRow> {
+            
+            private global::System.Data.DataColumn columnCustomer_Name;
+            
+            private global::System.Data.DataColumn columnInvoiceNo;
+            
+            private global::System.Data.DataColumn columnCurrentDate;
+            
+            private global::System.Data.DataColumn columnTotalContainerCount;
+            
+            private global::System.Data.DataColumn columnBL;
+            
+            private global::System.Data.DataColumn columnOrderType;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportHeaderDataDataTable() {
+                this.TableName = "ContainerWiseImportHeaderData";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ContainerWiseImportHeaderDataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ContainerWiseImportHeaderDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Customer_NameColumn {
+                get {
+                    return this.columnCustomer_Name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn InvoiceNoColumn {
+                get {
+                    return this.columnInvoiceNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CurrentDateColumn {
+                get {
+                    return this.columnCurrentDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalContainerCountColumn {
+                get {
+                    return this.columnTotalContainerCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn BLColumn {
+                get {
+                    return this.columnBL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn OrderTypeColumn {
+                get {
+                    return this.columnOrderType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportHeaderDataRow this[int index] {
+                get {
+                    return ((ContainerWiseImportHeaderDataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportHeaderDataRowChangeEventHandler ContainerWiseImportHeaderDataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportHeaderDataRowChangeEventHandler ContainerWiseImportHeaderDataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportHeaderDataRowChangeEventHandler ContainerWiseImportHeaderDataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportHeaderDataRowChangeEventHandler ContainerWiseImportHeaderDataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddContainerWiseImportHeaderDataRow(ContainerWiseImportHeaderDataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportHeaderDataRow AddContainerWiseImportHeaderDataRow(string Customer_Name, string InvoiceNo, string CurrentDate, int TotalContainerCount, string BL, string OrderType) {
+                ContainerWiseImportHeaderDataRow rowContainerWiseImportHeaderDataRow = ((ContainerWiseImportHeaderDataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Customer_Name,
+                        InvoiceNo,
+                        CurrentDate,
+                        TotalContainerCount,
+                        BL,
+                        OrderType};
+                rowContainerWiseImportHeaderDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowContainerWiseImportHeaderDataRow);
+                return rowContainerWiseImportHeaderDataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ContainerWiseImportHeaderDataDataTable cln = ((ContainerWiseImportHeaderDataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ContainerWiseImportHeaderDataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCustomer_Name = base.Columns["Customer_Name"];
+                this.columnInvoiceNo = base.Columns["InvoiceNo"];
+                this.columnCurrentDate = base.Columns["CurrentDate"];
+                this.columnTotalContainerCount = base.Columns["TotalContainerCount"];
+                this.columnBL = base.Columns["BL"];
+                this.columnOrderType = base.Columns["OrderType"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCustomer_Name = new global::System.Data.DataColumn("Customer_Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomer_Name);
+                this.columnInvoiceNo = new global::System.Data.DataColumn("InvoiceNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceNo);
+                this.columnCurrentDate = new global::System.Data.DataColumn("CurrentDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrentDate);
+                this.columnTotalContainerCount = new global::System.Data.DataColumn("TotalContainerCount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalContainerCount);
+                this.columnBL = new global::System.Data.DataColumn("BL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBL);
+                this.columnOrderType = new global::System.Data.DataColumn("OrderType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrderType);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportHeaderDataRow NewContainerWiseImportHeaderDataRow() {
+                return ((ContainerWiseImportHeaderDataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ContainerWiseImportHeaderDataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ContainerWiseImportHeaderDataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ContainerWiseImportHeaderDataRowChanged != null)) {
+                    this.ContainerWiseImportHeaderDataRowChanged(this, new ContainerWiseImportHeaderDataRowChangeEvent(((ContainerWiseImportHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ContainerWiseImportHeaderDataRowChanging != null)) {
+                    this.ContainerWiseImportHeaderDataRowChanging(this, new ContainerWiseImportHeaderDataRowChangeEvent(((ContainerWiseImportHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ContainerWiseImportHeaderDataRowDeleted != null)) {
+                    this.ContainerWiseImportHeaderDataRowDeleted(this, new ContainerWiseImportHeaderDataRowChangeEvent(((ContainerWiseImportHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ContainerWiseImportHeaderDataRowDeleting != null)) {
+                    this.ContainerWiseImportHeaderDataRowDeleting(this, new ContainerWiseImportHeaderDataRowChangeEvent(((ContainerWiseImportHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveContainerWiseImportHeaderDataRow(ContainerWiseImportHeaderDataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ContainerWiseImportHeaderDataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ContainerWiseImportDetailDataDataTable : global::System.Data.TypedTableBase<ContainerWiseImportDetailDataRow> {
+            
+            private global::System.Data.DataColumn columnBL;
+            
+            private global::System.Data.DataColumn columnContainerCountTwenty;
+            
+            private global::System.Data.DataColumn columnRateTwenty;
+            
+            private global::System.Data.DataColumn columnTotalContainerCount;
+            
+            private global::System.Data.DataColumn columnContainerCountForty;
+            
+            private global::System.Data.DataColumn columnRateForty;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportDetailDataDataTable() {
+                this.TableName = "ContainerWiseImportDetailData";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ContainerWiseImportDetailDataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ContainerWiseImportDetailDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn BLColumn {
+                get {
+                    return this.columnBL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerCountTwentyColumn {
+                get {
+                    return this.columnContainerCountTwenty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateTwentyColumn {
+                get {
+                    return this.columnRateTwenty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalContainerCountColumn {
+                get {
+                    return this.columnTotalContainerCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerCountFortyColumn {
+                get {
+                    return this.columnContainerCountForty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateFortyColumn {
+                get {
+                    return this.columnRateForty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportDetailDataRow this[int index] {
+                get {
+                    return ((ContainerWiseImportDetailDataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportDetailDataRowChangeEventHandler ContainerWiseImportDetailDataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportDetailDataRowChangeEventHandler ContainerWiseImportDetailDataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportDetailDataRowChangeEventHandler ContainerWiseImportDetailDataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ContainerWiseImportDetailDataRowChangeEventHandler ContainerWiseImportDetailDataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddContainerWiseImportDetailDataRow(ContainerWiseImportDetailDataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportDetailDataRow AddContainerWiseImportDetailDataRow(string BL, int ContainerCountTwenty, int RateTwenty, int TotalContainerCount, int ContainerCountForty, int RateForty) {
+                ContainerWiseImportDetailDataRow rowContainerWiseImportDetailDataRow = ((ContainerWiseImportDetailDataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        BL,
+                        ContainerCountTwenty,
+                        RateTwenty,
+                        TotalContainerCount,
+                        ContainerCountForty,
+                        RateForty};
+                rowContainerWiseImportDetailDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowContainerWiseImportDetailDataRow);
+                return rowContainerWiseImportDetailDataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ContainerWiseImportDetailDataDataTable cln = ((ContainerWiseImportDetailDataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ContainerWiseImportDetailDataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnBL = base.Columns["BL"];
+                this.columnContainerCountTwenty = base.Columns["ContainerCountTwenty"];
+                this.columnRateTwenty = base.Columns["RateTwenty"];
+                this.columnTotalContainerCount = base.Columns["TotalContainerCount"];
+                this.columnContainerCountForty = base.Columns["ContainerCountForty"];
+                this.columnRateForty = base.Columns["RateForty"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnBL = new global::System.Data.DataColumn("BL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBL);
+                this.columnContainerCountTwenty = new global::System.Data.DataColumn("ContainerCountTwenty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerCountTwenty);
+                this.columnRateTwenty = new global::System.Data.DataColumn("RateTwenty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRateTwenty);
+                this.columnTotalContainerCount = new global::System.Data.DataColumn("TotalContainerCount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalContainerCount);
+                this.columnContainerCountForty = new global::System.Data.DataColumn("ContainerCountForty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerCountForty);
+                this.columnRateForty = new global::System.Data.DataColumn("RateForty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRateForty);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportDetailDataRow NewContainerWiseImportDetailDataRow() {
+                return ((ContainerWiseImportDetailDataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ContainerWiseImportDetailDataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ContainerWiseImportDetailDataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ContainerWiseImportDetailDataRowChanged != null)) {
+                    this.ContainerWiseImportDetailDataRowChanged(this, new ContainerWiseImportDetailDataRowChangeEvent(((ContainerWiseImportDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ContainerWiseImportDetailDataRowChanging != null)) {
+                    this.ContainerWiseImportDetailDataRowChanging(this, new ContainerWiseImportDetailDataRowChangeEvent(((ContainerWiseImportDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ContainerWiseImportDetailDataRowDeleted != null)) {
+                    this.ContainerWiseImportDetailDataRowDeleted(this, new ContainerWiseImportDetailDataRowChangeEvent(((ContainerWiseImportDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ContainerWiseImportDetailDataRowDeleting != null)) {
+                    this.ContainerWiseImportDetailDataRowDeleting(this, new ContainerWiseImportDetailDataRowChangeEvent(((ContainerWiseImportDetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveContainerWiseImportDetailDataRow(ContainerWiseImportDetailDataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ContainerWiseImportDetailDataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ExportCROHeaderDataDataTable : global::System.Data.TypedTableBase<ExportCROHeaderDataRow> {
+            
+            private global::System.Data.DataColumn columnCustomerName;
+            
+            private global::System.Data.DataColumn columnInvoiceNo;
+            
+            private global::System.Data.DataColumn columnCurrentDate;
+            
+            private global::System.Data.DataColumn columnTotalContainerQty;
+            
+            private global::System.Data.DataColumn columnCRO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataDataTable() {
+                this.TableName = "ExportCROHeaderData";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCROHeaderDataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ExportCROHeaderDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CustomerNameColumn {
+                get {
+                    return this.columnCustomerName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn InvoiceNoColumn {
+                get {
+                    return this.columnInvoiceNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CurrentDateColumn {
+                get {
+                    return this.columnCurrentDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalContainerQtyColumn {
+                get {
+                    return this.columnTotalContainerQty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataRow this[int index] {
+                get {
+                    return ((ExportCROHeaderDataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderDataRowChangeEventHandler ExportCROHeaderDataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderDataRowChangeEventHandler ExportCROHeaderDataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderDataRowChangeEventHandler ExportCROHeaderDataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderDataRowChangeEventHandler ExportCROHeaderDataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddExportCROHeaderDataRow(ExportCROHeaderDataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataRow AddExportCROHeaderDataRow(string CustomerName, string InvoiceNo, string CurrentDate, string TotalContainerQty, string CRO) {
+                ExportCROHeaderDataRow rowExportCROHeaderDataRow = ((ExportCROHeaderDataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CustomerName,
+                        InvoiceNo,
+                        CurrentDate,
+                        TotalContainerQty,
+                        CRO};
+                rowExportCROHeaderDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowExportCROHeaderDataRow);
+                return rowExportCROHeaderDataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ExportCROHeaderDataDataTable cln = ((ExportCROHeaderDataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ExportCROHeaderDataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCustomerName = base.Columns["CustomerName"];
+                this.columnInvoiceNo = base.Columns["InvoiceNo"];
+                this.columnCurrentDate = base.Columns["CurrentDate"];
+                this.columnTotalContainerQty = base.Columns["TotalContainerQty"];
+                this.columnCRO = base.Columns["CRO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCustomerName = new global::System.Data.DataColumn("CustomerName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomerName);
+                this.columnInvoiceNo = new global::System.Data.DataColumn("InvoiceNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceNo);
+                this.columnCurrentDate = new global::System.Data.DataColumn("CurrentDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrentDate);
+                this.columnTotalContainerQty = new global::System.Data.DataColumn("TotalContainerQty", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalContainerQty);
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataRow NewExportCROHeaderDataRow() {
+                return ((ExportCROHeaderDataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ExportCROHeaderDataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ExportCROHeaderDataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ExportCROHeaderDataRowChanged != null)) {
+                    this.ExportCROHeaderDataRowChanged(this, new ExportCROHeaderDataRowChangeEvent(((ExportCROHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ExportCROHeaderDataRowChanging != null)) {
+                    this.ExportCROHeaderDataRowChanging(this, new ExportCROHeaderDataRowChangeEvent(((ExportCROHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ExportCROHeaderDataRowDeleted != null)) {
+                    this.ExportCROHeaderDataRowDeleted(this, new ExportCROHeaderDataRowChangeEvent(((ExportCROHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ExportCROHeaderDataRowDeleting != null)) {
+                    this.ExportCROHeaderDataRowDeleting(this, new ExportCROHeaderDataRowChangeEvent(((ExportCROHeaderDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveExportCROHeaderDataRow(ExportCROHeaderDataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ExportCROHeaderDataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ExportCRODetailDataDataTable : global::System.Data.TypedTableBase<ExportCRODetailDataRow> {
+            
+            private global::System.Data.DataColumn columnCRO;
+            
+            private global::System.Data.DataColumn columnTwentyRate;
+            
+            private global::System.Data.DataColumn columnFortyRate;
+            
+            private global::System.Data.DataColumn columnContainerQtyTwenty;
+            
+            private global::System.Data.DataColumn columnContainerQtyForty;
+            
+            private global::System.Data.DataColumn columnTotalContainerQty;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataDataTable() {
+                this.TableName = "ExportCRODetailData";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCRODetailDataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ExportCRODetailDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TwentyRateColumn {
+                get {
+                    return this.columnTwentyRate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn FortyRateColumn {
+                get {
+                    return this.columnFortyRate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerQtyTwentyColumn {
+                get {
+                    return this.columnContainerQtyTwenty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerQtyFortyColumn {
+                get {
+                    return this.columnContainerQtyForty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalContainerQtyColumn {
+                get {
+                    return this.columnTotalContainerQty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataRow this[int index] {
+                get {
+                    return ((ExportCRODetailDataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailDataRowChangeEventHandler ExportCRODetailDataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailDataRowChangeEventHandler ExportCRODetailDataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailDataRowChangeEventHandler ExportCRODetailDataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailDataRowChangeEventHandler ExportCRODetailDataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddExportCRODetailDataRow(ExportCRODetailDataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataRow AddExportCRODetailDataRow(string CRO, string TwentyRate, string FortyRate, string ContainerQtyTwenty, string ContainerQtyForty, string TotalContainerQty) {
+                ExportCRODetailDataRow rowExportCRODetailDataRow = ((ExportCRODetailDataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CRO,
+                        TwentyRate,
+                        FortyRate,
+                        ContainerQtyTwenty,
+                        ContainerQtyForty,
+                        TotalContainerQty};
+                rowExportCRODetailDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowExportCRODetailDataRow);
+                return rowExportCRODetailDataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ExportCRODetailDataDataTable cln = ((ExportCRODetailDataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ExportCRODetailDataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCRO = base.Columns["CRO"];
+                this.columnTwentyRate = base.Columns["TwentyRate"];
+                this.columnFortyRate = base.Columns["FortyRate"];
+                this.columnContainerQtyTwenty = base.Columns["ContainerQtyTwenty"];
+                this.columnContainerQtyForty = base.Columns["ContainerQtyForty"];
+                this.columnTotalContainerQty = base.Columns["TotalContainerQty"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+                this.columnTwentyRate = new global::System.Data.DataColumn("TwentyRate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTwentyRate);
+                this.columnFortyRate = new global::System.Data.DataColumn("FortyRate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFortyRate);
+                this.columnContainerQtyTwenty = new global::System.Data.DataColumn("ContainerQtyTwenty", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerQtyTwenty);
+                this.columnContainerQtyForty = new global::System.Data.DataColumn("ContainerQtyForty", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerQtyForty);
+                this.columnTotalContainerQty = new global::System.Data.DataColumn("TotalContainerQty", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalContainerQty);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataRow NewExportCRODetailDataRow() {
+                return ((ExportCRODetailDataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ExportCRODetailDataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ExportCRODetailDataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ExportCRODetailDataRowChanged != null)) {
+                    this.ExportCRODetailDataRowChanged(this, new ExportCRODetailDataRowChangeEvent(((ExportCRODetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ExportCRODetailDataRowChanging != null)) {
+                    this.ExportCRODetailDataRowChanging(this, new ExportCRODetailDataRowChangeEvent(((ExportCRODetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ExportCRODetailDataRowDeleted != null)) {
+                    this.ExportCRODetailDataRowDeleted(this, new ExportCRODetailDataRowChangeEvent(((ExportCRODetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ExportCRODetailDataRowDeleting != null)) {
+                    this.ExportCRODetailDataRowDeleting(this, new ExportCRODetailDataRowChangeEvent(((ExportCRODetailDataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveExportCRODetailDataRow(ExportCRODetailDataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ExportCRODetailDataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ExportCROHeaderDataTable : global::System.Data.TypedTableBase<ExportCROHeaderRow> {
+            
+            private global::System.Data.DataColumn columnCustomer_Name;
+            
+            private global::System.Data.DataColumn columnInvoiceNo;
+            
+            private global::System.Data.DataColumn columnCurrentDate;
+            
+            private global::System.Data.DataColumn columnTotalContainerCount;
+            
+            private global::System.Data.DataColumn columnCRO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataTable() {
+                this.TableName = "ExportCROHeader";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCROHeaderDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ExportCROHeaderDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Customer_NameColumn {
+                get {
+                    return this.columnCustomer_Name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn InvoiceNoColumn {
+                get {
+                    return this.columnInvoiceNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CurrentDateColumn {
+                get {
+                    return this.columnCurrentDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalContainerCountColumn {
+                get {
+                    return this.columnTotalContainerCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderRow this[int index] {
+                get {
+                    return ((ExportCROHeaderRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderRowChangeEventHandler ExportCROHeaderRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderRowChangeEventHandler ExportCROHeaderRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderRowChangeEventHandler ExportCROHeaderRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCROHeaderRowChangeEventHandler ExportCROHeaderRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddExportCROHeaderRow(ExportCROHeaderRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderRow AddExportCROHeaderRow(string Customer_Name, string InvoiceNo, string CurrentDate, int TotalContainerCount, string CRO) {
+                ExportCROHeaderRow rowExportCROHeaderRow = ((ExportCROHeaderRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Customer_Name,
+                        InvoiceNo,
+                        CurrentDate,
+                        TotalContainerCount,
+                        CRO};
+                rowExportCROHeaderRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowExportCROHeaderRow);
+                return rowExportCROHeaderRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ExportCROHeaderDataTable cln = ((ExportCROHeaderDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ExportCROHeaderDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCustomer_Name = base.Columns["Customer_Name"];
+                this.columnInvoiceNo = base.Columns["InvoiceNo"];
+                this.columnCurrentDate = base.Columns["CurrentDate"];
+                this.columnTotalContainerCount = base.Columns["TotalContainerCount"];
+                this.columnCRO = base.Columns["CRO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCustomer_Name = new global::System.Data.DataColumn("Customer_Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomer_Name);
+                this.columnInvoiceNo = new global::System.Data.DataColumn("InvoiceNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceNo);
+                this.columnCurrentDate = new global::System.Data.DataColumn("CurrentDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrentDate);
+                this.columnTotalContainerCount = new global::System.Data.DataColumn("TotalContainerCount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalContainerCount);
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+                this.columnCRO.Caption = "BL";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderRow NewExportCROHeaderRow() {
+                return ((ExportCROHeaderRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ExportCROHeaderRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ExportCROHeaderRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ExportCROHeaderRowChanged != null)) {
+                    this.ExportCROHeaderRowChanged(this, new ExportCROHeaderRowChangeEvent(((ExportCROHeaderRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ExportCROHeaderRowChanging != null)) {
+                    this.ExportCROHeaderRowChanging(this, new ExportCROHeaderRowChangeEvent(((ExportCROHeaderRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ExportCROHeaderRowDeleted != null)) {
+                    this.ExportCROHeaderRowDeleted(this, new ExportCROHeaderRowChangeEvent(((ExportCROHeaderRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ExportCROHeaderRowDeleting != null)) {
+                    this.ExportCROHeaderRowDeleting(this, new ExportCROHeaderRowChangeEvent(((ExportCROHeaderRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveExportCROHeaderRow(ExportCROHeaderRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ExportCROHeaderDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ExportCRODetailDataTable : global::System.Data.TypedTableBase<ExportCRODetailRow> {
+            
+            private global::System.Data.DataColumn columnCRO;
+            
+            private global::System.Data.DataColumn columnContainerCountTwenty;
+            
+            private global::System.Data.DataColumn columnRateTwenty;
+            
+            private global::System.Data.DataColumn columnTotalContainerCount;
+            
+            private global::System.Data.DataColumn columnContainerCountForty;
+            
+            private global::System.Data.DataColumn columnRateForty;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataTable() {
+                this.TableName = "ExportCRODetail";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCRODetailDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ExportCRODetailDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CROColumn {
+                get {
+                    return this.columnCRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerCountTwentyColumn {
+                get {
+                    return this.columnContainerCountTwenty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateTwentyColumn {
+                get {
+                    return this.columnRateTwenty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalContainerCountColumn {
+                get {
+                    return this.columnTotalContainerCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ContainerCountFortyColumn {
+                get {
+                    return this.columnContainerCountForty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateFortyColumn {
+                get {
+                    return this.columnRateForty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailRow this[int index] {
+                get {
+                    return ((ExportCRODetailRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailRowChangeEventHandler ExportCRODetailRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailRowChangeEventHandler ExportCRODetailRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailRowChangeEventHandler ExportCRODetailRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ExportCRODetailRowChangeEventHandler ExportCRODetailRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddExportCRODetailRow(ExportCRODetailRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailRow AddExportCRODetailRow(string CRO, int ContainerCountTwenty, int RateTwenty, int TotalContainerCount, int ContainerCountForty, int RateForty) {
+                ExportCRODetailRow rowExportCRODetailRow = ((ExportCRODetailRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CRO,
+                        ContainerCountTwenty,
+                        RateTwenty,
+                        TotalContainerCount,
+                        ContainerCountForty,
+                        RateForty};
+                rowExportCRODetailRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowExportCRODetailRow);
+                return rowExportCRODetailRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ExportCRODetailDataTable cln = ((ExportCRODetailDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ExportCRODetailDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnCRO = base.Columns["CRO"];
+                this.columnContainerCountTwenty = base.Columns["ContainerCountTwenty"];
+                this.columnRateTwenty = base.Columns["RateTwenty"];
+                this.columnTotalContainerCount = base.Columns["TotalContainerCount"];
+                this.columnContainerCountForty = base.Columns["ContainerCountForty"];
+                this.columnRateForty = base.Columns["RateForty"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnCRO = new global::System.Data.DataColumn("CRO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCRO);
+                this.columnContainerCountTwenty = new global::System.Data.DataColumn("ContainerCountTwenty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerCountTwenty);
+                this.columnRateTwenty = new global::System.Data.DataColumn("RateTwenty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRateTwenty);
+                this.columnTotalContainerCount = new global::System.Data.DataColumn("TotalContainerCount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalContainerCount);
+                this.columnContainerCountForty = new global::System.Data.DataColumn("ContainerCountForty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnContainerCountForty);
+                this.columnRateForty = new global::System.Data.DataColumn("RateForty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRateForty);
+                this.columnCRO.Caption = "BL";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailRow NewExportCRODetailRow() {
+                return ((ExportCRODetailRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ExportCRODetailRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ExportCRODetailRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ExportCRODetailRowChanged != null)) {
+                    this.ExportCRODetailRowChanged(this, new ExportCRODetailRowChangeEvent(((ExportCRODetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ExportCRODetailRowChanging != null)) {
+                    this.ExportCRODetailRowChanging(this, new ExportCRODetailRowChangeEvent(((ExportCRODetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ExportCRODetailRowDeleted != null)) {
+                    this.ExportCRODetailRowDeleted(this, new ExportCRODetailRowChangeEvent(((ExportCRODetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ExportCRODetailRowDeleting != null)) {
+                    this.ExportCRODetailRowDeleting(this, new ExportCRODetailRowChangeEvent(((ExportCRODetailRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveExportCRODetailRow(ExportCRODetailRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                InvoiceData ds = new InvoiceData();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ExportCRODetailDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -8948,6 +11738,38 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableOrderHeaderData.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'OrderHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOrderHeaderData.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string DateOfBooking {
+                get {
+                    try {
+                        return ((string)(this[this.tableOrderHeaderData.DateOfBookingColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DateOfBooking\' in table \'OrderHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOrderHeaderData.DateOfBookingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCustomer_NameNull() {
                 return this.IsNull(this.tableOrderHeaderData.Customer_NameColumn);
             }
@@ -9040,6 +11862,186 @@ namespace BA_ERPMVC.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetContainerCountNull() {
                 this[this.tableOrderHeaderData.ContainerCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableOrderHeaderData.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableOrderHeaderData.CROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDateOfBookingNull() {
+                return this.IsNull(this.tableOrderHeaderData.DateOfBookingColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDateOfBookingNull() {
+                this[this.tableOrderHeaderData.DateOfBookingColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ExportOrderDetailDataRow : global::System.Data.DataRow {
+            
+            private ExportOrderDetailDataDataTable tableExportOrderDetailData;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportOrderDetailDataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableExportOrderDetailData = ((ExportOrderDetailDataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportOrderDetailData.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'ExportOrderDetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportOrderDetailData.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ContainerNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportOrderDetailData.ContainerNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerNo\' in table \'ExportOrderDetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportOrderDetailData.ContainerNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ContainerSize {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportOrderDetailData.ContainerSizeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerSize\' in table \'ExportOrderDetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportOrderDetailData.ContainerSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string WagonNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportOrderDetailData.WagonNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WagonNo\' in table \'ExportOrderDetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportOrderDetailData.WagonNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int RateOfTransportation {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportOrderDetailData.RateOfTransportationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RateOfTransportation\' in table \'ExportOrderDetailData\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportOrderDetailData.RateOfTransportationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableExportOrderDetailData.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableExportOrderDetailData.CROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerNoNull() {
+                return this.IsNull(this.tableExportOrderDetailData.ContainerNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerNoNull() {
+                this[this.tableExportOrderDetailData.ContainerNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerSizeNull() {
+                return this.IsNull(this.tableExportOrderDetailData.ContainerSizeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerSizeNull() {
+                this[this.tableExportOrderDetailData.ContainerSizeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsWagonNoNull() {
+                return this.IsNull(this.tableExportOrderDetailData.WagonNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetWagonNoNull() {
+                this[this.tableExportOrderDetailData.WagonNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateOfTransportationNull() {
+                return this.IsNull(this.tableExportOrderDetailData.RateOfTransportationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateOfTransportationNull() {
+                this[this.tableExportOrderDetailData.RateOfTransportationColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -9227,6 +12229,1218 @@ namespace BA_ERPMVC.Reports {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ExportHeaderdataRow : global::System.Data.DataRow {
+            
+            private ExportHeaderdataDataTable tableExportHeaderdata;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportHeaderdataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableExportHeaderdata = ((ExportHeaderdataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportHeaderdata.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'ExportHeaderdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportHeaderdata.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string InvoiceNO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportHeaderdata.InvoiceNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceNO\' in table \'ExportHeaderdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportHeaderdata.InvoiceNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CurrentDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportHeaderdata.CurrentDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentDate\' in table \'ExportHeaderdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportHeaderdata.CurrentDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ContainerCount {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportHeaderdata.ContainerCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerCount\' in table \'ExportHeaderdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportHeaderdata.ContainerCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string DateOfBooking {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportHeaderdata.DateOfBookingColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DateOfBooking\' in table \'ExportHeaderdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportHeaderdata.DateOfBookingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableExportHeaderdata.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableExportHeaderdata.CROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsInvoiceNONull() {
+                return this.IsNull(this.tableExportHeaderdata.InvoiceNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetInvoiceNONull() {
+                this[this.tableExportHeaderdata.InvoiceNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCurrentDateNull() {
+                return this.IsNull(this.tableExportHeaderdata.CurrentDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCurrentDateNull() {
+                this[this.tableExportHeaderdata.CurrentDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerCountNull() {
+                return this.IsNull(this.tableExportHeaderdata.ContainerCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerCountNull() {
+                this[this.tableExportHeaderdata.ContainerCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDateOfBookingNull() {
+                return this.IsNull(this.tableExportHeaderdata.DateOfBookingColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDateOfBookingNull() {
+                this[this.tableExportHeaderdata.DateOfBookingColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ContainerWiseImportHeaderDataRow : global::System.Data.DataRow {
+            
+            private ContainerWiseImportHeaderDataDataTable tableContainerWiseImportHeaderData;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ContainerWiseImportHeaderDataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableContainerWiseImportHeaderData = ((ContainerWiseImportHeaderDataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Customer_Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableContainerWiseImportHeaderData.Customer_NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Customer_Name\' in table \'ContainerWiseImportHeaderData\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportHeaderData.Customer_NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string InvoiceNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableContainerWiseImportHeaderData.InvoiceNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceNo\' in table \'ContainerWiseImportHeaderData\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportHeaderData.InvoiceNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CurrentDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableContainerWiseImportHeaderData.CurrentDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentDate\' in table \'ContainerWiseImportHeaderData\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportHeaderData.CurrentDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int TotalContainerCount {
+                get {
+                    try {
+                        return ((int)(this[this.tableContainerWiseImportHeaderData.TotalContainerCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContainerCount\' in table \'ContainerWiseImportHeaderDat" +
+                                "a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportHeaderData.TotalContainerCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string BL {
+                get {
+                    try {
+                        return ((string)(this[this.tableContainerWiseImportHeaderData.BLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BL\' in table \'ContainerWiseImportHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportHeaderData.BLColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string OrderType {
+                get {
+                    try {
+                        return ((string)(this[this.tableContainerWiseImportHeaderData.OrderTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OrderType\' in table \'ContainerWiseImportHeaderData\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportHeaderData.OrderTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCustomer_NameNull() {
+                return this.IsNull(this.tableContainerWiseImportHeaderData.Customer_NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCustomer_NameNull() {
+                this[this.tableContainerWiseImportHeaderData.Customer_NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsInvoiceNoNull() {
+                return this.IsNull(this.tableContainerWiseImportHeaderData.InvoiceNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetInvoiceNoNull() {
+                this[this.tableContainerWiseImportHeaderData.InvoiceNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCurrentDateNull() {
+                return this.IsNull(this.tableContainerWiseImportHeaderData.CurrentDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCurrentDateNull() {
+                this[this.tableContainerWiseImportHeaderData.CurrentDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalContainerCountNull() {
+                return this.IsNull(this.tableContainerWiseImportHeaderData.TotalContainerCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalContainerCountNull() {
+                this[this.tableContainerWiseImportHeaderData.TotalContainerCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsBLNull() {
+                return this.IsNull(this.tableContainerWiseImportHeaderData.BLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetBLNull() {
+                this[this.tableContainerWiseImportHeaderData.BLColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsOrderTypeNull() {
+                return this.IsNull(this.tableContainerWiseImportHeaderData.OrderTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetOrderTypeNull() {
+                this[this.tableContainerWiseImportHeaderData.OrderTypeColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ContainerWiseImportDetailDataRow : global::System.Data.DataRow {
+            
+            private ContainerWiseImportDetailDataDataTable tableContainerWiseImportDetailData;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ContainerWiseImportDetailDataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableContainerWiseImportDetailData = ((ContainerWiseImportDetailDataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string BL {
+                get {
+                    try {
+                        return ((string)(this[this.tableContainerWiseImportDetailData.BLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BL\' in table \'ContainerWiseImportDetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportDetailData.BLColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int ContainerCountTwenty {
+                get {
+                    try {
+                        return ((int)(this[this.tableContainerWiseImportDetailData.ContainerCountTwentyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerCountTwenty\' in table \'ContainerWiseImportDetailDa" +
+                                "ta\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportDetailData.ContainerCountTwentyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int RateTwenty {
+                get {
+                    try {
+                        return ((int)(this[this.tableContainerWiseImportDetailData.RateTwentyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RateTwenty\' in table \'ContainerWiseImportDetailData\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportDetailData.RateTwentyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int TotalContainerCount {
+                get {
+                    try {
+                        return ((int)(this[this.tableContainerWiseImportDetailData.TotalContainerCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContainerCount\' in table \'ContainerWiseImportDetailDat" +
+                                "a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportDetailData.TotalContainerCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int ContainerCountForty {
+                get {
+                    try {
+                        return ((int)(this[this.tableContainerWiseImportDetailData.ContainerCountFortyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerCountForty\' in table \'ContainerWiseImportDetailDat" +
+                                "a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportDetailData.ContainerCountFortyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int RateForty {
+                get {
+                    try {
+                        return ((int)(this[this.tableContainerWiseImportDetailData.RateFortyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RateForty\' in table \'ContainerWiseImportDetailData\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableContainerWiseImportDetailData.RateFortyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsBLNull() {
+                return this.IsNull(this.tableContainerWiseImportDetailData.BLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetBLNull() {
+                this[this.tableContainerWiseImportDetailData.BLColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerCountTwentyNull() {
+                return this.IsNull(this.tableContainerWiseImportDetailData.ContainerCountTwentyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerCountTwentyNull() {
+                this[this.tableContainerWiseImportDetailData.ContainerCountTwentyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateTwentyNull() {
+                return this.IsNull(this.tableContainerWiseImportDetailData.RateTwentyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateTwentyNull() {
+                this[this.tableContainerWiseImportDetailData.RateTwentyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalContainerCountNull() {
+                return this.IsNull(this.tableContainerWiseImportDetailData.TotalContainerCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalContainerCountNull() {
+                this[this.tableContainerWiseImportDetailData.TotalContainerCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerCountFortyNull() {
+                return this.IsNull(this.tableContainerWiseImportDetailData.ContainerCountFortyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerCountFortyNull() {
+                this[this.tableContainerWiseImportDetailData.ContainerCountFortyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateFortyNull() {
+                return this.IsNull(this.tableContainerWiseImportDetailData.RateFortyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateFortyNull() {
+                this[this.tableContainerWiseImportDetailData.RateFortyColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ExportCROHeaderDataRow : global::System.Data.DataRow {
+            
+            private ExportCROHeaderDataDataTable tableExportCROHeaderData;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCROHeaderDataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableExportCROHeaderData = ((ExportCROHeaderDataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CustomerName {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeaderData.CustomerNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerName\' in table \'ExportCROHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeaderData.CustomerNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string InvoiceNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeaderData.InvoiceNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceNo\' in table \'ExportCROHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeaderData.InvoiceNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CurrentDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeaderData.CurrentDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentDate\' in table \'ExportCROHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeaderData.CurrentDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TotalContainerQty {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeaderData.TotalContainerQtyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContainerQty\' in table \'ExportCROHeaderData\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeaderData.TotalContainerQtyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeaderData.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'ExportCROHeaderData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeaderData.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCustomerNameNull() {
+                return this.IsNull(this.tableExportCROHeaderData.CustomerNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCustomerNameNull() {
+                this[this.tableExportCROHeaderData.CustomerNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsInvoiceNoNull() {
+                return this.IsNull(this.tableExportCROHeaderData.InvoiceNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetInvoiceNoNull() {
+                this[this.tableExportCROHeaderData.InvoiceNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCurrentDateNull() {
+                return this.IsNull(this.tableExportCROHeaderData.CurrentDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCurrentDateNull() {
+                this[this.tableExportCROHeaderData.CurrentDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalContainerQtyNull() {
+                return this.IsNull(this.tableExportCROHeaderData.TotalContainerQtyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalContainerQtyNull() {
+                this[this.tableExportCROHeaderData.TotalContainerQtyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableExportCROHeaderData.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableExportCROHeaderData.CROColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ExportCRODetailDataRow : global::System.Data.DataRow {
+            
+            private ExportCRODetailDataDataTable tableExportCRODetailData;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCRODetailDataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableExportCRODetailData = ((ExportCRODetailDataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetailData.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'ExportCRODetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetailData.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TwentyRate {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetailData.TwentyRateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TwentyRate\' in table \'ExportCRODetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetailData.TwentyRateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string FortyRate {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetailData.FortyRateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FortyRate\' in table \'ExportCRODetailData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetailData.FortyRateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ContainerQtyTwenty {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetailData.ContainerQtyTwentyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerQtyTwenty\' in table \'ExportCRODetailData\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetailData.ContainerQtyTwentyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ContainerQtyForty {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetailData.ContainerQtyFortyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerQtyForty\' in table \'ExportCRODetailData\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetailData.ContainerQtyFortyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TotalContainerQty {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetailData.TotalContainerQtyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContainerQty\' in table \'ExportCRODetailData\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetailData.TotalContainerQtyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableExportCRODetailData.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableExportCRODetailData.CROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTwentyRateNull() {
+                return this.IsNull(this.tableExportCRODetailData.TwentyRateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTwentyRateNull() {
+                this[this.tableExportCRODetailData.TwentyRateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsFortyRateNull() {
+                return this.IsNull(this.tableExportCRODetailData.FortyRateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetFortyRateNull() {
+                this[this.tableExportCRODetailData.FortyRateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerQtyTwentyNull() {
+                return this.IsNull(this.tableExportCRODetailData.ContainerQtyTwentyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerQtyTwentyNull() {
+                this[this.tableExportCRODetailData.ContainerQtyTwentyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerQtyFortyNull() {
+                return this.IsNull(this.tableExportCRODetailData.ContainerQtyFortyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerQtyFortyNull() {
+                this[this.tableExportCRODetailData.ContainerQtyFortyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalContainerQtyNull() {
+                return this.IsNull(this.tableExportCRODetailData.TotalContainerQtyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalContainerQtyNull() {
+                this[this.tableExportCRODetailData.TotalContainerQtyColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ExportCROHeaderRow : global::System.Data.DataRow {
+            
+            private ExportCROHeaderDataTable tableExportCROHeader;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCROHeaderRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableExportCROHeader = ((ExportCROHeaderDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Customer_Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeader.Customer_NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Customer_Name\' in table \'ExportCROHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeader.Customer_NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string InvoiceNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeader.InvoiceNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceNo\' in table \'ExportCROHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeader.InvoiceNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CurrentDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeader.CurrentDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentDate\' in table \'ExportCROHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeader.CurrentDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int TotalContainerCount {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportCROHeader.TotalContainerCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContainerCount\' in table \'ExportCROHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeader.TotalContainerCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCROHeader.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'ExportCROHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCROHeader.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCustomer_NameNull() {
+                return this.IsNull(this.tableExportCROHeader.Customer_NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCustomer_NameNull() {
+                this[this.tableExportCROHeader.Customer_NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsInvoiceNoNull() {
+                return this.IsNull(this.tableExportCROHeader.InvoiceNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetInvoiceNoNull() {
+                this[this.tableExportCROHeader.InvoiceNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCurrentDateNull() {
+                return this.IsNull(this.tableExportCROHeader.CurrentDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCurrentDateNull() {
+                this[this.tableExportCROHeader.CurrentDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalContainerCountNull() {
+                return this.IsNull(this.tableExportCROHeader.TotalContainerCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalContainerCountNull() {
+                this[this.tableExportCROHeader.TotalContainerCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableExportCROHeader.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableExportCROHeader.CROColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ExportCRODetailRow : global::System.Data.DataRow {
+            
+            private ExportCRODetailDataTable tableExportCRODetail;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ExportCRODetailRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableExportCRODetail = ((ExportCRODetailDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CRO {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportCRODetail.CROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CRO\' in table \'ExportCRODetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetail.CROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int ContainerCountTwenty {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportCRODetail.ContainerCountTwentyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerCountTwenty\' in table \'ExportCRODetail\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetail.ContainerCountTwentyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int RateTwenty {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportCRODetail.RateTwentyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RateTwenty\' in table \'ExportCRODetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetail.RateTwentyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int TotalContainerCount {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportCRODetail.TotalContainerCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalContainerCount\' in table \'ExportCRODetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetail.TotalContainerCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int ContainerCountForty {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportCRODetail.ContainerCountFortyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContainerCountForty\' in table \'ExportCRODetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetail.ContainerCountFortyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int RateForty {
+                get {
+                    try {
+                        return ((int)(this[this.tableExportCRODetail.RateFortyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RateForty\' in table \'ExportCRODetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportCRODetail.RateFortyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCRONull() {
+                return this.IsNull(this.tableExportCRODetail.CROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCRONull() {
+                this[this.tableExportCRODetail.CROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerCountTwentyNull() {
+                return this.IsNull(this.tableExportCRODetail.ContainerCountTwentyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerCountTwentyNull() {
+                this[this.tableExportCRODetail.ContainerCountTwentyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateTwentyNull() {
+                return this.IsNull(this.tableExportCRODetail.RateTwentyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateTwentyNull() {
+                this[this.tableExportCRODetail.RateTwentyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalContainerCountNull() {
+                return this.IsNull(this.tableExportCRODetail.TotalContainerCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalContainerCountNull() {
+                this[this.tableExportCRODetail.TotalContainerCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsContainerCountFortyNull() {
+                return this.IsNull(this.tableExportCRODetail.ContainerCountFortyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetContainerCountFortyNull() {
+                this[this.tableExportCRODetail.ContainerCountFortyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateFortyNull() {
+                return this.IsNull(this.tableExportCRODetail.RateFortyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateFortyNull() {
+                this[this.tableExportCRODetail.RateFortyColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -9400,6 +13614,40 @@ namespace BA_ERPMVC.Reports {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ExportOrderDetailDataRowChangeEvent : global::System.EventArgs {
+            
+            private ExportOrderDetailDataRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportOrderDetailDataRowChangeEvent(ExportOrderDetailDataRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportOrderDetailDataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public class OrderDetailDataRowChangeEvent : global::System.EventArgs {
             
             private OrderDetailDataRow eventRow;
@@ -9416,6 +13664,244 @@ namespace BA_ERPMVC.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public OrderDetailDataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ExportHeaderdataRowChangeEvent : global::System.EventArgs {
+            
+            private ExportHeaderdataRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportHeaderdataRowChangeEvent(ExportHeaderdataRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportHeaderdataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ContainerWiseImportHeaderDataRowChangeEvent : global::System.EventArgs {
+            
+            private ContainerWiseImportHeaderDataRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportHeaderDataRowChangeEvent(ContainerWiseImportHeaderDataRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportHeaderDataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ContainerWiseImportDetailDataRowChangeEvent : global::System.EventArgs {
+            
+            private ContainerWiseImportDetailDataRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportDetailDataRowChangeEvent(ContainerWiseImportDetailDataRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContainerWiseImportDetailDataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ExportCROHeaderDataRowChangeEvent : global::System.EventArgs {
+            
+            private ExportCROHeaderDataRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataRowChangeEvent(ExportCROHeaderDataRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderDataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ExportCRODetailDataRowChangeEvent : global::System.EventArgs {
+            
+            private ExportCRODetailDataRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataRowChangeEvent(ExportCRODetailDataRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailDataRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ExportCROHeaderRowChangeEvent : global::System.EventArgs {
+            
+            private ExportCROHeaderRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderRowChangeEvent(ExportCROHeaderRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCROHeaderRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class ExportCRODetailRowChangeEvent : global::System.EventArgs {
+            
+            private ExportCRODetailRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailRowChangeEvent(ExportCRODetailRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExportCRODetailRow Row {
                 get {
                     return this.eventRow;
                 }

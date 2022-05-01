@@ -16,14 +16,14 @@ namespace BA_ERPMVC.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ImportBl : ReportClass {
+    public class ImportContainerWiseInvoiceReport : ReportClass {
         
-        public ImportBl() {
+        public ImportContainerWiseInvoiceReport() {
         }
         
         public override string ResourceName {
             get {
-                return "ImportBl.rpt";
+                return "ImportContainerWiseInvoiceReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace BA_ERPMVC.Reports {
         
         public override string FullResourceName {
             get {
-                return "BA_ERPMVC.Reports.ImportBl.rpt";
+                return "BA_ERPMVC.Reports.ImportContainerWiseInvoiceReport.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace BA_ERPMVC.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedImportBl : Component, ICachedReport {
+    public class CachedImportContainerWiseInvoiceReport : Component, ICachedReport {
         
-        public CachedImportBl() {
+        public CachedImportContainerWiseInvoiceReport() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace BA_ERPMVC.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ImportBl rpt = new ImportBl();
+            ImportContainerWiseInvoiceReport rpt = new ImportContainerWiseInvoiceReport();
             rpt.Site = this.Site;
             return rpt;
         }

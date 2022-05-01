@@ -1504,7 +1504,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         }
         public IEnumerable<OrderListViewModel> GetOrderList(int businessDivisionId)
         {
-            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
+            return (from order in _dbContext.GenerateOrders
                     join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
                             on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                     join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
@@ -2205,12 +2205,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             ExportDeliveryVM.ID = ExportDelivery.ID;
         }
 
-        // --- Import Report --- //
-        public IEnumerable<PrintImportReportViewModel> PrintImportReport(string section, string bl)
+        // --- Import ContainerWise Report --- //
+        public IEnumerable<PrintImportReportViewModel> PrintContainerWiseReport(string section, string bl)
         {
             if (section == "header")
             {
-                return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false && x.BL == bl)
+                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
                         select new PrintImportReportViewModel()
                         {
 
@@ -2224,21 +2224,133 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             }
             else if (section == "detail")
             {
-                return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false && x.BL == bl)
+                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
                         join logistics in _dbContext.Logistics.Where(x => x.IsActive == true)
                         on order.OrderID equals logistics.OrderId
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo }
-                            equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
+                        //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
                             ContainerSize = logistics.ContainerSize,
-                            ContainerNo = string.IsNullOrEmpty(logistics.ReferenceContainer) ? logistics.ContainerNo : logistics.ReferenceContainer,
+                            ContainerNo = logistics.ContainerNo,
+                            //TransportationType = logistics.ModeOfTransportation,
                             WagonNo = dispatch.WagonNo,
+                            // VehicleNo = dispatchtruck.VehicleNo,
                             ContainerWeight = logistics.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount
                         }).Distinct().ToList();
+            }
+            return null;
+        }
+
+
+        // --- Export ContainerWise Report --- //
+        public IEnumerable<PrintImportReportViewModel> PrintExportContainerWiseReport(string section, string cro)
+        {
+            if (section == "header")
+            {
+                return (from order in _dbContext.ExportBookingOrders.Where(x => x.CRO == cro)
+                        select new PrintImportReportViewModel()
+                        {
+
+                            CRO = order.CRO,
+                            //Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+
+                            DateOfBooking = order.DateOfBooking,
+                            ContainerCount = _dbContext.ExportLogistics.Where(x => /*x.IsCompleted == true &&*/ x.OrderId == order.OrderId).Count()
+                        }).Distinct().ToList();
+            }
+            else if (section == "detail")
+            {
+                return (from order in _dbContext.ExportBookingOrders.Where(x => x.CRO == cro)
+                        join exportlogistics in _dbContext.ExportLogistics
+                        on order.OrderId equals exportlogistics.OrderId
+                        //join dispatchtruck in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == true)
+                        //on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
+                        join dispatchtrain in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true)
+                        on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = dispatchtrain.OrderId, ContainerNo = dispatchtrain.ContainerNo }
+                        select new PrintImportReportViewModel()
+                        {
+                            CRO = order.CRO,
+                            ContainerSize = exportlogistics.ContainerSize,
+                            ContainerNo = exportlogistics.ContainerNo,
+                            //TransportationType = exportlogistics.ModeOfTransportation,
+                            WagonNo = dispatchtrain.WagonNo,
+                            //TruckNo = dispatchtruck.TruckNo,
+                            // ContainerWeight = exportlogistics.,
+                            RateOfTransportation = order.RateOfTransportation
+                        }).Distinct().ToList();
+            }
+            return null;
+        }
+        // --- Import BLWise Report --- //
+        public IEnumerable<PrintContainerWiseReportViewModel> PrintImportBLWiseImportReport(string section, string bl)
+        {
+            if (section == "header")
+            {
+                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
+                        select new PrintContainerWiseReportViewModel()
+                        {
+
+                            BL = order.BL,
+                            Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                            TotalContainerCount = _dbContext.Logistics.Where(x => x.IsActive == true && x.OrderId == order.OrderID).Count()
+                        }).Distinct().ToList();
+            }
+            else if (section == "detail")
+            {
+                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
+                        join logistics in _dbContext.Logistics
+                        on order.OrderID equals logistics.OrderId
+                        select new PrintContainerWiseReportViewModel()
+                        {
+                            BL = order.BL,
+                            ContainerCountTwenty = order.TwentyContainerQty,
+                            ContainerCountForty = order.FortyContainerQty,
+                            RateTwenty = Convert.ToInt32(Convert.ToInt32 (order.TwentyContainerPrice) / Convert.ToInt32(order.TwentyContainerQty)),
+                            RateForty = Convert.ToInt32(Convert.ToInt32 (order.FortyContainerPrice) / Convert.ToInt32(order.FortyContainerQty)),
+                            TotalContainerCount = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Count(),
+                           
+
+                        }) .Distinct().ToList();
+
+            }
+            return null;
+        }
+        // --- Export CROWise Report --- //
+        public IEnumerable<PrintContainerWiseReportViewModel> PrintExportCROWiseReport(string section, string cro)
+        {
+            if (section == "header")
+            {
+                return (from order in _dbContext.ExportBookingOrders.Where(x => x.CRO == cro)
+                        select new PrintContainerWiseReportViewModel()
+                        {
+
+                           CRO = order.CRO,
+                            //Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
+                            TotalContainerCount = _dbContext.ExportLogistics.Where(x =>  x.OrderId == order.OrderId).Count()
+                        }).Distinct().ToList();
+            }
+            else if (section == "detail")
+            {
+                return (from order in _dbContext.ExportBookingOrders.Where(x => x.CRO == cro)
+                        join logistics in _dbContext.ExportLogistics
+                        on order.OrderId equals logistics.OrderId
+                        select new PrintContainerWiseReportViewModel()
+                        {
+                            CRO = order.CRO,
+                            ContainerCountTwenty = order.TwentyContainerQty,
+                            ContainerCountForty = order.FortyContainerQty,
+                            RateTwenty = Convert.ToInt32(Convert.ToInt32(order.TwentyContainerPrice) / Convert.ToInt32(order.TwentyContainerQty)),
+                            RateForty = Convert.ToInt32(Convert.ToInt32(order.FortyContainerPrice) / Convert.ToInt32(order.FortyContainerQty)),
+                            TotalContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId).Count(),
+
+
+                        }).Distinct().ToList();
+
             }
             return null;
         }

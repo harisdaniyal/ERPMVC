@@ -370,7 +370,7 @@ namespace BA_ERPMVC.Controllers
                 }
                 else
                 {
-                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
+                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
                     //rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
                 }
 

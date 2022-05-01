@@ -279,9 +279,6 @@
     <Compile Include="BusinessLayer\ShippingService.cs" />
     <Compile Include="BusinessLayer\VendorExpensesService.cs" />
     <Compile Include="Controllers\OrderExecutionController.cs" />
-    <Compile Include="Models\AggregatedCounter.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -348,9 +345,6 @@
     <Compile Include="Models\ContainerType.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Counter.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -379,9 +373,6 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmptyDropOffLoc.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EmptyReturnLocation.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Emp_Child.cs">
@@ -435,25 +426,10 @@
     <Compile Include="Models\GenerateOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Hash.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\InTransactTrain.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InventoryCategory.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Job.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobParameter.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobQueue.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\List.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
@@ -507,15 +483,6 @@
     <Compile Include="Models\ReDispatched.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Schema.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Server.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Set.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Setup_Item_Master.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -526,9 +493,6 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShippingLine.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\State.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Station.cs">
@@ -651,6 +615,11 @@
       <DependentUpon>BLReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ContainerReportData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContainerReportData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -662,20 +631,35 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\ExportContainerWiseReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExportContainerWiseReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ExportCROReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExportCROReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\GDPDF.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GDPDF.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ImportBl.cs">
-      <DependentUpon>ImportBl.rpt</DependentUpon>
+    <Compile Include="Reports\ImportBLWiseReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportBLWiseReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ImportContainerWiseReport.cs">
+      <DependentUpon>ImportContainerWiseReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Reports\InvoiceData.cs">
-      <DependentUpon>InvoiceData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\InvoiceData.Designer.cs">
       <DependentUpon>InvoiceData.xsd</DependentUpon>
@@ -813,6 +797,7 @@
     <Compile Include="ViewModels\OrderBooking\ImportBookingReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\InTransactTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\PrintContainerWiseReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PrintImportReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReDispatchedViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ReadyForDispatchedViewModel.cs" />
@@ -3933,6 +3918,17 @@
     <Content Include="Reports\DataSet2.xsc">
       <DependentUpon>DataSet2.xsd</DependentUpon>
     </Content>
+    <Content Include="Reports\ContainerReportData.xsc">
+      <DependentUpon>ContainerReportData.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\ContainerReportData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ContainerReportData.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\ContainerReportData.xss">
+      <DependentUpon>ContainerReportData.xsd</DependentUpon>
+    </Content>
     <None Include="Reports\DataSet2.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DataSet2.Designer.cs</LastGenOutput>
@@ -4229,13 +4225,25 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DriverSlip.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ExportContainerWiseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ExportContainerWiseReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ExportCROReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ExportCROReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\GDPDF.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>GDPDF.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ImportBl.rpt">
+    <EmbeddedResource Include="Reports\ImportBLWiseReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ImportBl.cs</LastGenOutput>
+      <LastGenOutput>ImportBLWiseReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ImportContainerWiseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImportContainerWiseReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\LocalDetailInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

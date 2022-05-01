@@ -6,17 +6,22 @@
 
         var OrderType = $('#txt_OrderType').val();
         var BL = $('#txtBlNo').val();
+        var CRO = $('#txtCRONo').val();
 
-        if ($('#txt_OrderType').val() == '') {
+        if (OrderType == '') {
             alert('Please select Order Type')
             return false;
         }
-        else if (BL == '' || BL == undefined) {
-            alert('Please select BL/CRO')
+        else if ((BL == '' || BL == undefined) && OrderType == 'Import') {
+            alert('Please select BL')
+            return false;
+        }
+        else if ((CRO == '' || CRO == undefined) && OrderType == 'Export') {
+            alert('Please select CRO')
             return false;
         }
 
-        window.location.href = '/OrderBooking/PrintImportBLReport?ordertype=' + OrderType + '&bl=' + BL;//+ '&type=' + Type ;
+        window.location.href = '/OrderBooking/PrintContainerWiseReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
     })
 
 
@@ -63,6 +68,7 @@
                     _data += '<option value="' + data[i].BL + '">' + data[i].BL + '</option>';
                 }
                 $(".txtBlNo").html(_data);
+                //$(".blwisetxtBlNo").html(_data);
                 $('.txtBlNo').select2();
             }
 
@@ -73,14 +79,32 @@
 function onChange_OrderType(item) {
     var value = $(item).val();
     if (value == "Import") {
+        $("#txtCustomerName").parent().parent().show();
         $("#txtBlNo").parent().parent().show();
+        $("#txtexportCustomerName").parent().parent().hide();
         $("#txtCRONo").parent().parent().hide();
         // $("#lbl_BL_CRO").text("BL");
     }
     else if (value == "Export") {
         $("#txtBlNo").parent().parent().hide();
+        $("#txtCustomerName").parent().parent().hide();
         $("#txtCRONo").parent().parent().show();
+        $("#txtexportCustomerName ").parent().parent().show();
         //$("#lbl_BL_CRO").text("CRO");
     }
 }
+
+function onChange_Type(item) {
+    var value = $(item).val();
+    if (value == "ContainerWise") {
+        $(".BLWise").hide();
+        $(".ContainerWise").show();
+    }
+    else if (value == "BlWise") {
+        $(".BLWise").show();
+        $(".ContainerWise").hide();
+    }
+}
+
+
 

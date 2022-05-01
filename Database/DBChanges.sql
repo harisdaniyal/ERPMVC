@@ -4377,4 +4377,4 @@ Go
  where GenerateOrder.BL=@BL
 
 GO
-
+alter table ExportBookingOrder add InvoiceNo [nvarchar](50) NULL
