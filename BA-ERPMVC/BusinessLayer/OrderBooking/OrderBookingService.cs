@@ -2236,7 +2236,6 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             BL = order.BL,
                             ContainerSize = logistics.ContainerSize,
                             ContainerNo = logistics.ContainerNo,
-                            //TransportationType = logistics.ModeOfTransportation,
                             WagonNo = dispatch.WagonNo,
                             // VehicleNo = dispatchtruck.VehicleNo,
                             ContainerWeight = logistics.ContainerWeight,
