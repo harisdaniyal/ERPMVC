@@ -843,8 +843,8 @@ namespace BA_ERPMVC.Controllers
                     detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
                     detailRow["ContainerCountForty"] = item.ContainerCountForty;
                     detailRow["TotalContainerCount"] = item.TotalContainerCount;
-                    detailRow["RateTwenty"] = item.RateTwenty;
-                    detailRow["RateForty"] = item.RateForty;
+                    detailRow["RateTwenty"] = Convert.ToInt32(Convert.ToInt32(item.RateTwenty) / Convert.ToInt32(item.ContainerCountTwenty));
+                    detailRow["RateForty"] = Convert.ToInt32(Convert.ToInt32(item.RateForty) / Convert.ToInt32(item.ContainerCountForty));
 
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
@@ -883,10 +883,10 @@ namespace BA_ERPMVC.Controllers
                 {
                     detailRow["CRO"] = item.CRO;
                     detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
-                    detailRow["RateTwenty"] = item.RateTwenty;
+                    detailRow["RateTwenty"] = Convert.ToInt32(Convert.ToInt32(item.RateTwenty) / Convert.ToInt32(item.ContainerCountTwenty));
                     detailRow["TotalContainerCount"] = item.TotalContainerCount;
                     detailRow["ContainerCountForty"] = item.ContainerCountForty;
-                    detailRow["RateForty"] = item.RateForty;
+                    detailRow["RateForty"] = Convert.ToInt32(Convert.ToInt32(item.RateForty) / Convert.ToInt32(item.ContainerCountForty));
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
                 rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCROReport.rpt"));
