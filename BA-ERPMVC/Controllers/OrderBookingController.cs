@@ -840,11 +840,11 @@ namespace BA_ERPMVC.Controllers
                 foreach (var item in importReportDetailData)
                 {
                     detailRow["BL"] = item.BL;
-                    detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
-                    detailRow["ContainerCountForty"] = item.ContainerCountForty;
+                    detailRow["ContainerCountTwenty"] = Convert.ToInt32(item.ContainerCountTwenty);
+                    detailRow["ContainerCountForty"] = Convert.ToInt32(item.ContainerCountForty);
                     detailRow["TotalContainerCount"] = item.TotalContainerCount;
-                    detailRow["RateTwenty"] = Convert.ToInt32(Convert.ToInt32(item.RateTwenty) / Convert.ToInt32(item.ContainerCountTwenty));
-                    detailRow["RateForty"] = Convert.ToInt32(Convert.ToInt32(item.RateForty) / Convert.ToInt32(item.ContainerCountForty));
+                    detailRow["RateTwenty"] = Convert.ToInt32(item.RateTwenty) == 0 ? 0 : (Convert.ToInt32(item.RateTwenty) / Convert.ToInt32(item.ContainerCountTwenty));
+                    detailRow["RateForty"] = Convert.ToInt32(item.RateForty) == 0 ? 0 : (Convert.ToInt32(item.RateForty) / Convert.ToInt32(item.ContainerCountForty));
 
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
@@ -882,11 +882,11 @@ namespace BA_ERPMVC.Controllers
                 foreach (var item in exportReportDetailData)
                 {
                     detailRow["CRO"] = item.CRO;
-                    detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
-                    detailRow["RateTwenty"] = Convert.ToInt32(Convert.ToInt32(item.RateTwenty) / Convert.ToInt32(item.ContainerCountTwenty));
+                    detailRow["ContainerCountTwenty"] = Convert.ToInt32(item.ContainerCountTwenty);
+                    detailRow["RateTwenty"] = Convert.ToInt32(item.RateTwenty) == 0 ? 0 : (Convert.ToInt32(item.RateTwenty) / Convert.ToInt32(item.ContainerCountTwenty));
                     detailRow["TotalContainerCount"] = item.TotalContainerCount;
-                    detailRow["ContainerCountForty"] = item.ContainerCountForty;
-                    detailRow["RateForty"] = Convert.ToInt32(Convert.ToInt32(item.RateForty) / Convert.ToInt32(item.ContainerCountForty));
+                    detailRow["ContainerCountForty"] = Convert.ToInt32(item.ContainerCountForty);
+                    detailRow["RateForty"] = Convert.ToInt32(item.RateForty) == 0 ? 0 : (Convert.ToInt32(item.RateForty) / Convert.ToInt32(item.ContainerCountForty));
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
                 }
                 rd.Load(Path.Combine(Server.MapPath("~/Reports"), "ExportCROReport.rpt"));
