@@ -2309,8 +2309,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             BL = order.BL,
                             ContainerCountTwenty = order.TwentyContainerQty,
                             ContainerCountForty = order.FortyContainerQty,
-                            RateTwenty = Convert.ToInt32(Convert.ToInt32 (order.TwentyContainerPrice) / Convert.ToInt32(order.TwentyContainerQty)),
-                            RateForty = Convert.ToInt32(Convert.ToInt32 (order.FortyContainerPrice) / Convert.ToInt32(order.FortyContainerQty)),
+                            RateTwenty = order.TwentyContainerPrice,
+                            RateForty = order.FortyContainerPrice,
                             TotalContainerCount = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Count(),
                            
 
@@ -2343,9 +2343,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             CRO = order.CRO,
                             ContainerCountTwenty = order.TwentyContainerQty,
                             ContainerCountForty = order.FortyContainerQty,
-                            RateTwenty = Convert.ToInt32(Convert.ToInt32(order.TwentyContainerPrice) / Convert.ToInt32(order.TwentyContainerQty)),
-                            RateForty = Convert.ToInt32(Convert.ToInt32(order.FortyContainerPrice) / Convert.ToInt32(order.FortyContainerQty)),
-                            TotalContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId).Count(),
+                            RateTwenty = order.TwentyContainerPrice,
+                            RateForty = order.FortyContainerPrice,
+                            TotalContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId).Count()
 
 
                         }).Distinct().ToList();

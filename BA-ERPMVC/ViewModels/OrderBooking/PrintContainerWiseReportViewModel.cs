@@ -10,8 +10,8 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public int OrderId { get; set; }
         public int LogisticsId { get; set; }
         public int CustomerId { get; set; }
-        public int? RateTwenty{ get; set; }
-        public int? RateForty{ get; set; }
+        public string RateTwenty{ get; set; }
+        public string RateForty{ get; set; }
         public int? TotalContainerCount { get; set; }
         public string Customer_Name { get; set; }
         public int? ContainerCountTwenty { get; set; }

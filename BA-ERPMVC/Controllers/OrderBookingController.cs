@@ -798,7 +798,7 @@ namespace BA_ERPMVC.Controllers
             return File(stream, "application/pdf", $"{invoiceNo}.pdf");
 
         }
-        public ActionResult PrintImportBLWiseReport(string orderType, string bl, string cro, string customerName)
+        public ActionResult PrintLotWiseReport(string orderType, string bl, string cro, string customerName)
         {
 
             ERPMVCEntities context = new ERPMVCEntities();
@@ -884,7 +884,7 @@ namespace BA_ERPMVC.Controllers
                     detailRow["CRO"] = item.CRO;
                     detailRow["ContainerCountTwenty"] = item.ContainerCountTwenty;
                     detailRow["RateTwenty"] = item.RateTwenty;
-                    detailRow["TotalContainerCount"] = item.TotalContainerCount;                   
+                    detailRow["TotalContainerCount"] = item.TotalContainerCount;
                     detailRow["ContainerCountForty"] = item.ContainerCountForty;
                     detailRow["RateForty"] = item.RateForty;
                     orderDetailDataTable.Rows.Add(detailRow.ItemArray);
@@ -916,42 +916,17 @@ namespace BA_ERPMVC.Controllers
                 reprintNo = 1;
                 var upDown = orderType.ToLower() == "import" ? "UP" : "DW";
                 var type = orderType.ToLower() == "export" ? "EXP" : "IMP";
-                invoiceNo = maxValue.ToString($"{type}/{upDown}/{DateTime.Now.Date.ToString("ddMMyyyy")}/{orderNo}/{reprintNo.ToString("000")}");
-                if (!string.IsNullOrEmpty(reportType))
-                {
-                    invoiceNo = $"{reportType}/{invoiceNo}";
-                }
+                invoiceNo = maxValue.ToString($"{type}/{upDown}/{DateTime.Now.Date.ToString("ddMMyyyy")}/{orderNo}/{reportType}/{reprintNo.ToString("000")}");
             }
             else
             {
-                if (string.IsNullOrEmpty(reportType))
+                if (oldInvoiceNo.Split('/').Count() == 6)
                 {
-                    if (string.IsNullOrEmpty(oldInvoiceNo.Split('/')[4].ToString()))
-                    {
-                        reprintNo = 1;
-                    }
-                    else
-                    {
-                        reprintNo = Convert.ToInt32(oldInvoiceNo.Split('/')[4]) + 1;
-                    }
-                    invoiceNo = $"{oldInvoiceNo}/{reprintNo.ToString("000")}";
+                    reprintNo = Convert.ToInt32(oldInvoiceNo.Split('/')[5]) + 1;
                 }
-                else
-                {
-                    if (string.IsNullOrEmpty(oldInvoiceNo.Split('/')[5].ToString()))
-                    {
-                        reprintNo = 1;
-                    }
-                    else
-                    {
-                        reprintNo = Convert.ToInt32(oldInvoiceNo.Split('/')[5]) + 1;
-                    }
-                    invoiceNo = $"{oldInvoiceNo}/{reprintNo.ToString("000")}";
-                }
-
-
+                oldInvoiceNo = oldInvoiceNo.Remove(oldInvoiceNo.LastIndexOf('/'));
+                invoiceNo = $"{oldInvoiceNo}/{reprintNo.ToString("000")}";
             }
-
             return invoiceNo;
         }
 

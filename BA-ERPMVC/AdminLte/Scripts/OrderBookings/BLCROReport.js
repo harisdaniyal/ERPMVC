@@ -20,8 +20,13 @@
             alert('Please select CRO')
             return false;
         }
-
-        window.location.href = '/OrderBooking/PrintContainerWiseReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
+        if ($('#txt_Type').val() =="ContainerWise") {
+            window.location.href = '/OrderBooking/PrintContainerWiseReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
+        }
+        else {
+            window.location.href = '/OrderBooking/PrintLotWiseReport?ordertype=' + OrderType + '&bl=' + BL + '&cro=' + CRO;//+ '&type=' + Type ;
+        }
+        
     })
 
 
