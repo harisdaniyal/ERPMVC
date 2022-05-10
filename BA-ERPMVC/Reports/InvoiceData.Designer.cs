@@ -5002,6 +5002,8 @@ namespace BA_ERPMVC.Reports {
             
             private global::System.Data.DataColumn columnDateOfBooking;
             
+            private global::System.Data.DataColumn columnCustomerName;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ExportHeaderdataDataTable() {
@@ -5077,6 +5079,14 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn CustomerNameColumn {
+                get {
+                    return this.columnCustomerName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5112,14 +5122,15 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ExportHeaderdataRow AddExportHeaderdataRow(string CRO, string InvoiceNO, string CurrentDate, string ContainerCount, string DateOfBooking) {
+            public ExportHeaderdataRow AddExportHeaderdataRow(string CRO, string InvoiceNO, string CurrentDate, string ContainerCount, string DateOfBooking, string CustomerName) {
                 ExportHeaderdataRow rowExportHeaderdataRow = ((ExportHeaderdataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CRO,
                         InvoiceNO,
                         CurrentDate,
                         ContainerCount,
-                        DateOfBooking};
+                        DateOfBooking,
+                        CustomerName};
                 rowExportHeaderdataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowExportHeaderdataRow);
                 return rowExportHeaderdataRow;
@@ -5147,6 +5158,7 @@ namespace BA_ERPMVC.Reports {
                 this.columnCurrentDate = base.Columns["CurrentDate"];
                 this.columnContainerCount = base.Columns["ContainerCount"];
                 this.columnDateOfBooking = base.Columns["DateOfBooking"];
+                this.columnCustomerName = base.Columns["CustomerName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5162,6 +5174,8 @@ namespace BA_ERPMVC.Reports {
                 base.Columns.Add(this.columnContainerCount);
                 this.columnDateOfBooking = new global::System.Data.DataColumn("DateOfBooking", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDateOfBooking);
+                this.columnCustomerName = new global::System.Data.DataColumn("CustomerName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomerName);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5929,7 +5943,7 @@ namespace BA_ERPMVC.Reports {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ExportCROHeaderDataDataTable : global::System.Data.TypedTableBase<ExportCROHeaderDataRow> {
             
-            private global::System.Data.DataColumn columnCustomerName;
+            private global::System.Data.DataColumn columnCustomer_Name;
             
             private global::System.Data.DataColumn columnInvoiceNo;
             
@@ -5974,9 +5988,9 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn CustomerNameColumn {
+            public global::System.Data.DataColumn Customer_NameColumn {
                 get {
-                    return this.columnCustomerName;
+                    return this.columnCustomer_Name;
                 }
             }
             
@@ -6049,10 +6063,10 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ExportCROHeaderDataRow AddExportCROHeaderDataRow(string CustomerName, string InvoiceNo, string CurrentDate, string TotalContainerQty, string CRO) {
+            public ExportCROHeaderDataRow AddExportCROHeaderDataRow(string Customer_Name, string InvoiceNo, string CurrentDate, string TotalContainerQty, string CRO) {
                 ExportCROHeaderDataRow rowExportCROHeaderDataRow = ((ExportCROHeaderDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        CustomerName,
+                        Customer_Name,
                         InvoiceNo,
                         CurrentDate,
                         TotalContainerQty,
@@ -6079,7 +6093,7 @@ namespace BA_ERPMVC.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnCustomerName = base.Columns["CustomerName"];
+                this.columnCustomer_Name = base.Columns["Customer_Name"];
                 this.columnInvoiceNo = base.Columns["InvoiceNo"];
                 this.columnCurrentDate = base.Columns["CurrentDate"];
                 this.columnTotalContainerQty = base.Columns["TotalContainerQty"];
@@ -6089,8 +6103,8 @@ namespace BA_ERPMVC.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnCustomerName = new global::System.Data.DataColumn("CustomerName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCustomerName);
+                this.columnCustomer_Name = new global::System.Data.DataColumn("Customer_Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomer_Name);
                 this.columnInvoiceNo = new global::System.Data.DataColumn("InvoiceNo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnInvoiceNo);
                 this.columnCurrentDate = new global::System.Data.DataColumn("CurrentDate", typeof(string), null, global::System.Data.MappingType.Element);
@@ -12324,6 +12338,22 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string CustomerName {
+                get {
+                    try {
+                        return ((string)(this[this.tableExportHeaderdata.CustomerNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerName\' in table \'ExportHeaderdata\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableExportHeaderdata.CustomerNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCRONull() {
                 return this.IsNull(this.tableExportHeaderdata.CROColumn);
             }
@@ -12380,6 +12410,18 @@ namespace BA_ERPMVC.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetDateOfBookingNull() {
                 this[this.tableExportHeaderdata.DateOfBookingColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCustomerNameNull() {
+                return this.IsNull(this.tableExportHeaderdata.CustomerNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCustomerNameNull() {
+                this[this.tableExportHeaderdata.CustomerNameColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -12775,17 +12817,17 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string CustomerName {
+            public string Customer_Name {
                 get {
                     try {
-                        return ((string)(this[this.tableExportCROHeaderData.CustomerNameColumn]));
+                        return ((string)(this[this.tableExportCROHeaderData.Customer_NameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerName\' in table \'ExportCROHeaderData\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Customer_Name\' in table \'ExportCROHeaderData\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableExportCROHeaderData.CustomerNameColumn] = value;
+                    this[this.tableExportCROHeaderData.Customer_NameColumn] = value;
                 }
             }
             
@@ -12856,14 +12898,14 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCustomerNameNull() {
-                return this.IsNull(this.tableExportCROHeaderData.CustomerNameColumn);
+            public bool IsCustomer_NameNull() {
+                return this.IsNull(this.tableExportCROHeaderData.Customer_NameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCustomerNameNull() {
-                this[this.tableExportCROHeaderData.CustomerNameColumn] = global::System.Convert.DBNull;
+            public void SetCustomer_NameNull() {
+                this[this.tableExportCROHeaderData.Customer_NameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

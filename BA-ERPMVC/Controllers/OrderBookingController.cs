@@ -741,7 +741,7 @@ namespace BA_ERPMVC.Controllers
 
                 foreach (var item in exportReportHeaderData)
                 {
-                    // headerRow["Customer_Name"] = item.Customer_Name;
+                    headerRow["CustomerName"] = item.Customer_Name;
                     headerRow["InvoiceNO"] = exportOrder.InvoiceNo;
                     headerRow["CRO"] = item.CRO;
                     headerRow["CurrentDate"] = DateTime.Now;

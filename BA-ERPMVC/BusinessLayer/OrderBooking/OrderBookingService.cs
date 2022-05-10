@@ -471,7 +471,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         /////********* PreDispatchedMovement*********////////
 
 
-        /////////*********** Dispatched Order ***************//////////u
+        /////////*********** Dispatched Order ***************//////////
         public IEnumerable<DispatchedOrderViewModel> GetDispatchedOrderAsync()
         {
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
@@ -1537,7 +1537,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public IEnumerable<OrderListViewModel> GetExportOrderList()
         {
-            return (from order in _dbContext.ExportBookingOrders.Where(x => x.IsCompleted == false)
+            return (from order in _dbContext.ExportBookingOrders
                         //join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
                         //        on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                         //join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
@@ -2256,8 +2256,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         {
 
                             CRO = order.CRO,
-                            //Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
-
+                            Customer_Name = order.Forwarder,
                             DateOfBooking = order.DateOfBooking,
                             ContainerCount = _dbContext.ExportLogistics.Where(x => /*x.IsCompleted == true &&*/ x.OrderId == order.OrderId).Count()
                         }).Distinct().ToList();
@@ -2295,6 +2294,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         {
 
                             BL = order.BL,
+                            OrderType = order.OrderType,
                             Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
                             TotalContainerCount = _dbContext.Logistics.Where(x => x.IsActive == true && x.OrderId == order.OrderID).Count()
                         }).Distinct().ToList();
@@ -2328,7 +2328,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         select new PrintContainerWiseReportViewModel()
                         {
 
-                           CRO = order.CRO,
+                            CRO = order.CRO,
+                            Customer_Name = order.Forwarder,
                             //Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
                             TotalContainerCount = _dbContext.ExportLogistics.Where(x =>  x.OrderId == order.OrderId).Count()
                         }).Distinct().ToList();
