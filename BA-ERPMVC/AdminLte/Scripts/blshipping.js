@@ -90,8 +90,8 @@ $(document).ready(function () {
                 $("#txtPortOfLanding").val(data[0].portoflanding);
                 $("#txtPortOfDischarge").val(data[0].portofDischarge);
                 $("#txtPlaceofDeilvery").val(data[0].placeOfDelivery);
-                $(".txtContainerNo").select2().val(data[0].ContainerNo.split(',')).trigger("change");
-                $("#txtSealNo").val(data[0].SealNo);
+               // $(".txtContainerNo").select2().val(data[0].ContainerNo.split(',')).trigger("change");
+               // $("#txtSealNo").val(data[0].SealNo);
                 $("#txtConatinerOrPackage").val(data[0].numberOfConatinerPack);
                 $("#txtkindofpack").val(data[0].kindOfPackagesDescriptionOfGoods);
                 $("#txtGrossWeight").val(data[0].grossWeight);

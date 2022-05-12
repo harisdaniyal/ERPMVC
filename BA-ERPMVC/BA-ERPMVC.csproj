@@ -381,6 +381,9 @@
     <Compile Include="Models\EmptyDropOffLoc.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmptyReturnLocation.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Emp_Child.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -639,8 +642,8 @@
     <Compile Include="Models\VendorTypeExpense.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Reports\BLReportWithoutMark.cs">
-      <DependentUpon>BLReportWithoutMark.rpt</DependentUpon>
+    <Compile Include="Reports\BLReportWithOutWaterMark.cs">
+      <DependentUpon>BLReportWithOutWaterMark.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -4252,9 +4255,9 @@
     <EmbeddedResource Include="Migrations\202104292034479_AddLockColumn.resx">
       <DependentUpon>202104292034479_AddLockColumn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\BLReportWithoutMark.rpt">
+    <EmbeddedResource Include="Reports\BLReportWithOutWaterMark.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BLReportWithoutMark.cs</LastGenOutput>
+      <LastGenOutput>BLReportWithOutWaterMark.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\BLReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
