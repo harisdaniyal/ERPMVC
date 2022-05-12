@@ -22,7 +22,7 @@
             'ID': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,
             'ContainerNo': row.find(".txt_containerno").val(),
-            'SealNo': row.find(".txt_sealno").val(),
+            //'SealNo': row.find(".txt_sealno").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val()
 

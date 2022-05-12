@@ -2,10 +2,12 @@
 using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Extensions;
 using BA_ERPMVC.Models;
+using BA_ERPMVC.Reports;
 using BA_ERPMVC.ViewModels;
 using CrystalDecisions.CrystalReports.Engine;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -84,7 +86,7 @@ namespace BA_ERPMVC.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-    
+
 
 
 
@@ -332,8 +334,12 @@ namespace BA_ERPMVC.Controllers
             {
                 ERPMVCEntities context = new ERPMVCEntities();
                 ReportDocument rd = new ReportDocument();
+                InvoiceData invoiceDataDataSet = new InvoiceData();
+                DataTable orderMainDataTable = invoiceDataDataSet.BLShippingLine;
+                DataRow headerRow = orderMainDataTable.NewRow();
 
-                var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => new
+                var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => 
+                new BLShippingLineViewModel()
                 {
                     BL = c.BL,
                     Shipper = c.Shipper,
@@ -348,7 +354,7 @@ namespace BA_ERPMVC.Controllers
                     PlaceOfDelivery = c.PlaceOfDelivery,
                     ForwardingAgent = c.ForwardingAgent,
                     FinalDestination = c.FinalDestination,
-                    ContainerNo = c.ContainerNo,
+                   // ContainerNo = c.ContainerNo,
                     ////SealNo = c.SealNo,
                     NumberOfConatinerPack = c.NumberOfConatinerPack,
                     KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
@@ -360,21 +366,55 @@ namespace BA_ERPMVC.Controllers
                     NumberOfOrignalBL = c.NumberOfOrignalBL,
                     PlaceOfIssue = c.PlaceOfIssue,
                     Collect = c.Collect,
-                    DateOfIssue = c.DateOfIssue.ToString(),
+                    DateOfIssue = c.DateOfIssue,
                     BLAgent = c.BLAgent,
                     BLAgentDetail = context.BLAgentDetails.Where(x => x.BLAgent == c.BLAgent).Select(x => x.BLAgentDetail1).FirstOrDefault()
                 }).ToList();
+
+                foreach (var item in data)
+                {
+                    headerRow["BL"] = item.BL;
+                    headerRow["Shipper"] = item.Shipper;
+                    headerRow["Consignee"] = item.Consignee;
+                    headerRow["NotifyParty"] = item.NotifyParty;
+                    headerRow["precarriageby"] = item.precarriageby;
+                    headerRow["placeofreceipt"] = item.placeofreceipt;
+                    headerRow["OceanVessel"] = item.OceanVessel;
+                    headerRow["Portofloading"] = item.Portoflanding;
+                    headerRow["VoyNo"] = item.VoyNo;
+                    headerRow["PortofDischarge"] = item.PortofDischarge;
+                    headerRow["PlaceOfDelivery"] = item.PlaceOfDelivery;
+                    headerRow["ForwardingAgent"] = item.ForwardingAgent;
+                    headerRow["FinalDestination"] = item.FinalDestination;
+                    //headerRow["ContainerNo"] = item.ContainerNo;
+                    headerRow["NumberOfContainerPack"] = item.NumberOfConatinerPack;
+                    headerRow["KindOfPackagesDescriptionOfGoods"] = item.KindOfPackagesDescriptionOfGoods;
+                    headerRow["GrossWeight"] = item.GrossWeight;
+                    headerRow["NetWeight"] = item.NetWeight;
+                    headerRow["Frightandcharges"] = item.Frightandcharges;
+                    headerRow["FrightPayable"] = item.FrightPayable;
+                    headerRow["TypeOfService"] = item.TypeOfService;
+                    headerRow["NumberOfOriginalBL"] = item.NumberOfOrignalBL;
+                    headerRow["PlaceOfIssue"] = item.PlaceOfIssue;
+                    headerRow["Collect"] = item.Collect;
+                    headerRow["DateOfIssue"] = item.DateOfIssue;
+                    headerRow["BLAgent"] = item.BLAgent;
+                    headerRow["BLAgentDetail"] = item.BLAgentDetail;
+                    orderMainDataTable.Rows.Add(headerRow);
+                }
+
+
                 if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
                 {
                     rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReport.rpt"));
                 }
                 else
                 {
-                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
+                    rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithOutWaterMark.rpt"));
                     //rd.Load(Path.Combine(Server.MapPath("~/Reports"), "BLReportWithoutMark.rpt"));
                 }
 
-                rd.SetDataSource(data);
+                rd.SetDataSource(invoiceDataDataSet);
                 Response.Buffer = false;
                 Response.ClearContent();
                 Response.ClearHeaders();
@@ -390,7 +430,7 @@ namespace BA_ERPMVC.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = ex.Message });
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
