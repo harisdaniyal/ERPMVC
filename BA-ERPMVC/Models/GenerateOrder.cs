@@ -17,12 +17,16 @@ namespace BA_ERPMVC.Models
         public int OrderID { get; set; }
         public string OrderNo { get; set; }
         public Nullable<int> CustomerID { get; set; }
-        public Nullable<int> BusinessDevisionID { get; set; }
+        public Nullable<int> BusinessDivisionId { get; set; }
         public string OrderType { get; set; }
         public string BL { get; set; }
         public string CRO { get; set; }
         public string InBond_Number { get; set; }
         public string DeliveryNo { get; set; }
+        public Nullable<int> TwentyContainerQty { get; set; }
+        public Nullable<int> FortyContainerQty { get; set; }
+        public string TwentyContainerPrice { get; set; }
+        public string FortyContainerPrice { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
@@ -35,5 +39,12 @@ namespace BA_ERPMVC.Models
         public string Remarks { get; set; }
         public Nullable<System.DateTime> VesselBerthingDate { get; set; }
         public string BookingPOCName { get; set; }
+        public Nullable<System.DateTime> DOGuarantee { get; set; }
+        public Nullable<System.DateTime> ImportEIR { get; set; }
+        public Nullable<System.DateTime> PortWeighment { get; set; }
+        public Nullable<System.DateTime> OutSidePortWeighment { get; set; }
+        public Nullable<System.DateTime> GD { get; set; }
+        public Nullable<System.DateTime> BLDate { get; set; }
+        public string InvoiceNo { get; set; }
     }
 }

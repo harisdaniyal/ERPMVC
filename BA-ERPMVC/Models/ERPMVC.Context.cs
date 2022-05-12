@@ -39,7 +39,6 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<BAExpensesDetail> BAExpensesDetails { get; set; }
         public virtual DbSet<BAExpensesDropDown> BAExpensesDropDowns { get; set; }
         public virtual DbSet<BAMaritalStatu> BAMaritalStatus { get; set; }
-        public virtual DbSet<BAShippingLine> BAShippingLines { get; set; }
         public virtual DbSet<BAtrip> BAtrips { get; set; }
         public virtual DbSet<ClearingAgent> ClearingAgents { get; set; }
         public virtual DbSet<ContainerStatu> ContainerStatus { get; set; }
@@ -47,16 +46,13 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<DeliveryTrain> DeliveryTrains { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
-        public virtual DbSet<DispatchedOrder> DispatchedOrders { get; set; }
         public virtual DbSet<Emp_Child> Emp_Child { get; set; }
         public virtual DbSet<Emp_Parent> Emp_Parent { get; set; }
         public virtual DbSet<Emp_Spouse> Emp_Spouse { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<FromLocOil> FromLocOils { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<InTransactTrain> InTransactTrains { get; set; }
         public virtual DbSet<InventoryCategory> InventoryCategories { get; set; }
-        public virtual DbSet<Logistic> Logistics { get; set; }
         public virtual DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Order_Expense_Mapping> Order_Expense_Mapping { get; set; }
@@ -111,6 +107,28 @@ namespace BA_ERPMVC.Models
         public virtual DbSet<OilBalance> OilBalances { get; set; }
         public virtual DbSet<OilCompany> OilCompanies { get; set; }
         public virtual DbSet<stp_PaymentMode> stp_PaymentMode { get; set; }
+        public virtual DbSet<DeliveryTruck> DeliveryTrucks { get; set; }
+        public virtual DbSet<DispatchedTruck> DispatchedTrucks { get; set; }
+        public virtual DbSet<EmptyDropOff> EmptyDropOffs { get; set; }
+        public virtual DbSet<EmptyDropOffLoc> EmptyDropOffLocs { get; set; }
+        public virtual DbSet<ExportDelivery> ExportDeliveries { get; set; }
+        public virtual DbSet<ExportDispatchedTrain> ExportDispatchedTrains { get; set; }
+        public virtual DbSet<ExportDispatchedTruck> ExportDispatchedTrucks { get; set; }
+        public virtual DbSet<ExportLogistic> ExportLogistics { get; set; }
+        public virtual DbSet<ExportPreDispatched> ExportPreDispatcheds { get; set; }
+        public virtual DbSet<ExportReDispatched> ExportReDispatcheds { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<ReDispatched> ReDispatcheds { get; set; }
+        public virtual DbSet<BLShippingContainer> BLShippingContainers { get; set; }
+        public virtual DbSet<BLAgentDetail> BLAgentDetails { get; set; }
+        public virtual DbSet<BAShippingLine> BAShippingLines { get; set; }
+        public virtual DbSet<BLShippingContainerDetail> BLShippingContainerDetails { get; set; }
+        public virtual DbSet<BLApproval> BLApprovals { get; set; }
         public virtual DbSet<GenerateOrder> GenerateOrders { get; set; }
+        public virtual DbSet<Logistic> Logistics { get; set; }
+        public virtual DbSet<DispatchedOrder> DispatchedOrders { get; set; }
+        public virtual DbSet<ExportBookingOrder> ExportBookingOrders { get; set; }
+
+        public virtual DbSet<OrderContainer> OrderContainers { get; set; }
     }
 }
