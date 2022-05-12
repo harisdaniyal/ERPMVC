@@ -77,6 +77,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _exportdispatchedtruckRepository = new ExportDispatchedTruckRepository(_dbContext);
             _exportRedispatchedRepository = new ExportReDispatchedRepository(_dbContext);
             _exportDeliveryRepository = new ExportDeliveryRepository(_dbContext);
+            _orderContainerRepository = new OrderContainerRepository(_dbContext);
         }
 
         public async Task<BookingViewModel> GetOrderBookingAsync(int orderBookingId)
@@ -2259,19 +2260,20 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
                         join orderContainers in _dbContext.OrderContainers
-                        on order.OrderID equals orderContainers.OrderID
+                        on order.OrderID equals orderContainers.OrderID into OCGroup
+                        from ImportOrderContainers in OCGroup.DefaultIfEmpty()
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on new { OrderId = orderContainers.OrderID, ContainerNo = orderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        on new { OrderId = ImportOrderContainers.OrderID, ContainerNo = ImportOrderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
                         //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
                         //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
-                            ContainerSize = orderContainers.ContainerSize,
-                            ContainerNo = orderContainers.ContainerNo,
+                            ContainerSize = ImportOrderContainers.ContainerSize,
+                            ContainerNo = ImportOrderContainers.ContainerNo,
                             WagonNo = dispatch.WagonNo,
                             // VehicleNo = dispatchtruck.VehicleNo,
-                            ContainerWeight = orderContainers.ContainerWeight,
+                            ContainerWeight = ImportOrderContainers.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount
                         }).Distinct().ToList();
             }

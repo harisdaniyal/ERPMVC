@@ -279,9 +279,6 @@
     <Compile Include="BusinessLayer\ShippingService.cs" />
     <Compile Include="BusinessLayer\VendorExpensesService.cs" />
     <Compile Include="Controllers\OrderExecutionController.cs" />
-    <Compile Include="Models\AggregatedCounter.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -346,9 +343,6 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContainerType.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Counter.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -435,25 +429,10 @@
     <Compile Include="Models\GenerateOrder.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Hash.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\InTransactTrain.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InventoryCategory.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Job.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobParameter.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobQueue.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\List.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
@@ -510,15 +489,6 @@
     <Compile Include="Models\ReDispatched.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Schema.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Server.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Set.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Setup_Item_Master.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -529,9 +499,6 @@
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShippingLine.cs">
-      <DependentUpon>ERPMVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\State.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Station.cs">
@@ -829,7 +796,6 @@
     <Compile Include="ViewModels\ExportOrderBooking\ExportOrderBookingViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportPreDispatchedViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportReDispatchedViewModel.cs" />
-    <Compile Include="ViewModels\OrderBooking\OrderContainerViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DispatchedOrderViewModel.cs" />
@@ -837,6 +803,7 @@
     <Compile Include="ViewModels\OrderBooking\EmptyDropOffViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\ImportBookingReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\InTransactTrainViewModel.cs" />
+    <Compile Include="ViewModels\OrderBooking\OrderContainerViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PreDispatchedMovementViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PrintContainerWiseReportViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\PrintImportReportViewModel.cs" />
@@ -943,6 +910,7 @@
     <Content Include="AdminLte\Scripts\EmptyDropOffLoc.js" />
     <Content Include="AdminLte\Scripts\ExportOrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\BLCROReport.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\BookingContainers.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\DeliveryTruck.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\Dispatched.js" />
@@ -961,7 +929,6 @@
     <Content Include="AdminLte\Scripts\OrderBookings\PreDispatchedMovement.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ReDispatched.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ReadyForDispatched.js" />
-    <Content Include="AdminLte\Scripts\OrderBookings\BookingContainers.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\TripExecution.js" />
     <Content Include="AdminLte\Scripts\ShippingAgent.js" />
     <Content Include="AdminLte\Scripts\ShippingLine.js" />

@@ -12,7 +12,7 @@
             return false;
         }
         if (row.find(".txt_container_weight").val() == '') {
-            alert('Please select Container Size')
+            alert('Please select Container Weight')
             return false;
         }
         save(row, false)
