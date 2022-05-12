@@ -19,6 +19,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
     public class OrderBookingService
     {
         private readonly ERPMVCEntities _dbContext;
+        private readonly OrderContainerRepository _orderContainerRepository;
         private readonly OrderRepository _orderRepository;
         private readonly LogisticsRepositry _logisticsRepositry;
         private readonly ReadyForDispatchedRepositry _readyForDispatchedRepositry;
@@ -147,6 +148,19 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             bookingViewModel.OrderId = bookingModel.OrderID;
         }
 
+        public async Task CreateOrderBookingContainerAsync(List<OrderContainerViewModel> bookingContainerViewModel)
+        {
+            List<OrderContainer> bookingContainerModelList = Mapper.Map<List<OrderContainerViewModel>, List<OrderContainer>>(bookingContainerViewModel);
+            if (bookingContainerModelList == null)
+            {
+                throw new ArgumentNullException(nameof(bookingContainerModelList));
+            }
+
+            _dbContext.OrderContainers.AddRange(bookingContainerModelList);
+            await _dbContext.SaveChangesAsync();
+        }
+
+
         public async Task UpdateOrderBookingAsync(BookingViewModel bookingViewModel)
         {
             if (bookingViewModel == null)
@@ -211,6 +225,25 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             await AddOrderFacilitiesAsync(bookingViewModel.FacilityIds, bookingModel.OrderID);
 
             bookingViewModel.OrderId = bookingModel.OrderID;
+        }
+
+        public async Task UpdateOrderBookingContainerAsync(List<OrderContainerViewModel> bookingContainerViewModel, int orderId)
+        {
+            if (bookingContainerViewModel.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(bookingContainerViewModel));
+            }
+
+            var containers = _dbContext.OrderContainers.Where(x => x.OrderID == orderId).ToList();
+            _dbContext.OrderContainers.RemoveRange(containers);
+            var bookingContainerModelList = Mapper.Map<List<OrderContainerViewModel>, List<OrderContainer>>(bookingContainerViewModel);
+            if (bookingContainerModelList == null)
+            {
+                throw new ArgumentNullException(nameof(bookingContainerModelList));
+            }
+            bookingContainerModelList.ForEach(x => x.ID = 0);
+            _dbContext.OrderContainers.AddRange(bookingContainerModelList);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int[]> GetOrderFacilitiesAsync(int orderBookingId)
@@ -2219,26 +2252,26 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             OrderType = order.OrderType,
                             Remarks = order.Remarks,
                             OrderDate = order.OrderDate,
-                            ContainerCount = _dbContext.Logistics.Where(x => x.IsActive == true && x.OrderId == order.OrderID).Count()
+                            ContainerCount = _dbContext.OrderContainers.Count()
                         }).Distinct().ToList();
             }
             else if (section == "detail")
             {
                 return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
-                        join logistics in _dbContext.Logistics.Where(x => x.IsActive == true)
-                        on order.OrderID equals logistics.OrderId
+                        join orderContainers in _dbContext.OrderContainers
+                        on order.OrderID equals orderContainers.OrderID
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
+                        on new { OrderId = orderContainers.OrderID, ContainerNo = orderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
                         //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
                         //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
-                            ContainerSize = logistics.ContainerSize,
-                            ContainerNo = logistics.ContainerNo,
+                            ContainerSize = orderContainers.ContainerSize,
+                            ContainerNo = orderContainers.ContainerNo,
                             WagonNo = dispatch.WagonNo,
                             // VehicleNo = dispatchtruck.VehicleNo,
-                            ContainerWeight = logistics.ContainerWeight,
+                            ContainerWeight = orderContainers.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount
                         }).Distinct().ToList();
             }
@@ -2296,14 +2329,12 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             BL = order.BL,
                             OrderType = order.OrderType,
                             Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
-                            TotalContainerCount = _dbContext.Logistics.Where(x => x.IsActive == true && x.OrderId == order.OrderID).Count()
+                            TotalContainerCount = _dbContext.OrderContainers.Count()
                         }).Distinct().ToList();
             }
             else if (section == "detail")
             {
                 return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
-                        join logistics in _dbContext.Logistics
-                        on order.OrderID equals logistics.OrderId
                         select new PrintContainerWiseReportViewModel()
                         {
                             BL = order.BL,
@@ -2311,10 +2342,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             ContainerCountForty = order.FortyContainerQty,
                             RateTwenty = order.TwentyContainerPrice,
                             RateForty = order.FortyContainerPrice,
-                            TotalContainerCount = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.IsActive == true).Count(),
-                           
+                            TotalContainerCount = _dbContext.OrderContainers.Where(x=> x.OrderID == order.OrderID).Count(),
 
-                        }) .Distinct().ToList();
+
+                        }).Distinct().ToList();
 
             }
             return null;
@@ -2331,7 +2362,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             CRO = order.CRO,
                             Customer_Name = order.Forwarder,
                             //Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
-                            TotalContainerCount = _dbContext.ExportLogistics.Where(x =>  x.OrderId == order.OrderId).Count()
+                            TotalContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId).Count()
                         }).Distinct().ToList();
             }
             else if (section == "detail")

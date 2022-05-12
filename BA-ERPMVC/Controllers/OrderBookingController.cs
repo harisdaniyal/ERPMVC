@@ -64,6 +64,8 @@ namespace BA_ERPMVC.Controllers
 
             this.ViewBag.Customers = await customerService.GetAllCustomersAsync();
             this.ViewBag.Facilities = await facilityService.GetAllFacilitiesAsync();
+            this.ViewBag.OrderContainers = db.OrderContainers.Where(x => x.OrderID == orderBookingId).ToList();
+            this.ViewBag.ContainerSizes = await orderBookingService.GetContainerSizesAsync();
             this.ViewBag.BusinessDivisions = await businessDivisionService.GetAllBusinessDivisionsAsync();
 
             var bookingViewModel = await orderBookingService.GetOrderBookingAsync(orderBookingId);
@@ -100,6 +102,32 @@ namespace BA_ERPMVC.Controllers
                 await orderBookingService.UpdateOrderBookingAsync(bookingViewModel);
 
                 return Json(new { success = true, orderBookingId = bookingViewModel.OrderId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> BookingContainerDetails(List<OrderContainerViewModel> bookingContainerViewModel, int orderId)
+        {
+            if (bookingContainerViewModel == null)
+            {
+                return Json(new { success = false, message = $"{nameof(bookingContainerViewModel)} should be null or empty" });
+            }
+
+            try
+            {
+                if (orderId == 0)
+                {
+                    await orderBookingService.CreateOrderBookingContainerAsync(bookingContainerViewModel);
+                    return Json(new { success = true });
+                }
+
+                await orderBookingService.UpdateOrderBookingContainerAsync(bookingContainerViewModel, orderId);
+
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {

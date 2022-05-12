@@ -1,5 +1,5 @@
 ﻿$(document).ready(function myfunction() {
-
+    var dataObject = []
     $(document).on("click", ".btnSaveEdit", function () {
         row = $(this).closest("tr")
         console.log(row.find(".txt_ID").val())
@@ -18,7 +18,7 @@
             alert('You can not delete to non existing record !!')
             return false;
         }
-        var dataObject = JSON.stringify({
+        dataObject.push(JSON.stringify({
             'ID': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,
             'ContainerNo': row.find(".txt_containerno").val(),
@@ -26,7 +26,8 @@
             'ContainerType': row.find(".txt_ContainerType").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val()
 
-        });
+        }));
+
         showLoader();
         fetch('/DropDownMenu/BLShippingContainer', {
             method: 'POST',

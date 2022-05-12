@@ -6,7 +6,7 @@ function save() {
     var facilities = [];
     $("input:checkbox[name='cbx_Facilities']:checked").each(function () {
         facilities.push($(this).val());
-    });
+    }); save
 
     showLoader();
 
@@ -46,6 +46,37 @@ function save() {
     }).then(res => res.json());
 }
 
+function saveContainerDetails(orderId) {
+
+    debugger;
+    var containerData = [];
+    $('#example tbody tr').each(function () {
+        if ($(this).find(".txt_container").val() == '') {
+            return false;
+        }
+        debugger;
+        containerData.push({
+            ID: $(this).find(".txt_container_id").val(),
+            OrderId: orderId,
+            ContainerNo: $(this).find(".txt_container").val(),
+            ContainerSize: $(this).find(".ddl_ContainerSize").val(),
+            ContainerWeight: $(this).find(".txt_container_weight").val(),
+            OrderType: "Import"
+        });
+    });
+
+    showLoader();
+
+    return fetch("/OrderBooking/BookingContainerDetails?orderId=" + orderId, {
+        method: 'POST',
+        body: JSON.stringify(containerData),
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+    }).then(res => res.json());
+}
+
+
 function CalculateTotalAmount() {
     var twentycontainer = $("#txt_Twentycontainerprice").val();
     var fortycontainer = $("#txt_Fortycontainerprice").val();
@@ -78,7 +109,7 @@ async function saveDraft(showSuccessBanner) {
 
     if (response.success) {
         sessionStorage.setItem("orderBookingId", response.orderBookingId);
-
+        saveContainerDetails(response.orderBookingId);
         if (showSuccessBanner)
             showSuccessMessage("Booking has been created successfully");
     }
@@ -111,7 +142,7 @@ function onChange_OrderType(item) {
 
         if (orderType == "Import") {
             $("#txt_BL").show();
-           /* $("#txt_CRO").hide();*/
+            /* $("#txt_CRO").hide();*/
             $("#lbl_BL_CRO").text("BL");
         }
         //else if (orderType == "Export") {
@@ -173,8 +204,8 @@ function validateInputs() {
         $("#txt_VesselBerthingDate").parent('.input-group').addClass('invalid');
         isValid = false;
     }
-   
-    
+
+
     return isValid;
 }
 

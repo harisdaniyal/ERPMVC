@@ -4378,3 +4378,16 @@ Go
 
 GO
 alter table ExportBookingOrder add InvoiceNo [nvarchar](50) NULL
+update GenerateOrder set isCompleted=0, InvoiceNo=null where InvoiceNo is not null
+update ExportBookingOrder set isCompleted=0, InvoiceNo=null where InvoiceNo is not null
+
+---- Aleem 11-05-2022 ----
+GO
+CREATE TABLE [dbo].[OrderContainer](
+	[ID] [int] primary key IDENTITY(1,1) NOT NULL ,
+	[OrderID] int not null,
+	[ContainerNo] [nvarchar](250) NULL,
+	[ContainerSize] [nvarchar](50) NULL,
+	[ContainerWeight] int NULL,
+	[OrderType] nvarchar(50) null
+)
