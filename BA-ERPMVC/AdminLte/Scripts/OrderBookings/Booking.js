@@ -52,7 +52,7 @@ function saveContainerDetails(orderId) {
     var containerData = [];
     $('#example tbody tr').each(function () {
         if ($(this).find(".txt_container").val() == '') {
-            return;
+            return
         }
         debugger;
         containerData.push({
@@ -100,7 +100,7 @@ function CalculateTotalAmount() {
 
 async function saveDraft(showSuccessBanner) {
     var response = await save();
-
+    debugger;
     if (!response) return false;
 
     if (!response.success) {
