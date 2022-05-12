@@ -387,10 +387,6 @@ namespace BA_ERPMVC.Controllers
                     headerRow["ForwardingAgent"] = item.ForwardingAgent;
                     headerRow["FinalDestination"] = item.FinalDestination;
                     //headerRow["ContainerNo"] = item.ContainerNo;
-                    headerRow["NumberOfContainerPack"] = item.NumberOfConatinerPack;
-                    headerRow["KindOfPackagesDescriptionOfGoods"] = item.KindOfPackagesDescriptionOfGoods;
-                    headerRow["GrossWeight"] = item.GrossWeight;
-                    headerRow["NetWeight"] = item.NetWeight;
                     headerRow["Frightandcharges"] = item.Frightandcharges;
                     headerRow["FrightPayable"] = item.FrightPayable;
                     headerRow["TypeOfService"] = item.TypeOfService;
@@ -402,7 +398,22 @@ namespace BA_ERPMVC.Controllers
                     headerRow["BLAgentDetail"] = item.BLAgentDetail;
                     orderMainDataTable.Rows.Add(headerRow);
                 }
+                string BL_Number = data[0].BL;
 
+                var detailData = context.BLShippingContainerDetails.Where(x => x.Bl == BL_Number).ToList();
+                DataTable orderDetailDataTable = invoiceDataDataSet.BLShippingLineDetail;
+                DataRow DetailRow = orderDetailDataTable.NewRow();
+
+                foreach (var item in detailData)
+                {
+                    DetailRow["ContainerNo"] = item.ContainerNo;
+                    DetailRow["SealNo"] = item.SealNo;
+                    DetailRow["NoOfContainersOrPackages"] = data[0].NumberOfConatinerPack ;
+                    DetailRow["KindOfPackagesDescriptionOfGoods"] = data[0].KindOfPackagesDescriptionOfGoods;
+                    DetailRow["GrossWeight"] = data[0].GrossWeight;
+                    DetailRow["NetWeight"] = data[0].NetWeight;
+                    orderDetailDataTable.Rows.Add(DetailRow);
+                }
 
                 if (context.BAShippingLines.Where(x => x.BLShippingID == id).Select(x => x.IsCompleted).FirstOrDefault().GetValueOrDefault())
                 {
