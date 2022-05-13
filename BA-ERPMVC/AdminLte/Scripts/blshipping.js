@@ -364,6 +364,36 @@ $(document).ready(function () {
             window.location.href = "/BLShippingLine/PrintGDReport?id=" + ID + "&edit=1";
         });
 
+        // Container Detail Grid //
+
+        function savecontainerdetails(blshippingid) {
+
+            debugger;
+            var containerdata = [];
+            $('#example tbody tr').each(function () {
+                if ($(this).find(".txt_containerno").val() == '') {
+                    return
+                }
+                debugger;
+                containerdata.push({
+                    id: $(this).find(".txt_id").val(),
+                    blshippingid: blshippingid,
+                    containerno: $(this).find(".txt_containerno").val(),
+                    sealno: $(this).find(".txt_sealno").val(),
+                });
+            });
+
+            showLoader();
+
+            return fetch("/BLShippingLineController/BlShippingContainerDetail?blshippingId=" + blshippingId, {
+                method: 'POST',
+                body: JSON.stringify(containerData),
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then(res => res.json());
+        //}
+        
         //Back Button
         $("#btnBack").click(function () {
             // Remove this line if it worked
