@@ -2,14 +2,14 @@
 
     $(document).on("click", ".btnSaveEdit", function () {
         row = $(this).closest("tr")
-        //if (row.find(".txt_ContainerNo").val() == '') {
-        //    alert('Please Select Container No#')
-        //    return false;
-        //}
-        //if (row.find(".txt_sealno").val() == '') {
-        //    alert('Please enter Seal No')
-        //    return false;
-        //}
+        if (row.find(".txt_ContainerNo").val() == '') {
+            alert('Please Select Container No')
+            return false;
+        }
+        if (row.find(".txt_sealno").val() == '') {
+            alert('Please enter Seal No')
+            return false;
+        }
         
         console.log(row.find(".txt_ID").val())
         save(row, false)

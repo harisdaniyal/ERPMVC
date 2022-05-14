@@ -5,29 +5,29 @@
 }
 
 
-
 $("#btnDraft").click(function () {
-    save(true)
+    //var row = $(this).closest("tr")
+    Save(true)
 })
 
 $(document).ready(function () {
     var services = new Services();
 
-    $.ajax({
-        type: "GET",
-        url: "/BLShippingLine/GetContainerNo",
-        data: "{}",
-        async: false,
-        success: function (data) {
-            var _data = '<option value="">Please Select Container</option>';
-            for (var i = 0; i < data.length; i++) {
-                _data += '<option value="' + data[i].ContainerNo + '">' + data[i].ContainerNo + '</option>';
-            }
-            $(".txtContainerNo").html(_data);
-            $('.txtContainerNo').select2();
-        }
+    //$.ajax({
+    //    type: "GET",
+    //    url: "/BLShippingLine/GetContainerNo",
+    //    data: "{}",
+    //    async: false,
+    //    success: function (data) {
+    //        var _data = '<option value="">Please Select Container</option>';
+    //        for (var i = 0; i < data.length; i++) {
+    //            _data += '<option value="' + data[i].ContainerNo + '">' + data[i].ContainerNo + '</option>';
+    //        }
+    //        $(".txtContainerNo").html(_data);
+    //        $('.txtContainerNo').select2();
+    //    }
 
-    });
+    //});
 
     $.ajax({
         type: "GET",
@@ -90,8 +90,8 @@ $(document).ready(function () {
                 $("#txtPortOfLanding").val(data[0].portoflanding);
                 $("#txtPortOfDischarge").val(data[0].portofDischarge);
                 $("#txtPlaceofDeilvery").val(data[0].placeOfDelivery);
-               // $(".txtContainerNo").select2().val(data[0].ContainerNo.split(',')).trigger("change");
-               // $("#txtSealNo").val(data[0].SealNo);
+                // $(".txtContainerNo").select2().val(data[0].ContainerNo.split(',')).trigger("change");
+                // $("#txtSealNo").val(data[0].SealNo);
                 $("#txtConatinerOrPackage").val(data[0].numberOfConatinerPack);
                 $("#txtkindofpack").val(data[0].kindOfPackagesDescriptionOfGoods);
                 $("#txtGrossWeight").val(data[0].grossWeight);
@@ -156,8 +156,8 @@ $(document).ready(function () {
                             Portoflanding: $("#txtPortOfLanding").val(),
                             PortofDischarge: $("#txtPortOfDischarge").val(),
                             PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            ContainerNo: $(".txtContainerNo").val().toString(),
-                            SealNo: $("#txtSealNo").val(),
+                           // ContainerNo: $(".txtContainerNo").val().toString(),
+                            //SealNo: $(".txt_sealno").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
                             KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
                             GrossWeight: $("#txtGrossWeight").val(),
@@ -185,8 +185,8 @@ $(document).ready(function () {
                                 //  $("#txtfreightPayable").val("");
                                 //  $("#txtOperationDate").val("");
 
-
-                                toastr.success("City Detail has been inserted successfully");
+                                SaveContainerDetails();
+                                toastr.success("BL Detail has been inserted successfully");
                             } else {
                                 // DoSomethingElse()
                                 toastr.warn("Kindly Check Your Detail");
@@ -240,9 +240,10 @@ $(document).ready(function () {
                             width: 10,
                             'render': function (data) {
                                 if (data == null) {
-                                    return 'N/A'
+                                    return '<div class="badge badge-pill badge-warning w-100 py-2 mb-1"><div> N/A'
                                 } else {
-                                    return data == true ? "ACCEPTED" : "REJECTED";
+                                    return data == true ? '<div class="badge badge-pill badge-success w-100 py-2 mb-1"><div> ACCEPTED' :
+                                                          '<div class="badge badge-pill badge-danger w-100 py-2 mb-1"><div> REJECTED ';
                                 }
                             }
                         },
@@ -366,203 +367,208 @@ $(document).ready(function () {
 
         // Container Detail Grid //
 
-        function savecontainerdetails(blshippingid) {
+        function SaveContainerDetails() {
 
             debugger;
-            var containerdata = [];
+            var containerDetail = [];
             $('#example tbody tr').each(function () {
                 if ($(this).find(".txt_containerno").val() == '') {
                     return
                 }
                 debugger;
-                containerdata.push({
-                    id: $(this).find(".txt_id").val(),
-                    blshippingid: blshippingid,
-                    containerno: $(this).find(".txt_containerno").val(),
-                    sealno: $(this).find(".txt_sealno").val(),
+                containerDetail.push({
+                    Id: $(this).find(".txt_id").val(),
+                   /*// blshippingid: blshippingid,*/
+                    Bl: $(this).find(".txtblNo").val(),
+                    ContainerNo: $(this).find(".txt_containerno").val(),
+                    SealNo: $(this).find(".txt_sealno").val(),
                 });
             });
 
             showLoader();
 
-            return fetch("/BLShippingLineController/BlShippingContainerDetail?blshippingId=" + blshippingId, {
+            return fetch("/BLShippingLineController/BlShippingContainerDetail?blshippingId=" + Bl, {
                 method: 'POST',
-                body: JSON.stringify(containerData),
+                body: JSON.stringify(containerDetail),
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
             }).then(res => res.json());
-        //}
-        
-        //Back Button
-        $("#btnBack").click(function () {
-            // Remove this line if it worked
-            $("#gridShow").show();
-            $("#lloForm").hide();
-        });
-
-        //Add Button
-        $("#btnADD").click(function () {
-            // Remove this line if it worked
-            $("#gridShow").hide();
-            $("#lloForm").show();
-        });
-
-
-        $(document).on('click', '#btnDraft', function () {
-            $("#txtIsCompleted").val(false)
-            $("#_addShippingLine").valid();
-        });
-
-        $(document).on('click', '#btnSubmit', function () {
-            $("#txtIsCompleted").val(true)
-            $("#_addShippingLine").valid();
-        });
-
-        // Submit Button
-        var toastCount = 0;
-        $("#_addShippingLine").validate({
-            rules: {
-
-                txtblNo: "required",
-                txtshipping: "required",
-                txtConsignee: "required",
-                txtNotifyParty: "required",
-                txtOceanVessel: "required",
-                txtVoyNo: "required",
-                txtPortOfLanding: "required",
-                txtPortOfDischarge: "required",
-                txtPlaceofDeilvery: "required",
-                txtContainerNo: "required",
-                txtSealNo: "required",
-                txtConatinerOrPackage: "required",
-                txtkindofpack: "required",
-                txtGrossWeight: "required",
-                txtNetWeight: "required",
-                txtfreightandcharges: "required",
-                txtCollect: "required",
-                txtNumberofOrignal: "required",
-                txtEDob: "required",
-                txtplaceofissue: "required",
-            },
-            messages: {
-
-                txtblNo: "*",
-                txtshipping: "*",
-                txtConsignee: "*",
-                txtNotifyParty: "*",
-                txtOceanVessel: "*",
-                txtVoyNo: "*",
-                txtPortOfLanding: "*",
-                txtPortOfDischarge: "*",
-                txtPlaceofDeilvery: "*",
-                txtContainerNo: "*",
-                txtSealNo: "*",
-                txtVoyNo: "*",
-                txtConatinerOrPackage: "*",
-                txtkindofpack: "*",
-                txtGrossWeight: "*",
-                txtNetWeight: "*",
-                txtfreightandcharges: "*",
-                txtCollect: "*",
-                txtNumberofOrignal: "*",
-                txtEDob: "*",
-                txtplaceofissue: "*",
-
-
-            },
-            submitHandler: function (form) {
-                $.ajax(
-                    {
-                        type: "POST", //HTTP POST Method  
-                        url: "/BLShippingLine/AddOrEditeBLShippingLine", // Controller/View   
-                        data: { //Passing data  
-                            BL: $(".txtblNo").val(),
-                            IsCompleted: $("#txtIsCompleted").val(),
-                            Shipper: $("#txtshipping").val(),
-                            Consignee: $("#txtConsignee").val(),
-                            NotifyParty: $("#txtNotifyParty").val(),
-                            precarriageby: $("#txtprecarriageby").val(),
-                            Collect: $("#txtCollect").val(),
-                            placeofreceipt: $("#txtplaceofReceipt").val(),
-                            OceanVessel: $("#txtOceanVessel").val(),
-                            VoyNo: $("#txtVoyNo").val(),
-                            Portoflanding: $("#txtPortOfLanding").val(),
-                            PortofDischarge: $("#txtPortOfDischarge").val(),
-                            PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            //ContainerNo: $(".txtContainerNo").select2("val").toString(),
-                            SealNo: $("#txtSealNo").val(),
-                            NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
-                            KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
-                            GrossWeight: $("#txtGrossWeight").val(),
-                            NetWeight: $("#txtNetWeight").val(),
-                            Frightandcharges: $("#txtfreightandcharges option:selected").val(),
-                            BLAgent: $("#txtagent option:selected").val(),
-                            BLAgentDetail: $("#txtagentdetail").val(),
-                            TypeOfService: $("#txtypeofservice").val(),
-                            NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
-                            ForwardingAgent: $("#txtforwardingagent").val(),
-                            FinalDestination: $("#txtfinaldestination").val(),
-                            FrightPayable: $("#txtfreightPayable").val(),
-                            PlaceOfIssue: $("#txtplaceofissue").val(),
-                            DateofIssue: $("#txtOperationDate").val()
-
-                        },
-
-                        success: function (response) {
-                            if (response.success != null) {
-                                if (response.success) {
-                                    getblshippingGride();
-                                    $(".txtblNo").val("");
-                                    //$("#txtApproval").val("");
-                                    $("#txtshipping").val("");
-                                    $("#txtConsignee").val("");
-                                    $("#txtNotifyParty").val("");
-                                    $("#txtprecarriageby").val("");
-                                    $("#txtCollect").val("");
-                                    $("#txtplaceofReceipt").val("");
-                                    $("#txtOceanVessel").val("");
-                                    $("#txtVoyNo").val("");
-                                    $("#txtPortOfLanding").val("");
-                                    $("#txtPortOfDischarge").val("");
-                                    $("#txtPlaceofDeilvery").val("");
-                                    //$("#txtContainerNo").val("");
-                                    $("#txtSealNo").val("");
-                                    $("#txtConatinerOrPackage").val("");
-                                    $("#txtkindofpack").val("");
-                                    $("#txtGrossWeight").val("");
-                                    $("#txtNetWeight").val("");
-                                    $("#txtfreightandcharges").val("");
-                                    $("txtagent").val("");
-                                    //$("txtagentdetail").val("");
-                                    $("#txtypeofservice").val("");
-                                    $("#txtNumberofOrignal").val("");
-                                    $("#txtfreightPayable").val("");
-                                    $("#txtforwardingagent").val("");
-                                    $("#txtfinaldestination").val("");
-                                    $("#txtplaceofissue").val("");
-                                    $("#txtOperationDate").val("");
-                                    toastr.success("BL Shipping Details has been inserted successfully.");
-                                    returncondition = true;
-                                } else {
-                                    toastr.error("BL Detail Already inserted.");
-                                    returncondition = false;
-                                }
-                            } else {
-                                toastr.error("Kindly check your Internet Connection!");
-                                returncondition = false;
-                            }
-                        },
-                        error: function (response) {
-                            toastr.error("Server error,Please check your internet connection");
-                        }
-                    });
             }
 
-        });
+            //Back Button
+            $("#btnBack").click(function () {
+                // Remove this line if it worked
+                $("#gridShow").show();
+                $("#lloForm").hide();
+            });
 
-    }
+            //Add Button
+            $("#btnADD").click(function () {
+                // Remove this line if it worked
+                $("#gridShow").hide();
+                $("#lloForm").show();
+            });
 
-});
+
+            $(document).on('click', '#btnDraft', function () {
+                $("#txtIsCompleted").val(false)
+                $("#_addShippingLine").valid();
+               // $("#gridShow").valid();
+            });
+
+            $(document).on('click', '#btnSubmit', function () {
+                $("#txtIsCompleted").val(true)
+                $("#_addShippingLine").valid();
+                //$("#gridShow").valid();
+            });
+
+            // Submit Button
+            var toastCount = 0;
+            $("#_addShippingLine").validate({
+                rules: {
+
+                    txtblNo: "required",
+                    txtshipping: "required",
+                    txtConsignee: "required",
+                    txtNotifyParty: "required",
+                    txtOceanVessel: "required",
+                    txtVoyNo: "required",
+                    txtPortOfLanding: "required",
+                    txtPortOfDischarge: "required",
+                    txtPlaceofDeilvery: "required",
+                    txtContainerNo: "required",
+                    txtSealNo: "required",
+                    txtConatinerOrPackage: "required",
+                    txtkindofpack: "required",
+                    txtGrossWeight: "required",
+                    txtNetWeight: "required",
+                    txtfreightandcharges: "required",
+                    txtCollect: "required",
+                    txtNumberofOrignal: "required",
+                    txtEDob: "required",
+                    txtplaceofissue: "required",
+                },
+                messages: {
+
+                    txtblNo: "*",
+                    txtshipping: "*",
+                    txtConsignee: "*",
+                    txtNotifyParty: "*",
+                    txtOceanVessel: "*",
+                    txtVoyNo: "*",
+                    txtPortOfLanding: "*",
+                    txtPortOfDischarge: "*",
+                    txtPlaceofDeilvery: "*",
+                    txtContainerNo: "*",
+                    txtSealNo: "*",
+                    txtVoyNo: "*",
+                    txtConatinerOrPackage: "*",
+                    txtkindofpack: "*",
+                    txtGrossWeight: "*",
+                    txtNetWeight: "*",
+                    txtfreightandcharges: "*",
+                    txtCollect: "*",
+                    txtNumberofOrignal: "*",
+                    txtEDob: "*",
+                    txtplaceofissue: "*",
+
+
+                },
+                submitHandler: function (form) {
+                    $.ajax(
+                        {
+                            type: "POST", //HTTP POST Method  
+                            url: "/BLShippingLine/AddOrEditeBLShippingLine", // Controller/View   
+                            data: { //Passing data  
+                                BL: $(".txtblNo").val(),
+                                IsCompleted: $("#txtIsCompleted").val(),
+                                Shipper: $("#txtshipping").val(),
+                                Consignee: $("#txtConsignee").val(),
+                                NotifyParty: $("#txtNotifyParty").val(),
+                                precarriageby: $("#txtprecarriageby").val(),
+                                Collect: $("#txtCollect").val(),
+                                placeofreceipt: $("#txtplaceofReceipt").val(),
+                                OceanVessel: $("#txtOceanVessel").val(),
+                                VoyNo: $("#txtVoyNo").val(),
+                                Portoflanding: $("#txtPortOfLanding").val(),
+                                PortofDischarge: $("#txtPortOfDischarge").val(),
+                                PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
+                                //ContainerNo: $(".txtContainerNo").select2("val").toString(),
+                                SealNo: $("#txtSealNo").val(),
+                                NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
+                                KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
+                                GrossWeight: $("#txtGrossWeight").val(),
+                                NetWeight: $("#txtNetWeight").val(),
+                                Frightandcharges: $("#txtfreightandcharges option:selected").val(),
+                                BLAgent: $("#txtagent option:selected").val(),
+                                BLAgentDetail: $("#txtagentdetail").val(),
+                                TypeOfService: $("#txtypeofservice").val(),
+                                NumberOfOrignalBL: $("#txtNumberofOrignal").val(),
+                                ForwardingAgent: $("#txtforwardingagent").val(),
+                                FinalDestination: $("#txtfinaldestination").val(),
+                                FrightPayable: $("#txtfreightPayable").val(),
+                                PlaceOfIssue: $("#txtplaceofissue").val(),
+                                DateofIssue: $("#txtOperationDate").val()
+
+                            },
+
+                            success: function (response) {
+                                if (response.success != null) {
+                                    if (response.success) {
+                                        getblshippingGride();
+                                        $(".txtblNo").val("");
+                                        //$("#txtApproval").val("");
+                                        $("#txtshipping").val("");
+                                        $("#txtConsignee").val("");
+                                        $("#txtNotifyParty").val("");
+                                        $("#txtprecarriageby").val("");
+                                        $("#txtCollect").val("");
+                                        $("#txtplaceofReceipt").val("");
+                                        $("#txtOceanVessel").val("");
+                                        $("#txtVoyNo").val("");
+                                        $("#txtPortOfLanding").val("");
+                                        $("#txtPortOfDischarge").val("");
+                                        $("#txtPlaceofDeilvery").val("");
+                                        //$("#txtContainerNo").val("");
+                                        $("#txtSealNo").val("");
+                                        $("#txtConatinerOrPackage").val("");
+                                        $("#txtkindofpack").val("");
+                                        $("#txtGrossWeight").val("");
+                                        $("#txtNetWeight").val("");
+                                        $("#txtfreightandcharges").val("");
+                                        $("txtagent").val("");
+                                        //$("txtagentdetail").val("");
+                                        $("#txtypeofservice").val("");
+                                        $("#txtNumberofOrignal").val("");
+                                        $("#txtfreightPayable").val("");
+                                        $("#txtforwardingagent").val("");
+                                        $("#txtfinaldestination").val("");
+                                        $("#txtplaceofissue").val("");
+                                        $("#txtOperationDate").val("");
+
+                                        SaveContainerDetails();
+                                        toastr.success("BL Shipping Details has been inserted successfully.");
+                                        returncondition = true;
+                                    } else {
+                                        toastr.error("BL Detail Already inserted.");
+                                        returncondition = false;
+                                    }
+                                } else {
+                                    toastr.error("Kindly check your Internet Connection!");
+                                    returncondition = false;
+                                }
+                            },
+                            error: function (response) {
+                                toastr.error("Server error,Please check your internet connection");
+                            }
+                        });
+                }
+
+            });
+
+        }
+
+    });
 
 
