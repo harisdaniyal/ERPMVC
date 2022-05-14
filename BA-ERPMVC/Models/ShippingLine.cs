@@ -18,7 +18,7 @@ namespace BA_ERPMVC.Models
         public string ShippingLineName { get; set; }
         public string ShippingLineCode { get; set; }
         public string ShippingLineAgent { get; set; }
-        public System.DateTime DeleteDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     }
 }

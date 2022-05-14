@@ -44,6 +44,7 @@ namespace BA_ERPMVC.Models
         public string ModeOfTransportation { get; set; }
         public Nullable<bool> PreDispatched { get; set; }
         public string Comodities { get; set; }
+        public string ReferenceContainer { get; set; }
     
         public virtual ContainerType ContainerType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a31bf995892c41e88612df44eafa85dd" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="a31bf995892c41e88612df44eafa85dd" Name="Diagram1" ZoomLevel="52">
         <EntityTypeShape EntityType="db_a780fa_bilalModel.PreDispatchedMovement" Width="1.5" PointX="15.375" PointY="29.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="4.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.AspNetRole" Width="1.5" PointX="5.75" PointY="4.25" />
@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="db_a780fa_bilalModel.BAExpensesDetail" Width="1.5" PointX="5.25" PointY="12.75" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.BAExpensesDropDown" Width="1.5" PointX="17.75" PointY="2.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.BAMaritalStatu" Width="1.5" PointX="17.75" PointY="12.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.BAShippingLine" Width="1.5" PointX="17.75" PointY="15.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.BAtrip" Width="1.5" PointX="3" PointY="7.5" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ClearingAgent" Width="1.5" PointX="18.75" PointY="9.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.ContainerStatu" Width="1.5" PointX="19.75" PointY="2.25" />
@@ -28,16 +27,13 @@
         <EntityTypeShape EntityType="db_a780fa_bilalModel.DeliveryTrain" Width="1.5" PointX="19.75" PointY="12.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Department" Width="1.5" PointX="19.75" PointY="5.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Designation" Width="1.5" PointX="19.75" PointY="18.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.DispatchedOrder" Width="1.5" PointX="19.75" PointY="21.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Emp_Child" Width="1.5" PointX="0.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Emp_Parent" Width="1.5" PointX="20.75" PointY="8.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Emp_Spouse" Width="1.5" PointX="9.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Employee" Width="1.5" PointX="11.75" PointY="22.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.FromLocOil" Width="1.5" PointX="13.75" PointY="22.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Gender" Width="1.5" PointX="21.75" PointY="2.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.InTransactTrain" Width="1.5" PointX="21.75" PointY="17.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.InventoryCategory" Width="1.5" PointX="21.75" PointY="5.25" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.Logistic" Width="1.5" PointX="3" PointY="25.625" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.MaintenanceHistory" Width="1.5" PointX="15.75" PointY="23.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Menu" Width="1.5" PointX="21.75" PointY="23.25" />
         <EntityTypeShape EntityType="db_a780fa_bilalModel.Order_Expense_Mapping" Width="1.5" PointX="22.75" PointY="8.25" />
@@ -98,9 +94,6 @@
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripFromLocation" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripToLocation" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_TripVendor" />
-        <AssociationConnector Association="db_a780fa_bilalModel.FK_TripContainerType" />
-        <AssociationConnector Association="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829" />
-        <AssociationConnector Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_Purchase_Requisition_Detail_Purchase_Requisition" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_PurchaseDetail_PurchaseMaster" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK_PurchaseDetail_tbl_Item" />
@@ -115,7 +108,44 @@
         <AssociationConnector Association="db_a780fa_bilalModel.FK_tbl_Item_tbl_ItemType" />
         <AssociationConnector Association="db_a780fa_bilalModel.FK__VendorExp__Vendo__54CB950F" />
         <AssociationConnector Association="db_a780fa_bilalModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="db_a780fa_bilalModel.GenerateOrder" Width="1.5" PointX="30.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DeliveryTruck" Width="1.5" PointX="30.75" PointY="7.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DispatchedTruck" Width="1.5" PointX="30.75" PointY="12.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.EmptyDropOff" Width="1.5" PointX="30.75" PointY="18.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.EmptyDropOffLoc" Width="1.5" PointX="22.75" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportDelivery" Width="1.5" PointX="30.75" PointY="24.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportDispatchedTrain" Width="1.5" PointX="24.75" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportDispatchedTruck" Width="1.5" PointX="26.75" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportLogistic" Width="1.5" PointX="28.75" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportPreDispatched" Width="1.5" PointX="30.75" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportReDispatched" Width="1.5" PointX="7.75" PointY="31.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Location" Width="1.5" PointX="32.75" PointY="0.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ReDispatched" Width="1.5" PointX="0.75" PointY="32.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.BLShippingContainer" Width="1.5" PointX="30.375" PointY="3.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.BLAgentDetail" Width="1.5" PointX="4.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.BAShippingLine" Width="1.5" PointX="3.375" PointY="32.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.BLShippingContainerDetail" Width="1.5" PointX="33.375" PointY="11.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.BLApproval" Width="1.5" PointX="12.375" PointY="33.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.GenerateOrder" Width="1.5" PointX="33.375" PointY="3.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Logistic" Width="1.5" PointX="3" PointY="25.5" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK_TripContainerType" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK__TripConta__Logis__3FD07829" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK_Logistics_tbl_Container_logistics_Status" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.DispatchedOrder" Width="1.5" PointX="18.375" PointY="20.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.ExportBookingOrder" Width="1.5" PointX="33.375" PointY="14.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.AggregatedCounter" Width="1.5" PointX="33.375" PointY="24.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Counter" Width="1.5" PointX="33.375" PointY="27.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Hash" Width="1.5" PointX="33.375" PointY="30.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Job" Width="1.5" PointX="17.375" PointY="35.25" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.JobParameter" Width="1.5" PointX="19.625" PointY="34.125" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.JobQueue" Width="1.5" PointX="33.375" PointY="33.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.List" Width="1.5" PointX="35.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Schema" Width="1.5" PointX="35.375" PointY="3.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Server" Width="1.5" PointX="35.375" PointY="5.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.Set" Width="1.5" PointX="35.375" PointY="8.75" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.State" Width="1.5" PointX="19.625" PointY="36.75" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK_HangFire_JobParameter_Job" />
+        <AssociationConnector Association="db_a780fa_bilalModel.FK_HangFire_State_Job" />
+        <EntityTypeShape EntityType="db_a780fa_bilalModel.OrderContainer" Width="1.5" PointX="33.375" PointY="20.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

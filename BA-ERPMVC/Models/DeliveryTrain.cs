@@ -15,7 +15,7 @@ namespace BA_ERPMVC.Models
     public partial class DeliveryTrain
     {
         public int ID { get; set; }
-        public Nullable<int> OrderId { get; set; }
+        public int OrderId { get; set; }
         public string OrderNo { get; set; }
         public string ContainerNo { get; set; }
         public string ContainerSize { get; set; }
