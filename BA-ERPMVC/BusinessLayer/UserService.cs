@@ -145,7 +145,7 @@ namespace BA_ERPMVC.BusinessLayer
             return _dbContext.AspNetUsers.Where(x => x.isActive == true).ToList();
         }
       
-        public IEnumerable<UserMenuViewModel> AssignUserMenu(string userID)
+        public IEnumerable<UserMenuViewModel> GetAssignUserMenu(string userID)
         {
             return (from menu in _dbContext.Menus.Where(x => x.IsDeleted == false)
                     join MA in _dbContext.MenuAssignments.Where(x => x.IsDeleted == false && x.UserId == userID)

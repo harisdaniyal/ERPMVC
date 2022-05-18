@@ -453,7 +453,7 @@ namespace BA_ERPMVC.UtilityClasses
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("supremeftp21@gmail.com");
-            mail.To.Add("harisdaniyal@bilal-group.com, Aleemsiddiqui7585@gmail.com");
+            mail.To.Add("harisdaniyal@bilal-group.com");
             mail.Subject = "Testing";
             mail.Body = "mail with attachment";
            // ashraf @bilal-group.com

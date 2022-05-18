@@ -47,7 +47,7 @@ namespace InfiSolMVC.Controllers
         public ActionResult AssignMenu(string userID)
         {
             this.ViewBag.UserNames = userservice.GetUserNameList();
-            var assignuserModel = userservice.AssignUserMenu(userID);
+            var assignuserModel = userservice.GetAssignUserMenu(userID);
 
             return View(assignuserModel);
         }
