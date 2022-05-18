@@ -4468,6 +4468,7 @@ INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (51, N'Use
 INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (52, N'Role', N'/Role/CreateRole', 0)
 INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (53, N'Menu', N'/Account/Menu', 0)
 INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (54, N'Permission', N'/Account/Permission', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (54, N'Assign User-Menu', N'/Role/AssignMenu', 0)
 SET IDENTITY_INSERT [dbo].[Menu] OFF
 GO
 
