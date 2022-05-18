@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BA_ERPMVC.ViewModels.BLShippingContainerDetailViewModel>
+﻿@*@model IEnumerable<BA_ERPMVC.ViewModels.BLShippingContainerDetailViewModel>*@
 <link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
 
 
@@ -221,7 +221,7 @@
             </div>
 
 
-        
+
         </div>
 
         <div class="row">
@@ -383,17 +383,17 @@
 
 
 
-      
+
     </form>
 </div>
 
-                            @* //////Container Grid///// *@
+@* //////Container Grid///// *@
 
 <div id="gridShow" class="card">
     <div class="card-header" style="background:white;">
         <div class="row" style="margin-bottom:10px">
             <div class="col-sm-6 float-sm-left">
-                
+
             </div><!-- /.col -->
 
         </div>
@@ -471,13 +471,13 @@
                 </table>
             </div>
         </div>
-            <div class="card-footer">
-                <button type="button" id="btnBack" class="btn btn-dark">Back</button>
-                <button type="submit" id="btnDraft" class="btn btn-warning">Draft</button>
-                <button type="submit" id="btnSubmit" class="btn btn-success">Finalized</button>
-                <button type="submit" id="btnPrint" class="btn btn-primary">Print</button>
+        <div class="card-footer">
+            <button type="button" id="btnBack" class="btn btn-dark">Back</button>
+            <button type="submit" id="btnDraft" class="btn btn-warning">Draft</button>
+            <button type="submit" id="btnSubmit" class="btn btn-success">Finalized</button>
+            <button type="submit" id="btnPrint" class="btn btn-primary">Print</button>
 
-            </div>
+        </div>
         <!-- LOADING SHOW HIDE -->
         <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
     </div>

@@ -4475,7 +4475,7 @@ GO
 	CREATE TABLE [dbo].[MenuAssignment](
 	[Id] [int] IDENTITY(1,1) Primary key NOT NULL,
 	[MenuId] [int] Not NULL,
-	[UserId] [int] Not NULL,
+	[UserId] nvarchar(128) Not NULL,
 	[IsView] [bit] NULL,
 	[IsDeleted] [bit] NULL
 	)
