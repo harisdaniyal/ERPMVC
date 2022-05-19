@@ -445,6 +445,9 @@
     <Compile Include="Models\Menu.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MenuAssignment.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OilBalance.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -755,6 +758,7 @@
     <Compile Include="Repositories\CoreRepositories\ReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingAgentRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\UserMenuRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\VendorExpensesRepositry.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportBookingOrderRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportDeliveryRepository.cs" />
@@ -779,6 +783,7 @@
     <Compile Include="Repositories\IRepositories\IReadyForDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IShippingAgentRepository.cs" />
     <Compile Include="Repositories\IRepositories\IShippingLineRepository.cs" />
+    <Compile Include="Repositories\IRepositories\IUserMenuRepository.cs" />
     <Compile Include="Repositories\IRepositories\IVendorExpensesRepositry.cs" />
     <Compile Include="UtilityClasses\Common.cs" />
     <Compile Include="UtilityClasses\ModeOfTransaction.cs" />
@@ -812,6 +817,7 @@
     <Compile Include="ViewModels\OrderBooking\TrainOrderReportViewModel.cs" />
     <Compile Include="ViewModels\ShippingAgentViewModel.cs" />
     <Compile Include="ViewModels\ShippingLineViewModel.cs" />
+    <Compile Include="ViewModels\UserMenuViewModel.cs" />
     <Compile Include="ViewModels\VendorExpensesViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Content Include="AdminLte\Assets\bootstrap-progressbar\bootstrap-progressbar.js" />
@@ -901,6 +907,7 @@
     <Content Include="AdminLte\Js\pdfmake.min.js" />
     <Content Include="AdminLte\Js\vfs_fonts.js" />
     <Content Include="AdminLte\Js\xlsx.min.js" />
+    <Content Include="AdminLte\Scripts\AssignMenu.js" />
     <Content Include="AdminLte\Scripts\BLApproval.js" />
     <Content Include="AdminLte\Scripts\BLShippingContainer.js" />
     <Content Include="AdminLte\Scripts\BLShippingContainerDetail.js" />
@@ -4160,6 +4167,7 @@
     <Content Include="Views\OrderExecution\ImportOrderReport.cshtml" />
     <Content Include="Views\OrderExecution\ImportOrderReportTruck.cshtml" />
     <Content Include="Views\OrderBooking\BLOrCROReport.cshtml" />
+    <Content Include="Views\Role\AssignMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

@@ -6,8 +6,7 @@
 
 
 $("#btnDraft").click(function () {
-    //var row = $(this).closest("tr")
-    Save(true)
+    save(true)
 })
 
 // Container Detail Grid //

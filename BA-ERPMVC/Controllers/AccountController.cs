@@ -19,6 +19,7 @@ namespace BA_ERPMVC.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
@@ -40,7 +41,7 @@ namespace BA_ERPMVC.Controllers
             SignInManager = signInManager;
             RoleManager = roleManager;
         }
-      
+
         public ApplicationRoleManager RoleManager
         {
             get
@@ -58,9 +59,9 @@ namespace BA_ERPMVC.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -93,7 +94,7 @@ namespace BA_ERPMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> EditRole(RoleViewModel model)
         {
-            var role = new ApplicationRole() {Id = model.Id, Name = model.Name };
+            var role = new ApplicationRole() { Id = model.Id, Name = model.Name };
             await RoleManager.UpdateAsync(role);
             return View();
         }
@@ -124,34 +125,36 @@ namespace BA_ERPMVC.Controllers
             {
                 //var user = _applicationDbContext.Users.Where(x => x.CNIC == model.CNIC).FirstOrDefault();
 
-                
-                
-                    var User = _applicationDbContext.Users.Where(x => x.UserName == model.UserName && x.isActive == true).FirstOrDefault();
-                    if (User != null)
+
+
+                var User = _applicationDbContext.Users.Where(x => x.UserName == model.UserName && x.isActive == true).FirstOrDefault();
+                if (User != null)
+                {
+                    var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+                    switch (result)
                     {
-                        var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-                        switch (result)
-                        {
-                            case SignInStatus.Success:
-                                //string hashPassword = UserManager.PasswordHasher.HashPassword(model.Password);
+                        case SignInStatus.Success:
+                            //string hashPassword = UserManager.PasswordHasher.HashPassword(model.Password);
 
-                                string RoleID = User.Roles.Select(y => y.RoleId).FirstOrDefault();
-                                //var Roless = _applicationDbContext.Roles.Where(x => x.Id ==);
-                                UserDetail.Roles = _applicationDbContext.Roles.Where(x => x.Id == RoleID).Select(x => x.Name).FirstOrDefault();
-                                UserDetail.UserName = User.UserName;
-                                return RedirectToAction("Dashboard", "Home");
+                            string RoleID = User.Roles.Select(y => y.RoleId).FirstOrDefault();
+                            string userID = User.Roles.Select(y => y.UserId).FirstOrDefault();
+                            //var Roless = _applicationDbContext.Roles.Where(x => x.Id ==);
+                            UserDetail.Roles = _applicationDbContext.Roles.Where(x => x.Id == RoleID).Select(x => x.Name).FirstOrDefault();
+                            UserDetail.UserName = User.UserName;
+                            System.Web.HttpContext.Current.Session["MenuAssignment"] = _userService.GetAssignUserMenu(userID);
+                            return RedirectToAction("Dashboard", "Home");
 
 
-                            case SignInStatus.Failure:
-                                ModelState.AddModelError("UserName", "Invalid Username or Password");
-                                return View(model);
-                            default:
-                                ModelState.AddModelError("UserName", "Invalid Username or Password");
-                                return View(model);
-                        }
+                        case SignInStatus.Failure:
+                            ModelState.AddModelError("UserName", "Invalid Username or Password");
+                            return View(model);
+                        default:
+                            ModelState.AddModelError("UserName", "Invalid Username or Password");
+                            return View(model);
                     }
-                
-                
+                }
+
+
 
             }
 
@@ -187,7 +190,7 @@ namespace BA_ERPMVC.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -218,7 +221,7 @@ namespace BA_ERPMVC.Controllers
             {
                 return Redirect("/Account/Login");
             }
-            
+
         }
 
         //
@@ -315,9 +318,9 @@ namespace BA_ERPMVC.Controllers
 
                         else
                         {
-                            
-                                result = await UserManager.CreateAsync(user, model.Password);
-                           
+
+                            result = await UserManager.CreateAsync(user, model.Password);
+
 
                             if (result.Succeeded)
                             {

@@ -4391,3 +4391,91 @@ CREATE TABLE [dbo].[OrderContainer](
 	[ContainerWeight] int NULL,
 	[OrderType] nvarchar(50) null
 )
+ ------- Haris 14/05/2022 ---------
+Go
+Drop Table Menu
+USE [ERPMVCNEW]
+GO
+/****** Object:  Table [dbo].[Menu]    Script Date: 5/14/2022 3:46:39 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Menu](
+	[MenuId] [bigint] IDENTITY(1,1) NOT NULL,
+	[MenuName] [nvarchar](250) NULL,
+	[Url] [nvarchar](max) NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK__Menu__C99ED2304AC94DF3] PRIMARY KEY CLUSTERED 
+(
+	[MenuId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Menu] ON 
+
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (1, N'BL Listing', N'/BLShippingLine/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (2, N'Inventory Container', N'/DropDownMenu/BLShippingContainer', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (3, N'BLApproval', N'/BLShippingLine/BLApproval', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (4, N'VehicleRegistration', N'/BVMS/VehicleRegistration', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (5, N'EmployeeDetails', N'/HumanResourceManagment/EmployeeDetails', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (6, N'Expenses', N'/DropDownMenu/Expenses', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (7, N'Vendor', N'/Vendor/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (8, N'Country', N'/Country/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (9, N'Shipping Agent', N'/DropDownMenu/ShippingAgent', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (10, N'Shipping Line', N'/DropDownMenu/ShippingLine', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (11, N'EmptyDropOff Location', N'/DropDownMenu/EmptyDropOffLoc', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (12, N'Department', N'/Department/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (13, N'City', N'/City/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (14, N'BusinessDivision', N'/BusinessDivision/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (15, N'Designation', N'/Designation/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (16, N'Facility', N'/DropDownMenu/Facility', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (17, N'Location', N'/DropDownMenu/Location', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (18, N'Oil', N'/Setup/Oil', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (19, N'OilInvoiceDetail', N'/Setup/OilInvoiceDetail', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (20, N'Import Create Order', N'/OrderBooking/Index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (21, N'Import OrderListing', N'/OrderBooking/OrderList', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (22, N'Train Import Order Report', N'/OrderExecution/TrainReport', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (23, N'Import Booking Truck Report', N'/OrderExecution/ImportOrderReportTruck', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (24, N'Import Booking Train Report', N'/OrderExecution/ImportOrderReport', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (25, N'Import PreDispatched', N'/OrderExecution/PreDispatched', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (26, N'Import Dispatched(Train)', N'/OrderExecution/Dispatched', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (27, N'Import Dispatched(Truck)', N'/OrderExecution/DispatchedTruck', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (28, N'Import InTransact(Train)', N'/OrderExecution/InTransactTrain', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (29, N'Import Re-Dispatched(Train)', N'/OrderExecution/ReDispatched', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (30, N'Import Delivery(Train)', N'/OrderExecution/DeliveryTrain', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (31, N'Import Delivery(Truck)', N'/OrderExecution/DeliveryTruck', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (32, N'Import EmptyDropOff', N'/OrderExecution/EmptyDropOff', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (33, N'Export CreateOrder', N'/OrderBooking/ExportOrder', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (34, N'Export OrderListing', N'/OrderBooking/ExportOrderList', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (35, N'Export PreDispatched', N'/OrderExecution/ExportPreDispatched', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (36, N'Export Dispatched(Train)', N'/OrderExecution/ExportDispatchedTrain', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (37, N'Export Dispatched(Truck)', N'/OrderExecution/ExportDispatchedTruck', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (40, N'Export ReDispatched', N'/OrderExecution/ExportReDispatched', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (41, N'Export Delivery', N'/OrderExecution/ExportDelivery', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (42, N'Customer Registration', N'/Customer/CustomerRegistration', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (43, N'Pricing', N'/CustomerPrice/index', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (44, N'Logistic Operations', N'/sales/LocalLogisticOperation', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (45, N'Trip Detail', N'/sales/TripDetails', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (46, N'UpComingTrips', N'/sales/UpCommingTrips', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (47, N'Print Report', N'/Invoices/PrintReportLogistics', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (48, N'Generate Invoice', N'/Invoices/InvoiceGeneration', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (49, N'Print Order Invoice', N'/OrderBooking/BLOrCROReport', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (50, N'Print Invoice', N'/Invoices/LogisticInvoice', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (51, N'Print Invoice Report', N'/Invoices/LogisticInvoiceReport', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (52, N'User Registration', N'/Account/Register', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (53, N'Role', N'/Role/CreateRole', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (54, N'Menu', N'/Account/Menu', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (55, N'Permission', N'/Account/Permission', 0)
+INSERT [dbo].[Menu] ([MenuId], [MenuName], [Url], [IsDeleted]) VALUES (56, N'Assign User-Menu', N'/Role/AssignMenu', 0)
+SET IDENTITY_INSERT [dbo].[Menu] OFF
+GO
+
+
+	CREATE TABLE [dbo].[MenuAssignment](
+	[Id] [int] IDENTITY(1,1) Primary key NOT NULL,
+	[MenuId] [int] Not NULL,
+	[UserId] nvarchar(128) Not NULL,
+	[IsView] [bit] NULL,
+	[IsDeleted] [bit] NULL
+	)

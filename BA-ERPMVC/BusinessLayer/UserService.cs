@@ -1,4 +1,5 @@
-﻿using BA_ERPMVC.Models;
+﻿using AutoMapper;
+using BA_ERPMVC.Models;
 using BA_ERPMVC.Repositories.CoreRepositories;
 using BA_ERPMVC.Repositories.IRepositories;
 using BA_ERPMVC.ViewModels;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 
@@ -16,37 +18,40 @@ namespace BA_ERPMVC.BusinessLayer
         ERPMVCEntities _dbContext = null;
         ApplicationDbContext _applicationDbContext = null;
         IUserRepository _userRepository = null;
-   
+        private readonly UserMenuRepository userMenuRepository;
+
 
         public UserService()
         {
             _dbContext = new ERPMVCEntities();
             _applicationDbContext = new ApplicationDbContext();
             _userRepository = new UserRepository(_dbContext);
+            userMenuRepository = new UserMenuRepository(_dbContext);
+
         }
-        
-        
+
+
 
         public IEnumerable<AspNetUser> GetAll()
         {
             return _userRepository.GetAll();
         }
 
-       
+
         public Object GetUserList(string UserRole)
         {
-           
+
             var result = _userRepository.GetAll().
                                     Where(x => x.AspNetRoles.Any(r => r.Name == UserRole) /*&& x.IsActive == true*/).
                                     Select(x => new
                                     {
                                         x.Id,
-                                       
-                                      
+
+
                                         x.PhoneNumber,
                                         x.Email,
                                         x.UserName
-                                        
+
                                     });
             return result;
 
@@ -67,7 +72,7 @@ namespace BA_ERPMVC.BusinessLayer
             return result;
 
         }
-        
+
         public string IsUserExists(UserRegistrationViewModel userRegistrationViewModel)
         {
             string message = string.Empty;
@@ -129,6 +134,61 @@ namespace BA_ERPMVC.BusinessLayer
                 statusCode = "00";
             }
             return statusCode;
+        }
+
+
+        // ****************************** User-Menu-Assignment **************************** //
+
+
+        public IEnumerable<AspNetUser> GetUserNameList()
+        {
+            return _dbContext.AspNetUsers.Where(x => x.isActive == true).ToList();
+        }
+      
+        public IEnumerable<UserMenuViewModel> GetAssignUserMenu(string userID)
+        {
+            return (from menu in _dbContext.Menus.Where(x => x.IsDeleted == false)
+                    join MA in _dbContext.MenuAssignments.Where(x => x.IsDeleted == false && x.UserId == userID)
+                        on menu.MenuId equals MA.MenuId into MAGroup
+                    from MenuAssignment in MAGroup.DefaultIfEmpty()
+                    select new UserMenuViewModel()
+                    {
+                        MenuId = menu.MenuId,
+                        UserId = MenuAssignment.UserId,
+                        UserName = _dbContext.AspNetUsers.Where(x => x.isActive == true).FirstOrDefault().UserName,
+                        IsView = MenuAssignment.IsView,
+                        MenuName = menu.MenuName,
+                        Url = menu.Url
+
+                    }).Distinct().ToList();
+
+        }
+
+        public async Task SaveAssignMenuAsync(List<UserMenuViewModel> UserMenuVM)
+        {
+            try
+            {
+                var userassignmenu = Mapper.Map<List<UserMenuViewModel>, List<MenuAssignment>>(UserMenuVM);
+                string userID = string.Empty;
+                if (userassignmenu.Count == 0)
+                {
+                    throw new ArgumentNullException(nameof(UserMenuVM));
+                }
+
+                userID = userassignmenu[0].UserId;
+                if (_dbContext.MenuAssignments.Any(x => x.UserId == userID))
+                {
+                    userMenuRepository.RemoveRange(_dbContext.MenuAssignments.Where(x => x.UserId == userID).ToList());
+                    await _dbContext.SaveChangesAsync();
+                }
+              
+                userMenuRepository.AddRange(userassignmenu);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
