@@ -3928,6 +3928,7 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ExcelReports\13042022_165619_Report.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Reports\DataSet2.xsc">
       <DependentUpon>DataSet2.xsd</DependentUpon>
