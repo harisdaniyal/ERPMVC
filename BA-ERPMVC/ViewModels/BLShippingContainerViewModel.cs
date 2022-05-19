@@ -9,7 +9,6 @@ namespace BA_ERPMVC.ViewModels
     {
 		public int? ID { get; set; }
 		public string ContainerNo { get; set; }
-		public string SealNo { get; set; }
 		public string ContainerType { get; set; }
 		public string ContainerSize { get; set; }
 		public DateTime? DeletedDate { get; set; }

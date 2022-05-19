@@ -16,7 +16,6 @@ using BA_ERPMVC.UtilityClasses;
 
 namespace BA_ERPMVC.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
 
@@ -573,6 +572,7 @@ namespace BA_ERPMVC.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["UserName"] = null;
             return RedirectToAction("Login", "Account");
         }
 

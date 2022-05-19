@@ -4394,13 +4394,9 @@ CREATE TABLE [dbo].[OrderContainer](
  ------- Haris 14/05/2022 ---------
 Go
 Drop Table Menu
-USE [ERPMVCNEW]
-GO
-/****** Object:  Table [dbo].[Menu]    Script Date: 5/14/2022 3:46:39 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
+Go 
+
 CREATE TABLE [dbo].[Menu](
 	[MenuId] [bigint] IDENTITY(1,1) NOT NULL,
 	[MenuName] [nvarchar](250) NULL,

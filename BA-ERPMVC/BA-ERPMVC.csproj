@@ -279,7 +279,7 @@
     <Compile Include="BusinessLayer\ShippingService.cs" />
     <Compile Include="BusinessLayer\VendorExpensesService.cs" />
     <Compile Include="Controllers\OrderExecutionController.cs" />
-    <Compile Include="Filter\Autherization.cs" />
+    <Compile Include="Filter\CustomAuthenticationFilter.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>

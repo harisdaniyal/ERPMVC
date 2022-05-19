@@ -16,9 +16,11 @@ using System.IO;
 using MasterLayer;
 using System.Data;
 using BA_ERPMVC.Reports;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class OrderBookingController : Controller
     {
         ERPMVCEntities db = new ERPMVCEntities();
