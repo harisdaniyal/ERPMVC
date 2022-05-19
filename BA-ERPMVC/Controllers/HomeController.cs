@@ -1,4 +1,5 @@
-﻿using BA_ERPMVC.Models;
+﻿using BA_ERPMVC.Filter;
+using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class HomeController : Controller
     {
         public ActionResult Dashboard()

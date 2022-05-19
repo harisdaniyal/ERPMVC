@@ -2263,15 +2263,16 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         on order.OrderID equals orderContainers.OrderID into OCGroup
                         from ImportOrderContainers in OCGroup.DefaultIfEmpty()
                         join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on new { OrderId = ImportOrderContainers.OrderID, ContainerNo = ImportOrderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo }
-                        //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
-                        //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
+                        on new { OrderId = ImportOrderContainers.OrderID, ContainerNo = ImportOrderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo } into RFDGroup
+                        from readyForDispatched in RFDGroup.DefaultIfEmpty()
+                            //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
+                            //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
                         select new PrintImportReportViewModel()
                         {
                             BL = order.BL,
                             ContainerSize = ImportOrderContainers.ContainerSize,
                             ContainerNo = ImportOrderContainers.ContainerNo,
-                            WagonNo = dispatch.WagonNo,
+                            WagonNo = readyForDispatched.WagonNo,
                             // VehicleNo = dispatchtruck.VehicleNo,
                             ContainerWeight = ImportOrderContainers.ContainerWeight,
                             InvoiceAmount = order.InvoiceAmount

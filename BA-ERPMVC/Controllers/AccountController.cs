@@ -16,7 +16,6 @@ using BA_ERPMVC.UtilityClasses;
 
 namespace BA_ERPMVC.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
 

@@ -18,11 +18,18 @@
             alert('You can not delete to non existing record !!')
             return false;
         }
+        else if (row.find(".txt_ContainerType").val() == '' ) {
+            alert('Please select Container Type.')
+            return false;
+        }
+        else if (row.find(".txt_ContainerSize").val() == '') {
+            alert('Please select Container Size.')
+            return false;
+        }
         dataObject.push(JSON.stringify({
             'ID': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,
             'ContainerNo': row.find(".txt_containerno").val(),
-            //'SealNo': row.find(".txt_sealno").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val()
 
@@ -42,9 +49,8 @@
                 }
                 else {
                     if (row.find(".txt_ID").val() == 0) {
-                        $('#example').prepend(` <tr class="bg-light tbl-valign-top">` + row.html().trim() + ` </tr>`)
+                        $('#example tbody').prepend(` <tr class="bg-light tbl-valign-top">` + row.html().trim() + ` </tr>`)
                     }
-
                     row.find(".txt_ID").val(response.Id)
 
                 }
