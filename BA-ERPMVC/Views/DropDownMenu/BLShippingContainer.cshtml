@@ -34,20 +34,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-light tbl-valign-top">
+                        <tr class="bg-light ">
                             <td>
                                 <input type="hidden" value="0" class="form-control txt_ID" />
-
-                                <input  oninput="this.value= this.value.toUpperCase()" type="text" style="width: 200px;" value="" class="form-control  txt_containerno" />
-
+                                <input oninput="this.value= this.value.toUpperCase()" type="text" style="width: 200px;" value="" class="form-control  txt_containerno" />
                             </td>
-                            @*<td>
-
-                                <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
-
-                            </td>*@
                             <td>
-                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize"  style="width: 200px;" >
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize" style="width: 200px;">
                                     <option value="">Container Size</option>
                                     @foreach (var containerSize in ViewBag.ContainerSizes)
                                     {
@@ -55,7 +48,6 @@
                                     }
                                 </select>
                             </td>
-
                             <td>
                                 <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerType" style="width: 200px;">
                                     <option value="">Container Type</option>
@@ -65,9 +57,6 @@
                                     }
                                 </select>
                             </td>
-
-
-
                             <td class="btn-group">
                                 <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
                                 <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
@@ -75,18 +64,11 @@
                         </tr>
                         @foreach (var bLShippingContainer in Model.ToList())
                         {
-                            <tr class="bg-light tbl-valign-top">
+                            <tr class="bg-light">
                                 <td>
                                     <input type="hidden" value="@bLShippingContainer.ID" class="form-control txt_ID" />
-
-                                    <input oninput="this.value= this.value.toUpperCase()"  type="text" style="width: 200px;" value="@bLShippingContainer.ContainerNo" class="form-control  txt_containerno" />
-                                </td> 
-                                @*<td>
-                                    <input type="hidden" value="@bLShippingContainer.SealNo" class="form-control txt_ID" />
-
-                                    <input oninput="this.value= this.value.toUpperCase()"  type="text" style="width: 200px;" value="@bLShippingContainer.SealNo" class="form-control  txt_sealno" />
-                                </td>*@
-
+                                    <input oninput="this.value= this.value.toUpperCase()" type="text" style="width: 200px;" value="@bLShippingContainer.ContainerNo" class="form-control  txt_containerno" />
+                                </td>
                                 <td>
                                     <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize" style="width: 200px;">
                                         <option value="">Container Size</option>

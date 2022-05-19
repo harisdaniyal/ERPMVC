@@ -221,7 +221,7 @@
             </div>
 
 
-        
+
         </div>
 
         <div class="row">
@@ -380,108 +380,67 @@
             </div>
         </div>
 
+        @* //////Container Grid///// *@
 
+        <div id="gridShow" class="card">
+            <div class="card-header" style="background:white;">
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-sm-6 float-sm-left">
 
+                    </div><!-- /.col -->
 
-      
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 table-responsive center">
+                        <table id="example" class="table table-sm table-bordered mb-3" style="height: auto">
+                            <thead class="thead-light ">
+                                <tr>
+                                    <th>Container No#</th>
+                                    <th>Seal No#</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-light tbl-valign-top">
+                                    <td style="display:none">
+                                        <input type="hidden" value="0" class="form-control txt_ID" />
+                                    </td>
+                                    <td>
+                                        <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerNo" style="width: 200px;">
+                                            <option value="">Container No</option>
+                                            @foreach (var containerNo in ViewBag.BLShippingContainers)
+                                            {
+                                                <option value="@containerNo.ContainerNo" data-select2-id="@containerNo.ContainerNo">@containerNo.ContainerNo</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
+                                    </td>
+
+                                    <td class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                        <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="btnBack" class="btn btn-dark">Back</button>
+                    <button type="submit" id="btnDraft" class="btn btn-warning">Draft</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-success">Finalized</button>
+                    <button type="submit" id="btnPrint" class="btn btn-primary">Print</button>
+
+                </div>
+                <!-- LOADING SHOW HIDE -->
+                <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+            </div>
+        </div>
     </form>
 </div>
-
-                            @* //////Container Grid///// *@
-
-<div id="gridShow" class="card">
-    <div class="card-header" style="background:white;">
-        <div class="row" style="margin-bottom:10px">
-            <div class="col-sm-6 float-sm-left">
-                
-            </div><!-- /.col -->
-
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-12 table-responsive center">
-                <table id="example" class="table table-sm table-bordered mb-3" style="height: auto">
-                    <thead class="thead-light ">
-                        <tr>
-                            <th>Bl No#</th>
-                            <th>Container No#</th>
-                            <th>Seal No#</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-light tbl-valign-top">
-                            <td>
-                                <input type="hidden" value="0" class="form-control txt_ID" />
-                                <input type="text" style="width: 200px;" disabled value="" class="form-control txtblNo" />
-
-
-                            </td>
-                            <td>
-                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerNo" style="width: 200px;">
-                                    <option value="">Container No</option>
-                                    @foreach (var containerNo in ViewBag.BLShippingContainers)
-                                    {
-                                        <option value="@containerNo.ContainerNo" data-select2-id="@containerNo.ContainerNo">@containerNo.ContainerNo</option>
-                                    }
-                                </select>
-                            </td>
-                            <td>
-
-                                <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
-
-                            </td>
-
-                            <td class="btn-group">
-                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
-                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                            </td>
-                        </tr>
-                        @foreach (var bLShippingContainerdetail in Model.ToList())
-                        {
-                            <tr class="bg-light tbl-valign-top">
-                                <td>
-                                    <input type="hidden" value="@bLShippingContainerdetail.Id" class="form-control txt_ID" />
-                                    <input type="text" disabled style="width: 200px;" value="@bLShippingContainerdetail.Bl" class="form-control txtblNo" />
-
-                                </td>
-                                <td>
-                                    <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerNo" style="width: 200px;">
-                                        <option value="">Container No</option>
-                                        @foreach (var containerNo in ViewBag.BLShippingContainers)
-                                        {
-                                            <option value="@containerNo.ContainerNo" data-select2-id="@containerNo.ContainerNo" @(containerNo.ContainerNo == bLShippingContainerdetail.ContainerNo ? "selected=selected" : "")>@containerNo.ContainerNo</option>
-                                        }
-                                    </select>
-                                </td>
-                                <td>
-
-                                    <input oninput="this.value= this.value.toUpperCase()" type="text" style="width: 200px;" value="@bLShippingContainerdetail.SealNo" class="form-control  txt_sealno" />
-                                </td>
-
-                                <td class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
-                                    <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                                </td>
-                            </tr>
-                        }
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            <div class="card-footer">
-                <button type="button" id="btnBack" class="btn btn-dark">Back</button>
-                <button type="submit" id="btnDraft" class="btn btn-warning">Draft</button>
-                <button type="submit" id="btnSubmit" class="btn btn-success">Finalized</button>
-                <button type="submit" id="btnPrint" class="btn btn-primary">Print</button>
-
-            </div>
-        <!-- LOADING SHOW HIDE -->
-        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
-    </div>
-</div>
-
 <script src="~/AdminLte/Scripts/blshipping.js"></script>
 <script src="~/AdminLte/Scripts/BLshippingContainerDetail.js"></script>
