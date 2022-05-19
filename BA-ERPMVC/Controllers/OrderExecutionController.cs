@@ -370,8 +370,7 @@ namespace BA_ERPMVC.Controllers
         {
             CustomLogger.Info("AutomaticReportsOnEmail started");
             const string jobRegisteredMessage = "Hangfire Scheduler! Background jobs are registered successfully.";
-            RecurringJob.AddOrUpdate(() => ExportExcel(), Cron.Daily(13, 0), TimeZoneInfo.Local);
-            RecurringJob.AddOrUpdate(() => ExportExcel(), Cron.Daily(13, 05), TimeZoneInfo.Local);
+            RecurringJob.AddOrUpdate(() => ExportExcel(), "0 0 9 18 ? * * *");
             return jobRegisteredMessage;
         }
 

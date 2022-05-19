@@ -144,7 +144,7 @@ namespace BA_ERPMVC.BusinessLayer
         {
             return _dbContext.AspNetUsers.Where(x => x.isActive == true).ToList();
         }
-      
+
         public IEnumerable<UserMenuViewModel> GetAssignUserMenu(string userID)
         {
             return (from menu in _dbContext.Menus.Where(x => x.IsDeleted == false)
@@ -181,7 +181,7 @@ namespace BA_ERPMVC.BusinessLayer
                     userMenuRepository.RemoveRange(_dbContext.MenuAssignments.Where(x => x.UserId == userID).ToList());
                     await _dbContext.SaveChangesAsync();
                 }
-              
+
                 userMenuRepository.AddRange(userassignmenu);
                 await _dbContext.SaveChangesAsync();
             }

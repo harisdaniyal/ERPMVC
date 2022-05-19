@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AdminLTE 3 | Starter</title>
+    <title>BA-ERP</title>
     <!-- Font Awesome Icons -->
     @*@Scripts.Render("~/bundles/modernizr")*@
 
@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 {
                                     @*@Html.AntiForgeryToken()*@
                                     @*@Html.ActionLink("Log out", "LogOff", "Account", null, new { @class = "dropdown-item" })*@
-                                    <a onclick="$(this).closest('form').submit()" class="btn btn-default btn-flat">Log out</a>
+                                    <a onclick="submit()" class="btn btn-default btn-flat">Log out</a>
                                 }
                             </div>
                         </li>
@@ -423,6 +423,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         });
+
+        function submit() {
+            window.location = "/Account/LogOff";
+        }
     </script>
 </body>
 </html>

@@ -436,7 +436,7 @@
 
 
         </li>
-    
+
     }
     @*<li class="nav-item">
             <a href="/sales/OrderBooking" class="nav-link ">
@@ -621,8 +621,6 @@
                         </a>
                     </li>
                 </ul>}
-
-
 
         </li>
     }
@@ -1179,7 +1177,8 @@
 
     @if (menuAssignment.Any(x => x.Url != "/Invoices/InvoiceGeneration" && x.Url != "/OrderBooking/BLOrCROReport" && x.Url != "/Invoices/LogisticInvoice"
             && x.Url != "/Invoices/LogisticInvoiceReport"))
-    { <li class="nav-item has-treeview">
+    {
+        <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
                 <p>
@@ -1199,7 +1198,7 @@
                         </a>
 
                     </li>
-                    }
+                }
 
 
                 @if (menuAssignment.Any(x => x.Url == "/OrderBooking/BLOrCROReport" && x.IsView == true))
@@ -1212,7 +1211,7 @@
 
                     </li>
                 }
-                }
+
                 @if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoice" && x.IsView == true))
                 {
                     <li class="nav-item">
@@ -1236,7 +1235,8 @@
 
             </ul>
 
-        </li>}
+        </li>
+    }
 
     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
     {
@@ -1270,22 +1270,7 @@
 
                 </li>
             </ul>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="/Account/Menu" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Menu</p>
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="/Account/Permission" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Permission</p>
-                    </a>
-                </li>
-            </ul>
+
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="/Role/AssignMenu" class="nav-link">

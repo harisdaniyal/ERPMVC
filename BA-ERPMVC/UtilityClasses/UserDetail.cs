@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace BA_ERPMVC.UtilityClasses
 {
@@ -448,14 +449,16 @@ namespace BA_ERPMVC.UtilityClasses
 
         }
 
-        public  static void email_send(string filePath)
+        public static void email_send(string filePath)
         {
+            string strName = ConfigurationManager.AppSettings["EmailAutomation"];
+
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("supremeftp21@gmail.com");
-            mail.To.Add("harisdaniyal@bilal-group.com,aleemsiddiqui7585@gmail.com");
+            mail.To.Add(strName);
             mail.Subject = "Import Order Booking Report";
-            mail.Body = "Dear Concern,\n\nPlease check out the attachment for Import Order Booking.\n\nRegards,\nBilal Associates";
+            mail.Body = "Dear Concern, \n\nPlease check out the attachment for Import Order Booking.\n\nRegards,\nBilal Associates";
             // ashraf @bilal-group.com
             System.Net.Mail.Attachment attachment;
             attachment = new System.Net.Mail.Attachment(filePath);
