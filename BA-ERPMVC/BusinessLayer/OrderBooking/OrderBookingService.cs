@@ -1538,7 +1538,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         }
         public IEnumerable<OrderListViewModel> GetOrderList(int businessDivisionId)
         {
-            return (from order in _dbContext.GenerateOrders
+            return (from order in _dbContext.GenerateOrders.Where(x=> x.isCompleted == false)
                     join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
                             on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                     join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
@@ -1571,7 +1571,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public IEnumerable<OrderListViewModel> GetExportOrderList()
         {
-            return (from order in _dbContext.ExportBookingOrders
+            return (from order in _dbContext.ExportBookingOrders.Where(x=> x.IsCompleted == false)
                         //join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
                         //        on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                         //join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID

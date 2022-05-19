@@ -5,6 +5,7 @@ using System.Web;
 using System.Net;
 using System.Net.Mail;
 using System.Configuration;
+using MasterLayer;
 
 namespace BA_ERPMVC.UtilityClasses
 {
@@ -453,22 +454,33 @@ namespace BA_ERPMVC.UtilityClasses
         {
             string strName = ConfigurationManager.AppSettings["EmailAutomation"];
 
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("supremeftp21@gmail.com");
-            mail.To.Add(strName);
-            mail.Subject = "Import Order Booking Report";
-            mail.Body = "Dear Concern, \n\nPlease check out the attachment for Import Order Booking.\n\nRegards,\nBilal Associates";
-            // ashraf @bilal-group.com
-            System.Net.Mail.Attachment attachment;
-            attachment = new System.Net.Mail.Attachment(filePath);
-            mail.Attachments.Add(attachment);
+            try
+            {
+                CustomLogger.Info("Email Automation started");
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("supremeftp21@gmail.com");
+                mail.To.Add(strName);
+                mail.Subject = "Import Order Booking Report";
+                mail.Body = "Dear Concern, \n\nPlease check out the attachment for Import Order Booking.\n\nRegards,\nBilal Associates";
+                // ashraf @bilal-group.com
+                System.Net.Mail.Attachment attachment;
+                attachment = new System.Net.Mail.Attachment(filePath);
+                mail.Attachments.Add(attachment);
 
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("supremeftp21@gmail.com", "a!d@m#i$n");
-            SmtpServer.EnableSsl = true;
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("supremeftp21@gmail.com", "a!d@m#i$n");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+            }
+            catch (Exception ex )
+            {
+                throw;
+            }
 
-            SmtpServer.Send(mail);
+          
+
+           
 
         }
     }
