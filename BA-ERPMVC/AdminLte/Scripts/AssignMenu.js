@@ -13,6 +13,21 @@
         $(".ddl_UserName").val(userID)
     };
 
+    $('#checkall').change(function () {                         /// For Checked All Checkboxes ///
+        $('.IsView').prop('checked', this.checked);
+
+        if ($('.IsView:checked').length == $('.IsView').length) {
+            $('#checkall').prop('checked', true);
+        }
+        else {
+            $('#checkall').prop('checked', false);
+        }
+    });
+
+    //$('.IsView').change(function () {
+        
+    //});
+
 })
 
 $(".ddl_UserName").change(function () {

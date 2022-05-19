@@ -9,6 +9,10 @@
         width: 30px;
         height: 30px;
     }
+    #checkall {
+        width: 20px;
+        height: 20px;
+    }
 </style>
 
 <div id="gridShow" class="card">
@@ -27,13 +31,15 @@
                     @*<option value="0">All</option>*@
                     @foreach (var username in ViewBag.UserNames)
                     {
-                <option value="@username.Id" data-select2-id="@username.Id">@(String.Format("{0} {1}", username.FirstName, username.LastName))</option>
+                        <option value="@username.Id" data-select2-id="@username.Id">@(String.Format("{0} {1}", username.FirstName, username.LastName))</option>
                     }
                 </select>
                 <div class="form-status"><span></span></div>
 
-            </div>
+            </div><br />
         </div>
+        <label class="form-check-label" for="inlineCheckbox1">Check All</label>
+        <input type="checkbox" name="all" id="checkall" />
     </div>
     <div class="card-body">
         <div class="row">
