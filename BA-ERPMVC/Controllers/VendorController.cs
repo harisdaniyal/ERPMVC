@@ -17,15 +17,15 @@ namespace BA_ERPMVC.Controllers
         PartyService _partyService = null;
         public ActionResult Index()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
 

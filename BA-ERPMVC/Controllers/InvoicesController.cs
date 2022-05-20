@@ -31,41 +31,41 @@ namespace BA_ERPMVC.Controllers
         // GET: Invoices
         public ActionResult InvoiceGeneration()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
         public ActionResult InvoiceGenerationLogistic()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
         public ActionResult PrintReportLogistics()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
 
         }
 
@@ -73,27 +73,27 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult LogisticInvoice()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
         public ActionResult LogisticInvoiceReport()
         {
-            if (Session["UserName"] != null)
-            {
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
 

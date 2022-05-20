@@ -7,15 +7,12 @@
             return false;
         }
 
-        if (row.find(".txt_ContainerNo").val() == '') {
-            alert('Please Select Container No')
+        if (row.find(".txt_sealno").val() == '') {
+            alert('Please Enter Seal No')
             return false;
         }
 
-        if (row.find(".txt_ContainerNo").val() == '') {
-            alert('Please Select Container No')
-            return false;
-        }
+      
 
         console.log(row.find(".txt_ID").val())
         save(row, false)
@@ -42,7 +39,8 @@
             'Id': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,
             'Bl': row.find(".txtblNo").val(),
-            'ContainerNo': row.find(".txt_ContainerNo").val()
+            'ContainerNo': row.find(".txt_ContainerNo").val(),
+            'SealNo': row.find(".txt_sealno").val()
         });
         showLoader();
         fetch('/BLShippingLine/BlShippingContainerDetail', {
