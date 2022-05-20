@@ -2323,9 +2323,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         // --- Import BLWise Report --- //
         public IEnumerable<PrintContainerWiseReportViewModel> PrintImportBLWiseImportReport(string section, string bl)
         {
+            var singleBL = bl.Split(',');
             if (section == "header")
             {
-                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
+                return (from order in _dbContext.GenerateOrders.Where(x => singleBL.Contains(x.BL))
                         select new PrintContainerWiseReportViewModel()
                         {
 
