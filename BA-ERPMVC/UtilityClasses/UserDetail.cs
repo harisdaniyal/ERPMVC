@@ -452,7 +452,7 @@ namespace BA_ERPMVC.UtilityClasses
 
         public static void email_send(string filePath)
         {
-            string strName = ConfigurationManager.AppSettings["EmailAutomation"];
+            string strName = ConfigurationManager.AppSettings["EmailAddresses"];
 
             try
             {

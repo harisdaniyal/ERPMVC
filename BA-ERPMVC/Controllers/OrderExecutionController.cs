@@ -16,6 +16,7 @@ using ClosedXML.Excel;
 using Hangfire;
 using System.Web.Hosting;
 using MasterLayer;
+using System.Configuration;
 
 namespace BA_ERPMVC.Controllers
 {
@@ -370,7 +371,8 @@ namespace BA_ERPMVC.Controllers
         {
             CustomLogger.Info("AutomaticReportsOnEmail started");
             const string jobRegisteredMessage = "Hangfire Scheduler! Background jobs are registered successfully.";
-            RecurringJob.AddOrUpdate(() => ExportExcel(), "0 0 9 18 ? * * *");
+            string cronExpression = ConfigurationManager.AppSettings["CronExpressionForEmailService"];
+            RecurringJob.AddOrUpdate(() => ExportExcel(), cronExpression);
             return jobRegisteredMessage;
         }
 

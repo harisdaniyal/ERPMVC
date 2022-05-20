@@ -22,22 +22,22 @@ namespace BA_ERPMVC.Filter
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
-            else
-            {
-                List<UserMenuViewModel> menuAssignment = (List<UserMenuViewModel>)HttpContext.Current.Session["MenuAssignment"];
-                if (menuAssignment!= null)
-                {
-                    if (!menuAssignment.Any(x => x.Url == $"{controller}/{action}" && x.IsView == true) && action != "Dashboard")
-                    {
-                        filterContext.Result = new HttpUnauthorizedResult();
-                    }
-                }
-                else
-                {
-                    filterContext.Result = new HttpUnauthorizedResult();
-                }
+            //else
+            //{
+            //    List<UserMenuViewModel> menuAssignment = (List<UserMenuViewModel>)HttpContext.Current.Session["MenuAssignment"];
+            //    if (menuAssignment!= null)
+            //    {
+            //        if (!menuAssignment.Any(x => x.Url == $"{controller}/{action}" && x.IsView == true) && action != "Dashboard")
+            //        {
+            //            filterContext.Result = new HttpUnauthorizedResult();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        filterContext.Result = new HttpUnauthorizedResult();
+            //    }
                
-            }
+            //}
             
         }
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
