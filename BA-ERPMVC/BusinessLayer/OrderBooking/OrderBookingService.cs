@@ -2253,30 +2253,38 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             OrderType = order.OrderType,
                             Remarks = order.Remarks,
                             OrderDate = order.OrderDate,
-                            ContainerCount = _dbContext.OrderContainers.Count()
+                            ContainerCount = _dbContext.OrderContainers.Where(x => x.OrderID == order.OrderID).Count()
                         }).Distinct().ToList();
             }
             else if (section == "detail")
             {
-                return (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
-                        join orderContainers in _dbContext.OrderContainers
-                        on order.OrderID equals orderContainers.OrderID into OCGroup
-                        from ImportOrderContainers in OCGroup.DefaultIfEmpty()
-                        join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
-                        on new { OrderId = ImportOrderContainers.OrderID, ContainerNo = ImportOrderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo } into RFDGroup
-                        from readyForDispatched in RFDGroup.DefaultIfEmpty()
-                            //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
-                            //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
-                        select new PrintImportReportViewModel()
-                        {
-                            BL = order.BL,
-                            ContainerSize = ImportOrderContainers.ContainerSize,
-                            ContainerNo = ImportOrderContainers.ContainerNo,
-                            WagonNo = readyForDispatched.WagonNo,
-                            // VehicleNo = dispatchtruck.VehicleNo,
-                            ContainerWeight = ImportOrderContainers.ContainerWeight,
-                            InvoiceAmount = order.InvoiceAmount
-                        }).Distinct().ToList();
+                var data = (from order in _dbContext.GenerateOrders.Where(x => x.BL == bl)
+                            join orderContainers in _dbContext.OrderContainers
+                            on order.OrderID equals orderContainers.OrderID into OCGroup
+                            from ImportOrderContainers in OCGroup.DefaultIfEmpty()
+                            join dispatch in _dbContext.DispatchedOrders.Where(x => x.IsCompleted == true)
+                            on new { OrderId = ImportOrderContainers.OrderID, ContainerNo = ImportOrderContainers.ContainerNo } equals new { OrderId = dispatch.OrderId, ContainerNo = dispatch.ContainerNo } into RFDGroup
+                            from readyForDispatched in RFDGroup.DefaultIfEmpty()
+                                //join dispatchtruck in _dbContext.DispatchedTrucks.Where(x => x.IsCompleted == true)
+                                //on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = dispatchtruck.OrderId, ContainerNo = dispatchtruck.ContainerNo }
+                            select new PrintImportReportViewModel()
+                            {
+                                BL = order.BL,
+                                ContainerSize = ImportOrderContainers.ContainerSize,
+                                ContainerNo = ImportOrderContainers.ContainerNo,
+                                WagonNo = readyForDispatched.WagonNo,
+                                // VehicleNo = dispatchtruck.VehicleNo,
+                                ContainerWeight = ImportOrderContainers.ContainerWeight,
+                                ContainerCount = _dbContext.OrderContainers.Where(x => x.OrderID == order.OrderID).Count(),
+                                FortyContainerPrice = order.FortyContainerPrice,
+                                TwentyContainerPrice = order.TwentyContainerPrice
+                            }).Distinct().ToList();
+                foreach (var item in data)
+                {
+                    item.InvoiceAmount = item.ContainerSize == "40 DR" ? (Convert.ToDecimal(item.FortyContainerPrice) / item.ContainerCount)
+                        : (Convert.ToDecimal(item.TwentyContainerPrice) / item.ContainerCount);
+                }
+                return data;
             }
             return null;
         }
@@ -2333,7 +2341,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             BL = order.BL,
                             OrderType = order.OrderType,
                             Customer_Name = _dbContext.BACustomerRegistrations.Where(x => x.CustomerID == order.CustomerID).FirstOrDefault().Customer_Name,
-                            TotalContainerCount = _dbContext.OrderContainers.Count()
+                            TotalContainerCount = _dbContext.OrderContainers.Where(x => x.OrderID == order.OrderID).Count()
                         }).Distinct().ToList();
             }
             else if (section == "detail")

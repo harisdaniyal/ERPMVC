@@ -16,12 +16,12 @@
     <div class="filterBar d-flex align-content-center justify-content-between w-100 bg-light p-2 border-top border-lighter">
         <div class="mr-2 mt-1">
             @*<select class="form-control form-control-v1 form-control-sm bg-white" id="ddl_BusinessDivision" onchange="onChange_BusinessDivision(this)">
-                <option value="">Please Select Division</option>
-                @foreach (var businessDivision in ViewBag.BusinessDivisions)
-                {
-                    <option value="@businessDivision.BusinessDivisionID" @((Request["businessDivisionId"] != null && businessDivision.BusinessDivisionID.ToString() == Request["businessDivisionId"]) ? "selected=selected" : "")>@businessDivision.BusinessDivisionName</option>
-                }
-            </select>*@
+                    <option value="">Please Select Division</option>
+                    @foreach (var businessDivision in ViewBag.BusinessDivisions)
+                    {
+                        <option value="@businessDivision.BusinessDivisionID" @((Request["businessDivisionId"] != null && businessDivision.BusinessDivisionID.ToString() == Request["businessDivisionId"]) ? "selected=selected" : "")>@businessDivision.BusinessDivisionName</option>
+                    }
+                </select>*@
         </div>
         @*<div class="mx-2 mt-1">
                 <div class="input-group input-group-icon input-group-noLable-sm mb-0 bg-white">
@@ -36,66 +36,67 @@
     <table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle">
         <thead class="thead-light">
             <tr>
-                <th style="width:80px; text-align:center">ID</th>
-                @*<th>Business Devision</th>*@
-                <th style="width: 80px; text-align: center">Status</th>
-                <th style="width: 50px; text-align: center"> Container Qty</th>
-                <th style="width: 50px; text-align: center">Completed</th>
-                <th style="width: 80px; text-align: center">Actions</th>
+                <th>ID</th>
+                @*<th>Customer Name</th>
+                <th>Business Devision</th>*@
+                <th>Status</th>
+                <th> Container Qty</th>
+                <th>Completed</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var exportorder in Model)
             {
-            <tr>
-                <td>@exportorder.OrderNo</td>
-                @*<td>@order.CustomerName</td>
-        <td>@order.BusinessDivision</td>*@
-                @*<td>
-            <div class="badge badge-pill badge-success w-80 py-2">@exportorder.OrderType</div>
-        </td>*@
-                <td>
-                    @if (Convert.ToInt32(exportorder.ExportPreDispatched) > 0)
-                    {
-                        <div class="badge badge-pill badge-success w-80 py-2 mb-1 ">PreDispatched: @exportorder.ExportPreDispatched</div>
-                    }
-                    @if (Convert.ToInt32(exportorder.ExportDispatchedTrain) > 0)
-                    {
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">DispatchedTrain: @exportorder.ExportDispatchedTrain</div>
-                    }
-                    @if (Convert.ToInt32(exportorder.ExportDispatchedTruck) > 0)
-                    {
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">DispatchedTrain: @exportorder.ExportDispatchedTruck</div>
-                    }
-                    @if (Convert.ToInt32(exportorder.ExportReDispatched) > 0)
-                    {
-                        <div class="badge badge-pill badge-success w-80 py-2 mb-1 text-left">ReDispatched: @exportorder.ExportReDispatched</div>
-                    }
-                    @*@if (Convert.ToInt32(order.InTransact) > 0)
-            {
-                <div class="badge badge-pill badge-success w-100 py-2 mb-1">InTransact: @order.InTransact</div>
-            }
-            @if (Convert.ToInt32(order.EmptyDropOff) > 0)
-            {
-                <div class="badge badge-pill badge-success w-100 py-2 mb-1">EmptyDropOff: @order.EmptyDropOff </div>
-            }*@
-                    @if (Convert.ToInt32(exportorder.Completed) > 0)
-                    {
-                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">Completed: @exportorder.Completed</div>
-                    }
-                </td>
-                <td>
-                    <div class="badge badge-pill badge-success w-50 py-2 mb-1">QTY: @exportorder.ContainerCount</div>
+                <tr>
+                    <td>@exportorder.OrderNo</td>
+                    @*<td>@exportorder.CustomerName</td>
+                        <td>@exportorder.BusinessDivision</td>
+                        <td>
+                                <div class="badge badge-pill badge-success w-80 py-2">@exportorder.OrderType</div>
+                            </td>*@
+                    <td>
+                        @if (Convert.ToInt32(exportorder.ExportPreDispatched) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-80 py-2 mb-1 ">PreDispatched: @exportorder.ExportPreDispatched</div>
+                        }
+                        @if (Convert.ToInt32(exportorder.ExportDispatchedTrain) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">DispatchedTrain: @exportorder.ExportDispatchedTrain</div>
+                        }
+                        @if (Convert.ToInt32(exportorder.ExportDispatchedTruck) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">DispatchedTrain: @exportorder.ExportDispatchedTruck</div>
+                        }
+                        @if (Convert.ToInt32(exportorder.ExportReDispatched) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-80 py-2 mb-1 text-left">ReDispatched: @exportorder.ExportReDispatched</div>
+                        }
+                        @*@if (Convert.ToInt32(order.InTransact) > 0)
+                            {
+                                <div class="badge badge-pill badge-success w-100 py-2 mb-1">InTransact: @order.InTransact</div>
+                            }
+                            @if (Convert.ToInt32(order.EmptyDropOff) > 0)
+                            {
+                                <div class="badge badge-pill badge-success w-100 py-2 mb-1">EmptyDropOff: @order.EmptyDropOff </div>
+                            }*@
+                        @if (Convert.ToInt32(exportorder.Completed) > 0)
+                        {
+                            <div class="badge badge-pill badge-success w-100 py-2 mb-1">Completed: @exportorder.Completed</div>
+                        }
+                    </td>
+                    <td>
+                        <div class="badge badge-pill badge-success w-50 py-2 mb-1">QTY: @exportorder.ContainerCount</div>
 
-                </td>
-                <td>
-                    <div class="badge badge-pill badge-success w-100 py-2 mb-1">@{order.IsCompleted.GetValueOrDefault() ? "Yes" : "No"}</div>
-                </td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@exportorder.OrderId)"><i class="fas fa-eye"></i></button>
-                    @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        <div class="badge badge-pill badge-success w-50 py-2 mb-1">@exportorder.IsCompleted</div>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@exportorder.OrderId)"><i class="fas fa-eye"></i></button>
+                        @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

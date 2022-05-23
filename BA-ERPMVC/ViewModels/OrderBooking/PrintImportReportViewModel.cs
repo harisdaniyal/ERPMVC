@@ -29,5 +29,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public DateTime? OrderDate { get; set; }
         public DateTime? DateOfBooking { get; set; }
         public int? ContainerCount { get; set; }
+        public string FortyContainerPrice { get; set; }
+        public string TwentyContainerPrice { get; set; }
     }
 }
