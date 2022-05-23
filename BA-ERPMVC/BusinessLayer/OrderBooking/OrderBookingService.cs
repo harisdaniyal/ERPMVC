@@ -1538,7 +1538,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         }
         public IEnumerable<OrderListViewModel> GetOrderList(int businessDivisionId)
         {
-            return (from order in _dbContext.GenerateOrders.Where(x=> x.isCompleted == false)
+            return (from order in _dbContext.GenerateOrders//.Where(x=> x.isCompleted == false)
                     join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
                             on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                     join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
@@ -1561,7 +1561,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         EmptyDropOff = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.EmptyDropOff.ToString()).ToList().Count().ToString(),
                         Completed = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.Status == OrdersStatus.Completed.ToString()).ToList().Count().ToString(),
                         ContainerCount = _dbContext.Logistics.Where(x => x.OrderId == order.OrderID && x.IsActive == true).ToList().Count(),
-
+                        IsCompleted = order.isCompleted
                     }).Distinct().ToList();
         }
 
@@ -1571,7 +1571,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
         public IEnumerable<OrderListViewModel> GetExportOrderList()
         {
-            return (from order in _dbContext.ExportBookingOrders.Where(x=> x.IsCompleted == false)
+            return (from order in _dbContext.ExportBookingOrders//.Where(x=> x.IsCompleted == false)
                         //join bDivision in _dbContext.stp_BusinessDivision.Where(x => businessDivisionId == 0 || x.BusinessDivisionID == businessDivisionId)
                         //        on order.BusinessDivisionId equals bDivision.BusinessDivisionID
                         //join customer in _dbContext.BACustomerRegistrations on order.CustomerID equals customer.CustomerID
@@ -1586,7 +1586,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         ExportDelivery = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Delivery.ToString()).ToList().Count().ToString(),
                         Completed = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId && x.Status == OrdersStatus.Completed.ToString()).ToList().Count().ToString(),
                         ContainerCount = _dbContext.ExportLogistics.Where(x => x.OrderId == order.OrderId).ToList().Count(),
-
+                        IsCompleted = order.IsCompleted
                     }).Distinct().ToList();
         }
 
@@ -2345,7 +2345,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                             ContainerCountForty = order.FortyContainerQty,
                             RateTwenty = order.TwentyContainerPrice,
                             RateForty = order.FortyContainerPrice,
-                            TotalContainerCount = _dbContext.OrderContainers.Where(x=> x.OrderID == order.OrderID).Count(),
+                            TotalContainerCount = _dbContext.OrderContainers.Where(x => x.OrderID == order.OrderID).Count(),
 
 
                         }).Distinct().ToList();

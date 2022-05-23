@@ -41,6 +41,7 @@
                 <th>Business Devision</th>
                 <th style="width:120px;">Status</th>
                 <th> Container Qty</th>
+                <th>Completed</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -52,8 +53,8 @@
                     <td>@order.CustomerName</td>
                     <td>@order.BusinessDivision</td>
                     @*<td>
-                        <div class="badge badge-pill badge-success w-80 py-2">@order.OrderType</div>
-                    </td>*@
+                            <div class="badge badge-pill badge-success w-80 py-2">@order.OrderType</div>
+                        </td>*@
                     <td>
                         @if (Convert.ToInt32(order.ReadyForDispatched) > 0)
                         {
@@ -88,7 +89,9 @@
                         <div class="badge badge-pill badge-success w-100 py-2 mb-1">QTY: @order.ContainerCount</div>
 
                     </td>
-
+                    <td>
+                        <div class="badge badge-pill badge-success w-100 py-2 mb-1">@{order.IsCompleted.GetValueOrDefault() ? "Yes" : "No"}</div>
+                    </td>
                     <td class="text-center">
                         <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>
                         @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
