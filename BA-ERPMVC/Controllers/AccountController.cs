@@ -208,18 +208,18 @@ namespace BA_ERPMVC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            if (Session["UserName"] != null)
-            {
+            //if (Session["UserName"] != null)
+            
                 RegisterViewModel registerViewModel = new RegisterViewModel();
                 RegisterDropDownViewModel registerDropDownModel = _accountService.GetAccountDropdowns();
                 ViewBag.Role = new SelectList(registerDropDownModel.RoleList.Select(x => new { x.Id, x.Name }), "Name", "Name");
                 ViewBag.BusinessDivisionID = new SelectList(registerDropDownModel.BusinessList.Select(x => new { x.BusinessDivisionID, x.BusinessDivisionName }), "BusinessDivisionID", "BusinessDivisionName");
                 return View(registerViewModel);
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
 
         }
 

@@ -14,15 +14,15 @@ namespace BA_ERPMVC.Controllers
     {
         public ActionResult Dashboard()
         {
-            if (Session["UserName"] != null)
-            {
-                
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+                
+            //}
+            //else
+            //{
+            //    return RedirectToAction("/Account/Login");
+            //}
 
         }
 

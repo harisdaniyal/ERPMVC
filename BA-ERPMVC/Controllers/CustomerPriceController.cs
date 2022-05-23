@@ -34,15 +34,15 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult Index()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
 

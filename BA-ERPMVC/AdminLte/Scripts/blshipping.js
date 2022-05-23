@@ -17,10 +17,10 @@ function SaveContainerDetails() {
     var containerDetail = [];
     $('#example tbody tr').each(function () {
         containerDetail.push({
-            Id: $(this).find(".txt_id").val(),
+            Id: $(this).find(".txt_ID").val(),
             /*// blshippingid: blshippingid,*/
             Bl: $(this).find(".txtblNo").val(),
-            ContainerNo: $(this).find(".txt_containerno").val(),
+            ContainerNo: $(this).find(".txt_ContainerNo").val(),
             SealNo: $(this).find(".txt_sealno").val(),
         });
     });
@@ -388,6 +388,7 @@ $(document).ready(function () {
         });
 
         $(document).on("click", "._remove", function (e) {
+            debugger;
             var ID = $(this).attr('data-id');
             window.location.href = "/BLShippingLine/PrintGDReport?id=" + ID + "&edit=1";
         });

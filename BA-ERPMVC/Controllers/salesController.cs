@@ -30,15 +30,15 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult OrderBooking()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
         public ActionResult StepwiseOrderCreation()
         {
@@ -353,28 +353,28 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult LocalLogisticOperation()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
         public ActionResult TripDetails()
         {
-            if (Session["UserName"] != null)
-            {
-
                 return View();
-            }
-            else
-            {
-                return Redirect("/Account/Login");
-            }
+            //if (Session["UserName"] != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return Redirect("/Account/Login");
+            //}
         }
 
         public ActionResult getDepartment()
