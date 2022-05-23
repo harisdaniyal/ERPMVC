@@ -15,8 +15,8 @@ namespace BA_ERPMVC.Filter
 
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            var controller = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-            var action = filterContext.ActionDescriptor.ActionName;
+            //var controller = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
+            //var action = filterContext.ActionDescriptor.ActionName;
 
             if (HttpContext.Current.Session["UserName"] == null)
             {

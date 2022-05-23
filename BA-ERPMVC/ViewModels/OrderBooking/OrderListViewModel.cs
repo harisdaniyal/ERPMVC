@@ -23,6 +23,8 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string ReDispatched { get; set; }
         public string Delivery { get; set; }
         public string EmptyDropOff { get; set; }
+        public string Completed { get; set; }
+        public bool? IsCompleted { get; set; }
 
         //Export//
         public string ExportPreDispatched { get; set; }
@@ -30,6 +32,6 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string ExportDispatchedTruck { get; set; }
         public string ExportReDispatched { get; set; }
         public string ExportDelivery { get; set; }
-        public string Completed { get; set; }
+        
     }
 }
