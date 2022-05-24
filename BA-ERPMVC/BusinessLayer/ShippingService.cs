@@ -47,7 +47,8 @@ namespace BA_ERPMVC.BusinessLayer
             {
                 throw new ArgumentNullException(nameof(shippingagentVM));
             }
-
+            shippingagent.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            shippingagent.CreatedDate = DateTime.Now;
             shippingagent.IsDeleted = false;
             _shippingAgentRepository.Add(shippingagent);
 
@@ -104,7 +105,8 @@ namespace BA_ERPMVC.BusinessLayer
             {
                 throw new ArgumentNullException(nameof(shippinglineVM));
             }
-
+            shippingline.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            shippingline.CreatedDate = DateTime.Now;
             shippingline.IsDeleted = false;
             _shippingLineRepository.Add(shippingline);
 
