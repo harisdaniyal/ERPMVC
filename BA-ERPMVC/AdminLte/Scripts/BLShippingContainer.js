@@ -26,6 +26,7 @@
             alert('Please select Container Size.')
             return false;
         }
+        dataObject = []
         dataObject.push(JSON.stringify({
             'ID': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,

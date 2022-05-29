@@ -173,6 +173,7 @@ namespace BA_ERPMVC.Controllers
                                     //  obj.UserID = Session["UserName"].ToString();
                                     obj.CreateDate = DateTime.Now.ToString();
                                     obj.UserID = Session["UserName"].ToString();
+                                    obj.CreatedBy = Session["UserName"].ToString();
                                     //obj.Approval = 1;
                                     db.BAShippingLines.Add(obj);
                                     done = db.SaveChanges();
@@ -184,6 +185,7 @@ namespace BA_ERPMVC.Controllers
                             {
                                 obj.CreateDate = DateTime.Now.ToString();
                                 obj.UserID = Session["UserName"].ToString();
+                                obj.CreatedBy = Session["UserName"].ToString();
                                 //  obj.CreateDate = DateTime.Now.ToString();
                                 //obj.UserID = Session["UserName"].ToString();
                                 //obj.Approval = "1";

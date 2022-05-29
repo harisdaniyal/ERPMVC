@@ -5075,3 +5075,209 @@ ALTER TABLE [dbo].[ShippingLine] ADD  DEFAULT ((0)) FOR [IsDeleted]
 GO
 ALTER TABLE [dbo].[VehicleRegistrationDetail] ADD  CONSTRAINT [DF_VehicleRegistrationDetail_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
 GO
+
+---- 25/05/2022 ------ HARIS
+GO
+
+/****** Object:  Table [dbo].[ExpenseInvoice]    Script Date: 5/29/2022 9:50:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ExpenseInvoice](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OrderNo] [nvarchar](9) NULL,
+	[ContainerNo] [nvarchar](50) NULL,
+	[OrderType] [nvarchar](50) NULL,
+	[HeadType] [nvarchar](50) NULL,
+	[HeadName] [nvarchar](250) NULL,
+	[HeadID] [int] NULL,
+	[Amount] [numeric](18, 0) NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[CreatedDate] [datetime] NULL,
+	[IsCompleted] [bit] NULL,
+ CONSTRAINT [PK_ExpenseInvoice] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Table [dbo].[InvoiceHead]    Script Date: 5/29/2022 9:52:00 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[InvoiceHead](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[HeadType] [nvarchar](50) NULL,
+	[HeadName] [nvarchar](250) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreatedDate] [datetime] NULL,
+	[DeletedBy] [nvarchar](250) NULL,
+	[DeletedDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_InvoiceHead] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Table [dbo].[EmptyDropOffLoc]    Script Date: 5/29/2022 9:52:32 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EmptyDropOffLoc](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[LocationName] [nvarchar](50) NULL,
+	[CompanyID] [int] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreatedDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Table [dbo].[BAShippingLine]    Script Date: 5/29/2022 9:53:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BAShippingLine](
+	[BLShippingID] [int] IDENTITY(1,1) NOT NULL,
+	[BL] [nvarchar](50) NULL,
+	[Approval] [bit] NULL,
+	[Collect] [int] NOT NULL,
+	[NumberOfOrignalBL] [nvarchar](50) NULL,
+	[Shipper] [nvarchar](max) NULL,
+	[Consignee] [nvarchar](max) NULL,
+	[NotifyParty] [nvarchar](max) NULL,
+	[precarriageby] [nvarchar](50) NULL,
+	[ForwardingAgent] [nvarchar](250) NULL,
+	[FinalDestination] [nvarchar](250) NULL,
+	[placeofreceipt] [nvarchar](50) NULL,
+	[OceanVessel] [nvarchar](50) NULL,
+	[VoyNo] [nvarchar](20) NULL,
+	[Portoflanding] [nvarchar](50) NULL,
+	[PortofDischarge] [nvarchar](50) NULL,
+	[PlaceOfIssue] [nvarchar](250) NULL,
+	[DateOfIssue] [datetime] NULL,
+	[PlaceOfDelivery] [nvarchar](50) NULL,
+	[ContainerNo] [nvarchar](max) NULL,
+	[SealNo] [varchar](50) NULL,
+	[NumberOfConatinerPack] [nvarchar](max) NULL,
+	[KindOfPackagesDescriptionOfGoods] [nvarchar](max) NULL,
+	[GrossWeight] [nvarchar](50) NULL,
+	[NetWeight] [nvarchar](50) NULL,
+	[Frightandcharges] [nvarchar](50) NULL,
+	[TypeOfService] [nvarchar](50) NULL,
+	[BLAgent] [nvarchar](700) NULL,
+	[FrightPayable] [nvarchar](50) NULL,
+	[placeOfDateofIssue] [datetime] NULL,
+	[IsCompleted] [bit] NULL,
+	[UserID] [varchar](50) NULL,
+	[UpdateBy] [varchar](50) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [varchar](50) NULL,
+	[UpdateDate] [varchar](50) NULL,
+ CONSTRAINT [PK__BAShippi__FD108598428974AC] PRIMARY KEY CLUSTERED 
+(
+	[BLShippingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[BAShippingLine] ADD  CONSTRAINT [DF__BAShippin__IsCom__53385258]  DEFAULT ((0)) FOR [IsCompleted]
+GO
+
+GO
+
+/****** Object:  Table [dbo].[stp_BusinessDivision]    Script Date: 5/29/2022 9:53:55 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[stp_BusinessDivision](
+	[BusinessDivisionID] [int] IDENTITY(1,1) NOT NULL,
+	[BusinessDivisionCode] [varchar](8) NULL,
+	[BusinessDivisionName] [varchar](50) NOT NULL,
+	[CompanyID] [numeric](18, 0) NOT NULL,
+	[UserID] [varchar](50) NULL,
+	[UpdateBy] [varchar](50) NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreateDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_stp_BusinessDivision] PRIMARY KEY CLUSTERED 
+(
+	[BusinessDivisionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[stp_BusinessDivision] ADD  CONSTRAINT [DF_stp_BusinessDivision_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+GO
+
+GO
+
+/****** Object:  Table [dbo].[Location]    Script Date: 5/29/2022 9:55:14 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Location](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[LocationName] [nvarchar](50) NULL,
+	[CompanyID] [int] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreatedDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+GO
+
+/****** Object:  Table [dbo].[stp_Facility]    Script Date: 5/29/2022 9:55:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[stp_Facility](
+	[facilityID] [int] IDENTITY(1,1) NOT NULL,
+	[FacilityName] [nvarchar](50) NULL,
+	[isActive] [bit] NULL,
+	[CreatedBy] [nvarchar](250) NULL,
+	[CreatedDate] [datetime] NULL,
+ CONSTRAINT [PK_stp_Facility] PRIMARY KEY CLUSTERED 
+(
+	[facilityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
