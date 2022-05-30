@@ -7,6 +7,7 @@ using MasterLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,14 +18,19 @@ namespace BA_ERPMVC.BusinessLayer
         ERPMVCEntities _dbContext = null;
         ERPMVCEntities db = null;
         IInvoiceRepository _invoiceRepository = null;
+        IInvoiceHeadRepository _invoiceheadRepository = null;
+        IExpenseInvoiceRepository _expenseinvoiceRepository = null;
+
         public InvoiceServices()
         {
             _dbContext = new ERPMVCEntities();
             _invoiceRepository = new InvoiceRepository(_dbContext);
+            _invoiceheadRepository = new InvoiceHeadRepository(_dbContext);
+            _expenseinvoiceRepository = new ExpenseInvoiceRepository(_dbContext);
             db = new ERPMVCEntities();
-            
+
         }
-        
+
         public string AddInvoice(GenerateInvoiceViewModel invoiceDetail)
         {
             string statusCode = "11";
@@ -47,7 +53,7 @@ namespace BA_ERPMVC.BusinessLayer
             {
                 statusCode = "00";
             }
-           
+
             return statusCode;
         }
         //  List<string> terms = new List<string>();
@@ -244,22 +250,22 @@ namespace BA_ERPMVC.BusinessLayer
                     where Orders.OrderDate >= FromDate && Orders.OrderDate <= ToDate
                     select new LogisticsReportViewModel
                     {
-                      //  OrderNo = genOrd.OrderNo,
-                      logisticsid= opo.logisticsid,
-                      OrderNo =  Orders.OrderNo,
-                      Customer_Name  = Cust.Customer_Name,
-                      JobType =  opo.JobType,
-                      FacilityName   = faciltyLst.FacilityName,
-                      ContainerNo =  opo.ContainerNo,
-                      ContainerNo2 = opo.ContainerNo2,
-                      ContainerWeight =   opo.ContainerWeight,
+                        //  OrderNo = genOrd.OrderNo,
+                        logisticsid = opo.logisticsid,
+                        OrderNo = Orders.OrderNo,
+                        Customer_Name = Cust.Customer_Name,
+                        JobType = opo.JobType,
+                        FacilityName = faciltyLst.FacilityName,
+                        ContainerNo = opo.ContainerNo,
+                        ContainerNo2 = opo.ContainerNo2,
+                        ContainerWeight = opo.ContainerWeight,
                         //    opo.SingleDouble,
-                      ContainerSize =  opo.ContainerSize,
-                      FromLocation =  opo.FromLocation,
-                      ToLocation =   opo.ToLocation,
-                      IsActive =  opo.IsActive,
-                      Qty  = opo.Qty,
-                      ContainerStatusTrip = opo.tbl_Container_logistics_Status.Name
+                        ContainerSize = opo.ContainerSize,
+                        FromLocation = opo.FromLocation,
+                        ToLocation = opo.ToLocation,
+                        IsActive = opo.IsActive,
+                        Qty = opo.Qty,
+                        ContainerStatusTrip = opo.tbl_Container_logistics_Status.Name
 
                     }).ToList();
 
@@ -268,7 +274,7 @@ namespace BA_ERPMVC.BusinessLayer
 
 
 
-        public List<InvoiceViewModel> PrintInvoiceDetailReport(string CustomerName , DateTime? fromDate, DateTime? ToDate)
+        public List<InvoiceViewModel> PrintInvoiceDetailReport(string CustomerName, DateTime? fromDate, DateTime? ToDate)
         {
             return (from inv in _dbContext.tbl_Invoice
                     join genOrd in _dbContext.GenerateOrders on inv.OrderID equals genOrd.OrderID
@@ -276,10 +282,10 @@ namespace BA_ERPMVC.BusinessLayer
                     join bd in _dbContext.stp_BusinessDivision on genOrd.BusinessDivisionId equals bd.BusinessDivisionID
                     join st in _dbContext.stp_Status on inv.Status equals st.StatusID
                     where inv.InvoiceDate >= fromDate && inv.InvoiceDate <= ToDate
-                //    where x => x.ExpenseDate >= fromDate && x.ExpenseDate <= ToDate
-                    where cust.Customer_Name ==  CustomerName
-                  //  where inv.InvoiceDataFromDate == fromDate
-                   // where inv.InvoiceDataToDate == ToDate
+                    //    where x => x.ExpenseDate >= fromDate && x.ExpenseDate <= ToDate
+                    where cust.Customer_Name == CustomerName
+                    //  where inv.InvoiceDataFromDate == fromDate
+                    // where inv.InvoiceDataToDate == ToDate
                     select new InvoiceViewModel
                     {
                         OrderNo = genOrd.OrderNo,
@@ -469,29 +475,29 @@ namespace BA_ERPMVC.BusinessLayer
                         BusinessDivisionName = bd.BusinessDivisionName,
                         Status = st.Status,
                         S01_10TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1 //&& logis.ContainerWeight.Contains("01-10")
-                                        // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
-                                        }).Count(),
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1 //&& logis.ContainerWeight.Contains("01-10")
+                                                                                                                                                                                                                                                  // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
+                                              }).Count(),
 
                         S15_20TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1 //&& logis.ContainerWeight.Contains("10-15")
-                                        // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
-                                        }).Count(),
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1 //&& logis.ContainerWeight.Contains("10-15")
+                                                                                                                                                                                                                                                  // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
+                                              }).Count(),
 
 
                         S20_25TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
-                                        // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
-                                        }).Count(),
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
+                                              // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
+                                              }).Count(),
                         S25_30TonConatiner = (from logis in _dbContext.Logistics
                                               where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
                                               // where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20")   && logis.OrderServiceId == 1
@@ -502,37 +508,37 @@ namespace BA_ERPMVC.BusinessLayer
 
 
                         D20_25TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
-                                        //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
+                                              //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
 
-                                        }).Count(),
+                                              }).Count(),
                         D30_35TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
-                                        //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
+                                              //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
 
-                                        }).Count(),
+                                              }).Count(),
                         D35_40TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
-                                        //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
+                                              //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
 
-                                        }).Count(),
+                                              }).Count(),
                         D40_45TonConatiner = (from logis in _dbContext.Logistics
-                                        where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
-                                        //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
-                                        select new
-                                        {
-                                            logis.logisticsid
+                                              where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
+                                              //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
+                                              select new
+                                              {
+                                                  logis.logisticsid
 
-                                        }).Count(),
+                                              }).Count(),
                         D45_50TonConatiner = (from logis in _dbContext.Logistics
                                               where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 != null && logis.ContainerSize.Contains("20") && logis.JobType.Contains("LADEN") && logis.OrderServiceId == 1
                                               //      where logis.OrderId == inv.OrderID && logis.ContainerNo != null && logis.ContainerNo2 == null && logis.ContainerSize.Contains("20") && logis.OrderServiceId == 1
@@ -711,7 +717,168 @@ namespace BA_ERPMVC.BusinessLayer
                     }).FirstOrDefault();
 
         }
+        // Invoice Head //
+        public IEnumerable<InvoiceHeadViewModel> GetInvoiceHeadAsync()
+        {
+            return (from invoicehead in _dbContext.InvoiceHeads.Where(x => x.IsDeleted == false)
+                    select new InvoiceHeadViewModel()
+                    {
+                        ID = invoicehead.ID,
+                        HeadType = invoicehead.HeadType,
+                        HeadName = invoicehead.HeadName,
 
+                    });
+        }
+
+        public async Task SaveInvoiceHeadAsync(InvoiceHeadViewModel invoiceheadVM)
+        {
+
+            var invoicehead = Mapper.Map<InvoiceHeadViewModel, InvoiceHead>(invoiceheadVM);
+            if (invoicehead == null)
+            {
+                throw new ArgumentNullException(nameof(invoiceheadVM));
+            }
+            //invoicehead.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            //invoicehead.CreatedDate = DateTime.Now;
+            //invoicehead.CreatedBy = Session["UserName"].ToString();
+            invoicehead.CreatedDate = DateTime.Now;
+            invoicehead.IsDeleted = false;
+            _invoiceheadRepository.Add(invoicehead);
+
+            await _dbContext.SaveChangesAsync();
+            invoiceheadVM.ID = invoicehead.ID;
+        }
+
+        public async Task UpdateInvoiceHeadAsync(InvoiceHeadViewModel invoiceheadVM)
+        {
+
+            if (invoiceheadVM == null)
+            {
+                throw new ArgumentNullException(nameof(invoiceheadVM));
+            }
+
+            var invoicehead = await _invoiceheadRepository.GetAsync(Convert.ToInt32(invoiceheadVM.ID));
+
+            if (invoicehead == null)
+            {
+                throw new InvalidOperationException($"Invoice :{invoiceheadVM.ID}  not found.");
+            }
+
+            invoicehead.HeadType = invoiceheadVM.HeadType;
+            invoicehead.HeadName = invoiceheadVM.HeadName;
+
+            _invoiceheadRepository.Update(invoicehead);
+
+
+            await _dbContext.SaveChangesAsync();
+            invoiceheadVM.ID = invoicehead.ID;
+        }
+
+        ///////////************* Expenses Invoice **************/////////////
+
+        public IEnumerable<ExpenseInvoiceViewModel> GetExpenseInvoiceAsync(string orderNo, string containerNo)
+        {
+            return (from expenseinvoice in _dbContext.ExpenseInvoices.Where(x=> x.IsActive == false && x.OrderNo == orderNo && x.ContainerNo == containerNo)
+                                     
+                    select new ExpenseInvoiceViewModel()
+                    {
+                        OrderNo = expenseinvoice.OrderNo,
+                        //OrderNo = exportorder.OrderNo,
+                        ContainerNo = expenseinvoice.ContainerNo,
+                        HeadType = expenseinvoice.HeadType,
+                        HeadID = expenseinvoice.ID,
+                        HeadName = expenseinvoice.HeadName,
+                        Amount = expenseinvoice.Amount,
+                        OrderType = expenseinvoice.OrderType,
+                        ID = expenseinvoice.ID,
+                    });
+        }
+
+        public async Task SaveExpenseInvoiceAsync(ExpenseInvoiceViewModel expenseinvoiceVM)
+        {
+
+            var expenseinvoice = Mapper.Map<ExpenseInvoiceViewModel, ExpenseInvoice>(expenseinvoiceVM);
+            if (expenseinvoice == null)
+            {
+                throw new ArgumentNullException(nameof(expenseinvoiceVM));
+            }
+
+            //expenseinvoice.CreatedBy = Session["UserName"].ToString();
+            expenseinvoice.CreatedDate = DateTime.Now;
+
+            _expenseinvoiceRepository.Add(expenseinvoice);
+
+            await _dbContext.SaveChangesAsync();
+            expenseinvoiceVM.ID = expenseinvoice.ID;
+        }
+
+        public async Task UpdateExpenseInvoiceAsync(ExpenseInvoiceViewModel expenseinvoiceVM)
+        {
+
+            if (expenseinvoiceVM == null)
+            {
+                throw new ArgumentNullException(nameof(expenseinvoiceVM));
+            }
+
+            var expenseinvoice = await _expenseinvoiceRepository.GetAsync(Convert.ToInt32(expenseinvoiceVM.ID));
+
+            if (expenseinvoice == null)
+            {
+                throw new InvalidOperationException($"Data :{expenseinvoiceVM.ID}  not found.");
+            }
+
+            expenseinvoice.OrderNo = expenseinvoiceVM.OrderNo;
+            expenseinvoice.OrderType = expenseinvoiceVM.OrderType;
+            expenseinvoice.ContainerNo = expenseinvoiceVM.ContainerNo;
+            expenseinvoice.HeadType = expenseinvoiceVM.HeadType;
+            expenseinvoice.HeadName = expenseinvoiceVM.HeadName;
+            expenseinvoice.HeadID = expenseinvoiceVM.HeadID;
+            expenseinvoice.Amount = expenseinvoiceVM.Amount;
+
+            _expenseinvoiceRepository.Update(expenseinvoice);
+
+
+            await _dbContext.SaveChangesAsync();
+            expenseinvoiceVM.ID = expenseinvoice.ID;
+        }
+
+        public bool DeleteExpenseInvoice(int Id)
+        {
+            bool isSuccess = false;
+            var expenseInvoice = _dbContext.ExpenseInvoices.Where(x => x.ID == Id).FirstOrDefault();
+            if (expenseInvoice != null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                _expenseinvoiceRepository.Remove(Id);
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
+        }
+
+        public IEnumerable<GenerateOrder> GetImportOrderNo()
+        {
+            return _dbContext.GenerateOrders.ToList();
+        }
+        public IEnumerable<ExportBookingOrder> GetExportOrderNo()
+        {
+            return _dbContext.ExportBookingOrders.ToList();
+        }
+
+        public IEnumerable<InvoiceHeadViewModel> GetHeadName()
+        {
+            return (from HeadName in _dbContext.InvoiceHeads.Where(x => x.IsDeleted == false)
+                    select new InvoiceHeadViewModel()
+                    {
+                        HeadName = HeadName.HeadName,
+                        ID = HeadName.ID
+                    });
+        }
 
     }
 }

@@ -183,7 +183,8 @@ namespace BA_ERPMVC.Controllers
                     }
                     else
                     {
-
+                        obj.CreatedBy = Session["UserName"].ToString();
+                        obj.CreatedDate = DateTime.Now;
                         db.stp_Facility.Add(obj);
                         done = db.SaveChanges();
                         responseText = "Data Inserted Successfully.";
@@ -302,7 +303,8 @@ namespace BA_ERPMVC.Controllers
                     }
                     else
                     {
-
+                        obj.CreatedBy = Session["UserName"].ToString();
+                        obj.CreatedDate = DateTime.Now;
                         db.Locations.Add(obj);
                         done = db.SaveChanges();
                         responseText = "Data Inserted Successfully.";
@@ -399,7 +401,8 @@ namespace BA_ERPMVC.Controllers
                     }
                     else
                     {
-
+                        obj.CreatedBy = Session["UserName"].ToString();
+                        obj.CreatedDate = DateTime.Now;
                         db.EmptyDropOffLocs.Add(obj);
                         done = db.SaveChanges();
                         responseText = "Data Inserted Successfully.";

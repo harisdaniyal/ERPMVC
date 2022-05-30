@@ -85,7 +85,7 @@ namespace BA_ERPMVC.Controllers
                     }
                     else
                     {
-
+                        obj.CreatedBy = Session["UserName"].ToString();
                         obj.CreateDate = DateTime.Now;
                         obj.UserID = Session["UserName"].ToString();
                         db.VehicleRegistrationDetails.Add(obj);

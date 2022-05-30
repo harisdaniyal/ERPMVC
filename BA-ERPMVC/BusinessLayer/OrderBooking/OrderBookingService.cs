@@ -140,6 +140,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 bookingModel.BL = string.Empty;
             }
             bookingModel.isCompleted = false;
+            bookingModel.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            bookingModel.CreatedDate = DateTime.Now;
 
             _orderRepository.Add(bookingModel);
             await AddOrderFacilitiesAsync(bookingViewModel.FacilityIds, bookingModel.OrderID);
@@ -434,7 +436,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
 
 
-                        ID = PreDispatchedMovements.ID,
+            ID = PreDispatchedMovements.ID,
                         //GD = readyForDispatched.GD,
                         //BL = readyForDispatched.BL
                     }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
@@ -449,6 +451,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(preDispatchedMovementVM));
             }
 
+            preDispatchedMovement.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            preDispatchedMovement.CreateDate = DateTime.Now;
             _preDispatchedMovementRepository.Add(preDispatchedMovement);
 
             if (preDispatchedMovementVM.IsCompleted.GetValueOrDefault())
@@ -553,6 +557,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(dispatchedOrderVM));
             }
 
+            dispatchedOrder.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            dispatchedOrder.CreateDate = DateTime.Now;
             _dispatchedOrderRepository.Add(dispatchedOrder);
 
             if (dispatchedOrderVM.IsCompleted.GetValueOrDefault())
@@ -668,6 +674,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(intransacttrainVM));
             }
+            intransacttrain.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            intransacttrain.CreateDate = DateTime.Now;
 
             _intransactTrainRepository.Add(intransacttrain);
 
@@ -777,6 +785,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(reDispatched));
             }
 
+            reDispatched.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            reDispatched.CreateDate = DateTime.Now;
+
             _reDispatchedRepositry.Add(reDispatched);
 
             if (reDispatchedVM.IsCompleted.GetValueOrDefault())
@@ -879,6 +890,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(deliverytrainVM));
             }
+
+            deliverytrain.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            deliverytrain.CreateDate = DateTime.Now;
 
             _deliveryTrainRepository.Add(deliverytrain);
 
@@ -989,6 +1003,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(emptydropoffVM));
             }
 
+            emptydropoff.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            emptydropoff.CreateDate = DateTime.Now;
+
             _emptyDropoffRepository.Add(emptydropoff);
 
             if (emptydropoffVM.IsCompleted.GetValueOrDefault())
@@ -1096,6 +1113,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                 throw new ArgumentNullException(nameof(dispatchedtruckVM));
             }
 
+            dispatchedtruck.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            dispatchedtruck.CreateDate = DateTime.Now;
+
             _dispatchedtruckRepository.Add(dispatchedtruck);
 
             if (dispatchedtruckVM.IsCompleted.GetValueOrDefault())
@@ -1199,6 +1219,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(deliverytruckVM));
             }
+            deliverytruck.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            deliverytruck.CreateDate = DateTime.Now;
 
             _deliverytruckRepository.Add(deliverytruck);
 
@@ -1676,7 +1698,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentException($"{nameof(exportbookingModel.CRO)} already exist. ");
             }
-
+            exportbookingModel.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            exportbookingModel.CreateDate = DateTime.Now;
             exportbookingModel.IsCompleted = false;
 
             _exportbookingorderRepository.Add(exportbookingModel);
@@ -1735,6 +1758,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 exportlogistic.Status = OrdersStatus.Dispatched.ToString();
             }
+            exportlogistic.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            exportlogistic.CreateDate = DateTime.Now;
+
             _exportlogisticRepository.Add(exportlogistic);
             await _dbContext.SaveChangesAsync();
             exportlogisticsViewModels.LogisticId = exportlogistic.LogisticId;
@@ -1796,6 +1822,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(ExportpreDispatchedVM));
             }
+            ExportpreDispatched.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            ExportpreDispatched.CreateDate = DateTime.Now;
 
             _exportpredispatchedRepository.Add(ExportpreDispatched);
 
@@ -1893,6 +1921,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(ExportDispatchedTrainVM));
             }
+            ExportDispatchedTrain.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            ExportDispatchedTrain.CreateDate = DateTime.Now;
 
             _exportdispatchedtrainRepository.Add(ExportDispatchedTrain);
 
@@ -1991,6 +2021,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(ExportDispatchedTruckVM));
             }
+            ExportDispatchedTruck.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            ExportDispatchedTruck.CreateDate = DateTime.Now;
 
             _exportdispatchedtruckRepository.Add(ExportDispatchedTruck);
 
@@ -2085,6 +2117,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(ExportReDispatchedVM));
             }
+            ExportReDispatched.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            ExportReDispatched.CreateDate = DateTime.Now;
 
             _exportRedispatchedRepository.Add(ExportReDispatched);
 
@@ -2152,7 +2186,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     join DT in _dbContext.ExportDispatchedTrucks.Where(x => x.IsCompleted == true)
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
                     from ExportDispatchedTrucks in DTGroup.DefaultIfEmpty()
-                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true && x.ReDispatched.ToLower() == "false")
+                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true)// && x.ReDispatched.ToLower() == "false")
                     on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDT.OrderId, ContainerNo = EDT.ContainerNo } into EDTGroup
                     from ExportDispatchedTrains in EDTGroup.DefaultIfEmpty()
                     join ED in _dbContext.ExportDeliveries.Where(x => x.IsCompleted == false)
@@ -2186,6 +2220,8 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             {
                 throw new ArgumentNullException(nameof(ExportDeliveryVM));
             }
+            ExportDelivery.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            ExportDelivery.CreateDate = DateTime.Now;
 
             _exportDeliveryRepository.Add(ExportDelivery);
 

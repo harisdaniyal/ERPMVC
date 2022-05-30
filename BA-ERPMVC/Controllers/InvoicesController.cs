@@ -1,6 +1,7 @@
 ﻿using BA_ERPMVC.BusinessLayer;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.Reports;
+using BA_ERPMVC.ViewModels;
 using CrystalDecisions.CrystalReports.Engine;
 using MasterLayer;
 using Microsoft.AspNet.Identity;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -708,22 +710,142 @@ namespace BA_ERPMVC.Controllers
 
 
 
+        /// ************Invoice Head************** ///
+        public ActionResult InvoiceHead()
+        {
+            var invoicehead = _invoiceService.GetInvoiceHeadAsync();
+            return View(invoicehead);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult>InvoiceHead(InvoiceHeadViewModel invoiceheadVM)
+        {
+            if (invoiceheadVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(invoiceheadVM)} should not be null or empty" });
+            }
+
+            if (db.InvoiceHeads.Any(x => x.HeadType == invoiceheadVM.HeadType && x.HeadName == invoiceheadVM.HeadName) && invoiceheadVM.ID == 0)
+            {
+                return Json(new { success = false, message = $" This {invoiceheadVM.HeadName} is already exists." });
+
+            }
+
+            try
+            {
+                if (invoiceheadVM.ID == 0)
+                {
+                    await _invoiceService.SaveInvoiceHeadAsync(invoiceheadVM);
+
+                    return Json(new { success = true, Id = invoiceheadVM.ID });
+                }
+
+                await _invoiceService.UpdateInvoiceHeadAsync(invoiceheadVM);
+
+                return Json(new { success = true, Id = invoiceheadVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
+        ////// ********** Expense Invoice ***************///////////
+
+
+        public ActionResult ExpenseInvoice()
+        {
+            this.ViewBag.ImportOrderNo = _invoiceService.GetImportOrderNo();
+            this.ViewBag.ExportOrderNo = _invoiceService.GetExportOrderNo();
+            this.ViewBag.InvoiceHeadName = _invoiceService.GetHeadName();
+            return View();
+        }
+
+
+        [HttpGet]
+         public JsonResult GetExpenseInvoice(string orderNo, string containerNo)
+        {
+            var expenseinvoice = _invoiceService.GetExpenseInvoiceAsync(orderNo, containerNo);
+            return Json(expenseinvoice, JsonRequestBehavior.AllowGet);
+        }
 
 
 
+        [HttpGet] 
+        public JsonResult GetImportContainer(int orderID, string orderType)
+        {
+            var data = Json(db.OrderContainers.Where(x=> x.OrderID == orderID && x.OrderType == orderType).Select(x => new
+            {
+                ContainerNo = x.ContainerNo
+            }       
+            ).ToList(), JsonRequestBehavior.AllowGet);
+           
+            return data;
+        }
+
+        [HttpGet]
+        public JsonResult GetExportContainer(int orderID, string orderType)
+        {
+            var data = Json(db.ExportLogistics.Where(x => x.OrderId == orderID ).Select(x => new
+            {
+                ContainerNo = x.ContainerNo
+            }
+            ).ToList(), JsonRequestBehavior.AllowGet);
+
+            return data;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult>ExpenseInvoice(ExpenseInvoiceViewModel expenseinvoiceVM)
+        {
+            if (expenseinvoiceVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(expenseinvoiceVM)} should not be null or empty" });
+            }
+
+            try
+            {
+                if (expenseinvoiceVM.ID == 0)
+                {   
+                    await _invoiceService.SaveExpenseInvoiceAsync(expenseinvoiceVM);
+
+                    return Json(new { success = true, Id = expenseinvoiceVM.ID });
+                }
+
+                await _invoiceService.UpdateExpenseInvoiceAsync(expenseinvoiceVM);
+
+                return Json(new { success = true, Id = expenseinvoiceVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
 
 
+        //[HttpPost]
+        //public async Task<ActionResult> DeleteLogistics(int logisticsId)
+        //{
+        //    if (logisticsId < 0)
+        //    {
+        //        return Json(new { success = false, message = $"{nameof(logisticsId)} should be a valid id" });
+        //    }
 
+        //    try
+        //    {
+        //        if (!orderBookingService.DeleteLogistics(logisticsId))
+        //        {
+        //            return Json(new { success = false, message = $"Logistic can not be delete after Dispatched." });
+        //        }
 
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { success = false, message = "Container can not be deleted, it is used in trip." });
+        //    }
 
-
-
-
-
-
-
-
-
-
+        //    return Json(new { success = true });
+        //}
     }
 }

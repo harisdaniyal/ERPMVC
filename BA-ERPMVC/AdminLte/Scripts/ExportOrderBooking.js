@@ -55,12 +55,13 @@ function hideLoader() {
 function showErrorMessage(message) {
     hideLoader();
     // Show errorMessage banner
-    alert(message);
+    
+    toastr.error(message);
 }
 
 function showSuccessMessage(message) {
     hideLoader();
     // Show successMessage banner
-    alert(message);
+    toastr.success(message);
 }
 

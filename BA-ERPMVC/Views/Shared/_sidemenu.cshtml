@@ -31,7 +31,7 @@
 
     @if (menuAssignment.Any(x => x.Url != "/BLShippingLine/Index" && x.Url != "/DropDownMenu/BLShippingContainer" && x.Url != "/BLShippingLine/BLApproval"))
     {
-        {
+        
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link ">
                     <i class="nav-icon fas fa-ship"></i>
@@ -237,7 +237,7 @@
 
 
             </li>
-        }
+        
     }
 
     @if (menuAssignment.Any(x => x.Url != "/BVMS/VehicleRegistration" && x.Url != "/HumanResourceManagment/EmployeeDetails" && x.Url != "/DropDownMenu/Expenses"
@@ -1089,57 +1089,10 @@
 
 
 
-    @if (menuAssignment.Any(x => x.Url != "/sales/LocalLogisticOperation" && x.Url != "/sales/TripDetails" && x.Url != "/sales/UpCommingTrips"))
-    {
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link ">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                    Operations
-                    <i class="fas fa-angle-left right"></i>
 
-                </p>
-            </a>
 
-            <ul class="nav nav-treeview">
-                @if (menuAssignment.Any(x => x.Url == "/sales/LocalLogisticOperation" && x.IsView == true))
-                {
-                    <li class="nav-item">
-                        <a href="/sales/LocalLogisticOperation" class="nav-link">
-                            <i class="fas fa-tools nav-icon"></i>
-                            <p>Logistic Operations</p>
-                        </a>
-                    </li>
-                }
-
-                @if (menuAssignment.Any(x => x.Url == "/sales/TripDetails" && x.IsView == true))
-                {
-                    <li class="nav-item">
-                        <a href="/sales/TripDetails" class="nav-link">
-                            <i class="fas fa-tools nav-icon"></i>
-                            <p>Trip Detail</p>
-                        </a>
-
-                    </li>
-                }
-
-                @if (menuAssignment.Any(x => x.Url == "/sales/UpCommingTrips" && x.IsView == true))
-                {
-                    <li class="nav-item">
-                        <a href="/sales/UpCommingTrips" class="nav-link">
-                            <i class="fas fa-tools nav-icon"></i>
-                            <p>UpComingTrips</p>
-                        </a>
-
-                    </li>
-                }
-            </ul>
-
-        </li>
-    }
-
-    @if (menuAssignment.Any(x => x.Url != "/Invoices/PrintReportLogistics"))
-    {
+    
+    <!--{
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-truck"></i>
@@ -1148,7 +1101,7 @@
                     <i class="fas fa-angle-left right"></i>
 
                 </p>
-            </a>
+            </a>-->
             @*<ul class="nav nav-treeview">
                     <li class="nav-item">
 
@@ -1159,8 +1112,8 @@
 
                     </li>
                 </ul>*@
-            @if (menuAssignment.Any(x => x.Url == "/Invoices/PrintReportLogistics" && x.IsView == true))
-            {<ul class="nav nav-treeview">
+          
+            <!--{<ul class="nav nav-treeview">
                     <li class="nav-item">
 
                         <a href="/Invoices/PrintReportLogistics" class="nav-link">
@@ -1172,8 +1125,8 @@
                 </ul>}
 
 
-        </li>
-    }
+        </li>-->
+    
 
     @if (menuAssignment.Any(x => x.Url != "/Invoices/InvoiceGeneration" && x.Url != "/OrderBooking/BLOrCROReport" && x.Url != "/Invoices/LogisticInvoice"
             && x.Url != "/Invoices/LogisticInvoiceReport"))
@@ -1188,17 +1141,17 @@
                 </p>
             </a>
             <ul class="nav nav-treeview">
-                @if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceGeneration" && x.IsView == true))
+                @*@if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceGeneration" && x.IsView == true))*@
 
-                {
-                    <li class="nav-item">
-                        <a href="/Invoices/InvoiceGeneration" class="nav-link">
-                            <i class="fas fa-tools nav-icon"></i>
-                            <p>Generate Invoice</p>
-                        </a>
 
-                    </li>
-                }
+                @*<li class="nav-item">
+            <a href="/Invoices/InvoiceGeneration" class="nav-link">
+                <i class="fas fa-tools nav-icon"></i>
+                <p>Generate Invoice</p>
+            </a>
+
+        </li>*@
+
 
 
                 @if (menuAssignment.Any(x => x.Url == "/OrderBooking/BLOrCROReport" && x.IsView == true))
@@ -1212,26 +1165,48 @@
                     </li>
                 }
 
-                @if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoice" && x.IsView == true))
+                @if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceHead" && x.IsView == true))
                 {
                     <li class="nav-item">
-                        <a href="/Invoices/LogisticInvoice" class="nav-link">
-                            <i class="fas fa-gas-pump nav-icon"></i>
-                            <p>Print Invoice</p>
+                        <a href="/Invoices/InvoiceHead" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Create InvoiceHead</p>
                         </a>
 
                     </li>
                 }
-                @if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoiceReport" && x.IsView == true))
+
+                @if (menuAssignment.Any(x => x.Url == "/Invoices/ExpenseInvoice" && x.IsView == true))
                 {
                     <li class="nav-item">
-                        <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
-                            <i class="fas fa-gas-pump nav-icon"></i>
-                            <p>Print Invoice Report</p>
+                        <a href="/Invoices/ExpenseInvoice" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Expense Invoice</p>
                         </a>
 
                     </li>
                 }
+
+                @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoice" && x.IsView == true))
+        {
+            <li class="nav-item">
+                <a href="/Invoices/LogisticInvoice" class="nav-link">
+                    <i class="fas fa-gas-pump nav-icon"></i>
+                    <p>Print Invoice</p>
+                </a>
+
+            </li>
+        }*@
+                @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoiceReport" && x.IsView == true))
+        {
+            <li class="nav-item">
+                <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
+                    <i class="fas fa-gas-pump nav-icon"></i>
+                    <p>Print Invoice Report</p>
+                </a>
+
+            </li>
+        }*@
 
             </ul>
 
