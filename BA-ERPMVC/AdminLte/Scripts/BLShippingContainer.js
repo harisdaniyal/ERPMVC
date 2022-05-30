@@ -26,13 +26,14 @@
             alert('Please select Container Size.')
             return false;
         }
+
+        dataObject = []
         dataObject.push(JSON.stringify({
             'ID': row.find(".txt_ID").val(),
             'IsDeleted': IsDeleted,
             'ContainerNo': row.find(".txt_containerno").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val()
-
         }));
 
         showLoader();
