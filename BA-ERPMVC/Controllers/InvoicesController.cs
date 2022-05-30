@@ -759,12 +759,20 @@ namespace BA_ERPMVC.Controllers
             this.ViewBag.ImportOrderNo = _invoiceService.GetImportOrderNo();
             this.ViewBag.ExportOrderNo = _invoiceService.GetExportOrderNo();
             this.ViewBag.InvoiceHeadName = _invoiceService.GetHeadName();
-            var expenseinvoice = _invoiceService.GetExpenseInvoiceAsync();
-            return View(expenseinvoice);
+            return View();
         }
 
 
         [HttpGet]
+         public JsonResult GetExpenseInvoice(string orderNo, string containerNo)
+        {
+            var expenseinvoice = _invoiceService.GetExpenseInvoiceAsync(orderNo, containerNo);
+            return Json(expenseinvoice, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpGet] 
         public JsonResult GetImportContainer(int orderID, string orderType)
         {
             var data = Json(db.OrderContainers.Where(x=> x.OrderID == orderID && x.OrderType == orderType).Select(x => new
@@ -773,6 +781,18 @@ namespace BA_ERPMVC.Controllers
             }       
             ).ToList(), JsonRequestBehavior.AllowGet);
            
+            return data;
+        }
+
+        [HttpGet]
+        public JsonResult GetExportContainer(int orderID, string orderType)
+        {
+            var data = Json(db.ExportLogistics.Where(x => x.OrderId == orderID ).Select(x => new
+            {
+                ContainerNo = x.ContainerNo
+            }
+            ).ToList(), JsonRequestBehavior.AllowGet);
+
             return data;
         }
 
@@ -802,5 +822,30 @@ namespace BA_ERPMVC.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
+
+        //[HttpPost]
+        //public async Task<ActionResult> DeleteLogistics(int logisticsId)
+        //{
+        //    if (logisticsId < 0)
+        //    {
+        //        return Json(new { success = false, message = $"{nameof(logisticsId)} should be a valid id" });
+        //    }
+
+        //    try
+        //    {
+        //        if (!orderBookingService.DeleteLogistics(logisticsId))
+        //        {
+        //            return Json(new { success = false, message = $"Logistic can not be delete after Dispatched." });
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { success = false, message = "Container can not be deleted, it is used in trip." });
+        //    }
+
+        //    return Json(new { success = true });
+        //}
     }
 }

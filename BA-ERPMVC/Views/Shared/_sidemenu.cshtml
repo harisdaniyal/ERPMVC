@@ -1143,15 +1143,15 @@
             <ul class="nav nav-treeview">
                 @*@if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceGeneration" && x.IsView == true))*@
 
-                
-                    @*<li class="nav-item">
-                        <a href="/Invoices/InvoiceGeneration" class="nav-link">
-                            <i class="fas fa-tools nav-icon"></i>
-                            <p>Generate Invoice</p>
-                        </a>
 
-                    </li>*@
-                
+                @*<li class="nav-item">
+            <a href="/Invoices/InvoiceGeneration" class="nav-link">
+                <i class="fas fa-tools nav-icon"></i>
+                <p>Generate Invoice</p>
+            </a>
+
+        </li>*@
+
 
 
                 @if (menuAssignment.Any(x => x.Url == "/OrderBooking/BLOrCROReport" && x.IsView == true))
@@ -1165,26 +1165,48 @@
                     </li>
                 }
 
+                @if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceHead" && x.IsView == true))
+                {
+                    <li class="nav-item">
+                        <a href="/Invoices/InvoiceHead" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Create InvoiceHead</p>
+                        </a>
+
+                    </li>
+                }
+
+                @if (menuAssignment.Any(x => x.Url == "/Invoices/ExpenseInvoice" && x.IsView == true))
+                {
+                    <li class="nav-item">
+                        <a href="/Invoices/ExpenseInvoice" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Expense Invoice</p>
+                        </a>
+
+                    </li>
+                }
+
                 @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoice" && x.IsView == true))
-                {
-                    <li class="nav-item">
-                        <a href="/Invoices/LogisticInvoice" class="nav-link">
-                            <i class="fas fa-gas-pump nav-icon"></i>
-                            <p>Print Invoice</p>
-                        </a>
+        {
+            <li class="nav-item">
+                <a href="/Invoices/LogisticInvoice" class="nav-link">
+                    <i class="fas fa-gas-pump nav-icon"></i>
+                    <p>Print Invoice</p>
+                </a>
 
-                    </li>
-                }*@
+            </li>
+        }*@
                 @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoiceReport" && x.IsView == true))
-                {
-                    <li class="nav-item">
-                        <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
-                            <i class="fas fa-gas-pump nav-icon"></i>
-                            <p>Print Invoice Report</p>
-                        </a>
+        {
+            <li class="nav-item">
+                <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
+                    <i class="fas fa-gas-pump nav-icon"></i>
+                    <p>Print Invoice Report</p>
+                </a>
 
-                    </li>
-                }*@
+            </li>
+        }*@
 
             </ul>
 

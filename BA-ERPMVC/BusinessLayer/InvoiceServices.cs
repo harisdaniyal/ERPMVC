@@ -776,31 +776,22 @@ namespace BA_ERPMVC.BusinessLayer
 
         ///////////************* Expenses Invoice **************/////////////
 
-        public IEnumerable<ExpenseInvoiceViewModel> GetExpenseInvoiceAsync()
+        public IEnumerable<ExpenseInvoiceViewModel> GetExpenseInvoiceAsync(string orderNo, string containerNo)
         {
-            return (from expenseinvoice in _dbContext.ExpenseInvoices
-                    join order in _dbContext.GenerateOrders
-                         on new { OrderNo = expenseinvoice.OrderNo } equals new { OrderNo = order.OrderNo }
-                         // join exportorder in _dbContext.ExportBookingOrders
-                         //on new { OrderNo = expenseinvoice.OrderNo } equals new { OrderNo = exportorder.OrderNo }
-                    join ordercontainer in _dbContext.OrderContainers
-                         on new { ContainerNo = expenseinvoice.ContainerNo } equals new { ContainerNo = ordercontainer.ContainerNo }
-                    join HI in _dbContext.InvoiceHeads
-                         on new { HeadType = expenseinvoice.HeadType, HeadName = expenseinvoice.HeadName } equals new { HeadType = HI.HeadType, HeadName = HI.HeadName } into HIGroup
-                    from InvoiceHeads in HIGroup.DefaultIfEmpty()
-
+            return (from expenseinvoice in _dbContext.ExpenseInvoices.Where(x=> x.IsActive == false && x.OrderNo == orderNo && x.ContainerNo == containerNo)
+                                     
                     select new ExpenseInvoiceViewModel()
                     {
-                        OrderNo = order.OrderNo,
+                        OrderNo = expenseinvoice.OrderNo,
                         //OrderNo = exportorder.OrderNo,
-                        ContainerNo = ordercontainer.ContainerNo,
-                        HeadType = InvoiceHeads.HeadType,
-                        HeadID = InvoiceHeads.ID,
-                        HeadName = InvoiceHeads.HeadName,
+                        ContainerNo = expenseinvoice.ContainerNo,
+                        HeadType = expenseinvoice.HeadType,
+                        HeadID = expenseinvoice.ID,
+                        HeadName = expenseinvoice.HeadName,
                         Amount = expenseinvoice.Amount,
                         OrderType = expenseinvoice.OrderType,
                         ID = expenseinvoice.ID,
-                    }).OrderByDescending(x => x.ID);
+                    });
         }
 
         public async Task SaveExpenseInvoiceAsync(ExpenseInvoiceViewModel expenseinvoiceVM)
@@ -849,6 +840,25 @@ namespace BA_ERPMVC.BusinessLayer
 
             await _dbContext.SaveChangesAsync();
             expenseinvoiceVM.ID = expenseinvoice.ID;
+        }
+
+        public bool DeleteExpenseInvoice(int Id)
+        {
+            bool isSuccess = false;
+            var expenseInvoice = _dbContext.ExpenseInvoices.Where(x => x.ID == Id).FirstOrDefault();
+            if (expenseInvoice != null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                _expenseinvoiceRepository.Remove(Id);
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
         }
 
         public IEnumerable<GenerateOrder> GetImportOrderNo()

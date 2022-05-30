@@ -5097,7 +5097,7 @@ CREATE TABLE [dbo].[ExpenseInvoice](
 	[Amount] [numeric](18, 0) NULL,
 	[CreatedBy] [nvarchar](50) NULL,
 	[CreatedDate] [datetime] NULL,
-	[IsCompleted] [bit] NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_ExpenseInvoice] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

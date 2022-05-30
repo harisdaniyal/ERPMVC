@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExpenseInvoiceViewModel>
+﻿@*@model IEnumerable<BA_ERPMVC.ViewModels.ExpenseInvoiceViewModel>*@
 @{
     ViewBag.Title = "ExpenseInvoice";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,7 +30,7 @@
                 <select class="form-control" id="txt_importorderNo" style="width: 100%;">
                     <option value="">Please Select OrderNo</option>
                     <option value="0">All</option>
-                    @foreach (var orderno in ViewBag.ImportOrderNo)
+                    @foreach (var orderno   in ViewBag.ImportOrderNo)
                     {
                         <option value="@orderno.OrderID" data-select2-id="@orderno.OrderNo">@orderno.OrderNo</option>
                     }
@@ -102,8 +102,8 @@
                             </select>
                         </td>
                         <td>
-                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_HeadName"  id="txt_HeadName"style="width: 200px;">
-                                <option value="">Head Name</option>
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_HeadName" id="txt_HeadName" style="width: 200px;">
+                                <option value="">Select HeadName</option>
                                 @foreach (var InvoiceHeadName in ViewBag.InvoiceHeadName)
                                 {
                                     <option value="@InvoiceHeadName.ID" data-select2-id="@InvoiceHeadName.HeadName">@InvoiceHeadName.HeadName</option>
@@ -119,7 +119,7 @@
                         </td>
                     </tr>
 
-                    @foreach (var expenseinvoice in Model.ToList())
+                    @*@foreach (var expenseinvoice in Model.ToList())
                     {
                         <tr class="bg-light tbl-valign-top">
                             <td>
@@ -133,11 +133,10 @@
                             </td>
                             <td>
                                 <select class="form-control" id="txt_HeadName" style="width: 100%;">
-                                    <option value="">Please Select OrderNo</option>
-                                    <option value="0">All</option>
+                                    <option value="">Please Select HeadName</option>
                                     @foreach (var invoiceheadname in ViewBag.InvoiceHeadName)
                                     {
-                                        <option value="@invoiceheadname.ID" data-select2-id="@invoiceheadname.HeadName">@invoiceheadname.Headname</option>
+                                        <option value="@invoiceheadname.ID" data-select2-id="@invoiceheadname.HeadName">@invoiceheadname.HeadName</option>
                                     }
 
                                 </select>
@@ -149,7 +148,7 @@
                                 <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
                             </td>
                         </tr>
-                    }
+                    }*@
 
                 </tbody>
             </table>

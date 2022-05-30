@@ -8,7 +8,7 @@ namespace BA_ERPMVC.ViewModels
     public class ExpenseInvoiceViewModel
     {
 		public int? ID { get; set; }
-		public int HeadID { get; set; }
+		public int? HeadID { get; set; }
 		public string OrderNo { get; set; }
 		public string ContainerNo { get; set; }
 		public string OrderType { get; set; }
@@ -17,6 +17,6 @@ namespace BA_ERPMVC.ViewModels
 		public decimal? Amount { get; set; }
 		public string CreatedBy { get; set; }
 		public DateTime? CreatedDate { get; set; }
-		public bool? IsCompleted { get; set; }
+		public bool? IsActive { get; set; }
 	}
 }
