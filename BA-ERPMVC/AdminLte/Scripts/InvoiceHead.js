@@ -21,8 +21,22 @@
 
     $(document).on("click", ".btndlt", function () {
         var row = $(this).closest("tr")
-        save(row, true)
-    })
+        var Id = row.find(".txt_ID").val()
+
+        $.ajax({
+            type: 'POST',
+            url: '/Invoices/DeleteInvoiceHead?Id=' + Id,
+            async: false,
+            success: function (response) {
+                if (response.success) {
+                    toastr.success("Deleted Successfully.")
+                    hideLoader();
+                    row.remove();
+                }
+                else showErrorMessage(response.message);
+            }
+        });
+    });
 
     function save(row, IsDeleted) {
 

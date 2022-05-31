@@ -38,7 +38,21 @@ $(document).ready(function () {
 
     $(document).on("click", ".btndlt", function () {
         var row = $(this).closest("tr")
-        save(row, true)
+       var Id =  row.find(".txt_ID").val()
+
+    $.ajax({
+        type: 'POST',
+        url: '/Invoices/DeleteExpenseInvoice?Id=' + Id,
+        async: false,
+        success: function (response) {
+            if (response.success) {            
+                toastr.success("Deleted Successfully.")
+                hideLoader();
+                row.remove();
+            }
+            else showErrorMessage(response.message);
+        }
+    });
     });
 
     $("#txt_importorderNo").change(function () {
@@ -60,56 +74,56 @@ $(document).ready(function () {
     });
 
 
-
-
     $("#txt_importContainerNo").change(function () {
         var orderNo = $("#txt_importorderNo option:selected").text()
         var containerNo = $("#txt_importContainerNo option:selected").val()
 
         $.ajax({
             type: "GET",
-            url: "/Invoices/GetExpenseInvoice?orderNo" + orderNo + "&containerNo" + containerNo,
+            url: "/Invoices/GetExpenseInvoice?orderNo=" + orderNo + "&containerNo=" + containerNo,
             method: 'GET',
             async: false,
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-        }).then(res => res.json()).then(function (response) {
-
-            if (response.data != null) {
-                $('#example').prepend(` <tr class="bg-light tbl-valign-top">
+            success: function (data) {
+                if (data != null) {
+                    $("#example tbody").find("tr:gt(0)").remove();
+                    data.forEach(function (_data, index) {
+                        $('#example tbody').append(`<tr class="bg-light tbl-valign-top">
                          <td>
-                            <input type="hidden" value="0" class="form-control txt_ID" />
+                            <input type="hidden" value="`+ _data.ID + `" class="form-control txt_ID" />
 
                             <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
-                                <option value="">Select HeadType</option>
+                                <option value="">Select Head Type</option>
                                 <option value="Expense">Expense</option>
                                 <option value="Revenue">Revenue</option>
                             </select>
                         </td>
                         <td>
-                               `+ headName + `
+                               `+ $("#txt_HeadName").parent().html() + `
                         </td>
-                          
                         <td>
-                            <input type="number" style="width: 350px;" value="@expenseinvoice.Amount" class="form-control" id="txt_Amount" />
+                            <input type="number" style="width: 350px;" value="`+ _data.Amount + `" class="form-control" id="txt_Amount" />
                         </td>
                         <td class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
                             <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                        </td> </tr>`)
+                        </td>
+                    </tr>`)
+                    $('#example tbody tr:last').find('#txt_HeadType').val(_data.HeadType)
+                    $('#example tbody tr:last').find('#txt_HeadName').val(_data.HeadID)
 
+                    });
+                }
+                else toastr.error("Unable to get data");
                 hideLoader();
-                toastr.success("Saved Successfully.")
+                /*    toastr.success("Data Fetched Successfully.")*/
             }
-            else toastr.error("Failed");
-        });
+        })
+
+
     });
 
 
-
-
-    function save(row, IsCompleted) {
+    function save(row, IsActive) {
         var OrderType = $('#txt_OrderType').val();
         var ImportOrderNo = $('#txt_importorderNo').val();
         var ExportOrderNo = $('#txt_exportorderNo').val();
@@ -131,7 +145,7 @@ $(document).ready(function () {
             toastr.error('Please select ContainerNo')
             return false;
         }
-        else if (row.find(".txt_ID").val() == 0 && IsCompleted == true) {
+        else if (row.find(".txt_ID").val() == 0 && IsActive == true) {
             toastr.error('You can not delete to non existing record !!')
             return false;
         }
@@ -152,7 +166,7 @@ $(document).ready(function () {
         dataObject = []
         dataObject.push(JSON.stringify({
             'ID': row.find(".txt_ID").val(),
-            'IsCompleted': IsCompleted,
+            'IsActive': IsActive,
             'OrderType': $("#txt_OrderType option:selected").val(),
             'OrderNo': $("#txt_importorderNo option:selected").text(),
             'ContainerNo': $("#txt_importContainerNo option:selected").val(),
@@ -171,12 +185,13 @@ $(document).ready(function () {
             },
         }).then(res => res.json()).then(function (response) {
             if (response.success) {
-                if (IsCompleted) {
+                if (IsActive) {
                     row.remove();
                 }
                 else {
                     if (row.find(".txt_ID").val() == 0) {
-                        $('#example').prepend(` <tr class="bg-light tbl-valign-top">
+                        $('#example tbody').prepend(`
+                        <tr class="bg-light tbl-valign-top">
                          <td>
                             <input type="hidden" value="0" class="form-control txt_ID" />
 
@@ -196,7 +211,8 @@ $(document).ready(function () {
                         <td class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
                             <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                        </td> </tr>`)
+                        </td>
+                    </tr>`)
                     }
                     row.find(".txt_ID").val(response.Id)
 
@@ -209,23 +225,8 @@ $(document).ready(function () {
         });
     }
     showErrorMessage
-    //window.onload = function () {
-    //    let orderID = getUrlParameter("orderID");
-    //    $(".txt_ID").val(orderID)
-    //};
+
+   
+    
 
 });
-
-
-//$(".txt_ID").change(function () {
-
-//    var orderID = $(".txt_ID").val()
-//    window.location.href = "/Invoices/ExpenseInvoice?orderID=" + orderID
-//});
-
-//function getUrlParameter(name) {
-//    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-//    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-//        results = regex.exec(location.search);
-//    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-//}

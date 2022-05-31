@@ -774,19 +774,38 @@ namespace BA_ERPMVC.BusinessLayer
             invoiceheadVM.ID = invoicehead.ID;
         }
 
+
+        public bool DeleteInvoiceHead(int Id)
+        {
+            bool isSuccess = false;
+            var invoiceHead = _dbContext.InvoiceHeads.Where(x => x.ID == Id).FirstOrDefault();
+            if (invoiceHead == null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                invoiceHead.IsDeleted = true;
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
+        }
         ///////////************* Expenses Invoice **************/////////////
 
         public IEnumerable<ExpenseInvoiceViewModel> GetExpenseInvoiceAsync(string orderNo, string containerNo)
         {
-            return (from expenseinvoice in _dbContext.ExpenseInvoices.Where(x=> x.IsActive == false && x.OrderNo == orderNo && x.ContainerNo == containerNo)
-                                     
+            return (from expenseinvoice in _dbContext.ExpenseInvoices.Where(x => x.IsActive == false && x.OrderNo == orderNo && x.ContainerNo == containerNo)
+
                     select new ExpenseInvoiceViewModel()
                     {
                         OrderNo = expenseinvoice.OrderNo,
                         //OrderNo = exportorder.OrderNo,
                         ContainerNo = expenseinvoice.ContainerNo,
                         HeadType = expenseinvoice.HeadType,
-                        HeadID = expenseinvoice.ID,
+                        HeadID = expenseinvoice.HeadID,
                         HeadName = expenseinvoice.HeadName,
                         Amount = expenseinvoice.Amount,
                         OrderType = expenseinvoice.OrderType,
@@ -842,17 +861,18 @@ namespace BA_ERPMVC.BusinessLayer
             expenseinvoiceVM.ID = expenseinvoice.ID;
         }
 
+
         public bool DeleteExpenseInvoice(int Id)
         {
             bool isSuccess = false;
             var expenseInvoice = _dbContext.ExpenseInvoices.Where(x => x.ID == Id).FirstOrDefault();
-            if (expenseInvoice != null)
+            if (expenseInvoice == null)
             {
                 isSuccess = false;
             }
             else
             {
-                _expenseinvoiceRepository.Remove(Id);
+                expenseInvoice.IsActive = true;
                 _dbContext.SaveChangesAsync();
                 isSuccess = true;
             }

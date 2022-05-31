@@ -750,6 +750,30 @@ namespace BA_ERPMVC.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<ActionResult> DeleteInvoiceHead(int Id)
+        {
+            if (Id < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(Id)} should be a valid id" });
+            }
+
+            try
+            {
+                if (_invoiceService.DeleteInvoiceHead(Id))
+                {
+                    return Json(new { success = true, message = $"Deleted Successfully." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+
+            }
+            return null;
+        }
+
 
         ////// ********** Expense Invoice ***************///////////
 
@@ -785,7 +809,7 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetExportContainer(int orderID, string orderType)
+        public JsonResult GetExportContainer(int orderID)
         {
             var data = Json(db.ExportLogistics.Where(x => x.OrderId == orderID ).Select(x => new
             {
@@ -824,28 +848,30 @@ namespace BA_ERPMVC.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<ActionResult> DeleteLogistics(int logisticsId)
-        //{
-        //    if (logisticsId < 0)
-        //    {
-        //        return Json(new { success = false, message = $"{nameof(logisticsId)} should be a valid id" });
-        //    }
 
-        //    try
-        //    {
-        //        if (!orderBookingService.DeleteLogistics(logisticsId))
-        //        {
-        //            return Json(new { success = false, message = $"Logistic can not be delete after Dispatched." });
-        //        }
+        [HttpPost]
+        public async Task<ActionResult> DeleteExpenseInvoice(int Id)
+        {
+            if (Id < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(Id)} should be a valid id" });
+            }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { success = false, message = "Container can not be deleted, it is used in trip." });
-        //    }
+            try
+            {
+                if (_invoiceService.DeleteExpenseInvoice(Id))
+                {
+                    return Json(new { success = true, message = $"Deleted Successfully." });
+                }
 
-        //    return Json(new { success = true });
-        //}
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+
+            }
+            return null;
+        }
+        
     }
 }
