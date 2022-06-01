@@ -31,213 +31,213 @@
 
     @if (menuAssignment.Any(x => x.Url != "/BLShippingLine/Index" && x.Url != "/DropDownMenu/BLShippingContainer" && x.Url != "/BLShippingLine/BLApproval"))
     {
-        
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link ">
-                    <i class="nav-icon fas fa-ship"></i>
-                    <p>
-                        <i class="fas fa-angle-left right"></i>
-                        OCEANIC LINES LLC
 
-                    </p>
-                </a>
-                @if (menuAssignment.Any(x => x.Url == "/BLShippingLine/Index" && x.IsView == true))
-                {<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/BLShippingLine/Index" class="nav-link ">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>
-                                    BL Listing
-                                </p>
-                            </a>
-                        </li>
-                    </ul>}
-                @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/BLShippingContainer" && x.IsView == true))
-                {<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/BLShippingContainer" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Inventory Container</p>
-                            </a>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-ship"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    OCEANIC LINES LLC
 
-                        </li>
-                    </ul>}
-                @if (menuAssignment.Any(x => x.Url == "/BLShippingLine/BLApproval" && x.IsView == true))
+                </p>
+            </a>
+            @if (menuAssignment.Any(x => x.Url == "/BLShippingLine/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BLShippingLine/Index" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                BL Listing
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/BLShippingContainer" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/BLShippingContainer" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Inventory Container</p>
+                        </a>
 
-                {<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/BLShippingLine/BLApproval" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>BLApproval</p>
-                            </a>
+                    </li>
+                </ul>}
+            @if (menuAssignment.Any(x => x.Url == "/BLShippingLine/BLApproval" && x.IsView == true))
 
-                        </li>
-                    </ul>}
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BLShippingLine/BLApproval" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>BLApproval</p>
+                        </a>
 
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/BVMS/VehicleRegistration" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>VehicleRegistration</p>
-                            </a>
+                    </li>
+                </ul>}
 
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/HumanResourceManagment/EmployeeDetails" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>EmployeeDetails</p>
-                            </a>
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BVMS/VehicleRegistration" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>VehicleRegistration</p>
+                        </a>
 
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/Expenses" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Expenses</p>
-                            </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/HumanResourceManagment/EmployeeDetails" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>EmployeeDetails</p>
+                        </a>
 
-                        </li>
-                    </ul>*@
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Vendor/Index" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Vendor</p>
-                            </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Expenses" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Expenses</p>
+                        </a>
 
-                        </li>
-                    </ul>*@
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Vendor/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Vendor</p>
+                        </a>
 
-
-
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Country/Index" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Country</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/ShippingAgent" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Shipping Agent</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/ShippingLine" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Shipping Line</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/EmptyDropOffLoc" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>EmptyDropOff Location</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
+                    </li>
+                </ul>*@
 
 
 
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Department/Index" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Department</p>
-                            </a>
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Country/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Country</p>
+                        </a>
 
-                        </li>
-                    </ul>*@
+                    </li>
+                </ul>*@
 
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/City/Index" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>City</p>
-                            </a>
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/ShippingAgent" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Shipping Agent</p>
+                        </a>
 
-                        </li>
-                    </ul>*@
+                    </li>
+                </ul>*@
 
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/ShippingLine" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Shipping Line</p>
+                        </a>
 
+                    </li>
+                </ul>*@
 
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/BusinessDivision/Index" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>BusinessDivision</p>
-                            </a>
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/EmptyDropOffLoc" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>EmptyDropOff Location</p>
+                        </a>
 
-                        </li>
-                    </ul>*@
-
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Designation/Index" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Designation</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/Facility" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Facility</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/DropDownMenu/Location" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Location</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Setup/Oil" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>Oil</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
-
-                @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Setup/OilInvoiceDetail" class="nav-link">
-                                <i class="fas fa-car nav-icon"></i>
-                                <p>OilInvoiceDetail</p>
-                            </a>
-
-                        </li>
-                    </ul>*@
+                    </li>
+                </ul>*@
 
 
 
-            </li>
-        
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Department/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Department</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/City/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>City</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BusinessDivision/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>BusinessDivision</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Designation/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Designation</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Facility" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Facility</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Location" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Location</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/Oil" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Oil</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/OilInvoiceDetail" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>OilInvoiceDetail</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+
+
+        </li>
+
     }
 
     @if (menuAssignment.Any(x => x.Url != "/BVMS/VehicleRegistration" && x.Url != "/HumanResourceManagment/EmployeeDetails" && x.Url != "/DropDownMenu/Expenses"
@@ -340,6 +340,17 @@
                         <a href="/DropDownMenu/EmptyDropOffLoc" class="nav-link">
                             <i class="fas fa-car nav-icon"></i>
                             <p>EmptyDropOff Location</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Setup/GetUsers" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/GetUsers" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Users</p>
                         </a>
 
                     </li>
@@ -1091,7 +1102,7 @@
 
 
 
-    
+
     <!--{
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
@@ -1102,31 +1113,31 @@
 
                 </p>
             </a>-->
-            @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
 
-                        <a href="/Invoices/InvoiceGenerationLogistic" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Generate Report Logistics</p>
-                        </a>
+                <a href="/Invoices/InvoiceGenerationLogistic" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Generate Report Logistics</p>
+                </a>
 
-                    </li>
-                </ul>*@
-          
-            <!--{<ul class="nav nav-treeview">
-                    <li class="nav-item">
+            </li>
+        </ul>*@
 
-                        <a href="/Invoices/PrintReportLogistics" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Print Report</p>
-                        </a>
+    <!--{<ul class="nav nav-treeview">
+                <li class="nav-item">
 
-                    </li>
-                </ul>}
+                    <a href="/Invoices/PrintReportLogistics" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Print Report</p>
+                    </a>
+
+                </li>
+            </ul>}
 
 
-        </li>-->
-    
+    </li>-->
+
 
     @if (menuAssignment.Any(x => x.Url != "/Invoices/InvoiceGeneration" && x.Url != "/OrderBooking/BLOrCROReport" && x.Url != "/Invoices/LogisticInvoice"
             && x.Url != "/Invoices/LogisticInvoiceReport"))
@@ -1145,12 +1156,12 @@
 
 
                 @*<li class="nav-item">
-            <a href="/Invoices/InvoiceGeneration" class="nav-link">
-                <i class="fas fa-tools nav-icon"></i>
-                <p>Generate Invoice</p>
-            </a>
+                        <a href="/Invoices/InvoiceGeneration" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Generate Invoice</p>
+                        </a>
 
-        </li>*@
+                    </li>*@
 
 
 
@@ -1188,25 +1199,25 @@
                 }
 
                 @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoice" && x.IsView == true))
-        {
-            <li class="nav-item">
-                <a href="/Invoices/LogisticInvoice" class="nav-link">
-                    <i class="fas fa-gas-pump nav-icon"></i>
-                    <p>Print Invoice</p>
-                </a>
+                    {
+                        <li class="nav-item">
+                            <a href="/Invoices/LogisticInvoice" class="nav-link">
+                                <i class="fas fa-gas-pump nav-icon"></i>
+                                <p>Print Invoice</p>
+                            </a>
 
-            </li>
-        }*@
+                        </li>
+                    }*@
                 @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoiceReport" && x.IsView == true))
-        {
-            <li class="nav-item">
-                <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
-                    <i class="fas fa-gas-pump nav-icon"></i>
-                    <p>Print Invoice Report</p>
-                </a>
+                    {
+                        <li class="nav-item">
+                            <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
+                                <i class="fas fa-gas-pump nav-icon"></i>
+                                <p>Print Invoice Report</p>
+                            </a>
 
-            </li>
-        }*@
+                        </li>
+                    }*@
 
             </ul>
 

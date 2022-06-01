@@ -18,6 +18,7 @@ namespace BA_ERPMVC.BusinessLayer
         ERPMVCEntities _dbContext = null;
         ApplicationDbContext _applicationDbContext = null;
         IUserRepository _userRepository = null;
+        ISetupUserRepository _SetupuserRepository = null;
         private readonly UserMenuRepository userMenuRepository;
 
 
@@ -26,6 +27,7 @@ namespace BA_ERPMVC.BusinessLayer
             _dbContext = new ERPMVCEntities();
             _applicationDbContext = new ApplicationDbContext();
             _userRepository = new UserRepository(_dbContext);
+            _SetupuserRepository = new SetupUserRepository(_dbContext);
             userMenuRepository = new UserMenuRepository(_dbContext);
 
         }
@@ -190,5 +192,85 @@ namespace BA_ERPMVC.BusinessLayer
 
             }
         }
+
+        /// *********** Setup User *********///
+        public IEnumerable<UserViewModel> GetUserAsync()
+        {
+            return (from user in _dbContext.tbl_User.Where(x => x.IsDeleted == false)
+
+                    select new UserViewModel()
+                    {
+                        ID = user.ID,
+                        UserName = user.UserName,
+                        CNIC = user.CNIC,
+                        CreatedBy = user.CreatedBy,
+                        CreatedDate = user.CreatedDate,
+                        IsDeleted = user.IsDeleted,
+
+                    }).OrderByDescending(x => x.ID);
+        }
+        public async Task SaveUserAsync(UserViewModel setupuserVM)
+        {
+
+            var setupUser = Mapper.Map<UserViewModel, tbl_User>(setupuserVM);
+            if (setupUser == null)
+            {
+                throw new ArgumentNullException(nameof(setupuserVM));
+            }
+            setupUser.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            setupUser.CreatedDate = DateTime.Now;
+            setupUser.IsDeleted = false;
+            _SetupuserRepository.Add(setupUser);
+
+            await _dbContext.SaveChangesAsync();
+            setupuserVM.ID = setupUser.ID;
+        }
+
+        public async Task UpdateUsertAsync(UserViewModel setupuserVM)
+        {
+
+            if (setupuserVM == null)
+            {
+                throw new ArgumentNullException(nameof(setupuserVM));
+            }
+
+            var setupUser = await _SetupuserRepository.GetAsync(Convert.ToInt32(setupuserVM.ID));
+
+            if (setupUser == null)
+            {
+                throw new InvalidOperationException($"This User:{setupuserVM.ID}  not found.");
+            }
+
+            setupUser.UserName = setupuserVM.UserName;
+            setupUser.CNIC = setupuserVM.CNIC;
+
+            _SetupuserRepository.Update(setupUser);
+
+
+            await _dbContext.SaveChangesAsync();
+            setupuserVM.ID = setupUser.ID;
+        }
+
+        public bool DeleteUser(int Id)
+        {
+            bool isSuccess = false;
+            var setupUser = _dbContext.tbl_User.Where(x => x.ID == Id).FirstOrDefault();
+            if (setupUser == null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                setupUser.IsDeleted = true;
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
+        }
+
+
+      
     }
 }

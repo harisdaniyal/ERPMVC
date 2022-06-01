@@ -8,6 +8,7 @@ using BA_ERPMVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,6 +19,7 @@ namespace BA_ERPMVC.Controllers
         ApiResponse _apiResponse = null;
         IItemUnitRepository _itemUnitRepository = null;
         ItemUnitService _itemUnitService = null;
+        UserService _userService = null;
         ERPMVCEntities _dbContext = null;
         public SetupController()
         {
@@ -25,6 +27,7 @@ namespace BA_ERPMVC.Controllers
             _apiResponse = new ApiResponse();
             _itemUnitRepository = new ItemUnitRepository(_dbContext);
             _itemUnitService = new ItemUnitService();
+            _userService = new UserService();
 
         }
 
@@ -172,9 +175,9 @@ namespace BA_ERPMVC.Controllers
                     else
                     {
 
-                    //    db.sp_InsertOilStock.Add(obj1);
+                        //    db.sp_InsertOilStock.Add(obj1);
                         db.stp_Oil.Add(obj);
-                       // db.sp_InsertOilStock.AddOrEditeOilInvoice(oil);
+                        // db.sp_InsertOilStock.AddOrEditeOilInvoice(oil);
                         done = db.SaveChanges();
                         responseText = "Data Inserted Successfully.";
                     }
@@ -200,27 +203,27 @@ namespace BA_ERPMVC.Controllers
             using (ERPMVCEntities db = new ERPMVCEntities())
             {
                 var OILInvoice = (from opo in db.stp_Oil
-                          // join div in db.stp_OilMaster on opo.OilTypeID equals div.OMID
-                           join VX in db.OilCompanies on opo.OilCompany equals VX.OCID
-                           //join MX in db.stp_Company on opo.CompanyID equals MX.CompanyID 
-                           select new
-                           {
-                               oilID = opo.OilID,
-                               OIlRecD = opo.ReceivedDate,
-                               OilName = VX.OilCompany1,
-                               DeliverNo = opo.DeliveryNo,
-                               Quantity = opo.Quantity,
-                               INvoiceNo = opo.InvoiceNumber,
-                               InvoiceDate = opo.InvoiceDate,
-                               OilRate = opo.Rate,
-                               OilPaymentMode = opo.PaymentModeID,
-                               total = opo.TotalAmount,
-                               POREf =opo.PO_Ref_No,
-                               POAmount = opo.POAmount,
-                               Remake = opo.Remarks,
+                                      // join div in db.stp_OilMaster on opo.OilTypeID equals div.OMID
+                                  join VX in db.OilCompanies on opo.OilCompany equals VX.OCID
+                                  //join MX in db.stp_Company on opo.CompanyID equals MX.CompanyID 
+                                  select new
+                                  {
+                                      oilID = opo.OilID,
+                                      OIlRecD = opo.ReceivedDate,
+                                      OilName = VX.OilCompany1,
+                                      DeliverNo = opo.DeliveryNo,
+                                      Quantity = opo.Quantity,
+                                      INvoiceNo = opo.InvoiceNumber,
+                                      InvoiceDate = opo.InvoiceDate,
+                                      OilRate = opo.Rate,
+                                      OilPaymentMode = opo.PaymentModeID,
+                                      total = opo.TotalAmount,
+                                      POREf = opo.PO_Ref_No,
+                                      POAmount = opo.POAmount,
+                                      Remake = opo.Remarks,
 
 
-                           }).ToList();
+                                  }).ToList();
                 return Json(new { OILInvoice });
                 // return Json(new { data = Customer.ToList() }, JsonRequestBehavior.AllowGet);
             }
@@ -341,18 +344,18 @@ namespace BA_ERPMVC.Controllers
             using (ERPMVCEntities db = new ERPMVCEntities())
             {
                 var oil = from opo in db.stp_Oil.Where(a => a.OilID == id)
-                                  join div in db.stp_OilMaster on opo.OilTypeID equals div.OMID
-                                  join VX in db.OilCompanies on opo.OilCompany equals VX.OCID
-                                  select new
-                                  {
-                                      //  ID = opo.ID,
-                                      OID = div.Oil_Name,
-                                      OTID = VX.OilCompany1,
-                                      QUANTITY = opo.Quantity,
-                                      REMARKS = opo.Remarks,
-                                      DeliveryNo = opo.DeliveryNo,
-                                      Rec = opo.ReceivedDate,
-                                  };
+                          join div in db.stp_OilMaster on opo.OilTypeID equals div.OMID
+                          join VX in db.OilCompanies on opo.OilCompany equals VX.OCID
+                          select new
+                          {
+                              //  ID = opo.ID,
+                              OID = div.Oil_Name,
+                              OTID = VX.OilCompany1,
+                              QUANTITY = opo.Quantity,
+                              REMARKS = opo.Remarks,
+                              DeliveryNo = opo.DeliveryNo,
+                              Rec = opo.ReceivedDate,
+                          };
                 return Json(new { result = oil.ToList() }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -372,16 +375,16 @@ namespace BA_ERPMVC.Controllers
                            join VX in db.OilCompanies on opo.OilCompany equals VX.OCID
                            //join MX in db.stp_Company on opo.CompanyID equals MX.CompanyID 
                            select new
-                                   {
-                                       oilID = opo.OilID,
-                                       OID = div.Oil_Name,
-                                       OTID = VX.OilCompany1,
-                                       QUANTITY = opo.Quantity,
-                                       REMARKS = opo.Remarks,
-                                       DeliveryNo = opo.DeliveryNo,
-                                       Rec = opo.ReceivedDate,
+                           {
+                               oilID = opo.OilID,
+                               OID = div.Oil_Name,
+                               OTID = VX.OilCompany1,
+                               QUANTITY = opo.Quantity,
+                               REMARKS = opo.Remarks,
+                               DeliveryNo = opo.DeliveryNo,
+                               Rec = opo.ReceivedDate,
 
-                                   }).ToList();
+                           }).ToList();
                 return Json(new { OIL });
                 // return Json(new { data = Customer.ToList() }, JsonRequestBehavior.AllowGet);
             }
@@ -392,6 +395,71 @@ namespace BA_ERPMVC.Controllers
         // Oil End 
 
 
+        // Setup UserList For Expense Invoice //
+
+        [HttpGet]
+        public ActionResult GetUsers()
+        {
+            var setupUser = _userService.GetUserAsync();
+            return View(setupUser);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult>UserAsync(UserViewModel setupuserVM)
+        {
+            if (setupuserVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(setupuserVM)} should not be null or empty" });
+            }
+
+            if (_dbContext.tbl_User.Any(x => x.UserName == setupuserVM.UserName && x.CNIC == setupuserVM.CNIC) && setupuserVM.ID == 0)
+            {
+                return Json(new { success = false, message = $" This {setupuserVM.UserName} / {setupuserVM.CNIC} is already exists." });
+
+            }
+
+            try
+            {
+                if (setupuserVM.ID == 0)
+                {
+                    await _userService.SaveUserAsync(setupuserVM);
+
+                    return Json(new { success = true, Id = setupuserVM.ID });
+                }
+
+                await _userService.UpdateUsertAsync(setupuserVM);
+
+                return Json(new { success = true, Id = setupuserVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteUser(int Id)
+        {
+            if (Id < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(Id)} should be a valid id" });
+            }
+
+            try
+            {
+                if (_userService.DeleteUser(Id))
+                {
+                    return Json(new { success = true, message = $"Deleted Successfully." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+
+            }
+            return null;
+        }
 
 
     }

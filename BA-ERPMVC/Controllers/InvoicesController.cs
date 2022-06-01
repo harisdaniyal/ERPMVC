@@ -33,7 +33,7 @@ namespace BA_ERPMVC.Controllers
         // GET: Invoices
         public ActionResult InvoiceGeneration()
         {
-                return View();
+            return View();
             //if (Session["UserName"] != null)
             //{
 
@@ -46,7 +46,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult InvoiceGenerationLogistic()
         {
-                return View();
+            return View();
             //if (Session["UserName"] != null)
             //{
 
@@ -59,7 +59,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult PrintReportLogistics()
         {
-                return View();
+            return View();
             //if (Session["UserName"] != null)
             //{
 
@@ -75,7 +75,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult LogisticInvoice()
         {
-                return View();
+            return View();
             //if (Session["UserName"] != null)
             //{
 
@@ -88,7 +88,7 @@ namespace BA_ERPMVC.Controllers
 
         public ActionResult LogisticInvoiceReport()
         {
-                return View();
+            return View();
             //if (Session["UserName"] != null)
             //{
             //}
@@ -107,20 +107,20 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var Invoice = (from opo in db.tbl_Invoice
-                                join VV in db.GenerateOrders on opo.OrderID equals VV.OrderID
-                                join VX in db.stp_Status on opo.Status equals VX.StatusID
-                                select new
-                                {
-                                    ID = opo.InvoiceID,
-                                    Invoiceno = opo.InvoiceNumber,
-                                    orderID = VV.OrderNo,
-                                    INvoicedate = opo.InvoiceDate,
-                                    INvoicefromdate = opo.InvoiceDataFromDate,
-                                    INvoiceTodate = opo.InvoiceDataToDate,
-                                    isActive = opo.isActive,
-                                    status = VX.Status,
+                               join VV in db.GenerateOrders on opo.OrderID equals VV.OrderID
+                               join VX in db.stp_Status on opo.Status equals VX.StatusID
+                               select new
+                               {
+                                   ID = opo.InvoiceID,
+                                   Invoiceno = opo.InvoiceNumber,
+                                   orderID = VV.OrderNo,
+                                   INvoicedate = opo.InvoiceDate,
+                                   INvoicefromdate = opo.InvoiceDataFromDate,
+                                   INvoiceTodate = opo.InvoiceDataToDate,
+                                   isActive = opo.isActive,
+                                   status = VX.Status,
 
-                                }).ToList();
+                               }).ToList();
 
                 return Json(new { Invoice });
             }
@@ -178,14 +178,14 @@ namespace BA_ERPMVC.Controllers
             dynamic result = null;
             try
             {
-                
-                result = _orderService.GetAll().Where(x => x.BusinessDivisionId == BusinessDevisionID).Select (x => new
+
+                result = _orderService.GetAll().Where(x => x.BusinessDivisionId == BusinessDevisionID).Select(x => new
                 {
                     x.OrderID,
                     x.OrderNo,
                 });
 
-                
+
             }
             catch (Exception ex)
             {
@@ -221,7 +221,7 @@ namespace BA_ERPMVC.Controllers
                              e.BL
                          };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -233,22 +233,22 @@ namespace BA_ERPMVC.Controllers
             string InvoiceNo = "";
             string code = "";
             Int64 maxValue = 0;
-           
-                InvoiceNo = db.tbl_Invoice.OrderByDescending(x => x.InvoiceNumber).Select(x => x.InvoiceNumber).FirstOrDefault();
-                if (InvoiceNo != null || InvoiceNo == "")
-                {
-                    Int64 invoicenumber = Convert.ToInt64(InvoiceNo);
-                    maxValue = invoicenumber;
-                    maxValue++;
-                }
-                else
-                {
-                    maxValue = 1;
 
-                }
-                code = maxValue.ToString("000000");
+            InvoiceNo = db.tbl_Invoice.OrderByDescending(x => x.InvoiceNumber).Select(x => x.InvoiceNumber).FirstOrDefault();
+            if (InvoiceNo != null || InvoiceNo == "")
+            {
+                Int64 invoicenumber = Convert.ToInt64(InvoiceNo);
+                maxValue = invoicenumber;
+                maxValue++;
+            }
+            else
+            {
+                maxValue = 1;
 
-            
+            }
+            code = maxValue.ToString("000000");
+
+
 
             return Json(code);
         }
@@ -264,7 +264,7 @@ namespace BA_ERPMVC.Controllers
             statusCode = _invoiceService.AddInvoice(InvoiceVmodel);
             return Json(statusCode);
         }
-       
+
 
         public ActionResult PrintinvoiceByInvoiceNo(string invoiceNo)
         {
@@ -280,10 +280,10 @@ namespace BA_ERPMVC.Controllers
 
                 string userId = User.Identity.GetUserId();
                 var user = _applicationDbContext.Users.Where(x => x.Id == userId).FirstOrDefault();
-                
+
                 DataRow row = dataTable.NewRow();
-            //    row["S01_10TonConatiner"] = item.S01_10TonConatiner;
-            //    row["S10_15TonConatiner"] = item.S10_15TonConatiner;
+                //    row["S01_10TonConatiner"] = item.S01_10TonConatiner;
+                //    row["S10_15TonConatiner"] = item.S10_15TonConatiner;
 
 
 
@@ -405,7 +405,7 @@ namespace BA_ERPMVC.Controllers
                 }
                 dataTable.Rows.Add(row);
 
-                
+
                 CustomLogger.Debug("Ready To Print E-PRC Report\n");
             }
             catch (Exception ex)
@@ -413,7 +413,7 @@ namespace BA_ERPMVC.Controllers
 
             }
 
-            return PrintReport(applicationsList, "OrderInvoice.rpt",  invoiceNo  , DateTime.Now, DateTime.Now, ids);
+            return PrintReport(applicationsList, "OrderInvoice.rpt", invoiceNo, DateTime.Now, DateTime.Now, ids);
         }
 
         [NonAction]
@@ -448,7 +448,7 @@ namespace BA_ERPMVC.Controllers
 
 
 
-        public ActionResult PrintinvoiceReportByInvoiceNo(string CustomerName , DateTime? fromDate, DateTime? ToDate)
+        public ActionResult PrintinvoiceReportByInvoiceNo(string CustomerName, DateTime? fromDate, DateTime? ToDate)
         {
             InvoiceData applicationsList = new InvoiceData();
             string filename = "";
@@ -456,7 +456,7 @@ namespace BA_ERPMVC.Controllers
             try
             {
                 CustomLogger.Debug("========PRINT E-PRC REPORT=============\n");
-                var item = _invoiceService.PrintInvoiceDetailReport(CustomerName,fromDate,ToDate).ToList();
+                var item = _invoiceService.PrintInvoiceDetailReport(CustomerName, fromDate, ToDate).ToList();
                 var bank = db.BA_Bank.ToList();
                 DataTable dataTable = applicationsList.InvData;
 
@@ -467,8 +467,8 @@ namespace BA_ERPMVC.Controllers
                 DataRow row = dataTable.NewRow();
 
 
-                   for (int i = 0; i < item.Count; i++)
-                   {
+                for (int i = 0; i < item.Count; i++)
+                {
 
 
                     row["InvoiceNumber"] = item[i].InvoiceNumber;
@@ -583,8 +583,8 @@ namespace BA_ERPMVC.Controllers
                     }
 
                     dataTable.Rows.Add(row.ItemArray);
-                   }
-               
+                }
+
 
 
 
@@ -596,11 +596,11 @@ namespace BA_ERPMVC.Controllers
 
             }
 
-            return PrintInvoiceReport(applicationsList, "OrderInvoiceReport.rpt", CustomerName , DateTime.Now, DateTime.Now, ids);
+            return PrintInvoiceReport(applicationsList, "OrderInvoiceReport.rpt", CustomerName, DateTime.Now, DateTime.Now, ids);
         }
 
         [NonAction]
-        public ActionResult PrintInvoiceReport(InvoiceData dataSet, string reportName, string filename ,  DateTime Fdate, DateTime Tdate, string ids = "")
+        public ActionResult PrintInvoiceReport(InvoiceData dataSet, string reportName, string filename, DateTime Fdate, DateTime Tdate, string ids = "")
         {
             CustomLogger.Debug("========PRINT FUNCTION STARTED=========\n");
 
@@ -617,7 +617,7 @@ namespace BA_ERPMVC.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             //stream.Seek(0, SeekOrigin.Begin);
-            string fileName = string.Format(filename +  "-{0}.pdf", ids);
+            string fileName = string.Format(filename + "-{0}.pdf", ids);
 
 
             //return File(stream, "application/pdf");
@@ -644,7 +644,7 @@ namespace BA_ERPMVC.Controllers
 
                 //string userId = User.Identity.GetUserId();
                 //var user = _applicationDbContext.Users.Where(x => x.Id == userId).FirstOrDefault();
-                
+
 
                 var item = _invoiceService.PrintReportLogisticsContainer(FromDate, ToDate);
 
@@ -669,7 +669,7 @@ namespace BA_ERPMVC.Controllers
                     dataTable.Rows.Add(row.ItemArray);
                 }
 
-              
+
 
 
                 CustomLogger.Debug("Ready To Print E-PRC Report\n");
@@ -718,7 +718,7 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>InvoiceHead(InvoiceHeadViewModel invoiceheadVM)
+        public async Task<ActionResult> InvoiceHead(InvoiceHeadViewModel invoiceheadVM)
         {
             if (invoiceheadVM == null)
             {
@@ -783,12 +783,13 @@ namespace BA_ERPMVC.Controllers
             this.ViewBag.ImportOrderNo = _invoiceService.GetImportOrderNo();
             this.ViewBag.ExportOrderNo = _invoiceService.GetExportOrderNo();
             this.ViewBag.InvoiceHeadName = _invoiceService.GetHeadName();
+            this.ViewBag.UserList = _invoiceService.GetUserList();
             return View();
         }
 
 
         [HttpGet]
-         public JsonResult GetExpenseInvoice(string orderNo, string containerNo)
+        public JsonResult GetExpenseInvoice(string orderNo, string containerNo)
         {
             var expenseinvoice = _invoiceService.GetExpenseInvoiceAsync(orderNo, containerNo);
             return Json(expenseinvoice, JsonRequestBehavior.AllowGet);
@@ -796,22 +797,22 @@ namespace BA_ERPMVC.Controllers
 
 
 
-        [HttpGet] 
+        [HttpGet]
         public JsonResult GetImportContainer(int orderID, string orderType)
         {
-            var data = Json(db.OrderContainers.Where(x=> x.OrderID == orderID && x.OrderType == orderType).Select(x => new
+            var data = Json(db.OrderContainers.Where(x => x.OrderID == orderID && x.OrderType == orderType).Select(x => new
             {
                 ContainerNo = x.ContainerNo
-            }       
+            }
             ).ToList(), JsonRequestBehavior.AllowGet);
-           
+
             return data;
         }
 
         [HttpGet]
         public JsonResult GetExportContainer(int orderID)
         {
-            var data = Json(db.ExportLogistics.Where(x => x.OrderId == orderID ).Select(x => new
+            var data = Json(db.ExportLogistics.Where(x => x.OrderId == orderID).Select(x => new
             {
                 ContainerNo = x.ContainerNo
             }
@@ -821,7 +822,7 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>ExpenseInvoice(ExpenseInvoiceViewModel expenseinvoiceVM)
+        public async Task<ActionResult> ExpenseInvoice(ExpenseInvoiceViewModel expenseinvoiceVM)
         {
             if (expenseinvoiceVM == null)
             {
@@ -831,7 +832,7 @@ namespace BA_ERPMVC.Controllers
             try
             {
                 if (expenseinvoiceVM.ID == 0)
-                {   
+                {
                     await _invoiceService.SaveExpenseInvoiceAsync(expenseinvoiceVM);
 
                     return Json(new { success = true, Id = expenseinvoiceVM.ID });
@@ -872,6 +873,6 @@ namespace BA_ERPMVC.Controllers
             }
             return null;
         }
-        
+
     }
 }

@@ -598,6 +598,9 @@
     <Compile Include="Models\tbl_State.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbl_User.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TripContainer.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -764,6 +767,7 @@
     <Compile Include="Repositories\CoreRepositories\PreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ReDispatchedRepositry.cs" />
     <Compile Include="Repositories\CoreRepositories\ReadyForDispatchedRepositry.cs" />
+    <Compile Include="Repositories\CoreRepositories\SetupUserRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingAgentRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\ShippingLineRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\UserMenuRepository.cs" />
@@ -791,6 +795,7 @@
     <Compile Include="Repositories\IRepositories\IPreDispatchedMovementRepository.cs" />
     <Compile Include="Repositories\IRepositories\IReDispatchedRepositry.cs" />
     <Compile Include="Repositories\IRepositories\IReadyForDispatchedRepositry.cs" />
+    <Compile Include="Repositories\IRepositories\ISetupUserRepository.cs" />
     <Compile Include="Repositories\IRepositories\IShippingAgentRepository.cs" />
     <Compile Include="Repositories\IRepositories\IShippingLineRepository.cs" />
     <Compile Include="Repositories\IRepositories\IUserMenuRepository.cs" />
@@ -830,6 +835,7 @@
     <Compile Include="ViewModels\ShippingAgentViewModel.cs" />
     <Compile Include="ViewModels\ShippingLineViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\VendorExpensesViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
     <Content Include="AdminLte\Assets\bootstrap-progressbar\bootstrap-progressbar.js" />
@@ -951,6 +957,7 @@
     <Content Include="AdminLte\Scripts\OrderBookings\TripExecution.js" />
     <Content Include="AdminLte\Scripts\ShippingAgent.js" />
     <Content Include="AdminLte\Scripts\ShippingLine.js" />
+    <Content Include="AdminLte\Scripts\Userlist.js" />
     <Content Include="App_Code\Fingerprint.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -4185,6 +4192,7 @@
     <Content Include="Views\Role\AssignMenu.cshtml" />
     <Content Include="Views\Invoices\InvoiceHead.cshtml" />
     <Content Include="Views\Invoices\ExpenseInvoice.cshtml" />
+    <Content Include="Views\Setup\GetUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />

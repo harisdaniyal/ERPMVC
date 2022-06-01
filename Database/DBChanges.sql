@@ -5158,3 +5158,25 @@ Go
 select * from menu
 insert into menu values ('Invoice Heads', '/Invoices/InvoiceHead',0)
 insert into menu values ('Container Expense', '/Invoices/ExpenseInvoice',0)
+
+---------- 6.1.2022 --------------- Haris
+Go
+
+alter table [ExpenseInvoice] add [Remarks] [nvarchar](500) NULL
+Go
+
+alter table [ExpenseInvoice] add [UserName] [nvarchar](500) NULL
+
+GO
+CREATE TABLE tbl_User(
+	[ID] [int] IDENTITY(1,1) primary key NOT NULL,
+	[UserName] [nvarchar](500) NULL,
+	[CNIC] [nvarchar](100) NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[CreatedDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+	)
+
+select * from menu
+insert into menu values ('Users', '/Setup/GetUsers',0)
+

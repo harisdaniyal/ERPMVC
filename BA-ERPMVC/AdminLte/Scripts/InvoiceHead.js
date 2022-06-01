@@ -82,7 +82,6 @@
                                <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
                                     <option value="">Select HeadType</option>
                                     <option value="Expense">Expense</option>
-                                    <option value="Revenue">Revenue</option>
                                 </select>
                             </td>
                              <td>

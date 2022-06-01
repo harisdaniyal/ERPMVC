@@ -38,21 +38,21 @@ $(document).ready(function () {
 
     $(document).on("click", ".btndlt", function () {
         var row = $(this).closest("tr")
-       var Id =  row.find(".txt_ID").val()
+        var Id = row.find(".txt_ID").val()
 
-    $.ajax({
-        type: 'POST',
-        url: '/Invoices/DeleteExpenseInvoice?Id=' + Id,
-        async: false,
-        success: function (response) {
-            if (response.success) {            
-                toastr.success("Deleted Successfully.")
-                hideLoader();
-                row.remove();
+        $.ajax({
+            type: 'POST',
+            url: '/Invoices/DeleteExpenseInvoice?Id=' + Id,
+            async: false,
+            success: function (response) {
+                if (response.success) {
+                    toastr.success("Deleted Successfully.")
+                    hideLoader();
+                    row.remove();
+                }
+                else showErrorMessage(response.message);
             }
-            else showErrorMessage(response.message);
-        }
-    });
+        });
     });
 
     $("#txt_importorderNo").change(function () {
@@ -91,25 +91,36 @@ $(document).ready(function () {
                          <td>
                             <input type="hidden" value="`+ _data.ID + `" class="form-control txt_ID" />
 
-                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
+                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
                                 <option value="">Select Head Type</option>
                                 <option value="Expense">Expense</option>
-                                <option value="Revenue">Revenue</option>
                             </select>
                         </td>
                         <td>
                                `+ $("#txt_HeadName").parent().html() + `
                         </td>
+
                         <td>
-                            <input type="number" style="width: 350px;" value="`+ _data.Amount + `" class="form-control" id="txt_Amount" />
+                            <input type="number" style="width: 150px;" value="`+ _data.Amount + `" class="form-control" id="txt_Amount" />
                         </td>
+
+                         <td>
+                               `+ $("#txt_userName").parent().html() + `
+                        </td>
+
+                         <td>
+                         <textarea class="form-control" id="txt_Remarks" rows="1"></textarea>
+                        </td>
+                        
                         <td class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
                             <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
                         </td>
                     </tr>`)
-                    $('#example tbody tr:last').find('#txt_HeadType').val(_data.HeadType)
-                    $('#example tbody tr:last').find('#txt_HeadName').val(_data.HeadID)
+                        $('#example tbody tr:last').find('#txt_HeadType').val(_data.HeadType)
+                        $('#example tbody tr:last').find('#txt_HeadName').val(_data.HeadID)
+                        $('#example tbody tr:last').find('#txt_userName').val(_data.UserName)
+                        $('#example tbody tr:last').find('#txt_Remarks').val(_data.Remarks)
 
                     });
                 }
@@ -161,8 +172,17 @@ $(document).ready(function () {
             toastr.error('Please Enter Amount.')
             return false;
         }
+        else if (row.find("#txt_Remarks").val() == '') {
+            toastr.error('Please Enter Remarks.')
+            return false;
+        }
+        else if (row.find("#txt_userName").val() == '') {
+            toastr.error('Please Enter UserName.')
+            return false;
+        }
 
         var headName = row.find("#txt_HeadName").parent().html()
+        var userName = row.find("#txt_userName").parent().html()
         dataObject = []
         dataObject.push(JSON.stringify({
             'ID': row.find(".txt_ID").val(),
@@ -173,7 +193,9 @@ $(document).ready(function () {
             'HeadType': row.find("#txt_HeadType option:selected").text(),
             'HeadID': row.find("#txt_HeadName option:selected").val(),
             'HeadName': row.find("#txt_HeadName option:selected").text(),
+            'UserName': row.find("#txt_userName option:selected").text(),
             'Amount': row.find("#txt_Amount").val(),
+            'Remarks': row.find("#txt_Remarks").val(),
         }));
 
         showLoader();
@@ -195,10 +217,9 @@ $(document).ready(function () {
                          <td>
                             <input type="hidden" value="0" class="form-control txt_ID" />
 
-                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
+                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
                                 <option value="">Select HeadType</option>
                                 <option value="Expense">Expense</option>
-                                <option value="Revenue">Revenue</option>
                             </select>
                         </td>
                         <td>
@@ -206,8 +227,18 @@ $(document).ready(function () {
                         </td>
                           
                         <td>
-                            <input type="number" style="width: 350px;" value="" class="form-control" id="txt_Amount" />
+                            <input type="number" style="width: 150px;" value="" class="form-control" id="txt_Amount" />
                         </td>
+
+                         <td>
+                               `+ userName + `
+                        </td>   
+
+                        <td>
+                          <textarea class="form-control" id="txt_Remarks" rows="1"></textarea>
+                        </td>
+
+
                         <td class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
                             <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
@@ -226,7 +257,7 @@ $(document).ready(function () {
     }
     showErrorMessage
 
-   
-    
+
+
 
 });

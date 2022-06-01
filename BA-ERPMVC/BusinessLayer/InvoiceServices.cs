@@ -10,10 +10,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace BA_ERPMVC.BusinessLayer
 {
-    public class InvoiceServices : Controller
+    public class InvoiceServices 
     {
         ERPMVCEntities _dbContext = null;
         ERPMVCEntities db = null;
@@ -727,7 +728,7 @@ namespace BA_ERPMVC.BusinessLayer
                         HeadType = invoicehead.HeadType,
                         HeadName = invoicehead.HeadName,
 
-                    });
+                    }).OrderByDescending(x => x.ID);
         }
 
         public async Task SaveInvoiceHeadAsync(InvoiceHeadViewModel invoiceheadVM)
@@ -738,9 +739,7 @@ namespace BA_ERPMVC.BusinessLayer
             {
                 throw new ArgumentNullException(nameof(invoiceheadVM));
             }
-            //invoicehead.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
-            //invoicehead.CreatedDate = DateTime.Now;
-            //invoicehead.CreatedBy = Session["UserName"].ToString();
+            invoicehead.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
             invoicehead.CreatedDate = DateTime.Now;
             invoicehead.IsDeleted = false;
             _invoiceheadRepository.Add(invoicehead);
@@ -801,15 +800,16 @@ namespace BA_ERPMVC.BusinessLayer
 
                     select new ExpenseInvoiceViewModel()
                     {
+                        ID = expenseinvoice.ID,
                         OrderNo = expenseinvoice.OrderNo,
-                        //OrderNo = exportorder.OrderNo,
                         ContainerNo = expenseinvoice.ContainerNo,
                         HeadType = expenseinvoice.HeadType,
                         HeadID = expenseinvoice.HeadID,
                         HeadName = expenseinvoice.HeadName,
                         Amount = expenseinvoice.Amount,
                         OrderType = expenseinvoice.OrderType,
-                        ID = expenseinvoice.ID,
+                        UserName = expenseinvoice.UserName,
+                        Remarks = expenseinvoice.Remarks,
                     });
         }
 
@@ -822,7 +822,8 @@ namespace BA_ERPMVC.BusinessLayer
                 throw new ArgumentNullException(nameof(expenseinvoiceVM));
             }
 
-            //expenseinvoice.CreatedBy = Session["UserName"].ToString();
+            expenseinvoice.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+
             expenseinvoice.CreatedDate = DateTime.Now;
 
             _expenseinvoiceRepository.Add(expenseinvoice);
@@ -853,6 +854,8 @@ namespace BA_ERPMVC.BusinessLayer
             expenseinvoice.HeadName = expenseinvoiceVM.HeadName;
             expenseinvoice.HeadID = expenseinvoiceVM.HeadID;
             expenseinvoice.Amount = expenseinvoiceVM.Amount;
+            expenseinvoice.Remarks = expenseinvoiceVM.Remarks;
+            expenseinvoice.UserName = expenseinvoiceVM.UserName;
 
             _expenseinvoiceRepository.Update(expenseinvoice);
 
@@ -898,6 +901,11 @@ namespace BA_ERPMVC.BusinessLayer
                         HeadName = HeadName.HeadName,
                         ID = HeadName.ID
                     });
+        }
+
+        public IEnumerable<tbl_User> GetUserList()
+        {
+            return _dbContext.tbl_User.ToList();
         }
 
     }

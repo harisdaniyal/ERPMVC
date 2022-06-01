@@ -6,7 +6,7 @@
 
 
 
-<h2>Expense Invoice</h2>
+<h2>Container Expense</h2>
 
 <br />
 <div class="d-block py-2">
@@ -88,6 +88,8 @@
                         <th>HeadType</th>
                         <th>HeadName</th>
                         <th>Amount</th>
+                        <th>User</th>
+                        <th>Remarks</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -95,14 +97,13 @@
                     <tr class="bg-light tbl-valign-top">
                         <td>
                             <input type="hidden" value="0" class="form-control txt_ID" />
-                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
+                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
                                 <option value="">Select HeadType</option>
                                 <option value="Expense">Expense</option>
-                                <option value="Revenue">Revenue</option>
                             </select>
                         </td>
                         <td>
-                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_HeadName" id="txt_HeadName" style="width: 200px;">
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_HeadName" id="txt_HeadName" style="width: 120px;">
                                 <option value="">Select HeadName</option>
                                 @foreach (var InvoiceHeadName in ViewBag.InvoiceHeadName)
                                 {
@@ -110,8 +111,22 @@
                                 }
                             </select>
                         </td>
+
                         <td>
-                            <input type="number" style="width: 350px;" value="" class="form-control" id="txt_Amount" />
+                            <input type="number" style="width: 150px;" value="" class="form-control" id="txt_Amount" />
+                        </td>
+
+                        <td>
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_userName" id="txt_userName" style="width: 120px;">
+                                <option value="">Select User</option>
+                                @foreach (var user in ViewBag.UserList)
+                                {
+                                    <option value="@user.ID" data-select2-id="@user.UserName">@user.UserName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <textarea class="form-control" id="txt_Remarks" rows="1"></textarea>
                         </td>
                         <td class="btn-group">
                             <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
