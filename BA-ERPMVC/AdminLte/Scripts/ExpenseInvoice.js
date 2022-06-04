@@ -1,23 +1,15 @@
 ﻿function onChange_OrderType(item) {
     var value = $(item).val();
-    if (value == "Import") {
-        $("#txt_importorderNo").parent().parent().show();
-        $("#txt_exportorderNo").parent().parent().hide();
-
-    }
-    else if (value == "Export") {
-        $("#txt_exportorderNo").parent().parent().show();
-        $("#txt_importorderNo").parent().parent().hide();
+    if (value == "import") {
+        $("#txt_importContainerNo").parent().parent().show();
     }
     else {
-        $("#txt_importorderNo").parent().parent().hide();
-        $("#txt_exportorderNo").parent().parent().hide();
+        $("#txt_importContainerNo").parent().parent().hide();
     }
 }
 
 $(document).ready(function () {
     var dataObject = []
-
 
     $('#example').dataTable({
         buttons: [
@@ -55,33 +47,33 @@ $(document).ready(function () {
         });
     });
 
-    $("#txt_importorderNo").change(function () {
+    $("#txt_OrderType").change(function () {
         $.ajax({
             type: "GET",
-            url: "/Invoices/GetImportContainer?orderID=" + $(this).val() + "&orderType=" + $('#txt_OrderType').val(),
+            url: "/Invoices/GetImportContainer?orderType=" + $('#txt_OrderType').val(),
             async: false,
             success: function (data) {
+                data = data.Data;
                 var _data = '<option value="" selected>Please Select Container</option>';
                 for (var i = 0; i < data.length; i++) {
-                    _data += '<option value="' + data[i].ContainerNo + '">' + data[i].ContainerNo + '</option>';
+                    _data += '<option value="' + data[i].ContainerNo + '" data-order-no= "' + data[i].OrderNo+'">' + data[i].ContainerNoAndOrderNo + '</option>';
                 }
-                $("#txt_importContainerNo").html(_data);
+                $("#txt_importContainerNo ").html(_data);
                 $('#txt_importContainerNo').select2();
                 $('#txt_importContainerNo').parent().parent().show();
             }
 
         })
-    });
+   });
 
 
     $("#txt_importContainerNo").change(function () {
-        var orderNo = $("#txt_importorderNo option:selected").text()
+        var orderNo = $("#txt_importContainerNo").find(':selected').attr('data-order-no')
         var containerNo = $("#txt_importContainerNo option:selected").val()
 
         $.ajax({
             type: "GET",
             url: "/Invoices/GetExpenseInvoice?orderNo=" + orderNo + "&containerNo=" + containerNo,
-            method: 'GET',
             async: false,
             success: function (data) {
                 if (data != null) {
@@ -98,6 +90,7 @@ $(document).ready(function () {
                         </td>
                         <td>
                                `+ $("#txt_HeadName").parent().html() + `
+
                         </td>
 
                         <td>
@@ -106,6 +99,7 @@ $(document).ready(function () {
 
                          <td>
                                `+ $("#txt_userName").parent().html() + `
+                               
                         </td>
 
                          <td>
@@ -119,7 +113,7 @@ $(document).ready(function () {
                     </tr>`)
                         $('#example tbody tr:last').find('#txt_HeadType').val(_data.HeadType)
                         $('#example tbody tr:last').find('#txt_HeadName').val(_data.HeadID)
-                        $('#example tbody tr:last').find('#txt_userName').val(_data.UserName)
+                        $('#example tbody tr:last').find('#txt_userName').val(_data.UserID)
                         $('#example tbody tr:last').find('#txt_Remarks').val(_data.Remarks)
 
                     });
@@ -136,22 +130,22 @@ $(document).ready(function () {
 
     function save(row, IsActive) {
         var OrderType = $('#txt_OrderType').val();
-        var ImportOrderNo = $('#txt_importorderNo').val();
-        var ExportOrderNo = $('#txt_exportorderNo').val();
+        //var ImportOrderNo = $('#txt_importorderNo').val();
+        //var ExportOrderNo = $('#txt_exportorderNo').val();
         var ContainerNo = $('#txt_importContainerNo').val();
 
         if (OrderType == '') {
             toastr.error('Please select Order Type')
             return false;
         }
-        else if ((ImportOrderNo == '' || ImportOrderNo == undefined) && OrderType == 'Import') {
-            toastr.error('Please select OrderNo')
-            return false;
-        }
-        else if ((ExportOrderNo == '' || ExportOrderNo == undefined) && OrderType == 'Export') {
-            toastr.error('Please select OrderNo')
-            return false;
-        }
+        //else if ((ImportOrderNo == '' || ImportOrderNo == undefined) && OrderType == 'Import') {
+        //    toastr.error('Please select OrderNo')
+        //    return false;
+        //}
+        //else if ((ExportOrderNo == '' || ExportOrderNo == undefined) && OrderType == 'Export') {
+        //    toastr.error('Please select OrderNo')
+        //    return false;
+        //}
         else if ((ContainerNo == '' || ContainerNo == undefined)) {
             toastr.error('Please select ContainerNo')
             return false;
@@ -177,7 +171,7 @@ $(document).ready(function () {
             return false;
         }
         else if (row.find("#txt_userName").val() == '') {
-            toastr.error('Please Enter UserName.')
+            toastr.error('Please Select UserName.')
             return false;
         }
 
@@ -188,11 +182,12 @@ $(document).ready(function () {
             'ID': row.find(".txt_ID").val(),
             'IsActive': IsActive,
             'OrderType': $("#txt_OrderType option:selected").val(),
-            'OrderNo': $("#txt_importorderNo option:selected").text(),
+            'OrderNo': $("#txt_importContainerNo").find(':selected').attr('data-order-no'),
             'ContainerNo': $("#txt_importContainerNo option:selected").val(),
             'HeadType': row.find("#txt_HeadType option:selected").text(),
             'HeadID': row.find("#txt_HeadName option:selected").val(),
             'HeadName': row.find("#txt_HeadName option:selected").text(),
+            'UserID': row.find("#txt_userName option:selected").val(),
             'UserName': row.find("#txt_userName option:selected").text(),
             'Amount': row.find("#txt_Amount").val(),
             'Remarks': row.find("#txt_Remarks").val(),

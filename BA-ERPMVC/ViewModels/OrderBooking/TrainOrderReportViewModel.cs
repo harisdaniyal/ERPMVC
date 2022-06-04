@@ -36,6 +36,7 @@ namespace BA_ERPMVC.ViewModels.OrderBooking
         public string VehicleNumber { get; set; }
         public string WagonNumber { get; set; }
         public string WagonType { get; set; }
+        public string TrainID { get; set; }
         public string RRNo { get; set; }
         public string EngineNo { get; set; }
         public string BiltyNo { get; set; }

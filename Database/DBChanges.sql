@@ -5167,6 +5167,9 @@ Go
 
 alter table [ExpenseInvoice] add [UserName] [nvarchar](500) NULL
 
+Go
+
+alter table [ExpenseInvoice] add [UserID] [int] NULL
 GO
 CREATE TABLE tbl_User(
 	[ID] [int] IDENTITY(1,1) primary key NOT NULL,

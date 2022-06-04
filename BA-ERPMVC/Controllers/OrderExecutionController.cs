@@ -359,6 +359,14 @@ namespace BA_ERPMVC.Controllers
         }
 
         [HttpGet]
+        public ActionResult ExportTrainReport()
+        {
+            var ExportTrainReport = orderBookingService.ExportTrainOrderReport();
+
+            return View(ExportTrainReport);
+        }
+
+        [HttpGet]
         public ActionResult ImportOrderReport()
         {
             var ImportOrderReport = orderBookingService.ImportBookingReportTrain();

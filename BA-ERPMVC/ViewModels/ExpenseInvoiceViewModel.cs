@@ -9,6 +9,7 @@ namespace BA_ERPMVC.ViewModels
     {
 		public int? ID { get; set; }
 		public int? HeadID { get; set; }
+		public int? UserID { get; set; }
 		public string OrderNo { get; set; }
 		public string ContainerNo { get; set; }
 		public string OrderType { get; set; }

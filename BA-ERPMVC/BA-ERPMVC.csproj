@@ -815,6 +815,7 @@
     <Compile Include="ViewModels\ExportOrderBooking\ExportOrderBookingViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportPreDispatchedViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportReDispatchedViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\ExportTrainOrderReportViewModel.cs" />
     <Compile Include="ViewModels\InvoiceHeadViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />
@@ -4193,6 +4194,7 @@
     <Content Include="Views\Invoices\InvoiceHead.cshtml" />
     <Content Include="Views\Invoices\ExpenseInvoice.cshtml" />
     <Content Include="Views\Setup\GetUsers.cshtml" />
+    <Content Include="Views\OrderExecution\ExportTrainReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DropDown\" />
