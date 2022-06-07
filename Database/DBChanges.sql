@@ -5183,3 +5183,17 @@ CREATE TABLE tbl_User(
 select * from menu
 insert into menu values ('Users', '/Setup/GetUsers',0)
 
+
+---- 06.07.2022----- Haris
+
+insert into menu values ('Export Train Report', '/OrderExecution/ExportTrainReport',0)
+insert into menu values ('TrainID', '/Setup/GetTrainId',0)
+
+Create TABLE tbl_TrainId (
+	[ID] [int] IDENTITY(1,1) primary key NOT NULL,
+	[TrainID] [nvarchar](250) NULL,
+	
+	[CreatedBy] [nvarchar](50) NULL,
+	[CreatedDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+	)
