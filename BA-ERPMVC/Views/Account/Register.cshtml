@@ -98,7 +98,20 @@
             </div>
 
         </div>
-        </form>
+    </form>
 </div>
+
+
+@if (Convert.ToString(ViewBag.Message) == "Successfull")
+{
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            toastr.success("Saved Successfully.")
+        });
+    </script>
+}
+
+
+
 
 

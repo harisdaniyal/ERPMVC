@@ -553,6 +553,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         //BL = readyForDispatched.BL
                     }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
         }
+        public IEnumerable<tbl_TrainId> GetTrainID()
+        {
+            return _dbContext.tbl_TrainId.ToList();
+        }
 
         public async Task SaveDispatchedOrderAsync(DispatchedOrderViewModel dispatchedOrderVM)
         {

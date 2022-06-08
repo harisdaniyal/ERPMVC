@@ -105,6 +105,7 @@ namespace BA_ERPMVC.Controllers
         public ActionResult Dispatched()
         {
             this.ViewBag.Stations = orderBookingService.GetStationList();
+            this.ViewBag.TrainId = orderBookingService.GetTrainID();
             var DispatchedModel = orderBookingService.GetDispatchedOrderAsync();
 
             return View(DispatchedModel);
