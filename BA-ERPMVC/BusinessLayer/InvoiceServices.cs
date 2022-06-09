@@ -809,8 +809,9 @@ namespace BA_ERPMVC.BusinessLayer
                         Amount = expenseinvoice.Amount,
                         OrderType = expenseinvoice.OrderType,
                         UserName = expenseinvoice.UserName,
+                        UserID = expenseinvoice.UserID,
                         Remarks = expenseinvoice.Remarks,
-                    });
+                    }).OrderByDescending(x => x.ID);
         }
 
         public async Task SaveExpenseInvoiceAsync(ExpenseInvoiceViewModel expenseinvoiceVM)
@@ -823,9 +824,7 @@ namespace BA_ERPMVC.BusinessLayer
             }
 
             expenseinvoice.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
-
             expenseinvoice.CreatedDate = DateTime.Now;
-
             _expenseinvoiceRepository.Add(expenseinvoice);
 
             await _dbContext.SaveChangesAsync();
@@ -855,6 +854,7 @@ namespace BA_ERPMVC.BusinessLayer
             expenseinvoice.HeadID = expenseinvoiceVM.HeadID;
             expenseinvoice.Amount = expenseinvoiceVM.Amount;
             expenseinvoice.Remarks = expenseinvoiceVM.Remarks;
+            expenseinvoice.UserID = expenseinvoiceVM.UserID;
             expenseinvoice.UserName = expenseinvoiceVM.UserName;
 
             _expenseinvoiceRepository.Update(expenseinvoice);

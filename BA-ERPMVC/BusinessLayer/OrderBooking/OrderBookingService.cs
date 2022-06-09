@@ -45,8 +45,9 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         private readonly ExportDispatchedTruckRepository _exportdispatchedtruckRepository;
         private readonly ExportReDispatchedRepository _exportRedispatchedRepository;
         private readonly ExportDeliveryRepository _exportDeliveryRepository;
+        // setup train Id//
 
-
+        private readonly TrainIdRepository _trainIdRepository;
 
 
         public OrderBookingService()
@@ -78,6 +79,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             _exportRedispatchedRepository = new ExportReDispatchedRepository(_dbContext);
             _exportDeliveryRepository = new ExportDeliveryRepository(_dbContext);
             _orderContainerRepository = new OrderContainerRepository(_dbContext);
+
+            //Setup TrainId //
+            _trainIdRepository = new TrainIdRepository(_dbContext);
+
+
         }
 
         public async Task<BookingViewModel> GetOrderBookingAsync(int orderBookingId)
@@ -546,6 +552,10 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         //ID = readyForDispatched.GD,
                         //BL = readyForDispatched.BL
                     }).Distinct().ToList().OrderByDescending(x => x.OrderId).ThenByDescending(x => x.LogisticsId);
+        }
+        public IEnumerable<tbl_TrainId> GetTrainID()
+        {
+            return _dbContext.tbl_TrainId.ToList();
         }
 
         public async Task SaveDispatchedOrderAsync(DispatchedOrderViewModel dispatchedOrderVM)
@@ -1308,11 +1318,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         ////****** Train Report *******////
         public IEnumerable<TrainOrderReportViewModel> TrainOrderReport()
         {
-            return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
-                    join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
+            return (from order in _dbContext.GenerateOrders
+                    join logistics in _dbContext.Logistics.Where(x => x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
                         on order.OrderID equals logistics.OrderId
 
-                    join RFD in _dbContext.ReadyForDispatcheds.Where(x => x.IsCompleted == true)
+                    join RFD in _dbContext.ReadyForDispatcheds
                          on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = RFD.OrderId, ContainerNo = RFD.ContainerNo } into RFDGroup
                     from ReadyForDispatcheds in RFDGroup.DefaultIfEmpty()
                     join PDM in _dbContext.PreDispatchedMovements.Where(x => x.IsCompleted == true)
@@ -1330,7 +1340,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     join DT in _dbContext.DeliveryTrains.Where(x => x.IsCompleted == true)
                     on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = DT.OrderId, ContainerNo = DT.ContainerNo } into DTGroup
                     from DeliveryTrains in DTGroup.DefaultIfEmpty()
-                    join EDO in _dbContext.EmptyDropOffs.Where(x => x.IsCompleted == false)
+                    join EDO in _dbContext.EmptyDropOffs
                         on new { OrderId = logistics.OrderId, ContainerNo = logistics.ContainerNo } equals new { OrderId = EDO.OrderId, ContainerNo = EDO.ContainerNo } into EDOGroup
                     from EmptyDropOffs in EDOGroup.DefaultIfEmpty()
                     select new TrainOrderReportViewModel()
@@ -1395,7 +1405,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                         EIRNo = EmptyDropOffs.EIRNo,
                         EmptyDropOffRemarks = EmptyDropOffs.Remarks,
                         ExpenseAtEmptyLocation = EmptyDropOffs.ExpenseAtEmptyLocation,
-
+                        TrainID = DispatchedOrders.TrainID
 
 
 
@@ -1410,6 +1420,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             return (from order in _dbContext.GenerateOrders.Where(x => x.isCompleted == false)
                     join logistics in _dbContext.Logistics.Where(x => x.IsActive == true && x.ModeOfTransportation == ModeOfTransaction.Train.ToString() && x.Status == OrdersStatus.PreDispatched.ToString())
                     on order.OrderID equals logistics.OrderId
+                    
 
 
                     select new ImportBookingReportViewModel()
@@ -2432,6 +2443,158 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             }
             return null;
+        }
+
+        ////****** Export Train Report *******////
+
+        public IEnumerable<ExportTrainOrderReportViewModel> ExportTrainOrderReport()
+        {
+            return (from exportorder in _dbContext.ExportBookingOrders
+                    join exportlogistics in _dbContext.ExportLogistics.Where(x => x.ModeOfTransportation == ModeOfTransaction.Train.ToString())
+                        on exportorder.OrderId equals exportlogistics.OrderId
+
+                    join EPD in _dbContext.ExportPreDispatcheds.Where(x=> x.IsCompleted == true)
+                        on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = EPD.OrderId, ContainerNo = EPD.ContainerNo } into EPDGroup
+                    from ExportPreDispatched in EPDGroup.DefaultIfEmpty()
+                    join EDT in _dbContext.ExportDispatchedTrains.Where(x => x.IsCompleted == true)
+                          on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = EDT.OrderId, ContainerNo = EDT.ContainerNo } into EDTGroup
+                    from ExportDispatchedTrains in EDTGroup.DefaultIfEmpty()
+                    join EPD in _dbContext.ExportReDispatcheds.Where(x => x.IsCompleted == true)
+                        on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = EPD.OrderId, ContainerNo = EPD.ContainerNo } into PDGroup
+                    from ExportReDispatcheds in PDGroup.DefaultIfEmpty()
+                    join ED in _dbContext.ExportDeliveries.Where(x => x.IsCompleted == true)
+                     on new { OrderId = exportlogistics.OrderId, ContainerNo = exportlogistics.ContainerNo } equals new { OrderId = ED.OrderId, ContainerNo = ED.ContainerNo } into EDGroup
+                    from ExportDeliveries in EDGroup.DefaultIfEmpty()
+
+                    select new ExportTrainOrderReportViewModel()
+                    {
+                        CRO = exportorder.CRO,
+                        OrderNo = exportorder.OrderNo,
+                        DateOfBooking = exportorder.DateOfBooking,
+                        Forwarder = exportorder.Forwarder,
+                        ShipperName = exportorder.ShipperName,
+                        ShipperContact = exportorder.ShipperContact,
+                        TwentyContainerQty = exportorder.TwentyContainerQty,
+                        TwentyContainerPrice = exportorder.TwentyContainerPrice,
+                        FortyContainerQty = exportorder.FortyContainerQty,
+                        FortyContainerPrice = exportorder.FortyContainerPrice,
+                        RateOfTransportation = exportorder.RateOfTransportation,
+                        PointOfLoadingStation = exportorder.PointOfLoadingStation,
+                        ContainerNo = exportlogistics.ContainerNo,
+                        ContainerSize = exportlogistics.ContainerSize,
+                        ContainerType = exportlogistics.ContainerType,
+                        EGNo = exportlogistics.EGNo,
+                        vessel = exportlogistics.vessel,
+                        Voyage = exportlogistics.Voyage,
+                        ETD = exportlogistics.ETD,
+                        VesselCutOff = exportlogistics.VesselCutOff,
+                        ShippingLine = exportlogistics.ShippingLine,
+                        ClearingAgentName = exportlogistics.ClearingAgentName,
+                        CAContactNo = exportlogistics.CAContactNo,
+                        BookingPort = exportlogistics.BookingPort,
+                        ModeOfTransportation = exportlogistics.ModeOfTransportation,
+                        DateOfReceivingCargo = exportlogistics.DateOfReceivingCargo,
+                        PreDispatched = exportlogistics.PreDispatched,
+                        PickupFrom = ExportPreDispatched.PickupFrom,
+                        PreVehicleNo = ExportPreDispatched.VehicleNo,
+                        PreTransporterName = ExportPreDispatched.TransporterName,
+                        TransporterCost = ExportPreDispatched.TransporterCost,
+                        TrainID = ExportDispatchedTrains.TrainID,
+                        DispatchedOfDate = ExportDispatchedTrains.DispatchedOfDate,
+                        WagonNo = ExportDispatchedTrains.WagonNo,
+                        RRNo = ExportDispatchedTrains.RRNo,
+                        EngineNo = ExportDispatchedTrains.EngineNo,
+                        WagonType = ExportDispatchedTrains.WagonType,
+                        ReDispatched = ExportDispatchedTrains.ReDispatched,
+                        CargoWeight = ExportDispatchedTrains.CargoWeight,
+                        TareWeight = ExportDispatchedTrains.TareWeight,
+                        ReTransporterName = ExportReDispatcheds.TransporterName,
+                        ReVehicleNo = ExportReDispatcheds.VehicleNo,
+                        CustomerName = ExportReDispatcheds.CustomerName,
+                        TruckingCost = ExportReDispatcheds.TruckingCost,
+                        DeliveryDate = ExportDeliveries.DeliveryDate
+                    }).Distinct().ToList();
+
+                    }
+
+
+        ///***End***///
+
+
+        // Train ID Setup Screen //
+        public IEnumerable<SetupTrainIDViewModel> GetTrainIdAsync()
+        {
+            return (from trainId in _dbContext.tbl_TrainId.Where(x => x.IsDeleted == false)
+
+                    select new SetupTrainIDViewModel()
+                    {
+                        ID = trainId.ID,
+                        TrainID = trainId.TrainID,
+                        CreatedBy = trainId.CreatedBy,
+                        CreatedDate = trainId.CreatedDate,
+                        IsDeleted = trainId.IsDeleted,
+
+                    }).OrderByDescending(x => x.ID);
+        }
+
+        public async Task SaveTrainIdAsync(SetupTrainIDViewModel setuptrainVM)
+        {
+
+            var setuptrainId = Mapper.Map<SetupTrainIDViewModel, tbl_TrainId>(setuptrainVM);
+            if (setuptrainId == null)
+            {
+                throw new ArgumentNullException(nameof(setuptrainVM));
+            }
+            setuptrainId.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            setuptrainId.CreatedDate = DateTime.Now;
+            setuptrainId.IsDeleted = false;
+            _trainIdRepository.Add(setuptrainId);
+
+            await _dbContext.SaveChangesAsync();
+            setuptrainVM.ID = setuptrainId.ID;
+        }
+
+        public async Task UpdateTrainIdAsync(SetupTrainIDViewModel setuptrainVM)
+        {
+
+            if (setuptrainVM == null)
+            {
+                throw new ArgumentNullException(nameof(setuptrainVM));
+            }
+
+            var setuptrainId = await _trainIdRepository.GetAsync(Convert.ToInt32(setuptrainVM.ID));
+
+            if (setuptrainId == null)
+            {
+                throw new InvalidOperationException($"This TrainID:{setuptrainVM.ID}  not found.");
+            }
+
+            setuptrainId.TrainID = setuptrainVM.TrainID;
+
+            _trainIdRepository.Update(setuptrainId);
+
+
+            await _dbContext.SaveChangesAsync();
+            setuptrainVM.ID = setuptrainId.ID;
+        }
+
+        public bool DeleteTrainId(int Id)
+        {
+            bool isSuccess = false;
+            var setuptrainId = _dbContext.tbl_TrainId.Where(x => x.ID == Id).FirstOrDefault();
+            if (setuptrainId == null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                setuptrainId.IsDeleted = true;
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
         }
 
     }

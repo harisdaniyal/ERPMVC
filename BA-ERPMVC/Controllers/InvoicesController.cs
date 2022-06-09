@@ -798,16 +798,21 @@ namespace BA_ERPMVC.Controllers
 
 
         [HttpGet]
-        public JsonResult GetImportContainer(int orderID, string orderType)
+        public JsonResult GetImportContainer(string orderType)
         {
-            var data = Json(db.OrderContainers.Where(x => x.OrderID == orderID && x.OrderType == orderType).Select(x => new
-            {
-                ContainerNo = x.ContainerNo
-            }
-            ).ToList(), JsonRequestBehavior.AllowGet);
-
-            return data;
+            var data = Json(from order in db.GenerateOrders
+                            join oc in db.OrderContainers on order.OrderID equals oc.OrderID
+                            where order.OrderType == orderType
+                            select new
+                            {
+                                ContainerNoAndOrderNo = oc.ContainerNo + " | " + order.OrderNo,
+                                ContainerNo = oc.ContainerNo,
+                                OrderNo = order.OrderNo
+                            });
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+
 
         [HttpGet]
         public JsonResult GetExportContainer(int orderID)

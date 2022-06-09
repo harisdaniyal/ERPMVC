@@ -105,6 +105,7 @@ namespace BA_ERPMVC.Controllers
         public ActionResult Dispatched()
         {
             this.ViewBag.Stations = orderBookingService.GetStationList();
+            this.ViewBag.TrainId = orderBookingService.GetTrainID();
             var DispatchedModel = orderBookingService.GetDispatchedOrderAsync();
 
             return View(DispatchedModel);
@@ -356,6 +357,14 @@ namespace BA_ERPMVC.Controllers
             var TrainReport = orderBookingService.TrainOrderReport();
 
             return View(TrainReport);
+        }
+
+        [HttpGet]
+        public ActionResult ExportTrainReport()
+        {
+            var ExportTrainReport = orderBookingService.ExportTrainOrderReport();
+
+            return View(ExportTrainReport);
         }
 
         [HttpGet]

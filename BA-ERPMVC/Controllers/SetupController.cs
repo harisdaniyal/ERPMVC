@@ -1,9 +1,11 @@
 ﻿using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Extensions;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.Repositories.CoreRepositories;
 using BA_ERPMVC.Repositories.IRepositories;
 using BA_ERPMVC.ViewModels;
+using BA_ERPMVC.ViewModels.OrderBooking;
 //using InfiSolMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ namespace BA_ERPMVC.Controllers
         IItemUnitRepository _itemUnitRepository = null;
         ItemUnitService _itemUnitService = null;
         UserService _userService = null;
+        OrderBookingService _orderBookingService = null;
         ERPMVCEntities _dbContext = null;
         public SetupController()
         {
@@ -28,6 +31,7 @@ namespace BA_ERPMVC.Controllers
             _itemUnitRepository = new ItemUnitRepository(_dbContext);
             _itemUnitService = new ItemUnitService();
             _userService = new UserService();
+            _orderBookingService = new OrderBookingService();
 
         }
 
@@ -460,7 +464,71 @@ namespace BA_ERPMVC.Controllers
             }
             return null;
         }
+        // Setup TrainId For Import //
 
+        [HttpGet]
+        public ActionResult GetTrainId()
+        {
+            var setuptrainId = _orderBookingService.GetTrainIdAsync();
+            return View(setuptrainId);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult>TrainIdAsync(SetupTrainIDViewModel setuptrainVM)
+        {
+            if (setuptrainVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(setuptrainVM)} should not be null or empty" });
+            }
+
+            if (_dbContext.tbl_TrainId.Any(x => x.TrainID == setuptrainVM.TrainID) && setuptrainVM.ID == 0)
+            {
+                return Json(new { success = false, message = $" This {setuptrainVM.TrainID}  is already exists." });
+
+            }
+
+            try
+            {
+                if (setuptrainVM.ID == 0)
+                {
+                    await _orderBookingService.SaveTrainIdAsync(setuptrainVM);
+
+                    return Json(new { success = true, Id = setuptrainVM.ID });
+                }
+
+                await _orderBookingService.UpdateTrainIdAsync(setuptrainVM);
+
+                return Json(new { success = true, Id = setuptrainVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteTrainID(int Id)
+        {
+            if (Id < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(Id)} should be a valid id" });
+            }
+
+            try
+            {
+                if (_orderBookingService.DeleteTrainId(Id))
+                {
+                    return Json(new { success = true, message = $"Deleted Successfully." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+
+            }
+            return null;
+        }
 
     }
 }

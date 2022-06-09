@@ -34,7 +34,7 @@
             'ContainerSize': row.find(".txt_ContainerSize").val(),
             'ReferenceContainer': row.find(".txt_ReferenceContainer").val(),
             'PriorityForDispatched': row.find(".txt_Priority").val(),
-            'TrainID': row.find(".txt_TrainID").val(),
+            'TrainID': row.find(".txt_Train option:selected").val(),
             'DispatchedDate': row.find(".txt_Dispatcheddate").val(),
             'StationID': row.find(".txt_station").val(),
             'StationName': row.find(".txt_station option:selected").text(),
