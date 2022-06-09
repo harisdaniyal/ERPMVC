@@ -1,4 +1,5 @@
-﻿using BA_ERPMVC.Models;
+﻿using BA_ERPMVC.Filter;
+using BA_ERPMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class BVMSController : Controller
     {
         // GET: BVMS

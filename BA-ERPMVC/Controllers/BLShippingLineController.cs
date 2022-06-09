@@ -1,6 +1,7 @@
 ﻿using BA_ERPMVC.BusinessLayer;
 using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Extensions;
+using BA_ERPMVC.Filter;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.Reports;
 using BA_ERPMVC.ViewModels;
@@ -16,7 +17,8 @@ using System.Web.Mvc;
 
 namespace BA_ERPMVC.Controllers
 {
-    public class BLShippingLineController : BaseApiController
+    [CustomAuthenticationFilter]
+    public class BLShippingLineController :Controller
     {
         ERPMVCEntities db = new ERPMVCEntities();
         ApiResponse _apiResponse = new ApiResponse();
@@ -104,12 +106,13 @@ namespace BA_ERPMVC.Controllers
 
 
 
-        public ActionResult AddOrEditeBLShippingLine(BAShippingLine obj)
+        public ActionResult AddOrEditeBLShippingLine(BAShippingLine obj )
         {
             var done = 0;
             var responseText = "";
             _apiResponse.statusCode = "11";
             BAShippingLine isExistOrderNo = db.BAShippingLines.Where(i => i.BLShippingID == obj.BLShippingID).FirstOrDefault();
+            //BLShippingContainerDetail isExistContainerNo = db.BLShippingContainerDetails.Where(i => i.Id == obj.BLShippingID).FirstOrDefault();
             using (ERPMVCEntities db = new ERPMVCEntities())
             {
                 try
@@ -117,6 +120,7 @@ namespace BA_ERPMVC.Controllers
                     if (obj.BLShippingID != 0)
                     {
                         BAShippingLine a = db.BAShippingLines.First(i => i.BLShippingID == obj.BLShippingID);
+                        //BLShippingContainerDetail b = db.BLShippingContainerDetails.First(i => i.Id == b.Id);
 
                         a.BL = obj.BL;
                         //a.Approval = obj.Approval;
@@ -164,7 +168,7 @@ namespace BA_ERPMVC.Controllers
                                 if (isExistCustomeName != null)
                                 {
 
-                                    responseText = "BL/CRO no already exist.";
+                                    responseText = "BLNo already exist.";
                                 }
                                 else
                                 {
@@ -289,7 +293,7 @@ namespace BA_ERPMVC.Controllers
             {
 
                 var BL = (from opo in db.BAShippingLines
-                              //join status in db.stp_Status on opo.Approval equals VV.StatusID
+                          //join status in db.stp_Status on opo.Approval equals VV.StatusID
                           select new
                           {
                               ID = opo.BLShippingID,

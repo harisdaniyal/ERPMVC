@@ -8,9 +8,11 @@ using IRepo = BA_ERPMVC.Repositories.IRepositories;
 using ViewModel = BA_ERPMVC.ViewModels;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class VendorController : Controller
     {
         // GET: Vendor

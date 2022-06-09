@@ -17,9 +17,11 @@ using Hangfire;
 using System.Web.Hosting;
 using MasterLayer;
 using System.Configuration;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class OrderExecutionController : Controller
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

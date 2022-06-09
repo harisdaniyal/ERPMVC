@@ -1,4 +1,5 @@
 ﻿using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.Filter;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.Reports;
 using CrystalDecisions.CrystalReports.Engine;
@@ -14,6 +15,7 @@ using System.Web.Script.Serialization;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class GridSearchController : Controller
     {
         ERPMVCEntities db = null;

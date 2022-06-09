@@ -1,4 +1,5 @@
 ﻿using BA_ERPMVC.BusinessLayer;
+using BA_ERPMVC.Filter;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
 //using InfiSolMVC.Models;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace InfiSolMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class RoleController : Controller
     {
         private readonly UserService userservice;

@@ -1,5 +1,6 @@
 ﻿using BA_ERPMVC.BusinessLayer;
 using BA_ERPMVC.Extensions;
+using BA_ERPMVC.Filter;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
 using System;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace BA_ERPMVC.Controllers
 {
-
+    [CustomAuthenticationFilter]
     public class CustomerPriceController : Controller
     {
  

@@ -6,11 +6,11 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using BA_ERPMVC.Models;
 using System.Data;
-
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
-
+    [CustomAuthenticationFilter]
     public class HumanResourceManagmentController : Controller
     {
         ERPMVCEntities db = null;

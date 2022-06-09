@@ -11,9 +11,11 @@ using System.IO;
 using System.Data;
 using BA_ERPMVC.Extensions;
 using MasterLayer;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class salesController : Controller
     {
         // GET: sales

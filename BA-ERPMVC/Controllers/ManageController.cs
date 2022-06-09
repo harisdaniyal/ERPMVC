@@ -7,10 +7,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BA_ERPMVC.Models;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
     [Authorize]
+    [CustomAuthenticationFilter]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

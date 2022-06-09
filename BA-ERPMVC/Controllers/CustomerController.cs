@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BA_ERPMVC.BusinessLayer;
 using BA_ERPMVC.Extensions;
+using BA_ERPMVC.Filter;
 //using InfiSolMVC.Models;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.ViewModels;
@@ -13,6 +14,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class CustomerController : Controller
     {
         ERPMVCEntities db = new ERPMVCEntities();

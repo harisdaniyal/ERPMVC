@@ -1,6 +1,7 @@
 ﻿using BA_ERPMVC.BusinessLayer;
 using BA_ERPMVC.BusinessLayer.OrderBooking;
 using BA_ERPMVC.Extensions;
+using BA_ERPMVC.Filter;
 using BA_ERPMVC.Models;
 using BA_ERPMVC.Repositories.CoreRepositories;
 using BA_ERPMVC.Repositories.IRepositories;
@@ -16,6 +17,7 @@ using System.Web.Mvc;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class SetupController : Controller
     {
         ApiResponse _apiResponse = null;

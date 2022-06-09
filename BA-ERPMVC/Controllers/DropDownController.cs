@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using BA_ERPMVC.Models;
 using System.Data.Entity;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class DropDownController : Controller
     {
         ERPMVCEntities db = null;

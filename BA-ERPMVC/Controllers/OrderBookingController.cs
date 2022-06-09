@@ -20,8 +20,8 @@ using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
-    
-    public class OrderBookingController : BaseApiController
+    [CustomAuthenticationFilter]
+    public class OrderBookingController : Controller
     {
         ERPMVCEntities db = new ERPMVCEntities();
         private readonly OrderBookingService orderBookingService;

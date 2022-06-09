@@ -6,9 +6,11 @@ using System.Web;
 using BA_ERPMVC.BusinessLayer;
 using System.Web.Mvc;
 using BA_ERPMVC.Extensions;
+using BA_ERPMVC.Filter;
 
 namespace BA_ERPMVC.Controllers
 {
+    [CustomAuthenticationFilter]
     public class tripController : Controller
     {
         TripServices ts = null;
