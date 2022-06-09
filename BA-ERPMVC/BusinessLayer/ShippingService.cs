@@ -236,32 +236,23 @@ namespace BA_ERPMVC.BusinessLayer
             blshippingcontainerdetailVM.Id = blshippingcontainerdetail.Id;
         }
 
-        public async Task UpdateBLShippingContainerDetailAsync(BLShippingContainerDetailViewModel blshippingcontainerdetailVM)
+        public async Task UpdateBLShippingContainerDetailAsync(List<BLShippingContainerDetailViewModel> blshippingcontainerdetailVM, string blNumber)
         {
-
-            if (blshippingcontainerdetailVM == null)
+            if (blshippingcontainerdetailVM.Count == 0)
             {
                 throw new ArgumentNullException(nameof(blshippingcontainerdetailVM));
             }
 
-            var blshippingcontainerdetail = await _blshippingContainerdetailRepository.GetAsync(Convert.ToInt32(blshippingcontainerdetailVM.Id));
-
-            if (blshippingcontainerdetail == null)
+            var containers = _dbContext.BLShippingContainerDetails.Where(x => x.Bl == blNumber).ToList();
+            _dbContext.BLShippingContainerDetails.RemoveRange(containers);
+            var blShippingContainerDetailList = Mapper.Map<List<BLShippingContainerDetailViewModel>, List<BLShippingContainerDetail>>(blshippingcontainerdetailVM);
+            if (blShippingContainerDetailList == null)
             {
-                throw new InvalidOperationException($"Booking order:{blshippingcontainerdetailVM.Id}  not found.");
+                throw new ArgumentNullException(nameof(blShippingContainerDetailList));
             }
-
-            blshippingcontainerdetail.ContainerNo = blshippingcontainerdetailVM.ContainerNo;
-            blshippingcontainerdetail.SealNo = blshippingcontainerdetailVM.SealNo;
-
-
-
-
-            _blshippingContainerdetailRepository.Update(blshippingcontainerdetail);
-
-
+            blShippingContainerDetailList.ForEach(x => x.Id = 0);
+            _dbContext.BLShippingContainerDetails.AddRange(blShippingContainerDetailList);
             await _dbContext.SaveChangesAsync();
-            blshippingcontainerdetailVM.Id = blshippingcontainerdetail.Id;
         }
 
         

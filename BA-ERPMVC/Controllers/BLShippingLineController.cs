@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace BA_ERPMVC.Controllers
 {
-    public class BLShippingLineController : Controller
+    public class BLShippingLineController : BaseApiController
     {
         ERPMVCEntities db = new ERPMVCEntities();
         ApiResponse _apiResponse = new ApiResponse();
@@ -340,7 +340,7 @@ namespace BA_ERPMVC.Controllers
                 DataTable orderMainDataTable = invoiceDataDataSet.BLShippingLine;
                 DataRow headerRow = orderMainDataTable.NewRow();
 
-                var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c => 
+                var data = context.BAShippingLines.Where(x => x.BLShippingID == id).Select(c =>
                 new BLShippingLineViewModel()
                 {
                     BL = c.BL,
@@ -356,7 +356,7 @@ namespace BA_ERPMVC.Controllers
                     PlaceOfDelivery = c.PlaceOfDelivery,
                     ForwardingAgent = c.ForwardingAgent,
                     FinalDestination = c.FinalDestination,
-                   // ContainerNo = c.ContainerNo,
+                    // ContainerNo = c.ContainerNo,
                     ////SealNo = c.SealNo,
                     NumberOfConatinerPack = c.NumberOfConatinerPack,
                     KindOfPackagesDescriptionOfGoods = c.KindOfPackagesDescriptionOfGoods,
@@ -410,7 +410,7 @@ namespace BA_ERPMVC.Controllers
                 {
                     DetailRow["ContainerNo"] = item.ContainerNo;
                     DetailRow["SealNo"] = item.SealNo;
-                    DetailRow["NoOfContainersOrPackages"] = data[0].NumberOfConatinerPack ;
+                    DetailRow["NoOfContainersOrPackages"] = data[0].NumberOfConatinerPack;
                     DetailRow["KindOfPackagesDescriptionOfGoods"] = data[0].KindOfPackagesDescriptionOfGoods;
                     DetailRow["GrossWeight"] = data[0].GrossWeight;
                     DetailRow["NetWeight"] = data[0].NetWeight;
@@ -486,25 +486,21 @@ namespace BA_ERPMVC.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult> BlShippingContainerDetail(BLShippingContainerDetailViewModel blshippingcontainerdetailVM)
+        public async Task<ActionResult> BlShippingContainerDetail(List<BLShippingContainerDetailViewModel> blshippingcontainerdetailVM, string blNumber)
         {
             if (blshippingcontainerdetailVM == null)
             {
                 return Json(new { success = false, message = $"{nameof(blshippingcontainerdetailVM)} should not be null or empty" });
             }
+            else if (string.IsNullOrEmpty(blNumber))
+            {
+                return Json(new { success = false, message = $"BL Number should not be null or empty." });
+            }
 
             try
             {
-                if (blshippingcontainerdetailVM.Id == 0)
-                {
-                    await shippingService.SaveBLShippingContainerDetailAsync(blshippingcontainerdetailVM);
-
-                    return Json(new { success = true, Id = blshippingcontainerdetailVM.Id });
-                }
-
-                await shippingService.UpdateBLShippingContainerDetailAsync(blshippingcontainerdetailVM);
-
-                return Json(new { success = true, Id = blshippingcontainerdetailVM.Id });
+                await shippingService.UpdateBLShippingContainerDetailAsync(blshippingcontainerdetailVM, blNumber);
+                return Json(new { success = true, message = "Saved Successfully" });
             }
             catch (Exception ex)
             {

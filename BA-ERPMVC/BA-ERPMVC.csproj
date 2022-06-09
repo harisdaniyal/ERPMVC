@@ -278,6 +278,7 @@
   <ItemGroup>
     <Compile Include="BusinessLayer\ShippingService.cs" />
     <Compile Include="BusinessLayer\VendorExpensesService.cs" />
+    <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\OrderExecutionController.cs" />
     <Compile Include="Filter\CustomAuthenticationFilter.cs" />
     <Compile Include="Models\AspNetRole.cs">
@@ -4195,6 +4196,7 @@
     <Content Include="Views\Setup\GetUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\BaseApi\" />
     <Folder Include="Views\DropDown\" />
     <Folder Include="Views\GridSearch\" />
     <Folder Include="Views\VendorType\" />

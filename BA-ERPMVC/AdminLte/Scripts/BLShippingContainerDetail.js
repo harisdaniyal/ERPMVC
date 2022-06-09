@@ -12,16 +12,28 @@
             return false;
         }
 
-      
-
-        console.log(row.find(".txt_ID").val())
-        save(row, false)
+        var containersList = row.find(".txt_ContainerNo").parent().html()
+        $('#example').prepend(`<tr class="bg-light tbl-valign-top">
+                           <td style="display:none">
+                                        <input type="hidden" value="0" class="form-control txt_ID" />
+                                    </td>
+                                 <td>
+                                `+ containersList + `
+                            </td>
+                                <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
+                               </td>
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                            </td>
+                        </tr>`)
 
     })
 
     $(document).on("click", ".btndlt", function () {
         var row = $(this).closest("tr")
-        save(row, true)
+        row.remove();
     })
 
     $('#example').dataTable({

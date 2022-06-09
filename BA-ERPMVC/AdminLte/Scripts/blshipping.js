@@ -27,7 +27,7 @@ function SaveContainerDetails() {
 
     showLoader();
 
-    return fetch("/BLShippingLineController/BlShippingContainerDetail?blshippingId=" + Bl, {
+    return fetch("/BLShippingLineController/BlShippingContainerDetail?blNumber=" + $(this).find(".txtblNo").val(), {
         method: 'POST',
         body: JSON.stringify(containerDetail),
         headers: {
@@ -35,6 +35,9 @@ function SaveContainerDetails() {
         },
     }).then(res => res.json());
 }
+
+
+
 
 $(document).ready(function () {
     var services = new Services();
@@ -211,7 +214,7 @@ $(document).ready(function () {
                                 //  $("#txtfreightPayable").val("");
                                 //  $("#txtOperationDate").val("");
 
-                                //SaveContainerDetails();
+                                SaveContainerDetails();
                                 toastr.success("BL Detail has been inserted successfully");
                                 location.reload();
                             } else {
