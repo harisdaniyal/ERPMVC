@@ -48,6 +48,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
         // setup train Id//
 
         private readonly TrainIdRepository _trainIdRepository;
+        private readonly ExportTrainRepository _exptrainIdRepository;
 
 
         public OrderBookingService()
@@ -82,6 +83,7 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
 
             //Setup TrainId //
             _trainIdRepository = new TrainIdRepository(_dbContext);
+            _exptrainIdRepository = new ExportTrainRepository(_dbContext);
 
 
         }
@@ -1924,6 +1926,11 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
                     }).Distinct().ToList();
         }
 
+        public IEnumerable<tbl_ExportTrain> GetExportTrainID()
+        {
+            return _dbContext.tbl_ExportTrain.ToList();
+        }
+
         public async Task SaveExportDispatchedTrainAsync(ExportDispatchedTrainViewModel ExportDispatchedTrainVM)
         {
 
@@ -2589,6 +2596,83 @@ namespace BA_ERPMVC.BusinessLayer.OrderBooking
             else
             {
                 setuptrainId.IsDeleted = true;
+                _dbContext.SaveChangesAsync();
+                isSuccess = true;
+            }
+
+            return isSuccess;
+
+        }
+
+
+        //Export Train ID Setup Screen //
+        public IEnumerable<SetupExportTrainViewModel> GetExportTrainIdAsync()
+        {
+            return (from trainId in _dbContext.tbl_ExportTrain.Where(x => x.IsDeleted == false)
+
+                    select new SetupExportTrainViewModel()
+                    {
+                        ID = trainId.ID,
+                        TrainID = trainId.TrainID,
+                        CreatedBy = trainId.CreatedBy,
+                        CreatedDate = trainId.CreatedDate,
+                        IsDeleted = trainId.IsDeleted,
+
+                    }).OrderByDescending(x => x.ID);
+        }
+
+        public async Task SaveExportTrainIdAsync(SetupExportTrainViewModel setupexptrainVM)
+        {
+
+            var setupexptrain = Mapper.Map<SetupExportTrainViewModel, tbl_ExportTrain>(setupexptrainVM);
+            if (setupexptrain == null)
+            {
+                throw new ArgumentNullException(nameof(setupexptrainVM));
+            }
+            setupexptrain.CreatedBy = Convert.ToString(HttpContext.Current.Session["UserName"]);
+            setupexptrain.CreatedDate = DateTime.Now;
+            setupexptrain.IsDeleted = false;
+            _exptrainIdRepository.Add(setupexptrain);
+
+            await _dbContext.SaveChangesAsync();
+            setupexptrainVM.ID = setupexptrain.ID;
+        }
+
+        public async Task UpdateExportTrainIdAsync(SetupExportTrainViewModel setupexptrainVM)
+        {
+
+            if (setupexptrainVM == null)
+            {
+                throw new ArgumentNullException(nameof(setupexptrainVM));
+            }
+
+            var setupexptrainId = await _exptrainIdRepository.GetAsync(Convert.ToInt32(setupexptrainVM.ID));
+
+            if (setupexptrainId == null)
+            {
+                throw new InvalidOperationException($"This TrainID:{setupexptrainVM.ID}  not found.");
+            }
+
+            setupexptrainId.TrainID = setupexptrainVM.TrainID;
+
+            _exptrainIdRepository.Update(setupexptrainId);
+
+
+            await _dbContext.SaveChangesAsync();
+            setupexptrainVM.ID = setupexptrainId.ID;
+        }
+
+        public bool DeleteExportTrainId(int Id)
+        {
+            bool isSuccess = false;
+            var setupexptrainId = _dbContext.tbl_ExportTrain.Where(x => x.ID == Id).FirstOrDefault();
+            if (setupexptrainId == null)
+            {
+                isSuccess = false;
+            }
+            else
+            {
+                setupexptrainId.IsDeleted = true;
                 _dbContext.SaveChangesAsync();
                 isSuccess = true;
             }

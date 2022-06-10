@@ -33,8 +33,7 @@
             'ContainerNo': row.find(".txt_ContainerNo").val(),
             'ContainerSize': row.find(".txt_ContainerSize").val(),
             'ContainerType': row.find(".txt_ContainerType").val(),
-
-            'TrainID': row.find(".txt_TrainID").val(),
+            'TrainID': row.find(".txt_Train option:selected").val(),
             'DispatchedOfDate': row.find(".txt_ExportDispatcheddate").val(),
             'WagonNo': row.find(".txt_WagonNo").val(),
             'RRNo': row.find(".txt_RRNo").val(),

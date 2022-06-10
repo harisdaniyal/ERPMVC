@@ -547,7 +547,7 @@ namespace BA_ERPMVC.Controllers
         [HttpGet]
         public ActionResult ExportDispatchedTrain()
         {
-
+            this.ViewBag.ExportTrainId = orderBookingService.GetExportTrainID();
             var exportDispatchedtrainModel = orderBookingService.GetExportDispatchedTrainAsync();
 
             return View(exportDispatchedtrainModel);

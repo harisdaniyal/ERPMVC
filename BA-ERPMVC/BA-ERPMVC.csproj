@@ -278,7 +278,6 @@
   <ItemGroup>
     <Compile Include="BusinessLayer\ShippingService.cs" />
     <Compile Include="BusinessLayer\VendorExpensesService.cs" />
-    <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\OrderExecutionController.cs" />
     <Compile Include="Filter\CustomAuthenticationFilter.cs" />
     <Compile Include="Models\AspNetRole.cs">
@@ -578,6 +577,9 @@
     <Compile Include="Models\tbl_ExpenseType.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbl_ExportTrain.cs">
+      <DependentUpon>ERPMVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_Invoice.cs">
       <DependentUpon>ERPMVC.tt</DependentUpon>
     </Compile>
@@ -765,6 +767,7 @@
     <Compile Include="Repositories\CoreRepositories\Export\ExportLogisticRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\Export\ExportPreDispatchedRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\Export\ExportReDispatchedRepository.cs" />
+    <Compile Include="Repositories\CoreRepositories\Export\ExportTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InTransactTrainRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\InvoiceHeadRepository.cs" />
     <Compile Include="Repositories\CoreRepositories\OrderContainerRepository.cs" />
@@ -783,6 +786,7 @@
     <Compile Include="Repositories\IRepositories\Export\IExportLogisticRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportPreDispatchedRepository.cs" />
     <Compile Include="Repositories\IRepositories\Export\IExportReDispatchedRepository.cs" />
+    <Compile Include="Repositories\IRepositories\Export\IExportTrainRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerDetailRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingContainerRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBLShippingLineRepository.cs" />
@@ -822,6 +826,7 @@
     <Compile Include="ViewModels\ExportOrderBooking\ExportPreDispatchedViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportReDispatchedViewModel.cs" />
     <Compile Include="ViewModels\ExportOrderBooking\ExportTrainOrderReportViewModel.cs" />
+    <Compile Include="ViewModels\ExportOrderBooking\SetupExportTrainViewModel.cs" />
     <Compile Include="ViewModels\InvoiceHeadViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTrainViewModel.cs" />
     <Compile Include="ViewModels\OrderBooking\DeliveryTruckViewModel.cs" />
@@ -956,6 +961,7 @@
     <Content Include="AdminLte\Scripts\OrderBookings\ExportDispatchedTruck.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExportLogistic.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\ExportRedispatched.js" />
+    <Content Include="AdminLte\Scripts\OrderBookings\ExportTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\InTransactTrain.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderBooking.js" />
     <Content Include="AdminLte\Scripts\OrderBookings\OrderDelivery.js" />
@@ -4204,6 +4210,7 @@
     <Content Include="Views\Setup\GetUsers.cshtml" />
     <Content Include="Views\OrderExecution\ExportTrainReport.cshtml" />
     <Content Include="Views\Setup\GetTrainId.cshtml" />
+    <Content Include="Views\Setup\GetExportTrainId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\BaseApi\" />

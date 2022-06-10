@@ -6,6 +6,7 @@ using BA_ERPMVC.Models;
 using BA_ERPMVC.Repositories.CoreRepositories;
 using BA_ERPMVC.Repositories.IRepositories;
 using BA_ERPMVC.ViewModels;
+using BA_ERPMVC.ViewModels.ExportOrderBooking;
 using BA_ERPMVC.ViewModels.OrderBooking;
 //using InfiSolMVC.Models;
 using System;
@@ -531,6 +532,71 @@ namespace BA_ERPMVC.Controllers
             }
             return null;
         }
+
+        [HttpGet]
+        public ActionResult GetExportTrainId()
+        {
+            var setupexptrainId = _orderBookingService.GetExportTrainIdAsync();
+            return View(setupexptrainId);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportTrainIdAsync(SetupExportTrainViewModel setupexptrainVM)
+        {
+            if (setupexptrainVM == null)
+            {
+                return Json(new { success = false, message = $"{nameof(setupexptrainVM)} should not be null or empty" });
+            }
+
+            if (_dbContext.tbl_ExportTrain.Any(x => x.TrainID == setupexptrainVM.TrainID) && setupexptrainVM.ID == 0)
+            {
+                return Json(new { success = false, message = $" This {setupexptrainVM.TrainID}  is already exists." });
+
+            }
+
+            try
+            {
+                if (setupexptrainVM.ID == 0)
+                {
+                    await _orderBookingService.SaveExportTrainIdAsync(setupexptrainVM);
+
+                    return Json(new { success = true, Id = setupexptrainVM.ID });
+                }
+
+                await _orderBookingService.UpdateExportTrainIdAsync(setupexptrainVM);
+
+                return Json(new { success = true, Id = setupexptrainVM.ID });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ExportDeleteTrainID(int Id)
+        {
+            if (Id < 0)
+            {
+                return Json(new { success = false, message = $"{nameof(Id)} should be a valid id" });
+            }
+
+            try
+            {
+                if (_orderBookingService.DeleteExportTrainId(Id))
+                {
+                    return Json(new { success = true, message = $"Deleted Successfully." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+
+            }
+            return null;
+        }
+
 
     }
 }

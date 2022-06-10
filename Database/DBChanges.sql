@@ -5197,3 +5197,21 @@ Create TABLE tbl_TrainId (
 	[CreatedDate] [datetime] NULL,
 	[IsDeleted] [bit] NULL,
 	)
+
+
+
+
+	select * from DispatchedOrder where ContainerNo = 'TEMU0635820'
+
+	----- 10.06.2022 ---- Haris
+
+	Create TABLE tbl_ExportTrain (
+	[ID] [int] IDENTITY(1,1) primary key NOT NULL,
+	[TrainID] [nvarchar](250) NULL,
+	
+	[CreatedBy] [nvarchar](50) NULL,
+	[CreatedDate] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+	)
+
+	insert into menu values ('ExportTrain', '/Setup/GetExportTrainId',0)

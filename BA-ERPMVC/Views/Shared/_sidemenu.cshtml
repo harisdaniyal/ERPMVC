@@ -355,13 +355,24 @@
 
             </li>
         </ul>}
- 
+
     @if (menuAssignment.Any(x => x.Url == "/Setup/GetTrainId" && x.IsView == true))
     {<ul class="nav nav-treeview">
             <li class="nav-item">
                 <a href="/Setup/GetTrainId" class="nav-link">
                     <i class="fas fa-car nav-icon"></i>
                     <p>Train</p>
+                </a>
+
+            </li>
+        </ul>}
+
+    @if (menuAssignment.Any(x => x.Url == "/Setup/GetExportTrainId" && x.IsView == true))
+    {<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/Setup/GetExportTrainId" class="nav-link">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>ExportTrain</p>
                 </a>
 
             </li>
