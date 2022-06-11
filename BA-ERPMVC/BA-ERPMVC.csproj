@@ -4213,7 +4213,6 @@
     <Content Include="Views\Setup\GetExportTrainId.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\BaseApi\" />
     <Folder Include="Views\DropDown\" />
     <Folder Include="Views\GridSearch\" />
     <Folder Include="Views\VendorType\" />

@@ -72,7 +72,7 @@
                                     <option value="">Select TrainID</option>
                                     @foreach (var train in ViewBag.TrainId)
                                     {
-                                        <option value="@train.TrainID" data-select2-id="@train.TrainID">@train.TrainID</option>
+                                        <option value="@train.TrainID" @(train.TrainID == train.TrainID ? "selected=selected" : "")>@train.TrainID</option>
                                     }
                                 </select>
                             </td>
