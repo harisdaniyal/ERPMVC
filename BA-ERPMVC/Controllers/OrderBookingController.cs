@@ -187,6 +187,8 @@ namespace BA_ERPMVC.Controllers
                 {
                     logistics.Status = OrdersStatus.Dispatched.ToString();
                 }
+                logistics.CreatedBy = Session["UserName"].ToString();
+                logistics.CreatedDate = DateTime.Now;
                 await orderBookingService.SaveLogisticsAsync(logistics);
 
                 return Json(new { success = true, logisticsId = logistics.logisticsid });

@@ -5215,3 +5215,10 @@ Create TABLE tbl_TrainId (
 	)
 
 	insert into menu values ('ExportTrain', '/Setup/GetExportTrainId',0)
+
+	--- 13.06.2022--- Haris
+
+Go
+alter table [BLShippingContainerDetail] add [KindOfPackagesDescriptionOfGoods] [nvarchar] (max) NULL
+alter table [BLShippingContainerDetail] add [GrossWeight] [nvarchar](50) NULL
+alter table [BLShippingContainerDetail] add [NetWeight] [nvarchar](50) NULL

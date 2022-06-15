@@ -84,8 +84,8 @@ namespace BA_ERPMVC.BusinessLayer
             shippingagentVM.ShippingAgentId = shippingagent.ShippingAgentId;
         }
 
-                       /////******** ShippingLine ********/////
-        
+        /////******** ShippingLine ********/////
+
         public IEnumerable<ShippingLineViewModel> GetShippingLineAsync()
         {
             return (from shippingline in _dbContext.ShippingLines.Where(x => x.IsDeleted == false)
@@ -216,6 +216,9 @@ namespace BA_ERPMVC.BusinessLayer
                         Id = shippingcontainerdetail.Id,
                         ContainerNo = shippingcontainerdetail.ContainerNo,
                         SealNo = shippingcontainerdetail.SealNo,
+                        KindOfPackagesDescriptionOfGoods = shippingcontainerdetail.KindOfPackagesDescriptionOfGoods,
+                        GrossWeight = shippingcontainerdetail.GrossWeight,
+                        NetWeight = shippingcontainerdetail.NetWeight,
                         Bl = shippingcontainerdetail.Bl
                     }).OrderByDescending(x => x.Id);
 
@@ -251,10 +254,11 @@ namespace BA_ERPMVC.BusinessLayer
                 throw new ArgumentNullException(nameof(blShippingContainerDetailList));
             }
             blShippingContainerDetailList.ForEach(x => x.Id = 0);
+            blShippingContainerDetailList.ForEach(x => x.IsDeleted = false);
             _dbContext.BLShippingContainerDetails.AddRange(blShippingContainerDetailList);
             await _dbContext.SaveChangesAsync();
         }
 
-        
+
     }
 }

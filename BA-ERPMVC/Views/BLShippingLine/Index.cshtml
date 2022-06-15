@@ -53,12 +53,12 @@
                             <th class="head" scope="col">PortOfLoading</th>
                             <th class="head" scope="col">PortOfDischarge</th>
                             <th class="head" scope="col">PlaceOfDelivery</th>
-                            <th class="head" scope="col">ContainerNo</th>
-                            <th class="head" scope="col">SealNo</th>
+                            @*<th class="head" scope="col">ContainerNo</th>
+                            <th class="head" scope="col">SealNo</th>*@
                             <th class="head" scope="col">NumberOfContainerPack</th>
-                            <th class="head" scope="col">KindOfPackDescriptionOfGoods</th>
+                            @*<th class="head" scope="col">KindOfPackDescriptionOfGoods</th>
                             <th class="head" scope="col">GrossWeight</th>
-                            <th class="head" scope="col">Measurement</th>
+                            <th class="head" scope="col">Measurement</th>*@
                             <th class="head" scope="col">FreightAndCharges</th>
                             <th class="head" scope="col" style="width:80px;">BLAgent</th>
                             <th class="head" scope="col">TypeOfService</th>
@@ -220,50 +220,43 @@
                 </div>
             </div>
 
-
-
-        </div>
-
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="txtConatinerOrPackage">NUMBER OF CONTAINERS OR PACKAGES<label id="_txtCustomerName-error" class="error" for="txtConatinerOrPackage"></label></label>
-                    <div class="input-group">
-                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtConatinerOrPackage" name="txtConatinerOrPackage" class="form-control"></textarea>
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtConatinerOrPackage">NUMBER OF CONTAINERS OR PACKAGES<label id="_txtCustomerName-error" class="error" for="txtConatinerOrPackage"></label></label>
+                        <div class="input-group">
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtConatinerOrPackage" name="txtConatinerOrPackage" class="form-control"></textarea>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
 
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="txtkindofpack">KIND OF PACKAGES & DISCRIPTION OF GOODS<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
-                    <div class="input-group">
-                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtkindofpack">KIND OF PACKAGES & DISCRIPTION OF GOODS<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
+                        <div class="input-group">
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
 
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="txtGrossWeight">GROSS WEIGHT<label id="_txtCustomerName-error" class="error" for="txtGrossWeight"></label></label>
-                    <div class="input-group">
-                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtGrossWeight" name="txtGrossWeight" class="form-control">
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtGrossWeight">GROSS WEIGHT<label id="_txtCustomerName-error" class="error" for="txtGrossWeight"></label></label>
+                        <div class="input-group">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtGrossWeight" name="txtGrossWeight" class="form-control">
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
 
-        </div>
 
-        <div class="row">
 
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="txtNetWeight">MEASUREMENT<label id="_txtCustomerName-error" class="error" for="txtNetWeight"></label></label>
-                    <div class="input-group">
-                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtNetWeight" name="txtNetWeight" class="form-control">
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtNetWeight">MEASUREMENT<label id="_txtCustomerName-error" class="error" for="txtNetWeight"></label></label>
+                        <div class="input-group">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtNetWeight" name="txtNetWeight" class="form-control">
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
 
             <div class="col-lg-4">
                 <div class="form-group">
@@ -329,6 +322,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="txtfinaldestination">FINAL DESTINATION<label id="_txtCustomerName-error" class="error" for="txtfinaldestination"></label></label>
@@ -346,9 +342,8 @@
                 </div>
             </div>
 
-        </div>
 
-        <div class="row">
+
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="txtCollect">COLLECT<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
@@ -357,6 +352,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-4">
                 <!-- text input -->
                 <div class="form-group">
@@ -380,6 +378,7 @@
             </div>
         </div>
 
+
         @* //////Container Grid///// *@
 
         <div id="gridShow" class="card">
@@ -399,15 +398,18 @@
                                 <tr>
                                     <th>Container No#</th>
                                     <th>Seal No#</th>
+                                    <th>KindOfPackDescriptionOfGoods</th>
+                                    <th>GrossWeight</th>
+                                    <th>Measurement</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="bg-light tbl-valign-top">
-                                    <td style="display:none">
-                                        <input type="hidden" value="0" class="form-control txt_ID" />
-                                    </td>
+                                    @*<td style="display:none">
+                                        </td>*@
                                     <td>
+                                        <input type="hidden" value="0" class="form-control txt_ID" />
                                         <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerNo" style="width: 200px;">
                                             <option value="">Container No</option>
                                             @foreach (var containerNo in ViewBag.BLShippingContainers)
@@ -418,6 +420,18 @@
                                     </td>
                                     <td>
                                         <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
+                                    </td>
+
+                                    <td>
+                                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" name="txtkindofpack" class="form-control txtkindofpack"></textarea>
+
+                                    </td>
+
+                                    <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" type="text" name="txtGrossWeight" class="form-control txtGrossWeight">
+                                    </td>
+                                    <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" type="text" name="txtNetWeight" class="form-control txtNetWeight">
                                     </td>
 
                                     <td class="btn-group">

@@ -11,23 +11,44 @@
             alert('Please Enter Seal No')
             return false;
         }
+        if (row.find(".txtkindofpack").val() == '') {
+            alert('Please Enter Kind Of Goods Description')
+            return false;
+        }
+        if (row.find(".txtGrossWeight").val() == '') {
+            alert('Please Enter GrossWeight')
+            return false;
+        }
+        if (row.find(".txtNetWeight").val() == '') {
+            alert('Please Enter NetWeight')
+            return false;
+        }
 
         var containersList = row.find(".txt_ContainerNo").parent().html()
         $('#example').prepend(`<tr class="bg-light tbl-valign-top">
-                           <td style="display:none">
-                                        <input type="hidden" value="0" class="form-control txt_ID" />
-                                    </td>
+                                 <td style="display:none">
+                                 <input type="hidden" value="0" class="form-control txt_ID" />
+                                 </td>
                                  <td>
                                 `+ containersList + `
-                            </td>
+                                </td>
                                 <td>
-                                        <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
-                               </td>
-                            <td class="btn-group">
+                                 <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
+                                </td>
+                                <td>
+                                  <textarea oninput="this.value= this.value.toUpperCase()" type="text" name="txtkindofpack" class="form-control txtkindofpack"></textarea>
+                                </td>
+                                <td>
+                                 <input oninput="this.value= this.value.toUpperCase()" type="text" name="txtGrossWeight" class="form-control txtGrossWeight">
+                                </td>
+                                <td>
+                                 <input oninput="this.value= this.value.toUpperCase()" type="text" name="txtNetWeight" class="form-control txtNetWeight">
+                                </td>
+                                 <td class="btn-group">
                                 <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
                                 <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
-                            </td>
-                        </tr>`)
+                                </td>
+                               </tr>`)
 
     })
 
@@ -36,9 +57,9 @@
         row.remove();
     })
 
-    $('#example').dataTable({
-        "paging": false
-    });
+    //$('#example').dataTable({
+    //    "paging": false
+    //});
 
     function save(row, IsDeleted) {
 

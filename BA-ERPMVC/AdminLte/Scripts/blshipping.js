@@ -5,9 +5,9 @@
 }
 
 
-$("#btnDraft").click(function () {
-    save(true)
-})
+//$("#btnDraft").click(function () {
+//    save(true)
+//})
 
 // Container Detail Grid //
 
@@ -16,10 +16,16 @@ function SaveContainerDetails() {
     debugger;
     var containerDetail = [];
     $('#example tbody tr').each(function () {
+        if ($(this).find(".txt_ContainerNo").val() == '') {
+            return
+        }
         containerDetail.push({
             Id: $(this).find(".txt_ID").val(),
-            /*// blshippingid: blshippingid,*/
-            Bl: $(this).find(".txtblNo").val(),
+            /*// b: blshippingid,*/
+            KindOfPackagesDescriptionOfGoods: $(this).find('.txtkindofpack').val(),
+            GrossWeight: $(this).find('.txtGrossWeight').val(),
+            NetWeight: $(this).find('.txtNetWeight').val(),
+            Bl: $(".txtblNo").val(),
             ContainerNo: $(this).find(".txt_ContainerNo").val(),
             SealNo: $(this).find(".txt_sealno").val(),
         });
@@ -27,7 +33,7 @@ function SaveContainerDetails() {
 
     showLoader();
 
-    return fetch("/BLShippingLineController/BlShippingContainerDetail?blNumber=" + $(this).find(".txtblNo").val(), {
+    return fetch("/BLShippingLine/BlShippingContainerDetail?blNumber=" + $(".txtblNo").val(), {
         method: 'POST',
         body: JSON.stringify(containerDetail),
         headers: {
@@ -36,8 +42,58 @@ function SaveContainerDetails() {
     }).then(res => res.json());
 }
 
+var containerNo = $(".txt_ContainerNo").parent().html()
+
+function GetContainerDetail() {
+
+    $.ajax({
+        type: "GET",
+        url: "/BLShippingLine/GetBlShippingContainerDetails?blNumber=" + $(".txtblNo").val(),
+        async: false,
+        success: function (response) {
+            debugger
+            if (response.success) {
+                $.each(response.data, function (index, _data) {
+                    $('#example').append(`<tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="`+ _data.Id + `" class="form-control txt_ID" />
+
+                               `+ containerNo + `                       
+                            </td>
+
+                             <td>
+                                  <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="`+ _data.SealNo + `" class="form-control  txt_sealno" />
+                             </td>
+                               <td> 
+                                <textarea oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;"  value="`+ _data.KindOfPackagesDescriptionOfGoods + `" class="form-control txtkindofpack"></textarea>
+                             </td>
+
+                             <td>
+                                <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="`+ _data.GrossWeight + `" class="form-control txtGrossWeight">
+                             </td>
+                              <td>
+                                 <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="`+ _data.NetWeight + `" class="form-control txtNetWeight">
+                              </td>
 
 
+                               <td class="btn-group">
+                                  <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                  <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                               </td>
+                        </tr>`)
+                    $('#example tbody tr:last').find('.txt_ContainerNo').val(_data.ContainerNo)
+                    $('#example tbody tr:last').find('.txtkindofpack').val(_data.KindOfPackagesDescriptionOfGoods)
+                    $('#example tbody tr:last').find('.txtGrossWeight').val(_data.GrossWeight)
+                    $('#example tbody tr:last').find('.txtNetWeight').val(_data.NetWeight)
+                });
+
+
+                hideLoader();
+            }
+        }
+
+    });
+}
 
 $(document).ready(function () {
     var services = new Services();
@@ -57,17 +113,6 @@ $(document).ready(function () {
     //    }
 
     //});
-
-    $.ajax({
-        type: "GET",
-        url: "/BLShippingLine/GetBLNumber",
-        data: "{}",
-        async: false,
-        success: function (data) {
-            $(".txtblNo").val(data);
-        }
-
-    });
 
     $.ajax({
         type: "GET",
@@ -119,12 +164,12 @@ $(document).ready(function () {
                 $("#txtPortOfLanding").val(data[0].portoflanding);
                 $("#txtPortOfDischarge").val(data[0].portofDischarge);
                 $("#txtPlaceofDeilvery").val(data[0].placeOfDelivery);
-                // $(".txtContainerNo").select2().val(data[0].ContainerNo.split(',')).trigger("change");
-                // $("#txtSealNo").val(data[0].SealNo);
+                //$(".txtContainerNo").val(data[0].ContainerNo);
+                //$(".txt_sealno").val(data[0].SealNo);
                 $("#txtConatinerOrPackage").val(data[0].numberOfConatinerPack);
-                $("#txtkindofpack").val(data[0].kindOfPackagesDescriptionOfGoods);
-                $("#txtGrossWeight").val(data[0].grossWeight);
-                $("#txtNetWeight").val(data[0].netWeight);
+                $(".txtkindofpack").val(data[0].kindOfPackagesDescriptionOfGoods);
+                $(".txtGrossWeight").val(data[0].grossWeight);
+                $(".txtNetWeight").val(data[0].netWeight);
                 $("#txtfreightandcharges").val(data[0].Frightandcharges);
                 $("#txtagent").val(data[0].BLAgent);
                 $("#txtagentdetail").val(data[0].BLAgentDetail);
@@ -135,8 +180,9 @@ $(document).ready(function () {
                 $("#txtfreightPayable").val(data[0].FrightPayable);
                 $("#txtplaceofissue").val(data[0].PlaceOfIssue);
                 $("#txtOperationDate").val(data1);
-
+                GetContainerDetail()
             });
+
         } getBlShippingLineByid(empid);
 
         $(document).on('click', '#btnDraft', function () {
@@ -185,12 +231,12 @@ $(document).ready(function () {
                             Portoflanding: $("#txtPortOfLanding").val(),
                             PortofDischarge: $("#txtPortOfDischarge").val(),
                             PlaceOfDelivery: $("#txtPlaceofDeilvery").val(),
-                            // ContainerNo: $(".txtContainerNo").val().toString(),
-                            //SealNo: $(".txt_sealno").val(),
+                            ContainerNo: $(".txtContainerNo").val(),
+                            SealNo: $(".txt_sealno").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
-                            KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
-                            GrossWeight: $("#txtGrossWeight").val(),
-                            NetWeight: $("#txtNetWeight").val(),
+                            KindOfPackagesDescriptionOfGoods: $(".txtkindofpack").val(),
+                            GrossWeight: $(".txtGrossWeight").val(),
+                            NetWeight: $(".txtNetWeight").val(),
                             Frightandcharges: $("#txtfreightandcharges option:selected").val(),
                             BLAgent: $("#txtagent option:selected").val(),
                             BLAgentDetail: $("#txtagentdetail").val(),
@@ -207,6 +253,7 @@ $(document).ready(function () {
                         success: function (response) {
 
                             if (response.success) {
+                                SaveContainerDetails();
                                 //   getLocDropGridDetail();
                                 window.location.href = "Index";
 
@@ -214,7 +261,7 @@ $(document).ready(function () {
                                 //  $("#txtfreightPayable").val("");
                                 //  $("#txtOperationDate").val("");
 
-                                SaveContainerDetails();
+
                                 toastr.success("BL Detail has been inserted successfully");
                                 location.reload();
                             } else {
@@ -232,6 +279,18 @@ $(document).ready(function () {
 
     }
     else {
+
+        $.ajax({
+            type: "GET",
+            url: "/BLShippingLine/GetBLNumber",
+            data: "{}",
+            async: false,
+            success: function (data) {
+                $(".txtblNo").val(data);
+            }
+
+        });
+
         $("#DX").addClass("d-none");
         $("#gridShow").removeClass("d-none");
 
@@ -315,25 +374,32 @@ $(document).ready(function () {
                         }, {
                             data: 'placeOfDelivery',
                             width: 10
-                        }, {
-                            data: 'ContainerNo',
-                            width: 10
-                        }, {
-                            data: 'SealNo',
-                            width: 10
-                        }, {
+                        },
+                        //{
+                        //    data: 'ContainerNo',
+                        //    width: 10
+                        //},
+                        //{
+                        //    data: 'SealNo',
+                        //    width: 10
+                        //},
+                        {
                             data: 'numberOfConatinerPack',
                             width: 10
-                        }, {
-                            data: 'kindOfPackagesDescriptionOfGoods',
-                            width: 10
-                        }, {
-                            data: 'grossWeight',
-                            width: 10
-                        }, {
-                            data: 'netWeight',
-                            width: 10
-                        }, {
+                        },
+                        //{
+                        //    data: 'kindOfPackagesDescriptionOfGoods',
+                        //    width: 10
+                        //}
+                        //{
+                        //    data: 'grossWeight',
+                        //    width: 10
+                        //},
+                        //{
+                        //    data: 'netWeight',
+                        //    width: 10
+                        //},
+                        {
                             data: 'Frightandcharges',
                             width: 10
                         }, {
@@ -437,12 +503,12 @@ $(document).ready(function () {
                 txtPortOfLanding: "required",
                 txtPortOfDischarge: "required",
                 txtPlaceofDeilvery: "required",
-                txtContainerNo: "required",
-                txtSealNo: "required",
-                txtConatinerOrPackage: "required",
-                txtkindofpack: "required",
-                txtGrossWeight: "required",
-                txtNetWeight: "required",
+                //txtContainerNo: "required",
+                //txtSealNo: "required",
+                //txtConatinerOrPackage: "required",
+                //txtkindofpack: "required",
+                //txtGrossWeight: "required",
+                //txtNetWeight: "required",
                 txtfreightandcharges: "required",
                 txtCollect: "required",
                 txtNumberofOrignal: "required",
@@ -463,10 +529,10 @@ $(document).ready(function () {
                 txtContainerNo: "*",
                 txtSealNo: "*",
                 txtVoyNo: "*",
-                txtConatinerOrPackage: "*",
-                txtkindofpack: "*",
-                txtGrossWeight: "*",
-                txtNetWeight: "*",
+                //txtConatinerOrPackage: "*",
+                //txtkindofpack: "*",
+                //txtGrossWeight: "*",
+                //txtNetWeight: "*",
                 txtfreightandcharges: "*",
                 txtCollect: "*",
                 txtNumberofOrignal: "*",
@@ -497,9 +563,9 @@ $(document).ready(function () {
                             //ContainerNo: $(".txtContainerNo").select2("val").toString(),
                             SealNo: $("#txtSealNo").val(),
                             NumberOfConatinerPack: $("#txtConatinerOrPackage").val(),
-                            KindOfPackagesDescriptionOfGoods: $("#txtkindofpack").val(),
-                            GrossWeight: $("#txtGrossWeight").val(),
-                            NetWeight: $("#txtNetWeight").val(),
+                            KindOfPackagesDescriptionOfGoods: $(".txtkindofpack").val(),
+                            GrossWeight: $(".txtGrossWeight").val(),
+                            NetWeight: $(".txtNetWeight").val(),
                             Frightandcharges: $("#txtfreightandcharges option:selected").val(),
                             BLAgent: $("#txtagent option:selected").val(),
                             BLAgentDetail: $("#txtagentdetail").val(),
@@ -516,6 +582,7 @@ $(document).ready(function () {
                         success: function (response) {
                             if (response.success != null) {
                                 if (response.success) {
+                                    SaveContainerDetails();
                                     getblshippingGride();
                                     $(".txtblNo").val("");
                                     //$("#txtApproval").val("");
@@ -533,9 +600,9 @@ $(document).ready(function () {
                                     //$("#txtContainerNo").val("");
                                     $("#txtSealNo").val("");
                                     $("#txtConatinerOrPackage").val("");
-                                    $("#txtkindofpack").val("");
-                                    $("#txtGrossWeight").val("");
-                                    $("#txtNetWeight").val("");
+                                    $(".txtkindofpack").val("");
+                                    $(".txtGrossWeight").val("");
+                                    $(".txtNetWeight").val("");
                                     $("#txtfreightandcharges").val("");
                                     $("txtagent").val("");
                                     //$("txtagentdetail").val("");
@@ -547,7 +614,6 @@ $(document).ready(function () {
                                     $("#txtplaceofissue").val("");
                                     $("#txtOperationDate").val("");
 
-                                    //SaveContainerDetails();
                                     toastr.success("BL Shipping Details has been inserted successfully.");
                                     location.reload();
                                     returncondition = true;

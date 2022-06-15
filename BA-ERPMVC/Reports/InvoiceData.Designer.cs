@@ -7822,8 +7822,6 @@ namespace BA_ERPMVC.Reports {
             
             private global::System.Data.DataColumn columnSealNo;
             
-            private global::System.Data.DataColumn columnNoOfContainersOrPackages;
-            
             private global::System.Data.DataColumn columnKindOfPackagesDescriptionOfGoods;
             
             private global::System.Data.DataColumn columnGrossWeight;
@@ -7876,14 +7874,6 @@ namespace BA_ERPMVC.Reports {
             public global::System.Data.DataColumn SealNoColumn {
                 get {
                     return this.columnSealNo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn NoOfContainersOrPackagesColumn {
-                get {
-                    return this.columnNoOfContainersOrPackages;
                 }
             }
             
@@ -7948,12 +7938,11 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public BLShippingLineDetailRow AddBLShippingLineDetailRow(string ContainerNo, string SealNo, string NoOfContainersOrPackages, string KindOfPackagesDescriptionOfGoods, string GrossWeight, string NetWeight) {
+            public BLShippingLineDetailRow AddBLShippingLineDetailRow(string ContainerNo, string SealNo, string KindOfPackagesDescriptionOfGoods, string GrossWeight, string NetWeight) {
                 BLShippingLineDetailRow rowBLShippingLineDetailRow = ((BLShippingLineDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ContainerNo,
                         SealNo,
-                        NoOfContainersOrPackages,
                         KindOfPackagesDescriptionOfGoods,
                         GrossWeight,
                         NetWeight};
@@ -7981,7 +7970,6 @@ namespace BA_ERPMVC.Reports {
             internal void InitVars() {
                 this.columnContainerNo = base.Columns["ContainerNo"];
                 this.columnSealNo = base.Columns["SealNo"];
-                this.columnNoOfContainersOrPackages = base.Columns["NoOfContainersOrPackages"];
                 this.columnKindOfPackagesDescriptionOfGoods = base.Columns["KindOfPackagesDescriptionOfGoods"];
                 this.columnGrossWeight = base.Columns["GrossWeight"];
                 this.columnNetWeight = base.Columns["NetWeight"];
@@ -7994,8 +7982,6 @@ namespace BA_ERPMVC.Reports {
                 base.Columns.Add(this.columnContainerNo);
                 this.columnSealNo = new global::System.Data.DataColumn("SealNo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSealNo);
-                this.columnNoOfContainersOrPackages = new global::System.Data.DataColumn("NoOfContainersOrPackages", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNoOfContainersOrPackages);
                 this.columnKindOfPackagesDescriptionOfGoods = new global::System.Data.DataColumn("KindOfPackagesDescriptionOfGoods", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnKindOfPackagesDescriptionOfGoods);
                 this.columnGrossWeight = new global::System.Data.DataColumn("GrossWeight", typeof(string), null, global::System.Data.MappingType.Element);
@@ -15111,23 +15097,6 @@ namespace BA_ERPMVC.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string NoOfContainersOrPackages {
-                get {
-                    try {
-                        return ((string)(this[this.tableBLShippingLineDetail.NoOfContainersOrPackagesColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NoOfContainersOrPackages\' in table \'BLShippingLineDetail\' i" +
-                                "s DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBLShippingLineDetail.NoOfContainersOrPackagesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string KindOfPackagesDescriptionOfGoods {
                 get {
                     try {
@@ -15197,18 +15166,6 @@ namespace BA_ERPMVC.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetSealNoNull() {
                 this[this.tableBLShippingLineDetail.SealNoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsNoOfContainersOrPackagesNull() {
-                return this.IsNull(this.tableBLShippingLineDetail.NoOfContainersOrPackagesColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetNoOfContainersOrPackagesNull() {
-                this[this.tableBLShippingLineDetail.NoOfContainersOrPackagesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
