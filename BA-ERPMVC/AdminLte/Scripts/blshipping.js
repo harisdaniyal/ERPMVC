@@ -188,11 +188,13 @@ $(document).ready(function () {
         $(document).on('click', '#btnDraft', function () {
             $("#txtIsCompleted").val(false)
             $("#_addShippingLine").valid();
+            window.location.href = "Index";
         });
 
         $(document).on('click', '#btnSubmit', function () {
             $("#txtIsCompleted").val(true)
             $("#_addShippingLine").valid();
+            window.location.href = "Index";
         });
 
         $(document).on("click", "#btnPrint", function (e) {
@@ -480,12 +482,14 @@ $(document).ready(function () {
         $(document).on('click', '#btnDraft', function () {
             $("#txtIsCompleted").val(false)
             $("#_addShippingLine").valid();
+            window.location.href = "Index";
             // $("#gridShow").valid();
         });
 
         $(document).on('click', '#btnSubmit', function () {
             $("#txtIsCompleted").val(true)
             $("#_addShippingLine").valid();
+            window.location.href = "Index";
             //$("#gridShow").valid();
         });
 
