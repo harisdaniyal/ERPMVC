@@ -714,7 +714,7 @@ namespace BA_ERPMVC.Controllers
             {
                 var importOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
                 importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3), "CW", importOrder.InvoiceNo);
-                importOrder.isCompleted = true;
+                //importOrder.isCompleted = true;
                 invoiceNo = importOrder.InvoiceNo;
 
 
@@ -762,7 +762,7 @@ namespace BA_ERPMVC.Controllers
             {
                 var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == cro.Trim()).FirstOrDefault();
                 exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3), "BW", exportOrder.InvoiceNo);
-                exportOrder.IsCompleted = true;
+                //exportOrder.IsCompleted = true;
                 invoiceNo = exportOrder.InvoiceNo;
 
                 //Header Section
@@ -842,7 +842,7 @@ namespace BA_ERPMVC.Controllers
             {
                 var importOrder = context.GenerateOrders.Where(x => x.BL == bl.Trim()).FirstOrDefault();
                 importOrder.InvoiceNo = GetInvoiceNo(orderType, importOrder.OrderNo.Substring(3), "CW", importOrder.InvoiceNo);
-                importOrder.isCompleted = true;
+                //importOrder.isCompleted = true;
                 invoiceNo = importOrder.InvoiceNo;
 
 
@@ -887,7 +887,7 @@ namespace BA_ERPMVC.Controllers
                 var exportOrder = context.ExportBookingOrders.Where(x => x.CRO == cro.Trim()).FirstOrDefault();
 
                 exportOrder.InvoiceNo = GetInvoiceNo(orderType, exportOrder.OrderNo.Substring(3), "BW", exportOrder.InvoiceNo);
-                exportOrder.IsCompleted = true;
+                //exportOrder.IsCompleted = true;
                 invoiceNo = exportOrder.InvoiceNo;
                 //Header Section
                 var exportReportHeaderData = orderBookingService.PrintExportCROWiseReport("header", cro).ToList();
