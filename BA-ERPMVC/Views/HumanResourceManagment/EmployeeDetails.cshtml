@@ -1,0 +1,245 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+<!-- Tempusdominus Bbootstrap 4 -->
+
+
+
+@{
+    ViewBag.Title = "Employee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Home/Login");
+    //}
+
+}
+
+<br />
+<div id="gridShow" class="card d-none">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Employee Details</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="Employeegrid" class="table table-bordered" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th scope="col">Actions</th>
+                            <th scope="col">Employee id</th>
+                            <th scope="col">Employee Code</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Marital Status</th>
+                            <th scope="col">Cnic</th>
+                            <th scope="col">Date Of Joining</th>
+                            <th scope="col">Department Name</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Phone No</th>
+                            <th scope="col">Alternate Phone No</th>
+                            <th scope="col">Email Address</th>
+                            <th scope="col">Address</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+    <div id="lloForm" class="card card-default collapse">
+
+        <div class="card-header">
+            <h3 class="card-title">Add Employee Form</h3>
+        </div>
+        <!-- /.card-header -->
+        <form id="_addEmployeeDetails">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Employee Code</label>
+                            <input type="text" id="Code" maxlength="12" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row divTopMargin">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtFirstName">First Name<label id="_txtCustomerName-error" class="error" for="txtFirstName"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtFirstName" name="txtFirstName" onkeypress="return isNumberKey(event)" class="form-control">
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtLastName">Last Name<label id="_txtCustomerName-error" class="error" for="txtLastName"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtLastName" name="txtLastName" onkeypress="return isNumberKey(event)" class="form-control">
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtEDob">Date Of Birth<label id="_txtCustomerName-error" class="error" for="txtEDob"></label></label>
+                            
+                            <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                                <input type="text" id="txtEDob" name="txtEDob" class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                                <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row divTopMargin">
+
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="ddlstatus">Marital Status<label id="_txtCustomerName-error" class="error" for="ddlstatus"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="ddlstatus" name="ddlstatus" style="width: 100%;">
+                                    <option value="1">--Please Select a Status--</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="ddlgender">Gender<label id="_txtCustomerName-error" class="error" for="ddlgender"></label></label>
+                            <div class="input-group">
+                                <select required class="form-control select2" id="ddlgender" name="ddlgender" style="width: 100%;">
+                                    <option value="1">--Please Select a Gender--</option>
+                                    <option  value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtEmpCnic">Cnic No<label id="_txtCustomerName-error" class="error" for="txtEmpCnic"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtEmpCnic" name="txtEmpCnic" maxlength="15" class="form-control">
+                            </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="row divTopMargin">
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtEmpPhno">Moblie Number<label id="_txtCustomerName-error" class="error" for="txtEmpPhno"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtEmpPhno" maxlength="12" class="form-control">
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" id="txtEmpPhnoopt" placeholder="Optional" maxlength="12" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtemail">Email Address<label id="_txtCustomerName-error" class="error" for="txtemail"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtemail" maxlength="30" placeholder="for eg: Example@bilal-group.com" class="form-control" />
+                            </div>
+                            </div>
+                    </div>
+
+                </div>
+                <div class="row divTopMargin">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtCmpName">Company Name<label id="_txtCustomerName-error" class="error" for="txtCmpName"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="ddlCmpName" name="txtCmpName" style="width: 100%;"></select>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtDepName">Department Name<label id="_txtCustomerName-error" class="error" for="txtDepName"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="ddlDepName" name="txtDepName" style="width: 100%;"></select>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtDesignation">Designation<label id="_txtCustomerName-error" class="error" for="txtDesignation"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="ddlDesignation" name="txtDesignation" style="width: 100%;"></select>
+                            </div>
+                            </div>
+                    </div>
+
+                </div>
+
+                <div class="row divTopMargin">
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtEDoj">Date Of Joining<label id="_txtCustomerName-error" class="error" for="txtEDoj"></label></label>
+                            
+                            <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                                <input type="text" id="txtEDoj" name="txtEDoj" class="form-control datetimepicker-input" data-target="#reservationdate2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                                <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtAddress">Address<label id="_txtCustomerName-error" class="error" for="txtAddress"></label></label>
+                            <div class="input-group">
+                                <textarea class="form-control" id="txtAddress" name="txtAddress" rows="3"></textarea>
+                            </div>
+                            </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+                    <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+                </div>
+
+
+                <!-- /.card-Body employee -->
+
+
+
+            </div>
+        </form>
+    </div>
+    <script src="~/AdminLte/Scripts/HRMjs.js"></script>
+
+   

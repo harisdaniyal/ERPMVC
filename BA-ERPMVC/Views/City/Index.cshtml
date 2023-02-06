@@ -1,0 +1,131 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<br />
+
+<div id="gridShow" class="card d-none">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Location Details</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="CityGride" class="table table-bordered" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th scope="col">CityCode</th>
+                            <th scope="col">CityName</th>
+                            <th scope="col">CityPhoneCode</th>
+                            <th scope="col">CountryName</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">Setup City</h3>
+    </div>
+
+    <form id="_addCustomerReg">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtCityCode">Code<label id="_txtCustomerName-error" class="error" for="txtCityCode"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtCityCode" name="txtCityCode" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtCityName">City Name<label id="_txtCustomerName-error" class="error" for="txtCityName"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtCityName" name="txtCityName" class="form-control">
+                        </div>
+                    </div>
+                </div>
+              
+
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtCityPhoneCode">City Phone Code<label id="_txtCustomerName-error" class="error" for="txtCityPhoneCode"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtCityPhoneCode" name="txtCityPhoneCode" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            
+
+                <div class="col-lg-4" id="DX">
+                    <div class="form-group">
+                        <label for="txtCountryName">Country Name<label id="_txtCustomerName-error" class="error" for="txtCountryName"></label></label>
+                        <div class="input-group">
+                            <select class="form-control select2" id="txtCountryName" name="txtCountryName" style="width: 100%;">
+                                <option selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-check">
+                        <label>Status</label>
+                        <input type="checkbox" class="form-check" id="txtStatus" checked="checked">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+        </div>
+    </form>
+</div>
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+
+<script src="~/AdminLte/Scripts/CityJS.js"></script>

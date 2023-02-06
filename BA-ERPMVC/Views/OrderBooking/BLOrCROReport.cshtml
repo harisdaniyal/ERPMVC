@@ -1,0 +1,84 @@
+﻿@model BA_ERPMVC.ViewModels.OrderBooking.BookingViewModel
+@{
+    ViewBag.Title = "BLOrCROReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Order Invoice</h2>
+
+<br />
+<div class="d-block py-2">
+    <div class="form-row">
+        <div class="col-md-2">
+            <div class="input-group">
+                <label for="ddlState">Type</label>
+                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_Type" required>
+                    <option value="" data-select2-id="2"> Select Invoice Type</option>
+                    <option value="LotWise">LotWise</option>
+                    <option value="ContainerWise">ContainerWise</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="input-group">
+                <label for="ddlState">OrderType</label>
+                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_OrderType" onchange="onChange_OrderType(this)" required>
+                    <option value="" data-select2-id="2"> Select OrderType</option>
+                    <option value="Import">Import</option>
+                    <option value="Export">Export</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-row">
+
+        <div class="col-md-4" style="display:none;">
+            <div class="input-group">
+                <label for="ddlState">Customer Name</label>
+                <select class="form-control txtCustomerName" name="Customer_Name[]" id="txtCustomerName" style="width: 100%;">
+                    <option selected="selected"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4" style="display:none;">
+            <div class="form-group">
+                <label for="ddlState">Customer Name</label>
+                <input class="txtexportCustomerName form-control" type="text" aria-invalid="false" placeholder="" value="" id="txtexportCustomerName" />
+            </div>
+        </div>
+        <div class="col-md-3" style="display:none;">
+            <div class="input-group">
+                <label for="ddlState">BL</label>
+                <select class="form-control txtBlNo" id="txtBlNo" @*multiple="multiple"*@ style="width: 100%;">
+                    <option selected="selected"></option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="col-md-3" style="display:none;">
+            <div class="input-group">
+                <label for="ddlState">CRO</label>
+                <select class="form-control txtCRONo" id="txtCRONo" style="width: 100%;">
+                    <option selected="selected"></option>
+                </select>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 text-left mt-5">
+        <button type="submit" id="btn_print" class="btn w-33 btn-success btn-v2 btn-view">GENERATE INVOICE <i class="fas fa-angle-double-right"></i></button>
+    </div>
+</div>
+
+<script src="~/AdminLte/Scripts/OrderBookings/BLCROReport.js"></script>
+
+
+

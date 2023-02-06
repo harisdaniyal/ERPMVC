@@ -1,0 +1,109 @@
+﻿
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="card d-none" id="gridShow">
+    <div class="card-header">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Customer Price</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetail">
+
+                <table class="table table-bordered table-hover table-condensed dataTable " style="width:100%" id="MainGrid">
+                    <thead class="_changeHeaderColor datatable-head">
+
+                        <tr class="text-center">
+                            <th scope="col">CustomerName</th>
+                            <th scope="col">loloprice</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="_orderList" class="text-center"></tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div id="lloForm" class="card card-default d-none">
+    <div class="card-header">
+        <h3 class="card-title">Customer Price/Facility Details Form</h3>
+    </div>
+
+    <form id="_Addprice">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row divTopMargin">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtCustomerNo">Customer Name<label id="_txtCustomerName-error" class="error" for="txtCustomerNo"></label></label>
+                        <div class="input-group">
+                            <select class="form-control select2" id="txtCustomerNo" name="txtCustomerNo" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row divTopMargin">
+
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <div class="row">
+                            <h4>Facility List</h4>
+                            <label id="FacilityCheckList-error" class="error" for="FacilityCheckList"></label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush" id="dvCheckBoxListControl">
+                            <!--
+    <li class="list-group-item"><div class="row"><div class="col-md-2"><div class="form-group"><input class="form-check-input" placeholder="LOLO" onchange="showtextbox(' + this.facilityID + ')" type="checkbox" name="_ExpenseCheckList" value="' + this.facilityID + '" id="' + this.facilityID + '"><label class="form-check-label" for="">' + this.FacilityName + '</label></div></div><div class="col-md-2" id="loloid"><p>LOLO</p><div class="form-group"><input type="text" id="txt' + this.facilityID + '" value="" class="form-control" disabled="disabled"></div></div>    <div class="col-md-2" id="Container20id"><p>Container20</p><div class="form-group"><input type="text" id="txt2' + this.facilityID + '" value="" class="form-control" disabled="disabled"></div></div>  <div class="col-md-2" id="ContainersNo40id"><p>Container40</p><div class="form-group"><input type="text" id="txt3' + this.facilityID + '" value="" class="form-control" disabled="disabled"></div></div>     </div></li>
+        -->
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+
+            <div class="card-footer">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+            </div>
+        </div>
+
+
+    </form>
+  
+
+</div>
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+<script src="~/AdminLte/Scripts/CustomerPrice.js"></script>

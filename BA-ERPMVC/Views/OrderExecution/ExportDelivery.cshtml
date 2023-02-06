@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExportOrderBooking.ExportDeliveryViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Delivery </h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Container Type</th>
+                            <th>Vehicle No#</th>
+                            <th>Truck No#</th>
+                            <th>Wagon No#</th>
+                            <th>Delivery Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ExportDelivery in Model.ToList())
+                        {
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="@ExportDelivery.OrderId" class="form-control txt_OrderId" />
+                                <input type="hidden" value="@ExportDelivery.CRO" class="form-control txt_CRO" />
+                                <input type="hidden" value="@Convert.ToInt32(ExportDelivery.ID)" class="form-control txt_ID" />
+                                <input type="text" disabled style="width: 110px;" value="@ExportDelivery.OrderNo" class="form-control txt_OrderNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 180px;" value="@ExportDelivery.ContainerNo" class="form-control txt_ContainerNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@ExportDelivery.ContainerSize" class="form-control txt_ContainerSize" />
+                            </td>
+
+                            <td>
+                                <input type="text" disabled style="width: 220px;" value="@ExportDelivery.ContainerType" class="form-control txt_ContainerType" />
+                            </td>
+
+
+                            <td>
+                                <input type="text" style="width: 100px;" disabled value="@ExportDelivery.VehicleNo" class="form-control txt_VehicleNo" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_TruckNo" disabled style="width: 116px;" type="text" placeholder="" value="@(ExportDelivery.TruckNo)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_WagonNo" disabled style="width: 116px;" type="text" placeholder="" value="@(ExportDelivery.WagonNo)" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_DeliveryDate" style="width: 170px;" type="date" placeholder="" value="@(ExportDelivery.DeliveryDate.HasValue ? ExportDelivery.DeliveryDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+
+
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDelivery">Delivered</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ExportDelivery.js")"></script>

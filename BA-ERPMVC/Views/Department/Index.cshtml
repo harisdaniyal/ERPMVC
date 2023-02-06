@@ -1,0 +1,79 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+
+
+
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div id="gridShow" class="card d-none">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Department Details</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="DepartmentGride" class="table table-bordered" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th scope="col">DepartmentName</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">Setup Department</h3>
+    </div>
+
+    <form id="_addCustomerReg">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtDepartment">Department Name<label id="_txtCustomerName-error" class="error" for="txtDepartment"></label></label>
+                        <div class="input-group">
+                            <input type="text" id="txtDepartment" name="txtDepartment" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+        </div>
+    </form>
+</div>
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+
+<script src="~/AdminLte/Scripts/DepartJS.js"></script>

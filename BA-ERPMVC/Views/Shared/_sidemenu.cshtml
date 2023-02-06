@@ -1,0 +1,1317 @@
+﻿@{List<BA_ERPMVC.ViewModels.UserMenuViewModel> menuAssignment = (List<BA_ERPMVC.ViewModels.UserMenuViewModel>)Session["MenuAssignment"];
+    if (menuAssignment.Count == 0)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+<style>
+
+    /*li {
+        margin: 8px 0;
+    }*/
+</style>
+<ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-flat col-md-offset-3" data-widget="treeview" role="menu" data-accordion="false">
+    <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+
+    <li class="nav-item">
+        <a href="@Url.Action("Dashboard", "Home")" class="nav-link active">
+            <!--
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+                -->
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Dashboard
+
+            </p>
+        </a>
+
+    </li>
+
+
+    @if (menuAssignment.Any(x => x.Url != "/BLShippingLine/Index" && x.Url != "/DropDownMenu/BLShippingContainer" && x.Url != "/BLShippingLine/BLApproval"))
+    {
+
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-ship"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    Sea link
+
+                </p>
+            </a>
+            @if (menuAssignment.Any(x => x.Url == "/BLShippingLine/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BLShippingLine/Index" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                BL Listing
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/BLShippingContainer" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/BLShippingContainer" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Inventory Container</p>
+                        </a>
+
+                    </li>
+                </ul>}
+            @if (menuAssignment.Any(x => x.Url == "/BLShippingLine/BLApproval" && x.IsView == true))
+
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BLShippingLine/BLApproval" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>BLApproval</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BVMS/VehicleRegistration" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>VehicleRegistration</p>
+                        </a>
+
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/HumanResourceManagment/EmployeeDetails" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>EmployeeDetails</p>
+                        </a>
+
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Expenses" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Expenses</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Vendor/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Vendor</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Country/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Country</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/ShippingAgent" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Shipping Agent</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/ShippingLine" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Shipping Line</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/EmptyDropOffLoc" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>EmptyDropOff Location</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Department/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Department</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/City/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>City</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BusinessDivision/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>BusinessDivision</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Designation/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Designation</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Facility" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Facility</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Location" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Location</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/Oil" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Oil</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/OilInvoiceDetail" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>OilInvoiceDetail</p>
+                        </a>
+
+                    </li>
+                </ul>*@
+
+
+
+        </li>
+
+    }
+
+    @if (menuAssignment.Any(x => x.Url != "/BVMS/VehicleRegistration" && x.Url != "/HumanResourceManagment/EmployeeDetails" && x.Url != "/DropDownMenu/Expenses"
+              && x.Url != "/Vendor/Index" && x.Url != "/Country/Index" && x.Url != "/DropDownMenu/ShippingAgent" && x.Url != "/DropDownMenu/ShippingLine"
+              && x.Url != "/DropDownMenu/EmptyDropOffLoc" && x.Url != "/Department/Index" && x.Url != "/City/Index" && x.Url != "/BusinessDivision/Index" && x.Url != "/Designation/Index"
+              && x.Url != "/DropDownMenu/Facility" && x.Url != "/DropDownMenu/Location" && x.Url != "/Setup/Oil" && x.Url != "/Setup/OilInvoiceDetail"))
+
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    Setup
+
+                </p>
+            </a>
+            @if (menuAssignment.Any(x => x.Url == "/BVMS/VehicleRegistration" && x.IsView == true))
+
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BVMS/VehicleRegistration" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Vehicle Registration</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/HumanResourceManagment/EmployeeDetails" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/HumanResourceManagment/EmployeeDetails" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Employee Details</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/Expenses" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Expenses" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Expenses</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Vendor/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Vendor/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Vendor</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/Country/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Country/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Country</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/ShippingAgent" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/ShippingAgent" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Shipping Agent</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/ShippingLine" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/ShippingLine" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Shipping Line</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/EmptyDropOffLoc" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/EmptyDropOffLoc" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Empty DropOff Location</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Setup/GetUsers" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/GetUsers" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Users</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Setup/GetTrainId" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/GetTrainId" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Train</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Setup/GetExportTrainId" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/GetExportTrainId" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Export Train</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Department/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Department/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Department</p>
+                        </a>
+
+                    </li>
+                </ul>}
+            @if (menuAssignment.Any(x => x.Url == "/City/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/City/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>City</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/BusinessDivision/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/BusinessDivision/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Business Division</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Designation/Index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Designation/Index" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Designation</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/Facility" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Facility" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Facility</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/DropDownMenu/Location" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/DropDownMenu/Location" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Location</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Setup/Oil" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/Oil" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Oil</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/Setup/OilInvoiceDetail" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Setup/OilInvoiceDetail" class="nav-link">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>Oil Invoice Detail</p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+
+
+        </li>
+
+    }
+    @*<li class="nav-item">
+            <a href="/sales/OrderBooking" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Create Order
+                </p>
+            </a>
+        </li>*@
+
+    @if (menuAssignment.Any(x => x.Url != "/OrderBooking/Index" && x.Url != "/OrderBooking/OrderList" && x.Url != "/OrderExecution/TrainReport" && x.Url != "/OrderExecution/ImportOrderReportTruck"
+             && x.Url != "/OrderExecution/ImportOrderReport" && x.Url != "/OrderExecution/PreDispatched" && x.Url != "/OrderExecution/DispatchedTruck" && x.Url != "/OrderExecution/InTransactTrain"
+             && x.Url != "/OrderExecution/ReDispatched" && x.Url != "/OrderExecution/DeliveryTrain" && x.Url != "/OrderExecution/DeliveryTruck"))
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    IMPORT
+
+                </p>
+            </a>
+            @if (menuAssignment.Any(x => x.Url == "/OrderBooking/Index" && x.IsView == true))
+            {
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderBooking/Index" class="nav-link ">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Import Create Order
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            }
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderBooking/OrderList" && x.IsView == true))
+
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderBooking/OrderList" class="nav-link ">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Import OrderListing
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/TrainReport" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/TrainReport" class="nav-link ">
+                            <i class="nav-icon fas fa-train"></i>
+                            <p>
+                                Train Import Order Report
+                            </p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ImportOrderReportTruck" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ImportOrderReportTruck" class="nav-link ">
+                            <i class="fas fa-truck nav-icon"></i>
+                            <p>
+                                Import Truck Booking Report
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ImportOrderReport" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ImportOrderReport" class="nav-link ">
+                            <i class="fas fa-train nav-icon"></i>
+                            <p>
+                                Import Train Booking Report
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/PreDispatched" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/PreDispatched" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import PreDispatched
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/Dispatched" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/Dispatched" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import Dispatched(Train)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/DispatchedTruck" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/DispatchedTruck" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import Dispatched(Truck)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/InTransactTrain" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/InTransactTrain" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import InTransact(Train)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ReDispatched" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ReDispatched" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import ReDispatched
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/DeliveryTrain" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/DeliveryTrain" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import Delivery(Train)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/DeliveryTruck" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/DeliveryTruck" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import Delivery(Truck)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/EmptyDropOff" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/EmptyDropOff" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Import EmptyDropOff
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+        </li>
+    }
+
+    @if (menuAssignment.Any(x => x.Url != "/OrderBooking/ExportOrder" && x.Url != "/OrderBooking/ExportOrderList" && x.Url != "/OrderExecution/ExportPreDispatched" && x.Url != "/OrderExecution/ExportDispatchedTrain"
+             && x.Url != "/OrderExecution/ExportDispatchedTruck" && x.Url != "/OrderExecution/ExportReDispatched" && x.Url != "/OrderExecution/ExportDelivery"))
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    EXPORT
+
+                </p>
+            </a>
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderBooking/ExportOrder" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderBooking/ExportOrder" class="nav-link ">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Export Create Order
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderBooking/ExportOrderList" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderBooking/ExportOrderList" class="nav-link ">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Export Order Listing
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ExportTrainReport" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ExportTrainReport" class="nav-link ">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Export Train Report
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ExportPreDispatched" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ExportPreDispatched" class="nav-link ">
+                            <i class="nav-icon fas fa-train"></i>
+                            <p>
+                                Export PreDispatched
+                            </p>
+                        </a>
+
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ExportDispatchedTrain" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ExportDispatchedTrain" class="nav-link ">
+                            <i class="fas fa-truck nav-icon"></i>
+                            <p>
+                                Export Dispatched(Train)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ExportDispatchedTruck" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ExportDispatchedTruck" class="nav-link ">
+                            <i class="fas fa-train nav-icon"></i>
+                            <p>
+                                Export Dispatched(Truck)
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/PreDispatched" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Pre Dispatched
+                            </p>
+                        </a>
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/Dispatched" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Dispatched (Train)
+                            </p>
+                        </a>
+                    </li>
+                </ul>*@
+            @*<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/DispatchedTruck" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Dispatched (Truck)
+                            </p>
+                        </a>
+                    </li>
+                </ul>*@
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ExportReDispatched" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ExportReDispatched" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Export ReDispatched
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/OrderExecution/ExportDelivery" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/OrderExecution/ExportDelivery" class="nav-link ">
+                            <i class="fas fa-car nav-icon"></i>
+                            <p>
+                                Export Delivery
+                            </p>
+                        </a>
+                    </li>
+                </ul>}
+
+        </li>
+    }
+
+    @*<li class="nav-item">
+            <a href="/OrderBooking/Index" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Create Import Order
+                </p>
+            </a>
+        </li>*@
+    @*<li class="nav-item">
+            <a href="/OrderBooking/ExportOrder" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Create Export Order
+                </p>
+            </a>
+        </li>*@
+
+    @*<li class="nav-item">
+            <a href="/OrderBooking/OrderList" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Import OrderListing
+                </p>
+            </a>
+        </li>*@
+    @*<li class="nav-item">
+            <a href="/OrderBooking/ExportOrderList" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Export OrderListing
+                </p>
+            </a>
+        </li>*@
+
+    @*<li class="nav-item">
+            <a href="/OrderExecution/TrainReport" class="nav-link ">
+                <i class="nav-icon fas fa-train"></i>
+                <p>
+                    Train Order Report
+                </p>
+            </a>
+        </li>*@
+
+    @*<li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    <i class="fas fa-angle-left right"></i>
+                    Import Order Reports
+
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ImportOrderReportTruck" class="nav-link ">
+                        <i class="fas fa-truck nav-icon"></i>
+                        <p>
+                            Truck Report
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/OrderExecution/ImportOrderReport" class="nav-link ">
+                        <i class="fas fa-train nav-icon"></i>
+                        <p>
+                            Train Report
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+
+        </li>*@
+
+
+    <!--<li class="nav-item has-treeview">
+        <a href="#" class="nav-link ">
+            <i class="nav-icon fas fa-truck"></i>
+            <p>
+                <i class="fas fa-angle-left right"></i>
+                Import Order Execution
+
+            </p>
+        </a>-->
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ReadyForDispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Ready For Dispatched
+                    </p>
+                </a>
+            </li>
+        </ul>*@
+
+    <!--<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/PreDispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Pre Dispatched
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/Dispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Dispatched (Train)
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/DispatchedTruck" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Dispatched (Truck)
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/InTransactTrain" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        InTransact (Train)
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ReDispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Re-Dispatched (Train)
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/DeliveryTrain" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Delivery (Train)
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/DeliveryTruck" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Delivery (Truck)
+                    </p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/EmptyDropOff" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Empty DropOff
+                    </p>
+                </a>
+            </li>
+        </ul>
+
+    </li>-->
+    <!--<li class="nav-item has-treeview">
+        <a href="#" class="nav-link ">
+            <i class="nav-icon fas fa-truck"></i>
+            <p>
+                <i class="fas fa-angle-left right"></i>
+                Export Order Execution
+
+            </p>
+        </a>
+
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ExportPreDispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Pre Dispatched
+                    </p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ExportDispatchedTrain" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Dispatched Train
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ExportDispatchedTruck" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Dispatched Truck
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ExportReDispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        ReDispatched
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ExportDelivery" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Delivery
+                    </p>
+                </a>
+            </li>
+        </ul>-->
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/ReDispatched" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Re-Dispatched (Train)
+                    </p>
+                </a>
+            </li>
+        </ul>*@
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/DeliveryTrain" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Delivery (Train)
+                    </p>
+                </a>
+            </li>
+        </ul>*@
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/DeliveryTruck" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Delivery (Truck)
+                    </p>
+                </a>
+            </li>
+        </ul>*@
+
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/OrderExecution/EmptyDropOff" class="nav-link ">
+                    <i class="fas fa-car nav-icon"></i>
+                    <p>
+                        Empty DropOff
+                    </p>
+                </a>
+            </li>
+        </ul>*@
+
+    <!--</li>-->
+
+    @if (menuAssignment.Any(x => x.Url != "/Customer/CustomerRegistration" && x.Url != "/CustomerPrice/index"))
+
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Customer
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+
+            @if (menuAssignment.Any(x => x.Url == "/Customer/CustomerRegistration" && x.IsView == true))
+
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Customer/CustomerRegistration" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Customer Registration</p>
+                        </a>
+
+                    </li>
+
+                </ul>}
+
+            @if (menuAssignment.Any(x => x.Url == "/CustomerPrice/index" && x.IsView == true))
+            {<ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/CustomerPrice/index" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Pricing</p>
+                        </a>
+
+                    </li>
+
+                </ul>}
+
+        </li>
+    }
+
+
+
+
+
+
+    <!--{
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    TripSheet Summary
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>-->
+    @*<ul class="nav nav-treeview">
+            <li class="nav-item">
+
+                <a href="/Invoices/InvoiceGenerationLogistic" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Generate Report Logistics</p>
+                </a>
+
+            </li>
+        </ul>*@
+
+    <!--{<ul class="nav nav-treeview">
+                <li class="nav-item">
+
+                    <a href="/Invoices/PrintReportLogistics" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Print Report</p>
+                    </a>
+
+                </li>
+            </ul>}
+
+
+    </li>-->
+
+
+    @if (menuAssignment.Any(x => x.Url != "/Invoices/InvoiceGeneration" && x.Url != "/OrderBooking/BLOrCROReport" && x.Url != "/Invoices/LogisticInvoice"
+            && x.Url != "/Invoices/LogisticInvoiceReport"))
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                    Invoice
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                @*@if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceGeneration" && x.IsView == true))*@
+
+
+                @*<li class="nav-item">
+                        <a href="/Invoices/InvoiceGeneration" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Generate Invoice</p>
+                        </a>
+
+                    </li>*@
+
+
+
+                @if (menuAssignment.Any(x => x.Url == "/OrderBooking/BLOrCROReport" && x.IsView == true))
+                {
+                    <li class="nav-item">
+                        <a href="/OrderBooking/BLOrCROReport" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Print Order Invoice</p>
+                        </a>
+
+                    </li>
+                }
+
+                @if (menuAssignment.Any(x => x.Url == "/Invoices/InvoiceHead" && x.IsView == true))
+                {
+                    <li class="nav-item">
+                        <a href="/Invoices/InvoiceHead" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Invoice Heads</p>
+                        </a>
+
+                    </li>
+                }
+
+                @if (menuAssignment.Any(x => x.Url == "/Invoices/ExpenseInvoice" && x.IsView == true))
+                {
+                    <li class="nav-item">
+                        <a href="/Invoices/ExpenseInvoice" class="nav-link">
+                            <i class="fas fa-tools nav-icon"></i>
+                            <p>Container Expense</p>
+                        </a>
+
+                    </li>
+                }
+
+                @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoice" && x.IsView == true))
+                    {
+                        <li class="nav-item">
+                            <a href="/Invoices/LogisticInvoice" class="nav-link">
+                                <i class="fas fa-gas-pump nav-icon"></i>
+                                <p>Print Invoice</p>
+                            </a>
+
+                        </li>
+                    }*@
+                @*@if (menuAssignment.Any(x => x.Url == "/Invoices/LogisticInvoiceReport" && x.IsView == true))
+                    {
+                        <li class="nav-item">
+                            <a href="/Invoices/LogisticInvoiceReport" class="nav-link">
+                                <i class="fas fa-gas-pump nav-icon"></i>
+                                <p>Print Invoice Report</p>
+                            </a>
+
+                        </li>
+                    }*@
+
+            </ul>
+
+        </li>
+    }
+
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    User Management
+                    <i class="fas fa-angle-left right"></i>
+
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+
+                    <a href="/Account/Register" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>User Registration</p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+
+                    <a href="/Role/CreateRole" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Role</p>
+                    </a>
+
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/Role/AssignMenu" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Assign User-Menu</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+    }
+</ul>
+
+<script>
+    $(document).ready(function () {
+        $('.dropdown-submenu a.test').on("click", function (e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+</script>
+

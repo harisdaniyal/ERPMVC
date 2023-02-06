@@ -1,0 +1,152 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+
+    ViewBag.Title = "Vehicle Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+
+
+    <div id="gridShow" class="card d-none">
+
+        <div class="card-header" style="background:white;">
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-sm-6 float-sm-left">
+                    <button type="submit" id="btnADD" class="btn btn-primary">Add Vehicle Details</button>
+                </div><!-- /.col -->
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                    <table id="VechialGride" class="table table-bordered" style="width: 100%;">
+                        <thead class="_changeHeaderColor datatable-head">
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">VechialNO</th>
+                                <th scope="col">VehicleTypeID</th>
+                                <th scope="col">VehicleEngineNo</th>
+                                <th scope="col">VehicleChassisNO</th>
+                                <th scope="col">VehicleName</th>
+                                <th scope="col">IsActive</th>
+                                <th scope="col">UserID</th>
+                                <th scope="col">UpdateBy</th>
+                                <th scope="col">CreateDate</th>
+                                <th scope="col">UpdateDate</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div id="lloForm" class="card card-default collapse">
+        <div class="card-header">
+            <h3 class="card-title">Vehicle Registration Form</h3>
+        </div>
+
+        
+
+            <form id="_addCustomerReg">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Vehicle Type</label>
+                                <select class="form-control select2" id="txtVehicleType" name="txtVehicleType" style="width: 100%;">
+                                    <option selected="selected"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtVehicleNo">Vechicle No<label id="_txtCustomerName-error" class="error" for="txtVehicleNo"></label></label>
+                                <div class="input-group">
+                                    <input type="text" id="txtVehicleNo" name="txtVehicleNo" class="form-control">
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label for="txtEngineNo">Engine No<label id="_txtCustomerName-error" class="error" for="txtEngineNo"></label></label>
+                                <div class="input-group">
+                                    <span id="errmsg" style="color:red;"></span>
+                                    <input type="text" id="txtEngineNo" name="txtEngineNo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtChassisNo">Chassis No<label id="_txtCustomerName-error" class="error" for="txtChassisNo"></label></label>
+                                <div class="input-group">
+                                    <span id="errmsg1" style="color:red;"></span>
+                                    <input type="text" id="txtChassisNo" name="txtChassisNo" class="form-control">
+                                </div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label for="txtVehicleName">Vehicle Name<label id="_txtCustomerName-error" class="error" for="txtVehicleName"></label></label>
+                                <div class="input-group">
+                                    <input type="text" id="txtVehicleName" name="txtVehicleName" class="form-control">
+                                </div>
+                                </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-check">
+                                <label>Status</label>
+                                <input type="checkbox" class="form-check" id="txtStatus" name="txtStatus" checked="checked">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+                    <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+                </div>
+            </form>
+
+
+    </div>
+
+
+
+
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+<script src="~/AdminLte/Scripts/VehicleReg.js"></script>

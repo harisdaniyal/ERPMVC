@@ -1,0 +1,121 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.DispatchedOrderViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Dispatched (For Train)</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" >
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Reference Container</th>
+                            <th>Priority For Dispatched</th>
+                            <th>Train ID</th>
+                            <th>Dispatched Date</th>
+                            <th>Station </th>
+                            <th>Wagon No#</th>
+                            <th>Wagon Type</th>
+                            <th>RR No</th>
+                            <th>Engine No</th>
+                            <th>Invoice No</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var DispatchedOrder in Model.ToList())
+                        {
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="@DispatchedOrder.OrderId" class="form-control txt_OrderId" />
+                                <input type="hidden" value="@DispatchedOrder.BLnumber" class="form-control txt_BLnumber" />
+                                <input type="hidden" value="@Convert.ToInt32(DispatchedOrder.ID)" class="form-control txt_ID" />
+                                <input type="text" disabled style="width: 110px;" value="@DispatchedOrder.OrderNo" class="form-control txt_OrderNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 300px;" value="@DispatchedOrder.ContainerNo" class="form-control txt_ContainerNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@DispatchedOrder.ContainerSize" class="form-control txt_ContainerSize" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 300px;" value="@DispatchedOrder.ReferenceContainer" class="form-control txt_ReferenceContainer" />
+                            </td>
+                            <td>
+                                <select class="form-control txt_Priority" aria-invalid="false" style="width: 145px;">
+                                    <option value="">Select Priority</option>
+                                    <option value="1" @(DispatchedOrder.PriorityForDispatched == "1" ? "selected=selected" : "")>1</option>
+                                    <option value="2" @(DispatchedOrder.PriorityForDispatched == "2" ? "selected=selected" : "")>2</option>
+                                    <option value="3" @(DispatchedOrder.PriorityForDispatched == "3" ? "selected=selected" : "")>3</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_Train" id="txt_userName" style="width: 120px;">
+                                    <option value="">Select TrainID</option>
+                                    @foreach (var train in ViewBag.TrainId)
+                                    {
+                                        <option value="@train.TrainID" @(train.TrainID == train.TrainID ? "selected=selected" : "")>@train.TrainID</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Dispatcheddate" style="width: 170px;" type="date" placeholder="" value="@(DispatchedOrder.DispatchedDate.HasValue ? DispatchedOrder.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_station" style="width: 130px;">
+                                    <option value="">From Location</option>
+                                    @foreach (var station in ViewBag.Stations)
+                                    {
+                                        <option value="@station.StationID" @(station.StationID == DispatchedOrder.StationID ? "selected=selected" : "")>@station.StationName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <input class="form-control txt_WagonNo" style="width: 116px;" type="text" placeholder="" value="@(DispatchedOrder.WagonNo)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_WagonType" style="width: 116px;" type="text" placeholder="" value="@(DispatchedOrder.WagonType)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_RRNo" style="width: 116px;" type="text" placeholder="" value="@(DispatchedOrder.RRNo)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_EngineNo" style="width: 116px;" type="text" placeholder="" value="@(DispatchedOrder.EngineNo)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_InvoiceNumber" style="width: 116px;" type="text" placeholder="" value="@(DispatchedOrder.InvoiceNumber)" />
+                            </td>
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDispatched">Dispatched</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/Dispatched.js")"></script>

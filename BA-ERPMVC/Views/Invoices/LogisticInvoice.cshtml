@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "InvoicePrint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="card">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">   Print Invoice </h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Invoice No</label>
+                    <div class="input-group">
+                        <select class="form-control select2" id="_txtInvNo" name="_txtInvNo" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <button type="submit" id="_btnPrintInvoice" class="btn btn-dark">Generate Invoice</button>
+    </div>
+</div>
+
+<script src="~/AdminLte/Scripts/invoice-create.js"></script>

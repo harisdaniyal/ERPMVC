@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExportOrderBooking.ExportPreDispatchedViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Pre Dispatched</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Pickup From</th>
+                            <th>Vehicle No#</th>
+                            <th>Transporter Name</th>
+                            <th>Transportation Cost</th>
+                            
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ExportpreDispatched in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@ExportpreDispatched.OrderId" class="form-control txt_OrderId" />
+                                    <input type="hidden" value="@ExportpreDispatched.CRO" class="form-control txt_CROnumber" />
+                                    <input type="hidden" value="@Convert.ToInt32(ExportpreDispatched.ID)" class="form-control txt_ID" />
+                                    <input type="text" class="form-control txt_OrderNo" style="width: 110px;" disabled value="@ExportpreDispatched.OrderNo" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_ContainerNo" style="width: 170px;" type="text" disabled value="@ExportpreDispatched.ContainerNo" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_ContainerSize" style="width: 100px;" type="text" disabled value="@ExportpreDispatched.ContainerSize" />
+                                </td>
+                                
+                                <td>
+                                    <input class="date-picker form-control txt_Pickupfrom" style="width: 170px;" type="date" placeholder="" value="@(ExportpreDispatched.PickupFrom.HasValue ? ExportpreDispatched.PickupFrom.Value.ToString("yyyy-MM-dd"): "")" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_VehicleNo" style="width: 170px;" type="text" placeholder="" value="@(ExportpreDispatched.VehicleNo)" />
+                                </td>
+                                
+                                <td>
+                                    <input class=" form-control txt_TransporterName" style="width: 170px;" type="text" placeholder="" value="@(ExportpreDispatched.TransporterName)" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_TransporterCost" style="width: 170px;" type="number" placeholder="" value="@(ExportpreDispatched.TransporterCost)" />
+                                </td>
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnPreDispatched">PreDispatched</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ExportPreDispatched.js")"></script>

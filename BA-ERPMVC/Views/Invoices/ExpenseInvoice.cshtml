@@ -1,0 +1,181 @@
+﻿@*@model IEnumerable<BA_ERPMVC.ViewModels.ExpenseInvoiceViewModel>*@
+@{
+    ViewBag.Title = "ExpenseInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Container Expense</h2>
+
+<br />
+<div class="d-block py-2">
+    <div class="form-row">
+        <div class="col-md-2">
+            <div class="input-group">
+                <label for="ddlState">OrderType</label>
+                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_OrderType" onchange="onChange_OrderType(this)">
+                    <option value="" data-select2-id="2"> Select OrderType</option>
+                    <option value="Import">Import</option>
+                    <option value="Export">Export</option>
+                </select>
+            </div>
+        </div>
+        <br />
+
+
+        @*<div class="col-md-3" style="display:none;">
+            <div class="input-group">
+                <label for="ddlState">OrderNo</label>
+                <select class="form-control" id="txt_importorderNo" style="width: 100%;">
+                    <option value="">Please Select OrderNo</option>
+                    <option value="0">All</option>
+                    @foreach (var orderno   in ViewBag.ImportOrderNo)
+                    {
+                        <option value="@orderno.OrderID" data-select2-id="@orderno.OrderNo">@orderno.OrderNo</option>
+                    }
+
+                </select>
+            </div>
+        </div>*@
+
+        @*<div class="col-md-3" style="display:none;">
+            <div class="input-group">
+                <label for="ddlState">OrderNo</label>
+                <select class="form-control" id="txt_exportorderNo" style="width: 100%;">
+                    <option value="">Please Select OrderNo</option>
+                    <option value="0">All</option>
+                    @foreach (var Exportorderno in ViewBag.ExportOrderNo)
+                    {
+                        <option value="@Exportorderno.OrderId" data-select2-id="@Exportorderno.OrderNo">@Exportorderno.OrderNo</option>
+                    }
+
+                </select>
+            </div>
+
+        </div>*@
+
+        <div class="col-md-4" style="display:none;">
+            <div class="input-group">
+                <label for="ddlState">ContainerNo</label>
+                <select class="form-control txt_importContainerNo" id="txt_importContainerNo" style="width: 100%;">
+                    <option selected="selected"></option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    @*<div class="col-md-4" style="display:none;">
+        <div class="input-group">
+            <label for="ddlState">ContainerNo</label>
+            <select class="form-control txt_ExportContainerNo" name="ContainerNo[]" id="txt_ExportContainerNo" style="width: 100%;">
+                <option selected="selected"></option>
+            </select>
+        </div>
+    </div>*@
+</div>
+
+
+
+@* //////////////////////// Grid ////////////////////// *@
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-12 table-responsive center">
+            <table id="example" class="table table-sm table-bordered mb-3" style="height: auto">
+                <thead class="thead-light">
+                    <tr>
+                        <th>HeadType</th>
+                        <th>HeadName</th>
+                        <th>Amount</th>
+                        <th>User</th>
+                        <th>Remarks</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-light tbl-valign-top">
+                        <td>
+                            <input type="hidden" value="0" class="form-control txt_ID" />
+                            <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Select HeadType</option>
+                                <option value="Expense">Expense</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_HeadName" id="txt_HeadName" style="width: 120px;">
+                                <option value="">Select HeadName</option>
+                                @foreach (var InvoiceHeadName in ViewBag.InvoiceHeadName)
+                                {
+                                    <option value="@InvoiceHeadName.ID" data-select2-id="@InvoiceHeadName.HeadName">@InvoiceHeadName.HeadName</option>
+                                }
+                            </select>
+                        </td>
+
+                        <td>
+                            <input type="number" style="width: 150px;" value="" class="form-control" id="txt_Amount" />
+                        </td>
+
+                        <td>
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_userName" id="txt_userName" style="width: 120px;">
+                                <option value="">Select User</option>
+                                @foreach (var user in ViewBag.UserList)
+                                {
+                                    <option value="@user.ID" data-select2-id="@user.UserName">@user.UserName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <textarea class="form-control" id="txt_Remarks" rows="1"></textarea>
+                        </td>
+                        <td class="btn-group">
+                            <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                            <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                        </td>
+                    </tr>
+
+                    @*@foreach (var expenseinvoice in Model.ToList())
+                    {
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="@expenseinvoice.ID" class="form-control txt_ID" />
+
+                                <select id="txt_HeadType" aria-invalid="false" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
+                                    <option value="">Select HeadType</option>
+                                    <option value="Expense" @(expenseinvoice.HeadType == "Expense" ? "selected=selected" : "")>Expense</option>
+                                    <option value="Revenue" @(expenseinvoice.HeadType == "Revenue" ? "selected=selected" : "")>Revenue</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control" id="txt_HeadName" style="width: 100%;">
+                                    <option value="">Please Select HeadName</option>
+                                    @foreach (var invoiceheadname in ViewBag.InvoiceHeadName)
+                                    {
+                                        <option value="@invoiceheadname.ID" data-select2-id="@invoiceheadname.HeadName">@invoiceheadname.HeadName</option>
+                                    }
+
+                                </select>
+                            </td>
+                            <td> <input type="number" id="txt_Amount" style="width: 350px;" value="@expenseinvoice.Amount" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" /></td>
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                            </td>
+                        </tr>
+                    }*@
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- LOADING SHOW HIDE -->
+    <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+</div>
+
+</div>
+
+<script src="~/AdminLte/Scripts/ExpenseInvoice.js"></script>
+
+
+

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Menu List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Menu Caption</label>
+                    <input type="text" id="_txtMenuCap" name="txtMenuCap" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Menu Url</label>
+                    <input type="text" id="_txtMenuUrl" name="txtMenuUrl" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>is Active</label>
+                    <input type="text" id="_txtIsActive" name="txtIsActive" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" id="_btnSubmitMenu" class="btn btn-primary">Add Menu</button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetail">
+                    <table class="table table-bordered table-hover table-condensed dataTable " id="_orderTable">
+                        <thead class="_changeHeaderColor datatable-head">
+                            <tr class="text-center">
+                                <th scope="col">Menu_ID</th>
+                                <th scope="col">Menu Caption</th>
+                                <th scope="col">Menu URL</th>
+                                <th scope="col">Is Active</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="_orderList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/AdminLte/Scripts/Menu_Script.js"></script>

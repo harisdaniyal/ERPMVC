@@ -1,0 +1,353 @@
+﻿@*@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.TripsViewModel>*@
+
+<!-- STEP 3 -->
+<fieldset class="animate px-3" data-fieldset="3">
+    <div class="d-block py-2">
+
+        <div class="form-row">
+            <div class="col-md-12 text-right mt-2">
+
+                <select class="form-control select2" aria-invalid="false" id="ddl_logisticsContainers" onchange="onChange_logisticsContainers(this)">
+                    <option value="">Container number</option>
+                    @foreach (var container in ViewBag.Containers)
+                    {
+                        <option value="@container.LogisticsId">@container.ContainerNumber</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- TRIPS TABLE -->
+        <div id="tripList">
+
+        </div>
+
+
+        <div class="form-row">
+            <div class="col-md-12 text-right mt-2">
+                <button type="button" class="btn btn-success btn-v2 mb-1 collapsed" data-toggle="collapse" href="#addTripCard" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id="btn_AddTrip">
+                    <i class="fas fa-plus-square"></i> Add Trip
+                </button>
+            </div>
+        </div>
+
+
+
+
+        <!-- ADD TRIP CARD -->
+        <div class="collapse multi-collapse " id="addTripCard">
+            <div class="card card-body rounded-0 border-0 shadow-none m-0 p-0 bg-transparent">
+                <div class="trip-card border rounded mt-3 mb-4 p-3 shadow bg-light">
+                    @*<div class="text-right mb-3">Total Expense: <strong id="st_TotalExpense" class="text-success">0</strong></div>*@
+                    <div class="form-row mb-1">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control staticLabel" type="text" value="@ViewBag.NewTripCode" id="txt_TripCode">
+                                <label>Trip Code</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        @*<div class="col-md-3">
+            <div class="input-group">
+                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_Vendor">
+                    <option value="">Please Select Vendor</option>
+                    @foreach (var vendor in ViewBag.Vendors)
+                    {
+                        <option value="@vendor.PartyId" data-select2-id="@vendor.PartyId" @(vendor.PartyId == 0 ? "selected=selected" : "")>@vendor.PartyName</option>
+                    }
+                </select>
+                <label>Vendor</label>
+                <div class="form-status"><span></span></div>
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>*@
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_FromLocation">
+                                    <option value="">Please Select Location</option>
+                                    @foreach (var location in ViewBag.Locations)
+                                    {
+                                        <option value="@location.CityID" data-code="@location.CityCode">@location.CityName</option>
+                                    }
+                                </select>
+                                <label>Location Fr.</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_ToLocation">
+                                    <option value="">Please Select Location</option>
+                                    @foreach (var location in ViewBag.Locations)
+                                    {
+                                        <option value="@location.CityID" data-code="@location.CityCode">@location.CityName</option>
+                                    }
+                                </select>
+                                <label>Location To</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control date-picker staticLabel" type="date" id="txt_TripDate">
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                       
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control staticLabel" type="text" id="txt_DriverName">
+                                <label>Driver Name</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control staticLabel" type="text" id="txt_DriverContactNo">
+                                <label>Contact No.</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control staticLabel" type="text" id="txt_DriverCNIC">
+                                <label>CNIC</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <input class="form-control staticLabel" type="text" id="txt_DriverVehicleNo">
+                                <label>Vehical No</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                        @*<div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control staticLabel" type="number" id="txt_VendorExpense">
+                                <label>Vendor Expense</label>
+                                <div class="form-status"><span></span></div>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>*@
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <h5 class="text-left">CONTAINERS</h5>
+                        <div>Total Weight: <span class="text-info" id="sp_TotalWeight">0 KG</span></div>
+                    </div>
+                    <div class="table-rowAdder">
+                        <table class="table table-sm table-bordered bg-white" id="tbl_LogisticsContainers">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Container Number</th>
+                                    <th>Container Weight</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-white">
+                                    <td>
+                                        <select class="form-control form-control-v1 form-control-sm border-dark mt-1 w-100" id="ddl_ContainerNumber" onchange="onChange_ddlContainer(this)">
+                                            <option value="">Container number</option>
+                                            @foreach (var container in ViewBag.Containers)
+                                            {
+                                                <option value="@container.LogisticsId" data-container-weight="@container.ContainerWeight">@container.ContainerNumber</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <span id="sp_ContainerWeight"></span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-block btn-success btn-v2" id="btn_AddTripContainer" onclick="onClick_btnAddTripContainer()"><i class="fas fa-plus"></i></button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                    <div class="border rounded py-2 px-4 bg-white mt-4" style="display:none;">
+                        <h5 class="text-left mb-2">EXPENSES</h5>
+                        <div id="div_VendorExpenses"></div>
+                    </div>
+                    <div class="d-block mt-2 text-right">
+                        <button type="button" class="btn btn-success btn-v2" onclick="onClick_btnSaveTrip()">SAVE TRIP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TRIP CARD END -->
+
+
+
+
+
+
+        <div class="form-row">
+            <div class="col-md-12 text-left mt-5">
+                <div class="d-flex justify-content-between px-3">
+                    <button type="button" class="btn w-25 btn-dark btn-v2 btn-back" onclick="onClick_BtnBackToLogistics()"><i class="fas fa-angle-double-left"></i> Back</button>
+                    <button type="button" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnProceedToInvoice()">PROCEED <i class="fas fa-angle-double-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+
+
+
+<script type="text/template" id="templateVendorExpense">
+    <div class="form-row expense-div" id="div_Expense">
+        <div class="col-md-4">
+            <div class="input-group input-group-noLable-sm">
+                <input class="form-control  expense-name" type="text" placeholder="Expense Name" id="txt_ExpenseName" value="{{ExpenseName}}" disabled="disabled">
+                <div class="form-status"><span></span></div>
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times"></i>
+                <input type="hidden" class="expense-id" id="hf_ExpenseId" value="{{VendorExpenseId}}">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-noLable-sm">
+                <input class="form-control expense-remarks" type="text" placeholder="Remarks" id="txt_ExpenseRemarks">
+                <div class="form-status"><span></span></div>
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group input-group-noLable-sm">
+                <input class="form-control expense-amount" type="number" placeholder="Amount" id="txt_ExpenseAmount" onchange="onChange_ExpenseAmount()">
+                <div class="form-status"><span></span></div>
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="template">
+    <div class="tripBox rounded mb-2 border">
+        <a class="btn btn-block  btn-collapse border-0 text-left rounded-0  shadow-none collapsed" data-toggle="collapse" href="#div{{TripId}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+            <div>
+                <h5 class="mr-5 mb-0">Vendor Name - <span class="text-primary">{{VendorName}}</span></h5>
+            </div>
+            <div class="fs-7">{{FromLocationCode}} - {{ToLocationCode}} <span></span></div>
+            <div>Total Expense: <strong>{{TotalExpense}}</strong></div>
+        </a>
+        <div class="collapse multi-collapse " id="div{{TripId}}">
+            <div class="card card-body rounded-0 border-0 shadow-none m-0 bg-light">
+                <div class="row">
+                    <div class="col-md-2 text-left">
+                        <strong class="fs-9">TRIP DATE</strong>
+                        <input type="text" class="input-lableSwitch" value="{{TripDate}}" />
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <strong class="fs-9">DRIVER NAME</strong>
+                        <input type="text" class="input-lableSwitch" value="{{DriverName}}" />
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <strong class="fs-9">CONTACT NUMBER</strong>
+                        <input type="text" class="input-lableSwitch" value="{{DriverContactNumber}}" />
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <strong class="fs-9">CNIC</strong>
+                        <input type="text" class="input-lableSwitch" value="{{DriverCNIC}}" />
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <strong class="fs-9">VEHICLE NO.</strong>
+                        <input type="text" class="input-lableSwitch" value="{{VehicleNumber}}" />
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6 mt-3">
+                        <h4 class="text-left">Container Information</h4>
+                        <div class="d-block">
+                            <table class="table table-sm table-bordered mb-0 bg-white">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Container Number</th>
+                                        <th>Container Weight</th>
+                                        <th class="td-editmod"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each TripContainers}}
+                                    <tr>
+                                        <td><input type="text" class="input-lableSwitch w-100" value="{{ContainerNumber}}" /></td>
+                                        <td><input type="text" class="input-lableSwitch w-100" value="{{ContainerWeight}}" /></td>
+                                        <td class="td-editmod"><button type="button" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <h4 class="text-left">Expenses</h4>
+                            <div class="d-block">
+                                <table class="table table-sm table-bordered mb-0 bg-white">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Remarks</th>
+                                            <th colspan="2">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each TripExpense}}
+                                        <tr>
+                                            <td><input type="text" class="input-lableSwitch w-100" value="{{ExpenseName}}" /></td>
+                                            <td><input type="text" class="input-lableSwitch w-100" value="{{Remarks}}" /></td>
+                                            <td><input type="text" class="input-lableSwitch w-100" value="{{Price}}" /></td>
+                                            <td class="td-editmod"><button type="button" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="d-block mt-2 text-right">
+                    <button type="button" class="btn btn-info btn-v2 mr-4 edit-tripCard" data-id="{{TripId}}">EDIT</button>
+                    <button type="button" class="btn btn-danger btn-v2" data-id="{{TripId}}" onclick="onClick_DeleteTrip(this)">DELETE</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/Trips.js")"></script>
+
+<script>
+    var trips =  @Html.Raw(Json.Encode(Model));
+
+    initialize(trips);
+</script>

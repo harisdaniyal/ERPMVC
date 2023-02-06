@@ -1,0 +1,354 @@
+﻿@model BA_ERPMVC.ViewModels.OrderBooking.BookingViewModel
+
+
+<!-- STEP 1 -->
+@*<form id="OrderBooking">*@
+<fieldset class="animate px-3 active" data-fieldset="1">
+    <div class="d-block py-2">
+        <div class="form-row ">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.OrderDate.HasValue ? Model.OrderDate.Value.ToString("yyyy-MM-dd"): "")" id="txt_OrderDate" />
+                    <label>Order Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                    <input type="hidden" value="@Model.OrderNo" id="hf_OrderNo">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.VesselBerthingDate.HasValue ? Model.VesselBerthingDate.Value.ToString("yyyy-MM-dd"): "")" id="txt_VesselBerthingDate" />
+                    <label>Vessel Berthing Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.DOGuarantee.HasValue ? Model.DOGuarantee.Value.ToString("yyyy-MM-dd"): "")" id="txt_DoGuarantee" />
+                    <label>DO Guarantee</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.ImportEIR.HasValue ? Model.ImportEIR.Value.ToString("yyyy-MM-dd"): "")" id="txt_ImportEIR" />
+                    <label>Import EIR</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.PortWeighment.HasValue ? Model.PortWeighment.Value.ToString("yyyy-MM-dd"): "")" id="txt_PortWeighment" />
+                    <label>Port Weightment</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.OutSidePortWeighment.HasValue ? Model.OutSidePortWeighment.Value.ToString("yyyy-MM-dd"): "")" id="txt_OutSidePortWeighment" />
+                    <label>OutSide Port Weightment</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.GD.HasValue ? Model.GD.Value.ToString("yyyy-MM-dd"): "")" id="txt_GD" />
+                    <label>GD Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.BLDate.HasValue ? Model.BLDate.Value.ToString("yyyy-MM-dd"): "")" id="txt_BLDate" />
+                    <label>BL Date</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_Customers">
+                        <option value="" data-select2-id="2">Please Select Customer</option>
+                        @foreach (var customer in ViewBag.Customers)
+                        {
+                            <option value="@customer.CustomerID" data-select2-id="@customer.CustomerID" @(customer.CustomerID == Model.CustomerId ? "selected=selected" : "")>@customer.Customer_Name</option>
+                        }
+                    </select>
+                    <label for="ddlState">Customer Name</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_BusinessDivision">
+                        <option value="">Please Select Division</option>
+                        @foreach (var businessDivision in ViewBag.BusinessDivisions)
+                        {
+                            <option value="@businessDivision.BusinessDivisionID" @(businessDivision.BusinessDivisionID == Model.BusinessDivisionId ? "selected=selected" : "")>@businessDivision.BusinessDivisionName</option>
+                        }
+                    </select>
+                    <label for="ddlState">Business Division</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_ShippingLine">
+                        <option value="">Please Select Shipping Line</option>
+                        @foreach (var shippingLine in ViewBag.ShippingLines)
+                        {
+                            <option value="@shippingLine.ShippingLineId" @(shippingLine.ShippingLineId == Model.ShippingLineId ? "selected=selected" : "")>@shippingLine.ShippingLineName</option>
+                        }
+                    </select>
+                    <label for="ddlState">Shipping Line</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <select class="form-control select2" aria-invalid="false" style="width: 100%;" id="ddl_ShippingAgent">
+                        <option value="">Please Select Shipping Agent</option>
+                        @foreach (var shippingAgent in ViewBag.ShippingAgents)
+                        {
+                            <option value="@shippingAgent.ShippingAgentId" @(shippingAgent.ShippingAgentId == Model.ShippingAgentId ? "selected=selected" : "")>@shippingAgent.Name</option>
+                        }
+                    </select>
+                    <label for="ddlState">Shipping Agent</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" placeholder="" value="@(Model.TwentyContainerQty)" id="txt_TwentycontainerQty" />
+                    <label>Twenty Container QTY</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" placeholder="" value="@(Model.FortyContainerQty)" id="txt_FortycontainerQty" />
+                    <label>Forty Container QTY</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" oninput="CalculateTotalAmount()" name="txt_Twentycontainerprice" placeholder="" value="@(Model.TwentyContainerPrice)" id="txt_Twentycontainerprice" />
+                    <label>Twenty Container Price</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" oninput="CalculateTotalAmount()" name="txt_Fortycontainerprice" placeholder="" value="@(Model.FortyContainerPrice)" id="txt_Fortycontainerprice" />
+                    <label>Forty Container Price</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" disabled type="number" min="0" placeholder="" value="@(Model.InvoiceAmount)" id="txt_InvoiceAmount" />
+                    <label>Invoice Amount</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="number" min="0" placeholder="" value="@(Model.FreeDays)" id="txt_FreeDays" />
+                    <label>Free Days</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="text" min="0" placeholder="" value="@(Model.BookingPOCName)" id="txt_BookingPOCName" />
+                    <label>Booking POC Name</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="text" placeholder="" value="@(Model.Remarks)" id="txt_Remarks" />
+                    <label>Remarks</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-block p-3 mb-4 bg-light border">
+            <div class="form-row">
+                <div class="col-md-6" id="div_OrderType">
+                    <div class="input-group">
+                        <select class="form-control select2" id="ddl_OrderType" aria-invalid="false" style="width: 100%;" onchange="onChange_OrderType(this)">
+                            <option value="">Select Order Type</option>
+                            <option value="Import" @(Model.OrderType == "Import" ? "selected=selected" : "")>Import</option>
+
+                        </select>
+                        <label for="ddlState">Order Type</label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="col-md-6" id="tr_BL_CRO" @(string.IsNullOrEmpty(Model.OrderType) ? "style=display:none;" : "")>
+
+                    <div class="input-group">
+                        <input type="text" id="txt_BL" class="form-control staticLabel w-25" value="@Model.BL" @(string.IsNullOrEmpty(Model.OrderType) || Model.OrderType == "Export" ? "style=display:none;" : "") />
+                        @*<input type="text" id="txt_CRO" class="form-control staticLabel w-25" value="@Model.CRO" @(string.IsNullOrEmpty(Model.OrderType) || Model.OrderType == "Import" ? "style=display:none;" : "") />*@
+                        @if (Model.OrderType == "Import")
+                        {
+                            <label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">BL</label>
+                        }
+                        else if (Model.OrderType == "Export")
+                        {
+                            @*<label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">CRO</label>*@
+                        }
+                        else
+                        {
+                            <label for="lbl_BL_CRO" id="lbl_BL_CRO"></label>
+                        }
+
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="col-md-6" id="div_HOrates" style="display:none;">
+                    <br />
+                    <div class="input-group input-group-option border-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="cbx_HOrates" value="">
+                            <label for="cbx_HOrates" class="custom-control-label">HO Rates</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="col-md-12 text-left">
+                <h5 class="text-uppercase border-bottom py-1 mb-4">Facilities List</h5>
+                <div class="d-flex mb-4 flex-wrap">
+                    @foreach (var facility in ViewBag.Facilities)
+                    {
+                        <div class="form-check w-md-25">
+                            <input class="form-check-input" type="checkbox" name="cbx_Facilities" value="@facility.facilityID" @(Model.FacilityIds != null && Model.FacilityIds.Any(x => x == (int)facility.facilityID) ? "checked='checked'" : "")>
+                            <label class="form-check-label" for="inlineCheckbox1">@facility.FacilityName</label>
+                        </div>
+                    }
+                </div>
+            </div>
+            <h5 class="text-uppercase border-bottom py-1 mb-4">Containers List</h5>
+            <table id="example" class="table table-sm table-bordered mb-3 w-min-80">
+                <thead class="thead-light ">
+                    <tr>
+                        <th>Container No#</th>
+                        <th>Container Size</th>
+                        <th>Container weight</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-light tbl-valign-top">
+                        <td>
+                            <input type="text" class="form-control  txt_container" />
+                            <input type="hidden" class="form-control  txt_container_id" />
+                        </td>
+                        <td>
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 ddl_ContainerSize">
+                                <option value="">Container Size</option>
+                                <option value="20 DR">20 DR</option>
+                                <option value="40 DR">40 DR</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control  txt_container_weight" />
+                        </td>
+                        <td class="btn-group">
+                            <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Add/Update</button>&ensp;
+                            <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                        </td>
+                    </tr>
+                    @foreach (var containers in ViewBag.OrderContainers)
+                    {
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="text" value="@containers.ContainerNo" class="form-control  txt_container" />
+                                <input type="hidden" value="@containers.ID" class="form-control  txt_container_id" />
+                            </td>
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 ddl_ContainerSize">
+                                    <option value="">Container Size</option>
+                                    <option value="20 DR" @("20 DR" == containers.ContainerSize ? "selected=selected" : "")>20 DR</option>
+                                    <option value="40 DR" @("40 DR" == containers.ContainerSize ? "selected=selected" : "")>40 DR</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" value="@containers.ContainerWeight" class="form-control  txt_container_weight" />
+                            </td>
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div class="col-md-12 text-left mt-5">
+                <button type="submit" id="btn_SubmitBookingOrder" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnSubmitBookingOrder()">PROCEED <i class="fas fa-angle-double-right"></i></button>
+            </div>
+        </div>
+    </div>
+</fieldset>
+@*</form>*@
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/Booking.js")"></script>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/BookingContainers.js")"></script>

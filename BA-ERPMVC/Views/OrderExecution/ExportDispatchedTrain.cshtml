@@ -1,0 +1,129 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExportOrderBooking.ExportDispatchedTrainViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Dispatched (For Train)</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Booking No#</th>                          
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Container Type</th>
+                            <th>TrainID</th>
+                            <th>Dispatched Date</th>
+                            <th>Wagon No#</th>
+                            <th>RR No</th>
+                            <th>Engine No</th>
+                            <th>Shipper Name</th>
+                            <th>Wagon Type</th>
+                            <th>ReDispatched</th>
+                            <th>Cargo Weight</th>
+                            <th>Tare Weight</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ExportDispatchedTrain in Model.ToList())
+                        {
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="@ExportDispatchedTrain.OrderId" class="form-control txt_OrderId" />
+                                <input type="hidden" value="@ExportDispatchedTrain.CRO" class="form-control txt_CRO" />
+                                <input type="hidden" value="@Convert.ToInt32(ExportDispatchedTrain.ID)" class="form-control txt_ID" />
+                                <input type="text" disabled style="width: 110px;" value="@ExportDispatchedTrain.OrderNo" class="form-control txt_OrderNo" />
+                            </td>
+
+                            <td>
+                                <input type="text" disabled style="width: 160px;" value="@ExportDispatchedTrain.ContainerNo" class="form-control txt_ContainerNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@ExportDispatchedTrain.ContainerSize" class="form-control txt_ContainerSize" />
+                            </td>
+
+                            <td>
+                                <input type="text" disabled style="width: 220px;" value="@ExportDispatchedTrain.ContainerType" class="form-control txt_ContainerType" />
+                            </td>
+
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_Train" id="txt_Train" style="width: 120px;">
+                                    <option value="" selected>Select</option>
+                                    @foreach (var exptrain in ViewBag.ExportTrainId)
+                                    {
+                                        <option value="@exptrain.TrainID"  @(exptrain.TrainID == exptrain.TrainID ? "selected=selected" : "")>@exptrain.TrainID</option>
+                                    }
+                                </select>
+                            </td>
+
+                            <td>
+                                <input class="date-picker form-control txt_ExportDispatcheddate" style="width: 170px;" type="date" placeholder="" value="@(ExportDispatchedTrain.DispatchedOfDate.HasValue ? ExportDispatchedTrain.DispatchedOfDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_WagonNo" style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTrain.WagonNo)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_RRNo" style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTrain.RRNo)" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_EngineNo" disabled style="width: 172px;" type="text" placeholder="" value="@(ExportDispatchedTrain.EngineNo)" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_ShipperName" disabled style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTrain.ShipperName)" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_WagonType" style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTrain.WagonType)" />
+                            </td>
+                            <td>
+
+                                <select class="form-control txt_ReDispatched" aria-invalid="false" style="width: 110px;">
+                                    <option value="">Re-Dispatched</option>
+                                    <option value="Yes" @(ExportDispatchedTrain.ReDispatched == "Yes" ? "selected=selected" : "")>Yes</option>
+                                    <option value="No" @(ExportDispatchedTrain.ReDispatched == "No" ? "selected=selected" : "")>No</option>
+
+                                </select>
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_Cargoweight" style="width: 116px;" type="number" placeholder="" value="@(ExportDispatchedTrain.CargoWeight)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_Tareweight" style="width: 116px;" type="number" placeholder="" value="@(ExportDispatchedTrain.TareWeight)" />
+                            </td>
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDispatched">Dispatched</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ExportDispatchedTrain.js")"></script>

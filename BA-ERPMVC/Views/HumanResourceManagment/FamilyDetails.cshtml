@@ -1,0 +1,424 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "FamilyDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="lloForm" class="card d-none">
+
+    <div class="card-header">
+        <h3 class="card-title">Employee Family Details</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Employee info</label>
+                    <select class="form-control select2" id="ddlEmployee" name="ddlEmployee" style="width: 100%;"></select>
+                </div>
+            </div>
+
+            <div class="col-lg-2 d-none" id="typecol">
+                <div class="form-group">
+                    <label>Select Members</label>
+                    <select class="form-control select2" id="ddltype" name="ddltype" style="width: 100%;">
+                        <option value="-1">Select type</option>
+                        <option value="Parents">Parents</option>
+                        <option value="Spouse">Spouse</option>
+                        <option value="Children">Children</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.card-Body Row -->
+
+
+    </div>
+
+</div>
+
+<div id="divparent" class="card d-none">
+    
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Parent Name</label>
+                    <input type="text" id="txtfathername" maxlength="50" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Parent Cnic</label>
+                    <input type="text" id="txtfathercnic" maxlength="12" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                        <input type="text" id="txtfDob" class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control select2" id="ddlpgender" name="ddlspender" style="width: 100%;">
+                        <option value="-1">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table id="ParentGrid" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Parent ID</th>
+                        <th>Parent Name</th>
+                        <th>Cnic No</th>
+                        <th>Date Of Birth</th>
+                        <th>Parent Gender</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnparentSubmit" class="btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</div>
+<div id="editparent" class="card d-none">
+    <div class="card-header">
+        <h3 class="card-title">Edit Parents</h3>
+    </div>
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Parent Name</label>
+                    <input type="text" id="txteditparentname" maxlength="50" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Parent Cnic</label>
+                    <input type="text" id="txteditparentcnic" maxlength="12" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                        <input type="text" id="txteditparentDob" class="form-control datetimepicker-input" data-target="#reservationdate1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control select2" id="ddleditparentgender" name="ddleditparentgender" style="width: 100%;">
+                        <option value="-1">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" id="btneditparent" class="btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</div>
+<div id="divspouse" class="card d-none">
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Spouse Name</label>
+                    <input type="text" id="txtspousename" maxlength="50" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Spouse Cnic</label>
+                    <input type="text" id="txtspousecnic" maxlength="12" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                        <input type="text" id="txtsDob" class="form-control datetimepicker-input" data-target="#reservationdate2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Spouse Gender</label>
+                    <select class="form-control select2" id="ddlsgender" name="ddlsgender" style="width: 100%;">
+                        <option value="-1">Select Gender</option>
+                        <option value="Father">Father</option>
+                        <option value="Mother">Mother</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="SpouseGrid" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Spouse ID</th>
+                        <th>Spouse Name</th>
+                        <th>Cnic No</th>
+                        <th>Date Of Birth</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnspouseSubmit" class="btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</div>
+
+<div id="editspouse" class="card d-none">
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Spouse Name</label>
+                    <input type="text" id="txteditspousename" maxlength="50" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Spouse Cnic</label>
+                    <input type="text" id="txteditspousecnic" maxlength="12" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                        <input type="text" id="txteditsDob" class="form-control datetimepicker-input" data-target="#reservationdate2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Spouse Gender</label>
+                    <select class="form-control select2" id="ddleditsgender" name="ddleditsgender" style="width: 100%;">
+                        <option value="-1">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Father">Father</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btneditspouse" class="btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</div>
+
+<div id="divchild" class="card d-none">
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="txtchildname" maxlength="50" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Cnic/BayForm No</label>
+                    <input type="text" id="txtchildcnic" maxlength="12" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                        <input type="text" id="txtcDob" class="form-control datetimepicker-input" data-target="#reservationdate2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <label>Gender</label>
+                    <select class="form-control select2" id="ddlchildgender" name="ddlchildgender" style="width: 100%;">
+                        <option value="-1">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Marital Status</label>
+
+                    <select class="form-control select2" id="ddlchildstatus" name="ddlchildstatus" style="width: 100%;">
+                        <option value="-1">Marital Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table id="ChildGrid" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Child ID</th>
+                        <th>Child Name</th>
+                        <th>Child Bayform/Cnic No</th>
+                        <th>Date Of Birth</th>
+                        <th>Marital Status</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnchildSubmit" class="btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</div>
+<div id="editchild" class="card d-none">
+    <div class="card-body">
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="txteditchildname" maxlength="50" class="form-control">
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Cnic/BayForm No</label>
+                    <input type="text" id="txteditchildcnic" maxlength="12" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                        <input type="text" id="txteditcDob" class="form-control datetimepicker-input" data-target="#reservationdate2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row divTopMargin">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control select2" id="ddleditchildgender" name="ddleditchildgender" style="width: 100%;">
+                        <option value="-1">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Marital Status</label>
+                    <select class="form-control select2" id="ddleditchildstatus" name="ddleditchildstatus" style="width: 100%;">
+                        <option value="-1">Marital Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="card-footer">
+            <button type="submit" id="btneditchild" class="btn btn-primary">Submit</button>
+
+        </div>
+    </div>
+</div>
+<script src="~/AdminLte/Scripts/familydetails.js"></script>
+
+

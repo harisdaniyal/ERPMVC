@@ -1,0 +1,154 @@
+﻿@model BA_ERPMVC.ViewModels.ExportOrderBooking.ExportOrderBookingViewModel
+
+
+<!-- STEP 1 -->
+@*<form id="OrderBooking">*@
+<fieldset class="animate px-3 active" data-fieldset="1">
+    <div class="d-block py-2">
+        <div class="form-row ">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class="date-picker form-control" type="date" placeholder="" value="@(Model.DateOfBooking.HasValue ? Model.DateOfBooking.Value.ToString("yyyy-MM-dd"): "")" id="txt_OrderDate" />
+                    <label>Date Of Booking</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                    <input type="hidden" value="@Model.OrderNo" id="hf_OrderNo">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="text" min="0" aria-invalid="true" placeholder="" value="@(Model.Forwarder)" id="txt_Forwarder" />
+                    <label>Forwarder</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="text" aria-invalid="false" placeholder="" value="@(Model.ShipperName)" id="txt_Shipper" />
+                    <label>Shipper Name</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="text" aria-invalid="false" placeholder="" value="@(Model.ShipperContact)" id="txt_ShipperContact" />
+                    <label>Shipper Contact Number</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" placeholder="" value="@(Model.TwentyContainerQty)" id="txt_TwentycontainerQty" />
+                    <label>Twenty Container QTY</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" placeholder="" value="@(Model.FortyContainerQty)" id="txt_FortycontainerQty" />
+                    <label>Forty Container QTY</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" oninput="CalculateTotalAmount()" name="txt_Twentycontainerprice" placeholder="" value="@(Model.TwentyContainerPrice)" id="txt_Twentycontainerprice" />
+                    <label>Twenty Container Price</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input class=" date-picker form-control" type="number" aria-invalid="false" oninput="CalculateTotalAmount()" name="txt_Fortycontainerprice" placeholder="" value="@(Model.FortyContainerPrice)" id="txt_Fortycontainerprice" />
+                    <label>Forty Container Price</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="input-group">
+                    <label style="font-size: 12px; color: #a0aaba; font-family: emoji; font-weight: 100; margin-left: 22px; ">Rate Of Transportation</label>
+                    <input class=" datepicker form-control" disabled type="text" aria-invalid="true" placeholder="" value="@(Model.RateOfTransportation)" id="txt_Rateoftransportation" />
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="input-group" style="padding-top: 26px;">
+                    @*<select class="form-control select2" aria-invalid="false" style="width: 100%;" id="txt_LoadingStation">
+                    <option value="">Please Select Loading Station</option>
+                    @foreach (var loadingStation in ViewBag.LoadingStation)
+                    {
+                        <option value="@loadingStation.LocationName" @(loadingStation.LocationName == Model.PointOfLoadingStation ? "selected=selected" : "")>@loadingStation.LocationName</option>
+                    }
+                </select>*@
+                    <select id="txt_LoadingStation" class="form-control select2" aria-invalid="false" style="width: 100%;">
+                        <option value="0">Point Of Loading</option>
+                        <option value="SAPT">SAPT</option>
+                        <option value="JUMMA GOTH">JUMMA GOTH</option>
+                        <option value="KRK LAHORE">KRK LAHORE</option>
+                    </select>
+                    <label for="ddlState">Loading Station</label>
+                    <div class="form-status"><span></span></div>
+                    <i class="fas fa-check"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+      
+                    <div class="col-md-6" id="tr_BL_CRO" >
+
+                        <div class="input-group">
+                           <input type="text" id="txt_CRO" class="form-control staticLabel w-25" value="@Model.CRO" />
+                           <label for="lbl_BL_CRO" id="lbl_BL_CRO" class="customLabel">CRO</label>
+
+                            <div class="form-status"><span></span></div>
+                            <i class="fas fa-check"></i>
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 text-left">
+                            <h5 class="text-uppercase border-bottom py-1 mb-4">Facilities List</h5>
+                            <div class="d-flex mb-4 flex-wrap">
+                                @foreach (var facility in ViewBag.Facilities)
+                                {
+                                    <div class=" form-check w-md-49">
+                                        <input class="form-check-input ml-1" type="checkbox" name="cbx_Facilities" value="@facility.facilityID" @(Model.FacilityIds != null && Model.FacilityIds.Any(x => x == (int)facility.facilityID) ? "checked='checked'" : "")>
+                                        <label class="form-check-label ml-4" for="inlineCheckbox1">@facility.FacilityName</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-left mt-5">
+                            <button type="submit" id="btn_SubmitBookingOrder" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnSubmitBookingOrder()">PROCEED <i class="fas fa-angle-double-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+</fieldset>
+@*</form>*@
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ExportBooking.js")"></script>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.UserMenuViewModel>
+@{
+    ViewBag.Title = "AssignMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    input.form-check-input {
+        width: 30px;
+        height: 30px;
+    }
+    #checkall {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4>Menu-Assign</h4>
+            </div><!-- /.col -->
+
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <label for="ddlState">UserName:</label>
+                <select class="form-control  ddl_UserName" aria-invalid="false" style="width: 100%;">
+                    <option value="">--Select User--</option>
+                    @*<option value="0">All</option>*@
+                    @foreach (var username in ViewBag.UserNames)
+                    {
+                        <option value="@username.Id" data-select2-id="@username.Id">@(String.Format("{0} {1}", username.FirstName, username.LastName))</option>
+                    }
+                </select>
+                <div class="form-status"><span></span></div>
+
+            </div><br />
+        </div>
+        <label class="form-check-label" for="inlineCheckbox1">Check All</label>
+        <input type="checkbox" name="all" id="checkall" />
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Menu" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive" style="height:auto;">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>Menu's</th>
+                            <th>Is View</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var menuassign in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+
+                                <td>
+                                    <input type="hidden" value="@menuassign.MenuId" class="form-control txt_MenuId" />
+                                    <input type="text" disabled value="@menuassign.MenuName" class="form-control txt_MenuName" style="width:250px;" />
+                                </td>
+
+                                <td>
+                                    <div class="form-check w-md-100">
+                                        <input class="form-check-input IsView" type="checkbox" name="cbx_Facilities" value="@menuassign.IsView" @(menuassign.IsView == true ? "checked='checked'" : "")>
+                                        <label class="form-check-label" for="inlineCheckbox1"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+    <div class="btn-group"style="width:100%; margin:5px;">
+        <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+    </div>
+</div>
+<script src="~/AdminLte/Scripts/AssignMenu.js"></script>

@@ -1,0 +1,278 @@
+﻿
+
+<style>
+
+
+
+    #errorDiv {
+        background-color: red;
+        color: #FFFFFF;
+        padding-left: 25px;
+    }
+
+    .message {
+        font: 20px Helvetica, Arial, Sans-serif;
+        display: none;
+        padding: 20px;
+        color: #fff;
+    }
+</style>
+
+
+
+@{
+
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "CustomerRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+<br />
+
+
+<div class="card">
+
+    <div class="card-header" style="border-bottom: 8px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <div class="col-md-6 float-sm-right">
+            <button type="submit" id="_btnBack" class="btn btn-default btn-primary float-right d-none">Back</button>
+        </div><!-- /.col -->
+        <h6 class="m-0 font-weight-bold centerHead">Customer Registration/Master Form</h6>
+
+    </div>
+    @*<div class="card-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h6>Customer Registration Form</h6>
+                </div><!-- /.col -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>*@
+    <div id="HideForm">
+
+
+        <form id="_addCustomerReg">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Customer Code</label>
+                            <input type="text" name="CustomerCode" id="CustomerCode" maxlength="12" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtCustomerName">Customer Name<label id="_txtCustomerName-error" class="error" for="txtCustomerName"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtCustomerName" name="txtCustomerName" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtCustomerAddress">Customer Address<label id="_txtCustomerName-error" class="error" for="txtCustomerAddress"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtCustomerAddress" name="txtCustomerAddress" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtCustomerEmail">Customer Email<label id="_txtCustomerName-error" class="error" for="txtCustomerEmail"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtCustomerEmail" name="txtCustomerEmail" class="form-control" required>
+                                <span class="message success" style="color:forestgreen;">Email Vaild!</span>
+                                <span class="message error" style="color:red;">Email InValid!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtCustomerType">Customer Type<label id="_txtCustomerName-error" class="error" for="txtCustomerType"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="txtCustomerType" name="txtCustomerType" style="width: 100%;">
+                                    <option selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtPhoneNO">Customer Phone No<label id="_txtCustomerName-error" class="error" for="txtPhoneNO"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtPhoneNO" name="txtPhoneNO" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtCountry">Country<label id="_txtCustomerName-error" class="error" for="txtCountry"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtCountry" name="txtCountry" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="txtCity">City<label id="_txtCustomerName-error" class="error" for="txtCity"></label></label>
+                            <div class="input-group">
+                                <input type="text" id="txtCity" name="txtCity" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="txtBussniessDivsion">Bussnies Division<label id="_txtCustomerName-error" class="error" for="txtBussniessDivsion"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="txtBussniessDivsion" name="txtBussniessDivsion" style="width: 100%;">
+                                    <option selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="form-check">
+                            <label>Status</label>
+                            <input type="checkbox" class="form-check" id="txtStatus" checked="checked">
+
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <div class="card-footer">
+                    <div class="col-md-6 col-sm-6 offset-md-3">
+                        <button class="btn btn-primary " id="_btnReset" type="reset">Reset</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-success">Submit</button>
+                        <button class="btn btn-dark " id="_viewOrder" type="button">ViewCustomer</button>
+                    </div>
+                </div>
+                <!--
+        <div class="card-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+
+            <!--  <button type="button" id="_viewOrder" class="btn btn-primary">View Order</button> 
+
+                <button type="button" id="_viewOrder" class="btn btn-primary">View Customer</button>
+
+            </div>
+            -->
+</div>
+        </form>
+    </div>
+
+
+    <div class="card-body d-none" id="OrderTableHide">
+        <div class="row">
+
+            <button type="submit" id="_btnBack" class="btn btn-primary">Back</button>
+        </div>
+
+
+
+
+
+        <!-- Start -->
+        <div class="ln_solid"></div>
+        <br />
+
+        <div id="TableDiv">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="CustomerGride">
+                                            <thead class="_changeHeaderColor">
+                                                <tr>
+                                                    <th scope="col">CustomerCode</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col" style="width:20px;"> CustomerAddress   </th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">CustomerType</th>
+                                                    <th scope="col">PhoneNO</th>
+                                                    <th scope="col">Country</th>
+                                                    <th scope="col">City</th>
+                                                    <th scope="col">BussinessDivision</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Action</th>
+                                                    <th scope="col">UserID</th>
+                                                    <th scope="col">UpdateBy</th>
+                                                    <th scope="col">CreateDate</th>
+                                                    <th scope="col">UpdateDate</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="_purchasetList"></tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+    <script src="~/AdminLte/Scripts/CustomerReg.js"></script>

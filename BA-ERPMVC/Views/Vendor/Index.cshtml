@@ -1,0 +1,269 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="/AdminLte/dist/css/styles.css" />
+
+<br />
+
+<div class="card d-none shadow-lg p-3 mb-5 bg-white rounded" id="gridShow">
+
+
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;">
+        <div class="row">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-outline-light">Add Vendor</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+    <div class="card-body shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetail">
+
+                <table class="table table-bordered table-hover table-condensed dataTable " style="width:100%" id="VendorGrid">
+                    <thead class="_changeHeaderColor datatable-head">
+
+                        <tr class="text-center">
+                            <th scope="col">Vendor Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Phone no</th>
+                            <th scope="col">State</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="_orderList" class="text-center"></tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div id="lloForm" class="card cardV2  d-none">
+    <div class="card-header">
+        <h5 class="m-0 font-weight-bold centerHead">Vendor Form</h5>
+    </div>
+
+
+    <form id="_Addvendor">
+        <!-- /.card-header -->
+        <input type="hidden" id="VendorId" name="VendorId" value="0" />
+        <input type="hidden" id="isEdit" name="isEdit" value="0" />
+        <div class="card-body p-0">
+            <div class="form-row ">
+
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" id="txtVendorname" name="txtVendorname" class="form-control">
+                        <label for="txtVendorname">Vendor Name<label id="_txtVendorname-error" class="error" for="txtVendorname"></label></label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" id="txtemail" name="txtemail" class="form-control">
+                        <label for="txtemail">Email<label id="_txtemail-error" class="error" for="txtemail"></label></label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <textarea id="txtAddress" name="txtAddress" class="form-control"></textarea>
+                        <label for="txtAddress">Address<label id="_txtemail-error" class="error" for="txtAddress"></label></label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input type="text" id="txtPhone" name="txtPhone" class="form-control">
+                        <label for="txtPhone">Phone<label id="_txtPhone-error" class="error" for="txtPhone"></label></label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <select class="form-control select2" id="ddlState" name="ddlState" style="width: 100%;">
+                            <option selected="selected" value="-1">-- Select --</option>
+                        </select>
+                        <label for="ddlState">State<label id="_ddlState-error" class="error" for="ddlState"></label></label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <select class="form-control select2" id="ddlCity" name="ddlCity" style="width: 100%;">
+                            <option selected="selected" value="-1">-- Select --</option>
+                        </select>
+                        <label for="ddlCity">City<label id="_ddlCity-error" class="error" for="ddlCity"></label></label>
+                        <div class="form-status"><span></span></div>
+                        <i class="fas fa-check"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-row ">
+                <div class="col-md-12">
+                    <div class="input-group input-group-option">
+                        @*<select class="form-control select2" id="ddlType" name="ddlType" style="width: 100%;">
+                        <option selected="selected" value="-1">-- Select --</option>
+                        <option value="1">Inventory</option>
+                        <option value="2">Transporter</option>
+                    </select>*@
+                        <label for="ddlType">Type<label id="_ddlType-error" class="error" for="ddlType"></label></label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-v2 ">
+                                <input type="radio" name="options" id="Trucking"> Trucking
+                            </label>
+                            <label class="btn btn-v2 ">
+                                <input type="radio" name="options" id="Railway"> Railway
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-row" id="statusrow">
+                <div class="col-md-12">
+                    <div class="input-group input-group-option">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="chkStatus" checked="checked">
+                            <label for="chkStatus" class="custom-control-label">Status<label id="_chkStatus-error" class="error" for="chkStatus"></label></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-12">
+                    <button class="btn btn-v2 btn-dark " id="btnBack" type="reset"><i class="fas fa-angle-left"></i> Back</button>
+                    <button class="btn btn-v2 btn-outline-secondary " id="_reset" type="reset"><i class="fas fa-undo"></i> Reset</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-v2 btn-success"><i class="fas fa-save"></i> Submit</button>
+                </div>
+            </div>
+
+
+            <!-- INVENTORY MODALS -->
+            <div class="modal fade" id="InventoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage Inventories</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- TRANSPORT MODALS -->
+            <div class="modal fade" id="TransporterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg  modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage Transport</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+    <div class="card-footer">
+        <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+        <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+    </div>
+        -->
+        </div>
+
+
+    </form>
+
+
+</div>
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/VendorJS.js")"></script>

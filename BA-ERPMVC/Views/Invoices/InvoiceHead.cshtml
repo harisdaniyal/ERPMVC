@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.InvoiceHeadViewModel>
+
+@{
+    ViewBag.Title = "InvoiceHead";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Invoice Heads</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 table-responsive center">
+                <table id="example" class="table table-sm table-bordered mb-3" style="height: auto">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>HeadType</th>
+                            <th>HeadName</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="0" class="form-control txt_ID" />
+                                <select id="txt_HeadType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
+                                    <option value="">Select HeadType</option>
+                                    <option value="Expense">Expense</option>
+                                    @*<option value="Revenue">Revenue</option>*@
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" style="width: 350px;" value="" class="form-control" id="txt_HeadName" />
+                            </td>
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                            </td>
+                        </tr>
+                        @foreach (var invoicehead in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@invoicehead.ID" class="form-control txt_ID" />
+
+                                    <select id="txt_HeadType" aria-invalid="false" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 200px;">
+                                        <option value="">Select HeadType</option>
+                                        <option value="Expense" @(invoicehead.HeadType == "Expense" ? "selected=selected" : "")>Expense</option>
+                                        <option value="Revenue" @(invoicehead.HeadType == "Revenue" ? "selected=selected" : "")>Revenue</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="txt_HeadName" style="width: 350px;" value="@invoicehead.HeadName" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" />
+                                </td>
+
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/InvoiceHead.js")"></script>
+

@@ -1,0 +1,16 @@
+Mode of transportation -----> Logistics
+status(pre-dispatch/ dispatch/delivery /empty return/Redispatched)--------> Logistics
+Pre-Dispatched Check box --------> Logistics
+Comodities --------> Logistics
+Empty Terminal Location rather than Empty Return Location --------> Logistics
+Shipping Line --------> Booking 
+Agent --------> Booking
+Free No of Days --------> Booking
+Remarks --------> Booking
+Vessel Berthing Date --------> Booking
+
+
+
+Take requirements from Accounts
+
+1) Terminals/Agents/Shipping Line/Stations/Locations

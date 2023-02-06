@@ -1,0 +1,150 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.LogisticsViewModel>
+
+<fieldset class="animate" data-fieldset="2">
+    <div class="d-block py-2">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+            <table id="tbl_Logistics" class="table table-sm table-bordered mb-3 w-min-100">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ContainerNo #</th>
+                        <th>Container Weight</th>
+                        <th>Container Size</th>
+                        <th>Reference Container</th>
+                        <th>Container Type</th>
+                        <th>Job Type</th>
+                        <th>Mode Of Transportation</th>
+                        <th>Pre-Dispatched</th>
+                        <th>Comodities</th>
+                        <th>From location</th>
+                        <th>To Location</th>
+                        <th>Empty Return Location</th>
+                        <th>Empty Return Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot class="mb-4">
+                    <tr id="tr_addLogistics" class="bg-light tbl-valign-top">
+                        <td>
+                            <input type="text" id="txt_ContainerNo" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width:120px;" placeholder="Container number" onchange="onChange_ContainerNumber(this)" />
+                            <span id="sp_containerError" class="error-msg" style="display:none;">DUPLICATE</span>
+                        </td>
+
+
+                        <td>
+                            <input type="number" id="txt_ContainerWeight" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="Container Weight" />
+                        </td>
+
+                        <td>
+                            <select id="ddl_ContainerSize" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0">
+                                <option value="">Container Size</option>
+                                @foreach (var containerSize in ViewBag.ContainerSizes)
+                                {
+                                    <option value="@containerSize.ProductCatID">@containerSize.ProductCatName</option>
+                                }
+                            </select>
+                        </td>
+
+                        <td>
+                            <input type="text" id="txt_RefrenceContainer" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="ReferenceContainer" style="width: 150px;" />
+                        </td>
+
+
+                        <td>
+                            <select id="ddl_ContainerType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 170px;">
+                                <option value="">Container Type</option>
+                                @foreach (var containerType in ViewBag.ContainerTypes)
+                                {
+                                    <option value="@containerType.ContainerTypeID">@containerType.ContainerTypeName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select id="ddl_JobType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Job Type</option>
+                                <option value="Laden">LADEN</option>
+                                <option value="Empty">EMPTY</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="ddl_ModeOfTransportation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Mode Of Transportation</option>
+                                <option value="Train">Train</option>
+                                <option value="Truck">Truck</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <select id="ddl_PreDispatched" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Pre-Dispatched</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="txt_Comodities" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="Comodities" style="width: 150px;" />
+                        </td>
+                        <td>
+                            <select id="ddl_FromLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 select2" style="width: 150px;">
+                                <option value="">From Location</option>
+                                @foreach (var location in ViewBag.Location)
+                                {
+                                    <option value="@location.ID">@location.LocationName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select id="ddl_ToLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 150px;">
+                                <option value="">To Location</option>
+                                @foreach (var location in ViewBag.Location)
+                                {
+                                    <option value="@location.ID">@location.LocationName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select id="ddl_EmptyContainerReturnLocation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 150px;">
+                                <option value="">Empty Return Location</option>
+                                @foreach (var location in ViewBag.EmptyDropOffLocation)
+                                {
+                                    <option value="@location.ID">@location.LocationName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_EmptyContainerReturnDate" type="date" placeholder="Empty Return Date">
+                        </td>
+                        <td>
+
+                            <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_Status" type="text" disabled style="width: 150px;">
+                        </td>
+                        <td style="width:50px">
+                            <button type="button" id="btn_AddLogistics" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0" onclick="onClick_AddLogistics()">Add</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="d-block w-100">
+            <div class="row">
+                <div class="col-md-12 text-left mt-5">
+                    <div class="d-flex w-100 justify-content-between px-3">
+                        <button type="button" class="btn w-25 btn-dark btn-v2 btn-back" onclick="onClick_BtnBackToBooking()"><i class="fas fa-angle-double-left"></i> Back</button>
+                        <button type="button" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnProceedToTrips()">PROCEED <i class="fas fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/Logistics.js")"></script>
+
+<script>
+    var logisticsData = @Html.Raw(Json.Encode(Model));
+
+    initialize(logisticsData);
+</script>
+

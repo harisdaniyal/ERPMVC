@@ -1,0 +1,150 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExportOrderBooking.ExportLogisticViewModel>
+
+<fieldset class="animate" data-fieldset="2">
+    <div class="d-block py-2">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+            <table id="tbl_ExportLogistics" class="table table-sm table-bordered mb-3 w-min-100">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Container No#</th>
+                        <th>Container Type</th>
+                        <th>Container Size</th>
+                        <th>EG NO#</th>
+                        <th>Vessel</th>
+                        <th>Voyage</th>
+                        <th>ETD Date</th>
+                        <th>Vessel CutOff</th>
+                        <th>ShippingLine</th>
+                        <th>Clearing Agent Name</th>
+                        <th>Clearing Agent No#</th>
+                        <th>Booking Port</th>
+                        <th>Mode Of Transportation</th>
+                        <th>Date Of Receiving Of Cargo</th>
+                        <th>Pre-Dispatched</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot class="mb-4">
+                    <tr id="tr_addLogistics" class="bg-light tbl-valign-top">
+                        <td>
+                            <input type="text" id="txt_ContainerNo" style="width:180px;" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" onchange="onChange_ContainerNumber(this)" />
+                            <span id="sp_containerError" class="error-msg" style="display:none;">DUPLICATE</span>
+                        </td>
+                        <td>
+                            <select id="txt_ContainerType" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 190px;">
+                                <option value="">Container Type</option>
+                                @foreach (var containerType in ViewBag.ContainerTypes)
+                                {
+                                    <option value="@containerType.ContainerTypeName">@containerType.ContainerTypeName </option>
+                                }
+                            </select>
+                        </td>
+
+
+                        <td>
+                            <select id="txt_ContainerSize" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 125px;">
+
+                                <option value="">Container Size</option>
+                                @foreach (var containerSize in ViewBag.ContainerSizes)
+                                {
+                                    <option value="@containerSize.ProductCatName">@containerSize.ProductCatName</option>
+                                }
+                            </select>
+                        </td>
+
+                        <td>
+                            <input type="text" id="txt_EgNo" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 130px;" />
+                        </td>
+
+                        <td>
+                            <input type="text" id="txt_Vessel" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 150px;" />
+                        </td>
+                        <td>
+                            <input type="text" id="txt_Voyage" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 120px;" />
+                        </td>
+                        <td>
+                            <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_ETD" type="date" placeholder="">
+                        </td>
+                        <td>
+                            <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_VesselCutoff" type="date" placeholder="">
+                        </td>
+                        <td>
+                            <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 170px;" id="txt_ShippingLine">
+                                <option value="">Select Shipping Line </option>
+                                @foreach (var shippingline in ViewBag.ShippingLines)
+                                {
+                                    <option value="@shippingline.ShippingLineName">@shippingline.ShippingLineName</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="txt_Clearingagent" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 150px;" />
+                        </td>
+                        <td>
+                            <input type="number" id="txt_Clearingagentno" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" placeholder="" style="width: 150px;" />
+                        </td>
+
+                        <td>
+                            <select id="txt_Bookingport" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Booking Port</option>
+                                <option value="kpt">KPT</option>
+                                <option value="kict">KICT</option>
+                                <option value="pict">PICT</option>
+                                <option value="qict">QICT</option>
+                                <option value="sapt">SAPT</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="txt_ModeOfTransportation" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Mode Of Transportation</option>
+                                <option value="Train">Train</option>
+                                <option value="Truck">Truck</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_DateofcargoReceiving" type="date" placeholder="">
+                        </td>
+                        <td>
+                            <select id="txt_PreDispatched" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" style="width: 100px;">
+                                <option value="">Pre-Dispatched</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </td>
+
+
+                        <td>
+
+                            <input class="date-picker form-control form-control-v1 form-control-sm border-dark mt-1 mb-0" id="txt_Status" type="text" disabled style="width: 150px;">
+                        </td>
+                        <td style="width:50px">
+                            <button type="button" id="btn_AddLogistics" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0" onclick="onClick_AddLogistics()">Add</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="d-block w-100">
+            <div class="row">
+                <div class="col-md-12 text-left mt-5">
+                    <div class="d-flex w-100 justify-content-between px-3">
+                        <button type="button" class="btn w-25 btn-dark btn-v2 btn-back" onclick="onClick_BtnBackToBooking()"><i class="fas fa-angle-double-left"></i> Back</button>
+                        <button type="button" class="btn w-25 btn-primary btn-v2 btn-next" onclick="onClick_BtnProceedToTrips()">PROCEED <i class="fas fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ExportLogistic.js")"></script>
+
+<script>
+    var logisticsData = @Html.Raw(Json.Encode(Model));
+
+    initialize(logisticsData);
+</script>
+

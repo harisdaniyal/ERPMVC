@@ -1,0 +1,108 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.BLShippingContainerViewModel>
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Inventory Container</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 table-responsive center">
+                <table id="example" class="table table-sm table-bordered mb-3  datatable" style="height: auto">
+                    <thead class="thead-light ">
+                        <tr>
+                            <th>Container No</th>
+                            <th>Container Size</th>
+                            <th>Container Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-light ">
+                            <td>
+                                <input type="hidden" value="0" class="form-control txt_ID" />
+                                <input oninput="this.value= this.value.toUpperCase()" type="text" style="width: 200px;" value="" class="form-control  txt_containerno" />
+                            </td>
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize" style="width: 200px;">
+                                    <option value="">Container Size</option>
+                                    @foreach (var containerSize in ViewBag.ContainerSizes)
+                                    {
+                                        <option value="@containerSize.ProductCatName" data-select2-id="@containerSize.ProductCatName">@containerSize.ProductCatName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerType" style="width: 200px;">
+                                    <option value="">Container Type</option>
+                                    @foreach (var containerType in ViewBag.ContainerTypes)
+                                    {
+                                        <option value="@containerType.ContainerTypeName" data-select2-id="@containerType.ContainerTypeName">@containerType.ContainerTypeName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                            </td>
+                        </tr>
+                        @foreach (var bLShippingContainer in Model.ToList())
+                        {
+                            <tr class="bg-light">
+                                <td>
+                                    <input type="hidden" value="@bLShippingContainer.ID" class="form-control txt_ID" />
+                                    <input oninput="this.value= this.value.toUpperCase()" type="text" style="width: 200px;" value="@bLShippingContainer.ContainerNo" class="form-control  txt_containerno" />
+                                </td>
+                                <td>
+                                    <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerSize" style="width: 200px;">
+                                        <option value="">Container Size</option>
+                                        @foreach (var containerSize in ViewBag.ContainerSizes)
+                                        {
+                                            <option value="@containerSize.ProductCatName" data-select2-id="@containerSize.ProductCatName" @(containerSize.ProductCatName == bLShippingContainer.ContainerSize ? "selected=selected" : "")>@containerSize.ProductCatName</option>
+                                        }
+                                    </select>
+                                </td>
+
+                                <td>
+                                    <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerType" style="width: 200px;">
+                                        <option value="">Container Type</option>
+                                        @foreach (var containerType in ViewBag.ContainerTypes)
+                                        {
+                                            <option value="@containerType.ContainerTypeName" data-select2-id="@containerType.ContainerTypeName" @(containerType.ContainerTypeName == bLShippingContainer.ContainerType ? "selected=selected" : "")>@containerType.ContainerTypeName</option>
+                                        }
+                                    </select>
+                                </td>
+
+
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/BLShippingContainer.js")"></script>

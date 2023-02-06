@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "UpcommingTrips";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="card shadow-lg p-3 mb-5 bg-white rounded " id="gridShow">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">UpCommingTrips</h6>
+    </div>
+    <div class="card-body">
+
+
+        <div class="row" id="transportaionhide">
+            <div class="col-md-12 ">
+                <div class="x_panel">
+                    <div class="table-responsive">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <table class="table   table-hover table-bordered table-condensed dataTable nowrap  shadow-lg p-3 mb-5 bg-white rounded" id="MainGrid">
+                                <thead class="_changeHeaderColor">
+                                    <tr>
+                                        <th scope="col">TripCode</th>
+                                        <th scope="col">Order No</th>
+                                        <th scope="col">Container No</th>
+                                        <th scope="col">Container No2</th>
+                                        <th scope="col">Vehicle No</th>
+                                        <th scope="col">DriverName</th>
+                                        <th scope="col">From Location</th>
+                                        <th scope="col">To Location</th>
+                                        <th scope="col">Container Status</th>
+                                        <th scope="col">Total Expense</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="_ticketList"></tbody>
+                                <!--
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th style="text-align:right">Total:</th>
+                                    <th>0</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                                -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <br />
+       
+
+    </div>
+
+
+</div>
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+
+<script src="~/AdminLte/Scripts/UpCommingtripsJS.js"></script>

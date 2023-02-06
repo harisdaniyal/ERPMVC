@@ -1,0 +1,124 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.ReDispatchedViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Re-Dispatched</h4>
+            </div><!-- /.col -->
+
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <label for="ddlState">Station Name</label>
+                <select class="form-control  ddl_stations" aria-invalid="false" style="width: 100%;">
+                    <option value="">Please Select Station</option>
+                    <option value="0">All</option>
+                    @foreach (var station in ViewBag.Stations)
+                    {
+                        <option value="@station.StationID" data-select2-id="@station.StationID" >@station.StationName</option>
+                    }
+                </select>
+                <div class="form-status"><span></span></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto;">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Reference Container</th>
+                            <th>Station Name</th>
+
+                            <th>Arrival Date</th>
+                            <th>Last Date of Empty Return</th>
+                            <th>Delivery Location</th>
+                            <th>Vehicle No#</th>
+                            <th>Re-Dispatched Date</th>
+                            <th>Transporter Name</th>
+                            <th>Bilty Number</th>
+                            <th>Transportation Cost</th>
+                            <th>Empty DropOff Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reDispatched in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@reDispatched.OrderId" class="form-control txt_OrderId" />
+                                    <input type="hidden" value="@reDispatched.BLnumber" class="form-control txt_BLnumber" />
+                                    <input type="hidden" value="@reDispatched.StationID" class="form-control txt_StationID" />
+                                    <input type="hidden" value="@Convert.ToInt32(reDispatched.ID)" class="form-control txt_ID" />
+                                    <input type="text" disabled style="width: 110px;" value="@reDispatched.OrderNo" class="form-control txt_OrderNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 300px;" value="@reDispatched.ContainerNo" class="form-control txt_ContainerNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled value="@reDispatched.ContainerSize" class="form-control txt_ContainerSize" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 300px;" value="@reDispatched.ReferenceContainer" class="form-control txt_ReferenceContainer" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_StationName" style="width: 170px;" type="text" disabled placeholder="" value="@(reDispatched.StationName)" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_ArrivalDate" disabled style="width: 170px;" type="date" placeholder="" value="@(reDispatched.ArrivalDate.HasValue ? reDispatched.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_LastDateofEmptyReturn" disabled style="width: 170px;" type="date" placeholder="" value="@(reDispatched.LastDateofEmptyReturn.HasValue ? reDispatched.LastDateofEmptyReturn.Value.AddDays(reDispatched.FreeDays > 0 ? Convert.ToDouble(reDispatched.FreeDays): 0).ToString("yyyy-MM-dd"): "")" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_DelieveryLocation" disabled style="width: 170px;" type="text" placeholder="" value="@(reDispatched.DelieveryLocation)" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_VehicleNo" style="width: 170px;" type="text" placeholder="" value="@(reDispatched.VehicleNo)" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_ReDispatchedDate" style="width: 170px;" type="date" placeholder="" value="@(reDispatched.ReDispatchedDate.HasValue ? reDispatched.ReDispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_TranspoterName" style="width: 170px;" type="text" placeholder="" value="@(reDispatched.TranspoterName)" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_BiltyNumber" style="width: 170px;" type="text" placeholder="" value="@(reDispatched.BiltyNumber)" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_TransportationCost" style="width: 170px;" type="number" placeholder="" value="@(reDispatched.TransportationCost)" />
+                                </td>
+                                <td>
+                                    <input class=" form-control txt_EmptyDropOffLocation" disabled style="width: 170px;" type="text" placeholder="" value="@(reDispatched.EmptyDropOffLocation)" />
+                                </td>
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnReDispatched">Re-Dispatched</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ReDispatched.js")"></script>

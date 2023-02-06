@@ -1,0 +1,460 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.BLShippingContainerDetailViewModel>
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .head {
+        background-color: grey;
+        color: white;
+    }
+</style>
+
+<br />
+
+<div id="gridShow" class="card d-none">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"> </i> BL Shipping line</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="BLShippingGride" class="table table-bordered dataTable" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th class="head" scope="col" sec:authorize="hasRole('Amin')">Action</th>
+                            <th class="head" scope="col">Approval</th>
+                            <th class="head" scope="col">BL No#</th>
+                            <th class="head" scope="col">ShipperName&Address</th>
+                            <th class="head" scope="col">ConsigneeName&Address</th>
+                            <th class="head" scope="col">NotifyPartyName&Address</th>
+                            <th class="head" scope="col">PreCarriageBy</th>
+                            <th class="head" scope="col">Collect</th>
+                            <th class="head" scope="col">PlaceOfReceipt</th>
+                            <th class="head" scope="col">OceanVessel</th>
+                            <th class="head" scope="col">VoyNo</th>
+                            <th class="head" scope="col">PortOfLoading</th>
+                            <th class="head" scope="col">PortOfDischarge</th>
+                            <th class="head" scope="col">PlaceOfDelivery</th>
+                            @*<th class="head" scope="col">ContainerNo</th>
+                            <th class="head" scope="col">SealNo</th>*@
+                            <th class="head" scope="col">NumberOfContainerPack</th>
+                            @*<th class="head" scope="col">KindOfPackDescriptionOfGoods</th>
+                            <th class="head" scope="col">GrossWeight</th>
+                            <th class="head" scope="col">Measurement</th>*@
+                            <th class="head" scope="col">FreightAndCharges</th>
+                            <th class="head" scope="col" style="width:80px;">BLAgent</th>
+                            <th class="head" scope="col">TypeOfService</th>
+                            <th class="head" scope="col">NumberOfOriginalBL</th>
+                            <th class="head" scope="col">ForwardingAgent</th>
+                            <th class="head" scope="col">FinalDestination</th>
+                            <th class="head" scope="col">FrightPayable</th>
+                            <th class="head" scope="col">Place Of Issue</th>
+                            <th class="head" scope="col">Date Of Issue</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+
+                        <tr>
+                            @*<th></th>*@
+
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">BLShippingLine</h3>
+    </div>
+
+    <form id="_addShippingLine">
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtblNo">BL No<label id="_txtCustomerName-error" class="error" for="txtblNo"></label></label>
+                        <div class="input-group">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" disabled name="txtblNo" class="txtblNo form-control">
+                            <input type="hidden" id="txtIsCompleted" value="" />
+                            <input type="hidden" id="txtBLShippingID" value="" />
+
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-lg-4" id="DX">
+                        <div class="form-group">
+                            <label for="txtApproval">Approval<label id="_txtCustomerName-error" class="error" for="txtApproval"></label></label>
+                            <div class="input-group">
+                                <select class="form-control select2" id="txtApproval" name="txtApproval" style="width: 100%;">
+                                    <option selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>*@
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group" />
+                    <label for="txtshipping">SHIPPER(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtshipping"></label></label>
+                    <div class="input-group">
+                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtshipping" name="txtshipping" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtConsignee">CONSIGNEE(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtConsignee"></label></label>
+                    <div class="input-group">
+                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtConsignee" name="txtConsignee" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtNotifyParty">NOTIFY PARTY(Name and Address)<label id="_txtCustomerName-error" class="error" for="txtNotifyParty"></label></label>
+                    <div class="input-group">
+                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtNotifyParty" name="txtNotifyParty" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtprecarriageby">PRE-CARRIAGE BY<label id="_txtCustomerName-error" class="error" for="txtprecarriageby"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtprecarriageby" name="txtprecarriageby" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtplaceofReceipt">PLACE OF RECEIPT<label id="_txtCustomerName-error" class="error" for="txtplaceofReceipt"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtplaceofReceipt" name="txtplaceofReceipt" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtOceanVessel">OCEAN VESSEL<label id="_txtCustomerName-error" class="error" for="txtOceanVessel"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtOceanVessel" name="txtOceanVessel" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtVoyNo">VOYAGE NO<label id="_txtCustomerName-error" class="error" for="txtVoyNo"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtVoyNo" name="txtVoyNo" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtPortOfLoading">PORT OF LOADING<label id="_txtCustomerName-error" class="error" for="txtPortOfLanding"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtPortOfLanding" name="txtPortOfLanding" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtPortOfDischarge">PORT OF DISCHARGE<label id="_txtCustomerName-error" class="error" for="txtPortOfDischarge"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtPortOfDischarge" name="txtPortOfDischarge" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtPlaceofDeilvery">PLACE OF DELIVERY<label id="_txtCustomerName-error" class="error" for="txtPlaceofDeilvery"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtPlaceofDeilvery" name="txtPlaceofDeilvery" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtConatinerOrPackage">NUMBER OF CONTAINERS OR PACKAGES<label id="_txtCustomerName-error" class="error" for="txtConatinerOrPackage"></label></label>
+                        <div class="input-group">
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtConatinerOrPackage" name="txtConatinerOrPackage" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtkindofpack">KIND OF PACKAGES & DISCRIPTION OF GOODS<label id="_txtCustomerName-error" class="error" for="txtkindofpack"></label></label>
+                        <div class="input-group">
+                            <textarea oninput="this.value= this.value.toUpperCase()" type="text" id="txtkindofpack" name="txtkindofpack" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtGrossWeight">GROSS WEIGHT<label id="_txtCustomerName-error" class="error" for="txtGrossWeight"></label></label>
+                        <div class="input-group">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtGrossWeight" name="txtGrossWeight" class="form-control">
+                        </div>
+                    </div>
+                </div>*@
+
+
+
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtNetWeight">MEASUREMENT<label id="_txtCustomerName-error" class="error" for="txtNetWeight"></label></label>
+                        <div class="input-group">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtNetWeight" name="txtNetWeight" class="form-control">
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtfreightandcharges">FREIGHT & CHARGES<label id="_txtCustomerName-error" class="error" for="txtfreightandcharges"></label></label>
+                    <div class="input-group">
+                        @*<input oninput="this.value= this.value.toUpperCase()"  type="text" id="txtfreightandcharges" name="txtfreightandcharges" class="form-control">*@
+
+                        <select id="txtfreightandcharges" class="form-control" style="width: 100px;">
+                            <option value="">Select</option>
+                            <option value="FREIGHT PREPAID"> FREIGHT PREPAID</option>
+                            <option value="COLLECT"> COLLECT</option>
+                            <option value="PREPAID"> PREPAID</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtagent">AGENT<label id="_txtCustomerName-error" class="error" for="txtagent"></label></label>
+                    <div class="input-group">
+                        <select class="form-control" id="txtagent" name="txtagent" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            @*<div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="txtagentdetail">AGENT DETAIL<label id="_txtCustomerName-error" class="error" for="txtagentdetail"></label></label>
+                        <div class="input-group">
+                            <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtagentdetail" name="txtagentdetail" class="form-control">
+                        </div>
+                    </div>
+                </div>*@
+
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtypeofservice">TYPE OF SERVICE<label id="_txtCustomerName-error" class="error" for="txtypeofservice"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtypeofservice" name="txtypeofservice" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtNumberofOrignal">NUMBER OF ORIGINAL B(s)/L<label id="_txtCustomerName-error" class="error" for="txtNumberofOrignal"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtNumberofOrignal" name="txtNumberofOrignal" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtforwardingagent">FORWARDING AGENT<label id="_txtCustomerName-error" class="error" for="txtforwardingagent"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtforwardingagent" name="txtforwardingagent" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtfinaldestination">FINAL DESTINATION<label id="_txtCustomerName-error" class="error" for="txtfinaldestination"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtfinaldestination" name="txtfinaldestination" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtfreightPayable">FREIGHT PAYABLE<label id="_txtCustomerName-error" class="error" for="txtfreightPayable"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtfreightPayable" name="txtfreightPayable" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtCollect">COLLECT<label id="_txtCustomerName-error" class="error" for="txtCollect"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtCollect" name="txtCollect" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- text input -->
+                <div class="form-group">
+                    <label for="txtEDob"> DATE OF ISSUE<label id="_txtCustomerName-error" class="error" for="txtEDob"></label></label>
+
+                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                        <input type="date" id="txtOperationDate" name="txtOperationDate" class="form-control datetimepicker-input" />
+                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datepicker">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="txtplaceofissue">PLACE OF ISSUE<label id="_txtCustomerName-error" class="error" for="txtplaceofissue"></label></label>
+                    <div class="input-group">
+                        <input oninput="this.value= this.value.toUpperCase()" type="text" id="txtplaceofissue" name="txtplaceofissue" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @* //////Container Grid///// *@
+
+        <div id="gridShow" class="card">
+            <div class="card-header" style="background:white;">
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-sm-6 float-sm-left">
+
+                    </div><!-- /.col -->
+
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 table-responsive center">
+                        <table id="example" class="table table-sm table-bordered mb-3" style="height: auto">
+                            <thead class="thead-light ">
+                                <tr>
+                                    <th>Container No#</th>
+                                    <th>Seal No#</th>
+                                    <th>KindOfPackDescriptionOfGoods</th>
+                                    <th>GrossWeight</th>
+                                    <th>Measurement</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-light tbl-valign-top">
+                                    @*<td style="display:none">
+                                        </td>*@
+                                    <td>
+                                        <input type="hidden" value="0" class="form-control txt_ID" />
+                                        <select class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_ContainerNo" style="width: 200px;">
+                                            <option value="">Container No</option>
+                                            @foreach (var containerNo in ViewBag.BLShippingContainers)
+                                            {
+                                                <option value="@containerNo.ContainerNo" data-select2-id="@containerNo.ContainerNo">@containerNo.ContainerNo</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" UPO type="text" style="width: 200px;" value="" class="form-control  txt_sealno" />
+                                    </td>
+
+                                    <td>
+                                        <textarea oninput="this.value= this.value.toUpperCase()" type="text" name="txtkindofpack" class="form-control txtkindofpack"></textarea>
+
+                                    </td>
+
+                                    <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" type="text" name="txtGrossWeight" class="form-control txtGrossWeight">
+                                    </td>
+                                    <td>
+                                        <input oninput="this.value= this.value.toUpperCase()" type="text" name="txtNetWeight" class="form-control txtNetWeight">
+                                    </td>
+
+                                    <td class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                        <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="btnBack" class="btn btn-dark">Back</button>
+                    <button type="submit" id="btnDraft" class="btn btn-warning">Draft</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-success">Finalized</button>
+                    <button type="submit" id="btnPrint" class="btn btn-primary">Print</button>
+
+                </div>
+                <!-- LOADING SHOW HIDE -->
+                <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/AdminLte/Scripts/blshipping.js"></script>
+<script src="~/AdminLte/Scripts/BLshippingContainerDetail.js"></script>

@@ -1,0 +1,137 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+<script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "CustomerRate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div id="gridShow">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add</button>
+            </div><!-- /.col -->
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+        <table id="CustomerGride" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>ID</th>
+                    <th>CustomerCode</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>CustomerType</th>
+                    <th>PhoneNO</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>BussinessDivision</th>
+                    <th>Status</th>
+                    <th>UserID</th>
+                    <th>UpdateBy</th>
+                    <th>CreateDate</th>
+                    <th>UpdateDate</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">Customer Rate Form</h3>
+    </div>
+
+
+    <div class="registration-form">
+        <!--<div id="myForm"> -->
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <select class="form-control select2" id="txtCustomerName" name="txtCustomerName" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Facilities</label>
+                        <select class="form-control select2" id="txtFacility" name="txtFacility" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Rate</label>
+                        <input type="text" id="txtrate" name="txtrate" class="form-control">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group" style="margin-top:30px;">
+                        <button type="submit" id="btnitemAdd" class="btn btn-primary">Add Item</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="CustomerRateGride" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Facilites</th>
+                            <th>Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+    </div>
+    <br />
+    <br />
+
+    <!-- /.row -->
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="btnBack" class="btn btn-primary">Back</button>
+
+    </div>
+</div>
+
+<!--</div>-->
+
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+<script src="~/AdminLte/Scripts/CustRate.js"></script>

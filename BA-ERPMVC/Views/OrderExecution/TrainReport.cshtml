@@ -1,0 +1,159 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.TrainOrderReportViewModel>
+
+@{
+    ViewBag.Title = "TrainReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Train Report</h2>
+<br />
+
+<table id="example" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive">
+    <thead class="thead-light text-center">
+        <tr>
+            <th>Order No</th>
+            <th>Customer Name</th>
+            <th>Business Division</th>
+            <th>Order Type</th>
+            <th>BLNo</th>
+            <th>Container No </th>
+            <th>Reference Container </th>
+            <th>Container Size </th>
+            <th>Container Weight </th>
+            <th>Container Type Name </th>
+            <th>CRO</th>
+            <th>Order Date</th>
+            <th>Invoice Amount</th>
+            <th>Shipping Agent Name</th>
+            <th>Free Days</th>
+            <th>Remarks</th>
+            <th>Vessel Berthing Date</th>
+            <th>Shipping Line Name</th>
+            <th>Booking POC Name</th>
+            <th>From Location</th>
+            <th>To Location</th>
+            <th>Job Type</th>
+            <th>Empty Return Location</th>
+            <th>Empty Return Date</th>
+            <th>Mode Of Transportation</th>
+            <th>PreDispatched</th>
+            <th>Commodities</th>
+            <th>DO Guarantee Date</th>
+            <th>Import EIR</th>
+            <th>Port Weighment</th>
+            <th>Outside Port Weighment</th>
+            <th>GD</th>
+            <th>BL</th>
+            <th>PreDispatchedFrom</th>
+            <th>PreDispatchedTo</th>
+            <th>PreDispatched Transporter Name</th>
+            <th>Vehicle No</th>
+            <th>Priority Of Dispatched</th>
+            <th>TrainId</th>
+            <th>DispatchedDate</th>
+            <th>Station Name</th>
+            <th>Wagon No</th>
+            <th>Wagon Type</th>
+            <th>RR No</th>
+            <th>Engine No</th>
+            <th>Invoice No</th>
+            <th>Arrival Date</th>
+            <th>LOLO</th>
+            <th>ReDispatched</th>
+            <th>ReDispatched TransporterName</th>
+            <th>BiltyNo</th>
+            <th>Transportation Cost</th>
+            <th>Delivery Vehicle Number</th>
+            <th>Delivery Arrival Date</th>
+            <th>Delivery Date</th>
+            <th>Expense At EmptyLocation</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: white ;" class="text-center">
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderNo</td>
+                <td>@order.CustomerName</td>
+                <td>@order.BusinessDivisionName</td>
+                <td>@order.OrderType</td>
+                <td>@order.BLNumber</td>
+                <td>@order.ContainerNo</td>
+                <td>@order.ReferenceContainer</td>
+                <td>@order.ContainerSize</td>
+                <td>@order.ContainerWeight</td>
+                <td>@order.ContainerTypeName</td>
+                <td>@order.CRO</td>
+                <td>@order.OrderDate</td>
+                <td>@order.InvoiceAmount</td>
+                <td>@order.ShippingAgentName</td>
+                <td>@order.FreeDays</td>
+                <td>@order.Remarks</td>
+                <td>@order.VesselBerthingDate</td>
+                <td>@order.ShippingLineName</td>
+                <td>@order.BookingPOCName</td>
+                <td>@order.FromLocation</td>
+                <td>@order.ToLocation</td>
+                <td>@order.JobType</td>
+                <td>@order.EmptyReturnLocation</td>
+                <td>@order.EmptyReturnDate</td>
+                <td>@order.ModeOfTransportation</td>
+                <td>@order.PreDispatched</td>
+                <td>@order.Commodities</td>
+                <td>@order.DoGuaranteeDate</td>
+                <td>@order.ImportEIR</td>
+                <td>@order.PortWeighment</td>
+                <td>@order.OutsidePortWeighment</td>
+                <td>@order.GD</td>
+                <td>@order.BL</td>
+                <td>@order.PreDispatchedFromLocation</td>
+                <td>@order.PreDispatchedToLocation</td>
+                <td>@order.PreDispatchedTransporterName</td>
+                <td>@order.VehicleNumber</td>
+                <td>@order.PriorityForDispatched</td>
+                <td>@order.TrainID</td>
+                <td>@order.DispatchedDate</td>
+                <td>@order.StationName</td>
+                <td>@order.WagonNumber</td>
+                <td>@order.WagonType</td>
+                <td>@order.RRNo</td>
+                <td>@order.EngineNo</td>
+                <td>@order.InvoiceNumber</td>
+                <td>@order.ArrivalDate</td>
+                <td>@order.LOLO</td>
+                <td>@order.ReDispatchedDate</td>
+                <td>@order.TransporterName</td>
+                <td>@order.BiltyNo</td>
+                <td>@order.TransportationCost</td>
+                <td>@order.DeliveryVehicleNumber</td>
+                <td>@order.DeliveryArrivalDate</td>
+                <td>@order.DeliveryDate</td>
+                <td>@order.ExpenseAtEmptyLocation</td>
+               
+
+                <!--<td class="text-center">-->
+                @* <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>*@
+                @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
+                <!--</td>-->
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+    $(document).ready(function myfunction() {
+        $('#example').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5'
+            ],
+            "Sorting": false,
+            "lengthChange": true,
+            "pageLength": 10,
+            "paging": true,
+            'searching': true
+        });
+
+    });
+</script>

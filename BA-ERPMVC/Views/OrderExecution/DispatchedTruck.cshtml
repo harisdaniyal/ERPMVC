@@ -1,0 +1,104 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.DispatchedTruckViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Dispatched (Truck)</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>From Location</th>
+                            <th>To Location</th>
+                            <th>Dispatched Date</th>
+                            <th>Vehicle No</th>
+                            <th>Driver Name</th>
+                            <th>Driver No</th>
+                            <th>Transporter Name</th>
+                            <th>Bilty No</th>
+                            <th>Last Date of Empty Return</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Dispatchedtruck in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@Dispatchedtruck.OrderId" class="form-control txt_OrderId" />
+                                    <input type="hidden" value="@Dispatchedtruck.BLnumber" class="form-control txt_BLnumber" />
+                                    <input type="hidden" value="@Convert.ToInt32(Dispatchedtruck.ID)" class="form-control txt_ID" />
+                                    <input type="text" disabled style="width: 90px;" value="@Dispatchedtruck.OrderNo" class="form-control txt_OrderNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 132px;" value="@Dispatchedtruck.ContainerNo" class="form-control txt_ContainerNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 80px;" value="@Dispatchedtruck.ContainerSize" class="form-control txt_ContainerSize" />
+                                </td>
+                               
+                                <td>
+                                    <input type="text" disabled style="width: 160px;" value="@Dispatchedtruck.FromLocation" class="form-control txt_FromLoc" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 100px;" value="@Dispatchedtruck.ToLocation" class="form-control txt_ToLoc" />
+                                </td>
+
+                                <td>
+                                    <input class="date-picker form-control txt_Dispatcheddate" style="width: 170px;" type="date" placeholder="" value="@(Dispatchedtruck.DispatchedDate.HasValue ? Dispatchedtruck.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
+                                </td>
+
+                                <td>
+                                    <input class="form-control txt_VehicleNo" style="width: 116px;" type="text" placeholder="" value="@(Dispatchedtruck.VehicleNo)" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_DriverName" style="width: 116px;" type="text" placeholder="" value="@(Dispatchedtruck.DriverName)" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_DriverNo" style="width: 116px;" type="text" placeholder="" value="@(Dispatchedtruck.DriverNo)" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_TransporterName" style="width: 116px;" type="text" placeholder="" value="@(Dispatchedtruck.TransporterName)" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_BiltyNo" style="width: 116px;" type="text" placeholder="" value="@(Dispatchedtruck.BiltyNo)" />
+                                </td>
+                                <td>
+                                    <input class="date-picker form-control txt_VesselBerthing" disabled style="width: 170px;" type="date" placeholder=""
+                                           value="@(Dispatchedtruck.LastDateofEmptyReturn.HasValue ? Dispatchedtruck.LastDateofEmptyReturn.Value.AddDays(Dispatchedtruck.FreeDays > 0 ? Convert.ToDouble(Dispatchedtruck.FreeDays): 0).ToString("yyyy-MM-dd"): "")" />
+                                </td>
+
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDispatched">Dispatched</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/DispatchedTruck.js")"></script>

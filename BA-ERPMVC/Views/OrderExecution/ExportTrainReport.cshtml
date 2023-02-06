@@ -1,0 +1,138 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExportOrderBooking.ExportTrainOrderReportViewModel>
+
+@{
+    ViewBag.Title = "ExportTrainReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Export Train Report</h2>
+<br />
+
+<table id="report" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive">
+    <thead class="thead-light text-center">
+        <tr>
+            <th>Order No</th>
+            <th>Order Type</th>
+            <th>Date Of Booking</th>
+            <th>Forwarder</th>
+            <th>Shipper Name</th>
+            <th>Shipper Contact No.</th>
+            <th>Twenty Container Qty </th>
+            <th>Twenty Container Price </th>
+            <th>Forty Container Qty </th>
+            <th>Forty Container Price</th>
+            <th>Rate Of Transportation </th>
+            <th>Loading Station </th>
+            <th>CRO</th>
+            <th>Container No</th>
+            <th>Container Type</th>
+            <th>Container Size</th>
+            <th>EG No#</th>
+            <th>Vessel</th>
+            <th>Voyage</th>
+            <th>ETD Date</th>
+            <th>Vessel Cut Off</th>
+            <th>ShippingLine</th>
+            <th>ClearingAgent Name</th>
+            <th>ClearingAgent No#</th>
+            <th>Booking Port</th>
+            <th>ModeOfTransportation</th>
+            <th>Date Of ReceivingCargo</th>
+            <th>PreDispatched</th>
+            <th>Pickup From</th>
+            <th>Pre-Dispatched VehicleNo#</th>
+            <th>Pre-Dispatched Transporter Name</th>
+            <th>Transporter Cost</th>
+            <th>TrainID</th>
+            <th>DispatchedDate</th>
+            <th>Wagon No</th>
+            <th>Wagon Type</th>
+            <th>RR No</th>
+            <th>Engine No</th>
+            <th>ReDispatched</th>
+            <th>Cargo Weight</th>
+            <th>Tare Weight</th>
+            <th>ReDispatched TransporterName</th>
+            <th>ReDispatched VehicleNo#</th>
+            <th>Customer Name</th>
+            <th>Trucking Cost</th>
+            <th>Delivery Date</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: white ;" class="text-center">
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderNo</td>
+                <td>Export</td>
+                <td>@order.DateOfBooking</td>
+                <td>@order.Forwarder</td>
+                <td>@order.ShipperName</td>
+                <td>@order.ShipperContact</td>
+                <td>@order.TwentyContainerQty</td>
+                <td>@order.TwentyContainerPrice</td>
+                <td>@order.FortyContainerQty</td>
+                <td>@order.FortyContainerPrice</td>
+                <td>@order.RateOfTransportation</td>
+                <td>@order.PointOfLoadingStation</td>
+                <td>@order.CRO</td>
+                <td>@order.ContainerNo</td>
+                <td>@order.ContainerType</td>
+                <td>@order.ContainerSize</td>
+                <td>@order.EGNo</td>
+                <td>@order.vessel</td>
+                <td>@order.Voyage</td>
+                <td>@order.ETD</td>
+                <td>@order.VesselCutOff</td>
+                <td>@order.ShippingLine</td>
+                <td>@order.ClearingAgentName</td>
+                <td>@order.CAContactNo</td>
+                <td>@order.BookingPort</td>
+                <td>@order.ModeOfTransportation</td>
+                <td>@order.DateOfReceivingCargo</td>
+                <td>@order.PreDispatched</td>
+                <td>@order.PickupFrom</td>
+                <td>@order.PreVehicleNo</td>
+                <td>@order.PreTransporterName</td>
+                <td>@order.TransporterCost</td>
+                <td>@order.TrainID</td>
+                <td>@order.DispatchedOfDate</td>
+                <td>@order.WagonNo</td>
+                <td>@order.WagonType</td>
+                <td>@order.RRNo</td>
+                <td>@order.EngineNo</td>
+                <td>@order.ReDispatched</td>
+                <td>@order.CargoWeight </td>
+                <td>@order.TareWeight</td>
+                <td>@order.ReTransporterName</td>
+                <td>@order.ReVehicleNo</td>
+                <td>@order.CustomerName</td>
+                <td>@order.TruckingCost</td>
+                <td>@order.DeliveryDate</td>
+
+                <!--<td class="text-center">-->
+                @* <button type="button" class="btn btn-sm btn-primary btn-v2 px-2 py-1" id="btnView" onclick="onClick_btnView(@order.OrderId)"><i class="fas fa-eye"></i></button>*@
+                @*<button type="button" class="btn btn-sm btn-warning btn-v2 px-2 py-1 ml-2" data-id="@order.OrderId" onclick="onClick_btnTripExecution(@order.OrderId)"><i class="fas fa-truck"></i></button>*@
+                <!--</td>-->
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+    $(document).ready(function myfunction() {
+        $('#report').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5'
+            ],
+            "Sorting": false,
+            "lengthChange": true,
+            "pageLength": 05,
+            "paging": true,
+            'searching': true
+        });
+
+    });
+</script>

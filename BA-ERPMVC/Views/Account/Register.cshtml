@@ -1,0 +1,117 @@
+﻿@model BA_ERPMVC.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<br />
+<div class="card">
+    <form method="post">
+        <div class="card-header">
+            Create New User
+        </div>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.Id, new { id = "_userId" })
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Name">First Name</label>
+                        <div class="input-group">
+                            <input type="text" id="_firstName" name="FirstName" value="@Model.FirstName" autofocus="autofocus" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="UserName">Last Name</label>
+                        <div class="input-group">
+                            <input type="text" id="_lastName" name="LastName" value="@Model.LastName" autofocus="autofocus" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="CNIC">CNIC</label>
+                        <div class="input-group">
+                            <input type="text" id="_cnic" maxlength="13" name="CNIC" value="@Model.CNIC" autofocus="autofocus" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Phone">Contact No</label>
+                        <div class="input-group">
+                            <input type="text" id="_Phone" name="Phone" value="@Model.Phone" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <div class="input-group">
+                            <input type="email" id="_email" name="Email" value="@Model.Email" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Email">Roles</label>
+                        <div class="input-group">
+                            @Html.DropDownList("Role", null, "Select Role", htmlAttributes: new { @class = "_roleList form-control _fields" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Email">Business Division</label>
+                        <div class="input-group">
+                            @Html.DropDownList("BusinessDivisionID", null, "Select Business Division", htmlAttributes: new { @class = "form-control _fields" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" id="_psw">
+                    <div class="form-group">
+                        <label for="Password">Create Password</label>
+                        <div class="input-group">
+                            <input class="form-control" type="password" id="_password" name="Password" onKeyUp="checkPasswordStrength();" value=""> &nbsp
+                            <div id="password-strength-status"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" id="_cpsw">
+                    <div class="form-group">
+                        <label for="ConfirmPassword">Confirm Password</label>
+                        <div class="input-group">
+                            <input class="form-control" type="password" id="_confirmpassword" name="ConfirmPassword" value="" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row" style="text-align:center">
+                <div class="offset-md-4 form-group col-md-4">
+                    <button type="submit" class="btn btn-primary" id="_btnRegister">Register</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+@if (Convert.ToString(ViewBag.Message) == "Successfull")
+{
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            toastr.success("Saved Successfully.")
+        });
+    </script>
+}
+
+
+
+
+

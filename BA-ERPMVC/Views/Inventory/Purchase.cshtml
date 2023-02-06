@@ -1,0 +1,367 @@
+﻿
+@{
+    ViewBag.Title = "Purchase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<style>
+    .custom-theme-color {
+        /*background-color : #35a6a4 !important;*/
+        color: white !important;
+        background-color: #239023;
+    }
+
+    #_purchaseNo-error {
+        color: #888888;
+        font-size: 12px;
+    }
+
+    #_date-error {
+        color: #888888;
+        font-size: 12px;
+    }
+
+    #_creditDay-error {
+        color: #888888;
+        font-size: 12px;
+    }
+
+    #_partyList-error {
+        color: #888888;
+        font-size: 12px;
+    }
+
+    #_billNo-error {
+        color: #888888;
+        font-size: 12px;
+    }
+
+    #_vendorList-error {
+        color: #888888;
+        font-size: 12px;
+    }
+</style>
+
+<div class="card shadow-lg p-3 mb-5 bg-white rounded d-none" id="FormDetail">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Purchase</h6>
+    </div>
+
+    <div class="card-body">
+
+        <form class="form-label-left input_mask" id="form1">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="x_panel shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="">
+                            <h2 style="font-size: 20px; color: #73879c; ">Purchase Info</h2>
+                            <hr />
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br>
+                            <input type="hidden" id="_purchaseId" name="_purchaseId" required="required" class="form-control " value="0">
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Purchase No </label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id="_purchaseNo" name="_purchaseNo" required="required" class="form-control _field">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Date </label>
+                                <div class="col-md-4 col-sm-4">
+                                    <input class="date-picker form-control _field" id="_date" name="_date" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                    <script>
+                                        function timeFunctionLong(input) {
+                                            setTimeout(function () {
+                                                input.type = 'text';
+                                            }, 60000);
+                                        }
+                                    </script>
+                                </div>
+                                <label class="col-form-label col-md-3 col-sm-3 ">Credit Day </label>
+                                <div class="col-md-2 col-sm-2 ">
+                                    <input type="text" id="_creditDay" name="_creditDay" required="required" class="form-control _field">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">
+                                    Due Date<span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input class="date-picker form-control _field" id="_dueDate" name="_dueDate" placeholder="dd-mm-yyyy" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" disabled>
+                                    <script>
+                                        function timeFunctionLong(input) {
+                                            setTimeout(function () {
+                                                input.type = 'text';
+                                            }, 60000);
+                                        }
+                                    </script>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Vendor</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <select id="_vendorList" name="_vendorList" class="form-control _field ">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Bill No</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id="_billNo" name="_billNo" required="required" class="form-control _field">
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 ">
+                    <div class="x_panel shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="">
+                            <h2 style="font-size: 20px; color: #73879c; ">Account Info</h2>
+                            <hr />
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br>
+                            <input type="hidden" id="_purchaseDetailId" name="_purchaseDetailId" required="required" class="form-control " value="0">
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Category</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <select id="_categoryList" name="_categoryList" class="form-control _field ">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Items</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <select id="_itemList" name="_itemList" class="form-control _field ">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Quantity </label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" id="_quantity" onkeypress="return isNumber(event)" name="_quantity" class="form-control _field">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Rate </label>
+                                <div class="col-md-3 col-sm-3 ">
+                                    <input type="text" id="_rate" onkeypress="return isNumber(event)" name="_rate" class="form-control _field">
+                                </div>
+                                <label class="col-form-label col-md-2 col-sm-2 ">Amount </label>
+                                <div class="col-md-4 col-sm-4 ">
+                                    <input type="text" id="_amount" onkeypress="return isNumber(event)" name="_amount" class="form-control _field" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-3 col-sm-3 ">Remarks </label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <textarea id="_remarks" name="_remarks" class="form-control _field"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group row">
+                                <div class="col-md-9 col-sm-9  offset-md-3">
+                                    <button class="btn btn-primary" type="button" id="_back">Back</button>
+                                    <button class="btn btn-primary _field" type="reset" id="_reset">Reset</button>
+                                    <button type="button" class="btn btn-success _field" id="_addCash">Add</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="">
+        <div class="x_panel shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="table-responsive">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-bordered  table-hover table-condensed dataTable nowrap" id="_tblTicketList">
+                        <thead class="_changeHeaderColor">
+                            <tr>
+                                <th>Purchase Detail No</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Unit In</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                                <th>Remarks</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="_ticketList">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th style="text-align:right">Total:</th>
+                                <th>0</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="row">
+            <div class="col-md-6 ">
+                <div class="x_panel shadow-lg p-3 mb-5 bg-white rounded">
+
+                    <div class="x_content">
+                        <br>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 ">Remarks </label>
+                            <div class="col-md-9 col-sm-9 ">
+                                <textarea id="_remarks" name="_remarks" class="form-control _field"></textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>*@
+
+
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 offset-sm-8 offset-md-8">
+                <button type="button" id="_btnSubmit" class="btn btn-success _field" style="float: right;">Submit</button>
+                <button class="btn btn-primary _field" type="reset" id="_cancel" style="float: right;">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="card shadow-lg p-3 mb-5  rounded " id="TableView">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Purchase</h6>
+    </div>
+    <div class="card-body">
+        <div class="item form-group">
+            <div class="col-md-7 col-sm-7 offset-md-5">
+                <button type="button" id="_addPurchaseDetail" class="btn btn-success">Add Purchase</button>
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div id="TableDiv">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+
+                        <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table   table-hover table-condensed dataTable nowrap shadow-lg p-3 mb-5 bg-white rounded" id="_tblPurchaseList">
+                                            <thead class="_changeHeaderColor">
+                                                <tr>
+                                                    <th>Purchase No</th>
+                                                    <th>Date</th>
+                                                    <th>Credit Date</th>
+                                                    <th>Due Date</th>
+                                                    <th>Party Name</th>
+                                                    <th>Bill No</th>
+                                                    <th>Created By</th>
+                                                    <th>Created Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="_purchasetList">
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="responsibility" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h4 class="modal-title">Purchase Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-striped text-center shadow-lg dataTable" id="_tblPurchaseDetail">
+                                    <thead class="custom-theme-color">
+                                        <tr class="text-center">
+                                            <th class="text-center">Item Name</th>
+                                            <th class="text-center" scope="col">Quantity</th>
+                                            <th class="text-center">Unit In</th>
+                                            <th class="text-center">Rate</th>
+                                            <th class="text-center">Amount</th>
+                                            <th class="text-center">Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="_purchaseDetailList">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script src="~/AdminLte/Scripts/Purchase.js"></script>

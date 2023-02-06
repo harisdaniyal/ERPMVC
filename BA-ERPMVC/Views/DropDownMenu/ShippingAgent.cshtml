@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ShippingAgentViewModel>
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4>Shipping Agent</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12 table-responsive center">
+                <table id="example" class="table table-sm table-bordered mb-3 w-min-80">
+                    <thead class="thead-light ">
+                        <tr>
+                            <th>Shipping Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="" class="form-control txt_ID" />
+
+                                <input type="text" style="width: 500px;" value="" class="form-control  txt_shippingagent" />
+                            </td>
+
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                            </td>
+                        </tr>
+                        @foreach (var ShippingAgent in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@ShippingAgent.ShippingAgentId" class="form-control txt_ID" />
+
+                                    <input type="text" style="width: 500px;" value="@ShippingAgent.Name" class="form-control  txt_shippingagent" />
+                                </td>
+
+
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSaveEdit">Save/Update</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-danger btn-v2 fs-8 text-nowrap mt-1 mb-0 btndlt">Delete</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/ShippingAgent.js")"></script>

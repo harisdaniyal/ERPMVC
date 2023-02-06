@@ -1,0 +1,155 @@
+﻿<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+
+
+@{
+    ViewBag.Title = "Oil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div id="gridShow" class="card d-none">
+
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Oil Details</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+
+
+
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="OilGride" class="table table-bordered" style="width: 100%;">
+                    <thead class="_changeHeaderColor datatable-head">
+                        <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">OilType</th>
+                            <th scope="col">OilCompany</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">DeliveryNumber</th>
+                            <th scope="col">ReceivedDate</th>
+                            <th scope="col">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="lloForm" class="card card-default collapse">
+    <div class="card-header">
+        <h3 class="card-title">Oil Master</h3>
+    </div>
+
+    <div class="registration-form">
+
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Company</label>
+                        <select class="form-control select2" id="txtCompany" name="txtCompany" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-4 d-none" id="OTY">
+                    <div class="form-group">
+                        <label>Oli Type</label>
+                        <select class="form-control select2" id="txtOilType" name="txtOilType" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 d-none" id="OC">
+                    <div class="form-group">
+                        <label>Oli Company</label>
+                        <select class="form-control select2" id="txtOilCompany" name="txtOilCompany" style="width: 100%;">
+                            <option selected="selected"></option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 d-none" id="QU">
+                    <div class="form-group">
+                        <label>Quantity (in Liter)</label>
+                        <div class="input-group mb-3">
+                            <input type="number" id="txtQuntity" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4 d-none" id="DN">
+                    <div class="form-group">
+                        <label>Delivery Number</label>
+                        <input type="text" id="txtDeilveryNo" name="txtDeilveryNo" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 d-none" id="RD">
+                    <div class="form-group">
+                        <label>Received Date</label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input type="text" id="txtRec" class="form-control datetimepicker-input" data-target="#reservationdate" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" data-mask />
+                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 d-none" id="RM">
+                    <div class="form-group">
+                        <label>Remarks</label>
+                        <input type="text" id="txtRemake" name="txtRemake" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="btnBack" class="btn btn-primary">Back</button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+<script src="~/AdminLte/Scripts/Oilmaster.js"></script>

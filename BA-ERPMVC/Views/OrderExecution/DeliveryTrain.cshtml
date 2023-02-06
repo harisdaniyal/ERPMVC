@@ -1,0 +1,103 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.OrderBooking.DeliveryTrainViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4>Delivery (Train)</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Reference Container</th>
+                            <th>Priority For Dispatched</th>
+                            <th>Train ID</th>
+                            <th>Dispatched Date</th>
+                            <th>Delivery Location</th>
+                            <th>Vehicle No </th>
+                            <th>Arrival Date </th>
+                            <th>Delivery Date</th>
+                            <th>EmptyDropOff Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var DeliveryTrain in Model.ToList())
+                        {
+                        <tr class="bg-light tbl-valign-top">
+                            <td>
+                                <input type="hidden" value="@DeliveryTrain.OrderId" class="form-control txt_OrderId" />
+                                <input type="hidden" value="@DeliveryTrain.BLnumber" class="form-control txt_BLnumber" />
+                                <input type="hidden" value="@Convert.ToInt32(DeliveryTrain.ID)" class="form-control txt_ID" />
+                                <input type="text" disabled style="width: 110px;" value="@DeliveryTrain.OrderNo" class="form-control txt_OrderNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 300px;" value="@DeliveryTrain.ContainerNo" class="form-control txt_ContainerNo" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.ContainerSize" class="form-control txt_ContainerSize" />
+                            </td>
+                            <td>
+                                <input type="text" disabled style="width: 300px;" value="@DeliveryTrain.ReferenceContainer" class="form-control txt_ReferenceContainer" />
+                            </td>
+                           
+                            <td>
+                                <input type="text" disabled style="width: 80px;" value="@DeliveryTrain.PriorityForDispatched" class="form-control txt_Priority" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_TrainID" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.TrainID)" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Dispatcheddate" disabled style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DispatchedDate.HasValue ? DeliveryTrain.DispatchedDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+
+                            <td>
+                                <input class="form-control txt_DeliveryLoc" disabled style="width: 140px;" type="text" placeholder="" value="@(DeliveryTrain.DeliveryLocation)" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_VehicleNo" style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.VehicleNo)" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Arrivaldate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.ArrivalDate.HasValue ? DeliveryTrain.ArrivalDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+                            <td>
+                                <input class="date-picker form-control txt_Deliverydate" style="width: 170px;" type="date" placeholder="" value="@(DeliveryTrain.DeliveryDate.HasValue ? DeliveryTrain.DeliveryDate.Value.ToString("yyyy-MM-dd"): "")" />
+                            </td>
+                            <td>
+                                <input class="form-control txt_EmptyDropOffLoc" disabled style="width: 116px;" type="text" placeholder="" value="@(DeliveryTrain.EmptyDropOffLocation)" />
+                            </td>
+
+                            <td class="btn-group">
+                                <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDelivery">Delivered</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/DeliveryTrain.js")"></script>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<BA_ERPMVC.ViewModels.ExportOrderBooking.ExportDispatchedTruckViewModel>
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4> Dispatched (Truck)</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                <table id="tbl_Logistics" class="table table-bordered table-sm border-right-0 border-left-0 fs-7 table-v-middle table-responsive datatable" style="height:auto; width:auto;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Booking No#</th>
+                            <th>Container No#</th>
+                            <th>Container Size</th>
+                            <th>Container Type</th>
+                            <th>TruckNo</th>
+                            <th>Dispatched Date</th>
+                            <th>Customer Name</th>
+                            <th>Truck Contact No# </th>
+                            <th>Bilty No</th>
+                            <th>Delivery Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ExportDispatchedTruck in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@ExportDispatchedTruck.OrderId" class="form-control txt_OrderId" />
+                                    <input type="hidden" value="@ExportDispatchedTruck.CRO" class="form-control txt_CRO" />
+                                    <input type="hidden" value="@Convert.ToInt32(ExportDispatchedTruck.ID)" class="form-control txt_ID" />
+                                    <input type="text" disabled style="width: 110px;" value="@ExportDispatchedTruck.OrderNo" class="form-control txt_OrderNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 160px;" value="@ExportDispatchedTruck.ContainerNo" class="form-control txt_ContainerNo" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 80px;" value="@ExportDispatchedTruck.ContainerSize" class="form-control txt_ContainerSize" />
+                                </td>
+
+                                <td>
+                                    <input type="text" disabled style="width: 220px;" value="@ExportDispatchedTruck.ContainerType" class="form-control txt_ContainerType" />
+                                </td>
+
+                                <td>
+                                    <input type="text" style="width: 100px;" value="@ExportDispatchedTruck.TruckNo" class="form-control txt_TruckNo" />
+                                </td>
+
+                                <td>
+                                    <input class="date-picker form-control txt_ExportDispatcheddate" style="width: 170px;" type="date" placeholder="" value="@(ExportDispatchedTruck.DateOfDispatched.HasValue ? ExportDispatchedTruck.DateOfDispatched.Value.ToString("yyyy-MM-dd"): "")" />
+                                </td>
+
+                                <td>
+                                    <input class="form-control txt_CustomerName" style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTruck.CustomerName)" />
+                                </td>
+                                <td>
+                                    <input class="form-control txt_TruckContactNo" style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTruck.TruckContactNo)" />
+                                </td>
+
+                                <td>
+                                    <input class="form-control txt_BiltyNo" style="width: 172px;" type="text" placeholder="" value="@(ExportDispatchedTruck.BiltyNo)" />
+                                </td>
+
+                                <td>
+                                    <input class="form-control txt_DeliveryLocation"  style="width: 116px;" type="text" placeholder="" value="@(ExportDispatchedTruck.DeliveryLocation)" />
+                                </td>
+
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>&ensp;
+                                    <button type="button" class="btn btn-sm btn-block btn-primary btn-v2 fs-8 text-nowrap mt-1 mb-0 btnDispatched">Dispatched</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+</div>
+<script src="@Fingerprint.Tag("/AdminLte/Scripts/OrderBookings/ExportDispatchedTruck.js")"></script>

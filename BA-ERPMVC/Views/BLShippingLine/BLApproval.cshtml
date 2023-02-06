@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BA_ERPMVC.Models.BAShippingLine>
+<link rel="stylesheet" href="~/AdminLte/dist/css/styles.css" />
+
+
+@{
+    //if (Session["UserName"] == null)
+    //{
+    //}
+    //Response.Redirect("~/Account/Login");
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div id="gridShow" class="card">
+    <div class="card-header" style="background:white;">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <h4>BL Approval</h4>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-l10  table-responsive center">
+                <table id="example" class="table table-sm table-bordered mb-3 w-min-80 datatable h-auto d-inline-block w-auto">
+                    <thead class="thead-light ">
+                        <tr>
+                            <th>BLNo#</th>
+                            <th>Shipper Name</th>
+                            <th>Consignee Name</th>
+                            <th>NotifyParty Name</th>
+                            <th>Approval</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var Bl in Model.ToList())
+                        {
+                            <tr class="bg-light tbl-valign-top">
+                                <td>
+                                    <input type="hidden" value="@Bl.BLShippingID" class="form-control txt_ID" />
+
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.BL" class="form-control  txt_BLnumber" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.Shipper" class="form-control  txt_Shipper" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.Consignee" class="form-control  txt_Consignee" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled style="width: 200px;" value="@Bl.NotifyParty" class="form-control  txt_Notifyparty" />
+                                </td>
+                                <td>
+                                    @if (Bl.Approval != null)
+                                    {
+                                        <select id="txt_approval" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_approval"  disabled style="width: 200px;">
+                                            <option value="">Select</option>
+                                            <option value="true"  @(Bl.Approval == true? "selected=selected" : "")>ACCEPTED</option>
+                                            <option value="false"  @(Bl.Approval == false ? "selected=selected" : "")>REJECTED</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select id="txt_approval" class="form-control form-control-v1 form-control-sm border-dark mt-1 mb-0 txt_approval" style="width: 200px;">
+                                            <option value="">Select</option>
+                                            <option value="true">ACCEPTED</option>
+                                            <option value="false">REJECTED</option>
+                                        </select>
+                                    }
+
+                                </td>
+
+                                <td class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-block btn-success btn-v2 fs-8 text-nowrap mt-1 mb-0 btnSave">Save</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- LOADING SHOW HIDE -->
+        <div class="loading-dimmer"><img src="~/AdminLte/dist/img/loading.gif" /></div>
+    </div>
+
+
+    <script src="@Fingerprint.Tag("/AdminLte/Scripts/BLApproval.js")"></script>

@@ -1,0 +1,345 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+
+<div class="card d-none shadow-lg p-3 mb-5 bg-white rounded" id="gridShow">
+
+
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;">
+        <div class="row">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-outline-light">Add Customer Price</button>
+            </div><!-- /.col -->
+
+        </div>
+    </div>
+    <!--
+    <div class="card-header">
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-sm-6 float-sm-left">
+                <button type="submit" id="btnADD" class="btn btn-primary">Add Customer Price</button>
+            </div><!-- /.col -->
+    <!--
+</div>
+    </div>
+-->
+<div class="card-body shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetail">
+
+            <table class="table table-bordered table-hover table-condensed dataTable " style="width:100%" id="MainGrid">
+                <thead class="_changeHeaderColor datatable-head">
+
+                    <tr class="text-center">
+                        <th scope="col">CustomerName</th>
+                        <th scope="col">Facility</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="_orderList" class="text-center"></tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<div id="lloForm" class="card  d-none">
+    <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+        <h6 class="m-0 font-weight-bold centerHead">Customer Price/Facility Details Form</h6>
+    </div>
+    <!--
+    <div class="card-header">
+        <h3 class="card-title">Customer Price/Facility Details Form</h3>
+    </div>
+        -->
+    <form id="_Addprice">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="form-row ">
+
+                <div class="input-group input-group-lg col-md-6 mx-auto">
+                    <label for="txtCustname">Customer Name<label id="_txtCustomerName-error" class="error" for="txtCustname"></label></label>
+                    <div class="input-group">
+                        <select class="form-control" id="txtCustname" name="txtCustname" style="width: 100%;">
+                            <option></option>
+                        </select>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            @*<div class="form-row ">
+
+                <div class="input-group input-group-lg col-md-6 mx-auto">
+                    <label for="txtOrderNo">Order No<label id="_txtCustomerName-error" class="error" for="txtOrderNo"></label></label>
+                    <div class="input-group">
+                        <select class="form-control" id="txtOrderNo" name="txtOrderNo" style="width: 100%;">
+                            <option></option>
+                        </select>
+
+
+                    </div>
+                </div>
+
+
+            </div>*@
+
+
+
+            <div class="form-row">
+                <div class="input-group input-group-lg col-md-6 mx-auto">
+
+                    <label for="txtfacility">Facility List<label id="_txtCustomerName-error" class="error" for="txtfacility"></label></label>
+                    <div class="input-group">
+                        <select class="form-control" id="txtfacility" name="txtfacility" style="width: 100%;">
+                            <option></option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            @*<div class="form-row">
+                <div class="input-group input-group-lg col-md-6 mx-auto">
+
+                    <label for="txtContainerWeightCategory">Container Weight Category<label id="txtContainerWeightCategory-error" class="error" for="txtContainerWeightCategory"></label></label>
+                    <div class="input-group">
+                        <select class="form-control" id="txtContainerWeightCategory" name="txtContainerWeightCategory" style="width: 100%;">
+                            <option></option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>*@
+            <br />
+            <div class="card-header" id="facList" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                <h6 class="m-0 font-weight-bold centerHead">FACILITY LIST</h6>
+            </div>
+            <!--
+    <div class="card-header" id="facList">
+        <h3>Facility List</h3>
+    </div>
+        -->
+            <br />
+            <div class="row" id="containerhide">
+                <div class="col-lg-3" id="LC20">
+                    <div class="form-group">
+                        <p for="txtContainer20laden">LADEN/Container20<label id="_txtCustomerName-error" class="error" for="txtContainer20laden"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtContainer20laden" name="txtContainer20laden" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group" id="LC40">
+                        <p for="txtContainer40laden">LADEN/Container40<label id="_txtCustomerName-error" class="error" for="txtContainer40laden"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtContainer40laden" name="txtContainer40laden" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group" id="EC20">
+                        <p for="txtContainer20Empty">EMPTY/Container20<label id="_txtCustomerName-error" class="error" for="txtContainer20Empty"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtContainer20Empty" name="txtContainer20Empty" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group" id="EC40">
+                        <p for="txtContainer40Empty">EMPTY/Container40<label id="_txtCustomerName-error" class="error" for="txtContainer40Empty"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtContainer40Empty" name="txtContainer40Empty" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" id="lolohide">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <p for="txtloloLaden">LOLO/LADEN<label id="_txtCustomerName-error" class="error" for="txtloloLaden"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtloloLaden" name="txtloloLaden" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <p for="txtloloEmpty">LOLO/EMPTY<label id="_txtCustomerName-error" class="error" for="txtloloEmpty"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtloloEmpty" name="txtloloEmpty" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row" id="WeightChrgeshide">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <p for="txtweightmentchargesladen">Weightment Charges/20<label id="_txtCustomerName-error" class="error" for="txtweightmentchargesladen"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtweightmentchargesladen" name="txtweightmentchargesladen" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <p for="txtweightmentchargesempty">Weightment Charges/40<label id="_txtCustomerName-error" class="error" for="txtweightmentchargesempty"></label></p>
+                        <div class="input-group">
+                            <input type="text" id="txtweightmentchargesempty" name="txtweightmentchargesempty" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <br />
+
+
+            <br />
+            <br />
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded d-none" id="hidemainrecents">
+                <div class="card-header" style="border-bottom: 1px solid #3A3B45;background: #3A3B45;color: white;text-align: center;">
+                    <h6 class="m-0 font-weight-bold centerHead">MAINTAIN CUSTOMER PRICE HISTROY</h6>
+                </div>
+
+
+                <div class="card-body">
+                    <!--Gride Recent Start-->
+                    <div class="row" id="Recesthide">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetail">
+
+                            <table class="table table-bordered table-hover table-condensed dataTable " style="width:100%" id="ResecntGrid">
+                                <thead class="_changeHeaderColor datatable-head">
+
+                                    <tr class="text-center">
+                                        <th scope="col">LADEN/Container20</th>
+                                        <th scope="col">LADEN/Container40</th>
+                                        <th scope="col">EMPTY/Container20</th>
+                                        <th scope="col">EMPTY/Container40</th>
+                                        <th scope="col">UpdateBy</th>
+                                        <th scope="col">UpdateDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="_orderList" class="text-center"></tbody>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="RecentHideLolo">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetaillolo">
+
+                            <table class="table table-bordered table-hover table-condensed dataTable " style="width:100%" id="LOlOGrideByID">
+                                <thead class="_changeHeaderColor datatable-head">
+
+                                    <tr class="text-center">
+                                        <th scope="col">LOLO/LADEN</th>
+                                        <th scope="col">LOLO/EMPTY</th>
+                                        <th scope="col">LOLO/EMPTY</th>
+                                        <th scope="col">LOLO/EMPTY</th>
+                                        <th scope="col">UpdateBy</th>
+                                        <th scope="col">UpdateDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="_list" class="text-center"></tbody>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row" id="RecentHideWeight">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive " id="_tblDetaillolo">
+
+                            <table class="table table-bordered table-hover table-condensed dataTable " style="width:100%" id="WeightGrideByID">
+                                <thead class="_changeHeaderColor datatable-head">
+
+                                    <tr class="text-center">
+                                        <th scope="col">WeightmentCharges20</th>
+                                        <th scope="col">WeightmentCharges40</th>
+                                        <th scope="col">LOLO/EMPTY</th>
+                                        <th scope="col">LOLO/EMPTY</th>
+                                        <th scope="col">UpdateBy</th>
+                                        <th scope="col">UpdateDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="_list" class="text-center"></tbody>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+                <!--Gride Recent End-->
+                <!--  gride rescent END  -->
+            </div>
+            <!--Gride Recent Start-->
+
+
+
+
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-6 offset-md-3">
+                    <button class="btn btn-primary " id="_reset" type="reset">Reset</button>
+                    <button class="btn btn-dark " id="btnBack" type="reset">Back</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+            <!--
+    <div class="card-footer">
+        <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+        <button type="button" id="btnBack" class="btn btn-primary">Back</button>
+
+    </div>
+        -->
+        </div>
+
+
+    </form>
+
+
+</div>
+<div class="row" style='margin-top: 25px;'>
+    <pre id='toastrOptions'></pre>
+</div>
+
+<script src="~/AdminLte/Scripts/PriceCustomerJS.js"></script>
